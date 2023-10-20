@@ -5,7 +5,7 @@ using UnityEngine;
 public class TargetManager : MonoBehaviour
 {
     // Fields for all targets and spawn locations
-    Target[] targets;
+    public static Target[] targets;
     public List<Vector3> spawnLocations;
 
     // Default values
