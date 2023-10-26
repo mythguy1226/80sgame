@@ -18,6 +18,12 @@ public class InputManager : MonoBehaviour
         private set;
     }
 
+    public Vector3 MouseWorldPosition
+    {
+        get;
+        private set;
+    }
+
     // Update is called once per frame
     public void Update()
     {
@@ -30,13 +36,13 @@ public class InputManager : MonoBehaviour
         // Mouse.position is an object, needs ReadValue() call to get value
         Vector3 screenSpaceLocation = mouse.position.ReadValue();
         // Convert the mouse's screen position to its equivalent position in the scene
-        Vector3 worldSpaceLocation = Camera.main.ScreenToWorldPoint(screenSpaceLocation);
+        MouseWorldPosition = Camera.main.ScreenToWorldPoint(screenSpaceLocation);
 
         // Debug code - delete when no longer needed
         if (MouseLeftDownThisFrame)
         {
             Debug.Log($"Mouse clicked at {screenSpaceLocation} on screen.");
-            Debug.Log($"Mouse clicked at {worldSpaceLocation} in world.");
+            Debug.Log($"Mouse clicked at {MouseWorldPosition} in world.");
         }
     }
 }
