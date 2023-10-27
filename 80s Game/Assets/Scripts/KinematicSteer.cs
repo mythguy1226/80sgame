@@ -47,8 +47,8 @@ public class KinematicSteer : MonoBehaviour
 
         // Incorporate flocking behavior in final velocity
         velocity += Separate(TargetManager.targets);
-        //velocity += Alignment(TargetManager.targets);
-        //velocity += Cohesion(TargetManager.targets);
+        velocity += Alignment(TargetManager.targets);
+        velocity += Cohesion(TargetManager.targets);
 
         // Get new position
         float newPosX = transform.position.x + velocity.x * Time.deltaTime;
@@ -67,7 +67,7 @@ public class KinematicSteer : MonoBehaviour
 
         // Get a random range for x and y levels
         float newPosX = Random.Range(-maxWidth, maxWidth);
-        float newPosY = Random.Range(-maxHeight/2, maxHeight/2);
+        float newPosY = Random.Range(-maxHeight, maxHeight);
 
         // Set the new position
         targetPosition = new Vector3(newPosX, newPosY, transform.position.z);
@@ -143,8 +143,11 @@ public class KinematicSteer : MonoBehaviour
     // Method for Cohesion
     public Vector2 Cohesion(Target[] neighbors)
     {
+        // Initialize to default zero vector
+        Vector3 desiredVelocity = Vector3.zero;
         Vector3 centroid = Vector3.zero;
-        int count = 0;
+
+        int neighborCount = 0;
 
         // Get the sum of all points of neighbors within a radius of 7
         foreach (Target neighbor in neighbors)
@@ -152,14 +155,19 @@ public class KinematicSteer : MonoBehaviour
             if (Vector3.Distance(transform.position, neighbor.transform.position) < 7)
             {
                 centroid += neighbor.transform.position;
-                count++;
+                neighborCount++;
             }
         }
 
         // Divide by number of neighbors to get the average point
-        centroid /= count;
+        centroid /= neighborCount;
+
+        // Calculate the desired velocity
+        desiredVelocity = centroid - transform.position;
+        desiredVelocity.Normalize();
+        desiredVelocity *= maxSpeed;
 
         // Seek that average point AKA the Centroid
-        return centroid * 0.2f;
+        return desiredVelocity * 0.1f;
     }
 }
