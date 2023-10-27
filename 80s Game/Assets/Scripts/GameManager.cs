@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     // Public properties
     public InputManager InputManager { get; private set;  }
     public TargetManager TargetManager { get; private set; }
+    public PointsManager PointsManager { get; private set; }
+    public HitsManager HitsManager { get; private set; }
 
     private void Awake()
     {
@@ -20,6 +22,7 @@ public class GameManager : MonoBehaviour
             // If not, then the script is a duplicate and can delete itself
             Destroy(this);
         }
+
         else
         {
             Instance = this;
@@ -27,6 +30,16 @@ public class GameManager : MonoBehaviour
             // Initialize managers
             InputManager = GetComponent<InputManager>();
             TargetManager = GetComponent<TargetManager>();
+            PointsManager = GetComponent<PointsManager>();
+            HitsManager = GetComponent<HitsManager>();
+        }
+    }
+
+    private void Update()
+    {
+        if (InputManager.MouseLeftDownThisFrame)
+        {
+            Debug.Log(HitsManager.AddShot());
         }
     }
 }
