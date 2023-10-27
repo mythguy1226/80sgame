@@ -34,12 +34,4 @@ public class GameManager : MonoBehaviour
             HitsManager = GetComponent<HitsManager>();
         }
     }
-
-    private void Update()
-    {
-        if (InputManager.MouseLeftDownThisFrame)
-        {
-            Debug.Log(HitsManager.AddShot());
-        }
-    }
 }
