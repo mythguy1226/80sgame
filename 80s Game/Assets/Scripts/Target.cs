@@ -2,27 +2,56 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum TargetStates
+{
+    Moving,
+    Fleeing,
+    Death
+}
+
 public class Target : MonoBehaviour
 {
+    // Public fields 
+    TargetStates currentState = TargetStates.Moving;
     public bool isOnScreen = false;
 
-    // Start is called before the first frame update
-    void Start()
+    // Get needed components for handling target behavior
+    KinematicSteer movementControls;
+
+    // Call once upon start of game
+    void Awake()
     {
-        
+        // Init component references
+        movementControls = GetComponent<KinematicSteer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        // If on-screen move towards origin
+        // If on-screen check behaviors
         if(isOnScreen)
         {
-            // Get the direction to move in
-            Vector3 directionToOrigin = Vector3.Normalize(Vector3.zero - transform.position);
+            // Switch on target states
+            // to control decision making
+            switch (currentState)
+            {
+                // Handle all base target movement here
+                case TargetStates.Moving:
+                    // Enable movement
+                    movementControls.canMove = true;
+                    break;
 
-            // Update target position in direction
-            transform.position += directionToOrigin * 2.0f * Time.deltaTime;
+                // Handle fleeing behavior here
+                case TargetStates.Fleeing:
+                    break;
+
+                // Handle death condition here
+                case TargetStates.Death:
+                    break;
+                default:
+                    break;
+            }
+
         }
     }
 }
