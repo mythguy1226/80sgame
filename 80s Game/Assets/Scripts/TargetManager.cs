@@ -10,8 +10,10 @@ public class TargetManager : MonoBehaviour
 
     // Default values
     public int firstRoundTargetCount = 5;
-    int currentRound = 1;
-    int currentRoundSize;
+    public int currentRound = 1;
+    public int currentRoundSize;
+    public int numStuns = 0;
+    int maxTargetsOnScreen = 8;
 
     // Start is called before the first frame update
     void Start()
@@ -44,17 +46,37 @@ public class TargetManager : MonoBehaviour
     }
 
     // Method for updating round parameters
-    void UpdateRoundParameters()
+    public void UpdateRoundParameters()
     {
-        // TO-DO
-        // When we get to future rounds
+        // Reset stuns and update round counter
+        currentRound++;
+        numStuns = 0;
+
+        // Update round size and arena max
+        currentRoundSize += 2;
+        maxTargetsOnScreen += 1;
+        if (maxTargetsOnScreen >= targets.Length)
+        {
+            maxTargetsOnScreen = targets.Length - 2;
+        }
     }
 
     // Method for starting the next round
-    void StartNextRound()
+    public void StartNextRound()
     {
-        // TO-DO
-        // When we get to future rounds
+        // Check list isn't empty
+        if (targets.Length > 0)
+        {
+            // Iterate through and spawn the next set of targets
+            for (int i = 0; i < currentRoundSize; i++)
+            {
+                int targetIndex = GetNextAvailableTarget();
+                if (targetIndex >= 0)
+                {
+                    SpawnTarget(targetIndex);
+                }
+            }
+        }
     }
 
     // Method for spawning more targets if needed
@@ -73,6 +95,7 @@ public class TargetManager : MonoBehaviour
 
         // Update on-screen status
         targets[targetIndex].isOnScreen = true;
+        targets[targetIndex].currentState = TargetStates.Moving;
     }
 
     // Method for getting all targets currently on screen
