@@ -6,13 +6,14 @@ using UnityEngine.SceneManagement;
 public class PauseScreenBehavior : MonoBehaviour
 {
     public bool isPaused;
-    public GameObject PauseScreen;
-    public GameObject GameUIElements;
+    public GameObject pauseScreen;
+    public GameObject gameUIElements;
+    public GameObject onboardingPanel;
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("escape"))
+        if (Input.GetKeyDown("escape") && !onboardingPanel.activeInHierarchy)
         {
             PauseGame();
         }
@@ -23,8 +24,8 @@ public class PauseScreenBehavior : MonoBehaviour
         isPaused = !isPaused;
         if (isPaused == true)
         {
-            PauseScreen.SetActive(true);
-            GameUIElements.SetActive(false);
+            pauseScreen.SetActive(true);
+            gameUIElements.SetActive(false);
 
             //Sets time scale to 0 so game pauses
             Time.timeScale = 0f;
@@ -32,8 +33,8 @@ public class PauseScreenBehavior : MonoBehaviour
 
         else
         {
-            PauseScreen.SetActive(false);
-            GameUIElements.SetActive(true);
+            pauseScreen.SetActive(false);
+            gameUIElements.SetActive(true);
 
             //Sets time scale to 1 so game unpauses
             Time.timeScale = 1f;
@@ -43,5 +44,6 @@ public class PauseScreenBehavior : MonoBehaviour
     public void QuitGame()
     {
         SceneManager.LoadScene(0);
+        Time.timeScale = 1f;
     }
 }
