@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
-    // Properties
+    // Public properties
     public bool MouseLeftDown
     {
         get;
@@ -37,12 +37,5 @@ public class InputManager : MonoBehaviour
         Vector3 screenSpaceLocation = mouse.position.ReadValue();
         // Convert the mouse's screen position to its equivalent position in the scene
         MouseWorldPosition = Camera.main.ScreenToWorldPoint(screenSpaceLocation);
-
-        // Debug code - delete when no longer needed
-        if (MouseLeftDownThisFrame)
-        {
-            Debug.Log($"Mouse clicked at {screenSpaceLocation} on screen.");
-            Debug.Log($"Mouse clicked at {MouseWorldPosition} in world.");
-        }
     }
 }
