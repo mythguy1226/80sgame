@@ -24,6 +24,19 @@ public class InputManager : MonoBehaviour
         private set;
     }
 
+    private List<Joycon> joycons;
+    public Vector3 gyro;
+    public Vector3 accel;
+    public int jc_ind = 0;
+    public Quaternion orientation;
+
+    void Start()
+    {
+        joycons = JoyconManager.Instance.j;
+        gyro = new Vector3(0, 0, 0);
+        accel = new Vector3(0, 0, 0);
+    }
+
     // Update is called once per frame
     public void Update()
     {
@@ -37,5 +50,17 @@ public class InputManager : MonoBehaviour
         Vector3 screenSpaceLocation = mouse.position.ReadValue();
         // Convert the mouse's screen position to its equivalent position in the scene
         MouseWorldPosition = Camera.main.ScreenToWorldPoint(screenSpaceLocation);
+
+        // make sure the Joycon only gets checked if attached
+        if (joycons.Count > 0)
+        {
+            Joycon j = joycons[jc_ind];
+
+            // Gyro values: x, y, z axis values (in radians per second)
+            gyro = j.GetGyro();
+
+            // Accel values:  x, y, z axis values (in Gs)
+            accel = j.GetAccel();
+        }
     }
 }
