@@ -58,9 +58,11 @@ public class InputManager : MonoBehaviour
 
             // Gyro values: x, y, z axis values (in radians per second)
             gyro = j.GetGyro();
+            Debug.Log(gyro);
 
             // Accel values:  x, y, z axis values (in Gs)
             accel = j.GetAccel();
+            Debug.Log(accel);
         }
     }
 }
