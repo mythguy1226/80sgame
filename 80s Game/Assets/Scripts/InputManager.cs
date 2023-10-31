@@ -29,12 +29,14 @@ public class InputManager : MonoBehaviour
     public Vector3 accel;
     public int jc_ind = 0;
     public Quaternion orientation;
+    public Vector3 joyconCursorPos;
 
     void Start()
     {
         joycons = JoyconManager.Instance.j;
         gyro = new Vector3(0, 0, 0);
         accel = new Vector3(0, 0, 0);
+        joyconCursorPos = new Vector3(0, 0, 0);
     }
 
     // Update is called once per frame
@@ -63,6 +65,13 @@ public class InputManager : MonoBehaviour
             // Accel values:  x, y, z axis values (in Gs)
             accel = j.GetAccel();
             Debug.Log(accel);
+
+            // Update cursor position based on gyroscope
+            joyconCursorPos += new Vector3(gyro.x, gyro.y, 0.0f);
+            Mouse.current.WarpCursorPosition(joyconCursorPos);
+
+
+
         }
     }
 }
