@@ -412,6 +412,7 @@ GameObject:
   - component: {fileID: 1312814415}
   - component: {fileID: 1312814414}
   - component: {fileID: 1312814416}
+  - component: {fileID: 1312814417}
   m_Layer: 5
   m_Name: ExitGame
   m_TagString: Untagged
@@ -593,6 +594,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1312814417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1312814412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebf9a18c2bdece04b8a9babe4112e403, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1639135118
 GameObject:
   m_ObjectHideFlags: 0
@@ -739,6 +752,7 @@ GameObject:
   - component: {fileID: 1959031507}
   - component: {fileID: 1959031506}
   - component: {fileID: 1959031508}
+  - component: {fileID: 1959031509}
   m_Layer: 5
   m_Name: StartGame
   m_TagString: Untagged
@@ -918,6 +932,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1959031509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1959031504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebf9a18c2bdece04b8a9babe4112e403, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
