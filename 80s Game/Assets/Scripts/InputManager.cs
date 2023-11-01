@@ -24,9 +24,9 @@ public class InputManager : MonoBehaviour
         private set;
     }
 
+    // Joycon fields
     private List<Joycon> joycons;
     public Vector3 gyro;
-    public Vector3 accel;
     public int jc_ind = 0;
     public Quaternion orientation;
     public Vector3 joyconCursorPos;
@@ -35,7 +35,6 @@ public class InputManager : MonoBehaviour
     {
         joycons = JoyconManager.Instance.j;
         gyro = new Vector3(0, 0, 0);
-        accel = new Vector3(0, 0, 0);
         joyconCursorPos = new Vector3(0, 0, 0);
     }
 
@@ -60,17 +59,19 @@ public class InputManager : MonoBehaviour
 
             // Gyro values: x, y, z axis values (in radians per second)
             gyro = j.GetGyro();
-            Debug.Log(gyro);
 
-            // Accel values:  x, y, z axis values (in Gs)
-            //accel = j.GetAccel();
-            //Debug.Log(accel);
-
-            // Update cursor position based on gyroscope
+            // Update cursor position based on gyroscope values
             joyconCursorPos += new Vector3(gyro.z, gyro.y, 0.0f);
             Mouse.current.WarpCursorPosition(joyconCursorPos);
 
+            // Get orientation from joycon
+            orientation = j.GetVector(); // <- Misleading method name, this returns a quaternion
 
+            // Get forward and rightward vectors from orientation
+            Vector3 curForward = orientation * Vector3.forward;
+            Vector3 curRightward = orientation * Vector3.right;
+            Debug.Log(curForward);
+            //Debug.Log(curRightward);
 
         }
     }
