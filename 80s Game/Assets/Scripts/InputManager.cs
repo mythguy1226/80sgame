@@ -63,11 +63,11 @@ public class InputManager : MonoBehaviour
             Debug.Log(gyro);
 
             // Accel values:  x, y, z axis values (in Gs)
-            accel = j.GetAccel();
-            Debug.Log(accel);
+            //accel = j.GetAccel();
+            //Debug.Log(accel);
 
             // Update cursor position based on gyroscope
-            joyconCursorPos += new Vector3(gyro.x, gyro.y, 0.0f);
+            joyconCursorPos += new Vector3(gyro.z, gyro.y, 0.0f);
             Mouse.current.WarpCursorPosition(joyconCursorPos);
 
 
