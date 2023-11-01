@@ -63,11 +63,8 @@ public class InputManager : MonoBehaviour
             // Update cursor position based on gyroscope values
             joyconCursorPos += new Vector3(gyro.z, gyro.y, 0.0f);
 
-            float screenAspect = (float)Screen.width / (float)Screen.height;
-            float cameraHeight = Camera.main.orthographicSize * 2;
-
-            joyconCursorPos.x = Mathf.Clamp(joyconCursorPos.x, -cameraHeight * screenAspect, cameraHeight * screenAspect);
-            joyconCursorPos.y = Mathf.Clamp(joyconCursorPos.y, -cameraHeight, cameraHeight);
+            joyconCursorPos.x = Mathf.Clamp(joyconCursorPos.x, 0, Screen.width);
+            joyconCursorPos.y = Mathf.Clamp(joyconCursorPos.y, 0, Screen.height);
 
 
             Mouse.current.WarpCursorPosition(joyconCursorPos);
