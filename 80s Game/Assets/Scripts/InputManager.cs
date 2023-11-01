@@ -62,15 +62,23 @@ public class InputManager : MonoBehaviour
 
             // Update cursor position based on gyroscope values
             joyconCursorPos += new Vector3(gyro.z, gyro.y, 0.0f);
+
+            float screenAspect = (float)Screen.width / (float)Screen.height;
+            float cameraHeight = Camera.main.orthographicSize * 2;
+
+            joyconCursorPos.x = Mathf.Clamp(joyconCursorPos.x, -cameraHeight * screenAspect, cameraHeight * screenAspect);
+            joyconCursorPos.y = Mathf.Clamp(joyconCursorPos.y, -cameraHeight, cameraHeight);
+
+
             Mouse.current.WarpCursorPosition(joyconCursorPos);
 
             // Get orientation from joycon
             orientation = j.GetVector(); // <- Misleading method name, this returns a quaternion
 
             // Get forward and rightward vectors from orientation
-            Vector3 curForward = orientation * Vector3.forward;
-            Vector3 curRightward = orientation * Vector3.right;
-            Debug.Log(curForward);
+            //Vector3 curForward = orientation * Vector3.forward;
+            //Vector3 curRightward = orientation * Vector3.right;
+            //Debug.Log(curForward);
             //Debug.Log(curRightward);
 
         }
