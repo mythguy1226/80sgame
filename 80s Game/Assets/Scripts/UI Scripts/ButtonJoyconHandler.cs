@@ -11,7 +11,7 @@ public class ButtonJoyconHandler : MonoBehaviour
         _button = GetComponent<Button>();
     }
 
-    void Update()
+    public void ActivateButton()
     {
         if (GameManager.Instance.InputManager.MouseLeftDownThisFrame)
         {
