@@ -18,16 +18,19 @@ public class ButtonJoyconHandler : MonoBehaviour
         if (GameManager.Instance.InputManager.MouseLeftDownThisFrame && hovered)
         {
             _button.onClick.Invoke();
+            hovered = false;
         }
     }
 
     public void ButtonHover()
     {
         hovered = true;
+        Debug.Log("Mouse Entered");
     }
 
     public void ButtonUnhover()
     {
         hovered = false;
+        Debug.Log("Mouse Exited");
     }
 }
