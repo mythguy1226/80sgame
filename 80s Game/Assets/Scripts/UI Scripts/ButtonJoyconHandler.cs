@@ -6,16 +6,28 @@ using UnityEngine.UI;
 public class ButtonJoyconHandler : MonoBehaviour
 {
     private Button _button;
+    private bool hovered;
+
     void Awake()
     {
         _button = GetComponent<Button>();
     }
 
-    public void ActivateButton()
+    private void Update()
     {
-        if (GameManager.Instance.InputManager.MouseLeftDownThisFrame)
+        if (GameManager.Instance.InputManager.MouseLeftDownThisFrame && hovered)
         {
             _button.onClick.Invoke();
         }
+    }
+
+    public void ButtonHover()
+    {
+        hovered = true;
+    }
+
+    public void ButtonUnhover()
+    {
+        hovered = false;
     }
 }
