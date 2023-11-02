@@ -51,7 +51,7 @@ public class Target : MonoBehaviour
                     // Check for player input coords hitting target
                     Vector3 shotPos = inputManager.MouseWorldPosition;
                     RaycastHit2D hit = Physics2D.Raycast(shotPos, Vector2.zero);
-                    if (hit && inputManager.MouseLeftDownThisFrame)
+                    if (hit && inputManager.MouseLeftDownThisFrame && Time.timeScale > 0) // Check time scale so bats cant be harmed while game is paused
                     {
                         // Check that hit has detected this particular object
                         if(hit.collider.gameObject == gameObject)

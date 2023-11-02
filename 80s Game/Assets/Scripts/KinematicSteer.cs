@@ -13,12 +13,29 @@ public class KinematicSteer : MonoBehaviour
     // Private fields for calculations
     Vector3 currentVelocity;
 
+    // Get the sprite renderer
+    SpriteRenderer spriteRenderer;
+
+    // Ran at beginning of game
+    void Start()
+    {
+        // Init components
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
     // Update is called once per frame
     void Update()
     {
         // Only steer if agent is currently moveable
         if (canMove)
             Steer();
+
+        // Set direction to face
+        if (currentVelocity.x > 0.0f)
+            spriteRenderer.flipX = true;
+        else
+            spriteRenderer.flipX = false;
+
     }
 
     public void Steer()
@@ -63,11 +80,11 @@ public class KinematicSteer : MonoBehaviour
     {
         // Get max heigh and width values from screen
         float maxHeight = Camera.main.GetComponent<Camera>().orthographicSize;
-        float maxWidth = maxHeight * Screen.width / Screen.height;
+        float maxWidth = maxHeight * (Screen.width / Screen.height);
 
         // Get a random range for x and y levels
-        float newPosX = Random.Range(-maxWidth, maxWidth);
-        float newPosY = Random.Range(-maxHeight, maxHeight);
+        float newPosX = Random.Range(-maxWidth + spriteRenderer.size.x, maxWidth - spriteRenderer.size.x);
+        float newPosY = Random.Range(-maxHeight + spriteRenderer.size.y, maxHeight - spriteRenderer.size.y);
 
         // Set the new position
         targetPosition = new Vector3(newPosX, newPosY, transform.position.z);
@@ -89,7 +106,7 @@ public class KinematicSteer : MonoBehaviour
             float distance = Vector3.Distance(transform.position, neighborPos);
 
             // If the distance less than the desired seperation and it's greater than zero, separate
-            if (distance < (transform.localScale.x * 2) + 4 && distance > 0)
+            if (distance < (spriteRenderer.size.x * 2) + 1 && distance > 0)
             {
                 // Add the normalized vectors between the object position and each neighbor's position to the desired velocity
                 Vector3 steeringForce = transform.position - neighborPos;
@@ -113,7 +130,7 @@ public class KinematicSteer : MonoBehaviour
         }
 
         // Return steering force
-        return desiredVelocity * 0.1f;
+        return desiredVelocity * 0.2f;
     }
 
     // Method used for Alignment
@@ -125,7 +142,7 @@ public class KinematicSteer : MonoBehaviour
         // Get all directions for all neighbors within a radius of 7
         foreach (Target neighbor in neighbors)
         {
-            if (Vector3.Distance(transform.position, neighbor.transform.position) < 7)
+            if (Vector3.Distance(transform.position, neighbor.transform.position) < 5)
             {
                 desiredVelocity += (neighbor.GetComponent<KinematicSteer>().targetPosition - neighbor.transform.position);
             }
@@ -137,7 +154,7 @@ public class KinematicSteer : MonoBehaviour
         desiredVelocity -= currentVelocity;
 
         // Return steering force
-        return desiredVelocity * 0.2f;
+        return desiredVelocity * 0.9f;
     }
 
     // Method for Cohesion
@@ -152,7 +169,7 @@ public class KinematicSteer : MonoBehaviour
         // Get the sum of all points of neighbors within a radius of 7
         foreach (Target neighbor in neighbors)
         {
-            if (Vector3.Distance(transform.position, neighbor.transform.position) < 7)
+            if (Vector3.Distance(transform.position, neighbor.transform.position) < 3)
             {
                 centroid += neighbor.transform.position;
                 neighborCount++;
