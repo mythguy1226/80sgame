@@ -99,10 +99,29 @@ public class TargetManager : MonoBehaviour
     }
 
     // Method for getting all targets currently on screen
-    void GetAllTargetsOnScreen()
+    public Target[] GetAllTargetsOnScreen()
     {
-        // TO-DO
-        // When we get to future rounds
+        // Init counter
+        List<Target> tempTargetList = new List<Target>();
+
+        // Iterate through all targets and check if they're on screen
+        foreach(Target target in targets)
+        {
+            // Add to counter if target is on screen
+            if (target.isOnScreen)
+                tempTargetList.Add(target);
+        }
+
+        // Init array for transfer
+        Target[] targetsOnScreen = new Target[tempTargetList.Count];
+
+        // Iterate through the temp list and add to target array
+        for (int i = 0; i < tempTargetList.Count; i++)
+        {
+            targetsOnScreen[i] = tempTargetList[i];
+        }
+
+        return targetsOnScreen;
     }
 
     // Method for getting the next available target
