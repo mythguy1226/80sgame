@@ -17,6 +17,14 @@ public class PauseScreenBehavior : MonoBehaviour
         {
             PauseGame();
         }
+
+        else if (Input.GetKeyDown("escape") && onboardingPanel.activeInHierarchy)
+        {
+            onboardingPanel.SetActive(false);
+            gameUIElements.SetActive(true);
+
+            Time.timeScale = 1.0f;
+        }
     }
 
     public void PauseGame()
