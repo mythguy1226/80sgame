@@ -74,16 +74,36 @@ public class TargetManager : MonoBehaviour
                 if (targetIndex >= 0)
                 {
                     SpawnTarget(targetIndex);
+
+                    // Check if screen is now full
+                    if (GetAllTargetsOnScreen().Length == maxTargetsOnScreen)
+                        return;
                 }
             }
         }
     }
 
     // Method for spawning more targets if needed
-    void SpawnMoreTargets()
+    public void SpawnMoreTargets()
     {
-        // TO-DO
-        // When we get to future rounds
+        // Check if stuns are needed
+        int neededStuns = currentRoundSize - numStuns;
+        if (neededStuns > 0)
+        {
+            if (GetAllTargetsOnScreen().Length < neededStuns)
+            {
+                // Check that screen isn't full
+                if (GetAllTargetsOnScreen().Length < maxTargetsOnScreen)
+                {
+                    // Spawn a target
+                    int targetIndex = GetNextAvailableTarget();
+                    if (targetIndex >= 0)
+                    {
+                        SpawnTarget(targetIndex);
+                    }
+                }
+            }
+        }
     }
 
     // Method for spawning a target
@@ -96,6 +116,7 @@ public class TargetManager : MonoBehaviour
         // Update on-screen status
         targets[targetIndex].isOnScreen = true;
         targets[targetIndex].currentState = TargetStates.Moving;
+        targets[targetIndex].SetFleeTimer();
     }
 
     // Method for getting all targets currently on screen
