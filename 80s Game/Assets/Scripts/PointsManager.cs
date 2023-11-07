@@ -6,11 +6,13 @@ public class PointsManager : MonoBehaviour
 {
     // Public property
     public int Points {  get; private set; }
+    public int RoundPoints { get; private set; }
 
     // Start is called before the first frame update
     void Awake()
     {
         Points = 0;
+        RoundPoints = 0;
     }
 
     /// <summary>
@@ -18,21 +20,31 @@ public class PointsManager : MonoBehaviour
     /// </summary>
     /// <param name="numPoints"></param>
     /// <returns>The new point total</returns>
-    public int AddPoints(int numPoints)
+    public int AddRoundPoints(int numPoints)
     {
-        Points += numPoints;
-        return Points;
+        RoundPoints += numPoints;
+        return RoundPoints;
     }
 
     /// <summary>
     /// Adds bonus points based off of an accuracy level
     /// </summary>
     /// <param name="accuracy"></param>
-    /// <returns>The new point total</returns>
+    /// <returns>The new round point total</returns>
     public int AddBonusPoints(float accuracy)
     {
-        // Bonus points are in the amount of (1
-        int numBonusPoints = Mathf.RoundToInt(Points * accuracy);
-        return AddPoints(numBonusPoints);
+        int numBonusPoints = Mathf.RoundToInt(RoundPoints * accuracy);
+        return AddRoundPoints(numBonusPoints);
+    }
+
+    /// <summary>
+    /// Totals up all the points in a round to the game points field
+    /// </summary>
+    /// <returns>The new point total</returns>
+    public int AddTotal()
+    {
+        Points += RoundPoints;
+        RoundPoints = 0;
+        return Points;
     }
 }

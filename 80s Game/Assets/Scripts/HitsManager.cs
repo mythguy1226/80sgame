@@ -7,7 +7,7 @@ public class HitsManager : MonoBehaviour
     // Public properties
     public int Shots {  get; private set; }
     public int Hits { get; private set; }
-    public int Accuracy { get; private set; }
+    public float Accuracy { get; private set; }
 
     // Start is called before the first frame update
     void Start()
@@ -21,10 +21,16 @@ public class HitsManager : MonoBehaviour
     void Update()
     {
         // Can't divide by 0
-        if(Shots > 0)
+        if (Shots > 0)
         {
             // Ratio of hits made to number of shots
-            Accuracy = Hits / Shots;
+            Accuracy = Hits / (float) Shots;
+        }
+
+        // When the player clicks and the game isn't paused, add a shot
+        if (GameManager.Instance.InputManager.MouseLeftDownThisFrame && Time.timeScale > 0)
+        {
+            AddShot();
         }
     }
 
@@ -43,7 +49,6 @@ public class HitsManager : MonoBehaviour
     /// <returns></returns>
     public int AddHit()
     {
-        Shots++;
         return ++Hits; 
     }
 }
