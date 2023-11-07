@@ -8,6 +8,7 @@ public class KinematicSteer : MonoBehaviour
     public Vector2 targetPosition;
     public float targetRadius;
     public bool canMove;
+    public bool isFleeing;
 
     // Maximums
     [Range(0, 10)]
@@ -51,12 +52,8 @@ public class KinematicSteer : MonoBehaviour
         // Only steer if agent is currently moveable
         if (canMove)
         {
-            // Get the direction towards target position
-            Vector2 direction = targetPosition - new Vector2(transform.position.x, transform.position.y);
-            float distance = direction.magnitude;
-
-            // Stop moving if at destination
-            if (distance <= targetRadius)
+            // Check if target reaches destination in wander state
+            if (IsAtDestination() && !isFleeing)
             {
                 // Find new position once at destination
                 SetWanderPosition();
@@ -110,6 +107,13 @@ public class KinematicSteer : MonoBehaviour
         return steer;
     }
 
+    // Method for setting the target position
+    public void SetTargetPosition(Vector2 newTarget)
+    {
+        // Set the position
+        targetPosition = newTarget;
+    }
+
     // Method used for Wandering
     public void SetWanderPosition()
     {
@@ -122,7 +126,18 @@ public class KinematicSteer : MonoBehaviour
         float newPosY = Random.Range(-maxHeight + spriteRenderer.size.y, maxHeight - spriteRenderer.size.y);
 
         // Set the new position
-        targetPosition = new Vector2(newPosX, newPosY);
+        SetTargetPosition(new Vector2(newPosX, newPosY));
+    }
+
+    // Method for checking if target has arrived at destination
+    public bool IsAtDestination()
+    {
+        // Get the direction towards target position
+        Vector2 direction = targetPosition - new Vector2(transform.position.x, transform.position.y);
+        float distance = direction.magnitude;
+
+        // Return result
+        return distance <= targetRadius;
     }
 
     // Method for applying flocking
