@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class ButtonJoyconHandler : MonoBehaviour
 {
+    //field for if the button is the pause button
+    public bool pauseButton = false;
+
     private Button _button;
     private bool hovered;
 
@@ -20,6 +23,11 @@ public class ButtonJoyconHandler : MonoBehaviour
         {
             _button.onClick.Invoke();
             hovered = false;
+
+            if (!pauseButton)
+            {
+                Invoke("ButtonHover", 0.1f);
+            }    
         }
     }
 
@@ -28,12 +36,10 @@ public class ButtonJoyconHandler : MonoBehaviour
     public void ButtonHover()
     {
         hovered = true;
-        Debug.Log("Mouse Entered");
     }
 
     public void ButtonUnhover()
     {
         hovered = false;
-        Debug.Log("Mouse Exited");
     }
 }

@@ -152,8 +152,9 @@ public class Target : MonoBehaviour
             }
 
             // Take into account the round cap
-            if (GameManager.Instance.TargetManager.currentRound == 10)
+            if (GameManager.Instance.TargetManager.currentRound == GameManager.Instance.TargetManager.numRounds)
             {
+                GameManager.Instance.TargetManager.gameOver = true;
                 return;
             }
 
