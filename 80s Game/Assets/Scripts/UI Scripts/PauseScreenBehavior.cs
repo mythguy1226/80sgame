@@ -13,11 +13,13 @@ public class PauseScreenBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("escape") && !onboardingPanel.activeInHierarchy)
+        //Pause game if escape key is pressed
+        if (Input.GetKeyDown("escape") && !onboardingPanel.activeInHierarchy && !GameManager.Instance.TargetManager.gameOver)
         {
             PauseGame();
         }
 
+        //If the onboarding panel is active when escape is pressed, close it and start the game
         else if (Input.GetKeyDown("escape") && onboardingPanel.activeInHierarchy)
         {
             onboardingPanel.SetActive(false);

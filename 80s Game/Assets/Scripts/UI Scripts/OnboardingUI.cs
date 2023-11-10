@@ -10,6 +10,7 @@ public class OnboardingUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Pause game when onboarding panel is activated
         Time.timeScale = 0.0f;
     }
 
@@ -19,6 +20,7 @@ public class OnboardingUI : MonoBehaviour
         
     }
 
+    //Close the panel, active game UI elements, and unpause the game
     public void CloseOnboarding()
     {
         onboardingPanel.SetActive(false);
