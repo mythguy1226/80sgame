@@ -29,6 +29,7 @@ public class Target : MonoBehaviour
     // Get needed components for handling target behavior
     KinematicSteer movementControls;
     AnimationHandler animControls;
+    CircleCollider2D collider;
 
     // Default fields used for resets
     Vector3 spawnPoint;
@@ -39,6 +40,7 @@ public class Target : MonoBehaviour
         // Init component references
         movementControls = GetComponent<KinematicSteer>();
         animControls = GetComponent<AnimationHandler>();
+        collider = GetComponent<CircleCollider2D>();
         inputManager = GameManager.Instance.InputManager;
         spawnPoint = transform.position;
 
@@ -90,7 +92,7 @@ public class Target : MonoBehaviour
                 case TargetStates.Death:
                     // Disable movement and set bat fall movement
                     movementControls.canMove = false;
-                    transform.position += new Vector3(0.0f, -1.0f, 0.0f) * Time.deltaTime;
+                    transform.position += new Vector3(0.0f, -1.0f, 0.0f) * 3.0f * Time.deltaTime;
 
                     // Reset all target values once in this state if
                     // bat has dropped
@@ -134,6 +136,7 @@ public class Target : MonoBehaviour
         // Bring bat to death state to start falling
         currentState = TargetStates.Death;
         animControls.PlayDropAnimation();
+        collider.isTrigger = true;
     }
 
     // Method used for resetting the target
@@ -144,6 +147,7 @@ public class Target : MonoBehaviour
         transform.position = spawnPoint;
         movementControls.canMove = false;
         animControls.ResetAnimation();
+        collider.isTrigger = false;
 
         // Choose new wander position to be used on respawn
         movementControls.SetWanderPosition();

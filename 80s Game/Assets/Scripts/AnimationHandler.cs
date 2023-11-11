@@ -6,18 +6,23 @@ public class AnimationHandler : MonoBehaviour
 {
     Animator anime; //animator for the given object
     //Target self; //Target script for object
-    private int stunHash = Animator.StringToHash("hit");
-    private int dropHash = Animator.StringToHash("drop");
-    private int resetHash = Animator.StringToHash("reset");
+    private int stunHash;
+    private int dropHash;
+    private int resetHash;
     //private int timeHash = Animator.StringToHash("stunTime");
     //private bool dying = false;
     //private int deathTimer;
     //private const int DTIME = 10;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         anime = GetComponent<Animator>(); //set up animator
+
+        stunHash = Animator.StringToHash("hit");
+        dropHash = Animator.StringToHash("drop");
+        resetHash = Animator.StringToHash("reset");
+
         //self = GetComponent<Target>();
         //deathTimer = DTIME;
         //anime.SetInteger(timeHash, deathTimer);
