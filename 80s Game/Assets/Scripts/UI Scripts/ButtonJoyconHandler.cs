@@ -21,7 +21,7 @@ public class ButtonJoyconHandler : MonoBehaviour
         //If the joycon trigger is pressed when the button is hovered over, perform the button's action
         if (GameManager.Instance.InputManager.MouseLeftDownThisFrame 
             && hovered
-            && GameManager.Instance.InputManager.jc_ind > 0)
+            && GameManager.Instance.InputManager.joycons.Count > 0)
         {
             _button.onClick.Invoke();
             hovered = false;

@@ -9,6 +9,7 @@ public class PauseScreenBehavior : MonoBehaviour
     public GameObject pauseScreen;
     public GameObject gameUIElements;
     public GameObject onboardingPanel;
+    public GameObject onboardingCloseButton;
 
     // Update is called once per frame
     void Update()
@@ -34,7 +35,10 @@ public class PauseScreenBehavior : MonoBehaviour
         isPaused = !isPaused;
         if (isPaused == true)
         {
+            //Enable pause screen and onboarding info (except the button to close onboarding)
             pauseScreen.SetActive(true);
+            onboardingPanel.SetActive(true);
+            onboardingCloseButton.SetActive(false);
             gameUIElements.SetActive(false);
 
             //Sets time scale to 0 so game pauses
@@ -44,6 +48,7 @@ public class PauseScreenBehavior : MonoBehaviour
         else
         {
             pauseScreen.SetActive(false);
+            onboardingPanel.SetActive(false);
             gameUIElements.SetActive(true);
 
             //Sets time scale to 1 so game unpauses

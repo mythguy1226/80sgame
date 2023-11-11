@@ -25,7 +25,7 @@ public class InputManager : MonoBehaviour
     }
 
     // Joycon fields
-    private List<Joycon> joycons;
+    public List<Joycon> joycons;
     public Vector3 gyro;
     public int jc_ind = 0;
     public Quaternion orientation;
