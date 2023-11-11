@@ -92,7 +92,7 @@ public class Target : MonoBehaviour
                 case TargetStates.Death:
                     // Disable movement and set bat fall movement
                     movementControls.canMove = false;
-                    transform.position += new Vector3(0.0f, -1.0f, 0.0f) * 3.0f * Time.deltaTime;
+                    transform.position += new Vector3(0.0f, -1.0f, 0.0f) * 6.0f * Time.deltaTime;
 
                     // Reset all target values once in this state if
                     // bat has dropped
