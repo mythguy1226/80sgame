@@ -5,19 +5,21 @@ using UnityEngine;
 public class AnimationHandler : MonoBehaviour
 {
     Animator anime; //animator for the given object
-    Target self; //Target script for object
+    //Target self; //Target script for object
     private int stunHash = Animator.StringToHash("hit");
-    private int timeHash = Animator.StringToHash("stunTime");
-    private bool dying = false;
-    private int deathTimer;
-    private const int DTIME = 10;
+    private int dropHash = Animator.StringToHash("drop");
+    private int resetHash = Animator.StringToHash("reset");
+    //private int timeHash = Animator.StringToHash("stunTime");
+    //private bool dying = false;
+    //private int deathTimer;
+    //private const int DTIME = 10;
 
     // Start is called before the first frame update
     void Start()
     {
         anime = GetComponent<Animator>(); //set up animator
-        self = GetComponent<Target>();
-        deathTimer = DTIME;
+        //self = GetComponent<Target>();
+        //deathTimer = DTIME;
         //anime.SetInteger(timeHash, deathTimer);
     }
 
@@ -46,5 +48,13 @@ public class AnimationHandler : MonoBehaviour
     public void PlayStunAnimation()
     {
         anime.SetTrigger(stunHash);
+    }
+    public void PlayDropAnimation()
+    {
+        anime.SetTrigger(dropHash);
+    }
+    public void ResetAnimation()
+    {
+        anime.SetTrigger(resetHash);
     }
 }

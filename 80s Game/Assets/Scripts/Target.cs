@@ -133,6 +133,7 @@ public class Target : MonoBehaviour
     {
         // Bring bat to death state to start falling
         currentState = TargetStates.Death;
+        animControls.PlayDropAnimation();
     }
 
     // Method used for resetting the target
@@ -142,6 +143,7 @@ public class Target : MonoBehaviour
         isOnScreen = false;
         transform.position = spawnPoint;
         movementControls.canMove = false;
+        animControls.ResetAnimation();
 
         // Choose new wander position to be used on respawn
         movementControls.SetWanderPosition();
