@@ -16,6 +16,7 @@ public class Target : MonoBehaviour
     public TargetStates currentState = TargetStates.Moving;
     public bool isOnScreen = false;
     public int pointValue = 1000;
+    public float deathHeight = -6.5f;
 
     // Fleeing fields
     public float timeUntilFlee = 5.0f;
@@ -27,6 +28,7 @@ public class Target : MonoBehaviour
 
     // Get needed components for handling target behavior
     KinematicSteer movementControls;
+    AnimationHandler animControls;
 
     // Default fields used for resets
     Vector3 spawnPoint;
@@ -36,6 +38,7 @@ public class Target : MonoBehaviour
     {
         // Init component references
         movementControls = GetComponent<KinematicSteer>();
+        animControls = GetComponent<AnimationHandler>();
         inputManager = GameManager.Instance.InputManager;
         spawnPoint = transform.position;
 
@@ -85,8 +88,16 @@ public class Target : MonoBehaviour
 
                 // Handle death condition here
                 case TargetStates.Death:
-                    // Reset all target values once in this state
-                    Reset();
+                    // Disable movement and set bat fall movement
+                    movementControls.canMove = false;
+                    transform.position += new Vector3(0.0f, -1.0f, 0.0f) * Time.deltaTime;
+
+                    // Reset all target values once in this state if
+                    // bat has dropped
+                    if(transform.position.y <= deathHeight)
+                    {
+                        Reset();
+                    }
                     break;
                 default:
                     break;
@@ -112,9 +123,16 @@ public class Target : MonoBehaviour
             // Check that hit has detected this particular object
             if (hit.collider.gameObject == gameObject)
             {
-                currentState = TargetStates.Death;
+                animControls.PlayStunAnimation();
             }
         }
+    }
+
+    // Method for dropping the bat
+    public void DropBat()
+    {
+        // Bring bat to death state to start falling
+        currentState = TargetStates.Death;
     }
 
     // Method used for resetting the target

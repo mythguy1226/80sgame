@@ -18,28 +18,33 @@ public class AnimationHandler : MonoBehaviour
         anime = GetComponent<Animator>(); //set up animator
         self = GetComponent<Target>();
         deathTimer = DTIME;
-        anime.SetInteger(timeHash, deathTimer);
+        //anime.SetInteger(timeHash, deathTimer);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (dying != true && self.currentState == TargetStates.Death)
-        {
-            dying = true;
-            anime.SetTrigger(stunHash);
-        }
-        if (dying == true && deathTimer > 0) //death animation should loop for ~10 frames
-        {
-            deathTimer--;
-            anime.SetInteger(timeHash, deathTimer);
-        }
-        if (self.currentState != TargetStates.Death && dying == true) //target has been reset, needs to be updated
-        {
-            dying = false;
-            deathTimer = DTIME;
-            anime.SetInteger(timeHash, deathTimer);
-            anime.ResetTrigger(stunHash);
-        }
+        //if (dying != true && self.currentState == TargetStates.Death)
+        //{
+        //    dying = true;
+        //    anime.SetTrigger(stunHash);
+        //}
+        //if (dying == true && deathTimer > 0) //death animation should loop for ~10 frames
+        //{
+        //    deathTimer--;
+        //    anime.SetInteger(timeHash, deathTimer);
+        //}
+        //if (self.currentState != TargetStates.Death && dying == true) //target has been reset, needs to be updated
+        //{
+        //    dying = false;
+        //    deathTimer = DTIME;
+        //    anime.SetInteger(timeHash, deathTimer);
+        //    anime.ResetTrigger(stunHash);
+        //}
+    }
+
+    public void PlayStunAnimation()
+    {
+        anime.SetTrigger(stunHash);
     }
 }
