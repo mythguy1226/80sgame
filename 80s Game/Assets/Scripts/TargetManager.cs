@@ -13,7 +13,9 @@ public class TargetManager : MonoBehaviour
     public int currentRound = 1;
     public int currentRoundSize;
     public int numStuns = 0;
+    public bool gameOver = false;
     int maxTargetsOnScreen = 8;
+    public int numRounds = 10;
 
     // Start is called before the first frame update
     void Start()
