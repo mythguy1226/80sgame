@@ -118,6 +118,8 @@ public class TargetManager : MonoBehaviour
         // Update on-screen status
         targets[targetIndex].isOnScreen = true;
         targets[targetIndex].currentState = TargetStates.Moving;
+        targets[targetIndex].GetComponent<AnimationHandler>().ResetAnimation();
+        targets[targetIndex].GetComponent<CircleCollider2D>().isTrigger = false;
         targets[targetIndex].SetFleeTimer();
     }
 
