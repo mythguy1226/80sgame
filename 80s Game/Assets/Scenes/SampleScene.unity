@@ -4167,7 +4167,7 @@ MonoBehaviour:
   currentRoundSize: 0
   numStuns: 0
   gameOver: 0
-  numRounds: 10
+  numRounds: 1
 --- !u!114 &1095139973
 MonoBehaviour:
   m_ObjectHideFlags: 0

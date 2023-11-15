@@ -179,6 +179,7 @@ public class Target : MonoBehaviour
             if (GameManager.Instance.TargetManager.currentRound == GameManager.Instance.TargetManager.numRounds)
             {
                 GameManager.Instance.TargetManager.gameOver = true;
+                GameManager.Instance.PointsManager.SaveScore();
                 return;
             }
 
