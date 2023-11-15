@@ -30,6 +30,7 @@ public class Target : MonoBehaviour
     KinematicSteer movementControls;
     AnimationHandler animControls;
     CircleCollider2D collider;
+    public AudioClip hitSound;
 
     // Default fields used for resets
     Vector3 spawnPoint;
@@ -126,6 +127,7 @@ public class Target : MonoBehaviour
             if (hit.collider.gameObject == gameObject)
             {
                 animControls.PlayStunAnimation();
+                SoundManager.Instance.PlaySound(hitSound);
             }
         }
     }
