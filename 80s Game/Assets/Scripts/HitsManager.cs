@@ -30,6 +30,11 @@ public class HitsManager : MonoBehaviour
         // When the player clicks and the game isn't paused, add a shot
         if (GameManager.Instance.InputManager.MouseLeftDownThisFrame && Time.timeScale > 0)
         {
+            if (GameManager.Instance.InputManager.joycons.Count > 0)
+            {
+                Joycon j = GameManager.Instance.InputManager.joycons[GameManager.Instance.InputManager.jc_ind];
+                j.SetRumble(160, 320, 0.6f, 200);
+            }
             AddShot();
         }
     }

@@ -11,8 +11,8 @@ public class OnboardingUI : MonoBehaviour
     public TMP_Text onboardingText;
     
     //Fields for onboarding text to be displayed to the player
-    private string mouseInputText = "The Bat Bots have escaped containment! \n\nAim your stun gun with the mouse and fire with left-click to stun the bat bots.";
-    private string joyconInputText = "The Bat Bots have escaped containment! \n\nAim your stun gun by tilting the JoyCon. \n\nFire with the trigger (ZR/ZL) to stun the bat bots.";
+    private string mouseInputText = "The bat bots have escaped containment! \n\nAim your stun gun with the mouse and fire with left-click to stun the bat bots.";
+    private string joyconInputText = "The bat bots have escaped containment! \n\nAim your stun gun by tilting the JoyCon. \n\nFire with the trigger (ZR/ZL) to stun the bat bots.";
 
 
     // Start is called before the first frame update

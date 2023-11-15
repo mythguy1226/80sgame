@@ -9,11 +9,13 @@ public class ScoreBehavior : MonoBehaviour
     public TMP_Text scoreTextObject;
     public TMP_Text highScoreTextObject;
     public TMP_Text finalScoreTextObject;
+    public TMP_Text roundIndicatorTextObject;
 
     //Strings for text minus the score values
     private string scoreText = "Score:\n";
     private string highScoreText = "High Score:\n";
     private string finalScoreText = "Final Score: ";
+    private string roundText = "Round\n";
 
     //Placeholder high score (Replace with File IO stuff)
     private int highScore = 20000;
@@ -29,10 +31,15 @@ public class ScoreBehavior : MonoBehaviour
     {
         //Get the score from the PointsManager
         int score = GameManager.Instance.PointsManager.Points;
+        int currentRoundNum = GameManager.Instance.TargetManager.currentRound;
+        int maxNumOfRounds = GameManager.Instance.TargetManager.numRounds;
 
         //Update Score and Final Score text boxes
         scoreTextObject.SetText(scoreText + score);
         finalScoreTextObject.SetText(finalScoreText + score);
+
+        //Update Round Indicator
+        roundIndicatorTextObject.SetText(roundText + currentRoundNum + "/" + maxNumOfRounds);
 
         //If you beat the high score, list the current score under high score as well
         if (score > highScore)
