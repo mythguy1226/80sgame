@@ -24,11 +24,11 @@ public class Target : MonoBehaviour
     public Vector2 fleeLocation;
 
     // Get component for player interactions
-    InputManager inputManager;
+    protected InputManager inputManager;
 
     // Get needed components for handling target behavior
-    KinematicSteer movementControls;
-    AnimationHandler animControls;
+    protected KinematicSteer movementControls;
+    protected AnimationHandler animControls;
     CircleCollider2D collider;
     public AudioClip hitSound;
 
@@ -116,7 +116,7 @@ public class Target : MonoBehaviour
     }
 
     // Method for checking if target has been stunned
-    void DetectStun()
+    protected virtual void DetectStun()
     {
         // Check for player input coords hitting target
         Vector3 shotPos = inputManager.MouseWorldPosition;
