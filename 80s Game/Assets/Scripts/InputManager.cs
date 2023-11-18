@@ -31,11 +31,14 @@ public class InputManager : MonoBehaviour
     public Quaternion orientation;
     public Vector3 joyconCursorPos;
 
+    public PauseScreenBehavior pauseScript;
+
     void Start()
     {
         joycons = JoyconManager.Instance.j;
         gyro = new Vector3(0, 0, 0);
-        joyconCursorPos = new Vector3(0, 0, 0);
+        RecenterCursor();
+        ResetRumble();
     }
 
     // Update is called once per frame
@@ -72,6 +75,29 @@ public class InputManager : MonoBehaviour
             // Get right trigger input
             MouseLeftDownThisFrame = j.GetButtonDown(Joycon.Button.SHOULDER_2);
 
+            if (j.GetButtonDown(Joycon.Button.DPAD_DOWN))
+            {
+                RecenterCursor();
+            }
+
+            if (j.GetButtonDown(Joycon.Button.PLUS) && !pauseScript.isPaused)
+            {
+                pauseScript.PauseGame();
+            }
+        }
+    }
+
+    public void RecenterCursor()
+    {
+        joyconCursorPos = new Vector3(Screen.width/2, Screen.height / 2, 0);
+    }
+
+    public void ResetRumble()
+    {
+        if (joycons.Count > 0)
+        {
+            Joycon j = joycons[jc_ind];
+            j.SetRumble(0, 0, 0);
         }
     }
 }

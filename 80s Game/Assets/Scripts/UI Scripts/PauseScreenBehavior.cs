@@ -15,13 +15,13 @@ public class PauseScreenBehavior : MonoBehaviour
     void Update()
     {
         //Pause game if escape key is pressed
-        if (Input.GetKeyDown("escape") && !onboardingPanel.activeInHierarchy && !GameManager.Instance.TargetManager.gameOver)
+        if (Input.GetKeyDown("escape") && (!onboardingPanel.activeInHierarchy || pauseScreen.activeInHierarchy) && !GameManager.Instance.TargetManager.gameOver)
         {
             PauseGame();
         }
 
         //If the onboarding panel is active when escape is pressed, close it and start the game
-        else if (Input.GetKeyDown("escape") && onboardingPanel.activeInHierarchy)
+        else if (Input.GetKeyDown("escape") && onboardingPanel.activeInHierarchy && !pauseScreen.activeInHierarchy)
         {
             onboardingPanel.SetActive(false);
             gameUIElements.SetActive(true);
@@ -32,33 +32,34 @@ public class PauseScreenBehavior : MonoBehaviour
 
     public void PauseGame()
     {
+        //GameManager.Instance.InputManager.ResetRumble();
         isPaused = !isPaused;
         if (isPaused == true)
         {
+            //Sets time scale to 0 so game pauses
+            Time.timeScale = 0f;
+
             //Enable pause screen and onboarding info (except the button to close onboarding)
             pauseScreen.SetActive(true);
             onboardingPanel.SetActive(true);
             onboardingCloseButton.SetActive(false);
             gameUIElements.SetActive(false);
-
-            //Sets time scale to 0 so game pauses
-            Time.timeScale = 0f;
         }
 
         else
         {
+            //Sets time scale to 1 so game unpauses
+            Time.timeScale = 1f;
+
             pauseScreen.SetActive(false);
             onboardingPanel.SetActive(false);
             gameUIElements.SetActive(true);
-
-            //Sets time scale to 1 so game unpauses
-            Time.timeScale = 1f;
         }
     }
 
     public void QuitGame()
     {
-        SceneManager.LoadScene(0);
         Time.timeScale = 1f;
+        SceneManager.LoadScene(0);
     }
 }
