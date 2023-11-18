@@ -17,6 +17,10 @@ public class TargetManager : MonoBehaviour
     int maxTargetsOnScreen = 8;
     public int numRounds = 10;
 
+    // Speed values
+    float minSpeed = 3.0f;
+    float maxSpeed = 3.5f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +31,9 @@ public class TargetManager : MonoBehaviour
         // to be equal to the first round's size
         StartFirstRound();
         currentRoundSize = firstRoundTargetCount;
+
+        // Update initial target speeds
+        UpdateRoundSpeeds();
     }
 
     // Method for spawning first round of targets
@@ -61,6 +68,17 @@ public class TargetManager : MonoBehaviour
         {
             maxTargetsOnScreen = targets.Length - 2;
         }
+
+        // Update min and max target speeds
+        minSpeed += 0.5f;
+        if (minSpeed >= 7.5f)
+            minSpeed = 7.5f;
+
+        maxSpeed += 0.5f;
+        if (maxSpeed >= 8.0f)
+            maxSpeed = 8.0f;
+        
+
     }
 
     // Method for starting the next round
@@ -164,5 +182,57 @@ public class TargetManager : MonoBehaviour
         }
 
         return -1;
+    }
+
+    // Method used for updating values on bat death
+    public void OnTargetDeath(TargetStates targetState)
+    {
+        // Update number of stuns
+        numStuns++;
+
+        // Compare number of stuns needed vs round size
+        if (numStuns >= currentRoundSize)
+        {
+            // Only add points if target didn't flee
+            if (targetState != TargetStates.Fleeing)
+            {
+                // A little verbose, but can be improved later on
+                PointsManager pointsManager = GameManager.Instance.PointsManager;
+                pointsManager.AddBonusPoints(GameManager.Instance.HitsManager.Accuracy);
+                pointsManager.AddTotal();
+            }
+
+            // Take into account the round cap
+            if (currentRound == numRounds)
+            {
+                gameOver = true;
+                return;
+            }
+
+            // Update params
+            UpdateRoundParameters();
+
+            // Update all target speeds once new round has started
+            UpdateRoundSpeeds();
+
+            // Begin the next round
+            StartNextRound();
+        }
+        else
+        {
+            // Try spawning another target
+            SpawnMoreTargets();
+        }
+    }
+
+    // Method for updating target speeds to be within range of round mins and maxes
+    void UpdateRoundSpeeds()
+    {
+        // Set target speeds to be in a random range
+        // between the min and max values
+        foreach(Target target in targets)
+        {
+            target.UpdateSpeed(Random.Range(minSpeed, maxSpeed));
+        }
     }
 }

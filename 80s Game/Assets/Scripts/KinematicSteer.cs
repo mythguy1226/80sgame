@@ -12,7 +12,7 @@ public class KinematicSteer : MonoBehaviour
 
     // Maximums
     [Range(0, 10)]
-    public float maxSpeed = 6f;
+    public float maxSpeed = 3f;
 
     [Range(.1f, .5f)]
     public float maxForce = .03f;

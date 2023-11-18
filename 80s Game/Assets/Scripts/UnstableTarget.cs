@@ -11,11 +11,17 @@ public class UnstableTarget : Target
     // Method for checking if target has been stunned
     protected override void DetectStun()
     {
-        // Check for player input coords hitting target
-        Vector3 shotPos = inputManager.MouseWorldPosition;
-        RaycastHit2D hit = Physics2D.Raycast(shotPos, Vector2.zero);
-        if (hit && inputManager.MouseLeftDownThisFrame && Time.timeScale > 0) // Check time scale so bats cant be harmed while game is paused
+        // Check time scale so bats cant be harmed while game is paused
+        if (inputManager.MouseLeftDownThisFrame && Time.timeScale > 0)
         {
+            // Check for player input coords hitting target
+            Vector3 shotPos = inputManager.MouseWorldPosition;
+            RaycastHit2D hit = Physics2D.Raycast(shotPos, Vector2.zero);
+
+            // Check if something was hit
+            if (!hit)
+                return;
+
             // Check that hit has detected this particular object
             if (hit.collider.gameObject == gameObject)
             {
