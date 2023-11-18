@@ -96,8 +96,7 @@ public class InputManager : MonoBehaviour
     {
         if (joycons.Count > 0)
         {
-            Joycon j = joycons[jc_ind];
-            j.SetRumble(0, 0, 0);
+            joycons[jc_ind].SetRumble(0, 0, 0);
         }
     }
 }

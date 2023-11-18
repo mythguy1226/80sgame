@@ -20,6 +20,7 @@ public class UnstableTarget : Target
             if (hit.collider.gameObject == gameObject)
             {
                 animControls.PlayStunAnimation();
+                SoundManager.Instance.PlaySound(hitSound);
 
                 // Get the chain of targets
                 Target[] targetChain = GetTargetChain();
