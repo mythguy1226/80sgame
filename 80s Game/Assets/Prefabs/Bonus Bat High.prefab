@@ -16,9 +16,9 @@ GameObject:
   - component: {fileID: 5432022069463102744}
   - component: {fileID: 7774082277665354212}
   - component: {fileID: 7014873915471283781}
-  - component: {fileID: 1064766512371524766}
+  - component: {fileID: 7037331219643080041}
   m_Layer: 0
-  m_Name: UnstableTarget
+  m_Name: Bonus Bat High
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8306778490096188409}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.9799995, y: -1.3400002, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3.5, y: 3.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -204,7 +204,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b276e073f04036041ab1761e836da248, type: 3}
-  m_Color: {r: 0.51320755, g: 0.5289857, b: 1, a: 1}
+  m_Color: {r: 0.48121867, g: 0.0141509175, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -226,7 +226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7afb1d5d9b1c61f4a8426a9f40b5d671, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1064766512371524766
+--- !u!114 &7037331219643080041
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -235,14 +235,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 8306778490096188409}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1541242eb80ec154dacf050192835f97, type: 3}
+  m_Script: {fileID: 11500000, guid: 0866a63fd34b4504e87f09f18a541938, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
   isOnScreen: 0
-  pointValue: 2000
+  pointValue: 4000
   deathHeight: -6.5
   timeUntilFlee: 5
-  fleeLocation: {x: 0, y: 10}
-  chainRadius: 2
-  chainLength: 3
+  fleeLocation: {x: 0, y: 0}
+  hitSound: {fileID: 0}

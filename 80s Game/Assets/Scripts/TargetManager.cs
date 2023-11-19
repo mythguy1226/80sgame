@@ -21,6 +21,10 @@ public class TargetManager : MonoBehaviour
     float minSpeed = 3.0f;
     float maxSpeed = 3.5f;
 
+    // Scale values
+    float minScale = 2.8f;
+    float maxScale = 3.5f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +38,9 @@ public class TargetManager : MonoBehaviour
 
         // Update initial target speeds
         UpdateRoundSpeeds();
+
+        // Switch initial target scales
+        UpdateRoundScaling();
     }
 
     // Method for spawning first round of targets
@@ -215,6 +222,9 @@ public class TargetManager : MonoBehaviour
             // Update all target speeds once new round has started
             UpdateRoundSpeeds();
 
+            // Switch up target scaling
+            UpdateRoundScaling();
+
             // Begin the next round
             StartNextRound();
         }
@@ -233,6 +243,21 @@ public class TargetManager : MonoBehaviour
         foreach(Target target in targets)
         {
             target.UpdateSpeed(Random.Range(minSpeed, maxSpeed));
+        }
+    }
+
+    // Method for changing bat scaling
+    void UpdateRoundScaling()
+    {
+        // Set target transform scales
+        // to be between min and max values
+        foreach(Target target in targets)
+        {
+            // Get random scale value
+            float newScale = Random.Range(minScale, maxScale);
+
+            // Update target local scale
+            target.gameObject.transform.localScale = new Vector3(newScale, newScale, newScale);
         }
     }
 }
