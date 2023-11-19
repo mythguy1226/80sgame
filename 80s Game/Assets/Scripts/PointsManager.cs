@@ -12,6 +12,7 @@ public class PointsManager : MonoBehaviour
     public int RoundPoints { get; private set; }
     private string filePath = Application.dataPath + "/PlayerData/scores.txt";
     private int numTopScores = 6;
+    private string initials = "ABC";
 
     // Start is called before the first frame update
     void Awake()
@@ -53,24 +54,37 @@ public class PointsManager : MonoBehaviour
         return Points;
     }
 
+    public class UserRecord
+    {
+        public string initials;
+        public int score;
+
+        public UserRecord(string intitials, int score)
+        {
+            this.initials = intitials;
+            this.score = score;
+        }
+    }
+
     /// <summary>
     /// Loads the scores from "scores.txt"
     /// </summary>
     /// <returns>A list of integers parsed from the data in "scores.txt"</returns>
-    public List<int> LoadScores()
+    public List<UserRecord> LoadRecords()
     {
         if(File.Exists(filePath))
         {
             // Read all lines from the file
             string[] lines = File.ReadAllLines(filePath);
 
-            List<int> scores = new List<int>();
+            List<UserRecord> records = new List<UserRecord>();
             // parse each top line and add it to the top scores
             foreach(string line in lines)
             {
-                if (int.TryParse(line, out int score))
+                string[] data = line.Split(":");
+                if (int.TryParse(data[1], out int score))
                 {
-                    scores.Add(score);
+                    records.Add(new UserRecord(data[0], score));
                 }
                 else
                 {
@@ -78,13 +92,12 @@ public class PointsManager : MonoBehaviour
                 }
             }
 
-            // convert list to array
-            return scores;
+            return records;
         }
         else
         {
             Debug.LogWarning("Scores file not found!");
-            return new List<int> { };
+            return new List<UserRecord> { };
         }
     }
 
@@ -93,20 +106,50 @@ public class PointsManager : MonoBehaviour
     /// </summary>
     public void SaveScore()
     {
+        List<UserRecord> records = LoadRecords();
+        records.Sort((record1, record2) => record1.score.CompareTo(record2.score));
+
+        if(records.Count > 0)
+        {
+            for(int i = 0; i < records.Count; i++)
+            {
+                if(Points > records[i].score)
+                {
+                    records.Insert(i, new UserRecord(initials, Points));
+                    break;
+                }
+            }
+        }
+        else
+        {
+            records.Add(new UserRecord(initials, Points));
+        }
+
+
         string dirPath = Path.GetDirectoryName(filePath);
         // Create the file if it doesn't exist
-        if(!Directory.Exists(dirPath))
+        if (!Directory.Exists(dirPath))
         {
             Directory.CreateDirectory(dirPath);
         }
 
-        // Write to the file
-        using(StreamWriter writer = new StreamWriter(filePath, true))
+        string scores = "";
+        for(int i = 0; i < 5; i++)
         {
-            writer.WriteLine(Points);
+            scores += $"{records[i].initials}:{records[i].score}";
+            // If note last recorded score, add new line
+            if(i != 4)
+            {
+                scores += "\n";
+            }
+            File.WriteAllText(filePath, scores);
         }
-
-        // Print the new set of scores
-        LoadScores().ForEach(score => Debug.Log(score));
+        
+        //// Write to the file
+        //using (StreamWriter writer = new StreamWriter(filePath, true))
+        //{
+            
+        //    writer.WriteLine($"{initials}:{Points}");
+        //}
     }
 }
