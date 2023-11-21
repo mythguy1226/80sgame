@@ -23,6 +23,7 @@ public class InputManager : MonoBehaviour
         get;
         private set;
     }
+    public AudioClip shootSound;
 
     // Joycon fields
     public List<Joycon> joycons;
@@ -84,6 +85,10 @@ public class InputManager : MonoBehaviour
             {
                 pauseScript.PauseGame();
             }
+        }
+        if (MouseLeftDownThisFrame && !pauseScript.isPaused)
+        {
+            SoundManager.Instance.PlaySoundContinuous(shootSound);
         }
     }
 

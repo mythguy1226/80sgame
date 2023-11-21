@@ -19,14 +19,17 @@ public class UnstableTarget : Target
             RaycastHit2D hit = Physics2D.Raycast(shotPos, Vector2.zero);
 
             // Check if something was hit
-            if (!hit)
-                return;
+            if (!hit) 
+            { 
+                //SoundManager.Instance.PlaySound(missSound); 
+                return; 
+            }
 
             // Check that hit has detected this particular object
             if (hit.collider.gameObject == gameObject)
             {
                 animControls.PlayStunAnimation();
-                SoundManager.Instance.PlaySound(hitSound);
+                SoundManager.Instance.PlaySoundInterrupt(hitSound);
 
                 // Get the chain of targets
                 Target[] targetChain = GetTargetChain();

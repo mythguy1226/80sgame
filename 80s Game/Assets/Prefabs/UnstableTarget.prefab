@@ -245,5 +245,6 @@ MonoBehaviour:
   timeUntilFlee: 5
   fleeLocation: {x: 0, y: 10}
   hitSound: {fileID: 8300000, guid: c928b956a133aa544bfa866c9b7c2b47, type: 3}
+  missSound: {fileID: 8300000, guid: 58d7a57419c677f4faa04f97ea74938c, type: 3}
   chainRadius: 2
   chainLength: 3
