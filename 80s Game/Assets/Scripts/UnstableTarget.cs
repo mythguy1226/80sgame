@@ -7,6 +7,7 @@ public class UnstableTarget : Target
     // Public chain fields
     public float chainRadius = 2.0f;
     public int chainLength = 3;
+    public GameObject lightning;
 
     // Method for checking if target has been stunned
     protected override void DetectStun()
@@ -30,10 +31,28 @@ public class UnstableTarget : Target
                 // Get the chain of targets
                 Target[] targetChain = GetTargetChain();
 
+                // Early return if chain is empty
+                if (targetChain.Length == 0)
+                    return;
+
+                // Init current target as this
+                Target currentTarg = this;
+
                 // Iterate through each chained target and play their stun animations as well
-                foreach(Target target in targetChain)
+                for (int i = 0; i < targetChain.Length; i++)
                 {
-                    target.GetComponent<AnimationHandler>().PlayStunAnimation();
+                    // Create instance of lightning
+                    GameObject effect = Instantiate(lightning, currentTarg.transform.position, Quaternion.identity);
+                    ChainLightning chain = effect.GetComponent<ChainLightning>();
+                    
+                    // Play lightning effect
+                    chain.PlayEffect(currentTarg.transform.position, targetChain[i].transform.position);
+
+                    // Play stun anim
+                    targetChain[i].GetComponent<AnimationHandler>().PlayStunAnimation();
+
+                    // Update current target
+                    currentTarg = targetChain[i];
                 }
             }
         }
