@@ -7,7 +7,8 @@ public class SoundManager : MonoBehaviour
     //singleton implementation adapted from an online tutorial: https://www.youtube.com/watch?v=tEsuLTpz_DU
     public static SoundManager Instance;
 
-    public AudioSource audio; //uses a single audio source
+    public AudioSource interruptSource; //audio source for sounds which cancel each other out
+    public AudioSource continuousSource; //audio source for sounds which cannot be interrupted
 
     void Awake()
     {
@@ -19,12 +20,17 @@ public class SoundManager : MonoBehaviour
         else Destroy(gameObject);
     }
 
-    public void PlaySound(AudioClip clip)
+    public void PlaySoundInterrupt(AudioClip clip)
     {
-        if (audio.isPlaying) 
+        if (interruptSource.isPlaying) 
         {
-            audio.Stop();
+            interruptSource.Stop();
         }
-        audio.PlayOneShot(clip);
+        interruptSource.PlayOneShot(clip);
+    }
+
+    public void PlaySoundContinuous(AudioClip clip)
+    { 
+        continuousSource.PlayOneShot(clip);
     }
 }
