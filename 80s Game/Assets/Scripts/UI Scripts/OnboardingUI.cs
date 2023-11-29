@@ -9,11 +9,14 @@ public class OnboardingUI : MonoBehaviour
     public GameObject onboardingPanel;
     public GameObject gameUIElements;
     public TMP_Text onboardingText;
+    public TMP_Text pauseControls;
     
     //Fields for onboarding text to be displayed to the player
     private string mouseInputText = "The bat bots have escaped containment! \n\nAim your stun gun with the mouse and fire with left-click to stun the bat bots.";
     private string joyconInputText = "The bat bots have escaped containment! \n\nAim your stun gun by tilting the JoyCon. \n\nFire with the trigger (ZR/ZL) to stun the bat bots.";
 
+    private string joyconPauseControls = "(+/-) Pause";
+    private string mousePauseControls = "(ESC) Pause";
 
     // Start is called before the first frame update
     void Start()
@@ -29,10 +32,12 @@ public class OnboardingUI : MonoBehaviour
         if (GameManager.Instance.InputManager.joycons.Count > 0)
         {
             onboardingText.SetText(joyconInputText);
+            pauseControls.SetText(joyconPauseControls);
         }
         else
         {
             onboardingText.SetText(mouseInputText);
+            pauseControls.SetText(mousePauseControls);
         }
     }
 
