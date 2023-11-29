@@ -1,10 +1,11 @@
 {
   "dependencies": {
     "com.glairedaggers.retrotvfx": {
-      "version": "file:C:/Users/insin/Desktop/RIT Important College Work/4th Year/IGME 601/80sgame/RetroTVFX",
+      "version": "https://github.com/GlaireDaggers/RetroTVFX.git",
       "depth": 0,
-      "source": "local",
-      "dependencies": {}
+      "source": "git",
+      "dependencies": {},
+      "hash": "9ea13b0d33c7f1a1cc2983d035733fd5e3958589"
     },
     "com.unity.2d.animation": {
       "version": "9.0.3",
