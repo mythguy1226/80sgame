@@ -5060,7 +5060,7 @@ MonoBehaviour:
   currentRoundSize: 0
   numStuns: 0
   gameOver: 0
-  numRounds: 10
+  numRounds: 7
 --- !u!114 &1095139973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7791,7 +7791,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1.1890869, y: 7.1348877}
+  m_AnchoredPosition: {x: 1.1889648, y: 7.1348877}
   m_SizeDelta: {x: -480.367, y: -449.9717}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1681867056
@@ -8980,8 +8980,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1474185976}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -10195,3 +10194,4 @@ SceneRoots:
   - {fileID: 1011990662}
   - {fileID: 929084812}
   - {fileID: 2079267051}
+  - {fileID: 1834904701}
