@@ -13,6 +13,8 @@ public class TargetManager : MonoBehaviour
     public int currentRound = 1;
     public int currentRoundSize;
     public int numStuns = 0;
+    int totalStuns = 0;
+    int numBonusBats = 0;
     public bool gameOver = false;
     int maxTargetsOnScreen = 8;
     public int numRounds = 10;
@@ -35,19 +37,19 @@ public class TargetManager : MonoBehaviour
         // to be equal to the first round's size
         StartFirstRound();
         currentRoundSize = firstRoundTargetCount;
-
-        // Update initial target speeds
-        UpdateRoundSpeeds();
-
-        // Switch initial target scales
-        UpdateRoundScaling();
     }
 
     // Method for spawning first round of targets
     void StartFirstRound()
     {
+        // Update initial target speeds
+        UpdateRoundSpeeds();
+
+        // Switch initial target scales
+        UpdateRoundScaling();
+
         // Check list isn't empty
-        if(targets.Length > 0)
+        if (targets.Length > 0)
         {
             // Iterate through and spawn the first set of targets
             for(int i = 0; i < firstRoundTargetCount; i++)
@@ -77,13 +79,13 @@ public class TargetManager : MonoBehaviour
         }
 
         // Update min and max target speeds
-        minSpeed += 0.5f;
-        if (minSpeed >= 7.5f)
-            minSpeed = 7.5f;
+        minSpeed += 0.1f;
+        if (minSpeed >= 3.5f)
+            minSpeed = 3.5f;
 
-        maxSpeed += 0.5f;
-        if (maxSpeed >= 8.0f)
-            maxSpeed = 8.0f;
+        maxSpeed += 0.1f;
+        if (maxSpeed >= 4.0f)
+            maxSpeed = 4.0f;
         
 
     }
@@ -184,7 +186,26 @@ public class TargetManager : MonoBehaviour
             // Check if on screen
             if(!targets[i].isOnScreen)
             {
-                return i;
+                // Default bat spawning
+                if (targets[i].pointValue == 1000.0f)
+                {
+                    // Ensure there are no bonus bats to be spawned
+                    if (numBonusBats == 0)
+                        return i;
+                    else
+                        continue;
+                }
+                else // Bonus bat spawning
+                {
+                    // Ensure there are bonus bats to be spawned
+                    if (numBonusBats > 0)
+                    {
+                        numBonusBats--;
+                        return i;
+                    }
+                    else
+                        continue;
+                }
             }
         }
 
@@ -196,6 +217,11 @@ public class TargetManager : MonoBehaviour
     {
         // Update number of stuns
         numStuns++;
+        totalStuns++;
+
+        // Add a bonus bat to spawn every 3 stuns
+        if (totalStuns % 3 == 0)
+            numBonusBats++;
 
         // Compare number of stuns needed vs round size
         if (numStuns >= currentRoundSize)
