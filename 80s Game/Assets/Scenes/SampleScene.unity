@@ -3292,7 +3292,7 @@ GameObject:
   - component: {fileID: 729109294}
   - component: {fileID: 729109293}
   m_Layer: 0
-  m_Name: bg_wip3_gal
+  m_Name: game-bg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
