@@ -31,6 +31,7 @@ public class Target : MonoBehaviour
     protected AnimationHandler animControls;
     CircleCollider2D collider;
     public AudioClip hitSound;
+    //public AudioClip missSound;
 
     // Default fields used for resets
     Vector3 spawnPoint;
@@ -133,13 +134,16 @@ public class Target : MonoBehaviour
 
             // Check if something was hit
             if (!hit)
+            {
+                //SoundManager.Instance.PlaySoundContinuous(missSound);
                 return;
+            }
 
             // Check that hit has detected this particular object
             if (hit.collider.gameObject == gameObject)
             {
                 animControls.PlayStunAnimation();
-                SoundManager.Instance.PlaySound(hitSound);
+                SoundManager.Instance.PlaySoundInterrupt(hitSound);
             }
         }
     }
