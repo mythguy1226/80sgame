@@ -4927,6 +4927,7 @@ MonoBehaviour:
   gameUI: {fileID: 1759806105}
   summaryScreen: {fileID: 1865122240}
   highScoreLeaderboard: {fileID: 1619173211}
+  leaderboardText: {fileID: 692398610}
 --- !u!114 &1011990666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4976,6 +4977,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e8b80e4b54ae714fad4ba53fe815506, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initialsTracker: {fileID: 1619173213}
 --- !u!114 &1095139971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5014,7 +5016,7 @@ MonoBehaviour:
   currentRoundSize: 0
   numStuns: 0
   gameOver: 0
-  numRounds: 1
+  numRounds: 7
 --- !u!114 &1095139973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7879,7 +7881,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1.1890869, y: 7.1348877}
+  m_AnchoredPosition: {x: 1.1889648, y: 7.1348877}
   m_SizeDelta: {x: -480.367, y: -449.9717}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1681867056

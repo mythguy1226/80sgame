@@ -22,6 +22,13 @@ public class PointsManager : MonoBehaviour
         RoundPoints = 0;
     }
 
+    // Add directly to total points
+    public int AddPoints(int numPoints)
+    {
+        Points += numPoints;
+        return Points;
+    }
+
     /// <summary>
     /// Adds a number of points
     /// </summary>
@@ -41,6 +48,8 @@ public class PointsManager : MonoBehaviour
     public int AddBonusPoints(float accuracy)
     {
         int numBonusPoints = Mathf.RoundToInt(RoundPoints * accuracy);
+        Points += RoundPoints;
+        RoundPoints = 0;
         return AddRoundPoints(numBonusPoints);
     }
 
@@ -123,10 +132,17 @@ public class PointsManager : MonoBehaviour
         {
             for(int i = 0; i < records.Count; i++)
             {
+                // Check if new score beats a score
                 if(Points > records[i].score)
                 {
                     // Remove score being replaced and insert new score
-                    records.RemoveAt(i);
+                    if(records.Count == numTopScores)
+                        records.RemoveAt(i);
+                    records.Insert(i, new UserRecord(initials, Points));
+                    break;
+                }
+                else if(records.Count < numTopScores) // Just add if leaderboard isnt full
+                {
                     records.Insert(i, new UserRecord(initials, Points));
                     break;
                 }
@@ -170,12 +186,5 @@ public class PointsManager : MonoBehaviour
             // Write text to the file
             File.WriteAllText(filePath, scores);
         }
-        
-        //// Write to the file
-        //using (StreamWriter writer = new StreamWriter(filePath, true))
-        //{
-            
-        //    writer.WriteLine($"{initials}:{Points}");
-        //}
     }
 }

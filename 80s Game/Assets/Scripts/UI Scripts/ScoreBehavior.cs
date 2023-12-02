@@ -23,7 +23,12 @@ public class ScoreBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        // Get the current high score
+        PointsManager pMngr = GameManager.Instance.PointsManager;
+        List<PointsManager.UserRecord> records = pMngr.LoadRecords();
+
+        // Set high score text
+        highScore = records[records.Count - 1].score;
     }
 
     // Update is called once per frame

@@ -35,8 +35,8 @@ public class TargetManager : MonoBehaviour
 
         // Begin the first round and set the round size tracker
         // to be equal to the first round's size
-        StartFirstRound();
         currentRoundSize = firstRoundTargetCount;
+        Invoke("StartFirstRound", 0.1f);
     }
 
     // Method for spawning first round of targets
@@ -229,10 +229,9 @@ public class TargetManager : MonoBehaviour
             // Only add points if target didn't flee
             if (targetState != TargetStates.Fleeing)
             {
-                // A little verbose, but can be improved later on
+                // Add bonus points
                 PointsManager pointsManager = GameManager.Instance.PointsManager;
                 pointsManager.AddBonusPoints(GameManager.Instance.HitsManager.Accuracy);
-                pointsManager.AddTotal();
             }
 
             // Take into account the round cap
@@ -268,7 +267,8 @@ public class TargetManager : MonoBehaviour
         // between the min and max values
         foreach(Target target in targets)
         {
-            target.UpdateSpeed(Random.Range(minSpeed, maxSpeed));
+            if(target != null)
+                target.UpdateSpeed(Random.Range(minSpeed, maxSpeed));
         }
     }
 
