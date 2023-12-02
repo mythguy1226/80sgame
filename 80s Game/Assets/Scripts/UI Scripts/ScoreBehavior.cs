@@ -28,7 +28,10 @@ public class ScoreBehavior : MonoBehaviour
         List<PointsManager.UserRecord> records = pMngr.LoadRecords();
 
         // Set high score text
-        highScore = records[records.Count - 1].score;
+        if (records.Count > 0)
+            highScore = records[records.Count - 1].score;
+        else
+            highScore = 0;
     }
 
     // Update is called once per frame
