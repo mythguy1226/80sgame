@@ -58,7 +58,6 @@ MonoBehaviour:
   timeUntilFlee: 5
   fleeLocation: {x: 0, y: 0}
   hitSound: {fileID: 8300000, guid: c928b956a133aa544bfa866c9b7c2b47, type: 3}
-  missSound: {fileID: 8300000, guid: 58d7a57419c677f4faa04f97ea74938c, type: 3}
 --- !u!50 &4043134783524271435
 Rigidbody2D:
   serializedVersion: 4
@@ -175,7 +174,9 @@ Animation:
   m_Enabled: 1
   serializedVersion: 3
   m_Animation: {fileID: 7400000, guid: 69ae86a3a632d6c44b862d36f8455c9c, type: 2}
-  m_Animations: []
+  m_Animations:
+  - {fileID: 7400000, guid: 69ae86a3a632d6c44b862d36f8455c9c, type: 2}
+  - {fileID: 7400000, guid: 3bc2ca24ee02b344c99c996b7b331e17, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
