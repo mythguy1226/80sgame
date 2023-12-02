@@ -59,6 +59,7 @@ public class PauseScreenBehavior : MonoBehaviour
 
     public void QuitGame()
     {
+        GameManager.Instance.PointsManager.SaveScore();
         Time.timeScale = 1f;
         SceneManager.LoadScene(0);
     }

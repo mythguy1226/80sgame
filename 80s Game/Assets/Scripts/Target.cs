@@ -175,7 +175,10 @@ public class Target : MonoBehaviour
 
         // Add points if target didn't flee
         if(currentState != TargetStates.Fleeing)
+        {
             gameManager.PointsManager.AddRoundPoints(pointValue);
+            gameManager.PointsManager.AddPoints(pointValue);
+        }
         
         // Add a successful hit
         gameManager.HitsManager.AddHit();

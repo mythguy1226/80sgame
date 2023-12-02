@@ -3841,7 +3841,7 @@ GameObject:
   - component: {fileID: 729109294}
   - component: {fileID: 729109293}
   m_Layer: 0
-  m_Name: bg_wip3_gal
+  m_Name: game-bg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3888,12 +3888,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e8f8c4742c13b02499f8e92e04ca759e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: adc65da9af63f8941ab6f09c18774659, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 4.8, y: 2.7}
+  m_Size: {x: 19.2, y: 10.8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -3908,8 +3908,8 @@ Transform:
   m_GameObject: {fileID: 729109292}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.39000034, y: 0.1800003, z: 108.01}
-  m_LocalScale: {x: 4, y: 4, z: 1}
+  m_LocalPosition: {x: 0.012, y: 0.4091, z: 108.01}
+  m_LocalScale: {x: 0.9223876, y: 0.93214387, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -4973,6 +4973,7 @@ MonoBehaviour:
   gameUI: {fileID: 1759806105}
   summaryScreen: {fileID: 1865122240}
   highScoreLeaderboard: {fileID: 1619173211}
+  leaderboardText: {fileID: 692398610}
 --- !u!114 &1011990666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5022,6 +5023,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e8b80e4b54ae714fad4ba53fe815506, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initialsTracker: {fileID: 1619173213}
 --- !u!114 &1095139971
 MonoBehaviour:
   m_ObjectHideFlags: 0

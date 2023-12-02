@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameOverBehavior : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class GameOverBehavior : MonoBehaviour
     public GameObject gameUI;
     public GameObject summaryScreen;
     public GameObject highScoreLeaderboard;
+    public TMP_Text leaderboardText;
 
     // Update is called once per frame
     void Update()
@@ -25,6 +27,18 @@ public class GameOverBehavior : MonoBehaviour
     //Change game over panel when the player continues from the summary screen
     public void ContinueToLeaderboard()
     {
+        // Load the high scores and set leaderboard text
+        PointsManager pMngr = GameManager.Instance.PointsManager;
+        List<PointsManager.UserRecord> records = pMngr.LoadRecords();
+        string scores = "";
+        for(int i = records.Count - 1; i >= 0; i--)
+        {
+            // Formatting for high score text
+            scores += $"{records[i].initials}\t{records[i].score}\n";
+            scores += "\n";
+        }
+        leaderboardText.text = scores;
+
         summaryScreen.SetActive(false);
         highScoreLeaderboard.SetActive(true);
     }
@@ -32,6 +46,7 @@ public class GameOverBehavior : MonoBehaviour
     //Restart the game by reloading the scene
     public void RestartGame()
     {
+        GameManager.Instance.PointsManager.SaveScore();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
