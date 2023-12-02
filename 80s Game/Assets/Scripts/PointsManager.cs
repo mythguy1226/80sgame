@@ -13,6 +13,7 @@ public class PointsManager : MonoBehaviour
     private string filePath = Application.dataPath + "/PlayerData/scores.txt";
     private int numTopScores = 6;
     private string initials = "ABC";
+    public HighScoreInitials initialsTracker;
 
     // Start is called before the first frame update
     void Awake()
@@ -106,42 +107,67 @@ public class PointsManager : MonoBehaviour
     /// </summary>
     public void SaveScore()
     {
+        // Get initials from tracker
+        initials = initialsTracker.initialOneText.text + initialsTracker.initialTwoText.text + initialsTracker.initialThreeText.text;
+
+        // Load the saves file
         List<UserRecord> records = LoadRecords();
+
+        // Sort the leaderboard based on score
         records.Sort((record1, record2) => record1.score.CompareTo(record2.score));
 
+        // If file contains scores,
+        // iterate through the records to compare new score
+        // If the score is higher, insert it into the records list
         if(records.Count > 0)
         {
             for(int i = 0; i < records.Count; i++)
             {
                 if(Points > records[i].score)
                 {
+                    // Remove score being replaced and insert new score
+                    records.RemoveAt(i);
                     records.Insert(i, new UserRecord(initials, Points));
                     break;
                 }
             }
         }
-        else
+        else // Adding the first record
         {
             records.Add(new UserRecord(initials, Points));
         }
 
 
+        // Get the file directory
         string dirPath = Path.GetDirectoryName(filePath);
+
         // Create the file if it doesn't exist
         if (!Directory.Exists(dirPath))
         {
             Directory.CreateDirectory(dirPath);
         }
 
+        // Sort the leaderboard based on score
+        records.Sort((record1, record2) => record1.score.CompareTo(record2.score));
+
+        // String of scores to add to the file
         string scores = "";
-        for(int i = 0; i < 5; i++)
+        for(int i = 0; i < numTopScores; i++)
         {
+            // Early break if num scores doesnt hit the max
+            if (i > records.Count - 1)
+                break;
+
+            // Stringify each record
             scores += $"{records[i].initials}:{records[i].score}";
+
             // If note last recorded score, add new line
-            if(i != 4)
+            if(i < numTopScores - 1)
             {
                 scores += "\n";
             }
+
+            // Write text to the file
             File.WriteAllText(filePath, scores);
         }
         
