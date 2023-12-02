@@ -13,9 +13,19 @@ public class TargetManager : MonoBehaviour
     public int currentRound = 1;
     public int currentRoundSize;
     public int numStuns = 0;
+    int totalStuns = 0;
+    int numBonusBats = 0;
     public bool gameOver = false;
     int maxTargetsOnScreen = 8;
     public int numRounds = 10;
+
+    // Speed values
+    float minSpeed = 3.0f;
+    float maxSpeed = 3.5f;
+
+    // Scale values
+    float minScale = 2.8f;
+    float maxScale = 3.5f;
 
     // Start is called before the first frame update
     void Start()
@@ -32,8 +42,14 @@ public class TargetManager : MonoBehaviour
     // Method for spawning first round of targets
     void StartFirstRound()
     {
+        // Update initial target speeds
+        UpdateRoundSpeeds();
+
+        // Switch initial target scales
+        UpdateRoundScaling();
+
         // Check list isn't empty
-        if(targets.Length > 0)
+        if (targets.Length > 0)
         {
             // Iterate through and spawn the first set of targets
             for(int i = 0; i < firstRoundTargetCount; i++)
@@ -61,6 +77,17 @@ public class TargetManager : MonoBehaviour
         {
             maxTargetsOnScreen = targets.Length - 2;
         }
+
+        // Update min and max target speeds
+        minSpeed += 0.1f;
+        if (minSpeed >= 3.5f)
+            minSpeed = 3.5f;
+
+        maxSpeed += 0.1f;
+        if (maxSpeed >= 4.0f)
+            maxSpeed = 4.0f;
+        
+
     }
 
     // Method for starting the next round
@@ -159,10 +186,104 @@ public class TargetManager : MonoBehaviour
             // Check if on screen
             if(!targets[i].isOnScreen)
             {
-                return i;
+                // Default bat spawning
+                if (targets[i].pointValue == 1000.0f)
+                {
+                    // Ensure there are no bonus bats to be spawned
+                    if (numBonusBats == 0)
+                        return i;
+                    else
+                        continue;
+                }
+                else // Bonus bat spawning
+                {
+                    // Ensure there are bonus bats to be spawned
+                    if (numBonusBats > 0)
+                    {
+                        numBonusBats--;
+                        return i;
+                    }
+                    else
+                        continue;
+                }
             }
         }
 
         return -1;
+    }
+
+    // Method used for updating values on bat death
+    public void OnTargetDeath(TargetStates targetState)
+    {
+        // Update number of stuns
+        numStuns++;
+        totalStuns++;
+
+        // Add a bonus bat to spawn every 3 stuns
+        if (totalStuns % 3 == 0)
+            numBonusBats++;
+
+        // Compare number of stuns needed vs round size
+        if (numStuns >= currentRoundSize)
+        {
+            // Only add points if target didn't flee
+            if (targetState != TargetStates.Fleeing)
+            {
+                // A little verbose, but can be improved later on
+                PointsManager pointsManager = GameManager.Instance.PointsManager;
+                pointsManager.AddBonusPoints(GameManager.Instance.HitsManager.Accuracy);
+                pointsManager.AddTotal();
+            }
+
+            // Take into account the round cap
+            if (currentRound == numRounds)
+            {
+                gameOver = true;
+                return;
+            }
+
+            // Update params
+            UpdateRoundParameters();
+
+            // Update all target speeds once new round has started
+            UpdateRoundSpeeds();
+
+            // Switch up target scaling
+            UpdateRoundScaling();
+
+            // Begin the next round
+            StartNextRound();
+        }
+        else
+        {
+            // Try spawning another target
+            SpawnMoreTargets();
+        }
+    }
+
+    // Method for updating target speeds to be within range of round mins and maxes
+    void UpdateRoundSpeeds()
+    {
+        // Set target speeds to be in a random range
+        // between the min and max values
+        foreach(Target target in targets)
+        {
+            target.UpdateSpeed(Random.Range(minSpeed, maxSpeed));
+        }
+    }
+
+    // Method for changing bat scaling
+    void UpdateRoundScaling()
+    {
+        // Set target transform scales
+        // to be between min and max values
+        foreach(Target target in targets)
+        {
+            // Get random scale value
+            float newScale = Random.Range(minScale, maxScale);
+
+            // Update target local scale
+            target.gameObject.transform.localScale = new Vector3(newScale, newScale, newScale);
+        }
     }
 }

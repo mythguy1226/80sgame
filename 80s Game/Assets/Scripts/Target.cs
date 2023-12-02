@@ -24,12 +24,14 @@ public class Target : MonoBehaviour
     public Vector2 fleeLocation;
 
     // Get component for player interactions
-    InputManager inputManager;
+    protected InputManager inputManager;
 
     // Get needed components for handling target behavior
-    KinematicSteer movementControls;
-    AnimationHandler animControls;
+    protected KinematicSteer movementControls;
+    protected AnimationHandler animControls;
     CircleCollider2D collider;
+    public AudioClip hitSound;
+    //public AudioClip missSound;
 
     // Default fields used for resets
     Vector3 spawnPoint;
@@ -108,6 +110,12 @@ public class Target : MonoBehaviour
         }
     }
 
+    // Method for updating movement control speed
+    public void UpdateSpeed(float newSpeed)
+    {
+        movementControls.maxSpeed = newSpeed;
+    }
+
     // Method used for setting target flee timer publicly
     public void SetFleeTimer()
     {
@@ -115,17 +123,27 @@ public class Target : MonoBehaviour
     }
 
     // Method for checking if target has been stunned
-    void DetectStun()
+    protected virtual void DetectStun()
     {
-        // Check for player input coords hitting target
-        Vector3 shotPos = inputManager.MouseWorldPosition;
-        RaycastHit2D hit = Physics2D.Raycast(shotPos, Vector2.zero);
-        if (hit && inputManager.MouseLeftDownThisFrame && Time.timeScale > 0) // Check time scale so bats cant be harmed while game is paused
+        // Check time scale so bats cant be harmed while game is paused
+        if (inputManager.MouseLeftDownThisFrame && Time.timeScale > 0)
         {
+            // Check for player input coords hitting target
+            Vector3 shotPos = inputManager.MouseWorldPosition;
+            RaycastHit2D hit = Physics2D.Raycast(shotPos, Vector2.zero);
+
+            // Check if something was hit
+            if (!hit)
+            {
+                //SoundManager.Instance.PlaySoundContinuous(missSound);
+                return;
+            }
+
             // Check that hit has detected this particular object
             if (hit.collider.gameObject == gameObject)
             {
                 animControls.PlayStunAnimation();
+                SoundManager.Instance.PlaySoundInterrupt(hitSound);
             }
         }
     }
@@ -152,10 +170,8 @@ public class Target : MonoBehaviour
         // Choose new wander position to be used on respawn
         movementControls.SetWanderPosition();
 
+        // Get reference to game manager instance
         GameManager gameManager = GameManager.Instance;
-
-        // Update the target manager
-        gameManager.TargetManager.numStuns++;
 
         // Add points if target didn't flee
         if(currentState != TargetStates.Fleeing)
@@ -164,33 +180,7 @@ public class Target : MonoBehaviour
         // Add a successful hit
         gameManager.HitsManager.AddHit();
 
-        if (GameManager.Instance.TargetManager.numStuns >= GameManager.Instance.TargetManager.currentRoundSize)
-        {
-            // Only add points if target didn't flee
-            if (currentState != TargetStates.Fleeing)
-            {
-                // A little verbose, but can be improved later on
-                PointsManager pointsManager = GameManager.Instance.PointsManager;
-                pointsManager.AddBonusPoints(GameManager.Instance.HitsManager.Accuracy);
-                pointsManager.AddTotal();
-            }
-
-            // Take into account the round cap
-            if (GameManager.Instance.TargetManager.currentRound == GameManager.Instance.TargetManager.numRounds)
-            {
-                GameManager.Instance.TargetManager.gameOver = true;
-                GameManager.Instance.PointsManager.SaveScore();
-                return;
-            }
-
-            // Begin the next round and update params
-            GameManager.Instance.TargetManager.UpdateRoundParameters();
-            GameManager.Instance.TargetManager.StartNextRound();
-        }
-        else
-        {
-            // Try spawning another target
-            GameManager.Instance.TargetManager.SpawnMoreTargets();
-        }
+        // Update target manager with current state
+        gameManager.TargetManager.OnTargetDeath(currentState);
     }
 }

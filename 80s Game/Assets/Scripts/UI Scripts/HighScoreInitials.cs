@@ -43,14 +43,29 @@ public class HighScoreInitials : MonoBehaviour
         {
             //Used for first initial
             case 1:
+                if (initialOne == 90)
+                {
+                    initialOne = 65;
+                    break;
+                }
                 initialOne = Mathf.Clamp(++initialOne, 65, 90);
                 break;
             //Used for second initial
             case 2:
+                if (initialTwo == 90)
+                {
+                    initialTwo = 65;
+                    break;
+                }
                 initialTwo = Mathf.Clamp(++initialTwo, 65, 90);
                 break;
             //Used for third initial
             case 3:
+                if (initialThree == 90)
+                {
+                    initialThree = 65;
+                    break;
+                }
                 initialThree = Mathf.Clamp(++initialThree, 65, 90);
                 break;
             default:
@@ -67,14 +82,29 @@ public class HighScoreInitials : MonoBehaviour
         {
             //Used for first initial
             case 1:
+                if (initialOne == 65)
+                {
+                    initialOne = 90;
+                    break;
+                }
                 initialOne = Mathf.Clamp(--initialOne, 65, 90);
                 break;
             //Used for second initial
             case 2:
+                if (initialTwo == 65)
+                {
+                    initialTwo = 90;
+                    break;
+                }
                 initialTwo = Mathf.Clamp(--initialTwo, 65, 90);
                 break;
             //Used for third initial
             case 3:
+                if (initialThree == 65)
+                {
+                    initialThree = 90;
+                    break;
+                }
                 initialThree = Mathf.Clamp(--initialThree, 65, 90);
                 break;
             default:
