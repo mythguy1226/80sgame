@@ -19,7 +19,7 @@ public class Target : MonoBehaviour
     public float deathHeight = -6.5f;
 
     // Fleeing fields
-    public float timeUntilFlee = 5.0f;
+    public float timeUntilFlee = 8.0f;
     float fleeTimer = 0.0f;
     public Vector2 fleeLocation;
 
@@ -71,6 +71,13 @@ public class Target : MonoBehaviour
                     if(fleeTimer <= 0.0f) // When timer is up, set target to flee
                     {
                         currentState = TargetStates.Fleeing;
+
+                        // Get max height and width values from screen
+                        float maxHeight = Camera.main.GetComponent<Camera>().orthographicSize;
+                        float maxWidth = maxHeight * (Screen.width / Screen.height);
+
+                        // Find random x position
+                        fleeLocation.x = UnityEngine.Random.Range((-maxWidth * 2) + GetComponent<SpriteRenderer>().size.x, (maxWidth * 2) - GetComponent<SpriteRenderer>().size.x);
                         movementControls.SetTargetPosition(fleeLocation);
                     }
 
