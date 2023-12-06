@@ -239,6 +239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0866a63fd34b4504e87f09f18a541938, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  floatingTextPrefab: {fileID: 5422266768498237442, guid: b98f70d59d257d149abbaf4824cd7b9e, type: 3}
   currentState: 0
   isOnScreen: 0
   pointValue: 3000
@@ -257,6 +258,10 @@ PrefabInstance:
     - target: {fileID: 2958280814618220372, guid: 4c132f7f6a4dcd0498a1113bfb046f74, type: 3}
       propertyPath: m_Name
       value: BlueSpark
+      objectReference: {fileID: 0}
+    - target: {fileID: 6319832096552523047, guid: 4c132f7f6a4dcd0498a1113bfb046f74, type: 3}
+      propertyPath: playOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7861385284531057610, guid: 4c132f7f6a4dcd0498a1113bfb046f74, type: 3}
       propertyPath: m_LocalPosition.x
@@ -296,6 +301,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7861385284531057610, guid: 4c132f7f6a4dcd0498a1113bfb046f74, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8299576132615518095, guid: 4c132f7f6a4dcd0498a1113bfb046f74, type: 3}
+      propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
