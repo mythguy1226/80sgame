@@ -7,21 +7,24 @@ using UnityEngine.SceneManagement;
 //Class that handles behavior for UI elements on the game's title screen
 public class TitleScreenBehavior : MonoBehaviour
 {
+    public GameObject onboardingContinueButton;
     public GameObject onboardingPanel;
 
     void Update()
     {
+        //Disable button to close onboarding
         if (GameManager.Instance.InputManager.joycons.Count == 0)
         {
-            onboardingPanel.SetActive(false);
+            onboardingContinueButton.SetActive(false);
         }
 
+        //only allow user to continue after they recenter the cursor
         else
         {
             Joycon j = GameManager.Instance.InputManager.joycons[GameManager.Instance.InputManager.jc_ind];
             if (j.GetButtonDown(Joycon.Button.DPAD_DOWN))
             {
-                onboardingPanel.SetActive(false);
+                onboardingContinueButton.SetActive(true);
             }
         }
     }
@@ -38,5 +41,11 @@ public class TitleScreenBehavior : MonoBehaviour
     public void ExitGame()
     {
         Application.Quit();
+    }
+
+    //Closes the onboarding panel
+    public void CloseOnboarding()
+    {
+        onboardingPanel.SetActive(false);
     }
 }
