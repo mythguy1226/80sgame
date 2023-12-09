@@ -31,6 +31,7 @@ public class InputManager : MonoBehaviour
     public int jc_ind = 0;
     public Quaternion orientation;
     public Vector3 joyconCursorPos;
+    //private bool shoulderPressed = false;
 
     public PauseScreenBehavior pauseScript;
 
@@ -75,7 +76,7 @@ public class InputManager : MonoBehaviour
 
             // Get right trigger input
             MouseLeftDownThisFrame = j.GetButtonDown(Joycon.Button.SHOULDER_2);
-
+            //shoulderPressed = true;
             if (j.GetButtonDown(Joycon.Button.DPAD_DOWN))
             {
                 RecenterCursor();
@@ -85,10 +86,11 @@ public class InputManager : MonoBehaviour
             {
                 pauseScript.PauseGame();
             }
+            //shoulderPressed = j.GetButtonUp(Joycon.Button.SHOULDER_2);
         }
         if (MouseLeftDownThisFrame && !pauseScript.isPaused && Time.timeScale > 0)
         {
-            SoundManager.Instance.PlaySoundContinuous(shootSound);
+            SoundManager.Instance.PlaySoundContinuous(shootSound, 0.5f);
         }
     }
 
