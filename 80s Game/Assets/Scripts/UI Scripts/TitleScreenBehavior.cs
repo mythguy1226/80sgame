@@ -12,9 +12,10 @@ public class TitleScreenBehavior : MonoBehaviour
 
     void Update()
     {
-        //Disable button to close onboarding
+        //Disable joycon calibration onboarding if no joycons are connected
         if (GameManager.Instance.InputManager.joycons.Count == 0)
         {
+            onboardingPanel.SetActive(false);
             onboardingContinueButton.SetActive(false);
         }
 

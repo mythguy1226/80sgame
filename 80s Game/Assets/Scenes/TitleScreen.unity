@@ -736,8 +736,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SendPointerHoverToParent: 1
-  DesiredResX: 230
-  DesiredResY: 315
+  DesiredResX: 1920
+  DesiredResY: 1080
   FisheyeX: 0.05
   FisheyeY: 0.05
   StretchToDisplay: 0
