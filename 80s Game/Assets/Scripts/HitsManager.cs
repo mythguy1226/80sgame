@@ -36,6 +36,7 @@ public class HitsManager : MonoBehaviour
                 j.SetRumble(160, 320, 0.6f, 200);
             }
             AddShot();
+            //Debug.Log(Shots);
         }
     }
 

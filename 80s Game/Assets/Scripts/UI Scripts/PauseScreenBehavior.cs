@@ -10,6 +10,7 @@ public class PauseScreenBehavior : MonoBehaviour
     public GameObject gameUIElements;
     public GameObject onboardingPanel;
     public GameObject onboardingCloseButton;
+    public AudioClip buttonClickSound;
 
     // Update is called once per frame
     void Update()
@@ -44,6 +45,8 @@ public class PauseScreenBehavior : MonoBehaviour
             onboardingPanel.SetActive(true);
             onboardingCloseButton.SetActive(false);
             gameUIElements.SetActive(false);
+
+            SoundManager.Instance.PlaySoundContinuous(buttonClickSound);
         }
 
         else
@@ -54,6 +57,8 @@ public class PauseScreenBehavior : MonoBehaviour
             pauseScreen.SetActive(false);
             onboardingPanel.SetActive(false);
             gameUIElements.SetActive(true);
+
+            SoundManager.Instance.PlaySoundContinuous(buttonClickSound);
         }
     }
 
@@ -62,5 +67,7 @@ public class PauseScreenBehavior : MonoBehaviour
         GameManager.Instance.PointsManager.SaveScore();
         Time.timeScale = 1f;
         SceneManager.LoadScene(0);
+
+        SoundManager.Instance.PlaySoundContinuous(buttonClickSound);
     }
 }

@@ -19,18 +19,20 @@ public class SoundManager : MonoBehaviour
         }
         else Destroy(gameObject);
     }
-
-    public void PlaySoundInterrupt(AudioClip clip)
+    //vol is a volume scale,
+    public void PlaySoundInterrupt(AudioClip clip, float vol = 1f)
     {
-        if (interruptSource.isPlaying) 
+        if (interruptSource.isPlaying)
         {
-            interruptSource.Stop();
+            interruptSource.Stop(); //interrupts current sound playing through interruptSource, to avoid sounds stacking on top of one another
         }
-        interruptSource.PlayOneShot(clip);
+        interruptSource.PlayOneShot(clip, vol);
+        //Debug.Log(clip);
     }
 
-    public void PlaySoundContinuous(AudioClip clip)
+    public void PlaySoundContinuous(AudioClip clip, float vol = 1f)
     { 
-        continuousSource.PlayOneShot(clip);
+        continuousSource.PlayOneShot(clip, vol);
+        //Debug.Log(clip);
     }
 }

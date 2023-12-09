@@ -15,6 +15,8 @@ public class HighScoreInitials : MonoBehaviour
     public TMP_Text initialTwoText;
     public TMP_Text initialThreeText;
 
+    public AudioClip buttonClickSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,6 +45,7 @@ public class HighScoreInitials : MonoBehaviour
         {
             //Used for first initial
             case 1:
+                SoundManager.Instance.PlaySoundContinuous(buttonClickSound);
                 if (initialOne == 90)
                 {
                     initialOne = 65;
@@ -52,6 +55,7 @@ public class HighScoreInitials : MonoBehaviour
                 break;
             //Used for second initial
             case 2:
+                SoundManager.Instance.PlaySoundContinuous(buttonClickSound);
                 if (initialTwo == 90)
                 {
                     initialTwo = 65;
@@ -61,6 +65,7 @@ public class HighScoreInitials : MonoBehaviour
                 break;
             //Used for third initial
             case 3:
+                SoundManager.Instance.PlaySoundContinuous(buttonClickSound);
                 if (initialThree == 90)
                 {
                     initialThree = 65;
@@ -82,6 +87,7 @@ public class HighScoreInitials : MonoBehaviour
         {
             //Used for first initial
             case 1:
+                SoundManager.Instance.PlaySoundContinuous(buttonClickSound);
                 if (initialOne == 65)
                 {
                     initialOne = 90;
@@ -91,6 +97,7 @@ public class HighScoreInitials : MonoBehaviour
                 break;
             //Used for second initial
             case 2:
+                SoundManager.Instance.PlaySoundContinuous(buttonClickSound);
                 if (initialTwo == 65)
                 {
                     initialTwo = 90;
@@ -100,6 +107,7 @@ public class HighScoreInitials : MonoBehaviour
                 break;
             //Used for third initial
             case 3:
+                SoundManager.Instance.PlaySoundContinuous(buttonClickSound);
                 if (initialThree == 65)
                 {
                     initialThree = 90;
