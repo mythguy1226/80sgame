@@ -150,7 +150,7 @@ public class Target : MonoBehaviour
             if (hit.collider.gameObject == gameObject)
             {
                 animControls.PlayStunAnimation();
-                SoundManager.Instance.PlaySoundInterrupt(hitSound);
+                SoundManager.Instance.PlaySoundInterrupt(hitSound, 0.7f);
             }
         }
     }

@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class TitleScreenBehavior : MonoBehaviour
 {
     public GameObject onboardingPanel;
+    public AudioClip buttonClickSound;
 
     void Update()
     {
@@ -30,6 +31,7 @@ public class TitleScreenBehavior : MonoBehaviour
     //Used within the StartGame button element
     public void StartGame()
     {
+        SoundManager.Instance.PlaySoundContinuous(buttonClickSound);
         SceneManager.LoadScene(1);
     }
 
@@ -37,6 +39,7 @@ public class TitleScreenBehavior : MonoBehaviour
     //Used within the ExitGame button element
     public void ExitGame()
     {
+        SoundManager.Instance.PlaySoundContinuous(buttonClickSound);
         Application.Quit();
     }
 }

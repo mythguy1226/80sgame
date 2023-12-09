@@ -794,6 +794,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1107071141}
+        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
+        m_MethodName: PlaySoundContinuous
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 0f33d998cd03b1f4ebc4983ef2a6d559, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &158337867
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4941,6 +4953,7 @@ MonoBehaviour:
   gameUIElements: {fileID: 1759806105}
   onboardingPanel: {fileID: 1681867054}
   onboardingCloseButton: {fileID: 296506228}
+  buttonClickSound: {fileID: 8300000, guid: 0f33d998cd03b1f4ebc4983ef2a6d559, type: 3}
 --- !u!114 &1011990664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4974,6 +4987,7 @@ MonoBehaviour:
   summaryScreen: {fileID: 1865122240}
   highScoreLeaderboard: {fileID: 1619173211}
   leaderboardText: {fileID: 692398610}
+  buttonClickSound: {fileID: 8300000, guid: 0f33d998cd03b1f4ebc4983ef2a6d559, type: 3}
 --- !u!114 &1011990666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7756,6 +7770,7 @@ MonoBehaviour:
   initialOneText: {fileID: 1107543755}
   initialTwoText: {fileID: 290389298}
   initialThreeText: {fileID: 1193949639}
+  buttonClickSound: {fileID: 8300000, guid: 0f33d998cd03b1f4ebc4983ef2a6d559, type: 3}
 --- !u!1 &1681867054
 GameObject:
   m_ObjectHideFlags: 0
