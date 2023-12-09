@@ -239,6 +239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1541242eb80ec154dacf050192835f97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  floatingTextPrefab: {fileID: 5422266768498237442, guid: 75dd293da92028a43b54e04a8792559c, type: 3}
   currentState: 0
   isOnScreen: 0
   pointValue: 2000

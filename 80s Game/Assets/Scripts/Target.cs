@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public enum TargetStates
@@ -13,6 +14,7 @@ public enum TargetStates
 public class Target : MonoBehaviour
 {
     // Public fields 
+    public GameObject floatingTextPrefab;
     public TargetStates currentState = TargetStates.Moving;
     public bool isOnScreen = false;
     public int pointValue = 1000;
@@ -158,21 +160,40 @@ public class Target : MonoBehaviour
     // Method for dropping the bat
     public void DropBat()
     {
+        if(floatingTextPrefab != null)
+        {
+            ShowFloatingText();
+        }
+
         // Bring bat to death state to start falling
         currentState = TargetStates.Death;
         animControls.PlayDropAnimation();
         collider.isTrigger = true;
     }
 
+    private void ShowFloatingText()
+    {
+        GameObject text = Instantiate(floatingTextPrefab, transform.position, Quaternion.identity);
+        text.GetComponent<TextMeshPro>().text = $"{pointValue}";
+    }
+
     // Method used for resetting the target
     void Reset()
     {
+        // The particle systems drag across the screen when repositioning bats
+        // Stopping it when resetting prevents that
+        if (GetComponentInChildren<ParticleSystem>())
+        {
+            GetComponentInChildren<ParticleSystem>().Stop();
+        }
+
         // Set target to its default values
         isOnScreen = false;
         transform.position = spawnPoint;
         movementControls.canMove = false;
         animControls.ResetAnimation();
         collider.isTrigger = false;
+
 
         // Choose new wander position to be used on respawn
         movementControls.SetWanderPosition();

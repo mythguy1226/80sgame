@@ -138,16 +138,23 @@ public class TargetManager : MonoBehaviour
     // Method for spawning a target
     void SpawnTarget(int targetIndex)
     {
+        Target target = targets[targetIndex];
         // Get the spawn point randomly and teleport the target to that point
         Vector3 spawnPoint = spawnLocations[Random.Range(0, spawnLocations.Count - 1)];
-        targets[targetIndex].transform.position = spawnPoint;
+        target.transform.position = spawnPoint;
+
+        // Start particles on spawn
+        if (target.GetComponentInChildren<ParticleSystem>())
+        {
+            target.GetComponentInChildren<ParticleSystem>().Play();
+        }
 
         // Update on-screen status
-        targets[targetIndex].isOnScreen = true;
-        targets[targetIndex].currentState = TargetStates.Moving;
-        targets[targetIndex].GetComponent<AnimationHandler>().ResetAnimation();
-        targets[targetIndex].GetComponent<CircleCollider2D>().isTrigger = false;
-        targets[targetIndex].SetFleeTimer();
+        target.isOnScreen = true;
+        target.currentState = TargetStates.Moving;
+        target.GetComponent<AnimationHandler>().ResetAnimation();
+        target.GetComponent<CircleCollider2D>().isTrigger = false;
+        target.SetFleeTimer();
     }
 
     // Method for getting all targets currently on screen
