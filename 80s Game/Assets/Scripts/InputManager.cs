@@ -82,7 +82,7 @@ public class InputManager : MonoBehaviour
                 RecenterCursor();
             }
 
-            if (j.GetButtonDown(Joycon.Button.PLUS) && !pauseScript.isPaused)
+            if ((j.GetButtonDown(Joycon.Button.PLUS) || j.GetButtonDown(Joycon.Button.MINUS)) && !pauseScript.isPaused)
             {
                 pauseScript.PauseGame();
             }
