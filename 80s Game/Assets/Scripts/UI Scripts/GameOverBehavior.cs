@@ -12,6 +12,7 @@ public class GameOverBehavior : MonoBehaviour
     public GameObject summaryScreen;
     public GameObject highScoreLeaderboard;
     public TMP_Text leaderboardText;
+    public AudioClip buttonClickSound;
 
     // Update is called once per frame
     void Update()
@@ -20,6 +21,7 @@ public class GameOverBehavior : MonoBehaviour
         gameOverUI.SetActive(GameManager.Instance.TargetManager.gameOver);
         if (gameOverUI.activeInHierarchy)
         {
+            Time.timeScale = 0f;
             gameUI.SetActive(false);
         }
     }
@@ -41,11 +43,13 @@ public class GameOverBehavior : MonoBehaviour
 
         summaryScreen.SetActive(false);
         highScoreLeaderboard.SetActive(true);
+        SoundManager.Instance.PlaySoundInterrupt(buttonClickSound);
     }
 
     //Restart the game by reloading the scene
     public void RestartGame()
     {
+        SoundManager.Instance.PlaySoundContinuous(buttonClickSound);
         GameManager.Instance.PointsManager.SaveScore();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }

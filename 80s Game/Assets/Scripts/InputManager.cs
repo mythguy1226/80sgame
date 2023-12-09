@@ -86,7 +86,7 @@ public class InputManager : MonoBehaviour
                 pauseScript.PauseGame();
             }
         }
-        if (MouseLeftDownThisFrame && !pauseScript.isPaused)
+        if (MouseLeftDownThisFrame && !pauseScript.isPaused && Time.timeScale > 0)
         {
             SoundManager.Instance.PlaySoundContinuous(shootSound);
         }

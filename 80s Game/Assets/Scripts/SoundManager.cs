@@ -27,10 +27,12 @@ public class SoundManager : MonoBehaviour
             interruptSource.Stop();
         }
         interruptSource.PlayOneShot(clip);
+        //Debug.Log(clip);
     }
 
     public void PlaySoundContinuous(AudioClip clip)
     { 
         continuousSource.PlayOneShot(clip);
+        //Debug.Log(clip);
     }
 }
