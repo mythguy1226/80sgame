@@ -69,7 +69,7 @@ public class InputManager : MonoBehaviour
             gyro = j.GetGyro();
 
             // Update cursor position based on gyroscope values
-            joyconCursorPos += new Vector3(gyro.z * 5.0f, gyro.y * 5.0f, 0.0f) ;
+            joyconCursorPos += new Vector3(gyro.z * 15.0f, gyro.y * 15.0f, 0.0f) ;
             // Clamp the cursor to the screen extents
             joyconCursorPos.x = Mathf.Clamp(joyconCursorPos.x, 0, Screen.width);
             joyconCursorPos.y = Mathf.Clamp(joyconCursorPos.y, 0, Screen.height);

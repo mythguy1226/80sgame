@@ -31,7 +31,7 @@ public class Target : MonoBehaviour
     // Get needed components for handling target behavior
     protected KinematicSteer movementControls;
     protected AnimationHandler animControls;
-    CircleCollider2D collider;
+    PolygonCollider2D collider;
     public AudioClip hitSound;
     //public AudioClip missSound;
 
@@ -44,7 +44,7 @@ public class Target : MonoBehaviour
         // Init component references
         movementControls = GetComponent<KinematicSteer>();
         animControls = GetComponent<AnimationHandler>();
-        collider = GetComponent<CircleCollider2D>();
+        collider = GetComponent<PolygonCollider2D>();
         inputManager = GameManager.Instance.InputManager;
         spawnPoint = transform.position;
 
