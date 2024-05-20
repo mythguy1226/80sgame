@@ -154,7 +154,7 @@ public class TargetManager : MonoBehaviour
         target.FSM.TransitionToState(BatStateMachine.BatStates.Moving);
         target.GetComponent<AnimationHandler>().ResetAnimation();
         target.GetComponent<PolygonCollider2D>().isTrigger = false;
-        target.SetFleeTimer();
+        target.FSM.SetFleeTimer();
     }
 
     // Method for getting all targets currently on screen
