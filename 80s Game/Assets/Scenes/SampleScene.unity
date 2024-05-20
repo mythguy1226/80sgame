@@ -5094,6 +5094,7 @@ MonoBehaviour:
   jc_ind: 0
   orientation: {x: 0, y: 0, z: 0, w: 0}
   joyconCursorPos: {x: 0, y: 0, z: 0}
+  crosshairScript: {fileID: 6808751828679409438}
   pauseScript: {fileID: 1011990663}
 --- !u!114 &1095139974
 MonoBehaviour:
@@ -10240,6 +10241,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3531d3616a21b724e92a89ba431bf8c2, type: 3}
+--- !u!114 &6808751828679409438 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8643429647793708552, guid: 3531d3616a21b724e92a89ba431bf8c2, type: 3}
+  m_PrefabInstance: {fileID: 6808751828679409437}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70260d319b4c2f84fb98163e1c9e72c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

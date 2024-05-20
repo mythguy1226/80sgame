@@ -29,8 +29,12 @@ public class CrosshairBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Make crosshair follow the mouse position
-        position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+    }
+
+    public void MoveCrosshair(Vector3 newPosition)
+    {
+        position = Camera.main.ScreenToWorldPoint(newPosition);
         position.z = 0;
 
         this.transform.position = position;

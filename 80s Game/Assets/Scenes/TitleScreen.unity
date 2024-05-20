@@ -681,7 +681,7 @@ MonoBehaviour:
   gameUIElements: {fileID: 0}
   onboardingPanel: {fileID: 0}
   onboardingCloseButton: {fileID: 0}
-  buttonClickSound: {fileID: 8300000, guid: 0f33d998cd03b1f4ebc4983ef2a6d559, type: 3}
+  buttonClickSound: {fileID: 0}
 --- !u!1 &340111859
 GameObject:
   m_ObjectHideFlags: 0
@@ -717,6 +717,7 @@ MonoBehaviour:
   jc_ind: 0
   orientation: {x: 0, y: 0, z: 0, w: 0}
   joyconCursorPos: {x: 0, y: 0, z: 0}
+  crosshairScript: {fileID: 690435953}
   pauseScript: {fileID: 319221313}
 --- !u!114 &340111861
 MonoBehaviour:
@@ -1030,6 +1031,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &690435953 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8643429647793708552, guid: 3531d3616a21b724e92a89ba431bf8c2, type: 3}
+  m_PrefabInstance: {fileID: 102456118}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70260d319b4c2f84fb98163e1c9e72c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &856292726
 GameObject:
   m_ObjectHideFlags: 0
