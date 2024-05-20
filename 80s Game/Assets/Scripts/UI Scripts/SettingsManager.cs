@@ -11,15 +11,18 @@ public class SettingsManager : MonoBehaviour
     public InputManager inputManager;
     public CRTEffect crtEffect;
 
+    //References to UI Elements
     public Slider volumeSlider;
     public Slider sensitivitySlider;
     public Toggle crtToggle;
     public Slider crtCurvature;
 
+    //Reference to curvature option and menu panel
     public GameObject crtCurvatureOption;
 
     public GameObject settingsPanel;
 
+    //Fields for each of the settings
     private float volume;
     private float sensitivity;
     private int crtOn = 1;
@@ -38,9 +41,11 @@ public class SettingsManager : MonoBehaviour
         SoundManager.Instance.volume = volume;
         volumeSlider.value = volume;
         
+        //Set sensitivity settings
         inputManager.sensitivity = sensitivity;
         sensitivitySlider.value = sensitivity;
 
+        //Set CRT effect based on settings
         if (crtOn == 1)
         {
             crtEffect.enabled = true;
@@ -53,6 +58,7 @@ public class SettingsManager : MonoBehaviour
             crtToggle.isOn = false;
         }
 
+        //Set curvature of the CRT effect
         crtEffect.Curvature = curvature;
         crtCurvature.value = curvature;
     }
@@ -60,7 +66,10 @@ public class SettingsManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Update values based on the values of the UI elements
         SoundManager.Instance.volume = volumeSlider.value;
+
+        inputManager.sensitivity = sensitivitySlider.value;
 
         crtCurvatureOption.SetActive(crtToggle.isOn);
         crtEffect.enabled = crtToggle.isOn;
@@ -71,11 +80,13 @@ public class SettingsManager : MonoBehaviour
         }
     }
 
+    //Toggle the menu on and off
     public void ToggleSettingsPanel()
     {
         settingsPanel.SetActive(!settingsPanel.activeInHierarchy);
     }   
 
+    //Save the settings, then close the menu
     public void ApplySettings()
     {
         PlayerPrefs.SetFloat("Volume", volumeSlider.value);
