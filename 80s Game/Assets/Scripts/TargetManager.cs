@@ -153,7 +153,7 @@ public class TargetManager : MonoBehaviour
         target.isOnScreen = true;
         target.currentState = TargetStates.Moving;
         target.GetComponent<AnimationHandler>().ResetAnimation();
-        target.GetComponent<CircleCollider2D>().isTrigger = false;
+        target.GetComponent<PolygonCollider2D>().isTrigger = false;
         target.SetFleeTimer();
     }
 
