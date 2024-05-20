@@ -32,6 +32,7 @@ public class InputManager : MonoBehaviour
     public Quaternion orientation;
     public Vector3 joyconCursorPos;
     //private bool shoulderPressed = false;
+    public CrosshairBehavior crosshairScript;
 
     public PauseScreenBehavior pauseScript;
 
@@ -41,6 +42,8 @@ public class InputManager : MonoBehaviour
         gyro = new Vector3(0, 0, 0);
         RecenterCursor();
         ResetRumble();
+
+        crosshairScript = GameObject.Find("Crosshair").GetComponent<CrosshairBehavior>();
     }
 
     // Update is called once per frame
@@ -73,6 +76,7 @@ public class InputManager : MonoBehaviour
 
             // Update the cursor position with calculated position
             Mouse.current.WarpCursorPosition(joyconCursorPos);
+            crosshairScript.MoveCrosshair(joyconCursorPos);
 
             // Get right trigger input
             MouseLeftDownThisFrame = j.GetButtonDown(Joycon.Button.SHOULDER_2);
@@ -88,6 +92,12 @@ public class InputManager : MonoBehaviour
             }
             //shoulderPressed = j.GetButtonUp(Joycon.Button.SHOULDER_2);
         }
+
+        else
+        {
+            crosshairScript.MoveCrosshair(Input.mousePosition);
+        }
+
         if (MouseLeftDownThisFrame && !pauseScript.isPaused && Time.timeScale > 0)
         {
             SoundManager.Instance.PlaySoundContinuous(shootSound, 0.5f);

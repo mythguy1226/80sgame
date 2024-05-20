@@ -153,8 +153,8 @@ public class TargetManager : MonoBehaviour
         target.FSM.bIsActive = true;
         target.FSM.TransitionToState(BatStateMachine.BatStates.Moving);
         target.GetComponent<AnimationHandler>().ResetAnimation();
-        target.GetComponent<CircleCollider2D>().isTrigger = false;
-        target.FSM.SetFleeTimer();
+        target.GetComponent<PolygonCollider2D>().isTrigger = false;
+        target.SetFleeTimer();
     }
 
     // Method for getting all targets currently on screen
