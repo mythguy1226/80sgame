@@ -33,32 +33,35 @@ public class PauseScreenBehavior : MonoBehaviour
 
     public void PauseGame()
     {
-        //GameManager.Instance.InputManager.ResetRumble();
-        isPaused = !isPaused;
-        if (isPaused == true)
+        if (pauseScreen != null)
         {
-            //Sets time scale to 0 so game pauses
-            Time.timeScale = 0f;
+            //GameManager.Instance.InputManager.ResetRumble();
+            isPaused = !isPaused;
+            if (isPaused == true)
+            {
+                //Sets time scale to 0 so game pauses
+                Time.timeScale = 0f;
 
-            //Enable pause screen and onboarding info (except the button to close onboarding)
-            pauseScreen.SetActive(true);
-            onboardingPanel.SetActive(true);
-            onboardingCloseButton.SetActive(false);
-            gameUIElements.SetActive(false);
+                //Enable pause screen and onboarding info (except the button to close onboarding)
+                pauseScreen.SetActive(true);
+                onboardingPanel.SetActive(true);
+                onboardingCloseButton.SetActive(false);
+                gameUIElements.SetActive(false);
 
-            SoundManager.Instance.PlaySoundContinuous(buttonClickSound);
-        }
+                SoundManager.Instance.PlaySoundContinuous(buttonClickSound);
+            }
 
-        else
-        {
-            //Sets time scale to 1 so game unpauses
-            Time.timeScale = 1f;
+            else
+            {
+                //Sets time scale to 1 so game unpauses
+                Time.timeScale = 1f;
 
-            pauseScreen.SetActive(false);
-            onboardingPanel.SetActive(false);
-            gameUIElements.SetActive(true);
+                pauseScreen.SetActive(false);
+                onboardingPanel.SetActive(false);
+                gameUIElements.SetActive(true);
 
-            SoundManager.Instance.PlaySoundContinuous(buttonClickSound);
+                SoundManager.Instance.PlaySoundContinuous(buttonClickSound);
+            }
         }
     }
 
