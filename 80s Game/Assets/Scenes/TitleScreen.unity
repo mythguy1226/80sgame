@@ -345,6 +345,75 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 74934317}
   m_CullTransparentMesh: 1
+--- !u!1001 &102456118
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2581428781294031484, guid: 3531d3616a21b724e92a89ba431bf8c2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2581428781294031484, guid: 3531d3616a21b724e92a89ba431bf8c2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2581428781294031484, guid: 3531d3616a21b724e92a89ba431bf8c2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2581428781294031484, guid: 3531d3616a21b724e92a89ba431bf8c2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2581428781294031484, guid: 3531d3616a21b724e92a89ba431bf8c2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2581428781294031484, guid: 3531d3616a21b724e92a89ba431bf8c2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2581428781294031484, guid: 3531d3616a21b724e92a89ba431bf8c2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2581428781294031484, guid: 3531d3616a21b724e92a89ba431bf8c2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2581428781294031484, guid: 3531d3616a21b724e92a89ba431bf8c2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2581428781294031484, guid: 3531d3616a21b724e92a89ba431bf8c2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6128920108644795991, guid: 3531d3616a21b724e92a89ba431bf8c2, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6128920108644795991, guid: 3531d3616a21b724e92a89ba431bf8c2, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6128920108644795991, guid: 3531d3616a21b724e92a89ba431bf8c2, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6550382031484820089, guid: 3531d3616a21b724e92a89ba431bf8c2, type: 3}
+      propertyPath: m_Name
+      value: Crosshair
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3531d3616a21b724e92a89ba431bf8c2, type: 3}
 --- !u!1 &160197780
 GameObject:
   m_ObjectHideFlags: 0
@@ -1019,7 +1088,6 @@ GameObject:
   - component: {fileID: 975349867}
   - component: {fileID: 975349866}
   - component: {fileID: 975349869}
-  - component: {fileID: 975349870}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1115,47 +1183,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shader: {fileID: 4800000, guid: 739c6569a1eb0c448804a9e0e49f34b1, type: 3}
   FilterQuality: 0
-  VideoMode: 1
-  DisplaySizeX: 960
-  DisplaySizeY: 480
-  StretchToDisplay: 1
-  AspectRatio: 1.33
-  EnableTVCurvature: 0
-  Curvature: 0
-  TVOverlay: {fileID: 2800000, guid: 983b4e2248d599443981d96b39576aeb, type: 3}
-  EnablePixelMask: 1
-  PixelMaskTexture: {fileID: 2800000, guid: 55b9f85457b9afc46834d927aa2e61cc, type: 3}
-  MaskRepeatX: 160
-  MaskRepeatY: 90
-  PixelMaskBrightness: 1
-  IQOffset: {x: 0, y: 0}
-  IQScale: {x: 1, y: 1}
-  RFNoise: 0.25
-  LumaSharpen: 0
-  QuantizeRGB: 0
-  RBits: 8
-  GBits: 8
-  BBits: 8
-  EnableBurstCountAnimation: 1
-  AntiFlicker: 0
-  EnableRollingFlicker: 0
-  RollingFlickerFactor: 0.25
-  RollingVSyncTime: 1
---- !u!114 &975349870
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 975349865}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e5e2c741e414724bb82e6b18576760a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shader: {fileID: 4800000, guid: 739c6569a1eb0c448804a9e0e49f34b1, type: 3}
-  FilterQuality: 0
-  VideoMode: 1
+  VideoMode: 2
   DisplaySizeX: 1280
   DisplaySizeY: 480
   StretchToDisplay: 1
@@ -1165,13 +1193,13 @@ MonoBehaviour:
   TVOverlay: {fileID: 2800000, guid: 983b4e2248d599443981d96b39576aeb, type: 3}
   EnablePixelMask: 1
   PixelMaskTexture: {fileID: 2800000, guid: 55b9f85457b9afc46834d927aa2e61cc, type: 3}
-  MaskRepeatX: 160
+  MaskRepeatX: -75
   MaskRepeatY: 90
   PixelMaskBrightness: 1
   IQOffset: {x: 0, y: 0}
   IQScale: {x: 1, y: 1}
   RFNoise: 0.25
-  LumaSharpen: 0.2
+  LumaSharpen: 0
   QuantizeRGB: 0
   RBits: 8
   GBits: 8
@@ -2152,6 +2180,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 975349868}
+  - {fileID: 102456118}
   - {fileID: 319221311}
   - {fileID: 450670734}
   - {fileID: 856292728}
