@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 7774082277665354212}
   - component: {fileID: 7014873915471283781}
   - component: {fileID: 1064766512371524766}
+  - component: {fileID: 7156282623998708221}
   m_Layer: 0
   m_Name: UnstableBat
   m_TagString: Untagged
@@ -33,7 +34,7 @@ Transform:
   m_GameObject: {fileID: 8306778490096188409}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.9799995, y: -1.3400002, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3.5, y: 3.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -239,14 +240,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1541242eb80ec154dacf050192835f97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FSM: {fileID: 7156282623998708221}
+--- !u!114 &7156282623998708221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8306778490096188409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3a7ce2ca68db8648acce298d4d9c36f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bIsActive: 0
+  initialState: 0
   floatingTextPrefab: {fileID: 5422266768498237442, guid: 75dd293da92028a43b54e04a8792559c, type: 3}
-  currentState: 0
-  isOnScreen: 0
   pointValue: 2000
   deathHeight: -6.5
-  timeUntilFlee: 5
-  fleeLocation: {x: 0, y: 10}
   hitSound: {fileID: 8300000, guid: c928b956a133aa544bfa866c9b7c2b47, type: 3}
+  timeUntilFlee: 8
+  fleeTimer: 0
+  fleeLocation: {x: 0, y: 0}
   chainRadius: 2
   chainLength: 3
   lightning: {fileID: 2958280814618220372, guid: 128a538b50a004e42bbe4ec0f3c37708, type: 3}

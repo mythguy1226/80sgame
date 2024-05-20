@@ -150,11 +150,11 @@ public class TargetManager : MonoBehaviour
         }
 
         // Update on-screen status
-        target.isOnScreen = true;
-        target.currentState = TargetStates.Moving;
+        target.FSM.bIsActive = true;
+        target.FSM.TransitionToState(BatStateMachine.BatStates.Moving);
         target.GetComponent<AnimationHandler>().ResetAnimation();
         target.GetComponent<CircleCollider2D>().isTrigger = false;
-        target.SetFleeTimer();
+        target.FSM.SetFleeTimer();
     }
 
     // Method for getting all targets currently on screen
@@ -167,7 +167,7 @@ public class TargetManager : MonoBehaviour
         foreach(Target target in targets)
         {
             // Add to counter if target is on screen
-            if (target.isOnScreen)
+            if (target.FSM.bIsActive)
                 tempTargetList.Add(target);
         }
 
@@ -191,10 +191,10 @@ public class TargetManager : MonoBehaviour
         for(int i = 0; i < targets.Length; i++)
         {
             // Check if on screen
-            if(!targets[i].isOnScreen)
+            if(!targets[i].FSM.bIsActive)
             {
                 // Default bat spawning
-                if (targets[i].pointValue == 1000.0f)
+                if (targets[i].FSM.pointValue == 1000.0f)
                 {
                     // Ensure there are no bonus bats to be spawned
                     if (numBonusBats == 0)
@@ -220,7 +220,7 @@ public class TargetManager : MonoBehaviour
     }
 
     // Method used for updating values on bat death
-    public void OnTargetDeath(TargetStates targetState)
+    public void OnTargetDeath(AbsBaseState<BatStateMachine.BatStates> targetState)
     {
         // Update number of stuns
         numStuns++;
@@ -234,7 +234,7 @@ public class TargetManager : MonoBehaviour
         if (numStuns >= currentRoundSize)
         {
             // Only add points if target didn't flee
-            if (targetState != TargetStates.Fleeing)
+            if (targetState.StateKey != BatStateMachine.BatStates.Fleeing)
             {
                 // Add bonus points
                 PointsManager pointsManager = GameManager.Instance.PointsManager;
@@ -275,7 +275,7 @@ public class TargetManager : MonoBehaviour
         foreach(Target target in targets)
         {
             if(target != null)
-                target.UpdateSpeed(Random.Range(minSpeed, maxSpeed));
+                target.FSM.UpdateSpeed(Random.Range(minSpeed, maxSpeed));
         }
     }
 
