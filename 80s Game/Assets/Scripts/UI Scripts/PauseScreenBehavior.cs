@@ -44,7 +44,7 @@ public class PauseScreenBehavior : MonoBehaviour
 
                 //Enable pause screen and onboarding info (except the button to close onboarding)
                 pauseScreen.SetActive(true);
-                onboardingPanel.SetActive(true);
+                //onboardingPanel.SetActive(true);
                 onboardingCloseButton.SetActive(false);
                 gameUIElements.SetActive(false);
 
@@ -57,7 +57,7 @@ public class PauseScreenBehavior : MonoBehaviour
                 Time.timeScale = 1f;
 
                 pauseScreen.SetActive(false);
-                onboardingPanel.SetActive(false);
+                //onboardingPanel.SetActive(false);
                 gameUIElements.SetActive(true);
 
                 SoundManager.Instance.PlaySoundContinuous(buttonClickSound);
