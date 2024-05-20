@@ -39,7 +39,7 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
     SpriteRenderer _SpriteRenderer;
     protected AnimationHandler _AnimControls;
     protected InputManager _InputManager;
-    CircleCollider2D _Collider;
+    PolygonCollider2D _Collider;
 
     // Public properties for bat components
     public KinematicSteer MovementControls
@@ -58,7 +58,7 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
     {
         get { return _InputManager; }
     }
-    public Collider2D Collider
+    public PolygonCollider2D Collider
     {
         get { return _Collider; }
     }
@@ -98,7 +98,7 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
         _SpriteRenderer = GetComponent<SpriteRenderer>();
         _AnimControls = GetComponent<AnimationHandler>();
         
-        _Collider = GetComponent<CircleCollider2D>();
+        _Collider = GetComponent<PolygonCollider2D>();
         spawnPoint = transform.position;
 
         // Init flee timer
