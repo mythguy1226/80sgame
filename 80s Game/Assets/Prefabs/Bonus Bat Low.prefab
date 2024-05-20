@@ -10033,9 +10033,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0866a63fd34b4504e87f09f18a541938, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FSM: {fileID: 2953488949255918500}
+--- !u!114 &2953488949255918500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8306778490096188409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f4f91da932e5f440acc9ad7a59f7be2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bIsActive: 0
+  initialState: 0
   floatingTextPrefab: {fileID: 5422266768498237442, guid: b98f70d59d257d149abbaf4824cd7b9e, type: 3}
-  currentState: 0
-  isOnScreen: 0
   pointValue: 3000
   deathHeight: -6.5
   timeUntilFlee: 5

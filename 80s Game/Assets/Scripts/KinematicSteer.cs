@@ -169,7 +169,7 @@ public class KinematicSteer : MonoBehaviour
         foreach (Target neighbor in neighbors)
         {
             // Continue if the bat isnt on screen
-            if (!neighbor.isOnScreen)
+            if (!neighbor.FSM.bIsActive)
                 continue;
 
             // Continue if the bat isnt in the flock radius
@@ -204,7 +204,7 @@ public class KinematicSteer : MonoBehaviour
         foreach (Target neighbor in neighbors)
         {
             // Continue if the bat isnt on screen
-            if (!neighbor.isOnScreen)
+            if (!neighbor.FSM.bIsActive)
                 continue;
 
             // Continue if the bat isnt in the flock radius
@@ -236,7 +236,7 @@ public class KinematicSteer : MonoBehaviour
         foreach (Target neighbor in neighbors)
         {
             // Continue if the bat isnt on screen
-            if (!neighbor.isOnScreen)
+            if (!neighbor.FSM.bIsActive)
                 continue;
 
             // Continue if the bat isnt in the flock radius

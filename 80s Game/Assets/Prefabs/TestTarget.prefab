@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 5352364880851083079}
   - component: {fileID: 1142854938126180406}
   - component: {fileID: 8052041500902039558}
+  - component: {fileID: 1575622764254521749}
   m_Layer: 0
   m_Name: TestTarget
   m_TagString: Untagged
@@ -51,14 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0866a63fd34b4504e87f09f18a541938, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  floatingTextPrefab: {fileID: 5422266768498237442, guid: 9fb18532ede7ca047b852b0d60f79673, type: 3}
-  currentState: 0
-  isOnScreen: 0
-  pointValue: 1000
-  deathHeight: -5
-  timeUntilFlee: 5
-  fleeLocation: {x: 0, y: 10}
-  hitSound: {fileID: 8300000, guid: c928b956a133aa544bfa866c9b7c2b47, type: 3}
+  FSM: {fileID: 1575622764254521749}
 --- !u!50 &4043134783524271435
 Rigidbody2D:
   serializedVersion: 4
@@ -267,3 +261,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7afb1d5d9b1c61f4a8426a9f40b5d671, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1575622764254521749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 232502045716647642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f4f91da932e5f440acc9ad7a59f7be2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bIsActive: 0
+  initialState: 0
+  floatingTextPrefab: {fileID: 5422266768498237442, guid: 9fb18532ede7ca047b852b0d60f79673, type: 3}
+  pointValue: 1000
+  deathHeight: -6.5
+  hitSound: {fileID: 8300000, guid: c928b956a133aa544bfa866c9b7c2b47, type: 3}
+  timeUntilFlee: 5
+  fleeTimer: 0
+  fleeLocation: {x: 0, y: 0}
