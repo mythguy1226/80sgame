@@ -52,14 +52,29 @@ public class AnimationHandler : MonoBehaviour
 
     public void PlayStunAnimation()
     {
+        // Reset potentially active animations
+        anime.ResetTrigger(dropHash);
+        anime.ResetTrigger(resetHash);
+
+        // Set new animation
         anime.SetTrigger(stunHash);
     }
     public void PlayDropAnimation()
     {
+        // Reset potentially active animations
+        anime.ResetTrigger(stunHash);
+        anime.ResetTrigger(resetHash);
+
+        // Set new animation
         anime.SetTrigger(dropHash);
     }
     public void ResetAnimation()
     {
+        // Reset potentially active animations
+        anime.ResetTrigger(stunHash);
+        anime.ResetTrigger(dropHash);
+
+        // Set new animation
         anime.SetTrigger(resetHash);
     }
 }
