@@ -1545,6 +1545,7 @@ GameObject:
   - component: {fileID: 198742983}
   - component: {fileID: 198742987}
   - component: {fileID: 198742986}
+  - component: {fileID: 198742988}
   m_Layer: 5
   m_Name: Initial 2 Button Down
   m_TagString: Untagged
@@ -1782,6 +1783,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseButton: 0
+--- !u!114 &198742988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 198742981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a057874a223fd04b8bdd6145686d1b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectable: {fileID: 198742983}
 --- !u!1001 &230340085
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6918,6 +6932,7 @@ MonoBehaviour:
   onboardingPanel: {fileID: 1681867054}
   onboardingCloseButton: {fileID: 296506228}
   buttonClickSound: {fileID: 8300000, guid: 0f33d998cd03b1f4ebc4983ef2a6d559, type: 3}
+  crosshairs: []
 --- !u!114 &1011990664
 MonoBehaviour:
   m_ObjectHideFlags: 0
