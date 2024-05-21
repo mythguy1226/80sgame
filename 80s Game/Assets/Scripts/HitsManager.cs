@@ -15,6 +15,13 @@ public class HitsManager : MonoBehaviour
         Shots = 0;
         Hits = 0;
         Accuracy = 0;
+
+        InputManager.detectHitSub += AddShot;
+    }
+
+    private void OnDisable()
+    {
+        InputManager.detectHitSub -= AddShot;
     }
 
     // Update is called once per frame
@@ -26,27 +33,27 @@ public class HitsManager : MonoBehaviour
             // Ratio of hits made to number of shots
             Accuracy = Hits / (float) Shots;
         }
-
-        // When the player clicks and the game isn't paused, add a shot
-        if (GameManager.Instance.InputManager.MouseLeftDownThisFrame && Time.timeScale > 0)
-        {
-            if (GameManager.Instance.InputManager.joycons.Count > 0)
-            {
-                Joycon j = GameManager.Instance.InputManager.joycons[GameManager.Instance.InputManager.jc_ind];
-                j.SetRumble(160, 320, 0.6f, 200);
-            }
-            AddShot();
-            //Debug.Log(Shots);
-        }
     }
 
     /// <summary>
     /// Adds a shot and returns the new number of shots
     /// </summary>
     /// <returns></returns>
-    public int AddShot()
+    public void AddShot(Vector3 position)
     {
-        return ++Shots;
+        bool isGameOngoing = Time.timeScale > 0;
+        if (!isGameOngoing)
+        {
+            return;
+        }
+
+        if (GameManager.Instance.InputManager.joycons.Count > 0)
+        {
+            Joycon j = GameManager.Instance.InputManager.joycons[GameManager.Instance.InputManager.jc_ind];
+            j.SetRumble(160, 320, 0.6f, 200);
+        }
+
+        ++Shots;
     }
 
     /// <summary>

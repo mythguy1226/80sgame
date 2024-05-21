@@ -556,79 +556,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 74934317}
   m_CullTransparentMesh: 1
---- !u!1001 &102456118
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2581428781294031484, guid: 3531d3616a21b724e92a89ba431bf8c2, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2581428781294031484, guid: 3531d3616a21b724e92a89ba431bf8c2, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2581428781294031484, guid: 3531d3616a21b724e92a89ba431bf8c2, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2581428781294031484, guid: 3531d3616a21b724e92a89ba431bf8c2, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2581428781294031484, guid: 3531d3616a21b724e92a89ba431bf8c2, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2581428781294031484, guid: 3531d3616a21b724e92a89ba431bf8c2, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2581428781294031484, guid: 3531d3616a21b724e92a89ba431bf8c2, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2581428781294031484, guid: 3531d3616a21b724e92a89ba431bf8c2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2581428781294031484, guid: 3531d3616a21b724e92a89ba431bf8c2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2581428781294031484, guid: 3531d3616a21b724e92a89ba431bf8c2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6128920108644795991, guid: 3531d3616a21b724e92a89ba431bf8c2, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6128920108644795991, guid: 3531d3616a21b724e92a89ba431bf8c2, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6128920108644795991, guid: 3531d3616a21b724e92a89ba431bf8c2, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6550382031484820089, guid: 3531d3616a21b724e92a89ba431bf8c2, type: 3}
-      propertyPath: m_Name
-      value: Crosshair
-      objectReference: {fileID: 0}
-    - target: {fileID: 6550382031484820089, guid: 3531d3616a21b724e92a89ba431bf8c2, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 3531d3616a21b724e92a89ba431bf8c2, type: 3}
 --- !u!1 &160197780
 GameObject:
   m_ObjectHideFlags: 0
@@ -1035,7 +962,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecb3240ed8294404ba046c9ad4331252, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootSound: {fileID: 8300000, guid: 58d7a57419c677f4faa04f97ea74938c, type: 3}
   gyro: {x: 0, y: 0, z: 0}
   jc_ind: 0
   orientation: {x: 0, y: 0, z: 0, w: 0}
@@ -1055,6 +981,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 379cbbec416febe4ca84352fed88c256, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerPrefab: {fileID: 0}
 --- !u!4 &340111862
 Transform:
   m_ObjectHideFlags: 0
@@ -5529,7 +5456,6 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 975349868}
-  - {fileID: 102456118}
   - {fileID: 319221311}
   - {fileID: 450670734}
   - {fileID: 856292728}

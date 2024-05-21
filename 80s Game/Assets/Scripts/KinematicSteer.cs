@@ -19,6 +19,7 @@ public class KinematicSteer : MonoBehaviour
 
     // Private fields for calculations
     public Vector2 currentVelocity;
+    private Vector2 originalScale;
 
     // Get the sprite renderer
     SpriteRenderer spriteRenderer;
@@ -44,6 +45,8 @@ public class KinematicSteer : MonoBehaviour
 
         // Set the first wander position
         SetWanderPosition();
+
+        originalScale = transform.localScale;
     }
 
     // Update is called once per frame
@@ -69,9 +72,9 @@ public class KinematicSteer : MonoBehaviour
 
         // Set direction to face
         if (currentVelocity.x > 0.0f)
-            spriteRenderer.flipX = true;
+            transform.localScale = new Vector2(-originalScale.x, originalScale.y);
         else
-            spriteRenderer.flipX = false;
+            transform.localScale = originalScale;
 
     }
 
@@ -166,7 +169,7 @@ public class KinematicSteer : MonoBehaviour
         foreach (Target neighbor in neighbors)
         {
             // Continue if the bat isnt on screen
-            if (!neighbor.isOnScreen)
+            if (!neighbor.FSM.bIsActive)
                 continue;
 
             // Continue if the bat isnt in the flock radius
@@ -201,7 +204,7 @@ public class KinematicSteer : MonoBehaviour
         foreach (Target neighbor in neighbors)
         {
             // Continue if the bat isnt on screen
-            if (!neighbor.isOnScreen)
+            if (!neighbor.FSM.bIsActive)
                 continue;
 
             // Continue if the bat isnt in the flock radius
@@ -233,7 +236,7 @@ public class KinematicSteer : MonoBehaviour
         foreach (Target neighbor in neighbors)
         {
             // Continue if the bat isnt on screen
-            if (!neighbor.isOnScreen)
+            if (!neighbor.FSM.bIsActive)
                 continue;
 
             // Continue if the bat isnt in the flock radius
