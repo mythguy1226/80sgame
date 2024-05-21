@@ -10,6 +10,8 @@ public class SoundManager : MonoBehaviour
     public AudioSource interruptSource; //audio source for sounds which cancel each other out
     public AudioSource continuousSource; //audio source for sounds which cannot be interrupted
 
+    public float volume = 1f;
+
     void Awake()
     {
         if (Instance == null)
@@ -26,13 +28,13 @@ public class SoundManager : MonoBehaviour
         {
             interruptSource.Stop(); //interrupts current sound playing through interruptSource, to avoid sounds stacking on top of one another
         }
-        interruptSource.PlayOneShot(clip, vol);
+        interruptSource.PlayOneShot(clip, volume);
         //Debug.Log(clip);
     }
 
     public void PlaySoundContinuous(AudioClip clip, float vol = 1f)
     { 
-        continuousSource.PlayOneShot(clip, vol);
+        continuousSource.PlayOneShot(clip, volume);
         //Debug.Log(clip);
     }
 }

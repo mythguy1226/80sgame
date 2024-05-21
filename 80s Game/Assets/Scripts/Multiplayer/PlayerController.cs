@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        PlayerData.activePlayers.Add(this);
         activeCrosshair = Instantiate(crosshairPrefab, new Vector3(0,0,0), Quaternion.identity);
     }
 

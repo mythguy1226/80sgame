@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
             UIManager = GetComponent<UIManager>();
 
             if (PlayerData.activePlayers.Count == 0) {
-                PlayerData.activePlayers.Add(Instantiate(playerPrefab, transform.position, Quaternion.identity));
+                Instantiate(playerPrefab, transform.position, Quaternion.identity);
             }
         }
     }
