@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using RetroTVFX;
-using UnityEditor.Timeline.Actions;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using TMPro;
 
 public class SettingsManager : MonoBehaviour
 {
@@ -21,6 +22,9 @@ public class SettingsManager : MonoBehaviour
     public GameObject crtCurvatureOption;
 
     public GameObject settingsPanel;
+    public GameObject settingsButton;
+
+    public List<TextMeshProUGUI> settingsLabels;
 
     //Fields for each of the settings
     private float volume;
@@ -63,20 +67,34 @@ public class SettingsManager : MonoBehaviour
         crtCurvature.value = curvature;
     }
 
-    // Update is called once per frame
-    void Update()
+    //Change Volume
+    public void ChangeVolume()
     {
-        //Update values based on the values of the UI elements
         SoundManager.Instance.volume = volumeSlider.value;
+        float volumeLabel = Mathf.RoundToInt(volumeSlider.value * 100);
+        settingsLabels[0].text = volumeLabel.ToString();
+    }
 
+    public void ChangeSensitivity()
+    {
         inputManager.sensitivity = sensitivitySlider.value;
+        float sensitivityLabel = Mathf.RoundToInt(sensitivitySlider.value * 10);
+        settingsLabels[1].text = sensitivityLabel.ToString();
+    }
 
-        crtCurvatureOption.SetActive(crtToggle.isOn);
+    public void ToggleCRTEffect()
+    {
         crtEffect.enabled = crtToggle.isOn;
+        crtCurvatureOption.SetActive(crtToggle.isOn);
+    }
 
+    public void ChangeCRTCurvature()
+    {
         if (crtEffect.enabled)
         {
             crtEffect.Curvature = crtCurvature.value;
+            float crtCurvatureLabel = Mathf.RoundToInt(crtCurvature.value * 500);
+            settingsLabels[2].text = crtCurvatureLabel.ToString();
         }
     }
 
@@ -84,6 +102,18 @@ public class SettingsManager : MonoBehaviour
     public void ToggleSettingsPanel()
     {
         settingsPanel.SetActive(!settingsPanel.activeInHierarchy);
+
+        if (settingsPanel.activeInHierarchy)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(volumeSlider.gameObject);
+        }
+
+        else
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(settingsButton.gameObject);
+        }
     }   
 
     //Save the settings, then close the menu

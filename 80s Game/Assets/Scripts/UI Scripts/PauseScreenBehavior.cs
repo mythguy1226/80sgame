@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class PauseScreenBehavior : MonoBehaviour
 {
     public bool isPaused;
     public GameObject pauseScreen;
+    public GameObject continueButton;
     public GameObject gameUIElements;
     public GameObject onboardingPanel;
     public GameObject onboardingCloseButton;
@@ -44,9 +46,10 @@ public class PauseScreenBehavior : MonoBehaviour
 
                 //Enable pause screen and onboarding info (except the button to close onboarding)
                 pauseScreen.SetActive(true);
-                //onboardingPanel.SetActive(true);
-                onboardingCloseButton.SetActive(false);
                 gameUIElements.SetActive(false);
+
+                EventSystem.current.SetSelectedGameObject(null);
+                EventSystem.current.SetSelectedGameObject(continueButton);
 
                 SoundManager.Instance.PlaySoundContinuous(buttonClickSound);
             }
