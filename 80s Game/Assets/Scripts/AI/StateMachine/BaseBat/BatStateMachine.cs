@@ -63,6 +63,11 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
         get { return _Collider; }
     }
 
+    public bool IsDefault
+    {
+        get { return pointValue == 1000; }
+    }
+
     void Awake()
     {
         // Initialize all components
@@ -212,6 +217,6 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
         gameManager.HitsManager.AddHit();
 
         // Update target manager with current state
-        gameManager.TargetManager.OnTargetDeath(currentState);
+        gameManager.TargetManager.OnTargetStun();
     }
 }
