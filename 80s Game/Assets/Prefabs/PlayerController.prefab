@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8d250109bb6f4f43824f6ed778ee039, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shootSound: {fileID: 8300000, guid: 58d7a57419c677f4faa04f97ea74938c, type: 3}
   score: 0
   accuracy: 0
   crosshairPrefab: {fileID: 6026067595286513962, guid: 3531d3616a21b724e92a89ba431bf8c2, type: 3}

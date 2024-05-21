@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-
+    public AudioClip shootSound;
     public int score;
     public float accuracy;
 
@@ -25,9 +25,16 @@ public class PlayerController : MonoBehaviour
 
     public void HandleFire()
     {
+        Debug.Log("Fire");
         if (GameManager.Instance.UIManager.activeUI != UIManager.UIType.None)
         {
             GameManager.Instance.UIManager.GetFireInput(activeCrosshair.PositionToScreen());
+            return;
+        }
+
+        if (Time.timeScale > 0)
+        {
+            SoundManager.Instance.PlaySoundContinuous(shootSound, 0.5f);
         }
         Vector3 shotLocation = activeCrosshair.transform.position;
         InputManager.PlayerShot(shotLocation);

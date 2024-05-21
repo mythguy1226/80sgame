@@ -281,4 +281,4 @@ MonoBehaviour:
   hitSound: {fileID: 8300000, guid: c928b956a133aa544bfa866c9b7c2b47, type: 3}
   timeUntilFlee: 5
   fleeTimer: 0
-  fleeLocation: {x: 0, y: 0}
+  fleeLocation: {x: 0, y: 10}

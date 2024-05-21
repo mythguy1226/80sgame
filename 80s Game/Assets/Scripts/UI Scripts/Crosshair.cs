@@ -12,6 +12,8 @@ public class Crosshair : MonoBehaviour
     private void Awake()
     {
         SetClamps();
+        //Hide mouse cursor
+        Cursor.visible = false;
     }
 
     void Update()

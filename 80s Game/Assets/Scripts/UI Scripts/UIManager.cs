@@ -31,6 +31,7 @@ public class UIManager : MonoBehaviour
         {
             case UIType.Onboarding:
                 onboardingUI.CloseOnboarding();
+                activeUI = UIType.None;
                 break;
             case UIType.Pause:
                 // Test each element and see wtf?
