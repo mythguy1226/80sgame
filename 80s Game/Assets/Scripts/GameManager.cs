@@ -1,18 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Scripting;
 
 public class GameManager : MonoBehaviour
 {
     // Singleton pattern
     public static GameManager Instance { get; private set; }
+    public PlayerController playerPrefab;
 
     // Public properties
     public InputManager InputManager { get; private set;  }
     public TargetManager TargetManager { get; private set; }
     public PointsManager PointsManager { get; private set; }
     public HitsManager HitsManager { get; private set; }
+
+    public UIManager UIManager { get; private set; }
 
     private void Awake()
     {
@@ -32,6 +34,11 @@ public class GameManager : MonoBehaviour
             TargetManager = GetComponent<TargetManager>();
             PointsManager = GetComponent<PointsManager>();
             HitsManager = GetComponent<HitsManager>();
+            UIManager = GetComponent<UIManager>();
+
+            if (PlayerData.activePlayers.Count == 0) {
+                PlayerData.activePlayers.Add(Instantiate(playerPrefab, transform.position, Quaternion.identity));
+            }
         }
     }
 }

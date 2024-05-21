@@ -42,8 +42,6 @@ public class InputManager : MonoBehaviour
         gyro = new Vector3(0, 0, 0);
         RecenterCursor();
         ResetRumble();
-
-        crosshairScript = GameObject.Find("Crosshair").GetComponent<CrosshairBehavior>();
     }
 
     // Update is called once per frame
@@ -91,11 +89,6 @@ public class InputManager : MonoBehaviour
                 pauseScript.PauseGame();
             }
             //shoulderPressed = j.GetButtonUp(Joycon.Button.SHOULDER_2);
-        }
-
-        else
-        {
-            crosshairScript.MoveCrosshair(Input.mousePosition);
         }
 
         if (MouseLeftDownThisFrame && !pauseScript.isPaused && Time.timeScale > 0)
