@@ -17,8 +17,9 @@ public class PlayerController : MonoBehaviour
         activeCrosshair = Instantiate(crosshairPrefab, new Vector3(0,0,0), Quaternion.identity);
     }
 
-    public void  HandleMovement(Vector2 movementData)
+    public void HandleMovement(Vector2 movementData)
     {
+
         activeCrosshair.SetMovementDelta(movementData);
     }
 
@@ -29,7 +30,6 @@ public class PlayerController : MonoBehaviour
             GameManager.Instance.UIManager.GetFireInput(activeCrosshair.PositionToScreen());
         }
         Vector3 shotLocation = activeCrosshair.transform.position;
-
-        // Check for bats? Have the bats check this?
+        InputManager.PlayerShot(shotLocation);
     }
 }

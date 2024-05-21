@@ -15,7 +15,6 @@ public class PlayerInputWrapper : MonoBehaviour
     {
         player = GetComponent<PlayerController>();
         playerInput = GetComponent<PlayerInput>();
-        Debug.Log(playerInput.currentControlScheme);
         if (playerInput.currentControlScheme == "PS4")
         {
             sensitivity = controllerSensitivity;

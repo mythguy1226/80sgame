@@ -150,11 +150,10 @@ public class TargetManager : MonoBehaviour
         }
 
         // Update on-screen status
-        target.FSM.bIsActive = true;
-        target.FSM.TransitionToState(BatStateMachine.BatStates.Moving);
+        target.FSM.Spawn();
         target.GetComponent<AnimationHandler>().ResetAnimation();
         target.GetComponent<PolygonCollider2D>().isTrigger = false;
-        target.FSM.SetFleeTimer();
+        
     }
 
     // Method for getting all targets currently on screen

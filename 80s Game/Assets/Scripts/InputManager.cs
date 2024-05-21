@@ -1,10 +1,12 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
+
+    public static event Action<Vector3> detectHitSub;
     // Public properties
     public bool MouseLeftDown
     {
@@ -108,5 +110,10 @@ public class InputManager : MonoBehaviour
         {
             joycons[jc_ind].SetRumble(0, 0, 0);
         }
+    }
+
+    public static void PlayerShot(Vector3 position)
+    {
+        detectHitSub?.Invoke(position);
     }
 }
