@@ -214,9 +214,9 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
         InputManager.detectHitSub -= ListenForShot;
     }
 
-    public void ListenForShot(Vector3 position)
+    public void ListenForShot(ShotInformation s)
     {
-        DetectStun(position);
+        DetectStun(s.location);
     }
 
     public void Spawn()

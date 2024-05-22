@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Timeline.Actions;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    
+
     public AudioClip shootSound;
     public int score;
     public float accuracy;
+    public int Order { get; private set; }
 
     [SerializeField]
     private Crosshair crosshairPrefab;
@@ -15,6 +19,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         PlayerData.activePlayers.Add(this);
+        Order = PlayerData.activePlayers.Count;
         activeCrosshair = Instantiate(crosshairPrefab, new Vector3(0,0,0), Quaternion.identity);
     }
 
@@ -37,7 +42,7 @@ public class PlayerController : MonoBehaviour
         {
             SoundManager.Instance.PlaySoundContinuous(shootSound, 0.5f);
         }
-        Vector3 shotLocation = activeCrosshair.transform.position;
-        InputManager.PlayerShot(shotLocation);
+        ShotInformation s = new(activeCrosshair.transform.position, Order);
+        InputManager.PlayerShot(s);
     }
 }
