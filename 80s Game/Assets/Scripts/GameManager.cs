@@ -37,7 +37,17 @@ public class GameManager : MonoBehaviour
             UIManager = GetComponent<UIManager>();
 
             if (PlayerData.activePlayers.Count == 0) {
-                Instantiate(playerPrefab, transform.position, Quaternion.identity);
+                PlayerConfig defaultConfig = new PlayerConfig(0, PlayerData.defaultColors[0], Vector2.one);
+                PlayerData.activePlayers.Add(defaultConfig);
+                PlayerController pc = Instantiate(playerPrefab, transform.position, Quaternion.identity);
+                pc.SetConfig(defaultConfig);
+            } else
+            {
+                for(int i = 0; i < PlayerData.activePlayers.Count; i++)
+                {
+                    PlayerController pc = Instantiate(playerPrefab, transform.position, Quaternion.identity);
+                    pc.SetConfig(PlayerData.activePlayers[i]);
+                }
             }
         }
     }
