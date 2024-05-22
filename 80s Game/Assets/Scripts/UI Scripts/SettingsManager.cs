@@ -9,45 +9,45 @@ using TMPro;
 public class SettingsManager : MonoBehaviour
 {
     //References to scripts that the settings will affect
-    public InputManager inputManager;
+    public PlayerInputWrapper inputManager;
     public CRTEffect crtEffect;
 
     //References to UI Elements
     public Slider volumeSlider;
-    public Slider sensitivitySlider;
+    public Slider mouseXSlider;
+    public Slider mouseYSlider;
+    public Slider gamepadXSlider;
+    public Slider gamepadYSlider;
     public Toggle crtToggle;
     public Slider crtCurvature;
 
-    //Reference to curvature option and menu panel
-    public GameObject crtCurvatureOption;
 
+    public GameObject crtCurvatureOption;
     public GameObject settingsPanel;
     public GameObject settingsButton;
-
     public List<TextMeshProUGUI> settingsLabels;
-
-    //Fields for each of the settings
-    private float volume;
-    private float sensitivity;
-    private int crtOn = 1;
-    private float curvature;
 
     // Start is called before the first frame update
     void Start()
     {
         //Load in settings from PlayerPrefs
-        volume = PlayerPrefs.GetFloat("Volume");
-        sensitivity = PlayerPrefs.GetFloat("Sensitivity");
-        crtOn = PlayerPrefs.GetInt("CRTOn");
-        curvature = PlayerPrefs.GetFloat("CRTCurvature");
+        float volume = PlayerPrefs.GetFloat("Volume");
+        int crtOn = PlayerPrefs.GetInt("CRTOn");
+        float curvature = PlayerPrefs.GetFloat("CRTCurvature");
+        float mouseX = PlayerPrefs.GetFloat("MouseXSensitivity");
+        float mouseY = PlayerPrefs.GetFloat("MouseYSensitivity");
+        float gamepadX = PlayerPrefs.GetFloat("GamepadXSensitivity");
+        float gamepadY = PlayerPrefs.GetFloat("GamepadYSensitivity");
 
         //Set Volume settings
         SoundManager.Instance.volume = volume;
         volumeSlider.value = volume;
-        
-        //Set sensitivity settings
-        inputManager.sensitivity = sensitivity;
-        sensitivitySlider.value = sensitivity;
+
+        //Set Sensitivity sliders
+        mouseXSlider.value = mouseX;
+        mouseYSlider.value = mouseY;
+        gamepadXSlider.value = gamepadX;
+        gamepadYSlider.value = gamepadY;
 
         //Set CRT effect based on settings
         if (crtOn == 1)
@@ -75,11 +75,32 @@ public class SettingsManager : MonoBehaviour
         settingsLabels[0].text = volumeLabel.ToString();
     }
 
-    public void ChangeSensitivity()
+    public void ChangeMouseSensitivityX()
     {
-        inputManager.sensitivity = sensitivitySlider.value;
-        float sensitivityLabel = Mathf.RoundToInt(sensitivitySlider.value * 10);
+        //inputManager.AdjustSensitivityX();
+        float sensitivityLabel = Mathf.RoundToInt(mouseXSlider.value * 10);
         settingsLabels[1].text = sensitivityLabel.ToString();
+    }
+
+    public void ChangeMouseSensitivityY()
+    {
+        //inputManager.AdjustSensitivityY();
+        float sensitivityLabel = Mathf.RoundToInt(mouseYSlider.value * 10);
+        settingsLabels[2].text = sensitivityLabel.ToString();
+    }
+
+    public void ChangeGamepadSensitivityX()
+    {
+        //inputManager.AdjustSensitivityX();
+        float sensitivityLabel = Mathf.RoundToInt(gamepadXSlider.value * 10);
+        settingsLabels[3].text = sensitivityLabel.ToString();
+    }
+
+    public void ChangeGamepadSensitivityY()
+    {
+        //inputManager.AdjustSensitivityY();
+        float sensitivityLabel = Mathf.RoundToInt(gamepadYSlider.value * 10);
+        settingsLabels[4].text = sensitivityLabel.ToString();
     }
 
     public void ToggleCRTEffect()
@@ -94,7 +115,7 @@ public class SettingsManager : MonoBehaviour
         {
             crtEffect.Curvature = crtCurvature.value;
             float crtCurvatureLabel = Mathf.RoundToInt(crtCurvature.value * 500);
-            settingsLabels[2].text = crtCurvatureLabel.ToString();
+            settingsLabels[5].text = crtCurvatureLabel.ToString();
         }
     }
 
@@ -120,7 +141,10 @@ public class SettingsManager : MonoBehaviour
     public void ApplySettings()
     {
         PlayerPrefs.SetFloat("Volume", volumeSlider.value);
-        PlayerPrefs.SetFloat("Sensitivity", sensitivitySlider.value);
+        PlayerPrefs.SetFloat("MouseXSensitivity", mouseXSlider.value);
+        PlayerPrefs.SetFloat("MouseYSensitivity", mouseYSlider.value);
+        PlayerPrefs.SetFloat("GamepadXSensitivity", gamepadXSlider.value);
+        PlayerPrefs.SetFloat("GamepadYSensitivity", gamepadYSlider.value);
         PlayerPrefs.SetInt("CRTOn", System.Convert.ToInt32(crtToggle.isOn));
         PlayerPrefs.SetFloat("CRTCurvature", crtCurvature.value);
 

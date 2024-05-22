@@ -157,9 +157,9 @@ RectTransform:
   - {fileID: 1285082002}
   m_Father: {fileID: 214077981}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 303.28003, y: -950}
   m_SizeDelta: {x: 606.56, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &10355059
@@ -402,7 +402,7 @@ MonoBehaviour:
   m_Navigation:
     m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 1492705051}
+    m_SelectOnUp: {fileID: 1058933520}
     m_SelectOnDown: {fileID: 958586289}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
@@ -440,7 +440,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 319221314}
         m_TargetAssemblyTypeName: SettingsManager, Assembly-CSharp
-        m_MethodName: ChangeSensitivity
+        m_MethodName: ChangeGamepadSensitivityY
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -839,11 +839,11 @@ RectTransform:
   - {fileID: 10355058}
   m_Father: {fileID: 750133599}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.00000037221, y: -64.69798}
-  m_SizeDelta: {x: 1634.2, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: -0.000091552734}
+  m_SizeDelta: {x: 0.19995117, y: 323.49}
+  m_Pivot: {x: 1, y: 1}
 --- !u!114 &214077982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -861,7 +861,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 0
+  m_ChildAlignment: 3
   m_Spacing: 50
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 0
@@ -917,7 +917,7 @@ RectTransform:
   m_Father: {fileID: 497102765}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -971,7 +971,7 @@ GameObject:
   - component: {fileID: 232486507}
   - component: {fileID: 232486506}
   m_Layer: 5
-  m_Name: Value Label (1)
+  m_Name: Mouse Y Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1105,6 +1105,7 @@ GameObject:
   - component: {fileID: 309228135}
   - component: {fileID: 309228134}
   - component: {fileID: 309228133}
+  - component: {fileID: 309228136}
   m_Layer: 5
   m_Name: SettingsScrollList
   m_TagString: Untagged
@@ -1201,6 +1202,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 309228131}
   m_CullTransparentMesh: 1
+--- !u!114 &309228136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309228131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9a100df30e4ab14e9774695933f9178, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &319221307
 GameObject:
   m_ObjectHideFlags: 0
@@ -1359,10 +1372,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9aeb6fb7eee4fa54ca36a231ee22d140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputManager: {fileID: 340111860}
+  inputManager: {fileID: 0}
   crtEffect: {fileID: 975349869}
   volumeSlider: {fileID: 1492705051}
-  sensitivitySlider: {fileID: 1414249906}
+  mouseXSlider: {fileID: 1414249906}
+  mouseYSlider: {fileID: 1106265430}
+  gamepadXSlider: {fileID: 1058933520}
+  gamepadYSlider: {fileID: 42696949}
   crtToggle: {fileID: 958586289}
   crtCurvature: {fileID: 2117102456}
   crtCurvatureOption: {fileID: 10355057}
@@ -1371,6 +1387,9 @@ MonoBehaviour:
   settingsLabels:
   - {fileID: 1816348464}
   - {fileID: 1995536686}
+  - {fileID: 232486506}
+  - {fileID: 1178308324}
+  - {fileID: 1899080029}
   - {fileID: 1285082003}
 --- !u!114 &319221315
 MonoBehaviour:
@@ -1548,7 +1567,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.00012207031, y: -211}
+  m_AnchoredPosition: {x: 0, y: -211}
   m_SizeDelta: {x: -1513.58, y: -1016.18}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &363716642
@@ -1993,7 +2012,7 @@ MonoBehaviour:
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit
   m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
+  m_InputActionsPerSecond: 7.5
   m_AllowActivationOnMobileDevice: 0
 --- !u!1 &468382033
 GameObject:
@@ -2029,9 +2048,9 @@ RectTransform:
   - {fileID: 232486505}
   m_Father: {fileID: 214077981}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 303.28003, y: -350}
   m_SizeDelta: {x: 606.56, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &468382035
@@ -2525,7 +2544,7 @@ RectTransform:
   m_Father: {fileID: 1588059903}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2600,7 +2619,7 @@ RectTransform:
   m_Father: {fileID: 1684932666}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2694,11 +2713,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnLeft: {fileID: 1492705051}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
@@ -2724,9 +2743,9 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 765622413}
   m_HandleRect: {fileID: 765622412}
   m_Direction: 2
-  m_Value: 0.6999999
-  m_Size: 0.6765099
-  m_NumberOfSteps: 11
+  m_Value: 1.0000004
+  m_Size: 0.67651004
+  m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2743,7 +2762,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.4433962, g: 0.43712175, b: 0.43712175, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2801,7 +2820,7 @@ RectTransform:
   m_Father: {fileID: 1747378912}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2877,9 +2896,9 @@ RectTransform:
   - {fileID: 1899080028}
   m_Father: {fileID: 214077981}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 303.28003, y: -650}
   m_SizeDelta: {x: 606.56, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &646706405
@@ -2998,7 +3017,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &658831022
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3093,9 +3112,9 @@ RectTransform:
   - {fileID: 1178308323}
   m_Father: {fileID: 214077981}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 303.28003, y: -500}
   m_SizeDelta: {x: 606.56, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &710708795
@@ -3404,7 +3423,7 @@ MonoBehaviour:
     m_SelectOnUp: {fileID: 2117102456}
     m_SelectOnDown: {fileID: 1492705051}
     m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnRight: {fileID: 603237760}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
@@ -3584,8 +3603,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 2068620914}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 0.32348996}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3863,10 +3882,10 @@ MonoBehaviour:
   m_Navigation:
     m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 1414249906}
+    m_SelectOnUp: {fileID: 42696949}
     m_SelectOnDown: {fileID: 2117102456}
     m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnRight: {fileID: 603237760}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
@@ -4099,8 +4118,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1314034844}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4175,7 +4194,7 @@ RectTransform:
   m_Father: {fileID: 1295072954}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4285,8 +4304,8 @@ MonoBehaviour:
   m_Navigation:
     m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 1492705051}
-    m_SelectOnDown: {fileID: 958586289}
+    m_SelectOnUp: {fileID: 1106265430}
+    m_SelectOnDown: {fileID: 42696949}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -4323,7 +4342,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 319221314}
         m_TargetAssemblyTypeName: SettingsManager, Assembly-CSharp
-        m_MethodName: ChangeSensitivity
+        m_MethodName: ChangeGamepadSensitivityX
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4521,8 +4540,8 @@ MonoBehaviour:
   m_Navigation:
     m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 1492705051}
-    m_SelectOnDown: {fileID: 958586289}
+    m_SelectOnUp: {fileID: 1414249906}
+    m_SelectOnDown: {fileID: 1058933520}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -4559,7 +4578,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 319221314}
         m_TargetAssemblyTypeName: SettingsManager, Assembly-CSharp
-        m_MethodName: ChangeSensitivity
+        m_MethodName: ChangeMouseSensitivityY
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4657,7 +4676,7 @@ GameObject:
   - component: {fileID: 1178308325}
   - component: {fileID: 1178308324}
   m_Layer: 5
-  m_Name: Value Label (1)
+  m_Name: Gamepad X Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4812,7 +4831,7 @@ RectTransform:
   m_Father: {fileID: 1373984788}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4887,7 +4906,7 @@ RectTransform:
   m_Father: {fileID: 380274633}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4962,7 +4981,7 @@ RectTransform:
   m_Father: {fileID: 521943867}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -5037,9 +5056,9 @@ RectTransform:
   - {fileID: 958586288}
   m_Father: {fileID: 214077981}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 303.28003, y: -800}
   m_SizeDelta: {x: 606.56, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1237833333
@@ -5151,7 +5170,7 @@ GameObject:
   - component: {fileID: 1285082004}
   - component: {fileID: 1285082003}
   m_Layer: 5
-  m_Name: Value Label (2)
+  m_Name: Curvature Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5644,8 +5663,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1097474493}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -5854,7 +5873,7 @@ MonoBehaviour:
     m_Mode: 4
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 1492705051}
-    m_SelectOnDown: {fileID: 958586289}
+    m_SelectOnDown: {fileID: 1106265430}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -5891,7 +5910,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 319221314}
         m_TargetAssemblyTypeName: SettingsManager, Assembly-CSharp
-        m_MethodName: ChangeSensitivity
+        m_MethodName: ChangeMouseSensitivityX
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6480,7 +6499,7 @@ GameObject:
   - component: {fileID: 1816348465}
   - component: {fileID: 1816348464}
   m_Layer: 5
-  m_Name: Value Label
+  m_Name: Volume Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6710,7 +6729,7 @@ RectTransform:
   m_Father: {fileID: 1974049426}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -6764,7 +6783,7 @@ GameObject:
   - component: {fileID: 1899080030}
   - component: {fileID: 1899080029}
   m_Layer: 5
-  m_Name: Value Label (1)
+  m_Name: Gamepad Y Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6919,7 +6938,7 @@ RectTransform:
   m_Father: {fileID: 366115683}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -7323,7 +7342,7 @@ GameObject:
   - component: {fileID: 1995536687}
   - component: {fileID: 1995536686}
   m_Layer: 5
-  m_Name: Value Label (1)
+  m_Name: Mouse X Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7479,9 +7498,9 @@ RectTransform:
   - {fileID: 1816348463}
   m_Father: {fileID: 214077981}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 303.28003, y: -50}
   m_SizeDelta: {x: 606.56, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2006739262
@@ -7844,9 +7863,9 @@ RectTransform:
   - {fileID: 1995536685}
   m_Father: {fileID: 214077981}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 303.28003, y: -200}
   m_SizeDelta: {x: 606.56, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2118977642
