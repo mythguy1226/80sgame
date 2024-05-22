@@ -11,7 +11,7 @@ public class PlayerInputWrapper : MonoBehaviour
     private PlayerController player;
     private PlayerInput playerInput;
 
-    bool controllerInput;
+    public bool controllerInput;
 
     private void Awake()
     {
