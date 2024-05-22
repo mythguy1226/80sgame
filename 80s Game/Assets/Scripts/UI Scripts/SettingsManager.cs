@@ -102,7 +102,6 @@ public class SettingsManager : MonoBehaviour
     {
         mouseSensitivityX = mouseXSlider.value / 400;
         playerInputWrapper.mouseSensitivity.x = mouseSensitivityX;
-        playerInputWrapper.SetSensitivity(playerInputWrapper.controllerInput);
 
         float sensitivityLabel = mouseXSlider.value / 4;
         settingsLabels[1].text = sensitivityLabel.ToString("F2");
@@ -111,8 +110,7 @@ public class SettingsManager : MonoBehaviour
     public void ChangeMouseSensitivityY()
     {
         mouseSensitivityY = mouseYSlider.value / 400;
-        playerInputWrapper.mouseSensitivity.y = mouseSensitivityY;
-        playerInputWrapper.SetSensitivity(playerInputWrapper.controllerInput);
+        playerInputWrapper.mouseSensitivity.y = mouseSensitivityY;        
 
         float sensitivityLabel = mouseYSlider.value / 4;
         settingsLabels[2].text = sensitivityLabel.ToString("F2");
@@ -122,7 +120,6 @@ public class SettingsManager : MonoBehaviour
     {
         gamepadSensitivityX = gamepadXSlider.value / 40;
         playerInputWrapper.controllerSensitivity.x = gamepadSensitivityX;
-        playerInputWrapper.SetSensitivity(playerInputWrapper.controllerInput);
 
         float sensitivityLabel = gamepadXSlider.value / 4;
         settingsLabels[3].text = sensitivityLabel.ToString("F2");
@@ -132,7 +129,6 @@ public class SettingsManager : MonoBehaviour
     {
         gamepadSensitivityY = gamepadYSlider.value / 40;
         playerInputWrapper.controllerSensitivity.y = gamepadSensitivityY;
-        playerInputWrapper.SetSensitivity(playerInputWrapper.controllerInput);
 
         float sensitivityLabel = gamepadYSlider.value / 4;
         settingsLabels[4].text = sensitivityLabel.ToString("F2");
@@ -182,6 +178,8 @@ public class SettingsManager : MonoBehaviour
         PlayerPrefs.SetFloat("GamepadYSensitivity", gamepadSensitivityY);
         PlayerPrefs.SetInt("CRTOn", System.Convert.ToInt32(crtToggle.isOn));
         PlayerPrefs.SetFloat("CRTCurvature", crtCurvature.value);
+
+        playerInputWrapper.SetSensitivity(playerInputWrapper.controllerInput);
 
         ToggleSettingsPanel();
     }
