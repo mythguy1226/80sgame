@@ -25,13 +25,10 @@ public class GameManager : MonoBehaviour
             // If not, then the script is a duplicate and can delete itself
             Destroy(this);
         }
-
         else
         {
             Instance = this;
 
-            // TEMPORARY - Set gamemode to Classic
-            ActiveGameMode = new ClassicMode();
 
             // Initialize managers
             InputManager = GetComponent<InputManager>();
@@ -39,5 +36,11 @@ public class GameManager : MonoBehaviour
             PointsManager = GetComponent<PointsManager>();
             HitsManager = GetComponent<HitsManager>();
         }
+    }
+
+    private void Start() 
+    {
+        // TEMPORARY - Set gamemode to Classic
+        ActiveGameMode = new ClassicMode();
     }
 }

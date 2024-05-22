@@ -26,6 +26,11 @@ public class TargetManager : MonoBehaviour
         get { return targets.FindAll(target => target.FSM.bIsActive); }
     }
 
+    private void Start()
+    {
+        targets = new List<Target>(GameObject.FindObjectsOfType<Target>());
+    }
+
     public void UpdateTargetParams()
     {
         // Update min and max target speeds
@@ -41,6 +46,8 @@ public class TargetManager : MonoBehaviour
     // Method for spawning a target
     public void SpawnTarget(int targetIndex)
     {
+        Debug.Log("Spawning Target " + targetIndex);
+
         Target target = targets[targetIndex];
         // Get the spawn point randomly and teleport the target to that point
         Vector3 spawnPoint = spawnLocations[Random.Range(0, spawnLocations.Count - 1)];

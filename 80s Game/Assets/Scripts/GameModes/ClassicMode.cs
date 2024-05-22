@@ -25,14 +25,15 @@ public class ClassicMode : AbsGameMode
 
     private void StartNextRound(bool isFirstRound = false)
     {
-        if(!isFirstRound)
+        if (!isFirstRound)
             UpdateRoundParams();
 
         // Iterate through and spawn the next set of targets
         for(int i = 0; i < currentRoundTargetCount; i++)
         {
             int targetIndex = GetNextAvailableBat();
-            if(targetIndex == -1)
+
+            if (targetIndex == -1)
                 continue;
 
             targetManager.SpawnTarget(targetIndex);
