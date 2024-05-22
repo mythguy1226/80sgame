@@ -15,7 +15,7 @@ public abstract class AbsGameMode
     public int speedModifier;
     public bool gameOver = false;
 
-    public abstract void OnTargetStun();
+    public abstract void OnTargetReset();
 
     public abstract int GetNextAvailableBat();
 }

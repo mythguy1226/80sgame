@@ -217,6 +217,6 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
         gameManager.HitsManager.AddHit();
 
         // Update target manager with current state
-        gameManager.TargetManager.OnTargetStun();
+        gameManager.TargetManager.OnTargetReset();
     }
 }

@@ -86,10 +86,12 @@ public class ClassicMode : AbsGameMode
         return -1;
     }
 
-    public override void OnTargetStun()
+    public override void OnTargetReset()
     {
         if(targetManager.totalStuns % 3 == 0)
             numBonusBats++;
+
+        Debug.Log(targetManager.numStuns + ": " + currentRoundTargetCount);
 
         if(targetManager.numStuns >= currentRoundTargetCount)
         {
@@ -101,6 +103,9 @@ public class ClassicMode : AbsGameMode
             // If last round completed
             if(currentRound == numRounds)
                 gameOver = true;
+            // Otherwise start next round
+            else
+                StartNextRound();
 
             return;
         }
@@ -112,13 +117,19 @@ public class ClassicMode : AbsGameMode
     private void SpawnMoreTargets()
     {
         // Check if the player still needs stuns for the round
-        if (currentRoundTargetCount - targetManager.numStuns <= 0)
+        int neededStuns = currentRoundTargetCount - targetManager.numStuns;
+        Debug.Log("Needed Stuns: " + neededStuns);
+        if (neededStuns <= 0)
             return;
 
         // If maximum number of targets isn't on screen
-        if(targetManager.ActiveTargets.Count < maxTargetsOnScreen)
+        if (
+            targetManager.ActiveTargets.Count < maxTargetsOnScreen 
+            && targetManager.ActiveTargets.Count < neededStuns
+        )
         {
             int targetIndex = GetNextAvailableBat();
+
             if (targetIndex >= 0)
                 targetManager.SpawnTarget(targetIndex);
         }

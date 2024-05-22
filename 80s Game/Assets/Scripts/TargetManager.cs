@@ -46,8 +46,6 @@ public class TargetManager : MonoBehaviour
     // Method for spawning a target
     public void SpawnTarget(int targetIndex)
     {
-        Debug.Log("Spawning Target " + targetIndex);
-
         Target target = targets[targetIndex];
         // Get the spawn point randomly and teleport the target to that point
         Vector3 spawnPoint = spawnLocations[Random.Range(0, spawnLocations.Count - 1)];
@@ -74,13 +72,15 @@ public class TargetManager : MonoBehaviour
     }
 
     // Method used for updating values on bat death
-    public void OnTargetStun()
+    public void OnTargetReset()
     {
+        Debug.Log("Target Reset");
+
         // Update number of stuns
         numStuns++;
         totalStuns++;
 
         // Allow game mode to update state based on bat stun
-        GameManager.Instance.ActiveGameMode.OnTargetStun();
+        GameManager.Instance.ActiveGameMode.OnTargetReset();
     }
 }
