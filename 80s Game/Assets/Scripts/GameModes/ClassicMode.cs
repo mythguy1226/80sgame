@@ -8,22 +8,20 @@ using UnityEngine.UIElements;
 
 public class ClassicMode : AbsGameMode
 {
-    public int numRounds = 10;
-    public int currentRound = 1;
-    public int currentRoundTargetCount = 0;
-    public int maxTargetsOnScreen = 8;
-    public int numBonusBats = 0;
-    public TargetManager targetManager;
 
-    public ClassicMode()
+    public ClassicMode() : base()
     {
-        // Target count for first round
+        ModeType = EGameMode.Classic;
+
+        // Initial round parameters
+        NumRounds = 10;
+        maxTargetsOnScreen = 8;
         currentRoundTargetCount = 5;
-        targetManager = GameManager.Instance.TargetManager;
+
         StartNextRound(true);
     }
 
-    private void StartNextRound(bool isFirstRound = false)
+    protected override void StartNextRound(bool isFirstRound = false)
     {
         if (!isFirstRound)
             UpdateRoundParams();
@@ -44,9 +42,9 @@ public class ClassicMode : AbsGameMode
         }
     }
 
-    private void UpdateRoundParams()
+    protected override void UpdateRoundParams()
     {
-        currentRound++;
+        CurrentRound++;
         currentRoundTargetCount += 2;
         maxTargetsOnScreen += 1;
         // Keep max targets on screen to at most two fewer than object pool
@@ -59,7 +57,7 @@ public class ClassicMode : AbsGameMode
         targetManager.UpdateTargetParams();
     }
 
-    public override int GetNextAvailableBat()
+    protected override int GetNextAvailableBat()
     {
         List<Target> bats = targetManager.targets;
 
@@ -101,8 +99,8 @@ public class ClassicMode : AbsGameMode
             );
 
             // If last round completed
-            if(currentRound == numRounds)
-                gameOver = true;
+            if(CurrentRound == NumRounds)
+                GameOver = true;
             // Otherwise start next round
             else
                 StartNextRound();

@@ -8,8 +8,6 @@ public class GameManager : MonoBehaviour
     // Singleton pattern
     public static GameManager Instance { get; private set; }
 
-
-
     public AbsGameMode ActiveGameMode { get; private set; }
     // Public properties
     public InputManager InputManager { get; private set;  }
@@ -42,5 +40,6 @@ public class GameManager : MonoBehaviour
     {
         // TEMPORARY - Set gamemode to Classic
         ActiveGameMode = new ClassicMode();
+        // ActiveGameMode = new CompetativeMode(numRoundsCompetative);
     }
 }

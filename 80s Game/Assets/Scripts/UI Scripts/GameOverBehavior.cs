@@ -18,7 +18,7 @@ public class GameOverBehavior : MonoBehaviour
     void Update()
     {
         //set UI based on if the game is over or not
-        gameOverUI.SetActive(GameManager.Instance.ActiveGameMode.gameOver);
+        gameOverUI.SetActive(GameManager.Instance.ActiveGameMode.GameOver);
         if (gameOverUI.activeInHierarchy)
         {
             Time.timeScale = 0f;
