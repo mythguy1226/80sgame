@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
+using static UnityEngine.GraphicsBuffer;
 
 /* CLASS: BatStateMachine
  * USAGE: State Machine used for managing bat behavior and
@@ -41,6 +42,7 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
     protected InputManager _InputManager;
     PolygonCollider2D _Collider;
 
+
     // Public properties for bat components
     public KinematicSteer MovementControls
     {
@@ -53,10 +55,6 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
     public AnimationHandler AnimControls
     {
         get { return _AnimControls; }
-    }
-    public InputManager InputManager
-    {
-        get { return _InputManager; }
     }
     public PolygonCollider2D Collider
     {
@@ -91,7 +89,7 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
 
     void Start()
     {
-        _InputManager = GameManager.Instance.InputManager;
+        
     }
 
     /// <summary>
@@ -130,28 +128,27 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
     /// <summary>
     /// Checks if bat has been stunned
     /// </summary>
-    public virtual void DetectStun()
+    public virtual void DetectStun(Vector3 pos)
     {
-        // Check time scale so bats cant be harmed while game is paused
-        if (_InputManager.MouseLeftDownThisFrame && Time.timeScale > 0)
+        bool isGameGoing = Time.timeScale > 0;
+        if (!isGameGoing)
         {
-            // Check for player input coords hitting target
-            Vector3 shotPos = _InputManager.MouseWorldPosition;
-            RaycastHit2D hit = Physics2D.Raycast(shotPos, Vector2.zero);
+            return;
+        }
+        
+        RaycastHit2D hit = Physics2D.Raycast(pos, Vector2.zero);
+        // Check if something was hit
+        if (!hit)
+        {
+            //SoundManager.Instance.PlaySoundContinuous(missSound);
+            return;
+        }
 
-            // Check if something was hit
-            if (!hit)
-            {
-                //SoundManager.Instance.PlaySoundContinuous(missSound);
-                return;
-            }
-
-            // Check that hit has detected this particular object
-            if (hit.collider.gameObject == gameObject)
-            {
-                _AnimControls.PlayStunAnimation();
-                SoundManager.Instance.PlaySoundInterrupt(hitSound, 0.7f);
-            }
+        // Check that hit has detected this particular object
+        if (hit.collider.gameObject == gameObject)
+        {
+            _AnimControls.PlayStunAnimation();
+            SoundManager.Instance.PlaySoundInterrupt(hitSound, 0.7f);
         }
     }
 
@@ -169,6 +166,7 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
         TransitionToState(BatStates.Death);
         _AnimControls.PlayDropAnimation();
         _Collider.isTrigger = true;
+        
     }
 
     /// <summary>
@@ -218,5 +216,19 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
 
         // Update target manager with current state
         gameManager.TargetManager.OnTargetReset();
+        InputManager.detectHitSub -= ListenForShot;
+    }
+
+    public void ListenForShot(Vector3 position)
+    {
+        DetectStun(position);
+    }
+
+    public void Spawn()
+    {
+        bIsActive = true;
+        InputManager.detectHitSub += ListenForShot;
+        TransitionToState(BatStates.Moving);
+        SetFleeTimer();
     }
 }

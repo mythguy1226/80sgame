@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.EventSystems;
+using Unity.VisualScripting;
 
 public class GameOverBehavior : MonoBehaviour
 {
@@ -11,9 +13,13 @@ public class GameOverBehavior : MonoBehaviour
     public GameObject gameUI;
     public GameObject summaryScreen;
     public GameObject highScoreLeaderboard;
+    public GameObject continueButton;
+    public GameObject restartButton;
     public TMP_Text leaderboardText;
     public AudioClip buttonClickSound;
 
+    private bool gameOverTransition = true;
+    
     // Update is called once per frame
     void Update()
     {
@@ -21,6 +27,16 @@ public class GameOverBehavior : MonoBehaviour
         gameOverUI.SetActive(GameManager.Instance.ActiveGameMode.GameOver);
         if (gameOverUI.activeInHierarchy)
         {
+            if (gameOverTransition)
+            {
+                EventSystem.current.SetSelectedGameObject(null);
+                EventSystem.current.SetSelectedGameObject(continueButton);
+
+                this.gameObject.GetComponent<PauseScreenBehavior>().ToggleCrosshairs(false);
+                Cursor.visible = true;
+
+                gameOverTransition = false;
+            }
             Time.timeScale = 0f;
             gameUI.SetActive(false);
         }
@@ -43,6 +59,10 @@ public class GameOverBehavior : MonoBehaviour
 
         summaryScreen.SetActive(false);
         highScoreLeaderboard.SetActive(true);
+
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(restartButton);
+
         SoundManager.Instance.PlaySoundInterrupt(buttonClickSound);
     }
 

@@ -64,11 +64,10 @@ public class TargetManager : MonoBehaviour
         target.gameObject.transform.localScale = new Vector3(newScale, newScale, newScale);
 
         // Update on-screen status
-        target.FSM.bIsActive = true;
-        target.FSM.TransitionToState(BatStateMachine.BatStates.Moving);
+        target.FSM.Spawn();
         target.GetComponent<AnimationHandler>().ResetAnimation();
         target.GetComponent<PolygonCollider2D>().isTrigger = false;
-        target.FSM.SetFleeTimer();
+        
     }
 
     // Method used for updating values on bat death

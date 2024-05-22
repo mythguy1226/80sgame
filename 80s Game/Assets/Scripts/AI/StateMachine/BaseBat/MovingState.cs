@@ -60,8 +60,6 @@ public class MovingState : AbsBaseState<BatStateMachine.BatStates>
         // Update flee timer
         FSM.fleeTimer -= Time.deltaTime;
 
-        // Check for stun
-        FSM.DetectStun();
     }
 
     /*

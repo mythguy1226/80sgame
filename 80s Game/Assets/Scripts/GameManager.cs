@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Scripting;
 
 public class GameManager : MonoBehaviour
 {
     // Singleton pattern
     public static GameManager Instance { get; private set; }
+    public PlayerController playerPrefab;
 
     public AbsGameMode ActiveGameMode { get; private set; }
     // Public properties
@@ -15,8 +15,11 @@ public class GameManager : MonoBehaviour
     public PointsManager PointsManager { get; private set; }
     public HitsManager HitsManager { get; private set; }
 
+    public UIManager UIManager { get; private set; }
+
     private void Awake()
     {
+
         // Check if the static reference matches the script instance
         if(Instance != null && Instance != this)
         {
@@ -27,18 +30,21 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
 
-
             // Initialize managers
             InputManager = GetComponent<InputManager>();
             TargetManager = GetComponent<TargetManager>();
             PointsManager = GetComponent<PointsManager>();
             HitsManager = GetComponent<HitsManager>();
+            UIManager = GetComponent<UIManager>();
+
+            if (PlayerData.activePlayers.Count == 0) {
+                Instantiate(playerPrefab, transform.position, Quaternion.identity);
+            }
         }
     }
 
     private void Start() 
     {
-        // TEMPORARY - Set gamemode to Classic
         ActiveGameMode = new ClassicMode();
         // ActiveGameMode = new CompetativeMode(numRoundsCompetative);
     }

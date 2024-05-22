@@ -47,8 +47,6 @@ public class FleeingState : AbsBaseState<BatStateMachine.BatStates>
 
         _MovementControls.isFleeing = true;
 
-        // Check for stun
-        FSM.DetectStun();
 
         // Check if destination is reached
         if (_MovementControls.IsAtDestination())

@@ -1,29 +1,12 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
-    // Public properties
-    public bool MouseLeftDown
-    {
-        get;
-        private set;
-    }
 
-    public bool MouseLeftDownThisFrame
-    {
-        get;
-        private set;
-    }
-
-    public Vector3 MouseWorldPosition
-    {
-        get;
-        private set;
-    }
-    public AudioClip shootSound;
+    public static event Action<Vector3> detectHitSub;
 
     // Joycon fields
     public List<Joycon> joycons;
@@ -36,30 +19,21 @@ public class InputManager : MonoBehaviour
 
     public PauseScreenBehavior pauseScript;
 
+    public float sensitivity = 5.0f;
+
     void Start()
     {
         joycons = JoyconManager.Instance.j;
         gyro = new Vector3(0, 0, 0);
         RecenterCursor();
         ResetRumble();
-
-        crosshairScript = GameObject.Find("Crosshair").GetComponent<CrosshairBehavior>();
     }
 
     // Update is called once per frame
     public void Update()
     {
-        // The "new" Unity Input System's mouse state getter
-        Mouse mouse = Mouse.current;
 
-        MouseLeftDown = mouse.leftButton.isPressed;
-        MouseLeftDownThisFrame = mouse.leftButton.wasPressedThisFrame;
-
-        // Mouse.position is an object, needs ReadValue() call to get value
-        Vector3 screenSpaceLocation = mouse.position.ReadValue();
-        // Convert the mouse's screen position to its equivalent position in the scene
-        MouseWorldPosition = Camera.main.ScreenToWorldPoint(screenSpaceLocation);
-
+        // This needs to be ported out - Ed
         // make sure the Joycon only gets checked if attached
         if (joycons.Count > 0)
         {
@@ -69,7 +43,7 @@ public class InputManager : MonoBehaviour
             gyro = j.GetGyro();
 
             // Update cursor position based on gyroscope values
-            joyconCursorPos += new Vector3(gyro.z * 5.0f, gyro.y * 5.0f, 0.0f) ;
+            joyconCursorPos += new Vector3(gyro.z * sensitivity, gyro.y * sensitivity, 0.0f) ;
             // Clamp the cursor to the screen extents
             joyconCursorPos.x = Mathf.Clamp(joyconCursorPos.x, 0, Screen.width);
             joyconCursorPos.y = Mathf.Clamp(joyconCursorPos.y, 0, Screen.height);
@@ -79,7 +53,8 @@ public class InputManager : MonoBehaviour
             crosshairScript.MoveCrosshair(joyconCursorPos);
 
             // Get right trigger input
-            MouseLeftDownThisFrame = j.GetButtonDown(Joycon.Button.SHOULDER_2);
+            //MouseLeftDownThisFrame = j.GetButtonDown(Joycon.Button.SHOULDER_2);
+            
             //shoulderPressed = true;
             if (j.GetButtonDown(Joycon.Button.DPAD_DOWN))
             {
@@ -93,15 +68,7 @@ public class InputManager : MonoBehaviour
             //shoulderPressed = j.GetButtonUp(Joycon.Button.SHOULDER_2);
         }
 
-        else
-        {
-            crosshairScript.MoveCrosshair(Input.mousePosition);
-        }
-
-        if (MouseLeftDownThisFrame && !pauseScript.isPaused && Time.timeScale > 0)
-        {
-            SoundManager.Instance.PlaySoundContinuous(shootSound, 0.5f);
-        }
+        
     }
 
     public void RecenterCursor()
@@ -115,5 +82,10 @@ public class InputManager : MonoBehaviour
         {
             joycons[jc_ind].SetRumble(0, 0, 0);
         }
+    }
+
+    public static void PlayerShot(Vector3 position)
+    {
+        detectHitSub?.Invoke(position);
     }
 }

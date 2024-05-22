@@ -1,16 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PauseScreenBehavior : MonoBehaviour
 {
     public bool isPaused;
     public GameObject pauseScreen;
+    public GameObject continueButton;
     public GameObject gameUIElements;
     public GameObject onboardingPanel;
     public GameObject onboardingCloseButton;
     public AudioClip buttonClickSound;
+
+    public Crosshair[] crosshairs;
+
+    void Start()
+    {
+        crosshairs = FindObjectsOfType(typeof(Crosshair)) as Crosshair[];
+    }
 
     // Update is called once per frame
     void Update()
@@ -37,6 +47,10 @@ public class PauseScreenBehavior : MonoBehaviour
         {
             //GameManager.Instance.InputManager.ResetRumble();
             isPaused = !isPaused;
+
+            ToggleCrosshairs(!isPaused);
+            Cursor.visible = isPaused;
+
             if (isPaused == true)
             {
                 //Sets time scale to 0 so game pauses
@@ -44,9 +58,10 @@ public class PauseScreenBehavior : MonoBehaviour
 
                 //Enable pause screen and onboarding info (except the button to close onboarding)
                 pauseScreen.SetActive(true);
-                onboardingPanel.SetActive(true);
-                onboardingCloseButton.SetActive(false);
                 gameUIElements.SetActive(false);
+
+                EventSystem.current.SetSelectedGameObject(null);
+                EventSystem.current.SetSelectedGameObject(continueButton);
 
                 SoundManager.Instance.PlaySoundContinuous(buttonClickSound);
             }
@@ -57,8 +72,13 @@ public class PauseScreenBehavior : MonoBehaviour
                 Time.timeScale = 1f;
 
                 pauseScreen.SetActive(false);
-                onboardingPanel.SetActive(false);
+                //onboardingPanel.SetActive(false);
                 gameUIElements.SetActive(true);
+
+                foreach(Crosshair c in crosshairs)
+                {
+                    c.gameObject.SetActive(true);
+                }
 
                 SoundManager.Instance.PlaySoundContinuous(buttonClickSound);
             }
@@ -72,5 +92,13 @@ public class PauseScreenBehavior : MonoBehaviour
         SceneManager.LoadScene(0);
 
         SoundManager.Instance.PlaySoundContinuous(buttonClickSound);
+    }
+
+    public void ToggleCrosshairs(bool toggle)
+    {
+        foreach(Crosshair c in crosshairs)
+        {
+            c.gameObject.SetActive(toggle);
+        }
     }
 }
