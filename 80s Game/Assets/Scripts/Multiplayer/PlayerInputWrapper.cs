@@ -17,12 +17,12 @@ public class PlayerInputWrapper : MonoBehaviour
     {
         player = GetComponent<PlayerController>();
         playerInput = GetComponent<PlayerInput>();
-        if (playerInput.currentControlScheme == "PS4")
-        {
-            controllerInput = true;
-        } else
+        if (playerInput.currentControlScheme == "KnM")
         {
             controllerInput = false;
+        } else
+        {
+            controllerInput = true;
         }
 
         controllerSensitivity = new Vector2(PlayerPrefs.GetFloat("GamepadXSensitivity"),PlayerPrefs.GetFloat("GamepadYSensitivity"));
@@ -39,7 +39,7 @@ public class PlayerInputWrapper : MonoBehaviour
         } else
         {
             sensitivity = mouseSensitivity;
-        }
+        } 
     }
 
     //Handle inputs received from the Unity input system
