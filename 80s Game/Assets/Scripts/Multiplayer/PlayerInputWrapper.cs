@@ -11,11 +11,29 @@ public class PlayerInputWrapper : MonoBehaviour
     private PlayerController player;
     private PlayerInput playerInput;
 
+    bool controllerInput;
+
     private void Awake()
     {
         player = GetComponent<PlayerController>();
         playerInput = GetComponent<PlayerInput>();
         if (playerInput.currentControlScheme == "PS4")
+        {
+            controllerInput = true;
+        } else
+        {
+            controllerInput = false;
+        }
+
+        controllerSensitivity = new Vector2(PlayerPrefs.GetFloat("GamepadXSensitivity"),PlayerPrefs.GetFloat("GamepadYSensitivity"));
+        mouseSensitivity = new Vector2(PlayerPrefs.GetFloat("MouseXSensitivity"),PlayerPrefs.GetFloat("MouseYSensitivity"));
+
+        SetSensitivity(controllerInput);
+    }
+
+    public void SetSensitivity(bool controllerInput)
+    {
+        if (controllerInput)
         {
             sensitivity = controllerSensitivity;
         } else

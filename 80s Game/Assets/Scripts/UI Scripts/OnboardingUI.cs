@@ -47,6 +47,8 @@ public class OnboardingUI : MonoBehaviour
         onboardingPanel.SetActive(false);
         gameUIElements.SetActive(true);
 
+        PauseScreenBehavior.Instance.ToggleCrosshairs(true);
+
         Time.timeScale = 1.0f;
     }
 }

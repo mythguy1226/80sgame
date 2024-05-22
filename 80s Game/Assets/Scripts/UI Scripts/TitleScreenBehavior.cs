@@ -36,6 +36,7 @@ public class TitleScreenBehavior : MonoBehaviour
     public void StartGame()
     {
         SoundManager.Instance.PlaySoundContinuous(buttonClickSound);
+        PlayerData.Reset();
         SceneManager.LoadScene(1);
     }
 
