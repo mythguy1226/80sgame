@@ -22,17 +22,22 @@ public abstract class AbsModifierEffect : MonoBehaviour
     public virtual void DetectHit(Vector3 pos)
     {
         bool isGameGoing = Time.timeScale > 0;
-        if (!isGameGoing || gameObject == null)
+        if (!isGameGoing)
         {
             return;
         }
 
         RaycastHit2D hit = Physics2D.Raycast(pos, Vector2.zero);
 
+        // Null check
+        if (!hit)
+            return;
+
         // Check that hit has detected this particular object
         if (hit.collider.gameObject == gameObject)
         {
             ActivateEffect();
+            InputManager.detectHitSub -= ListenForShot;
             Destroy(gameObject);
         }
     }

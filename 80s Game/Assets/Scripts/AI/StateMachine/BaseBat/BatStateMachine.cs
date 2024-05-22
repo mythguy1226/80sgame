@@ -176,7 +176,7 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
     /// <summary>
     /// Resets the bat
     /// </summary>
-    public void Reset()
+    public virtual void Reset()
     {
         // The particle systems drag across the screen when repositioning bats
         // Stopping it when resetting prevents that
