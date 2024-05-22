@@ -34,6 +34,11 @@ public class Crosshair : MonoBehaviour
         return screenPos;
     }
 
+    public void Center()
+    {
+        transform.position = Vector3.zero;
+    }
+
     private Vector3 Clamp(Vector3 position)
     {
         Vector3 adjustedPosition = position;

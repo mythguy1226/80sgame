@@ -2,6 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public struct ShotInformation
+{
+    public Vector3 location;
+    public int playerInt;
+    public ShotInformation(Vector3 l, int p)
+    {
+        location = l;
+        playerInt = p;
+    }
+}
+
 public class HitsManager : MonoBehaviour
 {
     // Public properties
@@ -39,7 +50,7 @@ public class HitsManager : MonoBehaviour
     /// Adds a shot and returns the new number of shots
     /// </summary>
     /// <returns></returns>
-    public void AddShot(Vector3 position)
+    public void AddShot(ShotInformation s)
     {
         bool isGameOngoing = Time.timeScale > 0;
         if (!isGameOngoing)
@@ -47,9 +58,9 @@ public class HitsManager : MonoBehaviour
             return;
         }
 
-        if (GameManager.Instance.InputManager.joycons.Count > 0)
+        if (JoyconManager.Instance.j.Count > 0)
         {
-            Joycon j = GameManager.Instance.InputManager.joycons[GameManager.Instance.InputManager.jc_ind];
+            Joycon j = JoyconManager.Instance.j[s.playerInt - 1];
             j.SetRumble(160, 320, 0.6f, 200);
         }
 
