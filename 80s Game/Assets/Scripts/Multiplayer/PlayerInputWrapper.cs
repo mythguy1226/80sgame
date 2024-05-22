@@ -60,12 +60,12 @@ public class PlayerInputWrapper : MonoBehaviour
 
     private void OnRecenter(InputValue value)
     {
-
+        player.RecenterCursor();
     }
 
     private void OnRecenter()
     {
-
+        player.RecenterCursor();
     }
 
     private void OnPause(InputValue value)

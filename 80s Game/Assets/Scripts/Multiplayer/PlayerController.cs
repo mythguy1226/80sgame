@@ -45,4 +45,9 @@ public class PlayerController : MonoBehaviour
         ShotInformation s = new(activeCrosshair.transform.position, Order);
         InputManager.PlayerShot(s);
     }
+
+    public void RecenterCursor()
+    {
+        activeCrosshair.Center();
+    }
 }
