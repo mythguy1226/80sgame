@@ -29,16 +29,8 @@ public class OnboardingUI : MonoBehaviour
     void Update()
     {
         //Set the text appropriately depending on if the player is using mouse or joycon input
-        if (GameManager.Instance.InputManager.joycons.Count > 0)
-        {
-            onboardingText.SetText(joyconInputText);
-            pauseControls.SetText(joyconPauseControls);
-        }
-        else
-        {
-            onboardingText.SetText(mouseInputText);
-            pauseControls.SetText(mousePauseControls);
-        }
+        onboardingText.SetText(mouseInputText);
+        pauseControls.SetText(mousePauseControls);
     }
 
     //Close the panel, active game UI elements, and unpause the game
