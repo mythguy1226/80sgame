@@ -39,6 +39,11 @@ public class PauseScreenBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (onboardingPanel == null)
+        {
+            return;
+        }
+        
         //Pause game if escape key is pressed
         if (Input.GetKeyDown("escape") && (!onboardingPanel.activeInHierarchy || pauseScreen.activeInHierarchy) && !GameManager.Instance.TargetManager.gameOver)
         {
@@ -63,7 +68,6 @@ public class PauseScreenBehavior : MonoBehaviour
             isPaused = !isPaused;
 
             ToggleCrosshairs(!isPaused);
-            Cursor.visible = isPaused;
 
             if (isPaused == true)
             {
@@ -120,11 +124,13 @@ public class PauseScreenBehavior : MonoBehaviour
         if (toggle == false)
         {
             Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
         }
 
         else
         {
             Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Confined;
         }
     }
 }
