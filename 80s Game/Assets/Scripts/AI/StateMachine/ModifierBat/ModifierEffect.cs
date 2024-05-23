@@ -46,8 +46,8 @@ public abstract class AbsModifierEffect : MonoBehaviour
     /// Listener event for detecting hits from input manager
     /// </summary>
     /// <param name="position">Position where player last fired</param>
-    public void ListenForShot(Vector3 position)
+    public void ListenForShot(ShotInformation s)
     {
-        DetectHit(position);
+        DetectHit(s.location);
     }
 }
