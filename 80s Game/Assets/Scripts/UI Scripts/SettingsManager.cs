@@ -13,7 +13,7 @@ public class SettingsManager : MonoBehaviour
     public static SettingsManager Instance { get; private set; }
 
     //References to scripts that the settings will affect
-    public PlayerConfig playerConfig;
+    public int playerIndex;
     public CRTEffect crtEffect;
 
     //References to UI Elements
@@ -61,11 +61,17 @@ public class SettingsManager : MonoBehaviour
     public void ChangeSensitivity()
     {
         sensitivityValue = sensitivitySlider.value / 4;
-        playerConfig.sensitivity = new Vector2(sensitivityValue, sensitivityValue);
+        PlayerConfig config = new PlayerConfig();
+
+        config.sensitivity = new Vector2(sensitivityValue, sensitivityValue);
+        config.crossHairColor = PlayerData.activePlayers[playerIndex].crossHairColor;
+        config.playerIndex = playerIndex;
+
+        PlayerData.activePlayers[playerIndex] = config;
 
         float sensitivityLabel = sensitivitySlider.value / 4;
         settingsLabels[1].text = sensitivityLabel.ToString("F2");
-        Debug.Log(playerConfig.sensitivity);
+        Debug.Log(config.sensitivity);
     }
 
     public void ToggleCRTEffect()
@@ -110,6 +116,8 @@ public class SettingsManager : MonoBehaviour
         PlayerPrefs.SetInt("CRTOn", System.Convert.ToInt32(crtToggle.isOn));
         PlayerPrefs.SetFloat("CRTCurvature", crtCurvature.value);
 
+        //playerInputWrapper.SetSensitivity(playerInputWrapper.controllerInput);
+
         ToggleSettingsPanel();
     }
 
@@ -134,8 +142,7 @@ public class SettingsManager : MonoBehaviour
 
     public void GetPlayerReference(int playerNumber = 1)
     {
-        //Get Reference to PlayerInputWrapper
-        playerConfig = PlayerData.activePlayers[playerNumber - 1];
+        playerIndex = playerNumber - 1;
     }
 
     private void LoadSettings()
