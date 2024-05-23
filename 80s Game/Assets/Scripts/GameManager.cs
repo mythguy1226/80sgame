@@ -17,6 +17,9 @@ public class GameManager : MonoBehaviour
     public HitsManager HitsManager { get; private set; }
 
     public UIManager UIManager { get; private set; }
+    
+    [Tooltip("Debug to spawn a Player Controller for testing without having to go through the join screen")]
+    public bool debug;
 
     private void Awake()
     {
@@ -38,7 +41,7 @@ public class GameManager : MonoBehaviour
             HitsManager = GetComponent<HitsManager>();
             UIManager = GetComponent<UIManager>();
 
-            if (PlayerData.activePlayers.Count == 0) {
+            if (PlayerData.activePlayers.Count == 0 && debug) {
                 PlayerConfig defaultConfig = new PlayerConfig(0, PlayerData.defaultColors[0], Vector2.one);
                 PlayerData.activePlayers.Add(defaultConfig);
                 PlayerController pc = Instantiate(playerPrefab, transform.position, Quaternion.identity);

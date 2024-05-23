@@ -60,4 +60,9 @@ public class PlayerController : MonoBehaviour
     {
         activeCrosshair.Center();
     }
+
+    public void EmitPause()
+    {
+        UIManager.PlayerPause();
+    }
 }

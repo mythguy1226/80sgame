@@ -70,7 +70,7 @@ public class PlayerInputWrapper : MonoBehaviour
 
     private void OnPause(InputValue value)
     {
-
+        player.EmitPause();
     }
 
     private void OnPause()
