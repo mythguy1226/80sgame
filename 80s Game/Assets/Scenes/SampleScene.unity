@@ -5253,7 +5253,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPaused: 0
   pauseScreen: {fileID: 1270203347}
-  continueButton: {fileID: 0}
+  continueButton: {fileID: 1915489863}
   gameUIElements: {fileID: 1759806105}
   onboardingPanel: {fileID: 1681867054}
   onboardingCloseButton: {fileID: 296506228}
@@ -5323,6 +5323,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9aeb6fb7eee4fa54ca36a231ee22d140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerIndex: 0
   crtEffect: {fileID: 519420033}
   volumeSlider: {fileID: 1820304739}
   sensitivitySlider: {fileID: 1820304752}
