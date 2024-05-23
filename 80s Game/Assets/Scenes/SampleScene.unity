@@ -4758,7 +4758,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -4.3200073, y: -438}
+  m_AnchoredPosition: {x: -4.3199463, y: -438}
   m_SizeDelta: {x: -1657.6511, y: -1009.116}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &537532384
@@ -6927,7 +6927,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPaused: 0
   pauseScreen: {fileID: 1270203347}
-  continueButton: {fileID: 1915489863}
+  continueButton: {fileID: 0}
   gameUIElements: {fileID: 1759806105}
   onboardingPanel: {fileID: 1681867054}
   onboardingCloseButton: {fileID: 296506228}
@@ -6965,8 +6965,8 @@ MonoBehaviour:
   gameUI: {fileID: 1759806105}
   summaryScreen: {fileID: 1865122240}
   highScoreLeaderboard: {fileID: 1619173211}
-  continueButton: {fileID: 158337862}
-  restartButton: {fileID: 393536519}
+  continueButton: {fileID: 0}
+  restartButton: {fileID: 0}
   leaderboardText: {fileID: 692398610}
   buttonClickSound: {fileID: 8300000, guid: 0f33d998cd03b1f4ebc4983ef2a6d559, type: 3}
 --- !u!114 &1011990666
@@ -7501,6 +7501,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34ba97b6fe2a76f488e5a4fcd478c3fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targets: []
   spawnLocations:
   - {x: 11.95, y: 3.18, z: 0}
   - {x: 11.95, y: -2.98, z: 0}
@@ -7510,12 +7511,8 @@ MonoBehaviour:
   - {x: 6.78, y: -5.94, z: 0}
   - {x: -6.48, y: 6.19, z: 0}
   - {x: 7.43, y: 6.81, z: 0}
-  firstRoundTargetCount: 5
-  currentRound: 1
-  currentRoundSize: 0
   numStuns: 0
-  gameOver: 0
-  numRounds: 7
+  totalStuns: 0
 --- !u!114 &1095139973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10129,7 +10126,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1.1889038, y: 0}
+  m_AnchoredPosition: {x: 1.1888428, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1576120996
@@ -13619,7 +13616,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -4.3200073, y: -330}
+  m_AnchoredPosition: {x: -4.3199463, y: -330}
   m_SizeDelta: {x: -1471.5566, y: -1002.0492}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2092589305
