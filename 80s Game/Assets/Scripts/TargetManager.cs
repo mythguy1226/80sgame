@@ -82,4 +82,32 @@ public class TargetManager : MonoBehaviour
         // Allow game mode to update state based on bat stun
         GameManager.Instance.ActiveGameMode.OnTargetReset();
     }
+
+    /// <summary>
+    /// Templated method that finds the next target
+    /// containing the templated class type
+    /// </summary>
+    /// <typeparam name="T">Templated class type</typeparam>
+    /// <returns>Index of available bat</returns>
+    public int GetNextAvailableTargetOfType<T>()
+    {
+        // Iterate through the targets until you
+        // find one that isn't already on screen
+        for (int i = 0; i < targets.Count; i++)
+        {
+            // Keep iterating if already active
+            if (targets[i].FSM.bIsActive)
+                continue;
+
+            // Keep iterating if target lacks component of templated class type
+            T comp = targets[i].GetComponent<T>();
+            if (comp == null)
+                continue;
+
+            // Return index of bat
+            return i;
+        }
+
+        return -1;
+    }
 }
