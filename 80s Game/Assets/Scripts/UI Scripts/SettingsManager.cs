@@ -118,14 +118,7 @@ public class SettingsManager : MonoBehaviour
     public void ToggleSettingsPanel()
     {
         settingsPanel.SetActive(!settingsPanel.activeInHierarchy);
-
-        cancelPanel.transform.GetChild(0).transform.localScale = Vector3.zero;
         cancelPanel.SetActive(false);
-        Animator animator = cancelPanel.transform.GetChild(0).GetComponent<Animator>();
-        if (animator != null)
-        {
-            animator.SetBool("show", false);
-        }
         
         LoadSettings();
 
@@ -160,18 +153,9 @@ public class SettingsManager : MonoBehaviour
 
     public void CancelSettings()
     {
-        bool isOpen = false;
-
         if (settingsPanel.activeInHierarchy)
         {
-            cancelPanel.transform.GetChild(0).transform.localScale = Vector3.zero;
             cancelPanel.SetActive(!cancelPanel.activeInHierarchy);
-            Animator animator = cancelPanel.transform.GetChild(0).GetComponent<Animator>();
-            if (animator != null)
-            {
-                isOpen = animator.GetBool("show");
-                animator.SetBool("show", !isOpen);
-            }
 
             if (cancelPanel.activeInHierarchy)
             {
