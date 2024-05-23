@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class PauseScreenBehavior : MonoBehaviour
 {
@@ -18,6 +17,16 @@ public class PauseScreenBehavior : MonoBehaviour
     public AudioClip buttonClickSound;
 
     public Crosshair[] crosshairs;
+
+    private void Awake()
+    {
+        UIManager.pauseEvent += PauseGame;
+    }
+
+    private void OnDisable()
+    {
+        UIManager.pauseEvent -= PauseGame;
+    }
 
     void Start()
     {
@@ -45,7 +54,7 @@ public class PauseScreenBehavior : MonoBehaviour
         }
         
         //Pause game if escape key is pressed
-        if (Input.GetKeyDown("escape") && (!onboardingPanel.activeInHierarchy || pauseScreen.activeInHierarchy) && !GameManager.Instance.TargetManager.gameOver)
+        if (Input.GetKeyDown("escape") && (!onboardingPanel.activeInHierarchy || pauseScreen.activeInHierarchy) && !GameManager.Instance.ActiveGameMode.GameOver)
         {
             PauseGame();
         }

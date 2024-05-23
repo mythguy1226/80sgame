@@ -13,15 +13,12 @@ public class SettingsManager : MonoBehaviour
     public static SettingsManager Instance { get; private set; }
 
     //References to scripts that the settings will affect
-    public PlayerInputWrapper playerInputWrapper;
+    public PlayerConfig playerConfig;
     public CRTEffect crtEffect;
 
     //References to UI Elements
     public Slider volumeSlider;
-    public Slider mouseXSlider;
-    public Slider mouseYSlider;
-    public Slider gamepadXSlider;
-    public Slider gamepadYSlider;
+    public Slider sensitivitySlider;
     public Toggle crtToggle;
     public Slider crtCurvature;
     public Button saveAndQuit;
@@ -32,10 +29,7 @@ public class SettingsManager : MonoBehaviour
     public GameObject settingsButton;
     public List<TextMeshProUGUI> settingsLabels;
 
-    float mouseSensitivityX;
-    float mouseSensitivityY;
-    float gamepadSensitivityX;
-    float gamepadSensitivityY;
+    float sensitivityValue;
 
     // Start is called before the first frame update
     void Start()
@@ -51,8 +45,6 @@ public class SettingsManager : MonoBehaviour
         {
             Instance = this;
         }
-
-        GetPlayerReference();
         this.GetComponent<PauseScreenBehavior>().ToggleCrosshairs(false);
 
         LoadSettings();
@@ -66,40 +58,14 @@ public class SettingsManager : MonoBehaviour
         settingsLabels[0].text = volumeLabel.ToString();
     }
 
-    public void ChangeMouseSensitivityX()
+    public void ChangeSensitivity()
     {
-        mouseSensitivityX = mouseXSlider.value / 400;
-        playerInputWrapper.mouseSensitivity.x = mouseSensitivityX;
+        sensitivityValue = sensitivitySlider.value / 4;
+        playerConfig.sensitivity = new Vector2(sensitivityValue, sensitivityValue);
 
-        float sensitivityLabel = mouseXSlider.value / 4;
+        float sensitivityLabel = sensitivitySlider.value / 4;
         settingsLabels[1].text = sensitivityLabel.ToString("F2");
-    }
-
-    public void ChangeMouseSensitivityY()
-    {
-        mouseSensitivityY = mouseYSlider.value / 400;
-        playerInputWrapper.mouseSensitivity.y = mouseSensitivityY;        
-
-        float sensitivityLabel = mouseYSlider.value / 4;
-        settingsLabels[2].text = sensitivityLabel.ToString("F2");
-    }
-
-    public void ChangeGamepadSensitivityX()
-    {
-        gamepadSensitivityX = gamepadXSlider.value / 40;
-        playerInputWrapper.controllerSensitivity.x = gamepadSensitivityX;
-
-        float sensitivityLabel = gamepadXSlider.value / 4;
-        settingsLabels[3].text = sensitivityLabel.ToString("F2");
-    }
-
-    public void ChangeGamepadSensitivityY()
-    {
-        gamepadSensitivityY = gamepadYSlider.value / 40;
-        playerInputWrapper.controllerSensitivity.y = gamepadSensitivityY;
-
-        float sensitivityLabel = gamepadYSlider.value / 4;
-        settingsLabels[4].text = sensitivityLabel.ToString("F2");
+        Debug.Log(playerConfig.sensitivity);
     }
 
     public void ToggleCRTEffect()
@@ -111,7 +77,7 @@ public class SettingsManager : MonoBehaviour
     {
         crtEffect.Curvature = crtCurvature.value;
         float crtCurvatureLabel = Mathf.RoundToInt(crtCurvature.value * 500);
-        settingsLabels[5].text = crtCurvatureLabel.ToString();
+        settingsLabels[2].text = crtCurvatureLabel.ToString();
     }
 
     //Toggle the menu on and off
@@ -120,6 +86,7 @@ public class SettingsManager : MonoBehaviour
         settingsPanel.SetActive(!settingsPanel.activeInHierarchy);
         cancelPanel.SetActive(false);
         
+        GetPlayerReference();
         LoadSettings();
 
         if (settingsPanel.activeInHierarchy)
@@ -139,14 +106,9 @@ public class SettingsManager : MonoBehaviour
     public void ApplySettings()
     {
         PlayerPrefs.SetFloat("Volume", volumeSlider.value);
-        PlayerPrefs.SetFloat("MouseXSensitivity", mouseSensitivityX);
-        PlayerPrefs.SetFloat("MouseYSensitivity", mouseSensitivityY);
-        PlayerPrefs.SetFloat("GamepadXSensitivity", gamepadSensitivityX);
-        PlayerPrefs.SetFloat("GamepadYSensitivity", gamepadSensitivityY);
+        PlayerPrefs.SetFloat("Sensitivity", sensitivityValue);
         PlayerPrefs.SetInt("CRTOn", System.Convert.ToInt32(crtToggle.isOn));
         PlayerPrefs.SetFloat("CRTCurvature", crtCurvature.value);
-
-        playerInputWrapper.SetSensitivity(playerInputWrapper.controllerInput);
 
         ToggleSettingsPanel();
     }
@@ -173,7 +135,7 @@ public class SettingsManager : MonoBehaviour
     public void GetPlayerReference(int playerNumber = 1)
     {
         //Get Reference to PlayerInputWrapper
-        playerInputWrapper = PlayerData.activePlayers[playerNumber - 1].GetComponent<PlayerInputWrapper>();
+        playerConfig = PlayerData.activePlayers[playerNumber - 1];
     }
 
     private void LoadSettings()
@@ -182,20 +144,14 @@ public class SettingsManager : MonoBehaviour
         float volume = PlayerPrefs.GetFloat("Volume");
         int crtOn = PlayerPrefs.GetInt("CRTOn");
         float curvature = PlayerPrefs.GetFloat("CRTCurvature");
-        float mouseX = PlayerPrefs.GetFloat("MouseXSensitivity");
-        float mouseY = PlayerPrefs.GetFloat("MouseYSensitivity");
-        float gamepadX = PlayerPrefs.GetFloat("GamepadXSensitivity");
-        float gamepadY = PlayerPrefs.GetFloat("GamepadYSensitivity");
+        float sensitivity = PlayerPrefs.GetFloat("Sensitivity");
 
         //Set Volume settings
         SoundManager.Instance.volume = volume;
         volumeSlider.value = volume;
 
         //Set Sensitivity sliders
-        mouseXSlider.value = mouseX * 400;
-        mouseYSlider.value = mouseY * 400;
-        gamepadXSlider.value = gamepadX * 40;
-        gamepadYSlider.value = gamepadY * 40;
+        sensitivitySlider.value = sensitivity * 4;
 
         //Set CRT effect based on settings
         if (crtOn == 1)

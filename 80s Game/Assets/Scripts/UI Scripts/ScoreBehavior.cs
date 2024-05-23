@@ -39,8 +39,8 @@ public class ScoreBehavior : MonoBehaviour
     {
         //Get the score from the PointsManager
         int score = GameManager.Instance.PointsManager.Points;
-        int currentRoundNum = GameManager.Instance.TargetManager.currentRound;
-        int maxNumOfRounds = GameManager.Instance.TargetManager.numRounds;
+        int currentRoundNum = GameManager.Instance.ActiveGameMode.CurrentRound;
+        int maxNumOfRounds = GameManager.Instance.ActiveGameMode.NumRounds;
 
         //Update Score and Final Score text boxes
         scoreTextObject.SetText(scoreText + score);

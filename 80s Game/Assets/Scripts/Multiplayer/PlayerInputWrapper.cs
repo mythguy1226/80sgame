@@ -30,9 +30,6 @@ public class PlayerInputWrapper : MonoBehaviour
             controllerInput = true;
         }
 
-        controllerSensitivity = new Vector2(PlayerPrefs.GetFloat("GamepadXSensitivity"),PlayerPrefs.GetFloat("GamepadYSensitivity"));
-        mouseSensitivity = new Vector2(PlayerPrefs.GetFloat("MouseXSensitivity"),PlayerPrefs.GetFloat("MouseYSensitivity"));
-
         SetSensitivity(controllerInput);
     }
 
@@ -58,8 +55,11 @@ public class PlayerInputWrapper : MonoBehaviour
     //Handle inputs received from the Unity input system
     private void OnMove(InputValue value)
     {
-        Vector2 adjustedInput = Vector2.Scale(value.Get<Vector2>(), sensitivity);
+        PlayerConfig config = PlayerData.activePlayers[player.Order];
+        Vector2 adjustedInput = Vector2.Scale(value.Get<Vector2>(), sensitivity * config.sensitivity);
         player.HandleMovement(adjustedInput);
+
+        Debug.Log(sensitivity * config.sensitivity);
     }
 
     private void OnMove(Vector2 value)
@@ -90,7 +90,7 @@ public class PlayerInputWrapper : MonoBehaviour
 
     private void OnPause(InputValue value)
     {
-
+        player.EmitPause();
     }
 
     private void OnPause()

@@ -12,58 +12,36 @@ public class UnstableBatStateMachine : BatStateMachine
     /// <summary>
     /// Override: Checks if target has been stunned
     /// </summary>
-    public override void DetectStun(Vector3 pos)
+    public override void ResolveHit()
     {
-        // Check time scale so bats cant be harmed while game is paused
-        bool isGameGoing = Time.timeScale > 0;
-        if (!isGameGoing)
-        {
+        // Trigger base behavior
+        base.ResolveHit();
+
+        // Get the chain of targets
+        Target[] targetChain = GetTargetChain();
+
+        // Early return if chain is empty
+        if (targetChain.Length == 0)
             return;
-        }
 
-        // Check for player input coords hitting target
-        Vector3 shotPos = pos;
-        RaycastHit2D hit = Physics2D.Raycast(shotPos, Vector2.zero);
+        // Init current target as this
+        Target currentTarg = GetComponent<Target>();
 
-        // Check if something was hit
-        if (!hit)
+        // Iterate through each chained target and play their stun animations as well
+        for (int i = 0; i < targetChain.Length; i++)
         {
-            //SoundManager.Instance.PlaySound(missSound); 
-            return;
-        }
+            // Create instance of lightning
+            GameObject effect = Instantiate(lightning, currentTarg.transform.position, Quaternion.identity);
+            ChainLightning chain = effect.GetComponent<ChainLightning>();
 
-        // Check that hit has detected this particular object
-        if (hit.collider.gameObject == gameObject)
-        {
-            _AnimControls.PlayStunAnimation();
-            SoundManager.Instance.PlaySoundInterrupt(hitSound, 0.7f);
+            // Play lightning effect
+            chain.PlayEffect(currentTarg.transform.position, targetChain[i].transform.position);
 
-            // Get the chain of targets
-            Target[] targetChain = GetTargetChain();
+            // Play stun anim
+            targetChain[i].GetComponent<AnimationHandler>().PlayStunAnimation();
 
-            // Early return if chain is empty
-            if (targetChain.Length == 0)
-                return;
-
-            // Init current target as this
-            Target currentTarg = GetComponent<Target>();
-
-            // Iterate through each chained target and play their stun animations as well
-            for (int i = 0; i < targetChain.Length; i++)
-            {
-                // Create instance of lightning
-                GameObject effect = Instantiate(lightning, currentTarg.transform.position, Quaternion.identity);
-                ChainLightning chain = effect.GetComponent<ChainLightning>();
-
-                // Play lightning effect
-                chain.PlayEffect(currentTarg.transform.position, targetChain[i].transform.position);
-
-                // Play stun anim
-                targetChain[i].GetComponent<AnimationHandler>().PlayStunAnimation();
-
-                // Update current target
-                currentTarg = targetChain[i];
-            }
+            // Update current target
+            currentTarg = targetChain[i];
         }
     }
 

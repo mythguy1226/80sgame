@@ -1,7 +1,10 @@
+using System;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
+
+    public static Action pauseEvent;
     public enum UIType
     {
         None,
@@ -41,5 +44,10 @@ public class UIManager : MonoBehaviour
             default:
                 return;
         }
+    }
+
+    public static void PlayerPause()
+    {
+        pauseEvent?.Invoke();
     }
 }

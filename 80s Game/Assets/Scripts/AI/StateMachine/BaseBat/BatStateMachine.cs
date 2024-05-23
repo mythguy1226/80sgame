@@ -61,6 +61,11 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
         get { return _Collider; }
     }
 
+    public bool IsDefault
+    {
+        get { return pointValue == 1000; }
+    }
+
     void Awake()
     {
         // Initialize all components
@@ -123,28 +128,25 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
     /// <summary>
     /// Checks if bat has been stunned
     /// </summary>
-    public virtual void DetectStun(Vector3 pos)
+    public bool DetectStun(Vector3 pos)
     {
+        // Check that game isnt paused
         bool isGameGoing = Time.timeScale > 0;
         if (!isGameGoing)
         {
-            return;
+            return false;
         }
-        
-        RaycastHit2D hit = Physics2D.Raycast(pos, Vector2.zero);
+
         // Check if something was hit
+        RaycastHit2D hit = Physics2D.Raycast(pos, Vector2.zero);
         if (!hit)
-        {
-            //SoundManager.Instance.PlaySoundContinuous(missSound);
-            return;
-        }
+            return false;
 
         // Check that hit has detected this particular object
         if (hit.collider.gameObject == gameObject)
-        {
-            _AnimControls.PlayStunAnimation();
-            SoundManager.Instance.PlaySoundInterrupt(hitSound, 0.7f);
-        }
+            return true;
+
+        return false;
     }
 
     /// <summary>
@@ -176,7 +178,7 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
     /// <summary>
     /// Resets the bat
     /// </summary>
-    public void Reset()
+    public virtual void Reset()
     {
         // The particle systems drag across the screen when repositioning bats
         // Stopping it when resetting prevents that
@@ -210,13 +212,22 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
         gameManager.HitsManager.AddHit();
 
         // Update target manager with current state
-        gameManager.TargetManager.OnTargetDeath(currentState);
+        gameManager.TargetManager.OnTargetReset();
         InputManager.detectHitSub -= ListenForShot;
     }
 
+    /// <summary>
+    /// Stun event listener attached to input manager
+    /// </summary>
+    /// <param name="s">Struct containing information about shot</param>
     public void ListenForShot(ShotInformation s)
     {
-        DetectStun(s.location);
+        // Check for stun detection
+        if(DetectStun(s.location))
+        {
+            // Call method for stun resolution
+            ResolveHit();
+        }
     }
 
     public void Spawn()
@@ -225,5 +236,15 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
         InputManager.detectHitSub += ListenForShot;
         TransitionToState(BatStates.Moving);
         SetFleeTimer();
+    }
+
+    /// <summary>
+    /// Overridable: Handles event of bat being stunned
+    /// </summary>
+    public virtual void ResolveHit()
+    {
+        // Trigger stun animation
+        _AnimControls.PlayStunAnimation();
+        SoundManager.Instance.PlaySoundInterrupt(hitSound, 0.7f);
     }
 }

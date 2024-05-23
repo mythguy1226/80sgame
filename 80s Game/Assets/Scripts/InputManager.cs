@@ -9,7 +9,7 @@ public class InputManager : MonoBehaviour
     public static event Action<ShotInformation> detectHitSub;
 
     // Joycon fields
-    public List<Joycon> joycons;
+    public List<Joycon> joycons = new List<Joycon>();
     public Vector3 gyro;
     public int jc_ind = 0;
     public Quaternion orientation;

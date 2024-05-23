@@ -58,7 +58,7 @@
                     "path": "<Gamepad>/leftStick",
                     "interactions": "",
                     "processors": "",
-                    "groups": "PS4;Xbox",
+                    "groups": "PS4",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -91,7 +91,7 @@
                     "path": "<Gamepad>/dpad/up",
                     "interactions": "",
                     "processors": "",
-                    "groups": "PS4;Xbox",
+                    "groups": "PS4",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -102,7 +102,7 @@
                     "path": "<Gamepad>/dpad/down",
                     "interactions": "",
                     "processors": "",
-                    "groups": "PS4;Xbox",
+                    "groups": "PS4",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -113,7 +113,7 @@
                     "path": "<Gamepad>/dpad/left",
                     "interactions": "",
                     "processors": "",
-                    "groups": "PS4;Xbox",
+                    "groups": "PS4",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -124,7 +124,7 @@
                     "path": "<Gamepad>/dpad/right",
                     "interactions": "",
                     "processors": "",
-                    "groups": "PS4;Xbox",
+                    "groups": "PS4",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -135,7 +135,7 @@
                     "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
-                    "groups": "PS4;Xbox",
+                    "groups": "PS4",
                     "action": "Fire",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -157,7 +157,7 @@
                     "path": "<Gamepad>/start",
                     "interactions": "",
                     "processors": "",
-                    "groups": "PS4;Xbox",
+                    "groups": "PS4",
                     "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -166,6 +166,17 @@
                     "name": "",
                     "id": "b86f2645-2b16-4412-827d-28b587b967f2",
                     "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KnM",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c1ba9ef3-de50-41bc-bc23-129d69e831ed",
+                    "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": "KnM",
@@ -220,18 +231,7 @@
             "bindingGroup": "PS4",
             "devices": [
                 {
-                    "devicePath": "<DualShockGamepad>",
-                    "isOptional": false,
-                    "isOR": false
-                }
-            ]
-        },
-        {
-            "name": "Xbox",
-            "bindingGroup": "Xbox",
-            "devices": [
-                {
-                    "devicePath": "<XInputController>",
+                    "devicePath": "<Gamepad>",
                     "isOptional": false,
                     "isOR": false
                 }

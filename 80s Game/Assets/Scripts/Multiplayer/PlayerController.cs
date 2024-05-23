@@ -1,16 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Timeline.Actions;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    
 
     public AudioClip shootSound;
     public int score;
     public float accuracy;
     public int Order { get; private set; }
+
+    private PlayerConfig config;
 
     [SerializeField]
     private Crosshair crosshairPrefab;
@@ -18,15 +19,25 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        PlayerData.activePlayers.Add(this);
         Order = PlayerData.activePlayers.Count;
         activeCrosshair = Instantiate(crosshairPrefab, new Vector3(0,0,0), Quaternion.identity);
+        activeCrosshair.ChangeSpriteColor(config.crossHairColor);
     }
 
     public void HandleMovement(Vector2 movementData)
     {
 
         activeCrosshair.SetMovementDelta(movementData);
+    }
+
+    public void SetConfig(PlayerConfig pc)
+    {
+        Order = pc.playerIndex;
+        config = pc;
+        if (activeCrosshair != null)
+        {
+            activeCrosshair.ChangeSpriteColor(pc.crossHairColor);
+        }
     }
 
     public void HandleFire()
@@ -48,5 +59,10 @@ public class PlayerController : MonoBehaviour
     public void RecenterCursor()
     {
         activeCrosshair.Center();
+    }
+
+    public void EmitPause()
+    {
+        UIManager.PlayerPause();
     }
 }
