@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     public PlayerController playerPrefab;
 
+    public AbsGameMode ActiveGameMode { get; private set; }
     // Public properties
     public InputManager InputManager { get; private set;  }
     public TargetManager TargetManager { get; private set; }
@@ -18,13 +20,13 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+
         // Check if the static reference matches the script instance
         if(Instance != null && Instance != this)
         {
             // If not, then the script is a duplicate and can delete itself
             Destroy(this);
         }
-
         else
         {
             Instance = this;
@@ -49,6 +51,23 @@ public class GameManager : MonoBehaviour
                     pc.SetConfig(PlayerData.activePlayers[i]);
                 }
             }
+        }
+    }
+
+    private void Start() 
+    {
+        Scene currentScene = SceneManager.GetActiveScene();
+        string sceneName = currentScene.name;
+
+        switch (sceneName)
+        {
+            case "SampleScene":
+                ActiveGameMode = new ClassicMode();
+                break;
+            /*
+             * case "...":
+             *  ActiveGameMode = new CompetativeMode(numRoundsCompetative);
+             */
         }
     }
 }

@@ -147,7 +147,7 @@ public class KinematicSteer : MonoBehaviour
     public void Flock()
     {
         // Get the targets on screen
-        Target[] targetsOnScreen = GameManager.Instance.TargetManager.GetAllTargetsOnScreen();
+        Target[] targetsOnScreen = GameManager.Instance.TargetManager.ActiveTargets.ToArray();
 
         // Apply the 3 flocking algorithms to the current velocity
         currentVelocity += Separate(targetsOnScreen) * separationStrength;
