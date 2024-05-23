@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class PauseScreenBehavior : MonoBehaviour
 {
@@ -16,6 +15,16 @@ public class PauseScreenBehavior : MonoBehaviour
     public AudioClip buttonClickSound;
 
     public Crosshair[] crosshairs;
+
+    private void Awake()
+    {
+        UIManager.pauseEvent += PauseGame;
+    }
+
+    private void OnDisable()
+    {
+        UIManager.pauseEvent -= PauseGame;
+    }
 
     void Start()
     {
