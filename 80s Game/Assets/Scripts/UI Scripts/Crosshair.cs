@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Crosshair : MonoBehaviour
 {
-    Sprite sprite;
+    SpriteRenderer sprite;
     Vector2 movementDelta;
 
     //Cursor clamping
@@ -11,6 +11,7 @@ public class Crosshair : MonoBehaviour
 
     private void Awake()
     {
+        sprite = GetComponent<SpriteRenderer>();
         SetClamps();
         //Hide mouse cursor
         Cursor.visible = false;
@@ -32,6 +33,11 @@ public class Crosshair : MonoBehaviour
         Camera cam = Camera.main;
         Vector3 screenPos = cam.WorldToScreenPoint(transform.position);
         return screenPos;
+    }
+
+    public void Center()
+    {
+        transform.position = Vector3.zero;
     }
 
     private Vector3 Clamp(Vector3 position)
@@ -66,5 +72,10 @@ public class Crosshair : MonoBehaviour
         minY = cam.ScreenToWorldPoint(new Vector3(0, 0, cam.transform.position.z)).y;
         minX = cam.ScreenToWorldPoint(new Vector3(0, 0, cam.transform.position.z)).x;
         maxX = cam.ScreenToWorldPoint(new Vector3(Screen.width, 0, cam.transform.position.z)).x;
+    }
+
+    public void ChangeSpriteColor(Color col)
+    {
+        sprite.color = col;
     }
 }

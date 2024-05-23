@@ -1,12 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+
     public AudioClip shootSound;
     public int score;
     public float accuracy;
+    public int Order { get; private set; }
+
+    private PlayerConfig config;
 
     [SerializeField]
     private Crosshair crosshairPrefab;
@@ -14,8 +19,9 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        PlayerData.activePlayers.Add(this);
+        Order = PlayerData.activePlayers.Count;
         activeCrosshair = Instantiate(crosshairPrefab, new Vector3(0,0,0), Quaternion.identity);
+        activeCrosshair.ChangeSpriteColor(config.crossHairColor);
     }
 
     public void HandleMovement(Vector2 movementData)
@@ -24,9 +30,18 @@ public class PlayerController : MonoBehaviour
         activeCrosshair.SetMovementDelta(movementData);
     }
 
+    public void SetConfig(PlayerConfig pc)
+    {
+        Order = pc.playerIndex;
+        config = pc;
+        if (activeCrosshair != null)
+        {
+            activeCrosshair.ChangeSpriteColor(pc.crossHairColor);
+        }
+    }
+
     public void HandleFire()
     {
-        Debug.Log("Fire");
         if (GameManager.Instance.UIManager.activeUI != UIManager.UIType.None)
         {
             GameManager.Instance.UIManager.GetFireInput(activeCrosshair.PositionToScreen());
@@ -37,7 +52,12 @@ public class PlayerController : MonoBehaviour
         {
             SoundManager.Instance.PlaySoundContinuous(shootSound, 0.5f);
         }
-        Vector3 shotLocation = activeCrosshair.transform.position;
-        InputManager.PlayerShot(shotLocation);
+        ShotInformation s = new(activeCrosshair.transform.position, Order);
+        InputManager.PlayerShot(s);
+    }
+
+    public void RecenterCursor()
+    {
+        activeCrosshair.Center();
     }
 }
