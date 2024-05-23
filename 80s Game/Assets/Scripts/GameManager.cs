@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -45,7 +46,18 @@ public class GameManager : MonoBehaviour
 
     private void Start() 
     {
-        ActiveGameMode = new ClassicMode();
-        // ActiveGameMode = new CompetativeMode(numRoundsCompetative);
+        Scene currentScene = SceneManager.GetActiveScene();
+        string sceneName = currentScene.name;
+
+        switch (sceneName)
+        {
+            case "SampleScene":
+                ActiveGameMode = new ClassicMode();
+                break;
+            /*
+             * case "...":
+             *  ActiveGameMode = new CompetativeMode(numRoundsCompetative);
+             */
+        }
     }
 }

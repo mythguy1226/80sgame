@@ -89,8 +89,6 @@ public class ClassicMode : AbsGameMode
         if(targetManager.totalStuns % 3 == 0)
             numBonusBats++;
 
-        Debug.Log(targetManager.numStuns + ": " + currentRoundTargetCount);
-
         if(targetManager.numStuns >= currentRoundTargetCount)
         {
             // Add bonus points
@@ -116,7 +114,6 @@ public class ClassicMode : AbsGameMode
     {
         // Check if the player still needs stuns for the round
         int neededStuns = currentRoundTargetCount - targetManager.numStuns;
-        Debug.Log("Needed Stuns: " + neededStuns);
         if (neededStuns <= 0)
             return;
 
