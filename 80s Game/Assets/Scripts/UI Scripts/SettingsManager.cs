@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.UI;
 
 public class SettingsManager : MonoBehaviour
 {
@@ -22,10 +24,11 @@ public class SettingsManager : MonoBehaviour
     public Slider gamepadYSlider;
     public Toggle crtToggle;
     public Slider crtCurvature;
+    public Button saveAndQuit;
+    public Button applyButton;
 
-
-    public GameObject crtCurvatureOption;
     public GameObject settingsPanel;
+    public GameObject cancelPanel;
     public GameObject settingsButton;
     public List<TextMeshProUGUI> settingsLabels;
 
@@ -33,7 +36,6 @@ public class SettingsManager : MonoBehaviour
     float mouseSensitivityY;
     float gamepadSensitivityX;
     float gamepadSensitivityY;
-
 
     // Start is called before the first frame update
     void Start()
@@ -53,41 +55,7 @@ public class SettingsManager : MonoBehaviour
         GetPlayerReference();
         this.GetComponent<PauseScreenBehavior>().ToggleCrosshairs(false);
 
-        //Load in settings from PlayerPrefs
-        float volume = PlayerPrefs.GetFloat("Volume");
-        int crtOn = PlayerPrefs.GetInt("CRTOn");
-        float curvature = PlayerPrefs.GetFloat("CRTCurvature");
-        float mouseX = PlayerPrefs.GetFloat("MouseXSensitivity");
-        float mouseY = PlayerPrefs.GetFloat("MouseYSensitivity");
-        float gamepadX = PlayerPrefs.GetFloat("GamepadXSensitivity");
-        float gamepadY = PlayerPrefs.GetFloat("GamepadYSensitivity");
-
-        //Set Volume settings
-        SoundManager.Instance.volume = volume;
-        volumeSlider.value = volume;
-
-        //Set Sensitivity sliders
-        mouseXSlider.value = mouseX * 400;
-        mouseYSlider.value = mouseY * 400;
-        gamepadXSlider.value = gamepadX * 40;
-        gamepadYSlider.value = gamepadY * 40;
-
-        //Set CRT effect based on settings
-        if (crtOn == 1)
-        {
-            crtEffect.enabled = true;
-            crtToggle.isOn = true;
-        }
-
-        else
-        {
-            crtEffect.enabled = false;
-            crtToggle.isOn = false;
-        }
-
-        //Set curvature of the CRT effect
-        crtEffect.Curvature = curvature;
-        crtCurvature.value = curvature;
+        LoadSettings();
     }
 
     //Change Volume
@@ -137,23 +105,29 @@ public class SettingsManager : MonoBehaviour
     public void ToggleCRTEffect()
     {
         crtEffect.enabled = crtToggle.isOn;
-        crtCurvatureOption.SetActive(crtToggle.isOn);
     }
 
     public void ChangeCRTCurvature()
     {
-        if (crtEffect.enabled)
-        {
-            crtEffect.Curvature = crtCurvature.value;
-            float crtCurvatureLabel = Mathf.RoundToInt(crtCurvature.value * 500);
-            settingsLabels[5].text = crtCurvatureLabel.ToString();
-        }
+        crtEffect.Curvature = crtCurvature.value;
+        float crtCurvatureLabel = Mathf.RoundToInt(crtCurvature.value * 500);
+        settingsLabels[5].text = crtCurvatureLabel.ToString();
     }
 
     //Toggle the menu on and off
     public void ToggleSettingsPanel()
     {
         settingsPanel.SetActive(!settingsPanel.activeInHierarchy);
+
+        cancelPanel.transform.GetChild(0).transform.localScale = Vector3.zero;
+        cancelPanel.SetActive(false);
+        Animator animator = cancelPanel.transform.GetChild(0).GetComponent<Animator>();
+        if (animator != null)
+        {
+            animator.SetBool("show", false);
+        }
+        
+        LoadSettings();
 
         if (settingsPanel.activeInHierarchy)
         {
@@ -184,9 +158,76 @@ public class SettingsManager : MonoBehaviour
         ToggleSettingsPanel();
     }
 
+    public void CancelSettings()
+    {
+        bool isOpen = false;
+
+        if (settingsPanel.activeInHierarchy)
+        {
+            cancelPanel.transform.GetChild(0).transform.localScale = Vector3.zero;
+            cancelPanel.SetActive(!cancelPanel.activeInHierarchy);
+            Animator animator = cancelPanel.transform.GetChild(0).GetComponent<Animator>();
+            if (animator != null)
+            {
+                isOpen = animator.GetBool("show");
+                animator.SetBool("show", !isOpen);
+            }
+
+            if (cancelPanel.activeInHierarchy)
+            {
+                EventSystem.current.SetSelectedGameObject(null);
+                EventSystem.current.SetSelectedGameObject(saveAndQuit.gameObject);
+            }
+            else
+            {
+                EventSystem.current.SetSelectedGameObject(null);
+                EventSystem.current.SetSelectedGameObject(applyButton.gameObject);
+            }
+        }
+    }
+
     public void GetPlayerReference(int playerNumber = 1)
     {
         //Get Reference to PlayerInputWrapper
         playerInputWrapper = PlayerData.activePlayers[playerNumber - 1].GetComponent<PlayerInputWrapper>();
+    }
+
+    private void LoadSettings()
+    {
+        //Load in settings from PlayerPrefs
+        float volume = PlayerPrefs.GetFloat("Volume");
+        int crtOn = PlayerPrefs.GetInt("CRTOn");
+        float curvature = PlayerPrefs.GetFloat("CRTCurvature");
+        float mouseX = PlayerPrefs.GetFloat("MouseXSensitivity");
+        float mouseY = PlayerPrefs.GetFloat("MouseYSensitivity");
+        float gamepadX = PlayerPrefs.GetFloat("GamepadXSensitivity");
+        float gamepadY = PlayerPrefs.GetFloat("GamepadYSensitivity");
+
+        //Set Volume settings
+        SoundManager.Instance.volume = volume;
+        volumeSlider.value = volume;
+
+        //Set Sensitivity sliders
+        mouseXSlider.value = mouseX * 400;
+        mouseYSlider.value = mouseY * 400;
+        gamepadXSlider.value = gamepadX * 40;
+        gamepadYSlider.value = gamepadY * 40;
+
+        //Set CRT effect based on settings
+        if (crtOn == 1)
+        {
+            crtEffect.enabled = true;
+            crtToggle.isOn = true;
+        }
+
+        else
+        {
+            crtEffect.enabled = false;
+            crtToggle.isOn = false;
+        }
+
+        //Set curvature of the CRT effect
+        crtEffect.Curvature = curvature;
+        crtCurvature.value = curvature;
     }
 }

@@ -98,6 +98,11 @@ public class PlayerInputWrapper : MonoBehaviour
 
     }
 
+    private void OnCancel()
+    {
+        SettingsManager.Instance.CancelSettings();
+    }
+
     public void Update()
     {
         // make sure the Joycon only gets checked if attached
@@ -129,6 +134,14 @@ public class PlayerInputWrapper : MonoBehaviour
             }
         }
 
-
+        if (playerInput.currentControlScheme == "KnM")
+        {
+            controllerInput = false;
+            SetSensitivity(controllerInput);
+        } else
+        {
+            controllerInput = true;
+            SetSensitivity(controllerInput);
+        }
     }
 }
