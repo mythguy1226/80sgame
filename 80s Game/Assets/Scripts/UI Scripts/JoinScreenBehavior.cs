@@ -5,6 +5,6 @@ public class JoinScreenBehavior : MonoBehaviour
 {
     public void StartGame()
     {
-        SceneManager.LoadScene("Eduardo-NewInputSystem");
+        SceneManager.LoadScene(1);
     }
 }
