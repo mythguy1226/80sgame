@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class PauseScreenBehavior : MonoBehaviour
 {
+    public static PauseScreenBehavior Instance { get; private set; }
+
     public bool isPaused;
     public GameObject pauseScreen;
     public GameObject continueButton;
@@ -28,12 +30,29 @@ public class PauseScreenBehavior : MonoBehaviour
 
     void Start()
     {
+        // Check if the static reference matches the script instance
+        if(Instance != null && Instance != this)
+        {
+            // If not, then the script is a duplicate and can delete itself
+            Destroy(this);
+        }
+
+        else
+        {
+            Instance = this;
+        }
+
         crosshairs = FindObjectsOfType(typeof(Crosshair)) as Crosshair[];
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (onboardingPanel == null)
+        {
+            return;
+        }
+        
         //Pause game if escape key is pressed
         if (Input.GetKeyDown("escape") && (!onboardingPanel.activeInHierarchy || pauseScreen.activeInHierarchy) && !GameManager.Instance.ActiveGameMode.GameOver)
         {
@@ -58,7 +77,6 @@ public class PauseScreenBehavior : MonoBehaviour
             isPaused = !isPaused;
 
             ToggleCrosshairs(!isPaused);
-            Cursor.visible = isPaused;
 
             if (isPaused == true)
             {
@@ -98,6 +116,8 @@ public class PauseScreenBehavior : MonoBehaviour
     {
         GameManager.Instance.PointsManager.SaveScore();
         Time.timeScale = 1f;
+
+        PlayerData.Reset();
         SceneManager.LoadScene(0);
 
         SoundManager.Instance.PlaySoundContinuous(buttonClickSound);
@@ -108,6 +128,18 @@ public class PauseScreenBehavior : MonoBehaviour
         foreach(Crosshair c in crosshairs)
         {
             c.gameObject.SetActive(toggle);
+        }
+
+        if (toggle == false)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+
+        else
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Confined;
         }
     }
 }
