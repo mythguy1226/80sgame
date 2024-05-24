@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 1142854938126180406}
   - component: {fileID: 8052041500902039558}
   - component: {fileID: 5577929286070373129}
+  - component: {fileID: 6347908914752317319}
   m_Layer: 0
   m_Name: ModifierBat
   m_TagString: Untagged
@@ -283,3 +284,38 @@ MonoBehaviour:
   fleeTimer: 0
   fleeLocation: {x: 0, y: 10}
   modifierObject: {fileID: 55702376141867145, guid: f0d9a4fb91af95845945f673813422f2, type: 3}
+--- !u!58 &6347908914752317319
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 232502045716647642}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.01

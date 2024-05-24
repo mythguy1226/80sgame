@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 1142854938126180406}
   - component: {fileID: 8052041500902039558}
   - component: {fileID: 1575622764254521749}
+  - component: {fileID: 7392182150163370368}
   m_Layer: 0
   m_Name: TestTarget
   m_TagString: Untagged
@@ -156,8 +157,8 @@ MonoBehaviour:
   maxForce: 0.03
   currentVelocity: {x: 0, y: 0}
   flockSize: 1
-  separationStrength: 1
-  cohesionStrength: 1
+  separationStrength: 1.2
+  cohesionStrength: 0.4
   alignmentStrength: 1
 --- !u!95 &5122440697510579374
 Animator:
@@ -282,3 +283,38 @@ MonoBehaviour:
   timeUntilFlee: 5
   fleeTimer: 0
   fleeLocation: {x: 0, y: 10}
+--- !u!58 &7392182150163370368
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 232502045716647642}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.01

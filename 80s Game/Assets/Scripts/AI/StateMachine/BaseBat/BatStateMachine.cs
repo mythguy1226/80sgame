@@ -164,6 +164,7 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
         TransitionToState(BatStates.Death);
         _AnimControls.PlayDropAnimation();
         _Collider.isTrigger = true;
+        GetComponent<CircleCollider2D>().isTrigger = true;
         
     }
 
@@ -194,6 +195,7 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
         _MovementControls.canMove = false;
         _AnimControls.ResetAnimation();
         _Collider.isTrigger = false;
+        GetComponent<CircleCollider2D>().isTrigger = false;
         bIsStunned = false;
 
 
