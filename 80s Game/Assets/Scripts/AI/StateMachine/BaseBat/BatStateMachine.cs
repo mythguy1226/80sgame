@@ -247,7 +247,7 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
     {
         // Trigger stun animation
         _AnimControls.PlayStunAnimation();
-        SoundManager.Instance.PlaySoundInterrupt(hitSound, 0.7f);
+        SoundManager.Instance.PlaySoundInterrupt(hitSound);
         bIsStunned = true;
     }
 }
