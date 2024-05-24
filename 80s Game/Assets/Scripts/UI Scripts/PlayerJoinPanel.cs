@@ -22,6 +22,17 @@ public class PlayerJoinPanel : MonoBehaviour
     public List<Sprite> crosshairSprites;
     private int crosshairIndex = 0;
 
+    public List<TextMeshProUGUI> initials;
+    public List<Button> initialUpButtons;
+    public List<Button> initialDownButtons;
+
+    private int initialOne = 65;
+    private int initialTwo = 65;
+    private int initialThree = 65;
+
+    public TextMeshProUGUI readyIndicator;
+    public bool playerReady;
+
     void Start()
     {
         crosshairLeftArrow.onClick.AddListener(() => ChangeCrosshairSprite(false));
@@ -29,6 +40,12 @@ public class PlayerJoinPanel : MonoBehaviour
 
         TextMeshProUGUI crosshairText = crosshairPreview.gameObject.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
         crosshairText.text = (crosshairIndex + 1) + "/" + crosshairSprites.Count;
+        for (int i = 0; i < initials.Count; i++)
+        {
+            int iCopy = i;
+            initialUpButtons[i].onClick.AddListener(() => ChangeInitial(true, iCopy));
+            initialDownButtons[i].onClick.AddListener(() => ChangeInitial(false, iCopy));
+        }
     }
 
     public void ChangeCrosshairSprite(bool forward)
@@ -82,5 +99,68 @@ public class PlayerJoinPanel : MonoBehaviour
 
         ChangeCrosshairColor();
         
+    }
+
+    public void ReadyUp()
+    {
+        playerReady = !playerReady;
+
+        if (playerReady)
+        {
+            readyIndicator.color = Color.green;
+        }
+        
+        else
+        {
+            readyIndicator.color = Color.red;
+        }
+    }
+
+    private void ChangeInitial(bool increase, int initialIndex)
+    {
+        char tempChar;
+        switch(initialIndex)
+        {
+            case 0:
+                initialOne = UpdateInitialNumber(increase, initialOne);
+                tempChar = (char)initialOne;
+                initials[initialIndex].text = tempChar.ToString();
+                break;
+
+            case 1:
+                initialTwo = UpdateInitialNumber(increase, initialTwo);
+                tempChar = (char)initialTwo;
+                initials[initialIndex].text = tempChar.ToString();
+                break;
+
+            case 2:
+                initialThree = UpdateInitialNumber(increase, initialThree);
+                tempChar = (char)initialThree;
+                initials[initialIndex].text = tempChar.ToString();
+                break;
+        }
+    }
+
+    private int UpdateInitialNumber(bool increase, int initialNum)
+    {
+        if (increase)
+        {
+            if (initialNum == 90)
+            {
+                return 65;
+            }
+
+            return Mathf.Clamp(++initialNum, 65, 90);
+        }
+
+        else
+        {
+            if (initialNum == 65)
+            {
+                return 90;
+            }
+
+            return Mathf.Clamp(--initialNum, 65, 90);
+        }
     }
 }

@@ -53,7 +53,7 @@ public class SettingsManager : MonoBehaviour
     //Change Volume
     public void ChangeVolume()
     {
-        SoundManager.Instance.volume = volumeSlider.value;
+        //SoundManager.Instance.volume = volumeSlider.value;
         float volumeLabel = Mathf.RoundToInt(volumeSlider.value * 100);
         settingsLabels[0].text = volumeLabel.ToString();
     }
@@ -104,7 +104,11 @@ public class SettingsManager : MonoBehaviour
         else
         {
             EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(settingsButton.gameObject);
+            
+            if(settingsButton != null)
+            {
+                EventSystem.current.SetSelectedGameObject(settingsButton.gameObject);
+            }
         }
     }   
 
@@ -154,7 +158,7 @@ public class SettingsManager : MonoBehaviour
         float sensitivity = PlayerPrefs.GetFloat("Sensitivity");
 
         //Set Volume settings
-        SoundManager.Instance.volume = volume;
+        //SoundManager.Instance.volume = volume;
         volumeSlider.value = volume;
 
         //Set Sensitivity sliders
