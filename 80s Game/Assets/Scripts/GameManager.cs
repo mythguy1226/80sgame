@@ -69,6 +69,9 @@ public class GameManager : MonoBehaviour
             case "SampleScene":
                 ActiveGameMode = new ClassicMode();
                 break;
+            case "CompetitiveMode":
+                ActiveGameMode = new CompetitiveMode();
+                break;
             /*
              * case "...":
              *  ActiveGameMode = new CompetativeMode(numRoundsCompetative);
