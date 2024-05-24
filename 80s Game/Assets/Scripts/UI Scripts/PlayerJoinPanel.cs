@@ -7,12 +7,42 @@ using UnityEngine.UI;
 
 public class PlayerJoinPanel : MonoBehaviour
 {
+    //Crosshair Elements
+    public Image crosshairPreview;
+    public Button crosshairRightArrow;
+    public Button crosshairLeftArrow;
+
+    //Color Elements
     public GameObject colorSettings;
     public TMP_Dropdown colorDropdown;
     public GameObject colorSettingsOption;
-    public Image crosshairPreview;
     public List<Slider> colorSliders;
     public List<TextMeshProUGUI> sliderLabels;
+
+    public List<Sprite> crosshairSprites;
+    private int crosshairIndex = 0;
+
+    void Start()
+    {
+        crosshairLeftArrow.onClick.AddListener(() => ChangeCrosshairSprite(false));
+        crosshairRightArrow.onClick.AddListener(() => ChangeCrosshairSprite(true));
+
+        TextMeshProUGUI crosshairText = crosshairPreview.gameObject.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
+        crosshairText.text = (crosshairIndex + 1) + "/" + crosshairSprites.Count;
+    }
+
+    public void ChangeCrosshairSprite(bool forward)
+    {   
+        if (forward) crosshairIndex++;
+        else crosshairIndex--;
+
+        crosshairIndex = Mathf.Clamp(crosshairIndex, 0, crosshairSprites.Count - 1);
+
+        crosshairPreview.sprite = crosshairSprites[crosshairIndex];
+
+        TextMeshProUGUI crosshairText = crosshairPreview.gameObject.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
+        crosshairText.text = (crosshairIndex + 1) + "/" + crosshairSprites.Count;
+    }
 
     public void ToggleColorSettings()
     {
