@@ -73,6 +73,7 @@ public class SoundManager : MonoBehaviour
     {
         for(int i = 0; i < musicLoopSources.Length; i++)
         {
+            if (musicLoopSources[i] == null) continue;
             musicLoopSources[i].Stop();
         }
         Debug.Log("you have been stopped.");
@@ -81,15 +82,28 @@ public class SoundManager : MonoBehaviour
 
     public void SetMusicToLoop(AudioClip clip) //sets up music to loop. This DOES NOT *play* the music
     {
-        if (musicLoopSources[0] == null)
+        //probably dangerous, but shouldn't need to be called anyway
+        if (musicLoopSources == null || musicLoopSources.Length == 0)
         {
+            Debug.Log("");
+            musicLoopSources = new AudioSource[2];
             musicLoopSources[0] = new AudioSource();
             musicLoopSources[0].volume = volume;
-        }
-        if (musicLoopSources[1] == null)
-        {
             musicLoopSources[1] = new AudioSource();
             musicLoopSources[1].volume = volume;
+        }
+        else
+        {
+            if (musicLoopSources[0] == null)
+            {
+                musicLoopSources[0] = new AudioSource();
+                musicLoopSources[0].volume = volume;
+            }
+            if (musicLoopSources[1] == null)
+            {
+                musicLoopSources[1] = new AudioSource();
+                musicLoopSources[1].volume = volume;
+            }
         }
 
         StopMusicLoop();
@@ -103,7 +117,7 @@ public class SoundManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("frick me dood");
+            Debug.Log("frick me dood, the music loop clip is null");
             return;
         }
     }
