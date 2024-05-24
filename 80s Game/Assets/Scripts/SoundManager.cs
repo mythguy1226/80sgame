@@ -120,6 +120,11 @@ public class SoundManager : MonoBehaviour
         double time = AudioSettings.dspTime;
         //Debug.Log(time);
 
+        if(musicLoopClip == null) //can't play music if there *is* no music
+        {
+            isMusicPlaying = false;
+            return;
+        }
         if (time + 1.0f > nextEventTime)
         {
             musicLoopSources[flip].volume = volume; //update audio source volume to reflect current overall volume
