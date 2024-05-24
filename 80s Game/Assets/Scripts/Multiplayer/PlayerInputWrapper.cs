@@ -15,6 +15,8 @@ public class PlayerInputWrapper : MonoBehaviour
     private List<Joycon> joycons;
     private float joyconSensitivyAdjust = 5.0f;
 
+    public bool controllerInput;
+    
     private void Start()
     {
         joycons = JoyconManager.Instance.j;
@@ -22,24 +24,42 @@ public class PlayerInputWrapper : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         if (playerInput.currentControlScheme == "KnM")
         {
-            sensitivity = mouseSensitivity;
+            controllerInput = false;
         } else
         {
-            sensitivity = controllerSensitivity;
+            controllerInput = true;
         }
 
-        if (joycons.Count > 0)
+        SetSensitivity(controllerInput);
+    }
+
+    public void SetSensitivity(bool controllerInput)
+    {
+        if (controllerInput)
+        {
+            sensitivity = controllerSensitivity;
+        } 
+        
+        else if (joycons.Count > 0)
         {
             joycons[player.Order-1].SetRumble(0, 0, 0);
             sensitivity = controllerSensitivity;
         }
+
+        else
+        {
+            sensitivity = mouseSensitivity;
+        } 
     }
 
     //Handle inputs received from the Unity input system
     private void OnMove(InputValue value)
     {
-        Vector2 adjustedInput = Vector2.Scale(value.Get<Vector2>(), sensitivity);
+        PlayerConfig config = PlayerData.activePlayers[player.Order];
+        Vector2 adjustedInput = Vector2.Scale(value.Get<Vector2>(), sensitivity * config.sensitivity);
         player.HandleMovement(adjustedInput);
+
+        Debug.Log(sensitivity * config.sensitivity);
     }
 
     private void OnMove(Vector2 value)
@@ -78,6 +98,11 @@ public class PlayerInputWrapper : MonoBehaviour
 
     }
 
+    private void OnCancel()
+    {
+        SettingsManager.Instance.CancelSettings();
+    }
+
     public void Update()
     {
         // make sure the Joycon only gets checked if attached
@@ -109,6 +134,14 @@ public class PlayerInputWrapper : MonoBehaviour
             }
         }
 
-
+        if (playerInput.currentControlScheme == "KnM")
+        {
+            controllerInput = false;
+            SetSensitivity(controllerInput);
+        } else
+        {
+            controllerInput = true;
+            SetSensitivity(controllerInput);
+        }
     }
 }

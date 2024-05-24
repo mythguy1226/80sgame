@@ -5,11 +5,15 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.UI;
 
 public class SettingsManager : MonoBehaviour
 {
+    public static SettingsManager Instance { get; private set; }
+
     //References to scripts that the settings will affect
-    public InputManager inputManager;
+    public int playerIndex;
     public CRTEffect crtEffect;
 
     //References to UI Elements
@@ -17,54 +21,33 @@ public class SettingsManager : MonoBehaviour
     public Slider sensitivitySlider;
     public Toggle crtToggle;
     public Slider crtCurvature;
-
-    //Reference to curvature option and menu panel
-    public GameObject crtCurvatureOption;
+    public Button saveAndQuit;
+    public Button applyButton;
 
     public GameObject settingsPanel;
+    public GameObject cancelPanel;
     public GameObject settingsButton;
-
     public List<TextMeshProUGUI> settingsLabels;
 
-    //Fields for each of the settings
-    private float volume;
-    private float sensitivity;
-    private int crtOn = 1;
-    private float curvature;
+    float sensitivityValue;
 
     // Start is called before the first frame update
     void Start()
     {
-        //Load in settings from PlayerPrefs
-        volume = PlayerPrefs.GetFloat("Volume");
-        sensitivity = PlayerPrefs.GetFloat("Sensitivity");
-        crtOn = PlayerPrefs.GetInt("CRTOn");
-        curvature = PlayerPrefs.GetFloat("CRTCurvature");
-
-        //Set Volume settings
-        SoundManager.Instance.volume = volume;
-        volumeSlider.value = volume;
-        
-        //Set sensitivity settings
-        inputManager.sensitivity = sensitivity;
-        sensitivitySlider.value = sensitivity;
-
-        //Set CRT effect based on settings
-        if (crtOn == 1)
+        // Check if the static reference matches the script instance
+        if(Instance != null && Instance != this)
         {
-            crtEffect.enabled = true;
-            crtToggle.isOn = true;
+            // If not, then the script is a duplicate and can delete itself
+            Destroy(this);
         }
 
         else
         {
-            crtEffect.enabled = false;
-            crtToggle.isOn = false;
+            Instance = this;
         }
+        this.GetComponent<PauseScreenBehavior>().ToggleCrosshairs(false);
 
-        //Set curvature of the CRT effect
-        crtEffect.Curvature = curvature;
-        crtCurvature.value = curvature;
+        LoadSettings();
     }
 
     //Change Volume
@@ -77,31 +60,40 @@ public class SettingsManager : MonoBehaviour
 
     public void ChangeSensitivity()
     {
-        inputManager.sensitivity = sensitivitySlider.value;
-        float sensitivityLabel = Mathf.RoundToInt(sensitivitySlider.value * 10);
-        settingsLabels[1].text = sensitivityLabel.ToString();
+        sensitivityValue = sensitivitySlider.value / 4;
+        PlayerConfig config = new PlayerConfig();
+
+        config.sensitivity = new Vector2(sensitivityValue, sensitivityValue);
+        config.crossHairColor = PlayerData.activePlayers[playerIndex].crossHairColor;
+        config.playerIndex = playerIndex;
+
+        PlayerData.activePlayers[playerIndex] = config;
+
+        float sensitivityLabel = sensitivitySlider.value / 4;
+        settingsLabels[1].text = sensitivityLabel.ToString("F2");
+        Debug.Log(config.sensitivity);
     }
 
     public void ToggleCRTEffect()
     {
         crtEffect.enabled = crtToggle.isOn;
-        crtCurvatureOption.SetActive(crtToggle.isOn);
     }
 
     public void ChangeCRTCurvature()
     {
-        if (crtEffect.enabled)
-        {
-            crtEffect.Curvature = crtCurvature.value;
-            float crtCurvatureLabel = Mathf.RoundToInt(crtCurvature.value * 500);
-            settingsLabels[2].text = crtCurvatureLabel.ToString();
-        }
+        crtEffect.Curvature = crtCurvature.value;
+        float crtCurvatureLabel = Mathf.RoundToInt(crtCurvature.value * 500);
+        settingsLabels[2].text = crtCurvatureLabel.ToString();
     }
 
     //Toggle the menu on and off
     public void ToggleSettingsPanel()
     {
         settingsPanel.SetActive(!settingsPanel.activeInHierarchy);
+        cancelPanel.SetActive(false);
+        
+        GetPlayerReference();
+        LoadSettings();
 
         if (settingsPanel.activeInHierarchy)
         {
@@ -120,10 +112,69 @@ public class SettingsManager : MonoBehaviour
     public void ApplySettings()
     {
         PlayerPrefs.SetFloat("Volume", volumeSlider.value);
-        PlayerPrefs.SetFloat("Sensitivity", sensitivitySlider.value);
+        PlayerPrefs.SetFloat("Sensitivity", sensitivityValue);
         PlayerPrefs.SetInt("CRTOn", System.Convert.ToInt32(crtToggle.isOn));
         PlayerPrefs.SetFloat("CRTCurvature", crtCurvature.value);
 
+        //playerInputWrapper.SetSensitivity(playerInputWrapper.controllerInput);
+
         ToggleSettingsPanel();
+    }
+
+    public void CancelSettings()
+    {
+        if (settingsPanel.activeInHierarchy)
+        {
+            cancelPanel.SetActive(!cancelPanel.activeInHierarchy);
+
+            if (cancelPanel.activeInHierarchy)
+            {
+                EventSystem.current.SetSelectedGameObject(null);
+                EventSystem.current.SetSelectedGameObject(saveAndQuit.gameObject);
+            }
+            else
+            {
+                EventSystem.current.SetSelectedGameObject(null);
+                EventSystem.current.SetSelectedGameObject(applyButton.gameObject);
+            }
+        }
+    }
+
+    public void GetPlayerReference(int playerNumber = 1)
+    {
+        playerIndex = playerNumber - 1;
+    }
+
+    private void LoadSettings()
+    {
+        //Load in settings from PlayerPrefs
+        float volume = PlayerPrefs.GetFloat("Volume");
+        int crtOn = PlayerPrefs.GetInt("CRTOn");
+        float curvature = PlayerPrefs.GetFloat("CRTCurvature");
+        float sensitivity = PlayerPrefs.GetFloat("Sensitivity");
+
+        //Set Volume settings
+        SoundManager.Instance.volume = volume;
+        volumeSlider.value = volume;
+
+        //Set Sensitivity sliders
+        sensitivitySlider.value = sensitivity * 4;
+
+        //Set CRT effect based on settings
+        if (crtOn == 1)
+        {
+            crtEffect.enabled = true;
+            crtToggle.isOn = true;
+        }
+
+        else
+        {
+            crtEffect.enabled = false;
+            crtToggle.isOn = false;
+        }
+
+        //Set curvature of the CRT effect
+        crtEffect.Curvature = curvature;
+        crtCurvature.value = curvature;
     }
 }

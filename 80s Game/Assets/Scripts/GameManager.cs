@@ -42,7 +42,9 @@ public class GameManager : MonoBehaviour
             UIManager = GetComponent<UIManager>();
 
             if (PlayerData.activePlayers.Count == 0 && debug) {
-                PlayerConfig defaultConfig = new PlayerConfig(0, PlayerData.defaultColors[0], Vector2.one);
+                float sensitivity = PlayerPrefs.GetFloat("Sensitivity", 1.0f);
+
+                PlayerConfig defaultConfig = new PlayerConfig(0, PlayerData.defaultColors[0], new Vector2(sensitivity, sensitivity));
                 PlayerData.activePlayers.Add(defaultConfig);
                 PlayerController pc = Instantiate(playerPrefab, transform.position, Quaternion.identity);
                 pc.SetConfig(defaultConfig);
