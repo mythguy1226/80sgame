@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Rendering;
 
 [RequireComponent(typeof(PlayerController))]
 public class PlayerInputWrapper : MonoBehaviour
@@ -59,7 +58,6 @@ public class PlayerInputWrapper : MonoBehaviour
         Vector2 adjustedInput = Vector2.Scale(value.Get<Vector2>(), sensitivity * config.sensitivity);
         player.HandleMovement(adjustedInput);
 
-        Debug.Log(sensitivity * config.sensitivity);
     }
 
     private void OnMove(Vector2 value)
