@@ -642,6 +642,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9aeb6fb7eee4fa54ca36a231ee22d140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerIndex: 0
   crtEffect: {fileID: 975349869}
   volumeSlider: {fileID: 1492705051}
   sensitivitySlider: {fileID: 1414249906}
@@ -2699,6 +2700,14 @@ PrefabInstance:
     - target: {fileID: 2860434881177399614, guid: ade02431274cdbe4f8fd5b4bdc90b6b9, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ChangeCRTCurvature
+      objectReference: {fileID: 0}
+    - target: {fileID: 3857794041588434869, guid: ade02431274cdbe4f8fd5b4bdc90b6b9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 319221314}
+    - target: {fileID: 3857794041588434869, guid: ade02431274cdbe4f8fd5b4bdc90b6b9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CancelSettings
       objectReference: {fileID: 0}
     - target: {fileID: 4306790102727005025, guid: ade02431274cdbe4f8fd5b4bdc90b6b9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
