@@ -81,7 +81,8 @@ public class UnstableBatStateMachine : BatStateMachine
             targetChain[i] = currentTarget;
 
             // Get the next target
-            currentTarget = GetTargetInRadius(targetChain[i].transform.position);
+            if(targetChain[i] != null)
+                currentTarget = GetTargetInRadius(targetChain[i].transform.position);
         }
 
         // Return full chain

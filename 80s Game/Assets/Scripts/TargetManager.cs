@@ -73,8 +73,6 @@ public class TargetManager : MonoBehaviour
     // Method used for updating values on bat death
     public void OnTargetReset()
     {
-        Debug.Log("Target Reset");
-
         // Update number of stuns
         numStuns++;
         totalStuns++;
