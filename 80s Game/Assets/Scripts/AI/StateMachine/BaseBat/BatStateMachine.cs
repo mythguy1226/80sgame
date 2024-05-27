@@ -40,6 +40,7 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
     SpriteRenderer _SpriteRenderer;
     protected AnimationHandler _AnimControls;
     protected InputManager _InputManager;
+    protected PlayerController stunningPlayer;
     PolygonCollider2D _Collider;
 
 
@@ -78,6 +79,7 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
 
         // Default state will be wandering
         currentState = states[initialState];
+        stunningPlayer = null;
 
         // Iterate through each state to pass game object as owner reference
         // putting this in here as well as base class to beat race condition
@@ -204,16 +206,15 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
         // Add points if target didn't flee
         if (currentState != states[BatStates.Fleeing])
         {
-            gameManager.PointsManager.AddRoundPoints(pointValue);
-            gameManager.PointsManager.AddPoints(pointValue);
+            // Add a successful hit
+            stunningPlayer.scoreController.AddHit();
+            gameManager.PointsManager.AddRoundPoints(stunningPlayer.Order, pointValue);
         }
-
-        // Add a successful hit
-        gameManager.HitsManager.AddHit();
 
         // Update target manager with current state
         gameManager.TargetManager.OnTargetReset();
         InputManager.detectHitSub -= ListenForShot;
+        stunningPlayer = null;
     }
 
     /// <summary>
@@ -225,6 +226,11 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
         // Check for stun detection
         if(DetectStun(s.location))
         {
+            // Allow this to only be set once to prevent players from snipe stealing points from each other
+            if (stunningPlayer == null)
+            {
+                stunningPlayer = s.player;
+            }
             // Call method for stun resolution
             ResolveHit();
         }

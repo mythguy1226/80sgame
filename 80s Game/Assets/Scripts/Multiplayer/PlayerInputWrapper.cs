@@ -76,6 +76,12 @@ public class PlayerInputWrapper : MonoBehaviour
     private void OnFire()
     {
         player.HandleFire();
+
+        if (JoyconManager.Instance.j.Count > 0)
+        {
+            Joycon j = JoyconManager.Instance.j[player.Order];
+            j.SetRumble(160, 320, 0.6f, 200);
+        }   
     }
 
     private void OnRecenter(InputValue value)

@@ -2,66 +2,61 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using UnityEngine;
 
 public class PointsManager : MonoBehaviour
 {
     // Public property
-    public int Points { get; private set; }
-    public int RoundPoints { get; private set; }
+    public int maxScore;
+    public int maxScoringPlayer;
+    private Dictionary<int, int> RoundScoreByPlayer;
+    private Dictionary<int, int> TotalPointsByPlayer;
+
     private string filePath = Application.dataPath + "/PlayerData/scores.txt";
     private int numTopScores = 6;
-    private string initials = "ABC";
-    public HighScoreInitials initialsTracker;
 
     // Start is called before the first frame update
     void Awake()
     {
-        Points = 0;
-        RoundPoints = 0;
-    }
-
-    // Add directly to total points
-    public int AddPoints(int numPoints)
-    {
-        Points += numPoints;
-        return Points;
+        maxScore = 0;
+        maxScoringPlayer = 0;
+        RoundScoreByPlayer = new Dictionary<int, int>();
+        TotalPointsByPlayer = new Dictionary<int, int>();
     }
 
     /// <summary>
-    /// Adds a number of points
+    /// Add this round's points for a player
     /// </summary>
-    /// <param name="numPoints"></param>
+    /// <param name="player"> The player for whom the points are being added </param>
+    /// <param name="value"> The amount of points to add</param>
     /// <returns>The new point total</returns>
-    public int AddRoundPoints(int numPoints)
+    public int AddRoundPoints(int player, int value)
     {
-        RoundPoints += numPoints;
-        return RoundPoints;
+        if (!RoundScoreByPlayer.ContainsKey(player))
+        {
+            RoundScoreByPlayer[player] = 0;
+            TotalPointsByPlayer[player] = 0;
+        }
+        RoundScoreByPlayer[player] += value;
+        TotalPointsByPlayer[player] += value;
+        if (RoundScoreByPlayer[player] > maxScore)
+        {
+            maxScore = RoundScoreByPlayer[player];
+            maxScoringPlayer = player; 
+        }
+        return RoundScoreByPlayer[player];
     }
 
     /// <summary>
     /// Adds bonus points based off of an accuracy level
     /// </summary>
+    /// <param name="player">The player for whom the points are being added</param>
     /// <param name="accuracy"></param>
     /// <returns>The new round point total</returns>
-    public int AddBonusPoints(float accuracy)
+    public int AddBonusPoints(int player, float accuracy)
     {
-        int numBonusPoints = Mathf.RoundToInt(RoundPoints * accuracy);
-        Points += RoundPoints;
-        RoundPoints = 0;
-        return AddRoundPoints(numBonusPoints);
-    }
-
-    /// <summary>
-    /// Totals up all the points in a round to the game points field
-    /// </summary>
-    /// <returns>The new point total</returns>
-    public int AddTotal()
-    {
-        Points += RoundPoints;
-        RoundPoints = 0;
-        return Points;
+        int numBonusPoints = Mathf.RoundToInt(RoundScoreByPlayer[player] * accuracy);
+        return AddRoundPoints(player, numBonusPoints);
     }
 
     public class UserRecord
@@ -116,14 +111,11 @@ public class PointsManager : MonoBehaviour
     /// </summary>
     public void SaveScore()
     {
-        // Get initials from tracker
-        initials = initialsTracker.initialOneText.text + initialsTracker.initialTwoText.text + initialsTracker.initialThreeText.text;
-
         // Load the saves file
         List<UserRecord> records = LoadRecords();
-
         // Sort the leaderboard based on score
         records.Sort((record1, record2) => record1.score.CompareTo(record2.score));
+        string initials = PlayerData.activePlayers[maxScoringPlayer].initials;
 
         // If file contains scores,
         // iterate through the records to compare new score
@@ -133,24 +125,24 @@ public class PointsManager : MonoBehaviour
             for(int i = 0; i < records.Count; i++)
             {
                 // Check if new score beats a score
-                if(Points > records[i].score)
+                if(maxScore > records[i].score)
                 {
                     // Remove score being replaced and insert new score
                     if(records.Count == numTopScores)
                         records.RemoveAt(i);
-                    records.Insert(i, new UserRecord(initials, Points));
+                    records.Insert(i, new UserRecord(initials, maxScore));
                     break;
                 }
                 else if(records.Count < numTopScores) // Just add if leaderboard isnt full
                 {
-                    records.Insert(i, new UserRecord(initials, Points));
+                    records.Insert(i, new UserRecord(initials, maxScore));
                     break;
                 }
             }
         }
         else // Adding the first record
         {
-            records.Add(new UserRecord(initials, Points));
+            records.Add(new UserRecord(initials, maxScore));
         }
 
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public static Action roundOverObservers;
     // Singleton pattern
     public static GameManager Instance { get; private set; }
     public PlayerController playerPrefab;
@@ -74,5 +76,10 @@ public class GameManager : MonoBehaviour
              *  ActiveGameMode = new CompetativeMode(numRoundsCompetative);
              */
         }
+    }
+
+    public static void EmitRoundOverEvent()
+    {
+        roundOverObservers?.Invoke();
     }
 }

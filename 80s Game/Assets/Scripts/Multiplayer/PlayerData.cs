@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public struct PlayerConfig
+public class PlayerConfig
 {
     public Color crossHairColor;
     public Vector2 sensitivity;
     public int playerIndex;
+    public string initials;
     public PlayerConfig(int i, Color col, Vector2 sens)
     {
         crossHairColor = col;
