@@ -21,9 +21,16 @@ public class PlayerController : MonoBehaviour
     {
         GameManager.roundOverObservers += ReportEndOfRound;
         scoreController = new PlayerScoreController();
-        Order = PlayerData.activePlayers.Count;
         activeCrosshair = Instantiate(crosshairPrefab, new Vector3(0,0,0), Quaternion.identity);
-        activeCrosshair.ChangeSpriteColor(config.crossHairColor);
+        if (config != null)
+        {
+            activeCrosshair.ChangeSpriteColor(config.crossHairColor);
+            
+        } else
+        {
+            Order = PlayerData.activePlayers.Count;
+        }
+        
     }
 
     public void HandleMovement(Vector2 movementData)

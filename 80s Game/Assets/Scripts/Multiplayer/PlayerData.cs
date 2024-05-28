@@ -1,6 +1,7 @@
 
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerConfig
 {
@@ -8,8 +9,11 @@ public class PlayerConfig
     public Vector2 sensitivity;
     public int playerIndex;
     public string initials;
+    public string controlScheme;
+    public InputDevice device;
     public PlayerConfig(int i, Color col, Vector2 sens)
     {
+
         crossHairColor = col;
         sensitivity = sens;
         playerIndex = i;

@@ -9,6 +9,8 @@ public class PlayerJoinManager : MonoBehaviour
     private void OnPlayerJoined(PlayerInput playerInput)
     {
         PlayerConfig config = new PlayerConfig(playerInput.playerIndex, PlayerData.defaultColors[playerInput.playerIndex], Vector2.one);
+        config.controlScheme = playerInput.currentControlScheme;
+        config.device = playerInput.devices[0];
         PlayerController pc = playerInput.gameObject.GetComponent<PlayerController>();
         PlayerData.activePlayers.Add(config);
         pc.SetConfig(config);

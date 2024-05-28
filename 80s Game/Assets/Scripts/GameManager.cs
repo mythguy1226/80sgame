@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -59,6 +60,9 @@ public class GameManager : MonoBehaviour
                 {
                     PlayerController pc = Instantiate(playerPrefab, transform.position, Quaternion.identity);
                     pc.SetConfig(PlayerData.activePlayers[i]);
+                    PlayerInput pi = pc.GetComponent<PlayerInput>();
+                    InputDevice[] devices = new InputDevice[] { PlayerData.activePlayers[i].device };
+                    pi.SwitchCurrentControlScheme(PlayerData.activePlayers[i].controlScheme, devices);
                 }
             }
         }

@@ -5714,7 +5714,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e8b80e4b54ae714fad4ba53fe815506, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialsTracker: {fileID: 1619173213}
+  maxScore: 0
+  maxScoringPlayer: 0
 --- !u!114 &1095139971
 MonoBehaviour:
   m_ObjectHideFlags: 0
