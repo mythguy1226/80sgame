@@ -53,7 +53,7 @@ public class SettingsManager : MonoBehaviour
     //Change Volume
     public void ChangeVolume()
     {
-        SoundManager.Instance.volume = volumeSlider.value;
+        SoundManager.Instance.Volume = volumeSlider.value;
         float volumeLabel = Mathf.RoundToInt(volumeSlider.value * 100);
         settingsLabels[0].text = volumeLabel.ToString();
     }
@@ -146,7 +146,7 @@ public class SettingsManager : MonoBehaviour
         float sensitivity = PlayerPrefs.GetFloat("Sensitivity",20);
 
         //Set Volume settings
-        SoundManager.Instance.volume = volume;
+        SoundManager.Instance.Volume = volume;
         volumeSlider.value = volume;
 
         //Set Sensitivity sliders

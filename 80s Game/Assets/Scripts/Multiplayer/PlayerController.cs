@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
 
         if (Time.timeScale > 0)
         {
-            SoundManager.Instance.PlaySoundContinuous(shootSound, 0.5f);
+            SoundManager.Instance.PlaySoundContinuous(shootSound);
         }
 
         ShotInformation s = new(activeCrosshair.transform.position, this);

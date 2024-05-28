@@ -52,6 +52,8 @@ public class ClassicMode : AbsGameMode
 
         targetManager.numStuns = 0;
         targetManager.UpdateTargetParams();
+        if (GameManager.Instance.roundEndTheme != null)
+            SoundManager.Instance.PlaySoundContinuous(GameManager.Instance.roundEndTheme);
     }
 
     protected override int GetNextAvailableBat()
