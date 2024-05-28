@@ -10,9 +10,22 @@ public class TitleScreenBehavior : MonoBehaviour
     public GameObject onboardingContinueButton;
     public GameObject onboardingPanel;
     public AudioClip buttonClickSound;
+    public AudioClip titleScreenMusic;
+
+    void Start()
+    {
+        SoundManager.Instance.SetMusicToLoop(titleScreenMusic);
+        Debug.Log(titleScreenMusic + " should be playing right about now...");
+        Debug.Log("Is music playing? " + SoundManager.Instance.IsMusicPlaying);
+    }
 
     void Update()
     {
+        //if (!SoundManager.Instance.IsMusicPlaying)
+        //{
+        //    SoundManager.Instance.SetMusicToLoop(titleScreenMusic);
+        //    Debug.Log(titleScreenMusic + " has been executed through update instead!");
+        //}
         //Disable joycon calibration onboarding if no joycons are connected
         /*if (GameManager.Instance.InputManager.joycons.Count == 0)
         {
@@ -36,6 +49,7 @@ public class TitleScreenBehavior : MonoBehaviour
     public void StartGame()
     {
         SoundManager.Instance.PlaySoundContinuous(buttonClickSound);
+        SoundManager.Instance.StopMusicLoop();
         PlayerData.Reset();
         SceneManager.LoadScene(1);
     }
