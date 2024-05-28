@@ -149,6 +149,6 @@ public class PauseScreenBehavior : MonoBehaviour
 
     public void GetAllCrosshairs()
     {
-        crosshairs = FindObjectsOfType(typeof(Crosshair)) as Crosshair[];
+        crosshairs = FindObjectsOfType(typeof(Crosshair), includeInactive:true) as Crosshair[];
     }
 }
