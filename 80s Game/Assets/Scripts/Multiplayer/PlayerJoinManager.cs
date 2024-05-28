@@ -13,6 +13,7 @@ public class PlayerJoinManager : MonoBehaviour
     private void OnPlayerJoined(PlayerInput playerInput)
     {
         GameObject newPlayerPanel = Instantiate(joinPanelPrefab, joinPanelContainer.transform);
+        playerInput.SwitchCurrentActionMap("UI");
         
         PlayerConfig config = new PlayerConfig(playerInput.playerIndex, PlayerData.defaultColors[playerInput.playerIndex], Vector2.one);
         PlayerController pc = playerInput.gameObject.GetComponent<PlayerController>();
