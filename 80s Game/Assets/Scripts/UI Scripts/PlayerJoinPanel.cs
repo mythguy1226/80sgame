@@ -33,7 +33,9 @@ public class PlayerJoinPanel : MonoBehaviour
     private int initialTwo = 65;
     private int initialThree = 65;
 
-    public TextMeshProUGUI readyIndicator;
+    public Image readyIndicator;
+    public Sprite notReady;
+    public Sprite isReady;
     public bool playerReady;
 
     public EventSystem eventSystem;
@@ -117,12 +119,12 @@ public class PlayerJoinPanel : MonoBehaviour
 
         if (playerReady)
         {
-            readyIndicator.color = Color.green;
+            readyIndicator.sprite = isReady;
         }
         
         else
         {
-            readyIndicator.color = Color.red;
+            readyIndicator.sprite = notReady;
         }
     }
 
