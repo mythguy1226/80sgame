@@ -42,7 +42,7 @@ public class PauseScreenBehavior : MonoBehaviour
             Instance = this;
         }
 
-        crosshairs = FindObjectsOfType(typeof(Crosshair)) as Crosshair[];
+        GetAllCrosshairs();
     }
 
     // Update is called once per frame
@@ -125,6 +125,7 @@ public class PauseScreenBehavior : MonoBehaviour
 
     public void ToggleCrosshairs(bool toggle)
     {
+        GetAllCrosshairs();
         foreach(Crosshair c in crosshairs)
         {
             c.gameObject.SetActive(toggle);
@@ -141,5 +142,10 @@ public class PauseScreenBehavior : MonoBehaviour
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Confined;
         }
+    }
+
+    public void GetAllCrosshairs()
+    {
+        crosshairs = FindObjectsOfType(typeof(Crosshair)) as Crosshair[];
     }
 }
