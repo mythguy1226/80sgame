@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class KinematicSteer : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class KinematicSteer : MonoBehaviour
 
     // Get the sprite renderer
     SpriteRenderer spriteRenderer;
+    Rigidbody2D _rb;
 
     // Flocking values
     [Range(0.1f, 3.0f)]
@@ -42,6 +44,7 @@ public class KinematicSteer : MonoBehaviour
     {
         // Init components
         spriteRenderer = GetComponent<SpriteRenderer>();
+        _rb = GetComponent<Rigidbody2D>();
 
         // Set the first wander position
         SetWanderPosition();
@@ -69,6 +72,10 @@ public class KinematicSteer : MonoBehaviour
             UpdateVelocity();
             UpdatePosition();
         }
+        else
+        {
+            _rb.velocity = Vector2.zero;
+        }
 
         // Set direction to face
         if (currentVelocity.x > 0.0f)
@@ -85,7 +92,8 @@ public class KinematicSteer : MonoBehaviour
         Vector2 finalVelocity = currentVelocity.normalized * maxSpeed;
 
         // Update position based on final velocity
-        transform.position += new Vector3(finalVelocity.x, finalVelocity.y, 0.0f) * Time.deltaTime;
+        //transform.position += new Vector3(finalVelocity.x, finalVelocity.y, 0.0f) * Time.deltaTime;
+        _rb.velocity = finalVelocity;
     }
 
     // Method used for updating the current velocity 
@@ -264,5 +272,21 @@ public class KinematicSteer : MonoBehaviour
             baseVector = baseVector.normalized * maxMagnitude;
         }
         return baseVector;
+    }
+
+    // Method for detecting collisions
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.GetComponent<KinematicSteer>())
+        {
+            // Get max height and width values from screen
+            float maxHeight = Camera.main.GetComponent<Camera>().orthographicSize;
+            float maxWidth = maxHeight * (Screen.width / Screen.height);
+
+            if (!isFleeing)
+                SetWanderPosition();
+            else
+                targetPosition.x = UnityEngine.Random.Range((-maxWidth * 2) + spriteRenderer.size.x, (maxWidth * 2) - spriteRenderer.size.x);
+        }
     }
 }

@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 1064766512371524766}
   - component: {fileID: 8319351504079490042}
   - component: {fileID: 7156282623998708221}
+  - component: {fileID: 199050564143429961}
   m_Layer: 0
   m_Name: UnstableTarget
   m_TagString: Untagged
@@ -88,7 +89,7 @@ MonoBehaviour:
   currentVelocity: {x: 0, y: 0}
   flockSize: 1.75
   separationStrength: 1
-  cohesionStrength: 1
+  cohesionStrength: 0.7
   alignmentStrength: 1
 --- !u!95 &3464643637762033909
 Animator:
@@ -286,3 +287,38 @@ MonoBehaviour:
   chainRadius: 2
   chainLength: 3
   lightning: {fileID: 2958280814618220372, guid: 128a538b50a004e42bbe4ec0f3c37708, type: 3}
+--- !u!58 &199050564143429961
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8306778490096188409}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.01
