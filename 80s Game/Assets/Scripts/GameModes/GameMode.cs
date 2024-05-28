@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum EGameMode
+{
+    Classic,
+    Competitive,
+    Defense
+}
+
 public abstract class AbsGameMode
 {
-    public enum EGameMode
-    {
-        Classic,
-        Competitive,
-        Defense
-    }
-
     public EGameMode ModeType {  get; protected set; }
     public bool GameOver { get; protected set; }
     public int CurrentRound {  get; protected set; }

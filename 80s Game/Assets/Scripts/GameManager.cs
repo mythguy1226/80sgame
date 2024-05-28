@@ -12,6 +12,9 @@ public class GameManager : MonoBehaviour
     public AudioClip roundEndTheme;     //putting this here so it can be called by GameMode subclasses
     //public AudioClip failstateTheme;  //for future implementation of losable game mode(s), e.g. defense mode
 
+    // Change in Inspector
+    public EGameMode gameModeType = EGameMode.Classic;
+
     public AbsGameMode ActiveGameMode { get; private set; }
     // Public properties
     public InputManager InputManager { get; private set;  }
@@ -26,7 +29,6 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-
         // Check if the static reference matches the script instance
         if(Instance != null && Instance != this)
         {
@@ -64,21 +66,19 @@ public class GameManager : MonoBehaviour
 
     private void Start() 
     {
-        Scene currentScene = SceneManager.GetActiveScene();
-        string sceneName = currentScene.name;
+        InitGameMode(gameModeType);
+    }
 
-        switch (sceneName)
+    public void InitGameMode(EGameMode gameModeType)
+    {
+        switch(gameModeType)
         {
-            case "SampleScene":
+            case EGameMode.Classic:
                 ActiveGameMode = new ClassicMode();
                 break;
-            case "CompetitiveMode":
+            case EGameMode.Competitive:
                 ActiveGameMode = new CompetitiveMode();
                 break;
-            /*
-             * case "...":
-             *  ActiveGameMode = new CompetativeMode(numRoundsCompetative);
-             */
         }
     }
 }
