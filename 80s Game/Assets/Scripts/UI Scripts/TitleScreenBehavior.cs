@@ -61,7 +61,7 @@ public class TitleScreenBehavior : MonoBehaviour
                 break;
             case 2:
                 gamemodeName.text = "Competitive";
-                gamemodeDescription.text = "Bat Bots with Multiplayer!\n\nPlay with up to 2 players and compete to see who can get the highest score!\n\n This mode features new bat bots not seen in the Classic mode!";
+                gamemodeDescription.text = "Bat Bots with Multiplayer!\n\nPlay with up to 2 players and compete to see who can get the highest score!\n\nThis mode features new bat bots not seen in the Classic mode!";
                 break;
         }
     }
