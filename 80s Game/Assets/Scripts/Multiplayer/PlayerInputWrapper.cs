@@ -41,7 +41,7 @@ public class PlayerInputWrapper : MonoBehaviour
         
         else if (joycons.Count > 0)
         {
-            joycons[player.Order-1].SetRumble(0, 0, 0);
+            joycons[player.Order].SetRumble(0, 0, 0);
             sensitivity = controllerSensitivity;
         }
 

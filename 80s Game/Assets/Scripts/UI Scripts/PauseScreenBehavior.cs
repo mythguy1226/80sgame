@@ -71,6 +71,9 @@ public class PauseScreenBehavior : MonoBehaviour
 
     public void PauseGame()
     {
+        if (GameManager.Instance.UIManager.activeUI != UIManager.UIType.None){
+            return;
+        }
         if (pauseScreen != null)
         {
             //GameManager.Instance.InputManager.ResetRumble();

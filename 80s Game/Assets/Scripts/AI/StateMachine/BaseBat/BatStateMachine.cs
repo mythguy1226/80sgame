@@ -258,4 +258,9 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
         SoundManager.Instance.PlaySoundInterrupt(hitSound);
         bIsStunned = true;
     }
+
+    public void SetStunningPlayer(PlayerController controller)
+    {
+        stunningPlayer = controller;
+    }
 }

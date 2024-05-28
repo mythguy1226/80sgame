@@ -55,6 +55,11 @@ public class PointsManager : MonoBehaviour
     /// <returns>The new round point total</returns>
     public int AddBonusPoints(int player, float accuracy)
     {
+        if (!RoundScoreByPlayer.ContainsKey(player))
+        {
+            RoundScoreByPlayer[player] = 0;
+            TotalPointsByPlayer[player] = 0;
+        }
         int numBonusPoints = Mathf.RoundToInt(RoundScoreByPlayer[player] * accuracy);
         return AddRoundPoints(player, numBonusPoints);
     }

@@ -38,6 +38,7 @@ public class UnstableBatStateMachine : BatStateMachine
             chain.PlayEffect(currentTarg.transform.position, targetChain[i].transform.position);
 
             // Play stun anim
+            targetChain[i].FSM.SetStunningPlayer(stunningPlayer);
             targetChain[i].GetComponent<AnimationHandler>().PlayStunAnimation();
 
             // Update current target

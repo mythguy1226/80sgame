@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public enum ControllerState
+    {
+        JoinScreen,
+        Gameplay
+    };
+
+    private ControllerState currentState;
+    private PlayerJoinManager pjm;
+
     [SerializeField]
     private AudioClip shootSound;
 
@@ -39,7 +48,7 @@ public class PlayerController : MonoBehaviour
         activeCrosshair.SetMovementDelta(movementData);
     }
 
-    public void SetConfig(PlayerConfig pc)
+    public void SetConfig(PlayerConfig pc, ControllerState controllerState)
     {
         Order = pc.playerIndex;
         config = pc;
@@ -47,6 +56,7 @@ public class PlayerController : MonoBehaviour
         {
             activeCrosshair.ChangeSpriteColor(pc.crossHairColor);
         }
+        currentState = controllerState;
     }
 
     public void HandleFire()
@@ -75,12 +85,22 @@ public class PlayerController : MonoBehaviour
 
     public void EmitPause()
     {
+        if (currentState == ControllerState.JoinScreen)
+        {
+            pjm.LaunchGameMode();
+            return;
+        }
         UIManager.PlayerPause();
     }
 
     public void ReportEndOfRound()
     {
         GameManager.Instance.PointsManager.AddBonusPoints(Order, scoreController.GetAccuracy());
+    }
+
+    public void SetJoinManager(PlayerJoinManager manager)
+    {
+        pjm = manager;
     }
 
 }
