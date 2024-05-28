@@ -9846,6 +9846,8 @@ GameObject:
   - component: {fileID: 7014873915471283781}
   - component: {fileID: 7037331219643080041}
   - component: {fileID: 1378422487222437612}
+  - component: {fileID: -8368935978441067624}
+  - component: {fileID: 6593497030765079827}
   m_Layer: 0
   m_Name: Bonus Bat High
   m_TagString: Untagged
@@ -9917,7 +9919,7 @@ MonoBehaviour:
   currentVelocity: {x: 0, y: 0}
   flockSize: 1.75
   separationStrength: 1
-  cohesionStrength: 1
+  cohesionStrength: 0.7
   alignmentStrength: 1
 --- !u!95 &3464643637762033909
 Animator:
@@ -10034,26 +10036,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FSM: {fileID: -8368935978441067624}
---- !u!114 &-8368935978441067624
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8306778490096188409}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f4f91da932e5f440acc9ad7a59f7be2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bIsActive: 0
-  initialState: 0
-  floatingTextPrefab: {fileID: 5422266768498237442, guid: a675186d31f4293478ad06871f10c307, type: 3}
-  pointValue: 4000
-  deathHeight: -6.5
-  timeUntilFlee: 5
-  fleeLocation: {x: 0, y: 10}
-  hitSound: {fileID: 8300000, guid: c928b956a133aa544bfa866c9b7c2b47, type: 3}
 --- !u!60 &1378422487222437612
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -10110,3 +10092,59 @@ PolygonCollider2D:
       - {x: 0.08671771, y: -0.10610534}
       - {x: 0.18838617, y: -0.036498513}
   m_UseDelaunayMesh: 0
+--- !u!114 &-8368935978441067624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8306778490096188409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f4f91da932e5f440acc9ad7a59f7be2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bIsActive: 0
+  initialState: 0
+  floatingTextPrefab: {fileID: 5422266768498237442, guid: a675186d31f4293478ad06871f10c307, type: 3}
+  pointValue: 4000
+  deathHeight: -6.5
+  hitSound: {fileID: 8300000, guid: c928b956a133aa544bfa866c9b7c2b47, type: 3}
+  timeUntilFlee: 5
+  fleeTimer: 0
+  fleeLocation: {x: 0, y: 10}
+--- !u!58 &6593497030765079827
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8306778490096188409}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.01

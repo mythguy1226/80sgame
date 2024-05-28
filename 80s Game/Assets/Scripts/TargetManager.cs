@@ -29,6 +29,7 @@ public class TargetManager : MonoBehaviour
     private void Start()
     {
         targets = new List<Target>(GameObject.FindObjectsOfType<Target>());
+        DisablePolyCollisions();
     }
 
     public void UpdateTargetParams()
@@ -107,5 +108,16 @@ public class TargetManager : MonoBehaviour
         }
 
         return -1;
+    }
+
+    private void DisablePolyCollisions()
+    {
+        for (int i = 0; i < targets.Count; i++)
+        {
+            for(int j = 0; j < targets.Count; j++)
+            {
+                Physics2D.IgnoreCollision(targets[i].GetComponent<PolygonCollider2D>(), targets[j].GetComponent<PolygonCollider2D>());
+            }
+        }
     }
 }
