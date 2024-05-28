@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem.UI;
 using UnityEngine.UI;
 
 public class PlayerJoinPanel : MonoBehaviour
 {
+    public TextMeshProUGUI playerHeader;
+
     //Crosshair Elements
     public Image crosshairPreview;
     public Button crosshairRightArrow;
@@ -33,8 +36,13 @@ public class PlayerJoinPanel : MonoBehaviour
     public TextMeshProUGUI readyIndicator;
     public bool playerReady;
 
+    public EventSystem eventSystem;
+    public PlayerController player;
+
     void Start()
     {
+        eventSystem.GetComponent<MultiplayerEventSystem>().playerRoot = this.gameObject;
+        
         crosshairLeftArrow.onClick.AddListener(() => ChangeCrosshairSprite(false));
         crosshairRightArrow.onClick.AddListener(() => ChangeCrosshairSprite(true));
 
@@ -46,6 +54,8 @@ public class PlayerJoinPanel : MonoBehaviour
             initialUpButtons[i].onClick.AddListener(() => ChangeInitial(true, iCopy));
             initialDownButtons[i].onClick.AddListener(() => ChangeInitial(false, iCopy));
         }
+
+        PauseScreenBehavior.Instance.ToggleCrosshairs(false);
     }
 
     public void ChangeCrosshairSprite(bool forward)
@@ -162,5 +172,10 @@ public class PlayerJoinPanel : MonoBehaviour
 
             return Mathf.Clamp(--initialNum, 65, 90);
         }
+    }
+
+    public void UpdatePlayerNumber(int playerNum)
+    {
+        playerHeader.text = "Player " + playerNum;
     }
 }

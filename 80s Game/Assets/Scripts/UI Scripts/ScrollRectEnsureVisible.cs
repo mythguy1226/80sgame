@@ -11,6 +11,8 @@ public class ScrollRectEnsureVisible : MonoBehaviour
     RectTransform selectedRectTransform;
     GameObject lastSelected;
 
+    public EventSystem eventSystem;
+
     void Start()
     {
         scrollRectTransform = GetComponent<RectTransform>();
@@ -21,7 +23,7 @@ public class ScrollRectEnsureVisible : MonoBehaviour
         //just incase content panel gets created in start.
         if(contentPanel == null) contentPanel = GetComponent<ScrollRect>().content;
 
-        GameObject selected = EventSystem.current.currentSelectedGameObject;
+        GameObject selected = eventSystem.currentSelectedGameObject;
 
         if (selected == null)
         {

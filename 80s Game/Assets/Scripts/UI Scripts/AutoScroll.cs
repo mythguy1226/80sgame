@@ -10,13 +10,16 @@ public class AutoScroll : MonoBehaviour
     RectTransform contentPanel;
     RectTransform selectedRectTransform;
     GameObject lastSelected;
+
+    public EventSystem eventSystem;
+
     void Start() {
         scrollRectTransform = GetComponent<RectTransform>();
         contentPanel = GetComponent<ScrollRect>().content;
     }
     void Update() {
         // Get the currently selected UI element from the event system.
-        GameObject selected = EventSystem.current.currentSelectedGameObject;
+        GameObject selected = eventSystem.currentSelectedGameObject;
 
         // Return if there are none.
         if (selected == null) {
