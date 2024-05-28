@@ -44,6 +44,7 @@ public class PlayerController : MonoBehaviour
 
     public void HandleFire()
     {
+
         if (GameManager.Instance.UIManager.activeUI != UIManager.UIType.None)
         {
             GameManager.Instance.UIManager.GetFireInput(activeCrosshair.PositionToScreen());

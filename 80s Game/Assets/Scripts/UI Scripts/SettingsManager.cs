@@ -140,10 +140,10 @@ public class SettingsManager : MonoBehaviour
     private void LoadSettings()
     {
         //Load in settings from PlayerPrefs
-        float volume = PlayerPrefs.GetFloat("Volume");
-        int crtOn = PlayerPrefs.GetInt("CRTOn");
-        float curvature = PlayerPrefs.GetFloat("CRTCurvature");
-        float sensitivity = PlayerPrefs.GetFloat("Sensitivity");
+        float volume = PlayerPrefs.GetFloat("Volume", 1.0f);
+        int crtOn = PlayerPrefs.GetInt("CRTOn", 1);
+        float curvature = PlayerPrefs.GetFloat("CRTCurvature",0.2f);
+        float sensitivity = PlayerPrefs.GetFloat("Sensitivity",20);
 
         //Set Volume settings
         SoundManager.Instance.volume = volume;

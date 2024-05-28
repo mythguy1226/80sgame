@@ -34,6 +34,7 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
 
     // Default fields used for resets
     Vector3 spawnPoint;
+    bool bIsStunned = false;
 
     // Get needed components for state machine
     KinematicSteer _MovementControls;
@@ -145,7 +146,7 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
             return false;
 
         // Check that hit has detected this particular object
-        if (hit.collider.gameObject == gameObject)
+        if (hit.collider.gameObject == gameObject && !bIsStunned)
             return true;
 
         return false;
@@ -195,6 +196,7 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
         _MovementControls.canMove = false;
         _AnimControls.ResetAnimation();
         _Collider.isTrigger = false;
+        bIsStunned = false;
 
 
         // Choose new wander position to be used on respawn
@@ -252,5 +254,6 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
         // Trigger stun animation
         _AnimControls.PlayStunAnimation();
         SoundManager.Instance.PlaySoundInterrupt(hitSound, 0.7f);
+        bIsStunned = true;
     }
 }
