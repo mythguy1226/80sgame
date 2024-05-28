@@ -17,6 +17,7 @@ public class GameOverBehavior : MonoBehaviour
     public GameObject restartButton;
     public TMP_Text leaderboardText;
     public AudioClip buttonClickSound;
+    [SerializeField] AudioClip gameEndTheme;
 
     private bool gameOverTransition = true;
     
@@ -34,6 +35,8 @@ public class GameOverBehavior : MonoBehaviour
 
                 this.gameObject.GetComponent<PauseScreenBehavior>().ToggleCrosshairs(false);
                 Cursor.visible = true;
+                if (gameEndTheme != null)
+                    SoundManager.Instance.PlaySoundContinuous(gameEndTheme);
 
                 gameOverTransition = false;
             }
