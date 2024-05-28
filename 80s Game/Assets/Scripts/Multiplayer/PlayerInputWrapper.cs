@@ -54,7 +54,7 @@ public class PlayerInputWrapper : MonoBehaviour
     //Handle inputs received from the Unity input system
     private void OnMove(InputValue value)
     {
-        PlayerConfig config = PlayerData.activePlayers[player.Order];
+        PlayerConfig config = PlayerData.activePlayers[player.Order - 1];
         Vector2 adjustedInput = Vector2.Scale(value.Get<Vector2>(), sensitivity * config.sensitivity);
         player.HandleMovement(adjustedInput);
 

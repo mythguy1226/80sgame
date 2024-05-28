@@ -104,7 +104,11 @@ public class SettingsManager : MonoBehaviour
         else
         {
             EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(settingsButton.gameObject);
+            
+            if(settingsButton != null)
+            {
+                EventSystem.current.SetSelectedGameObject(settingsButton.gameObject);
+            }
         }
     }   
 
@@ -115,8 +119,6 @@ public class SettingsManager : MonoBehaviour
         PlayerPrefs.SetFloat("Sensitivity", sensitivityValue);
         PlayerPrefs.SetInt("CRTOn", System.Convert.ToInt32(crtToggle.isOn));
         PlayerPrefs.SetFloat("CRTCurvature", crtCurvature.value);
-
-        //playerInputWrapper.SetSensitivity(playerInputWrapper.controllerInput);
 
         ToggleSettingsPanel();
     }
