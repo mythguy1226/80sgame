@@ -43,7 +43,10 @@ public class ScoreBehavior : MonoBehaviour
         int maxNumOfRounds = GameManager.Instance.ActiveGameMode.NumRounds;
 
         //Update Score and Final Score text boxes
-        scoreTextObject.SetText(scoreText + score);
+        if (scoreTextObject != null)
+        {
+            scoreTextObject.SetText(scoreText + score);
+        }
         finalScoreTextObject.SetText(finalScoreText + score);
 
         //Update Round Indicator

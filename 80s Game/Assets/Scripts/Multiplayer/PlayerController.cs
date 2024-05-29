@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviour
     public void SetConfig(PlayerConfig pc, ControllerState controllerState)
     {
         Order = pc.playerIndex;
+        Debug.Log(Order);
         config = pc;
         if (activeCrosshair != null)
         {
