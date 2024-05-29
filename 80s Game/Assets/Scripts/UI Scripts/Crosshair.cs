@@ -78,4 +78,18 @@ public class Crosshair : MonoBehaviour
     {
         sprite.color = col;
     }
+
+    public Sprite GetCrosshairSprite()
+    {
+        if (sprite == null)
+        {
+            sprite = GetComponent<SpriteRenderer>();
+        }
+        return sprite.sprite;
+    }
+
+    public void SetCrosshairSprite(Sprite newSprite)
+    {
+        sprite.sprite = newSprite;
+    }
 }

@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerConfig
 {
+    public Sprite crosshairSprite;
     public Color crossHairColor;
     public Vector2 sensitivity;
     public int playerIndex;

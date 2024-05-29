@@ -54,6 +54,7 @@ public class PlayerController : MonoBehaviour
         config = pc;
         if (activeCrosshair != null)
         {
+            activeCrosshair.SetCrosshairSprite(pc.crosshairSprite);
             activeCrosshair.ChangeSpriteColor(pc.crossHairColor);
         }
         currentState = controllerState;
@@ -102,6 +103,11 @@ public class PlayerController : MonoBehaviour
     public void SetJoinManager(PlayerJoinManager manager)
     {
         pjm = manager;
+    }
+
+    public Sprite GetCrosshairSprite()
+    {
+        return crosshairPrefab.GetCrosshairSprite();
     }
 
 }
