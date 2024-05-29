@@ -1,10 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.IO.LowLevel.Unsafe;
-using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.UIElements;
 
 public class ClassicMode : AbsGameMode
 {
@@ -24,6 +20,7 @@ public class ClassicMode : AbsGameMode
     protected override void StartNextRound(bool isFirstRound = false)
     {
         if (!isFirstRound)
+            
             UpdateRoundParams();
 
         // Iterate through and spawn the next set of targets
@@ -93,17 +90,17 @@ public class ClassicMode : AbsGameMode
 
         if(targetManager.numStuns >= currentRoundTargetCount)
         {
-            // Add bonus points
-            GameManager.Instance.PointsManager.AddBonusPoints(
-                GameManager.Instance.HitsManager.Accuracy
-            );
 
             // If last round completed
             if(CurrentRound == NumRounds)
                 GameOver = true;
             // Otherwise start next round
             else
+            {
+                GameManager.EmitRoundOverEvent();
                 StartNextRound();
+            }
+                
 
             return;
         }

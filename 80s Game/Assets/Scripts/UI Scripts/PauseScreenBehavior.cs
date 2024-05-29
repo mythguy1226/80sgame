@@ -71,6 +71,9 @@ public class PauseScreenBehavior : MonoBehaviour
 
     public void PauseGame()
     {
+        if (GameManager.Instance.UIManager.activeUI != UIManager.UIType.None){
+            return;
+        }
         if (pauseScreen != null)
         {
             //GameManager.Instance.InputManager.ResetRumble();
@@ -146,6 +149,6 @@ public class PauseScreenBehavior : MonoBehaviour
 
     public void GetAllCrosshairs()
     {
-        crosshairs = FindObjectsOfType(typeof(Crosshair)) as Crosshair[];
+        crosshairs = FindObjectsOfType(typeof(Crosshair), includeInactive:true) as Crosshair[];
     }
 }

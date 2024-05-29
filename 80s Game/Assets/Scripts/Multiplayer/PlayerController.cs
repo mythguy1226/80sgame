@@ -1,14 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    public enum ControllerState
+    {
+        JoinScreen,
+        Gameplay
+    };
 
-    public AudioClip shootSound;
-    public int score;
-    public float accuracy;
+    private ControllerState currentState;
+    private PlayerJoinManager pjm;
+
+    [SerializeField]
+    private AudioClip shootSound;
+
+    public PlayerScoreController scoreController;
+    
     public int Order { get; private set; }
 
     private PlayerConfig config;
@@ -19,9 +28,18 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        Order = PlayerData.activePlayers.Count;
+        GameManager.roundOverObservers += ReportEndOfRound;
+        scoreController = new PlayerScoreController();
         activeCrosshair = Instantiate(crosshairPrefab, new Vector3(0,0,0), Quaternion.identity);
-        activeCrosshair.ChangeSpriteColor(config.crossHairColor);
+        if (config != null)
+        {
+            activeCrosshair.ChangeSpriteColor(config.crossHairColor);
+            
+        } else
+        {
+            Order = PlayerData.activePlayers.Count;
+        }
+        
     }
 
     public void HandleMovement(Vector2 movementData)
@@ -30,7 +48,7 @@ public class PlayerController : MonoBehaviour
         activeCrosshair.SetMovementDelta(movementData);
     }
 
-    public void SetConfig(PlayerConfig pc)
+    public void SetConfig(PlayerConfig pc, ControllerState controllerState)
     {
         Order = pc.playerIndex;
         config = pc;
@@ -38,6 +56,7 @@ public class PlayerController : MonoBehaviour
         {
             activeCrosshair.ChangeSpriteColor(pc.crossHairColor);
         }
+        currentState = controllerState;
     }
 
     public void HandleFire()
@@ -53,8 +72,10 @@ public class PlayerController : MonoBehaviour
         {
             SoundManager.Instance.PlaySoundContinuous(shootSound);
         }
-        ShotInformation s = new(activeCrosshair.transform.position, Order);
+
+        ShotInformation s = new(activeCrosshair.transform.position, this);
         InputManager.PlayerShot(s);
+        scoreController.AddShot();
     }
 
     public void RecenterCursor()
@@ -64,6 +85,33 @@ public class PlayerController : MonoBehaviour
 
     public void EmitPause()
     {
+        if (currentState == ControllerState.JoinScreen)
+        {
+            pjm.LaunchGameMode();
+            return;
+        }
         UIManager.PlayerPause();
+    }
+
+    public void ReportEndOfRound()
+    {
+        GameManager.Instance.PointsManager.AddBonusPoints(Order, scoreController.GetAccuracy());
+    }
+
+    public void SetJoinManager(PlayerJoinManager manager)
+    {
+        pjm = manager;
+    }
+
+}
+
+public struct ShotInformation
+{
+    public Vector3 location;
+    public PlayerController player;
+    public ShotInformation(Vector3 l, PlayerController p)
+    {
+        location = l;
+        player = p;
     }
 }

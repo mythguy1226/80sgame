@@ -22,12 +22,14 @@ public class GameOverBehavior : MonoBehaviour
     private bool gameOverTransition = true;
     
     // Update is called once per frame
+    // This should be refactored - the game over screen is being set every frame
     void Update()
     {
         //set UI based on if the game is over or not
         gameOverUI.SetActive(GameManager.Instance.ActiveGameMode.GameOver);
         if (gameOverUI.activeInHierarchy)
         {
+            GameManager.Instance.UIManager.activeUI = UIManager.UIType.GameOver;
             if (gameOverTransition)
             {
                 EventSystem.current.SetSelectedGameObject(null);

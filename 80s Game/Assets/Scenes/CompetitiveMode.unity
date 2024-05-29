@@ -7973,8 +7973,8 @@ MonoBehaviour:
   gameUI: {fileID: 1759806105}
   summaryScreen: {fileID: 1865122240}
   highScoreLeaderboard: {fileID: 1619173211}
-  continueButton: {fileID: 0}
-  restartButton: {fileID: 0}
+  continueButton: {fileID: 158337862}
+  restartButton: {fileID: 393536519}
   leaderboardText: {fileID: 692398610}
   buttonClickSound: {fileID: 8300000, guid: 0f33d998cd03b1f4ebc4983ef2a6d559, type: 3}
   gameEndTheme: {fileID: 8300000, guid: e5a6e5297d672bc4e8399d40ba2d8e43, type: 3}

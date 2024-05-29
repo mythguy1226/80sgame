@@ -61,17 +61,9 @@ public class SettingsManager : MonoBehaviour
     public void ChangeSensitivity()
     {
         sensitivityValue = sensitivitySlider.value / 4;
-        PlayerConfig config = new PlayerConfig();
-
-        config.sensitivity = new Vector2(sensitivityValue, sensitivityValue);
-        config.crossHairColor = PlayerData.activePlayers[playerIndex].crossHairColor;
-        config.playerIndex = playerIndex;
-
-        PlayerData.activePlayers[playerIndex] = config;
-
+        PlayerData.activePlayers[playerIndex].sensitivity = new Vector2(sensitivityValue, sensitivityValue);
         float sensitivityLabel = sensitivitySlider.value / 4;
         settingsLabels[1].text = sensitivityLabel.ToString("F2");
-
     }
 
     public void ToggleCRTEffect()

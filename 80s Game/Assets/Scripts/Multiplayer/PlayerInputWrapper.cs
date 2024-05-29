@@ -41,7 +41,7 @@ public class PlayerInputWrapper : MonoBehaviour
         
         else if (joycons.Count > 0)
         {
-            joycons[player.Order-1].SetRumble(0, 0, 0);
+            joycons[player.Order].SetRumble(0, 0, 0);
             sensitivity = controllerSensitivity;
         }
 
@@ -54,10 +54,9 @@ public class PlayerInputWrapper : MonoBehaviour
     //Handle inputs received from the Unity input system
     private void OnMove(InputValue value)
     {
-        PlayerConfig config = PlayerData.activePlayers[player.Order - 1];
+        PlayerConfig config = PlayerData.activePlayers[player.Order];
         Vector2 adjustedInput = Vector2.Scale(value.Get<Vector2>(), sensitivity * config.sensitivity);
         player.HandleMovement(adjustedInput);
-
     }
 
     private void OnMove(Vector2 value)
@@ -74,6 +73,12 @@ public class PlayerInputWrapper : MonoBehaviour
     private void OnFire()
     {
         player.HandleFire();
+
+        if (JoyconManager.Instance.j.Count > 0)
+        {
+            Joycon j = JoyconManager.Instance.j[player.Order];
+            j.SetRumble(160, 320, 0.6f, 200);
+        }   
     }
 
     private void OnRecenter(InputValue value)

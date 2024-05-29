@@ -1,10 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public static Action roundOverObservers;
     // Singleton pattern
     public static GameManager Instance { get; private set; }
     public PlayerController playerPrefab;
@@ -52,13 +55,16 @@ public class GameManager : MonoBehaviour
                 PlayerConfig defaultConfig = new PlayerConfig(0, PlayerData.defaultColors[0], new Vector2(sensitivity, sensitivity));
                 PlayerData.activePlayers.Add(defaultConfig);
                 PlayerController pc = Instantiate(playerPrefab, transform.position, Quaternion.identity);
-                pc.SetConfig(defaultConfig);
+                pc.SetConfig(defaultConfig, PlayerController.ControllerState.Gameplay);
             } else
             {
                 for(int i = 0; i < PlayerData.activePlayers.Count; i++)
                 {
                     PlayerController pc = Instantiate(playerPrefab, transform.position, Quaternion.identity);
-                    pc.SetConfig(PlayerData.activePlayers[i]);
+                    pc.SetConfig(PlayerData.activePlayers[i], PlayerController.ControllerState.Gameplay);
+                    PlayerInput pi = pc.GetComponent<PlayerInput>();
+                    InputDevice[] devices = new InputDevice[] { PlayerData.activePlayers[i].device };
+                    pi.SwitchCurrentControlScheme(PlayerData.activePlayers[i].controlScheme, devices);
                 }
             }
         }
@@ -73,12 +79,17 @@ public class GameManager : MonoBehaviour
     {
         switch(gameModeType)
         {
-            case EGameMode.Classic:
-                ActiveGameMode = new ClassicMode();
-                break;
             case EGameMode.Competitive:
                 ActiveGameMode = new CompetitiveMode();
                 break;
+            default:
+                ActiveGameMode = new ClassicMode();
+                break;
         }
+    }
+
+    public static void EmitRoundOverEvent()
+    {
+        roundOverObservers?.Invoke();
     }
 }

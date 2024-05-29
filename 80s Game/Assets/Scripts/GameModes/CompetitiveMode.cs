@@ -110,10 +110,6 @@ public class CompetitiveMode : AbsGameMode
 
         if (targetManager.numStuns >= currentRoundTargetCount)
         {
-            // Add bonus points
-            GameManager.Instance.PointsManager.AddBonusPoints(
-                GameManager.Instance.HitsManager.Accuracy
-            );
 
             // If last round completed
             if (CurrentRound == NumRounds)
