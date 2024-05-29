@@ -68,17 +68,17 @@ public class ScoreBehavior : MonoBehaviour
             switch (leadingPlayer)
             {
                 case 1:
-                    finalScoreText = "Player 1 Wins!\n\n";
+                    finalScoreText = "Player 1 Wins!";
                     break;
                 case 2:
-                    finalScoreText = "Player 2 Wins!\n\n";
+                    finalScoreText = "Player 2 Wins!";
                     break;
                 case 3:
-                    finalScoreText = "Tie!\n\n";
+                    finalScoreText = "Tie!";
                     break;
             }
 
-            finalScoreText += "FINAL SCORES:\n\nPlayer 1: " + playerOnePoints + "\nPlayer 2: " + playerTwoPoints;
+            finalScoreText += "\n\n\nFINAL SCORES:\n\nPlayer 1: " + playerOnePoints + "\nPlayer 2: " + playerTwoPoints;
             finalScoreTextObject.SetText(finalScoreText);
         }
 
