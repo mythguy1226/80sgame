@@ -9,8 +9,10 @@ public class PointsManager : MonoBehaviour
     // Public property
     public int maxScore;
     public int maxScoringPlayer;
+    public ScoreBehavior scoreBehavior;
+
     private Dictionary<int, int> RoundScoreByPlayer;
-    private Dictionary<int, int> TotalPointsByPlayer;
+    public  Dictionary<int, int> TotalPointsByPlayer;
 
     private string filePath = Application.dataPath + "/PlayerData/scores.txt";
     private int numTopScores = 6;
@@ -44,6 +46,8 @@ public class PointsManager : MonoBehaviour
             maxScore = RoundScoreByPlayer[player];
             maxScoringPlayer = player; 
         }
+        
+        scoreBehavior.UpdateScores(player);
         return RoundScoreByPlayer[player];
     }
 
@@ -61,6 +65,8 @@ public class PointsManager : MonoBehaviour
             TotalPointsByPlayer[player] = 0;
         }
         int numBonusPoints = Mathf.RoundToInt(RoundScoreByPlayer[player] * accuracy);
+        
+        scoreBehavior.UpdateScores(player);
         return AddRoundPoints(player, numBonusPoints);
     }
 

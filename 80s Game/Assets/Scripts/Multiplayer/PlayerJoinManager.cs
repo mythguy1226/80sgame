@@ -55,6 +55,6 @@ public class PlayerJoinManager : MonoBehaviour
         }
 
         // Everyone is ready
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(3);
     }
 }

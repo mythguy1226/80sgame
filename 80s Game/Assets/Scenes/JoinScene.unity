@@ -611,6 +611,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 3927707039747870840, guid: bc3f50abd22028041ab5a1ce97145ecf, type: 3}
   roundEndTheme: {fileID: 0}
+  gameModeType: 3
   debug: 0
 --- !u!4 &1384543482
 Transform:

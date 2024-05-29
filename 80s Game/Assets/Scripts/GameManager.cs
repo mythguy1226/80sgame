@@ -82,8 +82,10 @@ public class GameManager : MonoBehaviour
             case EGameMode.Competitive:
                 ActiveGameMode = new CompetitiveMode();
                 break;
-            default:
+            case EGameMode.Classic:
                 ActiveGameMode = new ClassicMode();
+                break;
+            default:
                 break;
         }
     }
