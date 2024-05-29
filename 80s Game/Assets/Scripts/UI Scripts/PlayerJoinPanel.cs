@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
 using UnityEngine.UI;
 
@@ -37,7 +38,8 @@ public class PlayerJoinPanel : MonoBehaviour
     public bool playerReady;
 
     public EventSystem eventSystem;
-    public PlayerController player;
+    private int player;
+    private PlayerJoinManager pjm;
 
     void Start()
     {
@@ -56,6 +58,7 @@ public class PlayerJoinPanel : MonoBehaviour
         }
 
         PauseScreenBehavior.Instance.ToggleCrosshairs(false);
+
     }
 
     public void ChangeCrosshairSprite(bool forward)
@@ -124,6 +127,7 @@ public class PlayerJoinPanel : MonoBehaviour
         {
             readyIndicator.color = Color.red;
         }
+        pjm.SetPlayerReady(player, playerReady);
     }
 
     private void ChangeInitial(bool increase, int initialIndex)
@@ -176,6 +180,12 @@ public class PlayerJoinPanel : MonoBehaviour
 
     public void UpdatePlayerNumber(int playerNum)
     {
+        player = playerNum - 1;
         playerHeader.text = "Player " + playerNum;
+    }
+
+    public void SetManager(PlayerJoinManager manager)
+    {
+        pjm = manager;
     }
 }
