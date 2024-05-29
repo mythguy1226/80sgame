@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -103,7 +104,6 @@ public class PlayerController : MonoBehaviour
     {
         pjm = manager;
     }
-
 }
 
 public struct ShotInformation

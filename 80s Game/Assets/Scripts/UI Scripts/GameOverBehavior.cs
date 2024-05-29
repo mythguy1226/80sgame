@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.EventSystems;
 using Unity.VisualScripting;
+using UnityEngine.InputSystem;
 
 public class GameOverBehavior : MonoBehaviour
 {
@@ -34,7 +35,7 @@ public class GameOverBehavior : MonoBehaviour
             {
                 EventSystem.current.SetSelectedGameObject(null);
                 EventSystem.current.SetSelectedGameObject(continueButton);
-
+                
                 this.gameObject.GetComponent<PauseScreenBehavior>().ToggleCrosshairs(false);
                 Cursor.visible = true;
                 if (gameEndTheme != null)
