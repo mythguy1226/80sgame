@@ -96,6 +96,11 @@ public class PlayerInputWrapper : MonoBehaviour
         player.EmitPause();
     }
 
+    private void OnStartGame(InputValue value)
+    {
+        player.EmitPause();
+    }
+
     private void OnPause()
     {
 
