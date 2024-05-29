@@ -6,7 +6,8 @@ public enum EGameMode
 {
     Classic,
     Competitive,
-    Defense
+    Defense,
+    Menu
 }
 
 public abstract class AbsGameMode

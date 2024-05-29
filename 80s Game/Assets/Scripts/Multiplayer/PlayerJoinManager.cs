@@ -3,11 +3,12 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 [RequireComponent(typeof(PlayerInputManager))]
 public class PlayerJoinManager : MonoBehaviour
 {
-
+    public TextMeshProUGUI joinPrompt;
     Dictionary<int, bool> joinStatus;
 
     private void Awake()
@@ -28,6 +29,7 @@ public class PlayerJoinManager : MonoBehaviour
         config.controlScheme = playerInput.currentControlScheme;
         config.device = playerInput.devices[0];
         PlayerController pc = playerInput.gameObject.GetComponent<PlayerController>();
+        config.crosshairSprite = pc.GetCrosshairSprite();
         PlayerData.activePlayers.Add(config);
         pc.SetConfig(config, PlayerController.ControllerState.JoinScreen);
         pc.SetJoinManager(this);
@@ -36,6 +38,9 @@ public class PlayerJoinManager : MonoBehaviour
         
         newPlayerPanel.GetComponent<PlayerJoinPanel>().UpdatePlayerNumber(pc.Order + 1);
         newPlayerPanel.GetComponent<PlayerJoinPanel>().SetManager(this);
+
+        joinPrompt.text = "Press Start when ready";
+        joinPrompt.rectTransform.SetLocalPositionAndRotation(new Vector3(0, -460, 0), Quaternion.identity);
     }
 
     public void SetPlayerReady(int player, bool isReady)
@@ -55,6 +60,6 @@ public class PlayerJoinManager : MonoBehaviour
         }
 
         // Everyone is ready
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(3);
     }
 }

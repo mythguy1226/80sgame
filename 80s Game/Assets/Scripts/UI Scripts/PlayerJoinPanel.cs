@@ -34,7 +34,9 @@ public class PlayerJoinPanel : MonoBehaviour
     private int initialTwo = 65;
     private int initialThree = 65;
 
-    public TextMeshProUGUI readyIndicator;
+    public Image readyIndicator;
+    public Sprite notReady;
+    public Sprite isReady;
     public bool playerReady;
 
     public EventSystem eventSystem;
@@ -72,6 +74,7 @@ public class PlayerJoinPanel : MonoBehaviour
 
         TextMeshProUGUI crosshairText = crosshairPreview.gameObject.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
         crosshairText.text = (crosshairIndex + 1) + "/" + crosshairSprites.Count;
+        UpdatePlayerConfig();
     }
 
     public void ToggleColorSettings()
@@ -98,6 +101,7 @@ public class PlayerJoinPanel : MonoBehaviour
         {
             sliderLabels[i].text = colorSliders[i].value.ToString();
         }
+        UpdatePlayerConfig();
     }
 
     public void ChangeCrosshairPreset()
@@ -111,7 +115,7 @@ public class PlayerJoinPanel : MonoBehaviour
         }
 
         ChangeCrosshairColor();
-        
+        UpdatePlayerConfig();
     }
 
     public void ReadyUp()
@@ -120,12 +124,12 @@ public class PlayerJoinPanel : MonoBehaviour
 
         if (playerReady)
         {
-            readyIndicator.color = Color.green;
+            readyIndicator.sprite = isReady;
         }
         
         else
         {
-            readyIndicator.color = Color.red;
+            readyIndicator.sprite = notReady;
         }
         pjm.SetPlayerReady(player, playerReady);
     }
@@ -153,6 +157,15 @@ public class PlayerJoinPanel : MonoBehaviour
                 initials[initialIndex].text = tempChar.ToString();
                 break;
         }
+
+        UpdatePlayerConfig();
+    }
+
+    private void UpdatePlayerConfig()
+    {
+        PlayerData.activePlayers[player].initials = initials[0].text + initials[1].text + initials[2].text;
+        PlayerData.activePlayers[player].crossHairColor = new Color(colorSliders[0].value / 255, colorSliders[1].value / 255, colorSliders[2].value / 255);
+        PlayerData.activePlayers[player].crosshairSprite = crosshairPreview.sprite;
     }
 
     private int UpdateInitialNumber(bool increase, int initialNum)

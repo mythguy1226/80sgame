@@ -611,6 +611,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 3927707039747870840, guid: bc3f50abd22028041ab5a1ce97145ecf, type: 3}
   roundEndTheme: {fileID: 0}
+  gameModeType: 3
   debug: 0
 --- !u!4 &1384543482
 Transform:
@@ -1334,8 +1335,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 6.0825, y: -463.8}
-  m_SizeDelta: {x: 907.22, y: 85.6}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1899.91, y: 78.27}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1978148772
 MonoBehaviour:
@@ -1384,7 +1385,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50.4
+  m_fontSize: 72
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1531,6 +1532,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f3eca8310e3a7e4fb59a8cfc966895a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  joinPrompt: {fileID: 1978148772}
   joinPanelPrefab: {fileID: 2666762154324794849, guid: 3a8610fe63a9c0c488e0f9a05973d03b, type: 3}
   joinPanelContainer: {fileID: 745268981}
 --- !u!1660057539 &9223372036854775807

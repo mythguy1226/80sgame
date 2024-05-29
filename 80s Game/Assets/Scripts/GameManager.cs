@@ -23,7 +23,6 @@ public class GameManager : MonoBehaviour
     public InputManager InputManager { get; private set;  }
     public TargetManager TargetManager { get; private set; }
     public PointsManager PointsManager { get; private set; }
-    public HitsManager HitsManager { get; private set; }
 
     public UIManager UIManager { get; private set; }
     
@@ -46,7 +45,6 @@ public class GameManager : MonoBehaviour
             InputManager = GetComponent<InputManager>();
             TargetManager = GetComponent<TargetManager>();
             PointsManager = GetComponent<PointsManager>();
-            HitsManager = GetComponent<HitsManager>();
             UIManager = GetComponent<UIManager>();
 
             if (PlayerData.activePlayers.Count == 0 && debug) {
@@ -82,8 +80,10 @@ public class GameManager : MonoBehaviour
             case EGameMode.Competitive:
                 ActiveGameMode = new CompetitiveMode();
                 break;
-            default:
+            case EGameMode.Classic:
                 ActiveGameMode = new ClassicMode();
+                break;
+            default:
                 break;
         }
     }
