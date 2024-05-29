@@ -8258,7 +8258,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdc22801d2a00a740934f082aa4fa558, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreTextObject: {fileID: 0}
+  textScores:
+  - {fileID: 904504322}
+  - {fileID: 84073438}
   highScoreTextObject: {fileID: 153801723}
   finalScoreTextObject: {fileID: 1117114116}
   roundIndicatorTextObject: {fileID: 736886330}
@@ -8736,7 +8738,6 @@ GameObject:
   - component: {fileID: 1095139971}
   - component: {fileID: 1095139970}
   - component: {fileID: 1095139976}
-  - component: {fileID: 1095139977}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -8758,6 +8759,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxScore: 0
   maxScoringPlayer: 0
+  scoreBehavior: {fileID: 1011990666}
 --- !u!114 &1095139971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8858,21 +8860,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activeUI: 1
   canvas: {fileID: 1011990661}
---- !u!114 &1095139977
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1095139969}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 214edaa3f27fdd94d98230ea046bba22, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textScores:
-  - {fileID: 904504322}
-  - {fileID: 84073438}
 --- !u!1 &1098323054
 GameObject:
   m_ObjectHideFlags: 0
@@ -13540,7 +13527,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1759806106
 RectTransform:
   m_ObjectHideFlags: 0

@@ -6,7 +6,7 @@ using TMPro;
 public class ScoreBehavior : MonoBehaviour
 {
     //References to Text Objects
-    public TMP_Text scoreTextObject;
+    public List<TextMeshProUGUI> textScores;
     public TMP_Text highScoreTextObject;
     public TMP_Text finalScoreTextObject;
     public TMP_Text roundIndicatorTextObject;
@@ -42,26 +42,29 @@ public class ScoreBehavior : MonoBehaviour
         int currentRoundNum = GameManager.Instance.ActiveGameMode.CurrentRound;
         int maxNumOfRounds = GameManager.Instance.ActiveGameMode.NumRounds;
 
-        //Update Score and Final Score text boxes
-        if (scoreTextObject != null)
+        if (GameManager.Instance.gameModeType == EGameMode.Classic)
         {
-            scoreTextObject.SetText(scoreText + score);
+            finalScoreTextObject.SetText(finalScoreText + score);
+
+            //If you beat the high score, list the current score under high score as well
+            if (score > highScore)
+            {
+                highScoreTextObject.SetText(highScoreText + score);
+            }
+
+            //Otherwise use the set high score value
+            else
+            {
+                highScoreTextObject.SetText(highScoreText + highScore);
+            }
         }
-        finalScoreTextObject.SetText(finalScoreText + score);
 
         //Update Round Indicator
         roundIndicatorTextObject.SetText(roundText + currentRoundNum + "/" + maxNumOfRounds);
+    }
 
-        //If you beat the high score, list the current score under high score as well
-        if (score > highScore)
-        {
-            highScoreTextObject.SetText(highScoreText + score);
-        }
-
-        //Otherwise use the set high score value
-        else
-        {
-            highScoreTextObject.SetText(highScoreText + highScore);
-        }
+    public void UpdateScores(int player)
+    {
+        textScores[player].text = GameManager.Instance.PointsManager.TotalPointsByPlayer[player].ToString();
     }
 }

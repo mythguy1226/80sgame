@@ -17,12 +17,6 @@ public class MultiplayerScoreUI : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void UpdateScores(int player)
     {
         textScores[player].text = GameManager.Instance.PointsManager.TotalPointsByPlayer[player].ToString();

@@ -9,6 +9,8 @@ public class PointsManager : MonoBehaviour
     // Public property
     public int maxScore;
     public int maxScoringPlayer;
+    public ScoreBehavior scoreBehavior;
+
     private Dictionary<int, int> RoundScoreByPlayer;
     public  Dictionary<int, int> TotalPointsByPlayer;
 
@@ -44,8 +46,8 @@ public class PointsManager : MonoBehaviour
             maxScore = RoundScoreByPlayer[player];
             maxScoringPlayer = player; 
         }
-
-        this.GetComponent<MultiplayerScoreUI>().UpdateScores(player);
+        
+        scoreBehavior.UpdateScores(player);
         return RoundScoreByPlayer[player];
     }
 
@@ -64,8 +66,7 @@ public class PointsManager : MonoBehaviour
         }
         int numBonusPoints = Mathf.RoundToInt(RoundScoreByPlayer[player] * accuracy);
         
-        this.gameObject.GetComponent<MultiplayerScoreUI>().UpdateScores(player);
-
+        scoreBehavior.UpdateScores(player);
         return AddRoundPoints(player, numBonusPoints);
     }
 
