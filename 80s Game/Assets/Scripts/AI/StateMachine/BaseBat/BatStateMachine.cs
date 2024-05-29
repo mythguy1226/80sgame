@@ -212,7 +212,7 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
         {
             // Add a successful hit
             stunningPlayer.scoreController.AddHit();
-            gameManager.PointsManager.AddRoundPoints(stunningPlayer.Order, pointValue);
+            gameManager.PointsManager.AddRoundPoints(stunningPlayer.Order, pointValue * stunningPlayer.scoreController.pointsMod);
         }
 
         // Update target manager with current state

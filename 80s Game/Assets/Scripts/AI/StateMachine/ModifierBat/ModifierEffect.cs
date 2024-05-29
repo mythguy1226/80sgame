@@ -4,10 +4,44 @@ using UnityEngine;
 
 public abstract class AbsModifierEffect : MonoBehaviour
 {
+    [SerializeField]
+    protected float effectDuration;
+
+    protected bool bIsActive = false;
+    protected PlayerController activator;
+
+    Rigidbody2D _Rb;
+
     // Start is called before the first frame update
     void Start()
     {
         InputManager.detectHitSub += ListenForShot;
+        _Rb = GetComponent<Rigidbody2D>();
+    }
+
+    // Called once every frame
+    void Update()
+    {
+        // Manage duration timer if active
+        if(bIsActive)
+        {
+            effectDuration -= Time.deltaTime;
+
+            // Deactivate effect once timer reaches zero
+            if (effectDuration <= 0.0f)
+            {
+                DeactivateEffect();
+                bIsActive = false;
+                Destroy(gameObject);
+            }
+        }
+
+        // Detect when modifier has fallen out of world
+        if(transform.position.y <= -10.0f)
+        {
+            InputManager.detectHitSub -= ListenForShot;
+            Destroy(gameObject);
+        }    
     }
 
     /// <summary>
@@ -17,29 +51,35 @@ public abstract class AbsModifierEffect : MonoBehaviour
     public abstract void ActivateEffect();
 
     /// <summary>
+    /// Abstract method each modifier class will implement
+    /// to implement deactivation of effects
+    /// </summary>
+    public abstract void DeactivateEffect();
+
+    /// <summary>
     /// Checks if modifier has been shot
     /// </summary>
-    public virtual void DetectHit(Vector3 pos)
+    public bool DetectHit(Vector3 pos)
     {
         bool isGameGoing = Time.timeScale > 0;
         if (!isGameGoing)
         {
-            return;
+            return false;
         }
 
         RaycastHit2D hit = Physics2D.Raycast(pos, Vector2.zero);
 
         // Null check
         if (!hit)
-            return;
+            return false;
 
         // Check that hit has detected this particular object
         if (hit.collider.gameObject == gameObject)
         {
-            ActivateEffect();
-            InputManager.detectHitSub -= ListenForShot;
-            Destroy(gameObject);
+            return true;
         }
+
+        return false;
     }
 
     /// <summary>
@@ -48,6 +88,27 @@ public abstract class AbsModifierEffect : MonoBehaviour
     /// <param name="position">Position where player last fired</param>
     public void ListenForShot(ShotInformation s)
     {
-        DetectHit(s.location);
+        // Detect hit at location
+        if(DetectHit(s.location))
+        {
+            // Ensure activator is set
+            if (activator == null)
+                activator = s.player;
+
+            ResolveShot();
+        }
+    }
+
+    /// <summary>
+    /// Handler for shot resolution
+    /// </summary>
+    public void ResolveShot()
+    {
+        // Activate the effect
+        ActivateEffect();
+        bIsActive = true;
+        InputManager.detectHitSub -= ListenForShot;
+        transform.position = new Vector3(-15.0f, 15.0f, 0.0f); // Move off-screen for duration of lifetime
+        _Rb.gravityScale = 0.0f; // Turn off gravity here
     }
 }
