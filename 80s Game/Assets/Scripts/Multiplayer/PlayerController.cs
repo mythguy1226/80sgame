@@ -86,6 +86,7 @@ public class PlayerController : MonoBehaviour
 
     public void EmitPause()
     {
+
         if (currentState == ControllerState.JoinScreen)
         {
             pjm.LaunchGameMode();
