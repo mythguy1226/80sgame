@@ -13,8 +13,6 @@ public class ClassicMode : AbsGameMode
         NumRounds = 10;
         maxTargetsOnScreen = 8;
         currentRoundTargetCount = 5;
-
-        StartNextRound(true);
     }
 
     protected override void StartNextRound(bool isFirstRound = false)

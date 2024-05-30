@@ -60,13 +60,12 @@ public class SoundManager : MonoBehaviour
             interruptSource.Stop(); //interrupts current sound playing through interruptSource, to avoid sounds stacking on top of one another
         }
         interruptSource.PlayOneShot(clip, volume);
-        //Debug.Log(clip);
+
     }
 
     public void PlaySoundContinuous(AudioClip clip)
     { 
         continuousSource.PlayOneShot(clip, volume);
-        //Debug.Log(clip);
     }
 
     public void StopMusicLoop()
@@ -76,7 +75,7 @@ public class SoundManager : MonoBehaviour
             if (musicLoopSources[i] == null) continue;
             musicLoopSources[i].Stop();
         }
-        Debug.Log("you have been stopped.");
+
         isMusicPlaying = false;
     }
 
@@ -85,7 +84,7 @@ public class SoundManager : MonoBehaviour
         //probably dangerous, but shouldn't need to be called anyway
         if (musicLoopSources == null || musicLoopSources.Length == 0)
         {
-            Debug.Log("");
+
             musicLoopSources = new AudioSource[2];
             musicLoopSources[0] = new AudioSource();
             musicLoopSources[0].volume = volume;
@@ -110,14 +109,14 @@ public class SoundManager : MonoBehaviour
         if (clip != null)
         {
             musicLoopClip = clip;
-            Debug.Log(clip + " has been set to loop.");
+
             nextEventTime = AudioSettings.dspTime + 1.0f;
-            Debug.Log("Next event time: " + nextEventTime);
+
             isMusicPlaying = true;
         }
         else
         {
-            Debug.Log("frick me dood, the music loop clip is null");
+
             return;
         }
     }
@@ -127,12 +126,12 @@ public class SoundManager : MonoBehaviour
     {
         if (!isMusicPlaying) //update does nothing if music is not currently playing
         {
-            //Debug.Log("Music is not playing!");
+
             return; 
         }
 
         double time = AudioSettings.dspTime;
-        //Debug.Log(time);
+
 
         if(musicLoopClip == null) //can't play music if there *is* no music
         {
@@ -144,8 +143,6 @@ public class SoundManager : MonoBehaviour
             musicLoopSources[flip].volume = volume; //update audio source volume to reflect current overall volume
             musicLoopSources[flip].clip = musicLoopClip;
             musicLoopSources[flip].PlayScheduled(nextEventTime);
-
-            Debug.Log("Scheduled source " + flip + " to start at time " + nextEventTime);
 
             nextEventTime += musicLoopClip.length;
 

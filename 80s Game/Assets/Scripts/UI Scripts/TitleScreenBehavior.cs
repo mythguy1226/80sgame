@@ -25,43 +25,23 @@ public class TitleScreenBehavior : MonoBehaviour
     void Start()
     {
         SoundManager.Instance.SetMusicToLoop(titleScreenMusic);
-        Debug.Log(titleScreenMusic + " should be playing right about now...");
-        Debug.Log("Is music playing? " + SoundManager.Instance.IsMusicPlaying);
     }
 
     void Update()
     {
-        //if (!SoundManager.Instance.IsMusicPlaying)
-        //{
-        //    SoundManager.Instance.SetMusicToLoop(titleScreenMusic);
-        //    Debug.Log(titleScreenMusic + " has been executed through update instead!");
-        //}
-        //Disable joycon calibration onboarding if no joycons are connected
-        /*if (GameManager.Instance.InputManager.joycons.Count == 0)
-        {
-            onboardingPanel.SetActive(false);
-            onboardingContinueButton.SetActive(false);
-        }
 
-        //only allow user to continue after they recenter the cursor
-        else
-        {
-            Joycon j = GameManager.Instance.InputManager.joycons[GameManager.Instance.InputManager.jc_ind];
-            if (j.GetButtonDown(Joycon.Button.DPAD_DOWN))
-            {
-                onboardingContinueButton.SetActive(true);
-            }
-        }*/
 
         switch(gamemodeSelected)
         {
             case 1:
                 gamemodeName.text = "Classic";
                 gamemodeDescription.text = "The Classic Bat Bots experience.\n\nPlay through several rounds and stun as many Bat Bots as possible.\n\nTry to achieve the highest score!";
+                GameModeData.activeGameMode = EGameMode.Classic;
                 break;
             case 2:
                 gamemodeName.text = "Competitive";
                 gamemodeDescription.text = "Bat Bots with Multiplayer!\n\nPlay with up to 2 players and compete to see who can get the highest score!\n\nThis mode features new bat bots not seen in the Classic mode!";
+                GameModeData.activeGameMode = EGameMode.Competitive;
                 break;
         }
     }
@@ -73,7 +53,7 @@ public class TitleScreenBehavior : MonoBehaviour
         SoundManager.Instance.PlaySoundContinuous(buttonClickSound);
         SoundManager.Instance.StopMusicLoop();
         PlayerData.Reset();
-        SceneManager.LoadScene(gamemodeSelected);
+        SceneManager.LoadScene(1);
     }
 
     //Exits the application
@@ -81,6 +61,11 @@ public class TitleScreenBehavior : MonoBehaviour
     public void ExitGame()
     {
         SoundManager.Instance.PlaySoundContinuous(buttonClickSound);
+        if (Application.isEditor)
+        {
+            UnityEditor.EditorApplication.isPlaying = false;
+            return;
+        }
         Application.Quit();
     }
 

@@ -14,8 +14,6 @@ public class CompetitiveMode : AbsGameMode
         NumRounds = 15;
         maxTargetsOnScreen = 15;
         currentRoundTargetCount = 8;
-
-        StartNextRound(true);
     }
 
     protected override void StartNextRound(bool isFirstRound = false)
