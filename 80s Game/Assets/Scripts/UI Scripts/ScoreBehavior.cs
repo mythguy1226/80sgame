@@ -19,6 +19,7 @@ public class ScoreBehavior : MonoBehaviour
 
     //Placeholder high score (Replace with File IO stuff)
     private int highScore = 20000;
+    private float accuracy = 100;
 
     private int playerOnePoints = 0;
     private int playerTwoPoints = 0;
@@ -48,7 +49,8 @@ public class ScoreBehavior : MonoBehaviour
 
         if (GameManager.Instance.gameModeType == EGameMode.Classic)
         {
-            finalScoreTextObject.SetText(finalScoreText + score);
+            finalScoreText = "Final Score: " + score + "\n\nAccuracy: " + accuracy + "%";
+            finalScoreTextObject.SetText(finalScoreText);
 
             //If you beat the high score, list the current score under high score as well
             if (score > highScore)
@@ -115,5 +117,10 @@ public class ScoreBehavior : MonoBehaviour
         }
 
         Debug.Log(leadingPlayer);
+    }
+
+    public void UpdateAccuracy(float newAccuracy)
+    {
+        accuracy = Mathf.RoundToInt(newAccuracy * 100);
     }
 }
