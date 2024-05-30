@@ -31,6 +31,11 @@ public abstract class AbsGameMode
         CurrentRound = 1;
     }
 
+    public void StartGame()
+    {
+        StartNextRound(true);
+    }
+
     // Needs to be public for targetManager to call
     public abstract void OnTargetReset();
 
