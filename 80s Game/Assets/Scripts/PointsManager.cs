@@ -67,6 +67,7 @@ public class PointsManager : MonoBehaviour
         int numBonusPoints = Mathf.RoundToInt(RoundScoreByPlayer[player] * accuracy);
         
         scoreBehavior.UpdateScores(player);
+        scoreBehavior.UpdateAccuracy(accuracy);
         return AddRoundPoints(player, numBonusPoints);
     }
 
