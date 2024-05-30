@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
@@ -16,6 +17,8 @@ public class UIManager : MonoBehaviour
 
     public UIType activeUI;
     public Canvas canvas;
+
+    public List<GameObject> modifierContainers;
 
     private OnboardingUI onboardingUI;
     private PauseScreenBehavior pauseScreenUI;
@@ -49,5 +52,10 @@ public class UIManager : MonoBehaviour
     public static void PlayerPause()
     {
         pauseEvent?.Invoke();
+    }
+
+    public GameObject CreateModifierUI(GameObject uiPrefab, int player)
+    {
+        return Instantiate(uiPrefab, modifierContainers[player].transform);
     }
 }

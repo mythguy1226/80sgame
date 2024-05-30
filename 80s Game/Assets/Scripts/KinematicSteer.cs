@@ -151,6 +151,12 @@ public class KinematicSteer : MonoBehaviour
         return distance <= targetRadius;
     }
 
+    public bool IsInsideScreen()
+    {
+        Vector3 screenPoint = Camera.main.WorldToViewportPoint(transform.position);
+        return screenPoint.x > 0 && screenPoint.y > 0 && screenPoint.x < 1 && screenPoint.y < 1;
+    }
+
     // Method for applying flocking
     public void Flock()
     {
