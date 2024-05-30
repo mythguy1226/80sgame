@@ -6,6 +6,10 @@ public abstract class AbsModifierEffect : MonoBehaviour
 {
     [SerializeField]
     protected float effectDuration;
+    
+    [SerializeField]
+    protected GameObject modifierUIPrefab;
+    private GameObject modifierUIRef;
 
     protected bool bIsActive = false;
     protected PlayerController activator;
@@ -33,6 +37,7 @@ public abstract class AbsModifierEffect : MonoBehaviour
                 DeactivateEffect();
                 bIsActive = false;
                 Destroy(gameObject);
+                Destroy(modifierUIRef);
             }
         }
 
@@ -110,5 +115,6 @@ public abstract class AbsModifierEffect : MonoBehaviour
         InputManager.detectHitSub -= ListenForShot;
         transform.position = new Vector3(-15.0f, 15.0f, 0.0f); // Move off-screen for duration of lifetime
         _Rb.gravityScale = 0.0f; // Turn off gravity here
+        modifierUIRef = ModifierUIManager.Instance.CreateModifierUI(modifierUIPrefab, activator.Order);
     }
 }
