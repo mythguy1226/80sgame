@@ -23,6 +23,11 @@ public abstract class AbsModifierEffect : MonoBehaviour
         _Rb = GetComponent<Rigidbody2D>();
     }
 
+    void OnDisable()
+    {
+        InputManager.detectHitSub -= ListenForShot;
+    }
+
     // Called once every frame
     void Update()
     {

@@ -95,6 +95,11 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
         
     }
 
+    void OnDisable()
+    {
+        InputManager.detectHitSub -= ListenForShot;
+    }
+
     /// <summary>
     /// Initialize the state machine's fields and components
     /// </summary>
