@@ -9485,6 +9485,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1011990667}
+    - target: {fileID: 8744405975558721326, guid: ade02431274cdbe4f8fd5b4bdc90b6b9, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -210
+      objectReference: {fileID: 0}
     - target: {fileID: 9073613371500770895, guid: ade02431274cdbe4f8fd5b4bdc90b6b9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -10876,7 +10880,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1.1889648, y: 94.100006}
+  m_AnchoredPosition: {x: 1.1889648, y: 94.099976}
   m_SizeDelta: {x: -480.37, y: -623.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2109163649
