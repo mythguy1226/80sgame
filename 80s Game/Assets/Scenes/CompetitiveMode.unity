@@ -8193,7 +8193,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPaused: 0
   pauseScreen: {fileID: 1270203347}
-  continueButton: {fileID: 0}
+  continueButton: {fileID: 1915489863}
   gameUIElements: {fileID: 1759806105}
   onboardingPanel: {fileID: 1681867054}
   onboardingCloseButton: {fileID: 296506228}
