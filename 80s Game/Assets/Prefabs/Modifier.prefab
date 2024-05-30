@@ -162,3 +162,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectDuration: 10
+  modifierUIPrefab: {fileID: 4742045415562882795, guid: 80cb86923582fcf45a0a90845e26e769, type: 3}
