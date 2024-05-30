@@ -8726,9 +8726,9 @@ GameObject:
   - component: {fileID: 1095139974}
   - component: {fileID: 1095139973}
   - component: {fileID: 1095139972}
-  - component: {fileID: 1095139971}
   - component: {fileID: 1095139970}
   - component: {fileID: 1095139976}
+  - component: {fileID: 1095139977}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -8751,18 +8751,6 @@ MonoBehaviour:
   maxScore: 0
   maxScoringPlayer: 0
   scoreBehavior: {fileID: 1011990666}
---- !u!114 &1095139971
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1095139969}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49bffd2f3aeeb3a4987d97e5336d9ce5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1095139972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8854,6 +8842,50 @@ MonoBehaviour:
   modifierContainers:
   - {fileID: 1104945930}
   - {fileID: 1915508256}
+--- !u!114 &1095139977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1095139969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 621567455fd1c4ceb811cc8a00b6a1a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NotificationBehavior: 0
+  m_MaxPlayerCount: 4
+  m_AllowJoining: 1
+  m_JoinBehavior: 2
+  m_PlayerJoinedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_PlayerLeftEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_JoinAction:
+    m_UseReference: 0
+    m_Action:
+      m_Name: 
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: ac020f79-e709-4c64-beb2-ea2b9fb2a5a7
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  m_PlayerPrefab: {fileID: 0}
+  m_SplitScreen: 0
+  m_MaintainAspectRatioInSplitScreen: 0
+  m_FixedNumberOfSplitScreens: -1
+  m_SplitScreenRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
 --- !u!1 &1098323054
 GameObject:
   m_ObjectHideFlags: 0
