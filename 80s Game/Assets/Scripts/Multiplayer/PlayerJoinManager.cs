@@ -41,6 +41,10 @@ public class PlayerJoinManager : MonoBehaviour
 
         joinPrompt.text = "Press Start when ready";
         joinPrompt.rectTransform.SetLocalPositionAndRotation(new Vector3(0, -460, 0), Quaternion.identity);
+
+        if (GameModeData.activeGameMode == EGameMode.Classic)
+        {
+            PlayerInputManager.instance.DisableJoining();        }
     }
 
     public void SetPlayerReady(int player, bool isReady)
@@ -60,6 +64,6 @@ public class PlayerJoinManager : MonoBehaviour
         }
 
         // Everyone is ready
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(GameModeData.GameModeToSceneIndex());
     }
 }

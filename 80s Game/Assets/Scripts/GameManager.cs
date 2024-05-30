@@ -86,6 +86,11 @@ public class GameManager : MonoBehaviour
             default:
                 break;
         }
+        Scene activeScene = SceneManager.GetActiveScene();
+        if (activeScene.buildIndex > 1)
+        {
+            ActiveGameMode.StartGame();
+        }
     }
 
     public static void EmitRoundOverEvent()
