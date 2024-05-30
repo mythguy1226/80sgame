@@ -37,7 +37,7 @@ public abstract class AbsModifierEffect : MonoBehaviour
         }
 
         // Detect when modifier has fallen out of world
-        if(transform.position.y <= -10.0f)
+        if(transform.position.y <= -10.0f && !bIsActive)
         {
             InputManager.detectHitSub -= ListenForShot;
             Destroy(gameObject);
