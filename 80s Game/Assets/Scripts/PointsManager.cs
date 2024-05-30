@@ -70,6 +70,14 @@ public class PointsManager : MonoBehaviour
         return AddRoundPoints(player, numBonusPoints);
     }
 
+    public void ResetRoundPoints()
+    {
+        foreach(int key in RoundScoreByPlayer.Keys)
+        {
+            RoundScoreByPlayer[key] = 0;
+        }
+    }
+
     public class UserRecord
     {
         public string initials;
