@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 
 public class PointsManager : MonoBehaviour
@@ -72,7 +73,7 @@ public class PointsManager : MonoBehaviour
 
     public void ResetRoundPoints()
     {
-        foreach(int key in RoundScoreByPlayer.Keys)
+        foreach(int key in RoundScoreByPlayer.Keys.ToList())
         {
             RoundScoreByPlayer[key] = 0;
         }
