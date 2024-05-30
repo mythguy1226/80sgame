@@ -96,5 +96,6 @@ public class GameManager : MonoBehaviour
     public static void EmitRoundOverEvent()
     {
         roundOverObservers?.Invoke();
+        GameManager.Instance.PointsManager.ResetRoundPoints();
     }
 }
