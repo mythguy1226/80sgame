@@ -13,7 +13,7 @@ public class OnboardingUI : MonoBehaviour
     [SerializeField] AudioClip gameStartTheme;
     
     //Fields for onboarding text to be displayed to the player
-    private string mouseInputText = "The bat bots have escaped containment! \n\nAim your stun gun with the mouse and fire with left-click to stun the bat bots.";
+    private string inputText = "The Bat Bots have escaped containment!\n\nAim your stun gun with the left stick and fire with right trigger to stun the bat bots.\n\nPress the right trigger to start";
     private string joyconInputText = "The bat bots have escaped containment! \n\nAim your stun gun by tilting the JoyCon. \n\nFire with the trigger (ZR/ZL) to stun the bat bots.";
 
     private string joyconPauseControls = "(+/-) Pause";
@@ -30,7 +30,7 @@ public class OnboardingUI : MonoBehaviour
     void Update()
     {
         //Set the text appropriately depending on if the player is using mouse or joycon input
-        onboardingText.SetText(mouseInputText);
+        onboardingText.SetText(inputText);
         pauseControls.SetText(mousePauseControls);
     }
 
