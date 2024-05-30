@@ -42,9 +42,9 @@ public class PointsManager : MonoBehaviour
         }
         RoundScoreByPlayer[player] += value;
         TotalPointsByPlayer[player] += value;
-        if (RoundScoreByPlayer[player] > maxScore)
+        if (TotalPointsByPlayer[player] > maxScore)
         {
-            maxScore = RoundScoreByPlayer[player];
+            maxScore = TotalPointsByPlayer[player];
             maxScoringPlayer = player; 
         }
         
