@@ -49,7 +49,7 @@ public class FleeingState : AbsBaseState<BatStateMachine.BatStates>
 
 
         // Check if destination is reached
-        if (_MovementControls.IsAtDestination())
+        if (!_MovementControls.IsInsideScreen())
             FSM.Reset();
     }
 
