@@ -9,15 +9,12 @@ EditorBuildSettings:
     path: Assets/Scenes/TitleScreen.unity
     guid: ad65f6e8882d1764c82e60e286ec2920
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
     path: Assets/Scenes/JoinScene.unity
     guid: 9b92ff48492d87643adb64930541cd43
   - enabled: 1
+    path: Assets/Scenes/SampleScene.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
     path: Assets/Scenes/CompetitiveMode.unity
     guid: 295102dbda47b644db513e23df3d5202
-  - enabled: 0
-    path: Assets/Scenes/Eduardo-NewInputSystem.unity
-    guid: 95ceef5f075313845866b2490af4c313
   m_configObjects: {}
