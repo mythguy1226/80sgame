@@ -90,7 +90,7 @@ public class ScoreBehavior : MonoBehaviour
 
     public void UpdateScores(int player)
     {
-        Debug.Log(player);
+
         textScores[player].text = GameManager.Instance.PointsManager.TotalPointsByPlayer[player].ToString();
 
         if(GameManager.Instance.PointsManager.TotalPointsByPlayer.ContainsKey(0))
@@ -116,7 +116,7 @@ public class ScoreBehavior : MonoBehaviour
             leadingPlayer = 3;
         }
 
-        Debug.Log(leadingPlayer);
+
     }
 
     public void UpdateAccuracy(float newAccuracy)
