@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -54,6 +55,8 @@ public class GameManager : MonoBehaviour
                 PlayerData.activePlayers.Add(defaultConfig);
                 PlayerController pc = Instantiate(playerPrefab, transform.position, Quaternion.identity);
                 pc.SetConfig(defaultConfig, PlayerController.ControllerState.Gameplay);
+                PlayerInput pi = pc.GetComponent<PlayerInput>();
+                pi.SwitchCurrentControlScheme(pi.currentControlScheme, pi.devices[0]);
             } else
             {
                 for(int i = 0; i < PlayerData.activePlayers.Count; i++)
