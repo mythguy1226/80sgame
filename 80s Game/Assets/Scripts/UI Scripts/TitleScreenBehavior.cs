@@ -61,11 +61,9 @@ public class TitleScreenBehavior : MonoBehaviour
     public void ExitGame()
     {
         SoundManager.Instance.PlaySoundContinuous(buttonClickSound);
-        if (Application.isEditor)
-        {
-            UnityEditor.EditorApplication.isPlaying = false;
-            return;
-        }
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
         Application.Quit();
     }
 
