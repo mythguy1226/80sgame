@@ -11772,7 +11772,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1011990663}
         m_TargetAssemblyTypeName: PauseScreenBehavior, Assembly-CSharp
-        m_MethodName: PauseGame
+        m_MethodName: ContinueGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

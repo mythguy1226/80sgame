@@ -5134,6 +5134,7 @@ MonoBehaviour:
   onboardingCloseButton: {fileID: 0}
   buttonClickSound: {fileID: 8300000, guid: 0f33d998cd03b1f4ebc4983ef2a6d559, type: 3}
   crosshairs: []
+  playerIndex: 0
 --- !u!114 &1011990664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9488,7 +9489,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1011990663}
         m_TargetAssemblyTypeName: PauseScreenBehavior, Assembly-CSharp
-        m_MethodName: PauseGame
+        m_MethodName: ContinueGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -46,6 +46,7 @@ public class SettingsManager : MonoBehaviour
             Instance = this;
         }
         this.GetComponent<PauseScreenBehavior>().ToggleCrosshairs(false);
+        playerIndex = -1;
 
         LoadSettings();
     }
@@ -84,7 +85,7 @@ public class SettingsManager : MonoBehaviour
         settingsPanel.SetActive(!settingsPanel.activeInHierarchy);
         cancelPanel.SetActive(false);
         
-        GetPlayerReference();
+        GetPlayerReference(PauseScreenBehavior.Instance.playerIndex + 1);
         LoadSettings();
 
         if (settingsPanel.activeInHierarchy)
@@ -146,13 +147,20 @@ public class SettingsManager : MonoBehaviour
         int crtOn = PlayerPrefs.GetInt("CRTOn", 1);
         float curvature = PlayerPrefs.GetFloat("CRTCurvature",0.2f);
         float sensitivity = PlayerPrefs.GetFloat("Sensitivity",20);
+        
+        Debug.Log(playerIndex);
+
+        if (playerIndex >= 0)
+        {
+            sensitivity = PlayerData.activePlayers[playerIndex].sensitivity.x;
+            
+            //Set Sensitivity sliders
+            sensitivitySlider.value = sensitivity * 4;
+        }       
 
         //Set Volume settings
         SoundManager.Instance.Volume = volume;
         volumeSlider.value = volume;
-
-        //Set Sensitivity sliders
-        sensitivitySlider.value = sensitivity * 4;
 
         //Set CRT effect based on settings
         if (crtOn == 1)

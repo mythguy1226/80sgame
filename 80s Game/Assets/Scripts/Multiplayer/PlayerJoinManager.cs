@@ -25,7 +25,7 @@ public class PlayerJoinManager : MonoBehaviour
         GameObject newPlayerPanel = Instantiate(joinPanelPrefab, joinPanelContainer.transform);
         playerInput.SwitchCurrentActionMap("UI");
         
-        PlayerConfig config = new PlayerConfig(playerInput.playerIndex, PlayerData.defaultColors[playerInput.playerIndex], Vector2.one);
+        PlayerConfig config = new PlayerConfig(playerInput.playerIndex, PlayerData.defaultColors[playerInput.playerIndex], new Vector2(2.5f,2.5f));
         config.controlScheme = playerInput.currentControlScheme;
         config.device = playerInput.devices[0];
         PlayerController pc = playerInput.gameObject.GetComponent<PlayerController>();

@@ -18,6 +18,8 @@ public class PauseScreenBehavior : MonoBehaviour
 
     public Crosshair[] crosshairs;
 
+    public int playerIndex;
+
     private void Awake()
     {
         UIManager.pauseEvent += PauseGame;
@@ -52,11 +54,10 @@ public class PauseScreenBehavior : MonoBehaviour
         {
             return;
         }
-        
-        //Pause game if escape key is pressed
+
         if (Input.GetKeyDown("escape") && (!onboardingPanel.activeInHierarchy || pauseScreen.activeInHierarchy) && !GameManager.Instance.ActiveGameMode.GameOver)
         {
-            PauseGame();
+            PauseGame(0);
         }
 
         //If the onboarding panel is active when escape is pressed, close it and start the game
@@ -69,11 +70,17 @@ public class PauseScreenBehavior : MonoBehaviour
         }
     }
 
-    public void PauseGame()
+    public void PauseGame(int player)
     {
         if (GameManager.Instance.UIManager.activeUI != UIManager.UIType.None){
             return;
         }
+
+        if(player >= 0)
+        {
+            playerIndex = player;
+        }
+
         if (pauseScreen != null)
         {
             //GameManager.Instance.InputManager.ResetRumble();
@@ -150,5 +157,10 @@ public class PauseScreenBehavior : MonoBehaviour
     public void GetAllCrosshairs()
     {
         crosshairs = FindObjectsOfType(typeof(Crosshair), includeInactive:true) as Crosshair[];
+    }
+
+    public void ContinueGame()
+    {
+        PauseGame(0);
     }
 }

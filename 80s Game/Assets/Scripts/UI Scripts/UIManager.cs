@@ -5,7 +5,7 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
 
-    public static Action pauseEvent;
+    public static Action<int> pauseEvent;
     public enum UIType
     {
         None,
@@ -49,9 +49,9 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public static void PlayerPause()
+    public static void PlayerPause(int player)
     {
-        pauseEvent?.Invoke();
+        pauseEvent?.Invoke(player);
     }
 
     public GameObject CreateModifierUI(GameObject uiPrefab, int player)

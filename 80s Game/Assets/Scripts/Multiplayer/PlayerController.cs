@@ -93,7 +93,7 @@ public class PlayerController : MonoBehaviour
             pjm.LaunchGameMode();
             return;
         }
-        UIManager.PlayerPause();
+        UIManager.PlayerPause(Order);
     }
 
     public void ReportEndOfRound()
