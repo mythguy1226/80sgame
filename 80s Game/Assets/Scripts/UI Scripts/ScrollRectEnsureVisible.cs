@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
+//This script handles the auto scrolling for the dropdown in the Join Panel Color Settings
 [RequireComponent(typeof(ScrollRect))]
 public class ScrollRectEnsureVisible : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class ScrollRectEnsureVisible : MonoBehaviour
         //just incase content panel gets created in start.
         if(contentPanel == null) contentPanel = GetComponent<ScrollRect>().content;
 
+        //Set selected game object
         GameObject selected = eventSystem.currentSelectedGameObject;
 
         if (selected == null)
@@ -38,6 +40,7 @@ public class ScrollRectEnsureVisible : MonoBehaviour
             return;
         }
 
+        //Change the position of the content to fit with the selected object
         selectedRectTransform = selected.GetComponent<RectTransform>();
         contentPanel.anchoredPosition = new Vector2(contentPanel.anchoredPosition.x, - (selectedRectTransform.localPosition.y) - (selectedRectTransform.rect.height/2));
 

@@ -15,6 +15,7 @@ public class TitleScreenBehavior : MonoBehaviour
     public AudioClip buttonClickSound;
     public AudioClip titleScreenMusic;
 
+    //UI Elements for selecting game modes
     public TextMeshProUGUI gamemodeName;
     public TextMeshProUGUI gamemodeDescription;
     public GameObject startButton;
@@ -29,8 +30,7 @@ public class TitleScreenBehavior : MonoBehaviour
 
     void Update()
     {
-
-
+        //Change descriptions based on which game mode is selected
         switch(gamemodeSelected)
         {
             case 1:
@@ -46,7 +46,7 @@ public class TitleScreenBehavior : MonoBehaviour
         }
     }
 
-    //Loads the scene with index 1 within the game's build settings
+    //Loads the scene with index 1 within the game's build settings (Should be the Join Scene)
     //Used within the StartGame button element
     public void StartGame()
     {
@@ -73,10 +73,12 @@ public class TitleScreenBehavior : MonoBehaviour
         onboardingPanel.SetActive(false);
     }
 
+    //Toggle the game mode selection panel on or off
     public void ToggleGamemodeSelection()
     {
         gamemodePanel.SetActive(!gamemodePanel.activeInHierarchy);
 
+        //Select the proper UI element for navigation
         if (gamemodePanel.activeInHierarchy)
         {
             EventSystem.current.SetSelectedGameObject(null);
@@ -89,6 +91,7 @@ public class TitleScreenBehavior : MonoBehaviour
         }
     }
 
+    //Move to the next gamemode
     public void NextGameMode()
     {
         gamemodeSelected++;
@@ -96,7 +99,8 @@ public class TitleScreenBehavior : MonoBehaviour
 
         gamemodeSelected = Mathf.Clamp(gamemodeSelected, 1, 2);
     }
-
+    
+    //Move to the previous gamemode 
     public void PreviousGameMode()
     {
         gamemodeSelected--;

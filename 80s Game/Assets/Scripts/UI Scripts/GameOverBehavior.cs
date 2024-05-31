@@ -31,11 +31,15 @@ public class GameOverBehavior : MonoBehaviour
         if (gameOverUI.activeInHierarchy)
         {
             GameManager.Instance.UIManager.activeUI = UIManager.UIType.GameOver;
+
+            //Handle transition to game over screen
             if (gameOverTransition)
             {
+                //Select continue button for non-mouse navigation
                 EventSystem.current.SetSelectedGameObject(null);
                 EventSystem.current.SetSelectedGameObject(continueButton);
                 
+                //Disable crosshairs and turn mouse cursor on
                 this.gameObject.GetComponent<PauseScreenBehavior>().ToggleCrosshairs(false);
                 Cursor.visible = true;
                 if (gameEndTheme != null)
@@ -63,6 +67,7 @@ public class GameOverBehavior : MonoBehaviour
         }
         leaderboardText.text = scores;
 
+        //Transition from summary screen to high score leaderboard
         summaryScreen.SetActive(false);
         highScoreLeaderboard.SetActive(true);
 
