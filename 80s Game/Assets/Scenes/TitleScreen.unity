@@ -643,6 +643,7 @@ MonoBehaviour:
   onboardingCloseButton: {fileID: 0}
   buttonClickSound: {fileID: 0}
   crosshairs: []
+  playerIndex: 0
 --- !u!114 &319221314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -657,7 +658,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerIndex: 0
   crtEffect: {fileID: 975349869}
-  volumeSlider: {fileID: 1492705051}
+  musicVolumeSlider: {fileID: 0}
+  sfxVolumeSlider: {fileID: 0}
   sensitivitySlider: {fileID: 1414249906}
   crtToggle: {fileID: 958586289}
   crtCurvature: {fileID: 2117102456}
@@ -1287,7 +1289,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -4.464905, y: -421}
+  m_AnchoredPosition: {x: -4.4648438, y: -421}
   m_SizeDelta: {x: -1412.46, y: -1016.18}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &653409315
@@ -2989,17 +2991,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1450942076}
   m_CullTransparentMesh: 1
---- !u!114 &1492705051 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1378654797957926703, guid: ade02431274cdbe4f8fd5b4bdc90b6b9, type: 3}
-  m_PrefabInstance: {fileID: 1867834258203497347}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1641958615
 GameObject:
   m_ObjectHideFlags: 0
@@ -3645,7 +3636,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -4.465027, y: -317}
+  m_AnchoredPosition: {x: -4.465088, y: -317}
   m_SizeDelta: {x: -1412.46, y: -1016.18}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1984508950
@@ -4033,6 +4024,14 @@ PrefabInstance:
     - target: {fileID: 4306790102727005025, guid: ade02431274cdbe4f8fd5b4bdc90b6b9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ApplySettings
+      objectReference: {fileID: 0}
+    - target: {fileID: 4331333014142686684, guid: ade02431274cdbe4f8fd5b4bdc90b6b9, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 6.880127
+      objectReference: {fileID: 0}
+    - target: {fileID: 4331333014142686684, guid: ade02431274cdbe4f8fd5b4bdc90b6b9, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -190.23999
       objectReference: {fileID: 0}
     - target: {fileID: 4440939073170682342, guid: ade02431274cdbe4f8fd5b4bdc90b6b9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

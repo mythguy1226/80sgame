@@ -17,7 +17,8 @@ public class SettingsManager : MonoBehaviour
     public CRTEffect crtEffect;
 
     //References to UI Elements
-    public Slider volumeSlider;
+    public Slider musicVolumeSlider;
+    public Slider sfxVolumeSlider;
     public Slider sensitivitySlider;
     public Toggle crtToggle;
     public Slider crtCurvature;
@@ -54,12 +55,20 @@ public class SettingsManager : MonoBehaviour
         LoadSettings();
     }
 
-    //Change Volume
-    public void ChangeVolume()
+    //Change *Music Volume
+    public void ChangeMusicVolume()
     {
-        SoundManager.Instance.Volume = volumeSlider.value;
-        float volumeLabel = Mathf.RoundToInt(volumeSlider.value * 100);
-        settingsLabels[0].text = volumeLabel.ToString();
+        SoundManager.Instance.MusicVolume = musicVolumeSlider.value;
+        float musicVolumeLabel = Mathf.RoundToInt(musicVolumeSlider.value * 100);
+        settingsLabels[0].text = musicVolumeLabel.ToString();
+    }
+
+    //Change SFX Volume
+    public void ChangeSFXVolume()
+    {
+        SoundManager.Instance.sfxVolume = sfxVolumeSlider.value;
+        float sfxVolumeLabel = Mathf.RoundToInt(sfxVolumeSlider.value * 100);
+        settingsLabels[3].text = sfxVolumeLabel.ToString();
     }
 
     //Change the sensitivity for the player that paused the game 
@@ -99,7 +108,7 @@ public class SettingsManager : MonoBehaviour
         if (settingsPanel.activeInHierarchy)
         {
             EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(volumeSlider.gameObject);
+            EventSystem.current.SetSelectedGameObject(musicVolumeSlider.gameObject);
         }
 
         else
@@ -116,7 +125,8 @@ public class SettingsManager : MonoBehaviour
     //Save the settings, then close the menu
     public void ApplySettings()
     {
-        PlayerPrefs.SetFloat("Volume", volumeSlider.value);
+        PlayerPrefs.SetFloat("MusicVolume", musicVolumeSlider.value);
+        PlayerPrefs.SetFloat("SFXVolume", sfxVolumeSlider.value);
         PlayerPrefs.SetFloat("Sensitivity", sensitivityValue);
         PlayerPrefs.SetInt("CRTOn", System.Convert.ToInt32(crtToggle.isOn));
         PlayerPrefs.SetFloat("CRTCurvature", crtCurvature.value);
@@ -156,7 +166,8 @@ public class SettingsManager : MonoBehaviour
     private void LoadSettings()
     {
         //Load in settings from PlayerPrefs
-        float volume = PlayerPrefs.GetFloat("Volume", 1.0f);
+        float musicVolume = PlayerPrefs.GetFloat("MusicVolume", 1.0f);
+        float sfxVolume = PlayerPrefs.GetFloat("SFXVolume", 1.0f);
         int crtOn = PlayerPrefs.GetInt("CRTOn", 1);
         float curvature = PlayerPrefs.GetFloat("CRTCurvature",0.2f);
         float sensitivity = PlayerPrefs.GetFloat("Sensitivity",20);
@@ -171,8 +182,11 @@ public class SettingsManager : MonoBehaviour
         }       
 
         //Set Volume settings
-        SoundManager.Instance.Volume = volume;
-        volumeSlider.value = volume;
+        SoundManager.Instance.MusicVolume = musicVolume;
+        musicVolumeSlider.value = musicVolume;
+
+        SoundManager.Instance.sfxVolume = sfxVolume;
+        sfxVolumeSlider.value = sfxVolume;
 
         //Set CRT effect based on settings
         if (crtOn == 1)
