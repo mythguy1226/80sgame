@@ -133,6 +133,7 @@ public class PauseScreenBehavior : MonoBehaviour
         SoundManager.Instance.PlaySoundContinuous(buttonClickSound);
     }
 
+    //Toggle crosshairs and mouse cursor based on the passed in boolean
     public void ToggleCrosshairs(bool toggle)
     {
         GetAllCrosshairs();
@@ -154,6 +155,7 @@ public class PauseScreenBehavior : MonoBehaviour
         }
     }
 
+    //Fill the array of crosshairs with all crosshair objects
     public void GetAllCrosshairs()
     {
         crosshairs = FindObjectsOfType(typeof(Crosshair), includeInactive:true) as Crosshair[];

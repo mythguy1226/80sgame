@@ -47,8 +47,10 @@ public class ScoreBehavior : MonoBehaviour
         int currentRoundNum = GameManager.Instance.ActiveGameMode.CurrentRound;
         int maxNumOfRounds = GameManager.Instance.ActiveGameMode.NumRounds;
 
+        //Classic mode final score 
         if (GameManager.Instance.gameModeType == EGameMode.Classic)
         {
+            //Display the final score and accuracy values
             finalScoreText = "Final Score: " + score + "\n\nAccuracy: " + accuracy + "%";
             finalScoreTextObject.SetText(finalScoreText);
 
@@ -65,8 +67,10 @@ public class ScoreBehavior : MonoBehaviour
             }
         }
 
+        //Competitive mode final scores
         else if (GameManager.Instance.gameModeType == EGameMode.Competitive)
         {
+            //Show which player has won the game
             switch (leadingPlayer)
             {
                 case 1:
@@ -80,6 +84,7 @@ public class ScoreBehavior : MonoBehaviour
                     break;
             }
 
+            //Additionally show each player's final scores
             finalScoreText += "\n\n\nFINAL SCORES:\n\nPlayer 1: " + playerOnePoints + "\nPlayer 2: " + playerTwoPoints;
             finalScoreTextObject.SetText(finalScoreText);
         }
@@ -88,21 +93,25 @@ public class ScoreBehavior : MonoBehaviour
         roundIndicatorTextObject.SetText(roundText + currentRoundNum + "/" + maxNumOfRounds);
     }
 
+    //Update scores for the players in competitive mode
     public void UpdateScores(int player)
     {
-
+        //Update the appropraite score text with the proper player's score
         textScores[player].text = GameManager.Instance.PointsManager.TotalPointsByPlayer[player].ToString();
 
+        //Keep track of player 1's score
         if(GameManager.Instance.PointsManager.TotalPointsByPlayer.ContainsKey(0))
         {
             playerOnePoints = GameManager.Instance.PointsManager.TotalPointsByPlayer[0];
         }
 
+        //Keep track of player 2's score
         if (GameManager.Instance.PointsManager.TotalPointsByPlayer.ContainsKey(1))
         {
             playerTwoPoints = GameManager.Instance.PointsManager.TotalPointsByPlayer[1];
         }   
 
+        //Update which player is winning based on the scores
         if (playerOnePoints > playerTwoPoints)
         {
             leadingPlayer = 1;
@@ -118,7 +127,8 @@ public class ScoreBehavior : MonoBehaviour
 
 
     }
-
+    
+    //Keep track of the accuracy
     public void UpdateAccuracy(float newAccuracy)
     {
         accuracy = Mathf.RoundToInt(newAccuracy * 100);

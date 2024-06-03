@@ -54,6 +54,7 @@ public class UIManager : MonoBehaviour
         pauseEvent?.Invoke(player);
     }
 
+    //Create status effect UI for the appropriate modifier and proper player
     public GameObject CreateModifierUI(GameObject uiPrefab, int player)
     {
         return Instantiate(uiPrefab, modifierContainers[player].transform);

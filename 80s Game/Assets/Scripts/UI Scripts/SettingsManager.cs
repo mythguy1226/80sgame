@@ -45,9 +45,12 @@ public class SettingsManager : MonoBehaviour
         {
             Instance = this;
         }
+
+        //Turn the crosshairs off
         this.GetComponent<PauseScreenBehavior>().ToggleCrosshairs(false);
         playerIndex = -1;
 
+        //Load in the settings from PlayerPrefs
         LoadSettings();
     }
 
@@ -59,6 +62,7 @@ public class SettingsManager : MonoBehaviour
         settingsLabels[0].text = volumeLabel.ToString();
     }
 
+    //Change the sensitivity for the player that paused the game 
     public void ChangeSensitivity()
     {
         sensitivityValue = sensitivitySlider.value / 4;
@@ -67,11 +71,13 @@ public class SettingsManager : MonoBehaviour
         settingsLabels[1].text = sensitivityLabel.ToString("F2");
     }
 
+    //Toggle the CRT effect on and off
     public void ToggleCRTEffect()
     {
         crtEffect.enabled = crtToggle.isOn;
     }
 
+    //Change the intensity of the curve for the CRT effect
     public void ChangeCRTCurvature()
     {
         crtEffect.Curvature = crtCurvature.value;
@@ -85,9 +91,11 @@ public class SettingsManager : MonoBehaviour
         settingsPanel.SetActive(!settingsPanel.activeInHierarchy);
         cancelPanel.SetActive(false);
         
+        //Get which player paused the game to determine who is changing settings
         GetPlayerReference(PauseScreenBehavior.Instance.playerIndex + 1);
         LoadSettings();
 
+        //Select the proper UI element for navigation
         if (settingsPanel.activeInHierarchy)
         {
             EventSystem.current.SetSelectedGameObject(null);
@@ -116,12 +124,15 @@ public class SettingsManager : MonoBehaviour
         ToggleSettingsPanel();
     }
 
+    //Prompt the player when they cancel out of the settings menu
     public void CancelSettings()
     {
         if (settingsPanel.activeInHierarchy)
-        {
+        {   
+            //Toggle the panel on or off
             cancelPanel.SetActive(!cancelPanel.activeInHierarchy);
 
+            //Select the appropriate UI element for navigation
             if (cancelPanel.activeInHierarchy)
             {
                 EventSystem.current.SetSelectedGameObject(null);
@@ -135,11 +146,13 @@ public class SettingsManager : MonoBehaviour
         }
     }
 
+    //Change the player reference (For changing sensitivity values)
     public void GetPlayerReference(int playerNumber = 1)
     {
         playerIndex = playerNumber - 1;
     }
 
+    //Load the settings saved in PlayerPrefs
     private void LoadSettings()
     {
         //Load in settings from PlayerPrefs
@@ -147,9 +160,8 @@ public class SettingsManager : MonoBehaviour
         int crtOn = PlayerPrefs.GetInt("CRTOn", 1);
         float curvature = PlayerPrefs.GetFloat("CRTCurvature",0.2f);
         float sensitivity = PlayerPrefs.GetFloat("Sensitivity",20);
-        
-        Debug.Log(playerIndex);
 
+        //Overwrite sensitivity with the current player reference (i.e. show player 2's sensitivity if they pause the game)
         if (playerIndex >= 0)
         {
             sensitivity = PlayerData.activePlayers[playerIndex].sensitivity.x;
