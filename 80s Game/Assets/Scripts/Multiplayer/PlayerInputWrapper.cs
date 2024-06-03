@@ -76,7 +76,7 @@ public class PlayerInputWrapper : MonoBehaviour
         player.HandleFire();
     }
 
-    // On move override for joycons
+    // On fire override for joycons
     private void OnFire()
     {
         player.HandleFire();
