@@ -5,6 +5,11 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    // This class is the public facing class for player logic
+    // It controls the effect of input events and exposes the scoring system for each player
+    // It also exposes the presentation layer of the player to the code but all modifications to it must happen
+    // through this controller
+
     public enum ControllerState
     {
         JoinScreen,
@@ -43,12 +48,21 @@ public class PlayerController : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// What happens with movement inputs
+    /// </summary>
+    /// /// <param name="movementData">Vector2 that holds movement direction information</param>
     public void HandleMovement(Vector2 movementData)
     {
 
         activeCrosshair.SetMovementDelta(movementData);
     }
 
+    /// <summary>
+    /// Set the configuration for this player controller
+    /// </summary>
+    /// <param name="pc">The PlayerConfiguration object that informs this controller</param>
+    /// <param name="controllerState">ControllerState enum value that indicates what state the controller is in</param>
     public void SetConfig(PlayerConfig pc, ControllerState controllerState)
     {
         Order = pc.playerIndex;
@@ -61,33 +75,45 @@ public class PlayerController : MonoBehaviour
         currentState = controllerState;
     }
 
+    /// <summary>
+    /// Logic for handling the fire input message when received from the PlayerInputWrapper
+    /// </summary>
     public void HandleFire()
     {
-
+        // If the onboarding screen is on, dismiss it
         if (GameManager.Instance.UIManager.activeUI != UIManager.UIType.None)
         {
             GameManager.Instance.UIManager.GetFireInput(activeCrosshair.PositionToScreen());
             return;
         }
 
+        // Play the shoot sound if the game is not paused
         if (Time.timeScale > 0)
         {
             SoundManager.Instance.PlaySoundContinuous(shootSound);
         }
 
+        // Relay a shot information message to the Input Manager which acts as a publisher
         ShotInformation s = new(activeCrosshair.transform.position, this);
         InputManager.PlayerShot(s);
         scoreController.AddShot();
     }
 
+    /// <summary>
+    /// Recenter the cursor when the event to do so comes from the PlayerInputWrapper.
+    /// This is legacy code - meant to support Joycons.
+    /// </summary>
     public void RecenterCursor()
     {
         activeCrosshair.Center();
     }
 
+    /// <summary>
+    /// Emit a pause event for the UI Manager to handle.
+    /// </summary>
     public void EmitPause()
     {
-
+        // The JoinScreen uses this event to launch the game if all players are ready
         if (currentState == ControllerState.JoinScreen)
         {
             pjm.LaunchGameMode();
@@ -96,16 +122,26 @@ public class PlayerController : MonoBehaviour
         UIManager.PlayerPause(Order);
     }
 
+    /// <summary>
+    /// Send the PointsManager bonus point information at the end of every round of gameplay
+    /// </summary>
     public void ReportEndOfRound()
     {
         GameManager.Instance.PointsManager.AddBonusPoints(Order, scoreController.GetAccuracy());
     }
 
+    /// <summary>
+    /// Set which object is the join manager.
+    /// </summary>
+    /// <param name="manager">A PlayerJoinManager object</param>
     public void SetJoinManager(PlayerJoinManager manager)
     {
         pjm = manager;
     }
 
+    /// <summary>
+    /// Get the Crosshair sprite image
+    /// </summary>
     public Sprite GetCrosshairSprite()
     {
         return crosshairPrefab.GetCrosshairSprite();

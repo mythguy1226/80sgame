@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+// Player configuration object that houses the data relevant to set up players for the game
 public class PlayerConfig
 {
     public Sprite crosshairSprite;
@@ -21,6 +22,10 @@ public class PlayerConfig
     }
 }
 
+
+// Static singleton that persists through game scenes.
+// Houses the information currently active players
+// Should be reset at the end of every game to avoid behavior problems
 public static class PlayerData
 {
     public static Color[] defaultColors =
