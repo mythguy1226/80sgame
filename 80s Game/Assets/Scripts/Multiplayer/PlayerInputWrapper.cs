@@ -6,6 +6,9 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(PlayerController))]
 public class PlayerInputWrapper : MonoBehaviour
 {
+    // Class that wraps around the PlayerInput object to better handle
+    // how input behaves and where it sends its messages to
+
     public Vector2 mouseSensitivity;
     public Vector2 controllerSensitivity;
     private Vector2 sensitivity;
@@ -34,6 +37,7 @@ public class PlayerInputWrapper : MonoBehaviour
 
     public void SetSensitivity(bool controllerInput)
     {
+        // Set the sensitivity for this controller
         if (controllerInput)
         {
             sensitivity = controllerSensitivity;
@@ -59,17 +63,20 @@ public class PlayerInputWrapper : MonoBehaviour
         player.HandleMovement(adjustedInput);
     }
 
+    // On move override for Joycons
     private void OnMove(Vector2 value)
     {
         Vector2 adjustedInput = Vector2.Scale(value, sensitivity * joyconSensitivyAdjust);
         player.HandleMovement(adjustedInput);
     }
 
+    //Handle fire inputs received through the Unity input system
     private void OnFire(InputValue value)
     {
         player.HandleFire();
     }
 
+    // On fire override for joycons
     private void OnFire()
     {
         player.HandleFire();
@@ -81,36 +88,43 @@ public class PlayerInputWrapper : MonoBehaviour
         }   
     }
 
+    //Received through the Unity Input system
     private void OnRecenter(InputValue value)
     {
         player.RecenterCursor();
     }
 
+    // Override for joycons
     private void OnRecenter()
     {
         player.RecenterCursor();
     }
 
+    // Received through the Unity input system
     private void OnPause(InputValue value)
     {
         player.EmitPause();
     }
 
+    // Received through the Unity input system
     private void OnStartGame(InputValue value)
     {
         player.EmitPause();
     }
 
+    // Override for joycons
     private void OnPause()
     {
-
+        player.EmitPause();
     }
 
+    // Received through the Unity input system
     private void OnCancel()
     {
         SettingsManager.Instance.CancelSettings();
     }
 
+    // Most of this update thing is for Joycons
     public void Update()
     {
         // make sure the Joycon only gets checked if attached

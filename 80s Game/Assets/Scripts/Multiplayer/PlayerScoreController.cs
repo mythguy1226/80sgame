@@ -1,9 +1,7 @@
-using System.Diagnostics;
-
 public class PlayerScoreController
 {
-    private int _roundScore;
-    private int _totalScore;
+    // This class encapsulates the accuracy-keeping responsibility for each player object.
+
     private int _shotsFired;
     private int _shotsLanded;
     public int pointsMod = 1;
@@ -11,23 +9,11 @@ public class PlayerScoreController
 
     public PlayerScoreController()
     {
-        _roundScore = 0;
-        _totalScore = 0;
         _shotsFired = 0;
         _shotsLanded = 0;
     }
 
-    public void AddRoundPoints(int score)
-    {
-        _roundScore += (score * pointsMod);
-        _totalScore += (score * pointsMod);
-    }
-
-    public void ResetRoundPoints()
-    {
-        _roundScore = 0;
-    }
-
+    // Record keeping functions for managing accuracy
     public void AddShot()
     {
         _shotsFired++;
@@ -44,10 +30,5 @@ public class PlayerScoreController
             return 0.0f;
         }
         return _shotsLanded / (float)_shotsFired;
-    }
-
-    public int GetRoundScore()
-    {
-        return _roundScore;
     }
 }
