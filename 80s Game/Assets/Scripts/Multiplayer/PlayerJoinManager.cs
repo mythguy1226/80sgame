@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
 using UnityEngine.SceneManagement;
@@ -17,6 +18,11 @@ public class PlayerJoinManager : MonoBehaviour
     public GameObject joinPanelContainer;
     public GameObject backOutPanel;
     public GameObject backOutExit;
+    public GameObject promptTray;
+
+    public List<Image> promptTrayIcons;
+    public List<Sprite> controllerInputPrompts;
+    public List<Sprite> keyboardInputPrompts;
 
 
     private void Awake()
@@ -55,8 +61,29 @@ public class PlayerJoinManager : MonoBehaviour
         newPlayerPanel.GetComponent<PlayerJoinPanel>().SetManager(this);
 
         // We also update any onscreen UI the new state of having at least one joined player on screen.
-        joinPrompt.text = "Press Start when ready";
-        joinPrompt.rectTransform.SetLocalPositionAndRotation(new Vector3(0, -460, 0), Quaternion.identity);
+        joinPrompt.gameObject.SetActive(false);
+        promptTray.gameObject.SetActive(true);
+
+        if (pc.Order == 0)
+        {
+            if (playerInput.currentControlScheme == "KnM")
+            {
+                for (int i = 0; i < promptTrayIcons.Count; i++)
+                {
+                    promptTrayIcons[i].sprite = keyboardInputPrompts[i];
+                }
+            }
+
+            else
+            {
+                for (int i = 0; i < promptTrayIcons.Count; i++)
+                {
+                    promptTrayIcons[i].sprite = controllerInputPrompts[i];
+                }
+            }
+        }
+        //joinPrompt.text = "Press Start when ready";
+        //joinPrompt.rectTransform.SetLocalPositionAndRotation(new Vector3(0, -460, 0), Quaternion.identity);
 
         // In classic mode we only want one player to join, so we disable future joining.
         if (GameModeData.activeGameMode == EGameMode.Classic)
