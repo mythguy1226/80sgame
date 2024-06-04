@@ -23,8 +23,14 @@ public class PlayerController : MonoBehaviour
     private AudioClip shootSound;
 
     public PlayerScoreController scoreController;
-    
+    public float originalShotRadius = 1.6f;
+    private float modifiedShotRadius;
+
+    private ModDoublePoints doublePoints;
+    private ModOvercharge overchargeMod;
+
     public int Order { get; private set; }
+    public GameObject hitRadius;
 
     private PlayerConfig config;
 
@@ -45,6 +51,7 @@ public class PlayerController : MonoBehaviour
         {
             Order = PlayerData.activePlayers.Count;
         }
+        modifiedShotRadius = originalShotRadius;
         
     }
 
@@ -87,10 +94,12 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        // Play the shoot sound if the game is not paused
-        if (Time.timeScale > 0)
+        // Play the shoot sound and animation if the game is not paused 
+        if (Time.timeScale > 0 && activeCrosshair.gameObject.activeInHierarchy)
         {
             SoundManager.Instance.PlaySoundContinuous(shootSound);
+            GameObject hr = Instantiate(hitRadius, activeCrosshair.transform.position, Quaternion.identity);
+            hr.transform.localScale *= modifiedShotRadius / originalShotRadius;
         }
 
         // Relay a shot information message to the Input Manager which acts as a publisher
@@ -155,6 +164,99 @@ public class PlayerController : MonoBehaviour
         return crosshairPrefab.GetCrosshairSprite();
     }
 
+
+   
+    /// <summary>
+    /// Expand this player's hit radius
+    /// </summary>
+    public void ExpandRadius()
+    {
+        modifiedShotRadius = originalShotRadius * 2.0f;
+    }
+
+    /// <summary>
+    /// Reset this player's hit radius
+    /// </summary>
+    public void ResetRadius()
+    {
+        modifiedShotRadius = originalShotRadius;
+        overchargeMod = null;
+    }
+
+    /// <summary>
+    /// Get this player modified radius value
+    /// </summary>
+    /// <returns></returns>
+    public float GetShotRadius()
+    {
+        return modifiedShotRadius;
+    }
+
+    public bool HasMod(AbsModifierEffect.ModType type)
+    {
+        switch (type)
+        {
+            case AbsModifierEffect.ModType.Overcharge:
+                return overchargeMod != null;
+            case AbsModifierEffect.ModType.DoublePoints:
+                return doublePoints != null;
+            default:
+                return false;
+        }
+    }
+
+    /// <summary>
+    /// Set a modifier in this player controller
+    /// </summary>
+    /// <param name="type">The type of modifier being set</param>
+    /// <param name="effect">The effect object as a reference </param>
+    public void SetMod(AbsModifierEffect.ModType type, AbsModifierEffect effect)
+    {
+        switch (type)
+        {
+            case AbsModifierEffect.ModType.Overcharge:
+                overchargeMod = (ModOvercharge) effect;
+                break;
+            case AbsModifierEffect.ModType.DoublePoints:
+                doublePoints = (ModDoublePoints)effect;
+                break;
+        }
+    }
+
+    /// <summary>
+    /// Extend an owned mod's duration
+    /// </summary>
+    /// <param name="type">Which mod to extend</param>
+    /// <param name="duration">By how much</param>
+    public void ExtendModDuration(AbsModifierEffect.ModType type, float duration)
+    {
+        switch (type)
+        {
+            case AbsModifierEffect.ModType.Overcharge:
+                overchargeMod.AddDuration(duration);
+                break;
+            case AbsModifierEffect.ModType.DoublePoints:
+                doublePoints.AddDuration(duration);
+                break;
+        }
+    }
+
+    /// <summary>
+    /// Remove a reference to a mod, usually because it has expired
+    /// </summary>
+    /// <param name="type">Which mod to de-reference</param>
+    public void RemoveMod(AbsModifierEffect.ModType type)
+    {
+        switch (type)
+        {
+            case AbsModifierEffect.ModType.Overcharge:
+                overchargeMod = null;
+                break;
+            case AbsModifierEffect.ModType.DoublePoints:
+                doublePoints = null;
+                break;
+        }
+    }
 }
 
 public struct ShotInformation

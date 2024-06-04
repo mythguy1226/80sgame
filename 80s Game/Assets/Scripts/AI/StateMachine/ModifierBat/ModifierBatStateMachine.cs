@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
+[System.Serializable]
 public class ModifierBatStateMachine : BatStateMachine
 {
     // Public modifier fields
-    public GameObject modifierObject;
+    public List<GameObject> modifierObjects;
     bool modifierDropped = false;
 
     /// <summary>
@@ -19,7 +21,10 @@ public class ModifierBatStateMachine : BatStateMachine
         // Instantiate the modifier object
         if (!modifierDropped)
         {
-            Instantiate(modifierObject, transform.position, Quaternion.identity);
+            // Alter this if you want to force a specific modifier to drop
+            // i.e. if you want the Overcharged to always to drop, set the array access in line 27 to 0
+            int randomIndex = Random.Range(0, modifierObjects.Count);
+            Instantiate(modifierObjects[randomIndex], transform.position, Quaternion.identity);
             modifierDropped = true;
         }
     }

@@ -136,8 +136,9 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
     /// <summary>
     /// Checks if bat has been stunned
     /// </summary>
-    public bool DetectStun(Vector3 pos)
+    public bool DetectStun(Vector3 pos, float radius)
     {
+
         // Check that game isnt paused
         bool isGameGoing = Time.timeScale > 0;
         if (!isGameGoing)
@@ -145,13 +146,13 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
             return false;
         }
 
-        // Check if something was hit
-        RaycastHit2D hit = Physics2D.Raycast(pos, Vector2.zero);
-        if (!hit)
+        // Check if this target is within shot radius
+        float distance = Vector3.Distance(pos, transform.position);
+        if (distance > radius)
             return false;
 
         // Check that hit has detected this particular object
-        if (hit.collider.gameObject == gameObject && !bIsStunned)
+        if (distance <= radius && !bIsStunned)
             return true;
 
         return false;
@@ -233,7 +234,7 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
     public void ListenForShot(ShotInformation s)
     {
         // Check for stun detection
-        if(DetectStun(s.location))
+        if(DetectStun(s.location, s.player.GetShotRadius()))
         {
             // Allow this to only be set once to prevent players from snipe stealing points from each other
             if (stunningPlayer == null)
