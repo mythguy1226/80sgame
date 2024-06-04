@@ -122,6 +122,7 @@ public class PlayerInputWrapper : MonoBehaviour
     private void OnCancel()
     {
         SettingsManager.Instance.CancelSettings();
+        player.EmitCancel();
     }
 
     // Most of this update thing is for Joycons

@@ -79,7 +79,6 @@ public class PlayerJoinManager : MonoBehaviour
             if (!kvp.Value)
             {
                 //Someone is not ready
-                BackOut();
                 return;
             }
         }
