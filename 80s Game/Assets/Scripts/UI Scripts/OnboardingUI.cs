@@ -11,6 +11,7 @@ public class OnboardingUI : MonoBehaviour
     public TMP_Text onboardingText;
     public TMP_Text pauseControls;
     [SerializeField] AudioClip gameStartTheme;
+    private UIManager manager;
     
     //Fields for onboarding text to be displayed to the player
     private string inputText = "The Bat Bots have escaped containment!\n\nAim your stun gun with the left stick and fire with right trigger to stun the bat bots.\n\nPress the right trigger to start";
@@ -44,5 +45,11 @@ public class OnboardingUI : MonoBehaviour
         PauseScreenBehavior.Instance.ToggleCrosshairs(true);
 
         Time.timeScale = 1.0f;
+        manager.activeUI = UIManager.UIType.None;
+    }
+
+    public void SetManager(UIManager reference)
+    {
+        manager = reference;
     }
 }
