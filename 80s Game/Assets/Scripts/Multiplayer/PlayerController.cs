@@ -126,7 +126,7 @@ public class PlayerController : MonoBehaviour
     {
         if (currentState == ControllerState.JoinScreen)
         {
-            pjm.BackOut();
+            pjm.BackOut(Order);
         }
     }
 
