@@ -119,27 +119,36 @@ public class PlayerJoinManager : MonoBehaviour
 
     public void BackOut(int playerIndex)
     {
+        //Toggle the back out panel
         backOutPanel.SetActive(!backOutPanel.activeInHierarchy);
-        //TogglePanelControls();
+
+        //If the panel is active
         if (backOutPanel.activeInHierarchy)
         {
+            //Loop through all the join panels and keep track of the index
             int childIndex = 0;
             foreach (Transform child in joinPanelContainer.transform)
             {
+                //If the panel matches the player who clicked the exit button
                 if (childIndex == playerIndex)
                 {
+                    //Set player ref
                     backOutPlayerRef = childIndex;
+
+                    //Change player root for their event system and set their last selected game object
                     MultiplayerEventSystem eventSystem = child.GetChild(0).GetComponent<MultiplayerEventSystem>();
                     lastSelected = eventSystem.currentSelectedGameObject;
-
-                    Debug.Log(lastSelected);
                     eventSystem.playerRoot = backOutPanel;
+
+                    //Set the new selected object to the exit button on the back out panel
                     eventSystem.SetSelectedGameObject(null);
                     eventSystem.SetSelectedGameObject(backOutExit);
                 }
 
+                //If the player didn't hit the exit button
                 else
-                {
+                {   
+                    //Disable their inputs but deactivating their event system
                     child.GetChild(0).gameObject.SetActive(false);
                 }
 
@@ -147,6 +156,7 @@ public class PlayerJoinManager : MonoBehaviour
             }
         }
 
+        //If the back out panel isn't active, close it
         else
         {
             CloseBackOutPanel();
@@ -155,35 +165,38 @@ public class PlayerJoinManager : MonoBehaviour
 
     public void CloseBackOutPanel()
     {
+        //Turn off the panel
         backOutPanel.SetActive(false);
 
         int childIndex = 0;
-            foreach (Transform child in joinPanelContainer.transform)
-            {
-                if (childIndex == backOutPlayerRef)
-                {                
-                    MultiplayerEventSystem eventSystem = child.GetChild(0).GetComponent<MultiplayerEventSystem>();
-                    eventSystem.playerRoot = child.gameObject;
-                    eventSystem.SetSelectedGameObject(null);
-                    eventSystem.SetSelectedGameObject(lastSelected);
-                }
 
-                else
-                {
-                    child.GetChild(0).gameObject.SetActive(true);
-                }
+        //Loop through all the join panels
+        foreach (Transform child in joinPanelContainer.transform)
+        {
+            //If the panel matches the player that has control of the back out panel
+            if (childIndex == backOutPlayerRef)
+            {           
+                //Set their player root back to their join panel     
+                MultiplayerEventSystem eventSystem = child.GetChild(0).GetComponent<MultiplayerEventSystem>();
+                eventSystem.playerRoot = child.gameObject;
 
-                childIndex++;
+                //Set their selected object back to what it was when they hit exit
+                eventSystem.SetSelectedGameObject(null);
+                eventSystem.SetSelectedGameObject(lastSelected);
             }
+
+            //If the panel isn't for the player that hit exit, reactivate their controls
+            else
+            {
+                child.GetChild(0).gameObject.SetActive(true);
+            }
+
+            childIndex++;
+        }
     }
 
     public void ExitToTitle()
     {
         SceneManager.LoadScene(0);
-    }
-
-    public void TogglePanelControls()
-    {
-        
     }
 }
