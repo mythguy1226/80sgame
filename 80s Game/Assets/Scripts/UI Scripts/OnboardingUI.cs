@@ -37,7 +37,7 @@ public class OnboardingUI : MonoBehaviour
     //Close the panel, active game UI elements, and unpause the game
     public void CloseOnboarding()
     {
-        SoundManager.Instance.PlaySoundContinuous(gameStartTheme);
+        SoundManager.Instance.PlayNonloopMusic(gameStartTheme);
         onboardingPanel.SetActive(false);
         gameUIElements.SetActive(true);
 

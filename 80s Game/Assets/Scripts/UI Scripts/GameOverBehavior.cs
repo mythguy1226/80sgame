@@ -43,7 +43,7 @@ public class GameOverBehavior : MonoBehaviour
                 this.gameObject.GetComponent<PauseScreenBehavior>().ToggleCrosshairs(false);
                 Cursor.visible = true;
                 if (gameEndTheme != null)
-                    SoundManager.Instance.PlaySoundContinuous(gameEndTheme);
+                    SoundManager.Instance.PlayNonloopMusic(gameEndTheme);
 
                 gameOverTransition = false;
             }

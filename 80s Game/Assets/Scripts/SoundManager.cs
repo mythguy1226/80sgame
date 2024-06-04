@@ -11,15 +11,16 @@ public class SoundManager : MonoBehaviour
     public AudioSource continuousSource;    //audio source for sounds which cannot be interrupted
     [SerializeField] AudioSource[] musicLoopSources;     //audio sources for looping music track(s) seamlessly
 
-    //NOTE: non-looping music like between-round and game end themes should use PlaySoundContinuous()!
+    //NOTE: non-looping music like between-round and game end themes should use PlayNonloopMusic()!
 
-    private float volume = 1f;
-    public float Volume
+    //param(s) for music volume
+    private float musicvolume = 1f;
+    public float MusicVolume
     {
-        get { return volume; }
+        get { return musicvolume; }
         set 
         {
-            volume = value;
+            musicvolume = value;
             for(int i = 0; i < musicLoopSources.Length; i++)
             {
                 if (musicLoopSources[i] != null) musicLoopSources[i].volume = value;
@@ -27,16 +28,21 @@ public class SoundManager : MonoBehaviour
         }
     }
 
+    //param for sfx volume
+    public float sfxVolume = 1f;
+
     //fields for music loops
     //music loop implementation taken from the unity online manual: https://docs.unity3d.com/2021.3/Documentation/ScriptReference/AudioSource.PlayScheduled.html
     private bool isMusicPlaying;        //whether or not music is currently playing
     public bool IsMusicPlaying {  get { return isMusicPlaying; } }
 
     private AudioClip musicLoopClip;        //AudioClip to loop
-    //private float musicVolume;              //volume of music -- using the public volume instead
 
     private double nextEventTime;           //time to next loop plays
     private int flip = 0;                   //which loop source is being used?
+
+    //fields for non-looping music tracks
+    //TODO: add functionality to mute the currently looping track temporarily while jingle plays (see also PlayNonloopMusic())
 
     void Awake()
     {
@@ -59,15 +65,26 @@ public class SoundManager : MonoBehaviour
         {
             interruptSource.Stop(); //interrupts current sound playing through interruptSource, to avoid sounds stacking on top of one another
         }
-        interruptSource.PlayOneShot(clip, volume);
+        interruptSource.PlayOneShot(clip, sfxVolume);
 
     }
 
     public void PlaySoundContinuous(AudioClip clip)
     { 
-        continuousSource.PlayOneShot(clip, volume);
+        continuousSource.PlayOneShot(clip, sfxVolume);
     }
 
+    public void PlayNonloopMusic(AudioClip clip)
+    {
+        if(isMusicPlaying) 
+        {
+            //TODO: add functionality to mute the currently looping track temporarily while jingle plays
+        }
+        Debug.Log("Playing one-shot jingle!");
+        continuousSource.PlayOneShot(clip, musicvolume);
+    }
+
+    //immediately stop whatever looping track is playing
     public void StopMusicLoop()
     {
         for(int i = 0; i < musicLoopSources.Length; i++)
@@ -79,29 +96,29 @@ public class SoundManager : MonoBehaviour
         isMusicPlaying = false;
     }
 
-    public void SetMusicToLoop(AudioClip clip) //sets up music to loop. This DOES NOT *play* the music
+    public void SetMusicToLoop(AudioClip clip) //sets up music to loop. This DOES NOT PLAY the music
     {
-        //probably dangerous, but shouldn't need to be called anyway
+        //probably dangerous, but shouldn't need to be triggered anyway
         if (musicLoopSources == null || musicLoopSources.Length == 0)
         {
 
             musicLoopSources = new AudioSource[2];
             musicLoopSources[0] = new AudioSource();
-            musicLoopSources[0].volume = volume;
+            musicLoopSources[0].volume = musicvolume;
             musicLoopSources[1] = new AudioSource();
-            musicLoopSources[1].volume = volume;
+            musicLoopSources[1].volume = musicvolume;
         }
         else
         {
             if (musicLoopSources[0] == null)
             {
                 musicLoopSources[0] = new AudioSource();
-                musicLoopSources[0].volume = volume;
+                musicLoopSources[0].volume = musicvolume;
             }
             if (musicLoopSources[1] == null)
             {
                 musicLoopSources[1] = new AudioSource();
-                musicLoopSources[1].volume = volume;
+                musicLoopSources[1].volume = musicvolume;
             }
         }
 
@@ -124,7 +141,7 @@ public class SoundManager : MonoBehaviour
     //unabashedly copied from my (~QP) IGME670 (Spr 2024) IME Lab 9 implementation
     private void Update()
     {
-        if (!isMusicPlaying) //update does nothing if music is not currently playing
+        if (!isMusicPlaying) //update does nothing if music is not currently set to play
         {
 
             return; 
@@ -138,9 +155,8 @@ public class SoundManager : MonoBehaviour
             isMusicPlaying = false;
             return;
         }
-        if (time + 1.0f > nextEventTime)
+        if (time + 1.0f > nextEventTime) //if the next loop will play within the next second
         {
-            musicLoopSources[flip].volume = volume; //update audio source volume to reflect current overall volume
             musicLoopSources[flip].clip = musicLoopClip;
             musicLoopSources[flip].PlayScheduled(nextEventTime);
 
