@@ -60,7 +60,7 @@ public class SettingsManager : MonoBehaviour
     {
         SoundManager.Instance.MusicVolume = musicVolumeSlider.value;
         float musicVolumeLabel = Mathf.RoundToInt(musicVolumeSlider.value * 100);
-        settingsLabels[0].text = musicVolumeLabel.ToString();
+        settingsLabels[1].text = musicVolumeLabel.ToString();
     }
 
     //Change SFX Volume
@@ -68,7 +68,7 @@ public class SettingsManager : MonoBehaviour
     {
         SoundManager.Instance.sfxVolume = sfxVolumeSlider.value;
         float sfxVolumeLabel = Mathf.RoundToInt(sfxVolumeSlider.value * 100);
-        settingsLabels[3].text = sfxVolumeLabel.ToString();
+        settingsLabels[0].text = sfxVolumeLabel.ToString();
     }
 
     //Change the sensitivity for the player that paused the game 
@@ -77,7 +77,7 @@ public class SettingsManager : MonoBehaviour
         sensitivityValue = sensitivitySlider.value / 4;
         PlayerData.activePlayers[playerIndex].sensitivity = new Vector2(sensitivityValue, sensitivityValue);
         float sensitivityLabel = sensitivitySlider.value / 4;
-        settingsLabels[1].text = sensitivityLabel.ToString("F2");
+        settingsLabels[2].text = sensitivityLabel.ToString("F2");
     }
 
     //Toggle the CRT effect on and off
@@ -91,7 +91,7 @@ public class SettingsManager : MonoBehaviour
     {
         crtEffect.Curvature = crtCurvature.value;
         float crtCurvatureLabel = Mathf.RoundToInt(crtCurvature.value * 500);
-        settingsLabels[2].text = crtCurvatureLabel.ToString();
+        settingsLabels[3].text = crtCurvatureLabel.ToString();
     }
 
     //Toggle the menu on and off
