@@ -24,6 +24,9 @@ public class PlayerJoinManager : MonoBehaviour
     public List<Sprite> controllerInputPrompts;
     public List<Sprite> keyboardInputPrompts;
 
+    private GameObject lastSelected = null;
+    private int backOutPlayerRef;
+
 
     private void Awake()
     {
@@ -114,21 +117,64 @@ public class PlayerJoinManager : MonoBehaviour
         SceneManager.LoadScene(GameModeData.GameModeToSceneIndex());
     }
 
-    public void BackOut()
+    public void BackOut(int playerIndex)
     {
         backOutPanel.SetActive(!backOutPanel.activeInHierarchy);
-        TogglePanelControls();
-
+        //TogglePanelControls();
         if (backOutPanel.activeInHierarchy)
         {
-            EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(backOutExit);
+            int childIndex = 0;
+            foreach (Transform child in joinPanelContainer.transform)
+            {
+                if (childIndex == playerIndex)
+                {
+                    backOutPlayerRef = childIndex;
+                    MultiplayerEventSystem eventSystem = child.GetChild(0).GetComponent<MultiplayerEventSystem>();
+                    lastSelected = eventSystem.currentSelectedGameObject;
+
+                    Debug.Log(lastSelected);
+                    eventSystem.playerRoot = backOutPanel;
+                    eventSystem.SetSelectedGameObject(null);
+                    eventSystem.SetSelectedGameObject(backOutExit);
+                }
+
+                else
+                {
+                    child.GetChild(0).gameObject.SetActive(false);
+                }
+
+                childIndex++;
+            }
         }
 
         else
         {
-            EventSystem.current.SetSelectedGameObject(null);
+            CloseBackOutPanel();
         }
+    }
+
+    public void CloseBackOutPanel()
+    {
+        backOutPanel.SetActive(false);
+
+        int childIndex = 0;
+            foreach (Transform child in joinPanelContainer.transform)
+            {
+                if (childIndex == backOutPlayerRef)
+                {                
+                    MultiplayerEventSystem eventSystem = child.GetChild(0).GetComponent<MultiplayerEventSystem>();
+                    eventSystem.playerRoot = child.gameObject;
+                    eventSystem.SetSelectedGameObject(null);
+                    eventSystem.SetSelectedGameObject(lastSelected);
+                }
+
+                else
+                {
+                    child.GetChild(0).gameObject.SetActive(true);
+                }
+
+                childIndex++;
+            }
     }
 
     public void ExitToTitle()
@@ -138,9 +184,6 @@ public class PlayerJoinManager : MonoBehaviour
 
     public void TogglePanelControls()
     {
-        foreach (Transform child in joinPanelContainer.transform)
-        {
-            child.GetChild(0).gameObject.SetActive(!child.GetChild(0).gameObject.activeInHierarchy);
-        }
+        
     }
 }
