@@ -122,6 +122,14 @@ public class PlayerController : MonoBehaviour
         UIManager.PlayerPause(Order);
     }
 
+    public void EmitCancel()
+    {
+        if (currentState == ControllerState.JoinScreen)
+        {
+            pjm.BackOut();
+        }
+    }
+
     /// <summary>
     /// Send the PointsManager bonus point information at the end of every round of gameplay
     /// </summary>

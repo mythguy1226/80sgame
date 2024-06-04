@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(PlayerInputManager))]
 public class PlayerJoinManager : MonoBehaviour
@@ -14,6 +15,8 @@ public class PlayerJoinManager : MonoBehaviour
     Dictionary<int, bool> joinStatus;
     public GameObject joinPanelPrefab;
     public GameObject joinPanelContainer;
+    public GameObject backOutPanel;
+    public GameObject backOutExit;
 
 
     private void Awake()
@@ -82,5 +85,35 @@ public class PlayerJoinManager : MonoBehaviour
 
         // Everyone is ready
         SceneManager.LoadScene(GameModeData.GameModeToSceneIndex());
+    }
+
+    public void BackOut()
+    {
+        backOutPanel.SetActive(!backOutPanel.activeInHierarchy);
+        TogglePanelControls();
+
+        if (backOutPanel.activeInHierarchy)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(backOutExit);
+        }
+
+        else
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+        }
+    }
+
+    public void ExitToTitle()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    public void TogglePanelControls()
+    {
+        foreach (Transform child in joinPanelContainer.transform)
+        {
+            child.GetChild(0).gameObject.SetActive(!child.GetChild(0).gameObject.activeInHierarchy);
+        }
     }
 }
