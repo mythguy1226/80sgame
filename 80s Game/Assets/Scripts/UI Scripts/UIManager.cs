@@ -27,6 +27,10 @@ public class UIManager : MonoBehaviour
     private void Awake()
     {
         onboardingUI = canvas.GetComponent<OnboardingUI>();
+        if (onboardingUI)
+        {
+            onboardingUI.SetManager(this);
+        }
         pauseScreenUI = canvas.GetComponent<PauseScreenBehavior>();
         gameOverUI = canvas.GetComponent<GameOverBehavior>();
     }
@@ -37,7 +41,6 @@ public class UIManager : MonoBehaviour
         {
             case UIType.Onboarding:
                 onboardingUI.CloseOnboarding();
-                activeUI = UIType.None;
                 break;
             case UIType.Pause:
                 // Test each element and see wtf?
