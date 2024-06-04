@@ -63,7 +63,7 @@ public class PauseScreenBehavior : MonoBehaviour
         //If the onboarding panel is active when escape is pressed, close it and start the game
         else if (Input.GetKeyDown("escape") && onboardingPanel.activeInHierarchy && !pauseScreen.activeInHierarchy)
         {
-            OnboardingUI onboardingComponent = onboardingPanel.GetComponent<OnboardingUI>();
+            OnboardingUI onboardingComponent = GetComponent<OnboardingUI>();
             onboardingComponent.CloseOnboarding();
             gameUIElements.SetActive(true);
 
