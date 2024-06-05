@@ -106,6 +106,10 @@ public class KinematicSteer : MonoBehaviour
         // Steer agent to the wander point
         currentVelocity += Steer(desiredVelocity.normalized * maxSpeed);
         currentVelocity = LimitMagnitude(currentVelocity, maxSpeed);
+        if (GameManager.Instance.isSlowed)
+        {
+            currentVelocity *= 0.5f;
+        }
     }
 
     // Method for returning a steering velocity

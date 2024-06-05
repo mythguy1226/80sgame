@@ -1,7 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -26,6 +23,7 @@ public class GameManager : MonoBehaviour
     public PointsManager PointsManager { get; private set; }
 
     public UIManager UIManager { get; private set; }
+    public bool isSlowed = false;
     
     [Tooltip("Debug to spawn a Player Controller for testing without having to go through the join screen")]
     public bool debug;
