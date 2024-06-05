@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Relay a shot information message to the Input Manager which acts as a publisher
-        ShotInformation s = new(activeCrosshair.transform.position, this, modifiedShotRadius == originalShotRadius);
+        ShotInformation s = new(activeCrosshair.transform.position, this, modifiedShotRadius != originalShotRadius);
         InputManager.PlayerShot(s);
         scoreController.AddShot();
     }
