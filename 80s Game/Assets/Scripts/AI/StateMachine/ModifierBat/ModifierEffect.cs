@@ -4,6 +4,14 @@ using UnityEngine;
 
 public abstract class AbsModifierEffect : MonoBehaviour
 {
+    public enum ModType
+    {
+        DoublePoints,
+        Overcharge,
+        Snail,
+        Confusion
+    }
+
     [SerializeField]
     protected float effectDuration;
     
@@ -34,15 +42,15 @@ public abstract class AbsModifierEffect : MonoBehaviour
         // Manage duration timer if active
         if(bIsActive)
         {
+
             effectDuration -= Time.deltaTime;
 
             // Deactivate effect once timer reaches zero
             if (effectDuration <= 0.0f)
             {
                 DeactivateEffect();
-                bIsActive = false;
-                Destroy(gameObject);
-                Destroy(modifierUIRef);
+                CleanUp();
+                
             }
         }
 
@@ -115,11 +123,27 @@ public abstract class AbsModifierEffect : MonoBehaviour
     public void ResolveShot()
     {
         // Activate the effect
-        ActivateEffect();
         bIsActive = true;
         InputManager.detectHitSub -= ListenForShot;
         transform.position = new Vector3(-15.0f, 15.0f, 0.0f); // Move off-screen for duration of lifetime
         _Rb.gravityScale = 0.0f; // Turn off gravity here
         modifierUIRef = GameManager.Instance.UIManager.CreateModifierUI(modifierUIPrefab, activator.Order);
+        ActivateEffect();
+    }
+
+    protected void CleanUp()
+    {
+        bIsActive = false;
+        Destroy(gameObject);
+        Destroy(modifierUIRef);
+    }
+
+    /// <summary>
+    /// Add to the duration of this effect
+    /// </summary>
+    /// <param name="value">How much time to add</param>
+    public void AddDuration(float value)
+    {
+        effectDuration += value;
     }
 }

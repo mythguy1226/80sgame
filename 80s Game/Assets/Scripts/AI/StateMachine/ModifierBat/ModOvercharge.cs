@@ -1,14 +1,13 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 
 
-public class ModDoublePoints : AbsModifierEffect
+using UnityEngine;
+
+public class ModOvercharge : AbsModifierEffect
 {
-    ModType thisType = ModType.DoublePoints;
+    ModType thisType = ModType.Overcharge;
 
     /// <summary>
-    /// Override: Activates test effect
+    /// Activate the radius expansion effect or extend a currently existing one
     /// </summary>
     public override void ActivateEffect()
     {
@@ -20,15 +19,16 @@ public class ModDoublePoints : AbsModifierEffect
         }
 
         activator.SetMod(thisType, this);
-        activator.scoreController.pointsMod = 2;
+        activator.ExpandRadius();
     }
 
+
     /// <summary>
-    /// Override: Deactivates test effect
+    /// Remove this modifier from the PlayerController
     /// </summary>
     public override void DeactivateEffect()
     {
-        activator.scoreController.pointsMod = 1;
         activator.RemoveMod(thisType);
+        activator.ResetRadius();
     }
 }

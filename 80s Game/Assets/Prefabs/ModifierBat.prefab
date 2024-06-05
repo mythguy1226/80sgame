@@ -287,7 +287,9 @@ MonoBehaviour:
   timeUntilFlee: 8
   fleeTimer: 0
   fleeLocation: {x: 0, y: 10}
-  modifierObject: {fileID: 55702376141867145, guid: 9b8df211c79ba59479819337f0c946e2, type: 3}
+  modifierObjects:
+  - {fileID: 55702376141867145, guid: 6311858a13f90b740a1313dc1b64b33d, type: 3}
+  - {fileID: 55702376141867145, guid: 9b8df211c79ba59479819337f0c946e2, type: 3}
 --- !u!58 &6347908914752317319
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -47,8 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootSound: {fileID: 8300000, guid: 58d7a57419c677f4faa04f97ea74938c, type: 3}
-  score: 0
-  accuracy: 0
+  originalShotRadius: 1
+  hitRadius: {fileID: 1163927658063404605, guid: 6e24b71edf843674988aacca09abff88, type: 3}
   crosshairPrefab: {fileID: 6026067595286513962, guid: 3531d3616a21b724e92a89ba431bf8c2, type: 3}
 --- !u!114 &8036583239399895434
 MonoBehaviour:
@@ -94,3 +94,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mouseSensitivity: {x: 0.02, y: 0.02}
   controllerSensitivity: {x: 0.05, y: 0.05}
+  controllerInput: 0
