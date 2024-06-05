@@ -26,6 +26,7 @@ public class PlayerJoinManager : MonoBehaviour
 
     private GameObject lastSelected = null;
     private int backOutPlayerRef;
+    private bool controllerConnected;
 
 
     private void Awake()
@@ -74,6 +75,7 @@ public class PlayerJoinManager : MonoBehaviour
                 for (int i = 0; i < promptTrayIcons.Count; i++)
                 {
                     promptTrayIcons[i].sprite = keyboardInputPrompts[i];
+                    controllerConnected = false;
                 }
             }
 
@@ -82,6 +84,7 @@ public class PlayerJoinManager : MonoBehaviour
                 for (int i = 0; i < promptTrayIcons.Count; i++)
                 {
                     promptTrayIcons[i].sprite = controllerInputPrompts[i];
+                    controllerConnected = true;
                 }
             }
         }
@@ -112,9 +115,15 @@ public class PlayerJoinManager : MonoBehaviour
                 return;
             }
         }
+        
+        bool sceneTransition = false;
 
-        // Everyone is ready
-        SceneManager.LoadScene(GameModeData.GameModeToSceneIndex());
+        if (!sceneTransition)
+        {
+            // Everyone is ready
+            this.gameObject.GetComponent<LoadingScreen>().LoadScene(GameModeData.GameModeToSceneIndex(), controllerConnected);
+            sceneTransition = true;
+        }
     }
 
     public void BackOut(int playerIndex)

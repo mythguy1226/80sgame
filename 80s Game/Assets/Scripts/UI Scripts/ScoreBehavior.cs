@@ -97,8 +97,11 @@ public class ScoreBehavior : MonoBehaviour
     public void UpdateScores(int player)
     {
         //Update the appropraite score text with the proper player's score
-        textScores[player].text = GameManager.Instance.PointsManager.TotalPointsByPlayer[player].ToString();
-
+        if (textScores[player] != null)
+        {
+            textScores[player].text = GameManager.Instance.PointsManager.TotalPointsByPlayer[player].ToString();
+        }
+        
         //Keep track of player 1's score
         if(GameManager.Instance.PointsManager.TotalPointsByPlayer.ContainsKey(0))
         {
