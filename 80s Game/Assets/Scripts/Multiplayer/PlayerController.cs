@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Relay a shot information message to the Input Manager which acts as a publisher
-        ShotInformation s = new(activeCrosshair.transform.position, this);
+        ShotInformation s = new(activeCrosshair.transform.position, this, modifiedShotRadius == originalShotRadius);
         InputManager.PlayerShot(s);
         scoreController.AddShot();
     }
@@ -265,9 +265,11 @@ public struct ShotInformation
 {
     public Vector3 location;
     public PlayerController player;
-    public ShotInformation(Vector3 l, PlayerController p)
+    public bool isRadiusCheck;
+    public ShotInformation(Vector3 l, PlayerController p, bool radiusCheck)
     {
         location = l;
         player = p;
+        isRadiusCheck = radiusCheck;
     }
 }

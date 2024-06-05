@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
+using static UnityEditor.PlayerSettings;
 using static UnityEngine.GraphicsBuffer;
 
 /* CLASS: BatStateMachine
@@ -133,19 +134,9 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
         fleeTimer = timeUntilFlee;
     }
 
-    /// <summary>
-    /// Checks if bat has been stunned
-    /// </summary>
-    public bool DetectStun(Vector3 pos, float radius)
+
+    private bool DetectRadius(Vector3 pos, float radius)
     {
-
-        // Check that game isnt paused
-        bool isGameGoing = Time.timeScale > 0;
-        if (!isGameGoing)
-        {
-            return false;
-        }
-
         // Check if this target is within shot radius
         float distance = Vector3.Distance(pos, transform.position);
         if (distance > radius)
@@ -156,6 +147,41 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
             return true;
 
         return false;
+    }
+    private bool DetectCollision(Vector3 pos)
+    {
+        // Check if something was hit
+        RaycastHit2D hit = Physics2D.Raycast(pos, Vector2.zero);
+        if (!hit)
+            return false;
+
+        // Check that hit has detected this particular object
+        if (hit.collider.gameObject == gameObject && !bIsStunned)
+            return true;
+
+        return false;
+    }
+
+    /// <summary>
+    /// Checks if bat has been stunned
+    /// </summary>
+    public bool DetectStun(Vector3 pos, bool radCheck, float radius)
+    {
+
+        // Check that game isnt paused
+        bool isGameGoing = Time.timeScale > 0;
+        if (!isGameGoing)
+        {
+            return false;
+        }
+
+        if (radCheck)
+        {
+            return DetectRadius(pos, radius);
+        }
+
+        return DetectCollision(pos);
+        
     }
 
     /// <summary>
@@ -234,7 +260,7 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
     public void ListenForShot(ShotInformation s)
     {
         // Check for stun detection
-        if(DetectStun(s.location, s.player.GetShotRadius()))
+        if(DetectStun(s.location, s.isRadiusCheck, s.player.GetShotRadius()))
         {
             // Allow this to only be set once to prevent players from snipe stealing points from each other
             if (stunningPlayer == null)
