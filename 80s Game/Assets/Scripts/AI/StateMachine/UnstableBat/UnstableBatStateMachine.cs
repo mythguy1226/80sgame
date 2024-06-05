@@ -30,6 +30,11 @@ public class UnstableBatStateMachine : BatStateMachine
         // Iterate through each chained target and play their stun animations as well
         for (int i = 0; i < targetChain.Length; i++)
         {
+            if (targetChain[i] == null)
+            {
+                continue;
+            }
+
             // Create instance of lightning
             GameObject effect = Instantiate(lightning, currentTarg.transform.position, Quaternion.identity);
             ChainLightning chain = effect.GetComponent<ChainLightning>();
