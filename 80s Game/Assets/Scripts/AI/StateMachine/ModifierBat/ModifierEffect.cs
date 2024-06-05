@@ -42,7 +42,7 @@ public abstract class AbsModifierEffect : MonoBehaviour
         // Manage duration timer if active
         if(bIsActive)
         {
-            Debug.Log(effectDuration);
+
             effectDuration -= Time.deltaTime;
 
             // Deactivate effect once timer reaches zero
