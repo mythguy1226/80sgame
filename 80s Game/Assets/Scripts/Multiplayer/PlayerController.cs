@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     private AudioClip shootSound;
 
     public PlayerScoreController scoreController;
-    public float originalShotRadius = 1.6f;
+    public float originalShotRadius = 0.3f;
     private float modifiedShotRadius;
 
     private ModDoublePoints doublePoints;
@@ -100,6 +100,8 @@ public class PlayerController : MonoBehaviour
             SoundManager.Instance.PlaySoundContinuous(shootSound);
             GameObject hr = Instantiate(hitRadius, activeCrosshair.transform.position, Quaternion.identity);
             hr.transform.localScale *= modifiedShotRadius / originalShotRadius;
+            EndAndDie ed = hr.GetComponent<EndAndDie>();
+            ed.radius = modifiedShotRadius;
         }
 
         // Relay a shot information message to the Input Manager which acts as a publisher
