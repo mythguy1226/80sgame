@@ -106,7 +106,10 @@ public class SettingsManager : MonoBehaviour
     //Toggle the menu on and off
     public void ToggleSettingsPanel()
     {
+        //Switch tab back to Settings
         PreviousTab();
+
+        //Toggle panels
         settingsPanel.SetActive(!settingsPanel.activeInHierarchy);
         cancelPanel.SetActive(false);
         
@@ -218,8 +221,10 @@ public class SettingsManager : MonoBehaviour
         crtCurvature.value = curvature;
     }
 
+    //Switch to the next tab in the settings
     public void NextTab()
     {
+        //Return if on the last tab
         if (tabIndex == (tabs.Count - 1))
         {
             return;
@@ -227,13 +232,17 @@ public class SettingsManager : MonoBehaviour
 
         if (settingsPanel.activeInHierarchy)
         {
+            //Disable currently active tab
             tabs[tabIndex].SetActive(false);
 
+            //Move to the next tab in the list
             tabIndex++;
             tabIndex = Mathf.Clamp(tabIndex, 0, tabs.Count - 1);
 
+            //Active the next tab object
             tabs[tabIndex].SetActive(true);
-                
+            
+            //Select the correct UI element based on which tab is now open
             switch(tabIndex)
             {
                 case 0:
@@ -248,8 +257,10 @@ public class SettingsManager : MonoBehaviour
         }
     }
 
+    //Switch to the previous tab in the menu
     public void PreviousTab()
     {
+        //Return if on the first tab
         if (tabIndex == 0)
         {
             return;
@@ -257,13 +268,17 @@ public class SettingsManager : MonoBehaviour
 
         if (settingsPanel.activeInHierarchy)
         {
+            //Disable currently active tab
             tabs[tabIndex].SetActive(false);
 
+            //Go the previous tab in the list
             tabIndex--;
             tabIndex = Mathf.Clamp(tabIndex, 0, tabs.Count - 1);
 
+            //Activate the previous tab object
             tabs[tabIndex].SetActive(true);
 
+            //Select the proper UI element based on the newly activated tab
             switch(tabIndex)
             {
                 case 0:
@@ -278,17 +293,20 @@ public class SettingsManager : MonoBehaviour
         }
     }
 
+    //Switch to the next mapping on the controls tab
     public void NextMapping()
     {
         if (settingsPanel.activeInHierarchy)
         {
+            //Disable currently active mapping image
             controlMappings[mappingIndex].SetActive(false);
 
+            //Go to the next mapping in the list and activate it
             mappingIndex++;
             mappingIndex = Mathf.Clamp(mappingIndex, 0, controlMappings.Count - 1);
-
             controlMappings[mappingIndex].SetActive(true);
 
+            //Change the text to match the mapping shown
             switch(mappingIndex)
             {
                 case 0:
@@ -304,17 +322,20 @@ public class SettingsManager : MonoBehaviour
         }
     }
 
+    //Switch to the previous mapping in the controls menu
     public void PreviousMapping()
     {
         if (settingsPanel.activeInHierarchy)
         {
+            //Disable currently active mapping
             controlMappings[mappingIndex].SetActive(false);
 
+            //Go to the previous mapping in the list and display it
             mappingIndex--;
             mappingIndex = Mathf.Clamp(mappingIndex, 0, controlMappings.Count - 1);
-
             controlMappings[mappingIndex].SetActive(true);
 
+            //Update the text to match the shown mapping
             switch(mappingIndex)
             {
                 case 0:
