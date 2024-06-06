@@ -17,7 +17,7 @@ public abstract class AbsModifierEffect : MonoBehaviour
     
     [SerializeField]
     protected GameObject modifierUIPrefab;
-    private GameObject modifierUIRef;
+    protected List<GameObject> modifierUIRefs;
 
     protected bool bIsActive = false;
     protected PlayerController activator;
@@ -29,6 +29,7 @@ public abstract class AbsModifierEffect : MonoBehaviour
     {
         InputManager.detectHitSub += ListenForShot;
         _Rb = GetComponent<Rigidbody2D>();
+        modifierUIRefs = new List<GameObject>();
     }
 
     void OnDisable()
@@ -127,15 +128,30 @@ public abstract class AbsModifierEffect : MonoBehaviour
         InputManager.detectHitSub -= ListenForShot;
         transform.position = new Vector3(-15.0f, 15.0f, 0.0f); // Move off-screen for duration of lifetime
         _Rb.gravityScale = 0.0f; // Turn off gravity here
-        modifierUIRef = GameManager.Instance.UIManager.CreateModifierUI(modifierUIPrefab, activator.Order);
+        AddUIRef(activator.Order);
         ActivateEffect();
     }
 
+    /// <summary>
+    /// Clean this object up
+    /// </summary>
     protected void CleanUp()
     {
         bIsActive = false;
         Destroy(gameObject);
-        Destroy(modifierUIRef);
+        foreach(GameObject uiRef in modifierUIRefs)
+        {
+            Destroy(uiRef);
+        }
+    }
+
+    /// <summary>
+    /// Create a UI reference of this power for a specific player and keep track of it
+    /// </summary>
+    /// <param name="player">Which player needs it</param>
+    protected void AddUIRef(int player)
+    {
+        modifierUIRefs.Add(GameManager.Instance.UIManager.CreateModifierUI(modifierUIPrefab, player));
     }
 
     /// <summary>
@@ -146,4 +162,5 @@ public abstract class AbsModifierEffect : MonoBehaviour
     {
         effectDuration += value;
     }
+
 }

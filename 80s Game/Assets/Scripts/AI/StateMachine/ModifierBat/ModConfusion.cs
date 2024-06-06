@@ -8,16 +8,21 @@ public class ModConfusion : AbsModifierEffect
     /// </summary>
     public override void ActivateEffect()
     {
+        Destroy(modifierUIRefs[0]);
         PlayerInput[] pIs = FindObjectsByType<PlayerInput>(FindObjectsSortMode.None);
         for(int i = 0; i < pIs.Length; i++)
         {
             PlayerInputWrapper piw = pIs[i].GetComponent<PlayerInputWrapper>();
-            if (piw.GetPlayer() == activator)
+            PlayerController pc = piw.GetPlayer();
+            if (pc.Order == activator.Order)
             {
                 continue;
             }
             piw.isFlipped = true;
+            AddUIRef(pc.Order);
+
         }
+        GameManager.Instance.debuffActive = true;
     }
 
     /// <summary>
@@ -35,5 +40,6 @@ public class ModConfusion : AbsModifierEffect
             }
             piw.isFlipped = false;
         }
+        GameManager.Instance.debuffActive = false;
     }
 }

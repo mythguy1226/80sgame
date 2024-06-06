@@ -3,22 +3,28 @@ using UnityEngine.InputSystem;
 
 public class ModSnail : AbsModifierEffect
 {
+    ModType thisType = ModType.Snail;
+
     /// <summary>
     /// Override: Activates slow movement effect
     /// </summary>
     public override void ActivateEffect()
     {
+        Destroy(modifierUIRefs[0]);
         PlayerInput[] pIs = FindObjectsByType<PlayerInput>(FindObjectsSortMode.None);
         for (int i = 0; i < pIs.Length; i++)
         {
             PlayerInputWrapper piw = pIs[i].GetComponent<PlayerInputWrapper>();
-            if (piw.GetPlayer() == activator)
+            PlayerController pc = piw.GetPlayer();
+            if (pc.Order == activator.Order)
             {
                 continue;
             }
             piw.isSlowed = true;
-            GameManager.Instance.isSlowed = true;
+            AddUIRef(pc.Order);
         }
+        GameManager.Instance.isSlowed = true;
+        GameManager.Instance.debuffActive = true;
     }
 
     /// <summary>
@@ -26,16 +32,24 @@ public class ModSnail : AbsModifierEffect
     /// </summary>
     public override void DeactivateEffect()
     {
+        bool slowedRemains = false;
         PlayerInput[] pIs = FindObjectsByType<PlayerInput>(FindObjectsSortMode.None);
         for (int i = 0; i < pIs.Length; i++)
         {
             PlayerInputWrapper piw = pIs[i].GetComponent<PlayerInputWrapper>();
-            if (piw.GetPlayer() == activator)
+            if (piw.GetPlayer().Order == activator.Order)
             {
                 continue;
             }
             piw.isSlowed = false;
+
+        }
+
+        if (!slowedRemains)
+        {
             GameManager.Instance.isSlowed = false;
+            GameManager.Instance.debuffActive = false;
         }
     }
+    
 }
