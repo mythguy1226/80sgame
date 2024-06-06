@@ -27,6 +27,7 @@ public class PlayerJoinManager : MonoBehaviour
     private GameObject lastSelected = null;
     private int backOutPlayerRef;
     private bool controllerConnected;
+    private bool sceneTransition = false;
 
 
     private void Awake()
@@ -115,8 +116,6 @@ public class PlayerJoinManager : MonoBehaviour
                 return;
             }
         }
-        
-        bool sceneTransition = false;
 
         if (!sceneTransition)
         {

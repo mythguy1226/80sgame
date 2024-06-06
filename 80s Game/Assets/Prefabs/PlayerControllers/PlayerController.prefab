@@ -94,6 +94,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 901ff8a36ca907943a2356a4cf8ad6ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSensitivity: {x: 0.02, y: 0.02}
-  controllerSensitivity: {x: 0.05, y: 0.05}
+  mouseSensitivity: {x: 1, y: 1}
+  controllerSensitivity: {x: 5, y: 5}
   controllerInput: 0
+  isFlipped: 0
+  isSlowed: 0

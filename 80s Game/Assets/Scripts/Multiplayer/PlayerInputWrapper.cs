@@ -18,6 +18,8 @@ public class PlayerInputWrapper : MonoBehaviour
     private float joyconSensitivyAdjust = 5.0f;
 
     public bool controllerInput;
+    public bool isFlipped = false;
+    public bool isSlowed = false;
     
     private void Start()
     {
@@ -59,8 +61,21 @@ public class PlayerInputWrapper : MonoBehaviour
     private void OnMove(InputValue value)
     {
         PlayerConfig config = PlayerData.activePlayers[player.Order];
-        Vector2 adjustedInput = Vector2.Scale(value.Get<Vector2>(), sensitivity * config.sensitivity);
-        player.HandleMovement(adjustedInput);
+        float snailModifier = 1.0f;
+
+        // Handle slowed effect from modifiers
+        if (isSlowed)
+        {
+            snailModifier = 0.5f;
+        }
+
+
+        Vector2 adjustedInput = Vector2.Scale(value.Get<Vector2>(), sensitivity * config.sensitivity * snailModifier);
+        if (isFlipped)
+        {
+            adjustedInput *= -1;
+        }
+        player.HandleMovement(adjustedInput * Time.deltaTime);
     }
 
     // On move override for Joycons
@@ -166,5 +181,10 @@ public class PlayerInputWrapper : MonoBehaviour
             controllerInput = true;
             SetSensitivity(controllerInput);
         }
+    }
+
+    public PlayerController GetPlayer()
+    {
+        return player;
     }
 }

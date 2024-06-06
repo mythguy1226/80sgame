@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-[System.Serializable]
 public class ModifierBatStateMachine : BatStateMachine
 {
     // Public modifier fields
-    public List<GameObject> modifierObjects;
+    public List<GameObject> buffs;
+    public List<GameObject> debuffs;
     bool modifierDropped = false;
 
     /// <summary>
@@ -21,8 +21,21 @@ public class ModifierBatStateMachine : BatStateMachine
         // Instantiate the modifier object
         if (!modifierDropped)
         {
+            
+            //Compose available modifiers into single list
+            List<GameObject> modifierObjects = new List<GameObject>();
+            foreach(GameObject buff in buffs)
+            {
+                modifierObjects.Add(buff);
+            }
+            if (!GameManager.Instance.debuffActive)
+            {
+                foreach(GameObject debuff in debuffs)
+                {
+                    modifierObjects.Add(debuff);
+                }
+            }
             // Alter this if you want to force a specific modifier to drop
-            // i.e. if you want the Overcharged to always to drop, set the array access in line 27 to 0
             int randomIndex = Random.Range(0, modifierObjects.Count);
             Instantiate(modifierObjects[randomIndex], transform.position, Quaternion.identity);
             modifierDropped = true;
