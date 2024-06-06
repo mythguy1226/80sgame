@@ -140,6 +140,18 @@ public class PlayerInputWrapper : MonoBehaviour
         player.EmitCancel();
     }
 
+    private void OnPreviousTab()
+    {
+        Debug.Log("L2");
+        SettingsManager.Instance.PreviousTab();
+    }
+
+    private void OnNextTab()
+    {
+        Debug.Log("R2");
+        SettingsManager.Instance.NextTab();
+    }
+
     // Most of this update thing is for Joycons
     public void Update()
     {

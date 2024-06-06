@@ -24,13 +24,22 @@ public class SettingsManager : MonoBehaviour
     public Slider crtCurvature;
     public Button saveAndQuit;
     public Button applyButton;
+    public GameObject controlsNextMapping;
 
     public GameObject settingsPanel;
     public GameObject cancelPanel;
     public GameObject settingsButton;
     public List<TextMeshProUGUI> settingsLabels;
 
-    float sensitivityValue;
+    public List<GameObject> tabs;
+    private int tabIndex = 0;
+
+    public List<GameObject> controlMappings;
+    private int mappingIndex = 0;
+
+    private float sensitivityValue;
+
+    private GameObject lastSelected;
 
     // Start is called before the first frame update
     void Start()
@@ -97,6 +106,7 @@ public class SettingsManager : MonoBehaviour
     //Toggle the menu on and off
     public void ToggleSettingsPanel()
     {
+        PreviousTab();
         settingsPanel.SetActive(!settingsPanel.activeInHierarchy);
         cancelPanel.SetActive(false);
         
@@ -108,7 +118,7 @@ public class SettingsManager : MonoBehaviour
         if (settingsPanel.activeInHierarchy)
         {
             EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(musicVolumeSlider.gameObject);
+            EventSystem.current.SetSelectedGameObject(sfxVolumeSlider.gameObject);
         }
 
         else
@@ -145,13 +155,15 @@ public class SettingsManager : MonoBehaviour
             //Select the appropriate UI element for navigation
             if (cancelPanel.activeInHierarchy)
             {
+                lastSelected = EventSystem.current.currentSelectedGameObject;
+
                 EventSystem.current.SetSelectedGameObject(null);
                 EventSystem.current.SetSelectedGameObject(saveAndQuit.gameObject);
             }
             else
             {
                 EventSystem.current.SetSelectedGameObject(null);
-                EventSystem.current.SetSelectedGameObject(applyButton.gameObject);
+                EventSystem.current.SetSelectedGameObject(lastSelected);
             }
         }
     }
@@ -204,5 +216,107 @@ public class SettingsManager : MonoBehaviour
         //Set curvature of the CRT effect
         crtEffect.Curvature = curvature;
         crtCurvature.value = curvature;
+    }
+
+    public void NextTab()
+    {
+        if (settingsPanel.activeInHierarchy)
+        {
+            tabs[tabIndex].SetActive(false);
+
+            tabIndex++;
+            tabIndex = Mathf.Clamp(tabIndex, 0, tabs.Count - 1);
+
+            tabs[tabIndex].SetActive(true);
+                
+            switch(tabIndex)
+            {
+                case 0:
+                    EventSystem.current.SetSelectedGameObject(null);
+                    EventSystem.current.SetSelectedGameObject(sfxVolumeSlider.gameObject);
+                    break;
+                case 1:
+                    EventSystem.current.SetSelectedGameObject(null);
+                    EventSystem.current.SetSelectedGameObject(controlsNextMapping);
+                    break;
+            }
+        }
+    }
+
+    public void PreviousTab()
+    {
+        if (settingsPanel.activeInHierarchy)
+        {
+            tabs[tabIndex].SetActive(false);
+
+            tabIndex--;
+            tabIndex = Mathf.Clamp(tabIndex, 0, tabs.Count - 1);
+
+            tabs[tabIndex].SetActive(true);
+
+            switch(tabIndex)
+            {
+                case 0:
+                    EventSystem.current.SetSelectedGameObject(null);
+                    EventSystem.current.SetSelectedGameObject(sfxVolumeSlider.gameObject);
+                    break;
+                case 1:
+                    EventSystem.current.SetSelectedGameObject(null);
+                    EventSystem.current.SetSelectedGameObject(controlsNextMapping);
+                    break;
+            }
+        }
+    }
+
+    public void NextMapping()
+    {
+        if (settingsPanel.activeInHierarchy)
+        {
+            controlMappings[mappingIndex].SetActive(false);
+
+            mappingIndex++;
+            mappingIndex = Mathf.Clamp(mappingIndex, 0, controlMappings.Count - 1);
+
+            controlMappings[mappingIndex].SetActive(true);
+
+            switch(mappingIndex)
+            {
+                case 0:
+                    controlsNextMapping.transform.parent.GetComponent<TextMeshProUGUI>().text = "Mouse & Keyboard";
+                    break;
+                case 1:
+                    controlsNextMapping.transform.parent.GetComponent<TextMeshProUGUI>().text = "Gamepad 1";
+                    break;
+                case 2:
+                    controlsNextMapping.transform.parent.GetComponent<TextMeshProUGUI>().text = "Gamepad 2";
+                    break;
+            }
+        }
+    }
+
+    public void PreviousMapping()
+    {
+        if (settingsPanel.activeInHierarchy)
+        {
+            controlMappings[mappingIndex].SetActive(false);
+
+            mappingIndex--;
+            mappingIndex = Mathf.Clamp(mappingIndex, 0, controlMappings.Count - 1);
+
+            controlMappings[mappingIndex].SetActive(true);
+
+            switch(mappingIndex)
+            {
+                case 0:
+                    controlsNextMapping.transform.parent.GetComponent<TextMeshProUGUI>().text = "Mouse & Keyboard";
+                    break;
+                case 1:
+                    controlsNextMapping.transform.parent.GetComponent<TextMeshProUGUI>().text = "Gamepad 1";
+                    break;
+                case 2:
+                    controlsNextMapping.transform.parent.GetComponent<TextMeshProUGUI>().text = "Gamepad 2";
+                    break;
+            }
+        }
     }
 }
