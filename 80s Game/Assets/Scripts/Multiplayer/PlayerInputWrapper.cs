@@ -140,6 +140,18 @@ public class PlayerInputWrapper : MonoBehaviour
         player.EmitCancel();
     }
 
+    //Switches tabs for when settings panel is active
+    private void OnPreviousTab()
+    {
+        SettingsManager.Instance.PreviousTab();
+    }
+
+    //Switches tabs for when settings panel is active
+    private void OnNextTab()
+    {
+        SettingsManager.Instance.NextTab();
+    }
+
     // Most of this update thing is for Joycons
     public void Update()
     {

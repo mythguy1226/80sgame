@@ -24,13 +24,22 @@ public class SettingsManager : MonoBehaviour
     public Slider crtCurvature;
     public Button saveAndQuit;
     public Button applyButton;
+    public GameObject controlsNextMapping;
 
     public GameObject settingsPanel;
     public GameObject cancelPanel;
     public GameObject settingsButton;
     public List<TextMeshProUGUI> settingsLabels;
 
-    float sensitivityValue;
+    public List<GameObject> tabs;
+    private int tabIndex = 0;
+
+    public List<GameObject> controlMappings;
+    private int mappingIndex = 0;
+
+    private float sensitivityValue;
+
+    private GameObject lastSelected;
 
     // Start is called before the first frame update
     void Start()
@@ -97,6 +106,10 @@ public class SettingsManager : MonoBehaviour
     //Toggle the menu on and off
     public void ToggleSettingsPanel()
     {
+        //Switch tab back to Settings
+        PreviousTab();
+
+        //Toggle panels
         settingsPanel.SetActive(!settingsPanel.activeInHierarchy);
         cancelPanel.SetActive(false);
         
@@ -108,7 +121,7 @@ public class SettingsManager : MonoBehaviour
         if (settingsPanel.activeInHierarchy)
         {
             EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(musicVolumeSlider.gameObject);
+            EventSystem.current.SetSelectedGameObject(sfxVolumeSlider.gameObject);
         }
 
         else
@@ -145,13 +158,15 @@ public class SettingsManager : MonoBehaviour
             //Select the appropriate UI element for navigation
             if (cancelPanel.activeInHierarchy)
             {
+                lastSelected = EventSystem.current.currentSelectedGameObject;
+
                 EventSystem.current.SetSelectedGameObject(null);
                 EventSystem.current.SetSelectedGameObject(saveAndQuit.gameObject);
             }
             else
             {
                 EventSystem.current.SetSelectedGameObject(null);
-                EventSystem.current.SetSelectedGameObject(applyButton.gameObject);
+                EventSystem.current.SetSelectedGameObject(lastSelected);
             }
         }
     }
@@ -204,5 +219,135 @@ public class SettingsManager : MonoBehaviour
         //Set curvature of the CRT effect
         crtEffect.Curvature = curvature;
         crtCurvature.value = curvature;
+    }
+
+    //Switch to the next tab in the settings
+    public void NextTab()
+    {
+        //Return if on the last tab
+        if (tabIndex == (tabs.Count - 1))
+        {
+            return;
+        }
+
+        if (settingsPanel.activeInHierarchy)
+        {
+            //Disable currently active tab
+            tabs[tabIndex].SetActive(false);
+
+            //Move to the next tab in the list
+            tabIndex++;
+            tabIndex = Mathf.Clamp(tabIndex, 0, tabs.Count - 1);
+
+            //Active the next tab object
+            tabs[tabIndex].SetActive(true);
+            
+            //Select the correct UI element based on which tab is now open
+            switch(tabIndex)
+            {
+                case 0:
+                    EventSystem.current.SetSelectedGameObject(null);
+                    EventSystem.current.SetSelectedGameObject(sfxVolumeSlider.gameObject);
+                    break;
+                case 1:
+                    EventSystem.current.SetSelectedGameObject(null);
+                    EventSystem.current.SetSelectedGameObject(controlsNextMapping);
+                    break;
+            }
+        }
+    }
+
+    //Switch to the previous tab in the menu
+    public void PreviousTab()
+    {
+        //Return if on the first tab
+        if (tabIndex == 0)
+        {
+            return;
+        }
+
+        if (settingsPanel.activeInHierarchy)
+        {
+            //Disable currently active tab
+            tabs[tabIndex].SetActive(false);
+
+            //Go the previous tab in the list
+            tabIndex--;
+            tabIndex = Mathf.Clamp(tabIndex, 0, tabs.Count - 1);
+
+            //Activate the previous tab object
+            tabs[tabIndex].SetActive(true);
+
+            //Select the proper UI element based on the newly activated tab
+            switch(tabIndex)
+            {
+                case 0:
+                    EventSystem.current.SetSelectedGameObject(null);
+                    EventSystem.current.SetSelectedGameObject(sfxVolumeSlider.gameObject);
+                    break;
+                case 1:
+                    EventSystem.current.SetSelectedGameObject(null);
+                    EventSystem.current.SetSelectedGameObject(controlsNextMapping);
+                    break;
+            }
+        }
+    }
+
+    //Switch to the next mapping on the controls tab
+    public void NextMapping()
+    {
+        if (settingsPanel.activeInHierarchy)
+        {
+            //Disable currently active mapping image
+            controlMappings[mappingIndex].SetActive(false);
+
+            //Go to the next mapping in the list and activate it
+            mappingIndex++;
+            mappingIndex = Mathf.Clamp(mappingIndex, 0, controlMappings.Count - 1);
+            controlMappings[mappingIndex].SetActive(true);
+
+            //Change the text to match the mapping shown
+            switch(mappingIndex)
+            {
+                case 0:
+                    controlsNextMapping.transform.parent.GetComponent<TextMeshProUGUI>().text = "Mouse & Keyboard";
+                    break;
+                case 1:
+                    controlsNextMapping.transform.parent.GetComponent<TextMeshProUGUI>().text = "Gamepad 1";
+                    break;
+                case 2:
+                    controlsNextMapping.transform.parent.GetComponent<TextMeshProUGUI>().text = "Gamepad 2";
+                    break;
+            }
+        }
+    }
+
+    //Switch to the previous mapping in the controls menu
+    public void PreviousMapping()
+    {
+        if (settingsPanel.activeInHierarchy)
+        {
+            //Disable currently active mapping
+            controlMappings[mappingIndex].SetActive(false);
+
+            //Go to the previous mapping in the list and display it
+            mappingIndex--;
+            mappingIndex = Mathf.Clamp(mappingIndex, 0, controlMappings.Count - 1);
+            controlMappings[mappingIndex].SetActive(true);
+
+            //Update the text to match the shown mapping
+            switch(mappingIndex)
+            {
+                case 0:
+                    controlsNextMapping.transform.parent.GetComponent<TextMeshProUGUI>().text = "Mouse & Keyboard";
+                    break;
+                case 1:
+                    controlsNextMapping.transform.parent.GetComponent<TextMeshProUGUI>().text = "Gamepad 1";
+                    break;
+                case 2:
+                    controlsNextMapping.transform.parent.GetComponent<TextMeshProUGUI>().text = "Gamepad 2";
+                    break;
+            }
+        }
     }
 }
