@@ -220,6 +220,11 @@ public class SettingsManager : MonoBehaviour
 
     public void NextTab()
     {
+        if (tabIndex == (tabs.Count - 1))
+        {
+            return;
+        }
+
         if (settingsPanel.activeInHierarchy)
         {
             tabs[tabIndex].SetActive(false);
@@ -245,6 +250,11 @@ public class SettingsManager : MonoBehaviour
 
     public void PreviousTab()
     {
+        if (tabIndex == 0)
+        {
+            return;
+        }
+
         if (settingsPanel.activeInHierarchy)
         {
             tabs[tabIndex].SetActive(false);

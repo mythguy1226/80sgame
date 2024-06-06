@@ -142,13 +142,11 @@ public class PlayerInputWrapper : MonoBehaviour
 
     private void OnPreviousTab()
     {
-        Debug.Log("L2");
         SettingsManager.Instance.PreviousTab();
     }
 
     private void OnNextTab()
     {
-        Debug.Log("R2");
         SettingsManager.Instance.NextTab();
     }
 

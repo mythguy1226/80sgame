@@ -686,6 +686,14 @@ MonoBehaviour:
   - {fileID: 154591517}
   - {fileID: 1333690338}
   - {fileID: 1856425092}
+  switchTabIcons:
+  - {fileID: 1020122200}
+  - {fileID: 510393279}
+  switchTabSprites:
+  - {fileID: 21300000, guid: 06d718ce91157f54c8d7ea5dc3e6e63b, type: 3}
+  - {fileID: 21300000, guid: 2e53c3a4923ec234fb51a4433c3781c8, type: 3}
+  - {fileID: 21300000, guid: 51cb69bf594c65049b4f8754de7e67db, type: 3}
+  - {fileID: 21300000, guid: ba243ab6d8ab3aa4489be7e8b7044303, type: 3}
 --- !u!114 &319221315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1270,6 +1278,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &510393279 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 650512168210861314, guid: ade02431274cdbe4f8fd5b4bdc90b6b9, type: 3}
+  m_PrefabInstance: {fileID: 1867834258203497347}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &653409313
@@ -2286,6 +2305,17 @@ MonoBehaviour:
   EnableRollingFlicker: 0
   RollingFlickerFactor: 0.25
   RollingVSyncTime: 1
+--- !u!114 &1020122200 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4184649026959582423, guid: ade02431274cdbe4f8fd5b4bdc90b6b9, type: 3}
+  m_PrefabInstance: {fileID: 1867834258203497347}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1082227965
 GameObject:
   m_ObjectHideFlags: 0
