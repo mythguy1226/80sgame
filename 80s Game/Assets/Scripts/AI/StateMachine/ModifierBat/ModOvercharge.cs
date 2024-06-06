@@ -5,6 +5,7 @@ using UnityEngine;
 public class ModOvercharge : AbsModifierEffect
 {
     ModType thisType = ModType.Overcharge;
+    public GameObject hitParticles;
 
     /// <summary>
     /// Activate the radius expansion effect or extend a currently existing one
@@ -20,6 +21,7 @@ public class ModOvercharge : AbsModifierEffect
 
         activator.SetMod(thisType, this);
         activator.ExpandRadius();
+        activator.hitParticles = hitParticles;
     }
 
 
@@ -30,5 +32,6 @@ public class ModOvercharge : AbsModifierEffect
     {
         activator.RemoveMod(thisType);
         activator.ResetRadius();
+        activator.hitParticles = activator.defaultHitParticles;
     }
 }
