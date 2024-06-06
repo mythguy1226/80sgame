@@ -163,3 +163,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectDuration: 10
   modifierUIPrefab: {fileID: 4742045415562882795, guid: 3052070908cd69d4896cc1da560f9e8d, type: 3}
+  hitParticles: {fileID: 3537340124483570280, guid: 7f86aa82b0946c7498238b9fe89ac5aa, type: 3}

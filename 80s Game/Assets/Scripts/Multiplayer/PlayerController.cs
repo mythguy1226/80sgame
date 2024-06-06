@@ -31,6 +31,8 @@ public class PlayerController : MonoBehaviour
 
     public int Order { get; private set; }
     public GameObject hitRadius;
+    public GameObject hitParticles;
+    public GameObject defaultHitParticles;
 
     private PlayerConfig config;
 
@@ -52,6 +54,7 @@ public class PlayerController : MonoBehaviour
             Order = PlayerData.activePlayers.Count;
         }
         modifiedShotRadius = originalShotRadius;
+        hitParticles = defaultHitParticles;
         
     }
 
@@ -102,6 +105,9 @@ public class PlayerController : MonoBehaviour
             hr.transform.localScale *= modifiedShotRadius / originalShotRadius;
             EndAndDie ed = hr.GetComponent<EndAndDie>();
             ed.radius = modifiedShotRadius;
+
+            GameObject hitVFX = Instantiate(hitParticles, activeCrosshair.transform.position, Quaternion.identity);
+            Destroy(hitVFX, 0.6f);
         }
 
         // Relay a shot information message to the Input Manager which acts as a publisher
