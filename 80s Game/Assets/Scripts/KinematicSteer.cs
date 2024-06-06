@@ -88,8 +88,13 @@ public class KinematicSteer : MonoBehaviour
     // Method for updating the agent position based on the current velocity
     public void UpdatePosition()
     {
+        float modifiedSpeed = maxSpeed;
+        if (GameManager.Instance.isSlowed)
+        {
+            modifiedSpeed *= 0.75f;
+        }
         // Calculate moving velocity
-        Vector2 finalVelocity = currentVelocity.normalized * maxSpeed;
+        Vector2 finalVelocity = currentVelocity.normalized * modifiedSpeed;
 
         // Update position based on final velocity
         //transform.position += new Vector3(finalVelocity.x, finalVelocity.y, 0.0f) * Time.deltaTime;

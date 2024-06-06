@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,7 +17,6 @@ public class InputManager : MonoBehaviour
     public Vector3 joyconCursorPos;
     //private bool shoulderPressed = false;
     public CrosshairBehavior crosshairScript;
-
     public PauseScreenBehavior pauseScript;
     public float sensitivity = 5.0f;
     // Update is called once per frame
