@@ -134,6 +134,9 @@ public class PlayerController : MonoBehaviour
         UIManager.PlayerPause(Order);
     }
 
+    /// <summary>
+    /// Emit a cancel event
+    /// </summary>
     public void EmitCancel()
     {
         if (currentState == ControllerState.JoinScreen)
@@ -150,11 +153,20 @@ public class PlayerController : MonoBehaviour
         GameManager.Instance.PointsManager.AddBonusPoints(Order, scoreController.GetAccuracy());
     }
 
+    /// <summary>
+    /// Exposes the total shots fired managed by the scoreController
+    /// </summary>
+    /// <returns>Total Shots Fired</returns>
     public int GetShotsFired()
     {
         return scoreController.ShotsFired;
     }
 
+
+    /// <summary>
+    /// Exposes the total shots landed managed by the scoreController
+    /// </summary>
+    /// <returns>Total shots landed</returns>
     public int GetShotsLanded()
     {
         return scoreController.ShotsLanded;

@@ -10,7 +10,7 @@ public class ClassicMode : AbsGameMode
         ModeType = EGameMode.Classic;
 
         // Initial round parameters
-        NumRounds = 1;
+        NumRounds = 10;
         maxTargetsOnScreen = 8;
         currentRoundTargetCount = 5;
     }

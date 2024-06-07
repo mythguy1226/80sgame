@@ -110,13 +110,20 @@ public class GameManager : MonoBehaviour
         GameManager.Instance.PointsManager.ResetRoundPoints();
     }
 
+    /// <summary>
+    /// Sets whether or not the client is connected to the internet
+    /// </summary>
+    /// <param name="value">The boolean that sets connectivity status</param>
     private void SetOnline(bool value)
     {
         
         isOnline = value;
-        Debug.Log("Is online: " + isOnline.ToString());
     }
 
+    /// <summary>
+    /// Function called by a game mode when the last round is exceeded.
+    /// Saves play data
+    /// </summary>
     public void HandleGameOver()
     {
         // Overall Game Data
@@ -128,7 +135,9 @@ public class GameManager : MonoBehaviour
         dataToSave.playerCount = PlayerData.activePlayers.Count;
         dataToSave.playerData = new PlayerSaveData[players.Count];
 
-        // Per Player data
+        // Per Player data. Not a fan of how this works.
+        // This loop requires strong coupling between this class and the active players,
+        // which have no reason to know about each other until now. Might turn this around in a refactor
         for (int i = 0; i < players.Count; i++)
         {
             PlayerSaveData playerData = new PlayerSaveData();
@@ -137,6 +146,8 @@ public class GameManager : MonoBehaviour
             playerData.shotsHit = players[i].GetShotsLanded();
             playerData.device = config.controlScheme;
             playerData.deviceMake = config.device.name;
+            playerData.crossHairColor = new float[] { config.crossHairColor.r, config.crossHairColor.g, config.crossHairColor.b };
+            playerData.crossHairIndex = config.crossHairIndex;
             playerData.sensitivity = new SensitivityData(config.sensitivity.x, config.sensitivity.y);
             playerData.modifiersCollected = new ModifierData(players[i].modifierCounter);
             dataToSave.playerData[i] = playerData;

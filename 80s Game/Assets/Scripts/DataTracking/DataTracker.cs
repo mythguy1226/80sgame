@@ -24,8 +24,7 @@ public abstract class DataSaver
 {
     /// <summary>
     /// Save the data item that encapsulates player behavior.
-    /// Handled asyncronously through the use of coroutines to minimize
-    /// gameplay impact
+    /// Handled asyncronously through the use of coroutines to minimize gameplay impact
     /// </summary>
     /// <param name="data">Data item</param>
     /// <returns></returns>
@@ -61,7 +60,7 @@ public class RemoteDataSaver : DataSaver
     public override IEnumerator Save(SaveDataItem data)
     {
         // Prepare the request
-        string url = "http://localhost:80" + endpoint;
+        string url = NetworkUtility.destinationURL + endpoint;
         UnityWebRequest request = new UnityWebRequest(url, "POST");
         request.SetRequestHeader("Content-Type", "application-json");
         byte[] bodyRaw = Encoding.UTF8.GetBytes(JsonUtility.ToJson(data));
@@ -71,7 +70,7 @@ public class RemoteDataSaver : DataSaver
         //Send the request
         yield return request.SendWebRequest();
         
-        // Fallback has been tested
+        // Fallback method in case our server becomes unreachable or the request fails
         bool requestError = request.result != UnityWebRequest.Result.Success;
         if ( requestError )
         {
