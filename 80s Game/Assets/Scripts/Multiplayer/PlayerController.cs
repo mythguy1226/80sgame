@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -78,6 +79,16 @@ public class PlayerController : MonoBehaviour
         {
             activeCrosshair.SetCrosshairSprite(pc.crosshairSprite);
             activeCrosshair.ChangeSpriteColor(pc.crossHairColor);
+
+            if (config.initials == null)
+            {
+                activeCrosshair.gameObject.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = "AAA";
+            }
+
+            else
+            {
+                activeCrosshair.gameObject.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = config.initials;
+            }
         }
         currentState = controllerState;
     }

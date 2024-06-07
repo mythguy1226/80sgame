@@ -15,7 +15,6 @@ public class PlayerConfig
     public InputDevice device;
     public PlayerConfig(int i, Color col, Vector2 sens)
     {
-
         crossHairColor = col;
         sensitivity = sens;
         playerIndex = i;
