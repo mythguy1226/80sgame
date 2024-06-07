@@ -6054,6 +6054,9 @@ MonoBehaviour:
   highScoreTextObject: {fileID: 153801723}
   finalScoreTextObject: {fileID: 1117114116}
   roundIndicatorTextObject: {fileID: 736886330}
+  playerNames:
+  - {fileID: 1554343130}
+  - {fileID: 1275475504}
 --- !u!114 &1011990667
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -25,6 +25,8 @@ public class ScoreBehavior : MonoBehaviour
     private int playerTwoPoints = 0;
     private int leadingPlayer;
 
+    public List<TextMeshProUGUI> playerNames;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +39,26 @@ public class ScoreBehavior : MonoBehaviour
             highScore = records[records.Count - 1].score;
         else
             highScore = 0;
+
+        //Set the player names for the scores in Competitive mode
+        if (GameManager.Instance.gameModeType == EGameMode.Competitive)
+        {   
+            //Loop through all active player names
+            for (int i =0 ; i <= playerNames.Count - 1; i++)
+            {
+                //Set default name if no initials set
+                if (PlayerData.activePlayers[i].initials == null)
+                {
+                    playerNames[i].text = "AAA";
+                }
+
+                //Otherwise, used saved initials
+                else
+                {
+                    playerNames[i].text = PlayerData.activePlayers[i].initials;
+                }
+            }
+        }
     }
 
     // Update is called once per frame

@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -78,6 +79,22 @@ public class PlayerController : MonoBehaviour
         {
             activeCrosshair.SetCrosshairSprite(pc.crosshairSprite);
             activeCrosshair.ChangeSpriteColor(pc.crossHairColor);
+
+            //Set initials under crosshair only in Competitive mode
+            if (GameManager.Instance.gameModeType == EGameMode.Competitive)
+            {
+                //Set initials under crosshair to AAA if initials haven't been changed
+                if (config.initials == null)
+                {
+                    activeCrosshair.gameObject.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = "AAA";
+                }
+
+                //Otherwise, use the initials saved in the config
+                else
+                {
+                    activeCrosshair.gameObject.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = config.initials;
+                }
+            }
         }
         currentState = controllerState;
     }
