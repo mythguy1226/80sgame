@@ -206,6 +206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1541242eb80ec154dacf050192835f97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 2
   FSM: {fileID: 7156282623998708221}
 --- !u!60 &8319351504079490042
 PolygonCollider2D:

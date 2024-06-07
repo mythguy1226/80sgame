@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
@@ -27,6 +28,8 @@ public class PlayerController : MonoBehaviour
     private ModDoublePoints doublePoints;
     private ModOvercharge overchargeMod;
 
+    public Dictionary<AbsModifierEffect.ModType, int> modifierCounter;
+
     public int Order { get; private set; }
     public GameObject hitRadius;
     public GameObject hitParticles;
@@ -40,6 +43,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        modifierCounter = new Dictionary<AbsModifierEffect.ModType, int>();
         GameManager.roundOverObservers += ReportEndOfRound;
         scoreController = new PlayerScoreController();
         activeCrosshair = Instantiate(crosshairPrefab, new Vector3(0,0,0), Quaternion.identity);
@@ -169,6 +173,17 @@ public class PlayerController : MonoBehaviour
         GameManager.Instance.PointsManager.AddBonusPoints(Order, scoreController.GetAccuracy());
     }
 
+    public int GetShotsFired()
+    {
+        return scoreController.ShotsFired;
+    }
+
+    public int GetShotsLanded()
+    {
+        return scoreController.ShotsLanded;
+    }
+
+
     /// <summary>
     /// Set which object is the join manager.
     /// </summary>
@@ -214,6 +229,11 @@ public class PlayerController : MonoBehaviour
         return modifiedShotRadius;
     }
 
+    /// <summary>
+    /// Test that the player currently has a type of modifier active
+    /// </summary>
+    /// <param name="type">The type to test</param>
+    /// <returns>Whether or not the type tested is active</returns>
     public bool HasMod(AbsModifierEffect.ModType type)
     {
         switch (type)
@@ -228,15 +248,30 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
+    /// Add modifier to the count for data tracking
+    /// </summary>
+    /// <param name="type">The type of modifier to add</param>
+    public void AddModToCount(AbsModifierEffect.ModType type)
+    {
+        if (!modifierCounter.ContainsKey(type))
+        {
+            modifierCounter[type] = 0;
+        }
+        modifierCounter[type] += 1;
+    }
+
+    /// <summary>
     /// Set a modifier in this player controller
     /// </summary>
     /// <param name="type">The type of modifier being set</param>
     /// <param name="effect">The effect object as a reference </param>
     public void SetMod(AbsModifierEffect.ModType type, AbsModifierEffect effect)
     {
+        AddModToCount(type);
         switch (type)
         {
             case AbsModifierEffect.ModType.Overcharge:
+                
                 overchargeMod = (ModOvercharge) effect;
                 break;
             case AbsModifierEffect.ModType.DoublePoints:

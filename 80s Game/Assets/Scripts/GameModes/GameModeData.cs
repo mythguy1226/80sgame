@@ -15,4 +15,19 @@ public static class GameModeData
                 return 2;
         }
     }
+
+    public static string GameModeToString()
+    {
+        switch (activeGameMode)
+        {
+            case EGameMode.Competitive:
+                return "competitive";
+            case EGameMode.Defense:
+                return "defense";
+            case EGameMode.Classic:
+                return "classic";
+            default:
+                return "unreg";
+        }
+    }
 }
