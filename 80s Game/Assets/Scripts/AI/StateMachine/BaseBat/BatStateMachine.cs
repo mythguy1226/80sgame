@@ -2,9 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Rendering;
-using static UnityEditor.PlayerSettings;
-using static UnityEngine.GraphicsBuffer;
 
 /* CLASS: BatStateMachine
  * USAGE: State Machine used for managing bat behavior and
@@ -248,7 +245,7 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
         }
 
         // Update target manager with current state
-        gameManager.TargetManager.OnTargetReset();
+        gameManager.TargetManager.OnTargetReset(GetComponent<Target>().type);
         InputManager.detectHitSub -= ListenForShot;
         stunningPlayer = null;
     }

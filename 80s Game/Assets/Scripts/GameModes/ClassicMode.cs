@@ -10,7 +10,7 @@ public class ClassicMode : AbsGameMode
         ModeType = EGameMode.Classic;
 
         // Initial round parameters
-        NumRounds = 10;
+        NumRounds = 1;
         maxTargetsOnScreen = 8;
         currentRoundTargetCount = 5;
     }
@@ -91,7 +91,10 @@ public class ClassicMode : AbsGameMode
 
             // If last round completed
             if(CurrentRound == NumRounds)
+            {
                 GameOver = true;
+                EndGame();
+            }
             // Otherwise start next round
             else
             {
