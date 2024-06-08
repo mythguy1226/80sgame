@@ -240,12 +240,13 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
         if (currentState != states[BatStates.Fleeing])
         {
             // Add a successful hit
+            gameManager.TargetManager.AddToCount(GetComponent<Target>().type, gameManager.TargetManager.killCount);
             stunningPlayer.scoreController.AddHit();
             gameManager.PointsManager.AddRoundPoints(stunningPlayer.Order, pointValue * stunningPlayer.scoreController.pointsMod);
         }
 
         // Update target manager with current state
-        gameManager.TargetManager.OnTargetReset(GetComponent<Target>().type);
+        gameManager.TargetManager.OnTargetReset();
         InputManager.detectHitSub -= ListenForShot;
         stunningPlayer = null;
     }
