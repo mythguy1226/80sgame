@@ -83,13 +83,11 @@ public class TargetManager : MonoBehaviour
     }
 
     // Method used for updating values on bat death
-    public void OnTargetReset(TargetType targetType)
+    public void OnTargetReset()
     {
         // Update number of stuns
         numStuns++;
         totalStuns++;
-
-        AddToCount(targetType, killCount);
 
         // Allow game mode to update state based on bat stun
         GameManager.Instance.ActiveGameMode.OnTargetReset();
