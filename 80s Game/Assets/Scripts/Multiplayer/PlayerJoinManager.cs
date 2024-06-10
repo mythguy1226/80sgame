@@ -56,6 +56,10 @@ public class PlayerJoinManager : MonoBehaviour
         // with UI controls. We also set its PlayerConfig.
         PlayerController pc = playerInput.gameObject.GetComponent<PlayerController>();
         config.crosshairSprite = pc.GetCrosshairSprite();
+
+        // Set back sensitivity override if this is player one
+        if(playerInput.playerIndex == 0)
+            config.sensitivity = new Vector2(PlayerPrefs.GetFloat("Sensitivity"), PlayerPrefs.GetFloat("Sensitivity"));
         PlayerData.activePlayers.Add(config);
         pc.SetConfig(config, PlayerController.ControllerState.JoinScreen);
         pc.SetJoinManager(this);
