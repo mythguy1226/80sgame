@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -28,6 +29,9 @@ public class GameManager : MonoBehaviour
     
     [Tooltip("Debug to spawn a Player Controller for testing without having to go through the join screen")]
     public bool debug;
+    private float gameStartTime;
+    private List<PlayerController> players;
+    private bool isOnline;
 
     private void Awake()
     {
@@ -46,6 +50,7 @@ public class GameManager : MonoBehaviour
             TargetManager = GetComponent<TargetManager>();
             PointsManager = GetComponent<PointsManager>();
             UIManager = GetComponent<UIManager>();
+            players = new List<PlayerController>();
 
             if (PlayerData.activePlayers.Count == 0 && debug) {
                 float sensitivity = PlayerPrefs.GetFloat("Sensitivity", 1.0f);
@@ -58,6 +63,7 @@ public class GameManager : MonoBehaviour
                 pi.SwitchCurrentControlScheme(pi.currentControlScheme, pi.devices[0]);
             } else
             {
+                // Main Gameplay Player Instantiation
                 for(int i = 0; i < PlayerData.activePlayers.Count; i++)
                 {
                     PlayerController pc = Instantiate(playerPrefab, transform.position, Quaternion.identity);
@@ -65,7 +71,9 @@ public class GameManager : MonoBehaviour
                     PlayerInput pi = pc.GetComponent<PlayerInput>();
                     InputDevice[] devices = new InputDevice[] { PlayerData.activePlayers[i].device };
                     pi.SwitchCurrentControlScheme(PlayerData.activePlayers[i].controlScheme, devices);
+                    players.Add(pc);
                 }
+                StartCoroutine(NetworkUtility.Ping(SetOnline));
             }
         }
     }
@@ -92,6 +100,7 @@ public class GameManager : MonoBehaviour
         if (activeScene.buildIndex > 1)
         {
             ActiveGameMode.StartGame();
+            gameStartTime = Time.time;
         }
     }
 
@@ -99,5 +108,51 @@ public class GameManager : MonoBehaviour
     {
         roundOverObservers?.Invoke();
         GameManager.Instance.PointsManager.ResetRoundPoints();
+    }
+
+    /// <summary>
+    /// Sets whether or not the client is connected to the internet
+    /// </summary>
+    /// <param name="value">The boolean that sets connectivity status</param>
+    private void SetOnline(bool value)
+    {
+        
+        isOnline = value;
+    }
+
+    /// <summary>
+    /// Function called by a game mode when the last round is exceeded.
+    /// Saves play data
+    /// </summary>
+    public void HandleGameOver()
+    {
+        // Overall Game Data
+        SaveDataItem dataToSave = new SaveDataItem();
+        dataToSave.gameMode = GameModeData.GameModeToString();
+        dataToSave.batsShot = new BatData(TargetManager.killCount);
+        dataToSave.batsSpawned = new BatData(TargetManager.spawnCount);
+        dataToSave.duration = (int)(Time.time - gameStartTime);
+        dataToSave.playerCount = PlayerData.activePlayers.Count;
+        dataToSave.playerData = new PlayerSaveData[players.Count];
+
+        // Per Player data. Not a fan of how this works.
+        // This loop requires strong coupling between this class and the active players,
+        // which have no reason to know about each other until now. Might turn this around in a refactor
+        for (int i = 0; i < players.Count; i++)
+        {
+            PlayerSaveData playerData = new PlayerSaveData();
+            PlayerConfig config = PlayerData.activePlayers[players[i].Order];
+            playerData.shotsFired = players[i].GetShotsFired();
+            playerData.shotsHit = players[i].GetShotsLanded();
+            playerData.device = config.controlScheme;
+            playerData.deviceMake = config.device.name;
+            playerData.crossHairColor = new float[] { config.crossHairColor.r, config.crossHairColor.g, config.crossHairColor.b };
+            playerData.crossHairIndex = config.crossHairIndex;
+            playerData.sensitivity = new SensitivityData(config.sensitivity.x, config.sensitivity.y);
+            playerData.modifiersCollected = new ModifierData(players[i].modifierCounter);
+            dataToSave.playerData[i] = playerData;
+        }
+        DataSaver saver = DataSaveFactory.MakeSaver(true);
+        StartCoroutine(saver.Save(dataToSave));
     }
 }

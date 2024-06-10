@@ -111,7 +111,11 @@ public class CompetitiveMode : AbsGameMode
 
             // If last round completed
             if (CurrentRound == NumRounds)
+            {
                 GameOver = true;
+                EndGame();
+            }
+                
             // Otherwise start next round
             else
                 StartNextRound();

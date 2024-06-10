@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 
 public class ModConfusion : AbsModifierEffect
 {
+    ModType thisType = ModType.Confusion;
     /// <summary>
     /// Override: Activates inverse controller effect
     /// </summary>
@@ -16,6 +17,7 @@ public class ModConfusion : AbsModifierEffect
             PlayerController pc = piw.GetPlayer();
             if (pc.Order == activator.Order)
             {
+                activator.AddModToCount(thisType);
                 continue;
             }
             piw.isFlipped = true;

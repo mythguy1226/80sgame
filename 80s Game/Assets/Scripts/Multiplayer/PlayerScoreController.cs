@@ -1,9 +1,14 @@
+using System.Runtime.InteropServices.WindowsRuntime;
+
 public class PlayerScoreController
 {
     // This class encapsulates the accuracy-keeping responsibility for each player object.
-
     private int _shotsFired;
     private int _shotsLanded;
+
+    public int ShotsFired { get => _shotsFired; }
+    public int ShotsLanded { get => _shotsLanded; }
+
     public int pointsMod = 1;
 
 

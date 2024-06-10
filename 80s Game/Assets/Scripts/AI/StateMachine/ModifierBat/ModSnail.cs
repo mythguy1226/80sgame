@@ -4,7 +4,6 @@ using UnityEngine.InputSystem;
 public class ModSnail : AbsModifierEffect
 {
     ModType thisType = ModType.Snail;
-
     /// <summary>
     /// Override: Activates slow movement effect
     /// </summary>
@@ -18,6 +17,7 @@ public class ModSnail : AbsModifierEffect
             PlayerController pc = piw.GetPlayer();
             if (pc.Order == activator.Order)
             {
+                activator.AddModToCount(thisType);
                 continue;
             }
             piw.isSlowed = true;

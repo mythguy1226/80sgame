@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public enum EGameMode
 {
     Classic,
@@ -34,6 +30,11 @@ public abstract class AbsGameMode
     public void StartGame()
     {
         StartNextRound(true);
+    }
+
+    protected void EndGame()
+    {
+        GameManager.Instance.HandleGameOver();
     }
 
     // Needs to be public for targetManager to call

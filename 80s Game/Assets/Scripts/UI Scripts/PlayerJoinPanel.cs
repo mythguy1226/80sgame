@@ -205,6 +205,7 @@ public class PlayerJoinPanel : MonoBehaviour
         PlayerData.activePlayers[player].initials = initials[0].text + initials[1].text + initials[2].text;
         PlayerData.activePlayers[player].crossHairColor = new Color(colorSliders[0].value / 255, colorSliders[1].value / 255, colorSliders[2].value / 255);
         PlayerData.activePlayers[player].crosshairSprite = crosshairPreview.sprite;
+        PlayerData.activePlayers[player].crossHairIndex = crosshairIndex;
     }
 
     //Method for updating the number of the initial variables
