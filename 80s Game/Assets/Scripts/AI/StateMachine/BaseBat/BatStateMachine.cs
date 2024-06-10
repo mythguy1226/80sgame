@@ -2,9 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Rendering;
-using static UnityEditor.PlayerSettings;
-using static UnityEngine.GraphicsBuffer;
 
 /* CLASS: BatStateMachine
  * USAGE: State Machine used for managing bat behavior and
@@ -243,6 +240,7 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
         if (currentState != states[BatStates.Fleeing])
         {
             // Add a successful hit
+            gameManager.TargetManager.AddToCount(GetComponent<Target>().type, gameManager.TargetManager.killCount);
             stunningPlayer.scoreController.AddHit();
             gameManager.PointsManager.AddRoundPoints(stunningPlayer.Order, pointValue * stunningPlayer.scoreController.pointsMod);
         }

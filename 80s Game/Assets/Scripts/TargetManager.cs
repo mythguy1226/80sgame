@@ -1,10 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class TargetManager : MonoBehaviour
 {
+    public enum TargetType
+    {
+        Regular,
+        Bonus,
+        Unstable,
+        Modifier
+    }
     // Fields for all targets and spawn locations
     public List<Target> targets;
     public List<Vector3> spawnLocations;
@@ -20,6 +26,8 @@ public class TargetManager : MonoBehaviour
     // Scale values
     float minScale = 2.8f;
     float maxScale = 3.5f;
+    public Dictionary<TargetType, int> killCount;
+    public Dictionary<TargetType, int> spawnCount;
 
     public List<Target> ActiveTargets
     {
@@ -29,6 +37,8 @@ public class TargetManager : MonoBehaviour
     private void Start()
     {
         targets = new List<Target>(GameObject.FindObjectsOfType<Target>());
+        killCount = new Dictionary<TargetType, int>();
+        spawnCount = new Dictionary<TargetType, int>();
         DisablePolyCollisions();
     }
 
@@ -48,6 +58,7 @@ public class TargetManager : MonoBehaviour
     public void SpawnTarget(int targetIndex)
     {
         Target target = targets[targetIndex];
+        AddToCount(target.type, spawnCount);
         // Get the spawn point randomly and teleport the target to that point
         Vector3 spawnPoint = spawnLocations[Random.Range(0, spawnLocations.Count - 1)];
         target.transform.position = spawnPoint;
@@ -81,6 +92,23 @@ public class TargetManager : MonoBehaviour
         // Allow game mode to update state based on bat stun
         GameManager.Instance.ActiveGameMode.OnTargetReset();
     }
+
+    /// <summary>
+    /// Add a target to one of the counter objects
+    /// </summary>
+    /// <param name="targetType">The type of the target to keep count of</param>
+    /// <param name="counter">The collection that keeps track of this count</param>
+    public void AddToCount(TargetType targetType, Dictionary<TargetType, int> counter)
+    {
+        if (!counter.ContainsKey(targetType))
+        {
+            counter.Add(targetType, 0);
+        }
+
+        counter[targetType] += 1;
+    }
+
+
 
     /// <summary>
     /// Templated method that finds the next target
