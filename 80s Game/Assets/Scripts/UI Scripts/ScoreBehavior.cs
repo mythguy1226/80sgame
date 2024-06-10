@@ -85,26 +85,29 @@ public class ScoreBehavior : MonoBehaviour
         //Competitive mode final scores
         else if (GameManager.Instance.gameModeType == EGameMode.Competitive)
         {
-            //Show which player has won the game
-            switch (leadingPlayer)
+            if (PlayerData.activePlayers.Count > 0)
             {
-                case 1:
-                    finalScoreText = PlayerData.activePlayers[0].initials + " Wins!";
-                    break;
-                case 2:
-                    finalScoreText = PlayerData.activePlayers[1].initials + " Wins!";
-                    break;
-                case 3:
-                    finalScoreText = PlayerData.activePlayers[2].initials + " Wins!";
-                    break;
-                case 4:
-                    finalScoreText = PlayerData.activePlayers[3].initials + " Wins!";
-                    break;
-                case 5:
-                    finalScoreText = "Tie!";
-                    break;
+                //Show which player has won the game
+                switch (leadingPlayer)
+                {
+                    case 1:
+                        finalScoreText = PlayerData.activePlayers[0].initials + " Wins!";
+                        break;
+                    case 2:
+                        finalScoreText = PlayerData.activePlayers[1].initials + " Wins!";
+                        break;
+                    case 3:
+                        finalScoreText = PlayerData.activePlayers[2].initials + " Wins!";
+                        break;
+                    case 4:
+                        finalScoreText = PlayerData.activePlayers[3].initials + " Wins!";
+                        break;
+                    case 5:
+                        finalScoreText = "Tie!";
+                        break;
+                }
             }
-
+            
             //Additionally show each player's final scores
             finalScoreText += "\n\n\nFINAL SCORES:\n\n" + PlayerData.activePlayers[0].initials + ": " + playerOnePoints 
             + "\n" + PlayerData.activePlayers[1].initials + ": " + playerTwoPoints;
