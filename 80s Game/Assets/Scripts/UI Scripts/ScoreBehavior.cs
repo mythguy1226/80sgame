@@ -46,21 +46,10 @@ public class ScoreBehavior : MonoBehaviour
         if (GameManager.Instance.gameModeType == EGameMode.Competitive)
         {   
             //Loop through all active player names
-            for (int i =0 ; i <= playerNames.Count - 1; i++)
+            for (int i =0 ; i <= PlayerData.activePlayers.Count - 1; i++)
             {
                 playerNames[i].gameObject.SetActive(true);
-
-                //Set default name if no initials set
-                if (PlayerData.activePlayers[i].initials == null)
-                {
-                    playerNames[i].text = "AAA";
-                }
-
-                //Otherwise, used saved initials
-                else
-                {
-                    playerNames[i].text = PlayerData.activePlayers[i].initials;
-                }
+                playerNames[i].text = PlayerData.activePlayers[i].initials;
             }
         }
     }
@@ -121,13 +110,13 @@ public class ScoreBehavior : MonoBehaviour
             + "\n" + PlayerData.activePlayers[1].initials + ": " + playerTwoPoints;
             
             //Add player 3's score if there is a player 3
-            if (PlayerData.activePlayers[2] != null)
+            if (PlayerData.activePlayers.Count >= 3)
             {
                 finalScoreText += "\n" + PlayerData.activePlayers[2].initials + ": " + playerThreePoints;
             }
 
             //Add player 4's score if there is a player 4
-            if (PlayerData.activePlayers[3] != null)
+            if (PlayerData.activePlayers.Count == 4)
             {
                 finalScoreText += "\n" + PlayerData.activePlayers[3].initials + ": " + playerFourPoints;
             }
