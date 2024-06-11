@@ -109,8 +109,12 @@ public class ScoreBehavior : MonoBehaviour
             }
             
             //Additionally show each player's final scores
-            finalScoreText += "\n\n\nFINAL SCORES:\n\n" + PlayerData.activePlayers[0].initials + ": " + playerOnePoints 
-            + "\n" + PlayerData.activePlayers[1].initials + ": " + playerTwoPoints;
+            finalScoreText += "\n\n\nFINAL SCORES:\n\n" + PlayerData.activePlayers[0].initials + ": " + playerOnePoints; 
+            
+            if (PlayerData.activePlayers.Count >= 2)
+            {
+                finalScoreText += "\n" + PlayerData.activePlayers[1].initials + ": " + playerTwoPoints;
+            }
             
             //Add player 3's score if there is a player 3
             if (PlayerData.activePlayers.Count >= 3)
