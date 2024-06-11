@@ -167,6 +167,11 @@ public abstract class AbsModifierEffect : MonoBehaviour
     public void AddDuration(float value)
     {
         effectDuration += value;
+
+        if (effectDuration > maxEffectDuration)
+        {
+            maxEffectDuration = effectDuration;
+        }
     }
 
 }
