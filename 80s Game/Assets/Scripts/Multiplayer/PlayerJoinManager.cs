@@ -116,6 +116,12 @@ public class PlayerJoinManager : MonoBehaviour
     // This function launches the corresponding game mode that has been loaded by selection in the previous scene.
     public void LaunchGameMode()
     {
+        //Don't launch competitive with only 1 player
+        if (GameModeData.activeGameMode == EGameMode.Competitive && PlayerData.activePlayers.Count == 1)
+        {
+            return;
+        }
+
         foreach(KeyValuePair<int, bool> kvp in joinStatus)
         {
             if (!kvp.Value)
