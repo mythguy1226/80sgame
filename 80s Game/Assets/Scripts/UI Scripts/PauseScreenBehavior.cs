@@ -128,7 +128,6 @@ public class PauseScreenBehavior : MonoBehaviour
         GameManager.Instance.PointsManager.SaveScore();
         Time.timeScale = 1f;
 
-        PlayerData.Reset();
         SceneManager.LoadScene(0);
 
         SoundManager.Instance.PlaySoundContinuous(buttonClickSound);

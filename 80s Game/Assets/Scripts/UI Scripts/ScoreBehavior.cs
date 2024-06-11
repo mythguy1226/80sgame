@@ -23,6 +23,8 @@ public class ScoreBehavior : MonoBehaviour
 
     private int playerOnePoints = 0;
     private int playerTwoPoints = 0;
+    private int playerThreePoints = 0;
+    private int playerFourPoints = 0;
     private int leadingPlayer;
 
     public List<TextMeshProUGUI> playerNames;
@@ -44,19 +46,10 @@ public class ScoreBehavior : MonoBehaviour
         if (GameManager.Instance.gameModeType == EGameMode.Competitive)
         {   
             //Loop through all active player names
-            for (int i =0 ; i <= playerNames.Count - 1; i++)
+            for (int i =0 ; i <= PlayerData.activePlayers.Count - 1; i++)
             {
-                //Set default name if no initials set
-                if (PlayerData.activePlayers[i].initials == null)
-                {
-                    playerNames[i].text = "AAA";
-                }
-
-                //Otherwise, used saved initials
-                else
-                {
-                    playerNames[i].text = PlayerData.activePlayers[i].initials;
-                }
+                playerNames[i].gameObject.SetActive(true);
+                playerNames[i].text = PlayerData.activePlayers[i].initials;
             }
         }
     }
@@ -92,22 +85,49 @@ public class ScoreBehavior : MonoBehaviour
         //Competitive mode final scores
         else if (GameManager.Instance.gameModeType == EGameMode.Competitive)
         {
-            //Show which player has won the game
-            switch (leadingPlayer)
+            if (PlayerData.activePlayers.Count > 0)
             {
-                case 1:
-                    finalScoreText = "Player 1 Wins!";
-                    break;
-                case 2:
-                    finalScoreText = "Player 2 Wins!";
-                    break;
-                case 3:
-                    finalScoreText = "Tie!";
-                    break;
+                //Show which player has won the game
+                switch (leadingPlayer)
+                {
+                    case 1:
+                        finalScoreText = PlayerData.activePlayers[0].initials + " Wins!";
+                        break;
+                    case 2:
+                        finalScoreText = PlayerData.activePlayers[1].initials + " Wins!";
+                        break;
+                    case 3:
+                        finalScoreText = PlayerData.activePlayers[2].initials + " Wins!";
+                        break;
+                    case 4:
+                        finalScoreText = PlayerData.activePlayers[3].initials + " Wins!";
+                        break;
+                    case 5:
+                        finalScoreText = "Tie!";
+                        break;
+                }
+            }
+            
+            //Additionally show each player's final scores
+            finalScoreText += "\n\n\nFINAL SCORES:\n\n" + PlayerData.activePlayers[0].initials + ": " + playerOnePoints; 
+            
+            if (PlayerData.activePlayers.Count >= 2)
+            {
+                finalScoreText += "\n" + PlayerData.activePlayers[1].initials + ": " + playerTwoPoints;
+            }
+            
+            //Add player 3's score if there is a player 3
+            if (PlayerData.activePlayers.Count >= 3)
+            {
+                finalScoreText += "\n" + PlayerData.activePlayers[2].initials + ": " + playerThreePoints;
             }
 
-            //Additionally show each player's final scores
-            finalScoreText += "\n\n\nFINAL SCORES:\n\nPlayer 1: " + playerOnePoints + "\nPlayer 2: " + playerTwoPoints;
+            //Add player 4's score if there is a player 4
+            if (PlayerData.activePlayers.Count == 4)
+            {
+                finalScoreText += "\n" + PlayerData.activePlayers[3].initials + ": " + playerFourPoints;
+            }
+
             finalScoreTextObject.SetText(finalScoreText);
         }
 
@@ -134,22 +154,49 @@ public class ScoreBehavior : MonoBehaviour
         if (GameManager.Instance.PointsManager.TotalPointsByPlayer.ContainsKey(1))
         {
             playerTwoPoints = GameManager.Instance.PointsManager.TotalPointsByPlayer[1];
-        }   
+        }
+
+        //Keep track of player 3's score
+        if (GameManager.Instance.PointsManager.TotalPointsByPlayer.ContainsKey(2))
+        {
+            playerThreePoints = GameManager.Instance.PointsManager.TotalPointsByPlayer[2];
+        }
+
+        if (GameManager.Instance.PointsManager.TotalPointsByPlayer.ContainsKey(3))
+        {
+            playerFourPoints = GameManager.Instance.PointsManager.TotalPointsByPlayer[3];
+        }       
 
         //Update which player is winning based on the scores
-        if (playerOnePoints > playerTwoPoints)
+        //Set player 1 as leading player
+        if (playerOnePoints > playerTwoPoints && playerOnePoints > playerThreePoints && playerOnePoints > playerFourPoints)
         {
             leadingPlayer = 1;
         }
-        else if(playerOnePoints < playerTwoPoints)
+
+        //Set player 2 as leading player
+        else if(playerTwoPoints > playerOnePoints && playerTwoPoints > playerThreePoints && playerTwoPoints > playerFourPoints)
         {
             leadingPlayer = 2;
         }
-        else
+
+        //Set player 3 as leading player
+        else if(playerThreePoints > playerOnePoints && playerThreePoints > playerTwoPoints && playerThreePoints > playerFourPoints)
         {
             leadingPlayer = 3;
         }
 
+        //Set player 4 as leading player
+        else if (playerFourPoints > playerOnePoints && playerFourPoints > playerThreePoints && playerFourPoints > playerTwoPoints)
+        {
+            leadingPlayer = 4;
+        }
+
+        //Set game as a tie
+        else
+        {
+            leadingPlayer = 5;
+        }
 
     }
     

@@ -90,14 +90,10 @@ public class PlayerController : MonoBehaviour
                 //Set initials under crosshair to AAA if initials haven't been changed
                 if (config.initials == null)
                 {
-                    activeCrosshair.gameObject.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = "AAA";
+                    config.initials = "AAA";
                 }
 
-                //Otherwise, use the initials saved in the config
-                else
-                {
-                    activeCrosshair.gameObject.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = config.initials;
-                }
+                activeCrosshair.gameObject.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = config.initials;
             }
         }
         currentState = controllerState;

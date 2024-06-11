@@ -37,6 +37,10 @@ public class PlayerJoinManager : MonoBehaviour
 
     private void OnPlayerJoined(PlayerInput playerInput)
     {
+        if (PlayerData.activePlayers.Count == 4)
+        {
+            return;
+        }
         // This event is called by the Player Input Manager component when a player joins
         // The parameter passed is the PlayerInput component the instantiated Player object has.
 
