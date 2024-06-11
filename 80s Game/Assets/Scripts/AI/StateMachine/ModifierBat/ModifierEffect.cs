@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class AbsModifierEffect : MonoBehaviour
 {
@@ -14,10 +15,12 @@ public abstract class AbsModifierEffect : MonoBehaviour
 
     [SerializeField]
     protected float effectDuration;
+    protected float maxEffectDuration;
     
     [SerializeField]
     protected GameObject modifierUIPrefab;
     protected List<GameObject> modifierUIRefs;
+    protected GameObject modifierUIElement;
 
     protected bool bIsActive = false;
     protected PlayerController activator;
@@ -30,6 +33,7 @@ public abstract class AbsModifierEffect : MonoBehaviour
         InputManager.detectHitSub += ListenForShot;
         _Rb = GetComponent<Rigidbody2D>();
         modifierUIRefs = new List<GameObject>();
+        maxEffectDuration = effectDuration;
     }
 
     void OnDisable()
@@ -45,6 +49,7 @@ public abstract class AbsModifierEffect : MonoBehaviour
         {
 
             effectDuration -= Time.deltaTime;
+            modifierUIElement.transform.GetChild(0).GetComponent<Image>().fillAmount = effectDuration / maxEffectDuration;
 
             // Deactivate effect once timer reaches zero
             if (effectDuration <= 0.0f)
@@ -151,7 +156,8 @@ public abstract class AbsModifierEffect : MonoBehaviour
     /// <param name="player">Which player needs it</param>
     protected void AddUIRef(int player)
     {
-        modifierUIRefs.Add(GameManager.Instance.UIManager.CreateModifierUI(modifierUIPrefab, player));
+        modifierUIElement = GameManager.Instance.UIManager.CreateModifierUI(modifierUIPrefab, player);
+        modifierUIRefs.Add(modifierUIElement);
     }
 
     /// <summary>
@@ -161,6 +167,11 @@ public abstract class AbsModifierEffect : MonoBehaviour
     public void AddDuration(float value)
     {
         effectDuration += value;
+
+        if (effectDuration > maxEffectDuration)
+        {
+            maxEffectDuration = effectDuration;
+        }
     }
 
 }
