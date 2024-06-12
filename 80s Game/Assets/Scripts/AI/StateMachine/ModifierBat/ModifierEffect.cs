@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public abstract class AbsModifierEffect : MonoBehaviour
 {
@@ -21,6 +22,11 @@ public abstract class AbsModifierEffect : MonoBehaviour
     protected GameObject modifierUIPrefab;
     protected List<GameObject> modifierUIRefs;
     protected GameObject modifierUIElement;
+
+    [SerializeField]
+    protected GameObject floatingTextPrefab;
+    [SerializeField]
+    protected string modifierName;
 
     protected bool bIsActive = false;
     protected PlayerController activator;
@@ -131,6 +137,7 @@ public abstract class AbsModifierEffect : MonoBehaviour
         // Activate the effect
         bIsActive = true;
         InputManager.detectHitSub -= ListenForShot;
+        ShowFloatingText();
         transform.position = new Vector3(-15.0f, 15.0f, 0.0f); // Move off-screen for duration of lifetime
         _Rb.gravityScale = 0.0f; // Turn off gravity here
         AddUIRef(activator.Order);
@@ -174,4 +181,12 @@ public abstract class AbsModifierEffect : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Display floating text at modifier location
+    /// </summary>
+    private void ShowFloatingText()
+    {
+        GameObject text = Instantiate(floatingTextPrefab, transform.position, Quaternion.identity);
+        text.GetComponent<TextMeshPro>().text = $"{modifierName}";
+    }
 }

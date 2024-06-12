@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
+using UnityEngine.Rendering.PostProcessing;
 
 public class SettingsManager : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class SettingsManager : MonoBehaviour
     public Slider sfxVolumeSlider;
     public Slider sensitivitySlider;
     public Toggle crtToggle;
+    public Toggle bloomToggle;
     public Slider crtCurvature;
     public Button saveAndQuit;
     public Button applyButton;
@@ -89,6 +91,11 @@ public class SettingsManager : MonoBehaviour
         settingsLabels[2].text = sensitivityLabel.ToString("F2");
     }
 
+    public void ToggleBloom()
+    {
+        GameManager.Instance.UIManager.postProcessVolume.profile.GetSetting<Bloom>().active = bloomToggle.isOn;
+    }
+
     //Toggle the CRT effect on and off
     public void ToggleCRTEffect()
     {
@@ -141,6 +148,7 @@ public class SettingsManager : MonoBehaviour
         PlayerPrefs.SetFloat("MusicVolume", musicVolumeSlider.value);
         PlayerPrefs.SetFloat("SFXVolume", sfxVolumeSlider.value);
         PlayerPrefs.SetFloat("Sensitivity", sensitivityValue);
+        PlayerPrefs.SetInt("Bloom", System.Convert.ToInt32(bloomToggle.isOn));
         PlayerPrefs.SetInt("CRTOn", System.Convert.ToInt32(crtToggle.isOn));
         PlayerPrefs.SetFloat("CRTCurvature", crtCurvature.value);
 
@@ -183,6 +191,7 @@ public class SettingsManager : MonoBehaviour
         //Load in settings from PlayerPrefs
         float musicVolume = PlayerPrefs.GetFloat("MusicVolume", 1.0f);
         float sfxVolume = PlayerPrefs.GetFloat("SFXVolume", 1.0f);
+        int bloomOn = PlayerPrefs.GetInt("Bloom", 1);
         int crtOn = PlayerPrefs.GetInt("CRTOn", 1);
         float curvature = PlayerPrefs.GetFloat("CRTCurvature",0.2f);
         float sensitivity = PlayerPrefs.GetFloat("Sensitivity",20);
@@ -214,6 +223,18 @@ public class SettingsManager : MonoBehaviour
         {
             crtEffect.enabled = false;
             crtToggle.isOn = false;
+        }
+
+        if (bloomOn == 1)
+        {
+            GameManager.Instance.UIManager.postProcessVolume.profile.GetSetting<Bloom>().active = true;
+            bloomToggle.isOn = true;
+        }
+
+        else
+        {
+            GameManager.Instance.UIManager.postProcessVolume.profile.GetSetting<Bloom>().active = false;
+            bloomToggle.isOn = false;
         }
 
         //Set curvature of the CRT effect

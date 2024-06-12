@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 public class UIManager : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class UIManager : MonoBehaviour
     public Canvas canvas;
 
     public List<GameObject> modifierContainers;
+    public PostProcessVolume postProcessVolume;
 
     private OnboardingUI onboardingUI;
     private PauseScreenBehavior pauseScreenUI;
