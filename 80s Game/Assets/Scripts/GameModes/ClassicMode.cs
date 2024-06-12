@@ -35,10 +35,6 @@ public class ClassicMode : AbsGameMode
             if (targetManager.ActiveTargets.Count == maxTargetsOnScreen)
                 return;
         }
-
-        // Spawn a modifier bat and increment target count
-        targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<ModifierBatStateMachine>());
-        currentRoundTargetCount++;
     }
 
     protected override void UpdateRoundParams()
@@ -108,6 +104,9 @@ public class ClassicMode : AbsGameMode
             {
                 GameManager.EmitRoundOverEvent();
                 StartNextRound();
+                // Spawn a modifier bat and increment target count
+                targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<ModifierBatStateMachine>());
+                currentRoundTargetCount++;
             }
                 
 
