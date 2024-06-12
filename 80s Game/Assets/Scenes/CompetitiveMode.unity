@@ -6840,6 +6840,12 @@ MonoBehaviour:
   gameModeType: 1
   isSlowed: 0
   debuffActive: 0
+  buffs:
+  - {fileID: 55702376141867145, guid: 9b8df211c79ba59479819337f0c946e2, type: 3}
+  - {fileID: 55702376141867145, guid: 6311858a13f90b740a1313dc1b64b33d, type: 3}
+  debuffs:
+  - {fileID: 55702376141867145, guid: 367a188d6de1eb74aa7ebbdba130f295, type: 3}
+  - {fileID: 55702376141867145, guid: 1711ae630a5eadd4c811d1c70c1e9b7b, type: 3}
   debug: 1
 --- !u!4 &1095139975
 Transform:
