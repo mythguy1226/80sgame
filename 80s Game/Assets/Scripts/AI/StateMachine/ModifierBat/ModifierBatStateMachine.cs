@@ -6,9 +6,19 @@ using Random = UnityEngine.Random;
 public class ModifierBatStateMachine : BatStateMachine
 {
     // Public modifier fields
-    public List<GameObject> buffs;
-    public List<GameObject> debuffs;
+    List<GameObject> buffs;
+    List<GameObject> debuffs;
     bool modifierDropped = false;
+
+    /// <summary>
+    /// Override: Start method
+    /// </summary>
+    void Start()
+    {
+        // Get buffs and debuffs from game manager
+        buffs = GameManager.Instance.buffs;
+        debuffs = GameManager.Instance.debuffs;
+    }
 
     /// <summary>
     /// Override: Checks if target has been stunned

@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
     public UIManager UIManager { get; private set; }
     public bool isSlowed = false;
     public bool debuffActive = false;
+    public List<GameObject> buffs;
+    public List<GameObject> debuffs;
     
     [Tooltip("Debug to spawn a Player Controller for testing without having to go through the join screen")]
     public bool debug;
