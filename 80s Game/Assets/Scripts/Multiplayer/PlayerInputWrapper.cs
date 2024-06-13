@@ -16,10 +16,13 @@ public class PlayerInputWrapper : MonoBehaviour
     private PlayerInput playerInput;
     private List<Joycon> joycons;
     private float joyconSensitivyAdjust = 5.0f;
+    private bool fireHeld = false;
+    private float fireDelay = 0.0f;
 
     public bool controllerInput;
     public bool isFlipped = false;
     public bool isSlowed = false;
+
     
     private void Start()
     {
@@ -88,7 +91,7 @@ public class PlayerInputWrapper : MonoBehaviour
     //Handle fire inputs received through the Unity input system
     private void OnFire(InputValue value)
     {
-        player.HandleFire();
+        fireHeld = !fireHeld;
     }
 
     // On fire override for joycons
@@ -182,6 +185,17 @@ public class PlayerInputWrapper : MonoBehaviour
             {
                 OnPause();
             }
+        }
+
+        //Increase delay between shots
+        fireDelay += Time.deltaTime;
+
+        //If fire button is held and the delay is exceeded
+        if (fireHeld && fireDelay >= 0.2f)
+        {
+            //Fire and reset the delay
+            player.HandleFire();
+            fireDelay = 0.0f;
         }
 
         if (playerInput.currentControlScheme == "KnM")
