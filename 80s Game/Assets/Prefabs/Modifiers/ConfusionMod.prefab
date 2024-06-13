@@ -163,3 +163,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectDuration: 10
   modifierUIPrefab: {fileID: 8934627380610990763, guid: 8db0b1d577046204a9a74e1078d9ae3d, type: 3}
+  floatingTextPrefab: {fileID: 5422266768498237442, guid: 9fb18532ede7ca047b852b0d60f79673, type: 3}
+  modifierName: Confusion

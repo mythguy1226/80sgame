@@ -163,4 +163,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectDuration: 10
   modifierUIPrefab: {fileID: 2369580833882870520, guid: 7de7a0df7195efc4d913b933d983ceb7, type: 3}
+  floatingTextPrefab: {fileID: 5422266768498237442, guid: 9fb18532ede7ca047b852b0d60f79673, type: 3}
+  modifierName: Overcharge
   hitParticles: {fileID: 3537340124483570280, guid: 7f86aa82b0946c7498238b9fe89ac5aa, type: 3}

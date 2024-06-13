@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.PostProcessing;
 
 public class ModSnail : AbsModifierEffect
 {
@@ -25,6 +26,7 @@ public class ModSnail : AbsModifierEffect
         }
         GameManager.Instance.isSlowed = true;
         GameManager.Instance.debuffActive = true;
+        GameManager.Instance.UIManager.postProcessVolume.profile.GetSetting<Vignette>().active = true;
     }
 
     /// <summary>
@@ -50,6 +52,7 @@ public class ModSnail : AbsModifierEffect
             GameManager.Instance.isSlowed = false;
             GameManager.Instance.debuffActive = false;
         }
+        GameManager.Instance.UIManager.postProcessVolume.profile.GetSetting<Vignette>().active = false;
     }
     
 }
