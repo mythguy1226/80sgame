@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private Crosshair crosshairPrefab;
-    private Crosshair activeCrosshair;
+    public Crosshair activeCrosshair;
 
     private void Awake()
     {
@@ -104,13 +104,6 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void HandleFire()
     {
-        // If the onboarding screen is on, dismiss it
-        if (GameManager.Instance.UIManager.activeUI != UIManager.UIType.None)
-        {
-            GameManager.Instance.UIManager.GetFireInput(activeCrosshair.PositionToScreen());
-            return;
-        }
-
         // Play the shoot sound and animation if the game is not paused 
         if (Time.timeScale > 0 && activeCrosshair.gameObject.activeInHierarchy)
         {

@@ -17,7 +17,7 @@ public class PlayerInputWrapper : MonoBehaviour
     private List<Joycon> joycons;
     private float joyconSensitivyAdjust = 5.0f;
     private bool fireHeld = false;
-    private float fireDelay = 0.0f;
+    private float fireDelay = 0.2f;
 
     public bool controllerInput;
     public bool isFlipped = false;
@@ -91,6 +91,14 @@ public class PlayerInputWrapper : MonoBehaviour
     //Handle fire inputs received through the Unity input system
     private void OnFire(InputValue value)
     {
+        // If the onboarding screen is on, dismiss it
+        if (GameManager.Instance.UIManager.activeUI != UIManager.UIType.None)
+        {
+            GameManager.Instance.UIManager.GetFireInput(player.activeCrosshair.PositionToScreen());
+            fireDelay = 0.0f;
+            return;
+        }
+
         fireHeld = !fireHeld;
     }
 
@@ -191,7 +199,7 @@ public class PlayerInputWrapper : MonoBehaviour
         fireDelay += Time.deltaTime;
 
         //If fire button is held and the delay is exceeded
-        if (fireHeld && fireDelay >= 0.2f)
+        if (!fireHeld && fireDelay >= 0.2f)
         {
             //Fire and reset the delay
             player.HandleFire();
