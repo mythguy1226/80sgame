@@ -65,6 +65,10 @@ public class ClassicMode : AbsGameMode
             if (bats[i].FSM.bIsActive)
                 continue;
 
+            ModifierBatStateMachine comp = bats[i].GetComponent<ModifierBatStateMachine>();
+            if (comp != null)
+                continue;
+                
             // If default bat, return index if no bonus bats
             // Otherwise continue
             if (bats[i].FSM.IsDefault && numBonusBats == 0)
@@ -100,6 +104,9 @@ public class ClassicMode : AbsGameMode
             {
                 GameManager.EmitRoundOverEvent();
                 StartNextRound();
+                // Spawn a modifier bat and increment target count
+                targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<ModifierBatStateMachine>());
+                currentRoundTargetCount++;
             }
                 
 
