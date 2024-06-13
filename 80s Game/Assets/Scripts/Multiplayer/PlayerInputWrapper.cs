@@ -17,7 +17,10 @@ public class PlayerInputWrapper : MonoBehaviour
     private List<Joycon> joycons;
     private float joyconSensitivyAdjust = 5.0f;
     private bool fireHeld = false;
+
+    [SerializeField]
     private float fireDelay = 0.2f;
+    private float currentDelay = 0.0f;
 
     public bool controllerInput;
     public bool isFlipped = false;
@@ -36,6 +39,8 @@ public class PlayerInputWrapper : MonoBehaviour
         {
             controllerInput = true;
         }
+
+        currentDelay = fireDelay;
 
         SetSensitivity(controllerInput);
     }
@@ -95,7 +100,7 @@ public class PlayerInputWrapper : MonoBehaviour
         if (GameManager.Instance.UIManager.activeUI != UIManager.UIType.None)
         {
             GameManager.Instance.UIManager.GetFireInput(player.activeCrosshair.PositionToScreen());
-            fireDelay = 0.0f;
+            currentDelay = 0.0f;
             return;
         }
 
@@ -196,14 +201,14 @@ public class PlayerInputWrapper : MonoBehaviour
         }
 
         //Increase delay between shots
-        fireDelay += Time.deltaTime;
+        currentDelay += Time.deltaTime;
 
         //If fire button is held and the delay is exceeded
-        if (!fireHeld && fireDelay >= 0.2f)
+        if (!fireHeld && currentDelay >= fireDelay)
         {
             //Fire and reset the delay
             player.HandleFire();
-            fireDelay = 0.0f;
+            currentDelay = 0.0f;
         }
 
         if (playerInput.currentControlScheme == "KnM")
