@@ -163,3 +163,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectDuration: 10
   modifierUIPrefab: {fileID: 4742045415562882795, guid: 80cb86923582fcf45a0a90845e26e769, type: 3}
+  floatingTextPrefab: {fileID: 5422266768498237442, guid: 9fb18532ede7ca047b852b0d60f79673, type: 3}
+  modifierName: Double Points

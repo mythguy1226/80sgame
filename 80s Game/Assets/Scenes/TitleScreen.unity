@@ -667,6 +667,7 @@ MonoBehaviour:
   sfxVolumeSlider: {fileID: 1867834258203497349}
   sensitivitySlider: {fileID: 1414249906}
   crtToggle: {fileID: 958586289}
+  bloomToggle: {fileID: 1988720655}
   crtCurvature: {fileID: 2117102456}
   saveAndQuit: {fileID: 500749433}
   applyButton: {fileID: 307182515}
@@ -686,14 +687,6 @@ MonoBehaviour:
   - {fileID: 154591517}
   - {fileID: 1333690338}
   - {fileID: 1856425092}
-  switchTabIcons:
-  - {fileID: 1020122200}
-  - {fileID: 510393279}
-  switchTabSprites:
-  - {fileID: 21300000, guid: 06d718ce91157f54c8d7ea5dc3e6e63b, type: 3}
-  - {fileID: 21300000, guid: 2e53c3a4923ec234fb51a4433c3781c8, type: 3}
-  - {fileID: 21300000, guid: 51cb69bf594c65049b4f8754de7e67db, type: 3}
-  - {fileID: 21300000, guid: ba243ab6d8ab3aa4489be7e8b7044303, type: 3}
 --- !u!114 &319221315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -798,6 +791,7 @@ MonoBehaviour:
   activeUI: 0
   canvas: {fileID: 319221310}
   modifierContainers: []
+  postProcessVolume: {fileID: 2125853500}
 --- !u!114 &340111865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1278,17 +1272,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &510393279 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 650512168210861314, guid: ade02431274cdbe4f8fd5b4bdc90b6b9, type: 3}
-  m_PrefabInstance: {fileID: 1867834258203497347}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &653409313
@@ -2184,6 +2167,7 @@ GameObject:
   - component: {fileID: 975349867}
   - component: {fileID: 975349866}
   - component: {fileID: 975349869}
+  - component: {fileID: 975349870}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2305,17 +2289,66 @@ MonoBehaviour:
   EnableRollingFlicker: 0
   RollingFlickerFactor: 0.25
   RollingVSyncTime: 1
---- !u!114 &1020122200 stripped
+--- !u!114 &975349870
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4184649026959582423, guid: ade02431274cdbe4f8fd5b4bdc90b6b9, type: 3}
-  m_PrefabInstance: {fileID: 1867834258203497347}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 975349865}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  volumeTrigger: {fileID: 975349868}
+  volumeLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  stopNaNPropagation: 1
+  finalBlitToCameraTarget: 0
+  antialiasingMode: 0
+  temporalAntialiasing:
+    jitterSpread: 0.75
+    sharpness: 0.25
+    stationaryBlending: 0.95
+    motionBlending: 0.85
+  subpixelMorphologicalAntialiasing:
+    quality: 2
+  fastApproximateAntialiasing:
+    fastMode: 0
+    keepAlpha: 0
+  fog:
+    enabled: 1
+    excludeSkybox: 1
+  debugLayer:
+    lightMeter:
+      width: 512
+      height: 256
+      showCurves: 1
+    histogram:
+      width: 512
+      height: 256
+      channel: 3
+    waveform:
+      exposure: 0.12
+      height: 256
+    vectorscope:
+      size: 256
+      exposure: 0.12
+    overlaySettings:
+      linearDepth: 0
+      motionColorIntensity: 4
+      motionGridSize: 64
+      colorBlindnessType: 0
+      colorBlindnessStrength: 1
+  m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
+  m_ShowToolkit: 0
+  m_ShowCustomSorter: 0
+  breakBeforeColorGrading: 0
+  m_BeforeTransparentBundles: []
+  m_BeforeStackBundles: []
+  m_AfterStackBundles: []
 --- !u!1 &1082227965
 GameObject:
   m_ObjectHideFlags: 0
@@ -3929,6 +3962,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1984508948}
   m_CullTransparentMesh: 1
+--- !u!114 &1988720655 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2033742130219460123, guid: ade02431274cdbe4f8fd5b4bdc90b6b9, type: 3}
+  m_PrefabInstance: {fileID: 1867834258203497347}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1995536686 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 458373218885343457, guid: ade02431274cdbe4f8fd5b4bdc90b6b9, type: 3}
@@ -3956,6 +4000,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2125853499
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2125853501}
+  - component: {fileID: 2125853500}
+  m_Layer: 6
+  m_Name: Post Process Volume
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2125853500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2125853499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 11400000, guid: bbbe309963014b84ea4c3e99ee97b983, type: 2}
+  isGlobal: 1
+  blendDistance: 0
+  weight: 1
+  priority: 0
+--- !u!4 &2125853501
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2125853499}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -15, y: 15, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1867834258203497347
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4023,6 +4116,14 @@ PrefabInstance:
     - target: {fileID: 1866027868665589085, guid: ade02431274cdbe4f8fd5b4bdc90b6b9, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ToggleCRTEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 2033742130219460123, guid: ade02431274cdbe4f8fd5b4bdc90b6b9, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 319221314}
+    - target: {fileID: 2033742130219460123, guid: ade02431274cdbe4f8fd5b4bdc90b6b9, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ToggleBloom
       objectReference: {fileID: 0}
     - target: {fileID: 2069154999137074665, guid: ade02431274cdbe4f8fd5b4bdc90b6b9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -4510,3 +4611,4 @@ SceneRoots:
   - {fileID: 856292728}
   - {fileID: 340111862}
   - {fileID: 4229236438130621606}
+  - {fileID: 2125853501}
