@@ -71,8 +71,16 @@ public class GameManager : MonoBehaviour
                     PlayerController pc = Instantiate(playerPrefab, transform.position, Quaternion.identity);
                     pc.SetConfig(PlayerData.activePlayers[i], PlayerController.ControllerState.Gameplay);
                     PlayerInput pi = pc.GetComponent<PlayerInput>();
-                    InputDevice[] devices = new InputDevice[] { PlayerData.activePlayers[i].device };
-                    pi.SwitchCurrentControlScheme(PlayerData.activePlayers[i].controlScheme, devices);
+                    if (PlayerData.activePlayers[i].controlScheme == "KnM")
+                    {
+                        InputDevice[] devices = new InputDevice[] { PlayerData.activePlayers[i].device, Mouse.current };
+                        pi.SwitchCurrentControlScheme(PlayerData.activePlayers[i].controlScheme, devices);
+                    } else
+                    {
+                        InputDevice[] devices = new InputDevice[] { PlayerData.activePlayers[i].device };
+                        pi.SwitchCurrentControlScheme(PlayerData.activePlayers[i].controlScheme, devices);
+                    }
+                    
                     players.Add(pc);
                 }
                 StartCoroutine(NetworkUtility.Ping(SetOnline));
