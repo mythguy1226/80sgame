@@ -6736,13 +6736,13 @@ MonoBehaviour:
   - {fileID: 1759715911}
   - {fileID: 345740094}
   controllerInputPrompts:
-  - {fileID: 21300000, guid: 09b8f580e36684a4ca2010dffac3f44a, type: 3}
+  - {fileID: 21300000, guid: 0922d514951db654c8f4026fe9e480f4, type: 3}
   - {fileID: 21300000, guid: 271127115b8c8bf4f91941ffb5d20b78, type: 3}
   - {fileID: 21300000, guid: 8632def2730a1134ab4ce5975e9f3c03, type: 3}
   - {fileID: 21300000, guid: c47d2ec97e9dc6349bebfe36fefcd289, type: 3}
   - {fileID: 21300000, guid: c4bef494bc09fb345b90199870dd29fc, type: 3}
   keyboardInputPrompts:
-  - {fileID: 21300000, guid: 2252ebb5542a3994b838cc133994bb36, type: 3}
+  - {fileID: 21300000, guid: e6dcd0c360eb1054b804f8beae7c723c, type: 3}
   - {fileID: 21300000, guid: e813208bbda015b4f95bffc4eaa85739, type: 3}
   - {fileID: 21300000, guid: 423e9f4a5e7f97b43b5241790845f302, type: 3}
   - {fileID: 21300000, guid: c8e3102adee278f43b68cb5d1e0657fb, type: 3}
