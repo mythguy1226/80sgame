@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -20,13 +21,15 @@ public class PauseScreenBehavior : MonoBehaviour
 
     public int playerIndex;
 
-    private void Awake()
+    public void Awake()
     {
+        Debug.Log("Awake");
         UIManager.pauseEvent += PauseGame;
     }
 
     private void OnDisable()
     {
+        Debug.Log("Disable");
         UIManager.pauseEvent -= PauseGame;
     }
 
@@ -54,25 +57,11 @@ public class PauseScreenBehavior : MonoBehaviour
         {
             return;
         }
-
-        if (Input.GetKeyDown("escape") && (!onboardingPanel.activeInHierarchy || pauseScreen.activeInHierarchy) && !GameManager.Instance.ActiveGameMode.GameOver)
-        {
-            PauseGame(0);
-        }
-
-        //If the onboarding panel is active when escape is pressed, close it and start the game
-        else if (Input.GetKeyDown("escape") && onboardingPanel.activeInHierarchy && !pauseScreen.activeInHierarchy)
-        {
-            OnboardingUI onboardingComponent = GetComponent<OnboardingUI>();
-            onboardingComponent.CloseOnboarding();
-            gameUIElements.SetActive(true);
-
-            Time.timeScale = 1.0f;
-        }
     }
 
     public void PauseGame(int player)
     {
+        Debug.Log("Pause Game");
         if (GameManager.Instance.UIManager.activeUI != UIManager.UIType.None){
             return;
         }

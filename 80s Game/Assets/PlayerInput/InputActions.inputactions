@@ -67,6 +67,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Join",
+                    "type": "Button",
+                    "id": "f8cced9b-4958-4536-a848-529ad87e2bdd",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -193,17 +202,6 @@
                 },
                 {
                     "name": "",
-                    "id": "c1ba9ef3-de50-41bc-bc23-129d69e831ed",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "KnM",
-                    "action": "Pause",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "0cc735a6-d948-4c5a-9607-5e317b0d70da",
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
@@ -265,6 +263,28 @@
                     "processors": "",
                     "groups": "KnM",
                     "action": "PreviousTab",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "187678eb-00ff-4e08-9cc4-f884e92dddb6",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KnM",
+                    "action": "Join",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "161d477d-fc1e-4401-88b4-75697e73d32d",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PS4",
+                    "action": "Join",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
