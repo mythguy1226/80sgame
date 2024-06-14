@@ -3398,7 +3398,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2252ebb5542a3994b838cc133994bb36, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e6dcd0c360eb1054b804f8beae7c723c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3473,7 +3473,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 09b8f580e36684a4ca2010dffac3f44a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0922d514951db654c8f4026fe9e480f4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3968,6 +3968,8 @@ MonoBehaviour:
   gameModeType: 3
   isSlowed: 0
   debuffActive: 0
+  buffs: []
+  debuffs: []
   debug: 0
 --- !u!4 &1384543482
 Transform:
@@ -6330,7 +6332,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Press Fire To Join\n\n(  /  ) \n"
+  m_text: "Press Start To Join\n\n(  /  ) \n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4ffe7c97efad09e458ea5fc5958a4597, type: 2}
   m_sharedMaterial: {fileID: -507269567956872517, guid: 4ffe7c97efad09e458ea5fc5958a4597, type: 2}
@@ -6683,7 +6685,7 @@ MonoBehaviour:
         m_Action: Join
         m_Flags: 0
       m_Flags: 0
-    m_Reference: {fileID: -396693030614384387, guid: 2e5725103ad17b843888d975b30c3b9a, type: 3}
+    m_Reference: {fileID: -3144318162430482893, guid: 2e5725103ad17b843888d975b30c3b9a, type: 3}
   m_PlayerPrefab: {fileID: 391535260845415020, guid: bc3f50abd22028041ab5a1ce97145ecf, type: 3}
   m_SplitScreen: 0
   m_MaintainAspectRatioInSplitScreen: 0
@@ -6734,13 +6736,13 @@ MonoBehaviour:
   - {fileID: 1759715911}
   - {fileID: 345740094}
   controllerInputPrompts:
-  - {fileID: 21300000, guid: 09b8f580e36684a4ca2010dffac3f44a, type: 3}
+  - {fileID: 21300000, guid: 0922d514951db654c8f4026fe9e480f4, type: 3}
   - {fileID: 21300000, guid: 271127115b8c8bf4f91941ffb5d20b78, type: 3}
   - {fileID: 21300000, guid: 8632def2730a1134ab4ce5975e9f3c03, type: 3}
   - {fileID: 21300000, guid: c47d2ec97e9dc6349bebfe36fefcd289, type: 3}
   - {fileID: 21300000, guid: c4bef494bc09fb345b90199870dd29fc, type: 3}
   keyboardInputPrompts:
-  - {fileID: 21300000, guid: 2252ebb5542a3994b838cc133994bb36, type: 3}
+  - {fileID: 21300000, guid: e6dcd0c360eb1054b804f8beae7c723c, type: 3}
   - {fileID: 21300000, guid: e813208bbda015b4f95bffc4eaa85739, type: 3}
   - {fileID: 21300000, guid: 423e9f4a5e7f97b43b5241790845f302, type: 3}
   - {fileID: 21300000, guid: c8e3102adee278f43b68cb5d1e0657fb, type: 3}
