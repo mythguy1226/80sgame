@@ -101,7 +101,6 @@ public class PlayerInputWrapper : MonoBehaviour
         {
             GameManager.Instance.UIManager.GetFireInput(player.activeCrosshair.PositionToScreen());
             currentDelay = 0.0f;
-            return;
         }
 
         fireHeld = !fireHeld;
@@ -204,7 +203,7 @@ public class PlayerInputWrapper : MonoBehaviour
         currentDelay += Time.deltaTime;
 
         //If fire button is held and the delay is exceeded
-        if (!fireHeld && currentDelay >= fireDelay)
+        if (fireHeld && currentDelay >= fireDelay)
         {
             //Fire and reset the delay
             player.HandleFire();
