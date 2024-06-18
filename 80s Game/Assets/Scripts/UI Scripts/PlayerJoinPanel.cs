@@ -159,12 +159,11 @@ public class PlayerJoinPanel : MonoBehaviour
         //Toggle whether the player is ready
         playerReady = !playerReady;
 
-        //Set the ready indicator to the appropriate sprite
+        //Show that the player is ready
         if (playerReady)
         {
             readyUpPrompt.SetActive(true);
             playerSettings.SetActive(false);
-
 
             lastSelected = eventSystem.currentSelectedGameObject;
 
@@ -172,6 +171,7 @@ public class PlayerJoinPanel : MonoBehaviour
             EventSystem.current.SetSelectedGameObject(readyUpPrompt.transform.GetChild(1).gameObject);
         }
         
+        //Show settings if player unreadies
         else
         {
             readyUpPrompt.SetActive(false);
