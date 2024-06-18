@@ -43,6 +43,11 @@ public class TitleScreenBehavior : MonoBehaviour
                 gamemodeDescription.text = "Bat Bots with Multiplayer!\n\nPlay with up to 2 players and compete to see who can get the highest score!\n\nThis mode features new bat bots not seen in the Classic mode!";
                 GameModeData.activeGameMode = EGameMode.Competitive;
                 break;
+            case 3:
+                gamemodeName.text = "Cooperative/Defense";
+                gamemodeDescription.text = "Defend the core from waves of bats (Placeholder description)";
+                GameModeData.activeGameMode = EGameMode.Defense;
+                break;
         }
     }
 
@@ -95,17 +100,17 @@ public class TitleScreenBehavior : MonoBehaviour
     public void NextGameMode()
     {
         gamemodeSelected++;
-        if (gamemodeSelected == 3) gamemodeSelected = 1;
+        if (gamemodeSelected == 4) gamemodeSelected = 1;
 
-        gamemodeSelected = Mathf.Clamp(gamemodeSelected, 1, 2);
+        gamemodeSelected = Mathf.Clamp(gamemodeSelected, 1, 3);
     }
     
     //Move to the previous gamemode 
     public void PreviousGameMode()
     {
         gamemodeSelected--;
-        if (gamemodeSelected == 0) gamemodeSelected = 2;
+        if (gamemodeSelected == 0) gamemodeSelected = 3;
         
-        gamemodeSelected = Mathf.Clamp(gamemodeSelected, 1, 2);
+        gamemodeSelected = Mathf.Clamp(gamemodeSelected, 1, 3);
     }
 }
