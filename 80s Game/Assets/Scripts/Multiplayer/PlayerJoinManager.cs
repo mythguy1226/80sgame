@@ -111,6 +111,18 @@ public class PlayerJoinManager : MonoBehaviour
     public void SetPlayerReady(int player, bool isReady)
     {
         joinStatus[player] = isReady;
+
+        foreach(KeyValuePair<int, bool> kvp in joinStatus)
+        {
+            if (!kvp.Value)
+            {
+                //Someone is not ready
+                return;
+            }
+        }
+
+        //Launch Game when everyone is ready
+        LaunchGameMode();
     }
 
     // This function launches the corresponding game mode that has been loaded by selection in the previous scene.
@@ -120,15 +132,6 @@ public class PlayerJoinManager : MonoBehaviour
         if (GameModeData.activeGameMode == EGameMode.Competitive && PlayerData.activePlayers.Count == 1)
         {
             return;
-        }
-
-        foreach(KeyValuePair<int, bool> kvp in joinStatus)
-        {
-            if (!kvp.Value)
-            {
-                //Someone is not ready
-                return;
-            }
         }
 
         if (!sceneTransition)

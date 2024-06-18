@@ -38,10 +38,11 @@ public class PlayerJoinPanel : MonoBehaviour
     private int initialThree = 65;
 
     //Variables for readying up
-    public Image readyIndicator;
-    public Sprite notReady;
-    public Sprite isReady;
+    public GameObject playerSettings;
+    public GameObject readyUpPrompt;
     public bool playerReady;
+    private GameObject lastSelected;
+    
 
     public EventSystem eventSystem;
     private int player;
@@ -64,9 +65,14 @@ public class PlayerJoinPanel : MonoBehaviour
         for (int i = 0; i < initials.Count; i++)
         {
             int iCopy = i;
-            initialUpButtons[i].onClick.AddListener(() => ChangeInitial(true, iCopy));
-            initialDownButtons[i].onClick.AddListener(() => ChangeInitial(false, iCopy));
+            initialUpButtons[i].onClick.AddListener(() => ChangeInitial(false, iCopy));
+            initialDownButtons[i].onClick.AddListener(() => ChangeInitial(true, iCopy));
         }
+
+        //Set preview crosshair to default color for that player
+        colorSliders[0].value = PlayerData.defaultColors[player].r * 255;
+        colorSliders[1].value = PlayerData.defaultColors[player].g * 255;
+        colorSliders[2].value = PlayerData.defaultColors[player].b * 255;
 
         //Turn off the corsshairs
         PauseScreenBehavior.Instance.ToggleCrosshairs(false);
@@ -156,12 +162,27 @@ public class PlayerJoinPanel : MonoBehaviour
         //Set the ready indicator to the appropriate sprite
         if (playerReady)
         {
-            readyIndicator.sprite = isReady;
+            readyUpPrompt.SetActive(true);
+            playerSettings.SetActive(false);
+
+
+            lastSelected = eventSystem.currentSelectedGameObject;
+
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(readyUpPrompt.transform.GetChild(1).gameObject);
         }
         
         else
         {
-            readyIndicator.sprite = notReady;
+            readyUpPrompt.SetActive(false);
+            playerSettings.SetActive(true);
+
+            EventSystem.current.SetSelectedGameObject(null);
+
+            if (lastSelected != null)
+            {
+                EventSystem.current.SetSelectedGameObject(lastSelected);
+            }
         }
         pjm.SetPlayerReady(player, playerReady);
     }
