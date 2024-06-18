@@ -11,7 +11,7 @@ public class CooperativeMode : AbsGameMode
         ModeType = EGameMode.Competitive;
 
         // Initial round parameters
-        NumRounds = 15;
+        NumRounds = 5;
         maxTargetsOnScreen = 15;
         currentRoundTargetCount = 8;
     }
