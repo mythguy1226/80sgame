@@ -56,11 +56,10 @@ public class FileSystemDataSaver : DataSaver
 // Concrete data save class for sending data to a remote destination
 public class RemoteDataSaver : DataSaver
 {
-    string endpoint = "saveData";
     public override IEnumerator Save(SaveDataItem data)
     {
         // Prepare the request
-        string url = NetworkUtility.destinationURL + endpoint;
+        string url = NetworkUtility.destinationURL;
         UnityWebRequest request = new UnityWebRequest(url, UnityWebRequest.kHttpVerbPOST);
         request.SetRequestHeader("Content-Type", "application/json");
         byte[] bodyRaw = Encoding.UTF8.GetBytes(JsonUtility.ToJson(data));
