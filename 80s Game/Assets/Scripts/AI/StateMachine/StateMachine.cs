@@ -10,6 +10,7 @@ public abstract class AbsStateMachine<EState> : StateMachineWrapper where EState
 {
     // Public fields
     public bool bIsActive = true;
+    public List<EState> unscorableStates;
 
     // Protected fields
     protected Dictionary<EState, AbsBaseState<EState>> states = new Dictionary<EState, AbsBaseState<EState>>();
@@ -96,5 +97,50 @@ public abstract class AbsStateMachine<EState> : StateMachineWrapper where EState
     void OnTriggerExit(Collider other)
     {
         currentState.OnTriggerExit(other);
+    }
+
+    /*
+    USAGE: Returns activity of state machine
+	ARGUMENTS: ---
+	OUTPUT:
+    bool bIsActive -> flag indicating whether or not the state machine is active
+    */
+    public override bool IsActive()
+    {
+        return bIsActive;
+    }
+
+    /*
+    USAGE: Sets activity of state machine
+	ARGUMENTS:
+    - bool newActivity -> flag indicating whether or not the state machine is now active
+	OUTPUT: ---
+    */
+    public override void SetActive(bool newActivity)
+    {
+        bIsActive = newActivity;
+    }
+
+    public abstract EState GetDefaultState();
+    public abstract EState GetTerminalState();
+
+    public override void TransitionToDefault()
+    {
+        TransitionToState(GetDefaultState());
+    }
+
+    public override void TransitionToTerminal()
+    {
+        TransitionToState(GetTerminalState());
+    }
+
+    public override bool InUnscorableState()
+    {
+        foreach(EState stateKey in unscorableStates)
+        {
+            if(currentState == states[stateKey])
+                return true;
+        }
+        return false;
     }
 }

@@ -2,17 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StateMachineWrapper : MonoBehaviour
+public abstract class StateMachineWrapper : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public abstract bool IsActive();
+    public abstract void SetActive(bool newActivity);
+    public abstract void TransitionToDefault();
+    public abstract void TransitionToTerminal();
+    public abstract bool InUnscorableState();
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public virtual void ResolveEvent(){}
 }

@@ -290,4 +290,14 @@ public class DefenseBatStateMachine : AbsStateMachine<DefenseBatStateMachine.Def
     {
         stunningPlayer = controller;
     }
+
+    public override DefenseBatStates GetDefaultState()
+    {
+        return DefenseBatStates.Wandering;
+    }
+
+    public override DefenseBatStates GetTerminalState()
+    {
+        return DefenseBatStates.Death;
+    }
 }
