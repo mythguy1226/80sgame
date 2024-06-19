@@ -55,6 +55,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 3
   FSM: {fileID: 0}
+  floatingTextPrefab: {fileID: 0}
+  pointValue: 1000
+  deathHeight: -6.5
+  hitSound: {fileID: 0}
 --- !u!50 &4043134783524271435
 Rigidbody2D:
   serializedVersion: 4
@@ -156,6 +160,7 @@ MonoBehaviour:
   targetPosition: {x: 0, y: 0}
   targetRadius: 4
   canMove: 0
+  isWandering: 0
   isFleeing: 0
   maxSpeed: 6
   maxForce: 0.03
@@ -280,6 +285,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bIsActive: 0
+  unscorableStates: 01000000
   initialState: 0
   floatingTextPrefab: {fileID: 5422266768498237442, guid: 9fb18532ede7ca047b852b0d60f79673, type: 3}
   pointValue: 1000
@@ -288,12 +294,6 @@ MonoBehaviour:
   timeUntilFlee: 8
   fleeTimer: 0
   fleeLocation: {x: 0, y: 10}
-  buffs:
-  - {fileID: 55702376141867145, guid: 9b8df211c79ba59479819337f0c946e2, type: 3}
-  - {fileID: 55702376141867145, guid: 6311858a13f90b740a1313dc1b64b33d, type: 3}
-  debuffs:
-  - {fileID: 55702376141867145, guid: 367a188d6de1eb74aa7ebbdba130f295, type: 3}
-  - {fileID: 55702376141867145, guid: 1711ae630a5eadd4c811d1c70c1e9b7b, type: 3}
 --- !u!58 &6347908914752317319
 CircleCollider2D:
   m_ObjectHideFlags: 0

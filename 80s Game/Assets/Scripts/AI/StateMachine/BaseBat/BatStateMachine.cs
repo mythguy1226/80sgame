@@ -115,6 +115,7 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
     public virtual void Reset()
     {
         GetComponent<Target>().Reset();
+        SetFleeTimer();
     }
 
     public override void ResolveEvent()

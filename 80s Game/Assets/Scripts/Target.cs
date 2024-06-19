@@ -169,7 +169,6 @@ public class Target : MonoBehaviour
         FSM.SetActive(true);
         InputManager.detectHitSub += ListenForShot;
         FSM.TransitionToDefault();
-        //SetFleeTimer();
     }
 
     /// <summary>

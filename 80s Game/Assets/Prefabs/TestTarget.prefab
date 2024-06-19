@@ -281,7 +281,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bIsActive: 0
-  unscorableStates: 
+  unscorableStates: 01000000
   initialState: 0
   floatingTextPrefab: {fileID: 5422266768498237442, guid: 9fb18532ede7ca047b852b0d60f79673, type: 3}
   pointValue: 1000
