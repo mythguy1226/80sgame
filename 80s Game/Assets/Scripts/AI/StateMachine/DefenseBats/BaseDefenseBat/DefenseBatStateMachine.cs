@@ -20,12 +20,11 @@ public class DefenseBatStateMachine : AbsStateMachine<DefenseBatStateMachine.Def
     public int pointValue = 1000;
     public float deathHeight = -6.5f;
     public AudioClip hitSound;
-    //public AudioClip missSound;
 
     // Fleeing fields
-    public float timeUntilFlee = 8.0f;
-    public float fleeTimer = 0.0f;
-    public Vector2 fleeLocation;
+    public float timeUntilPursue = 8.0f;
+    public float pursueTimer = 0.0f;
+    public Vector2 targetAttackLocation;
 
     // Default fields used for resets
     Vector3 spawnPoint;
@@ -109,7 +108,7 @@ public class DefenseBatStateMachine : AbsStateMachine<DefenseBatStateMachine.Def
         spawnPoint = transform.position;
 
         // Init flee timer
-        fleeTimer = timeUntilFlee;
+        pursueTimer = timeUntilPursue;
     }
 
     /// <summary>
@@ -124,9 +123,9 @@ public class DefenseBatStateMachine : AbsStateMachine<DefenseBatStateMachine.Def
     /// <summary>
     /// Sets target flee timer publicly
     /// </summary>
-    public void SetFleeTimer()
+    public void SetPursueTimer()
     {
-        fleeTimer = timeUntilFlee;
+        pursueTimer = timeUntilPursue;
     }
 
 
@@ -273,7 +272,7 @@ public class DefenseBatStateMachine : AbsStateMachine<DefenseBatStateMachine.Def
         bIsActive = true;
         InputManager.detectHitSub += ListenForShot;
         TransitionToState(DefenseBatStates.Wandering);
-        SetFleeTimer();
+        SetPursueTimer();
     }
 
     /// <summary>

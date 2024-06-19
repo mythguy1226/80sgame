@@ -39,25 +39,22 @@ public class PursuingState : AbsBaseState<DefenseBatStateMachine.DefenseBatState
 	*/
     public override void UpdateState()
     {
+        // Get state machine and needed components
         DefenseBatStateMachine FSM = (DefenseBatStateMachine)OwnerFSM;
 
         if (FSM == null)
             return;
 
         _MovementControls = FSM.MovementControls;
-        _SpriteRenderer = FSM.SpriteRenderer;
 
         // Early return if movement controller is null
         if (_MovementControls == null)
             return;
 
-        // Enable movement
+        // Enable movement and disable wandering
         _MovementControls.isFleeing = false;
         _MovementControls.canMove = true;
-
-        // Update flee timer
-        FSM.fleeTimer -= Time.deltaTime;
-
+        _MovementControls.isWandering = false;
     }
 
     /*
@@ -67,7 +64,16 @@ public class PursuingState : AbsBaseState<DefenseBatStateMachine.DefenseBatState
 	*/
     public override DefenseBatStateMachine.DefenseBatStates GetNextState()
     {
-        
+        DefenseBatStateMachine FSM = (DefenseBatStateMachine)OwnerFSM;
+
+        // When timer is up, set target to flee
+        if(FSM != null)
+        {
+            if(Vector3.Distance(FSM.targetAttackLocation, FSM.transform.position) <= 1.0f)
+            {
+                return DefenseBatStateMachine.DefenseBatStates.Attacking;
+            }
+        }
         return DefenseBatStateMachine.DefenseBatStates.Pursuing;
     }
 }

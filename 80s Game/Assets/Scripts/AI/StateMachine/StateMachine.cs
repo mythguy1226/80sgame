@@ -6,7 +6,7 @@ using UnityEngine;
  * USAGE: Abstract class used as a template for 
  * creating state machines
  */
-public abstract class AbsStateMachine<EState> : MonoBehaviour where EState : System.Enum
+public abstract class AbsStateMachine<EState> : StateMachineWrapper where EState : System.Enum
 {
     // Public fields
     public bool bIsActive = true;

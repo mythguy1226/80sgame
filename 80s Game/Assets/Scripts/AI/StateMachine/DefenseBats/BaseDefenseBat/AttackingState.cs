@@ -53,11 +53,7 @@ public class AttackingState : AbsBaseState<DefenseBatStateMachine.DefenseBatStat
 
         // Enable movement
         _MovementControls.isFleeing = false;
-        _MovementControls.canMove = true;
-
-        // Update flee timer
-        FSM.fleeTimer -= Time.deltaTime;
-
+        _MovementControls.canMove = false;
     }
 
     /*
@@ -67,7 +63,16 @@ public class AttackingState : AbsBaseState<DefenseBatStateMachine.DefenseBatStat
 	*/
     public override DefenseBatStateMachine.DefenseBatStates GetNextState()
     {
-        
+        DefenseBatStateMachine FSM = (DefenseBatStateMachine)OwnerFSM;
+
+        // When timer is up, set target to flee
+        if(FSM != null)
+        {
+            if(Vector3.Distance(FSM.targetAttackLocation, FSM.transform.position) > 1.0f)
+            {
+                return DefenseBatStateMachine.DefenseBatStates.Pursuing;
+            }
+        }
         return DefenseBatStateMachine.DefenseBatStates.Attacking;
     }
 }

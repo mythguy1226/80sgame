@@ -54,9 +54,10 @@ public class WanderingState : AbsBaseState<DefenseBatStateMachine.DefenseBatStat
         // Enable movement
         _MovementControls.isFleeing = false;
         _MovementControls.canMove = true;
+        _MovementControls.isWandering = true;
 
-        // Update flee timer
-        FSM.fleeTimer -= Time.deltaTime;
+        // Update pursue timer
+        FSM.pursueTimer -= Time.deltaTime;
 
     }
 
@@ -67,6 +68,20 @@ public class WanderingState : AbsBaseState<DefenseBatStateMachine.DefenseBatStat
 	*/
     public override DefenseBatStateMachine.DefenseBatStates GetNextState()
     {
+        
+        DefenseBatStateMachine FSM = (DefenseBatStateMachine)OwnerFSM;
+
+        // When timer is up, set target to flee
+        if(FSM != null)
+        {
+            if (FSM.pursueTimer <= 0.0f)
+            {
+                // Set new target position to be the closest attack location
+                _MovementControls.SetTargetPosition(FSM.targetAttackLocation);
+
+                return DefenseBatStateMachine.DefenseBatStates.Pursuing;
+            }
+        }
         
         return DefenseBatStateMachine.DefenseBatStates.Wandering;
     }

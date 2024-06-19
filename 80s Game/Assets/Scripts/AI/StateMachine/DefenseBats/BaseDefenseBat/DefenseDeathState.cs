@@ -6,7 +6,6 @@ public class DefenseDeathState : AbsBaseState<DefenseBatStateMachine.DefenseBatS
 {
     // Get components
     KinematicSteer _MovementControls;
-    SpriteRenderer _SpriteRenderer;
 
     // Constructor with call to base state class
     public DefenseDeathState() : base(DefenseBatStateMachine.DefenseBatStates.Death)
@@ -41,23 +40,20 @@ public class DefenseDeathState : AbsBaseState<DefenseBatStateMachine.DefenseBatS
     {
         DefenseBatStateMachine FSM = (DefenseBatStateMachine)OwnerFSM;
 
-        if (FSM == null)
-            return;
-
-        _MovementControls = FSM.MovementControls;
-        _SpriteRenderer = FSM.SpriteRenderer;
-
         // Early return if movement controller is null
         if (_MovementControls == null)
             return;
 
-        // Enable movement
-        _MovementControls.isFleeing = false;
-        _MovementControls.canMove = true;
+        // Disable movement and set bat fall movement
+        _MovementControls.canMove = false;
+        FSM.transform.position += new Vector3(0.0f, -1.0f, 0.0f) * 6.0f * Time.deltaTime;
 
-        // Update flee timer
-        FSM.fleeTimer -= Time.deltaTime;
-
+        // Reset all target values once in this state if
+        // bat has dropped
+        if (FSM.transform.position.y <= FSM.deathHeight)
+        {
+            FSM.Reset();
+        }
     }
 
     /*

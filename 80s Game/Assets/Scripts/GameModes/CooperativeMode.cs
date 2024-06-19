@@ -66,7 +66,8 @@ public class CooperativeMode : AbsGameMode
         // find one that isn't already on screen
         for (int i = 0; i < bats.Count; i++)
         {
-            if (bats[i].FSM.bIsActive)
+            DefenseBatStateMachine FSM = (DefenseBatStateMachine)bats[i].FSM;
+            if (FSM.bIsActive)
                 continue;
 
             ModifierBatStateMachine comp = bats[i].GetComponent<ModifierBatStateMachine>();
@@ -75,7 +76,7 @@ public class CooperativeMode : AbsGameMode
 
             // If default bat, return index if no bonus bats
             // Otherwise continue
-            if (bats[i].FSM.IsDefault && numBonusBats == 0)
+            if (FSM.IsDefault && numBonusBats == 0)
             {
                 return i;
             }
