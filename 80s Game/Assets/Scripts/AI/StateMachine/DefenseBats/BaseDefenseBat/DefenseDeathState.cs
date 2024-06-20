@@ -18,7 +18,8 @@ public class DefenseDeathState : AbsBaseState<DefenseBatStateMachine.DefenseBatS
 	*/
     public override void EnterState()
     {
-
+        DefenseBatStateMachine FSM = (DefenseBatStateMachine)OwnerFSM;
+        _MovementControls = FSM.MovementControls;
     }
 
     /*
@@ -46,6 +47,7 @@ public class DefenseDeathState : AbsBaseState<DefenseBatStateMachine.DefenseBatS
 
         // Disable movement and set bat fall movement
         _MovementControls.canMove = false;
+        _MovementControls.isWandering = false;
         FSM.transform.position += new Vector3(0.0f, -1.0f, 0.0f) * 6.0f * Time.deltaTime;
 
         // Reset all target values once in this state if

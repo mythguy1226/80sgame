@@ -35,10 +35,6 @@ public class CooperativeMode : AbsGameMode
             if (targetManager.ActiveTargets.Count == maxTargetsOnScreen)
                 return;
         }
-
-        // Spawn a modifier bat and increment target count
-        targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<ModifierBatStateMachine>());
-        currentRoundTargetCount++;
     }
 
     protected override void UpdateRoundParams()
@@ -70,10 +66,6 @@ public class CooperativeMode : AbsGameMode
             if (FSM.bIsActive)
                 continue;
 
-            ModifierBatStateMachine comp = bats[i].GetComponent<ModifierBatStateMachine>();
-            if (comp != null)
-                continue;
-
             // If default bat, return index if no bonus bats
             // Otherwise continue
             if (FSM.IsDefault && numBonusBats == 0)
@@ -95,17 +87,6 @@ public class CooperativeMode : AbsGameMode
         // Increment bonus bats every 3 stuns
         if (targetManager.totalStuns % 3 == 0)
             numBonusBats++;
-
-        // Chance to spawn a modifier bat every 5 stuns
-        if(targetManager.totalStuns % 5 == 0)
-        {
-            if(Random.Range(0.0f, 1.0f) < modifierChance)
-            {
-                // Spawn a modifier bat and increment target count
-                targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<ModifierBatStateMachine>());
-                currentRoundTargetCount++;
-            }
-        }
 
         if (targetManager.numStuns >= currentRoundTargetCount)
         {

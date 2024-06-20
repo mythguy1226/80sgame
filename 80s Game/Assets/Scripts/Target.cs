@@ -20,7 +20,7 @@ public class Target : MonoBehaviour
 
     // Default fields used for resets
     Vector3 spawnPoint;
-    bool bIsStunned = false;
+    public bool bIsStunned = false;
 
     // Public fields
     public GameObject floatingTextPrefab;
@@ -203,9 +203,12 @@ public class Target : MonoBehaviour
         if (!FSM.InUnscorableState())
         {
             // Add a successful hit
-            gameManager.TargetManager.AddToCount(GetComponent<Target>().type, gameManager.TargetManager.killCount);
-            stunningPlayer.scoreController.AddHit();
-            gameManager.PointsManager.AddRoundPoints(stunningPlayer.Order, pointValue * stunningPlayer.scoreController.pointsMod);
+            if(stunningPlayer != null)
+            {
+                gameManager.TargetManager.AddToCount(GetComponent<Target>().type, gameManager.TargetManager.killCount);
+                stunningPlayer.scoreController.AddHit();
+                gameManager.PointsManager.AddRoundPoints(stunningPlayer.Order, pointValue * stunningPlayer.scoreController.pointsMod);
+            }
         }
 
         // Update target manager with current state

@@ -16,7 +16,6 @@ public class DefenseBatStateMachine : AbsStateMachine<DefenseBatStateMachine.Def
 
     // Public fields
     public DefenseBatStates initialState = DefenseBatStates.Wandering;
-    public GameObject floatingTextPrefab;
     public int pointValue = 1000;
     public float deathHeight = -6.5f;
     public AudioClip hitSound;
@@ -25,10 +24,6 @@ public class DefenseBatStateMachine : AbsStateMachine<DefenseBatStateMachine.Def
     public float timeUntilPursue = 8.0f;
     public float pursueTimer = 0.0f;
     public Vector2 targetAttackLocation;
-
-    // Default fields used for resets
-    Vector3 spawnPoint;
-    bool bIsStunned = false;
 
     // Get needed components for state machine
     KinematicSteer _MovementControls;
@@ -75,7 +70,6 @@ public class DefenseBatStateMachine : AbsStateMachine<DefenseBatStateMachine.Def
 
         // Default state will be wandering
         currentState = states[initialState];
-        stunningPlayer = null;
 
         // Iterate through each state to pass game object as owner reference
         // putting this in here as well as base class to beat race condition
@@ -83,16 +77,6 @@ public class DefenseBatStateMachine : AbsStateMachine<DefenseBatStateMachine.Def
         {
             state.Value.OwnerFSM = this;
         }
-    }
-
-    void Start()
-    {
-        
-    }
-
-    void OnDisable()
-    {
-        InputManager.detectHitSub -= ListenForShot;
     }
 
     /// <summary>
@@ -103,21 +87,10 @@ public class DefenseBatStateMachine : AbsStateMachine<DefenseBatStateMachine.Def
         _MovementControls = GetComponent<KinematicSteer>();
         _SpriteRenderer = GetComponent<SpriteRenderer>();
         _AnimControls = GetComponent<AnimationHandler>();
-        
         _Collider = GetComponent<PolygonCollider2D>();
-        spawnPoint = transform.position;
 
         // Init flee timer
         pursueTimer = timeUntilPursue;
-    }
-
-    /// <summary>
-    /// Updates movement control speed
-    /// </summary>
-    /// <param name="newSpeed">New speed</param>
-    public void UpdateSpeed(float newSpeed)
-    {
-        _MovementControls.maxSpeed = newSpeed;
     }
 
     /// <summary>
@@ -128,174 +101,46 @@ public class DefenseBatStateMachine : AbsStateMachine<DefenseBatStateMachine.Def
         pursueTimer = timeUntilPursue;
     }
 
-
-    private bool DetectRadius(Vector3 pos, float radius)
-    {
-        // Check if this target is within shot radius
-        float distance = Vector3.Distance(pos, transform.position);
-        if (distance > radius)
-            return false;
-
-        // Check that hit has detected this particular object
-        if (distance <= radius && !bIsStunned)
-            return true;
-
-        return false;
-    }
-    private bool DetectCollision(Vector3 pos)
-    {
-        // Check if something was hit
-        RaycastHit2D hit = Physics2D.Raycast(pos, Vector2.zero);
-        if (!hit)
-            return false;
-
-        // Check that hit has detected this particular object
-        if (hit.collider.gameObject == gameObject && !bIsStunned)
-            return true;
-
-        return false;
-    }
-
     /// <summary>
-    /// Checks if bat has been stunned
-    /// </summary>
-    public bool DetectStun(Vector3 pos, bool radCheck, float radius)
-    {
-
-        // Check that game isnt paused
-        bool isGameGoing = Time.timeScale > 0;
-        if (!isGameGoing)
-        {
-            return false;
-        }
-
-        if (radCheck)
-        {
-            return DetectRadius(pos, radius);
-        }
-
-        return DetectCollision(pos);
-        
-    }
-
-    /// <summary>
-    /// Drops the bat
-    /// </summary>
-    public void DropBat()
-    {
-        if (floatingTextPrefab != null)
-        {
-            ShowFloatingText();
-        }
-
-        // Bring bat to death state to start falling
-        TransitionToState(DefenseBatStates.Death);
-        _AnimControls.PlayDropAnimation();
-        _Collider.isTrigger = true;
-        GetComponent<CircleCollider2D>().isTrigger = true;
-        
-    }
-
-    /// <summary>
-    /// Display floating text at bat location
-    /// </summary>
-    private void ShowFloatingText()
-    {
-        GameObject text = Instantiate(floatingTextPrefab, transform.position, Quaternion.identity);
-        text.GetComponent<TextMeshPro>().text = $"{pointValue}";
-    }
-
-    /// <summary>
-    /// Resets the bat
+    /// Resets state machine values and target values
     /// </summary>
     public virtual void Reset()
     {
-        // The particle systems drag across the screen when repositioning bats
-        // Stopping it when resetting prevents that
-        if (GetComponentInChildren<ParticleSystem>())
-        {
-            GetComponentInChildren<ParticleSystem>().Stop();
-        }
-
-        // Set bat to its default values
-        bIsActive = false;
-        transform.position = spawnPoint;
-        _MovementControls.canMove = false;
-        _AnimControls.ResetAnimation();
-        _Collider.isTrigger = false;
-        GetComponent<CircleCollider2D>().isTrigger = false;
-        bIsStunned = false;
-
-
-        // Choose new wander position to be used on respawn
-        _MovementControls.SetWanderPosition();
-
-        // Get reference to game manager instance
-        GameManager gameManager = GameManager.Instance;
-
-        // Add points if target didn't flee
-        if (currentState != states[DefenseBatStates.Pursuing])
-        {
-            // Add a successful hit
-            gameManager.TargetManager.AddToCount(GetComponent<Target>().type, gameManager.TargetManager.killCount);
-            stunningPlayer.scoreController.AddHit();
-            gameManager.PointsManager.AddRoundPoints(stunningPlayer.Order, pointValue * stunningPlayer.scoreController.pointsMod);
-        }
-
-        // Update target manager with current state
-        gameManager.TargetManager.OnTargetReset();
-        InputManager.detectHitSub -= ListenForShot;
-        stunningPlayer = null;
-    }
-
-    /// <summary>
-    /// Stun event listener attached to input manager
-    /// </summary>
-    /// <param name="s">Struct containing information about shot</param>
-    public void ListenForShot(ShotInformation s)
-    {
-        // Check for stun detection
-        if(DetectStun(s.location, s.isRadiusCheck, s.player.GetShotRadius()))
-        {
-            // Allow this to only be set once to prevent players from snipe stealing points from each other
-            if (stunningPlayer == null)
-            {
-                stunningPlayer = s.player;
-            }
-            // Call method for stun resolution
-            ResolveHit();
-        }
-    }
-
-    public void Spawn()
-    {
-        bIsActive = true;
-        InputManager.detectHitSub += ListenForShot;
-        TransitionToState(DefenseBatStates.Wandering);
+        GetComponent<Target>().Reset();
         SetPursueTimer();
     }
 
     /// <summary>
-    /// Overridable: Handles event of bat being stunned
+    /// Resolves events tied to the state machine
+    /// </summary>
+    public override void ResolveEvent()
+    {
+        // Resolve hits
+        ResolveHit();
+    }
+
+    /// <summary>
+    /// Resolve hits
     /// </summary>
     public virtual void ResolveHit()
     {
         // Trigger stun animation
         _AnimControls.PlayStunAnimation();
         SoundManager.Instance.PlaySoundInterrupt(hitSound);
-        bIsStunned = true;
+        GetComponent<Target>().bIsStunned = true;
     }
 
-    public void SetStunningPlayer(PlayerController controller)
-    {
-        stunningPlayer = controller;
-    }
-
+    /// <summary>
+    /// Returns default state for reset purposes
+    /// </summary>
     public override DefenseBatStates GetDefaultState()
     {
         return DefenseBatStates.Wandering;
     }
 
+    /// <summary>
+    /// Returns terminal/death state for reset purposes
+    /// </summary>
     public override DefenseBatStates GetTerminalState()
     {
         return DefenseBatStates.Death;

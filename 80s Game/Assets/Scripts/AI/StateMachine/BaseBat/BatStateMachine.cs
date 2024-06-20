@@ -19,20 +19,14 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
 
     // Public fields
     public BatStates initialState = BatStates.Moving;
-    public GameObject floatingTextPrefab;
     public int pointValue = 1000;
     public float deathHeight = -6.5f;
     public AudioClip hitSound;
-    //public AudioClip missSound;
 
     // Fleeing fields
     public float timeUntilFlee = 8.0f;
     public float fleeTimer = 0.0f;
     public Vector2 fleeLocation;
-
-    // Default fields used for resets
-    Vector3 spawnPoint;
-    bool bIsStunned = false;
 
     // Get needed components for state machine
     KinematicSteer _MovementControls;
@@ -78,7 +72,6 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
 
         // Default state will be wandering
         currentState = states[initialState];
-        stunningPlayer = null;
 
         // Iterate through each state to pass game object as owner reference
         // putting this in here as well as base class to beat race condition
@@ -96,9 +89,7 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
         _MovementControls = GetComponent<KinematicSteer>();
         _SpriteRenderer = GetComponent<SpriteRenderer>();
         _AnimControls = GetComponent<AnimationHandler>();
-        
         _Collider = GetComponent<PolygonCollider2D>();
-        spawnPoint = transform.position;
 
         // Init flee timer
         fleeTimer = timeUntilFlee;
@@ -112,30 +103,46 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
         fleeTimer = timeUntilFlee;
     }
 
+    /// <summary>
+    /// Resets state machine values and target values
+    /// </summary>
     public virtual void Reset()
     {
         GetComponent<Target>().Reset();
         SetFleeTimer();
     }
 
+    /// <summary>
+    /// Resolves events tied to the state machine
+    /// </summary>
     public override void ResolveEvent()
     {
+        // Resolve hits
         ResolveHit();
     }
 
+    /// <summary>
+    /// Resolve hits
+    /// </summary>
     public virtual void ResolveHit()
     {
         // Trigger stun animation
         _AnimControls.PlayStunAnimation();
         SoundManager.Instance.PlaySoundInterrupt(hitSound);
-        bIsStunned = true;
+        GetComponent<Target>().bIsStunned = true;
     }
 
+    /// <summary>
+    /// Returns default state for reset purposes
+    /// </summary>
     public override BatStates GetDefaultState()
     {
         return BatStates.Moving;
     }
 
+    /// <summary>
+    /// Returns terminal/death state for reset purposes
+    /// </summary>
     public override BatStates GetTerminalState()
     {
         return BatStates.Death;
