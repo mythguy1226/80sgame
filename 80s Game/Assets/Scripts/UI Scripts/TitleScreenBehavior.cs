@@ -45,10 +45,10 @@ public class TitleScreenBehavior : MonoBehaviour
             case 2:
                 GameModeData.activeGameMode = EGameMode.Competitive;
                 break;
-
-            //PLACEHOLDER: Code for selecting defense mode is on a separate branch at the moment
             case 3:
-                GameModeData.activeGameMode = EGameMode.Classic;
+                gamemodeName.text = "Cooperative/Defense";
+                gamemodeDescription.text = "Defend the core from waves of bats (Placeholder description)";
+                GameModeData.activeGameMode = EGameMode.Defense;
                 break;
         }
     }
@@ -101,7 +101,18 @@ public class TitleScreenBehavior : MonoBehaviour
     //Select Gamemode and start the game
     public void SelectGamemode(int gamemodeIndex)
     {
-        gamemodeSelected = gamemodeIndex;
-        StartGame();
+        gamemodeSelected++;
+        if (gamemodeSelected == 4) gamemodeSelected = 1;
+
+        gamemodeSelected = Mathf.Clamp(gamemodeSelected, 1, 3);
+    }
+    
+    //Move to the previous gamemode 
+    public void PreviousGameMode()
+    {
+        gamemodeSelected--;
+        if (gamemodeSelected == 0) gamemodeSelected = 3;
+        
+        gamemodeSelected = Mathf.Clamp(gamemodeSelected, 1, 3);
     }
 }

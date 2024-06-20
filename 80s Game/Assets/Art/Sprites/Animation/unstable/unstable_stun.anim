@@ -88,7 +88,7 @@ AnimationClip:
   - time: 0.3
     functionName: DropBat
     data: 
-    objectReferenceParameter: {fileID: 0}
+    objectReferenceParameter: {fileID: 11500000, guid: 0866a63fd34b4504e87f09f18a541938, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0

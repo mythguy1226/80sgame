@@ -101,6 +101,9 @@ public class GameManager : MonoBehaviour
             case EGameMode.Classic:
                 ActiveGameMode = new ClassicMode();
                 break;
+            case EGameMode.Defense:
+                ActiveGameMode = new CooperativeMode();
+                break;
             default:
                 break;
         }

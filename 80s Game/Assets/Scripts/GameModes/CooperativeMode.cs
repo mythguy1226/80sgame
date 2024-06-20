@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CompetitiveMode : AbsGameMode
+public class CooperativeMode : AbsGameMode
 {
     float modifierChance = 0.3f;
 
-    public CompetitiveMode() : base()
+    public CooperativeMode() : base()
     {
         ModeType = EGameMode.Competitive;
 
         // Initial round parameters
-        NumRounds = 15;
+        NumRounds = 5;
         maxTargetsOnScreen = 15;
         currentRoundTargetCount = 8;
     }
@@ -35,10 +35,6 @@ public class CompetitiveMode : AbsGameMode
             if (targetManager.ActiveTargets.Count == maxTargetsOnScreen)
                 return;
         }
-
-        // Spawn a modifier bat and increment target count
-        targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<ModifierBatStateMachine>());
-        currentRoundTargetCount++;
     }
 
     protected override void UpdateRoundParams()
@@ -66,12 +62,8 @@ public class CompetitiveMode : AbsGameMode
         // find one that isn't already on screen
         for (int i = 0; i < bats.Count; i++)
         {
-            BatStateMachine FSM = (BatStateMachine)bats[i].FSM;
+            DefenseBatStateMachine FSM = (DefenseBatStateMachine)bats[i].FSM;
             if (FSM.bIsActive)
-                continue;
-
-            ModifierBatStateMachine comp = bats[i].GetComponent<ModifierBatStateMachine>();
-            if (comp != null)
                 continue;
 
             // If default bat, return index if no bonus bats
@@ -95,17 +87,6 @@ public class CompetitiveMode : AbsGameMode
         // Increment bonus bats every 3 stuns
         if (targetManager.totalStuns % 3 == 0)
             numBonusBats++;
-
-        // Chance to spawn a modifier bat every 5 stuns
-        if(targetManager.totalStuns % 5 == 0)
-        {
-            if(Random.Range(0.0f, 1.0f) < modifierChance)
-            {
-                // Spawn a modifier bat and increment target count
-                targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<ModifierBatStateMachine>());
-                currentRoundTargetCount++;
-            }
-        }
 
         if (targetManager.numStuns >= currentRoundTargetCount)
         {

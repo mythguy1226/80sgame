@@ -9,6 +9,7 @@ public class KinematicSteer : MonoBehaviour
     public Vector2 targetPosition;
     public float targetRadius;
     public bool canMove;
+    public bool isWandering;
     public bool isFleeing;
 
     // Maximums
@@ -50,6 +51,7 @@ public class KinematicSteer : MonoBehaviour
         SetWanderPosition();
 
         originalScale = transform.localScale;
+        isWandering = true;
     }
 
     // Update is called once per frame
@@ -59,7 +61,7 @@ public class KinematicSteer : MonoBehaviour
         if (canMove)
         {
             // Check if target reaches destination in wander state
-            if (IsAtDestination() && !isFleeing)
+            if (IsAtDestination() && !isFleeing && isWandering)
             {
                 // Find new position once at destination
                 SetWanderPosition();
@@ -188,7 +190,7 @@ public class KinematicSteer : MonoBehaviour
         foreach (Target neighbor in neighbors)
         {
             // Continue if the bat isnt on screen
-            if (!neighbor.FSM.bIsActive)
+            if (!neighbor.GetComponent<KinematicSteer>().canMove)
                 continue;
 
             // Continue if the bat isnt in the flock radius
@@ -223,7 +225,7 @@ public class KinematicSteer : MonoBehaviour
         foreach (Target neighbor in neighbors)
         {
             // Continue if the bat isnt on screen
-            if (!neighbor.FSM.bIsActive)
+            if (!neighbor.GetComponent<KinematicSteer>().canMove)
                 continue;
 
             // Continue if the bat isnt in the flock radius
@@ -255,7 +257,7 @@ public class KinematicSteer : MonoBehaviour
         foreach (Target neighbor in neighbors)
         {
             // Continue if the bat isnt on screen
-            if (!neighbor.FSM.bIsActive)
+            if (!neighbor.GetComponent<KinematicSteer>().canMove)
                 continue;
 
             // Continue if the bat isnt in the flock radius

@@ -53,7 +53,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0866a63fd34b4504e87f09f18a541938, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
   FSM: {fileID: 1575622764254521749}
+  floatingTextPrefab: {fileID: 5422266768498237442, guid: 9fb18532ede7ca047b852b0d60f79673, type: 3}
+  pointValue: 1000
+  deathHeight: -6.5
+  hitSound: {fileID: 0}
 --- !u!50 &4043134783524271435
 Rigidbody2D:
   serializedVersion: 4
@@ -152,6 +157,7 @@ MonoBehaviour:
   targetPosition: {x: 0, y: 0}
   targetRadius: 4
   canMove: 0
+  isWandering: 0
   isFleeing: 0
   maxSpeed: 6
   maxForce: 0.03
@@ -275,6 +281,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bIsActive: 0
+  unscorableStates: 01000000
   initialState: 0
   floatingTextPrefab: {fileID: 5422266768498237442, guid: 9fb18532ede7ca047b852b0d60f79673, type: 3}
   pointValue: 1000

@@ -3,30 +3,27 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-/* CLASS: BatStateMachine
- * USAGE: State Machine used for managing bat behavior and
- * storing all state keys.
- */
-public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
+public class DefenseBatStateMachine : AbsStateMachine<DefenseBatStateMachine.DefenseBatStates>
 {
     // Enum used for holding all creature state keys
-    public enum BatStates
+    public enum DefenseBatStates
     {
-        Moving,
-        Fleeing,
+        Wandering,
+        Pursuing,
+        Attacking,
         Death
     }
 
     // Public fields
-    public BatStates initialState = BatStates.Moving;
+    public DefenseBatStates initialState = DefenseBatStates.Wandering;
     public int pointValue = 1000;
     public float deathHeight = -6.5f;
     public AudioClip hitSound;
 
     // Fleeing fields
-    public float timeUntilFlee = 8.0f;
-    public float fleeTimer = 0.0f;
-    public Vector2 fleeLocation;
+    public float timeUntilPursue = 8.0f;
+    public float pursueTimer = 0.0f;
+    public Vector2 targetAttackLocation;
 
     // Get needed components for state machine
     KinematicSteer _MovementControls;
@@ -66,16 +63,17 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
         Init();
 
         // Fill the dictionary with needed states
-        states[BatStates.Moving] = new MovingState();
-        states[BatStates.Fleeing] = new FleeingState();
-        states[BatStates.Death] = new DeathState();
+        states[DefenseBatStates.Wandering] = new WanderingState();
+        states[DefenseBatStates.Pursuing] = new PursuingState();
+        states[DefenseBatStates.Attacking] = new AttackingState();
+        states[DefenseBatStates.Death] = new DefenseDeathState();
 
         // Default state will be wandering
         currentState = states[initialState];
 
         // Iterate through each state to pass game object as owner reference
         // putting this in here as well as base class to beat race condition
-        foreach (KeyValuePair<BatStates, AbsBaseState<BatStates>> state in states)
+        foreach (KeyValuePair<DefenseBatStates, AbsBaseState<DefenseBatStates>> state in states)
         {
             state.Value.OwnerFSM = this;
         }
@@ -92,15 +90,15 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
         _Collider = GetComponent<PolygonCollider2D>();
 
         // Init flee timer
-        fleeTimer = timeUntilFlee;
+        pursueTimer = timeUntilPursue;
     }
 
     /// <summary>
     /// Sets target flee timer publicly
     /// </summary>
-    public void SetFleeTimer()
+    public void SetPursueTimer()
     {
-        fleeTimer = timeUntilFlee;
+        pursueTimer = timeUntilPursue;
     }
 
     /// <summary>
@@ -109,7 +107,7 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
     public virtual void Reset()
     {
         GetComponent<Target>().Reset();
-        SetFleeTimer();
+        SetPursueTimer();
     }
 
     /// <summary>
@@ -135,16 +133,16 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
     /// <summary>
     /// Returns default state for reset purposes
     /// </summary>
-    public override BatStates GetDefaultState()
+    public override DefenseBatStates GetDefaultState()
     {
-        return BatStates.Moving;
+        return DefenseBatStates.Wandering;
     }
 
     /// <summary>
     /// Returns terminal/death state for reset purposes
     /// </summary>
-    public override BatStates GetTerminalState()
+    public override DefenseBatStates GetTerminalState()
     {
-        return BatStates.Death;
+        return DefenseBatStates.Death;
     }
 }

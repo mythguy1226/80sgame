@@ -31,7 +31,7 @@ public class TargetManager : MonoBehaviour
 
     public List<Target> ActiveTargets
     {
-        get { return targets.FindAll(target => target.FSM.bIsActive); }
+        get { return targets.FindAll(target => target.IsActive); }
     }
 
     private void Start()
@@ -70,13 +70,13 @@ public class TargetManager : MonoBehaviour
         }
 
         // Update target's speed and scaling
-        target.FSM.UpdateSpeed(Random.Range(minSpeed, maxSpeed));
+        target.UpdateSpeed(Random.Range(minSpeed, maxSpeed));
 
         float newScale = Random.Range(minScale, maxScale);
         target.gameObject.transform.localScale = new Vector3(newScale, newScale, newScale);
 
         // Update on-screen status
-        target.FSM.Spawn();
+        target.Spawn();
         target.GetComponent<AnimationHandler>().ResetAnimation();
         target.GetComponent<PolygonCollider2D>().isTrigger = false;
         
@@ -123,7 +123,7 @@ public class TargetManager : MonoBehaviour
         for (int i = 0; i < targets.Count; i++)
         {
             // Keep iterating if already active
-            if (targets[i].FSM.bIsActive)
+            if (targets[i].IsActive)
                 continue;
 
             // Keep iterating if target lacks component of templated class type

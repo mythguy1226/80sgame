@@ -9913,6 +9913,7 @@ MonoBehaviour:
   targetPosition: {x: 0, y: 0}
   targetRadius: 4
   canMove: 0
+  isWandering: 0
   isFleeing: 0
   maxSpeed: 6
   maxForce: 0.03
@@ -10037,6 +10038,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   FSM: {fileID: -8368935978441067624}
+  floatingTextPrefab: {fileID: 0}
+  pointValue: 1000
+  deathHeight: -6.5
+  hitSound: {fileID: 0}
 --- !u!60 &1378422487222437612
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -10106,6 +10111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bIsActive: 0
+  unscorableStates: 01000000
   initialState: 0
   floatingTextPrefab: {fileID: 5422266768498237442, guid: a675186d31f4293478ad06871f10c307, type: 3}
   pointValue: 4000
