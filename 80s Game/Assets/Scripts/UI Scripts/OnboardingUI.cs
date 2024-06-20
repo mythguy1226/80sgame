@@ -8,31 +8,42 @@ public class OnboardingUI : MonoBehaviour
     //Fields for object references
     public GameObject onboardingPanel;
     public GameObject gameUIElements;
-    public TMP_Text onboardingText;
-    public TMP_Text pauseControls;
+    public GameObject mouseDiagram;
+    public GameObject controllerDiagram;
     [SerializeField] AudioClip gameStartTheme;
     private UIManager manager;
-    
-    //Fields for onboarding text to be displayed to the player
-    private string inputText = "The Bat Bots have escaped containment!\n\nAim your stun gun with the left stick and fire with right trigger to stun the bat bots.\n\nPress the right trigger to start";
-    private string joyconInputText = "The bat bots have escaped containment! \n\nAim your stun gun by tilting the JoyCon. \n\nFire with the trigger (ZR/ZL) to stun the bat bots.";
+    private bool controllerConnected = false;
 
-    private string joyconPauseControls = "(+/-) Pause";
-    private string mousePauseControls = "(ESC) Pause";
 
     // Start is called before the first frame update
     void Start()
     {
         //Pause game when onboarding panel is activated
         Time.timeScale = 0.0f;
+
+        foreach (PlayerConfig pc in PlayerData.activePlayers)
+        {
+            if (pc.controlScheme != "KnM")
+            {
+                controllerConnected = true;
+            }
+        }
+
+        if (controllerConnected)
+        {
+            controllerDiagram.SetActive(true);
+        }
+
+        else
+        {
+            mouseDiagram.SetActive(true);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Set the text appropriately depending on if the player is using mouse or joycon input
-        onboardingText.SetText(inputText);
-        pauseControls.SetText(mousePauseControls);
+        
     }
 
     //Close the panel, active game UI elements, and unpause the game

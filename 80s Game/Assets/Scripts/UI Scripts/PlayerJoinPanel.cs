@@ -167,8 +167,8 @@ public class PlayerJoinPanel : MonoBehaviour
 
             lastSelected = eventSystem.currentSelectedGameObject;
 
-            EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(readyUpPrompt.transform.GetChild(1).gameObject);
+            eventSystem.SetSelectedGameObject(null);
+            eventSystem.SetSelectedGameObject(readyUpPrompt.transform.GetChild(1).gameObject);
         }
         
         //Show settings if player unreadies
@@ -177,11 +177,11 @@ public class PlayerJoinPanel : MonoBehaviour
             readyUpPrompt.SetActive(false);
             playerSettings.SetActive(true);
 
-            EventSystem.current.SetSelectedGameObject(null);
+            eventSystem.SetSelectedGameObject(null);
 
             if (lastSelected != null)
             {
-                EventSystem.current.SetSelectedGameObject(lastSelected);
+                eventSystem.SetSelectedGameObject(lastSelected);
             }
         }
         pjm.SetPlayerReady(player, playerReady);
