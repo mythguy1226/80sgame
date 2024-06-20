@@ -137,10 +137,10 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void EmitPause()
     {
-        // The JoinScreen uses this event to launch the game if all players are ready
+        // The JoinScreen uses this event to ready up the player
         if (currentState == ControllerState.JoinScreen)
         {
-            pjm.LaunchGameMode();
+            pjm.joinPanelContainer.transform.GetChild(Order).GetComponent<PlayerJoinPanel>().ReadyUp();
             return;
         }
         UIManager.PlayerPause(Order);
