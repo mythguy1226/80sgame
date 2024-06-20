@@ -27,7 +27,8 @@ public class TitleScreenBehavior : MonoBehaviour
     void Start()
     {
         SoundManager.Instance.SetMusicToLoop(titleScreenMusic);
-        
+
+        //Set up Gamemode Selection Buttons
         gamemodeOptions[0].onClick.AddListener(() => SelectGamemode(1));
         gamemodeOptions[1].onClick.AddListener(() => SelectGamemode(2));
         gamemodeOptions[2].onClick.AddListener(() => SelectGamemode(3));
@@ -97,12 +98,10 @@ public class TitleScreenBehavior : MonoBehaviour
         }
     }
 
-    //Move to the next gamemode
+    //Select Gamemode and start the game
     public void SelectGamemode(int gamemodeIndex)
     {
         gamemodeSelected = gamemodeIndex;
-
-        Debug.Log("Gamemode " + gamemodeSelected);
         StartGame();
     }
 }

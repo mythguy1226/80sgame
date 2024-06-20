@@ -65,7 +65,9 @@ public class PauseScreenBehavior : MonoBehaviour
         if (GameManager.Instance.UIManager.activeUI != UIManager.UIType.None){
             return;
         }
+        
 
+        //Show Gamemode descriptions if on the Title Screen
         if (this.gameObject.GetComponent<TitleScreenBehavior>() != null && this.gameObject.GetComponent<TitleScreenBehavior>().gamemodePanel.activeInHierarchy)
         {
             foreach (Button gamemode in this.gameObject.GetComponent<TitleScreenBehavior>().gamemodeOptions)
