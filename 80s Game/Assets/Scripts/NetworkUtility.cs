@@ -8,9 +8,7 @@ public static class NetworkUtility
 {
 
     // Currently pointing to localhost until we can set this up better
-    public static string destinationURL = "http://localhost:80";
-
-    public static string testURL = "http://google.com";
+    public static string destinationURL = "https://35v53w7wwj.execute-api.us-east-1.amazonaws.com/default/SaveToMongo";
 
     static UnityWebRequest req;
 
@@ -21,18 +19,16 @@ public static class NetworkUtility
     /// <returns>A coroutine that will set whether this computer can connect to our server or not</returns>
     public static IEnumerator Ping(Action<bool> callback)
     {
-        while (true)
-        {
-            req = new UnityWebRequest(testURL);
-            yield return req;
+        req = new UnityWebRequest(destinationURL, "GET");
+        yield return req.SendWebRequest();
 
-            if (req.result == UnityWebRequest.Result.ConnectionError)
-            {
-                callback.Invoke(false);
-            } else
-            {
-                callback.Invoke(true);
-            }
+        if (req.result == UnityWebRequest.Result.ConnectionError)
+        {
+            callback.Invoke(false);
+        }
+        else
+        {
+            callback.Invoke(true);
         }
     }
 }

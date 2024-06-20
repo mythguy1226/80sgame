@@ -126,7 +126,6 @@ public class GameManager : MonoBehaviour
     /// <param name="value">The boolean that sets connectivity status</param>
     private void SetOnline(bool value)
     {
-        
         isOnline = value;
     }
 
