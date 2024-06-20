@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using UnityEngine;
@@ -35,10 +36,14 @@ public abstract class DataSaver
 // Concrete data save class for interfacing with the local file system
 public class FileSystemDataSaver : DataSaver
 {
+    string filePath; 
+    public FileSystemDataSaver()
+    {
+        filePath = Application.dataPath + "/PlayerData/GameplayStats/";
+    }
     public override IEnumerator Save(SaveDataItem data)
     {
         // Establish a location where the data will be locally written to
-        string filePath = Application.dataPath + "/PlayerData/GameplayStats/";
         string fileName = Guid.NewGuid().ToString() + ".json";
         string dirPath = Path.GetDirectoryName(filePath + fileName);
         if (!Directory.Exists(dirPath))
@@ -49,6 +54,15 @@ public class FileSystemDataSaver : DataSaver
         // Write the data
         File.WriteAllText(filePath + fileName, JsonUtility.ToJson(data));
         yield return null;
+    }
+
+    public List<string> LoadData()
+    {
+        List<string> savedData = new List<string>();
+        string[] files = Directory.GetFiles(filePath, "*.json");
+        Debug.Log(files);
+        return savedData;
+
     }
 }
 
