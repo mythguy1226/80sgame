@@ -111,6 +111,18 @@ public class PlayerJoinManager : MonoBehaviour
     public void SetPlayerReady(int player, bool isReady)
     {
         joinStatus[player] = isReady;
+
+        foreach(KeyValuePair<int, bool> kvp in joinStatus)
+        {
+            if (!kvp.Value)
+            {
+                //Someone is not ready
+                return;
+            }
+        }
+
+        //Launch Game when everyone is ready
+        LaunchGameMode();
     }
 
     // This function launches the corresponding game mode that has been loaded by selection in the previous scene.
@@ -122,19 +134,10 @@ public class PlayerJoinManager : MonoBehaviour
             return;
         }
 
-        foreach(KeyValuePair<int, bool> kvp in joinStatus)
-        {
-            if (!kvp.Value)
-            {
-                //Someone is not ready
-                return;
-            }
-        }
-
         if (!sceneTransition)
         {
             // Everyone is ready
-            this.gameObject.GetComponent<LoadingScreen>().LoadScene(GameModeData.GameModeToSceneIndex(), controllerConnected);
+            SceneManager.LoadScene(GameModeData.GameModeToSceneIndex());
             sceneTransition = true;
         }
     }

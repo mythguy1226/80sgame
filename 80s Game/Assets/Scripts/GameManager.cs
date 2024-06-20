@@ -33,7 +33,6 @@ public class GameManager : MonoBehaviour
     public bool debug;
     private float gameStartTime;
     private List<PlayerController> players;
-    private bool isOnline;
 
     private void Awake()
     {
@@ -83,7 +82,6 @@ public class GameManager : MonoBehaviour
                     
                     players.Add(pc);
                 }
-                StartCoroutine(NetworkUtility.Ping(SetOnline));
             }
         }
     }
@@ -121,16 +119,6 @@ public class GameManager : MonoBehaviour
     {
         roundOverObservers?.Invoke();
         GameManager.Instance.PointsManager.ResetRoundPoints();
-    }
-
-    /// <summary>
-    /// Sets whether or not the client is connected to the internet
-    /// </summary>
-    /// <param name="value">The boolean that sets connectivity status</param>
-    private void SetOnline(bool value)
-    {
-        
-        isOnline = value;
     }
 
     /// <summary>
