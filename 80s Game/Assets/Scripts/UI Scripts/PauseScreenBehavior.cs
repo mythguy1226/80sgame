@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PauseScreenBehavior : MonoBehaviour
 {
@@ -62,6 +63,16 @@ public class PauseScreenBehavior : MonoBehaviour
     {
         Debug.Log("Pause Game");
         if (GameManager.Instance.UIManager.activeUI != UIManager.UIType.None){
+            return;
+        }
+
+        if (this.gameObject.GetComponent<TitleScreenBehavior>() != null && this.gameObject.GetComponent<TitleScreenBehavior>().gamemodePanel.activeInHierarchy)
+        {
+            foreach (Button gamemode in this.gameObject.GetComponent<TitleScreenBehavior>().gamemodeOptions)
+            {
+               GameObject gamemodeDescription = gamemode.gameObject.transform.GetChild(2).gameObject;
+               gamemodeDescription.SetActive(!gamemodeDescription.activeInHierarchy);
+            }
             return;
         }
 

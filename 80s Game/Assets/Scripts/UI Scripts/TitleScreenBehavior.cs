@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 
 //Class that handles behavior for UI elements on the game's title screen
@@ -19,29 +20,34 @@ public class TitleScreenBehavior : MonoBehaviour
     public TextMeshProUGUI gamemodeName;
     public TextMeshProUGUI gamemodeDescription;
     public GameObject startButton;
-    public GameObject nextGamemodeButton;
+    public List<Button> gamemodeOptions;
 
     private int gamemodeSelected = 1;
 
     void Start()
     {
         SoundManager.Instance.SetMusicToLoop(titleScreenMusic);
+        
+        gamemodeOptions[0].onClick.AddListener(() => SelectGamemode(1));
+        gamemodeOptions[1].onClick.AddListener(() => SelectGamemode(2));
+        gamemodeOptions[2].onClick.AddListener(() => SelectGamemode(3));
     }
 
     void Update()
     {
-        //Change descriptions based on which game mode is selected
+        //Change gamemode based on which game mode is selected
         switch(gamemodeSelected)
         {
             case 1:
-                gamemodeName.text = "Classic";
-                gamemodeDescription.text = "The Classic Bat Bots experience.\n\nPlay through several rounds and stun as many Bat Bots as possible.\n\nTry to achieve the highest score!";
                 GameModeData.activeGameMode = EGameMode.Classic;
                 break;
             case 2:
-                gamemodeName.text = "Competitive";
-                gamemodeDescription.text = "Bat Bots with Multiplayer!\n\nPlay with up to 2 players and compete to see who can get the highest score!\n\nThis mode features new bat bots not seen in the Classic mode!";
                 GameModeData.activeGameMode = EGameMode.Competitive;
+                break;
+
+            //PLACEHOLDER: Code for selecting defense mode is on a separate branch at the moment
+            case 3:
+                GameModeData.activeGameMode = EGameMode.Classic;
                 break;
         }
     }
@@ -82,7 +88,7 @@ public class TitleScreenBehavior : MonoBehaviour
         if (gamemodePanel.activeInHierarchy)
         {
             EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(nextGamemodeButton);
+            EventSystem.current.SetSelectedGameObject(gamemodeOptions[0].gameObject);
         }
         else
         {
@@ -92,20 +98,11 @@ public class TitleScreenBehavior : MonoBehaviour
     }
 
     //Move to the next gamemode
-    public void NextGameMode()
+    public void SelectGamemode(int gamemodeIndex)
     {
-        gamemodeSelected++;
-        if (gamemodeSelected == 3) gamemodeSelected = 1;
+        gamemodeSelected = gamemodeIndex;
 
-        gamemodeSelected = Mathf.Clamp(gamemodeSelected, 1, 2);
-    }
-    
-    //Move to the previous gamemode 
-    public void PreviousGameMode()
-    {
-        gamemodeSelected--;
-        if (gamemodeSelected == 0) gamemodeSelected = 2;
-        
-        gamemodeSelected = Mathf.Clamp(gamemodeSelected, 1, 2);
+        Debug.Log("Gamemode " + gamemodeSelected);
+        StartGame();
     }
 }
