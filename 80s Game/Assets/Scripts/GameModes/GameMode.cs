@@ -36,15 +36,6 @@ public abstract class AbsGameMode
 
     protected void EndGame()
     {
-        bool debug = Debug.isDebugBuild;
-#if UNITY_EDITOR
-        debug = true;
-#endif
-        if (debug)
-        {
-            return;
-        }
-
         GameManager.Instance.HandleGameOver();
     }
 
