@@ -42,7 +42,7 @@ public class FileSystemDataSaver : DataSaver
     public FileSystemDataSaver()
     {
         filePath = Application.dataPath + "/PlayerData/GameplayStats/";
-        fileLimitCount = 2;
+        fileLimitCount = 10;
     }
     public override IEnumerator Save(SaveDataItem data)
     {
