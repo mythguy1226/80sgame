@@ -15,10 +15,10 @@ public class FileSyncComponent : MonoBehaviour
     private void Start()
     {
         // Escape out of this if we're in the debug environment
-        if (NetworkUtility.NetworkDevEnv())
+        /*if (NetworkUtility.NetworkDevEnv())
         {
            return;
-        }
+        }*/
 
         fileSystemInterface = new FileSystemDataSaver();
         remoteSystemInterface = new RemoteDataSaver();
@@ -37,9 +37,9 @@ public class FileSyncComponent : MonoBehaviour
     /// </summary>
     /// <param name="index">The index of the file being updated</param>
     /// <param name="value">The result of the update function</param>
-    private void UpdateSyncStatus(int index, bool value)
+    private void UpdateSyncStatus(int index, bool bIsError)
     {
-        syncStatus.Add(index, value);
+        syncStatus.Add(index, bIsError);
         if (index < filenames.Count-1)
         {
             SyncFile(index + 1, filenames[index + 1].FullName);
@@ -71,7 +71,7 @@ public class FileSyncComponent : MonoBehaviour
     {
         foreach(KeyValuePair<int, bool> kvp in syncStatus)
         {
-            if (kvp.Value) { fileSystemInterface.DeleteFile(filenames[kvp.Key].FullName); }
+            if (!kvp.Value) { fileSystemInterface.DeleteFile(filenames[kvp.Key].FullName); }
         }
     }
 }
