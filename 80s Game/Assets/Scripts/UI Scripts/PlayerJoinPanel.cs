@@ -148,6 +148,12 @@ public class PlayerJoinPanel : MonoBehaviour
             colorSliders[2].value = newColor.b * 255;
         }
 
+        //Fix Green slider being set to 128 when using Green preset
+        if (colorDropdown.captionText.text == "Green")
+        {
+            colorSliders[1].value *= 2;
+        }
+
         //Change the crosshair color based off of the new slider values
         ChangeCrosshairColor();
         UpdatePlayerConfig();
