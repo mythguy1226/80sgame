@@ -71,6 +71,8 @@ public class Defendable : MonoBehaviour
             {
                 latch.Unlatch();
             }
+
+            GetComponent<SpriteRenderer>().color = Color.gray;
         }
         if (healthbar != null)
         {
