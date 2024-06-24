@@ -55,6 +55,10 @@ public class PursuingState : AbsBaseState<DefenseBatStateMachine.DefenseBatState
         _MovementControls.isFleeing = false;
         _MovementControls.canMove = true;
         _MovementControls.isWandering = false;
+
+        // Ensure bat is always pursuing the set target attack location
+        if(_MovementControls.targetPosition != (Vector2)FSM.targetLatch.transform.position)
+            _MovementControls.SetTargetPosition(FSM.targetLatch.transform.position);
     }
 
     /*
@@ -69,8 +73,9 @@ public class PursuingState : AbsBaseState<DefenseBatStateMachine.DefenseBatState
         // When timer is up, set target to flee
         if(FSM != null)
         {
-            if(Vector3.Distance(FSM.targetAttackLocation, FSM.transform.position) <= 1.0f)
+            if(Vector3.Distance(FSM.targetLatch.transform.position, FSM.transform.position) <= 1.0f)
             {
+                FSM.targetLatch.LatchTarget(FSM.GetComponent<Target>());
                 return DefenseBatStateMachine.DefenseBatStates.Attacking;
             }
         }
