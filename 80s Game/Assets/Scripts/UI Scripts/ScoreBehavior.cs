@@ -82,19 +82,16 @@ public class ScoreBehavior : MonoBehaviour
                 highScoreTextObject.SetText(highScoreText + highScore);
             }
 
-            //Update bottom score of leaderboard (edge case of null initials)
-            if (PlayerData.activePlayers[0].initials == null)
+            //Set initials for the leaderboard score
+            string initials = PlayerData.activePlayers[0].initials;
+            if (initials == null)
             {
-                bottomScoreTextObject.SetText("AAA\t" + score);
-                bottomScoreTextObject.gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = bottomScoreTextObject.text;
-            }
+                initials = "AAA";
+            }   
             
-            //Update bottom score of leaderboard
-            else
-            {
-                bottomScoreTextObject.SetText(PlayerData.activePlayers[0].initials + "\t" + score);
-                bottomScoreTextObject.gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = bottomScoreTextObject.text;
-            }
+            //Update bottom score leaderboard text
+            bottomScoreTextObject.SetText(initials + "\t" + score);
+            bottomScoreTextObject.gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = bottomScoreTextObject.text;
         }
 
         //Competitive mode final scores

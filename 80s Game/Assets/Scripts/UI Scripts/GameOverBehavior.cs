@@ -99,7 +99,6 @@ public class GameOverBehavior : MonoBehaviour
     public void RestartGame()
     {
         SoundManager.Instance.PlaySoundContinuous(buttonClickSound);
-        //GameManager.Instance.PointsManager.SaveScore();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
