@@ -66,6 +66,10 @@ public class CooperativeMode : AbsGameMode
             if (FSM.bIsActive)
                 continue;
 
+            ModifierDefenseBatStateMachine comp = bats[i].GetComponent<ModifierDefenseBatStateMachine>();
+            if (comp != null)
+                continue;
+
             // If default bat, return index if no bonus bats
             // Otherwise continue
             if (FSM.IsDefault && numBonusBats == 0)
@@ -88,19 +92,14 @@ public class CooperativeMode : AbsGameMode
         if (targetManager.totalStuns % 3 == 0)
             numBonusBats++;
 
+        // Start the next round if desired number of stuns is met
         if (targetManager.numStuns >= currentRoundTargetCount)
         {
+            StartNextRound();
 
-            // If last round completed
-            if (CurrentRound == NumRounds)
-            {
-                GameOver = true;
-                EndGame();
-            }
-                
-            // Otherwise start next round
-            else
-                StartNextRound();
+            // Spawn a modifier bat and increment target count
+            targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<ModifierDefenseBatStateMachine>());
+            currentRoundTargetCount++;
 
             return;
         }
@@ -127,5 +126,15 @@ public class CooperativeMode : AbsGameMode
             if (targetIndex >= 0)
                 targetManager.SpawnTarget(targetIndex);
         }
+    }
+
+    /// <summary>
+    /// Method calls end game logic and is public so it may be callable
+    /// from defendable class when it detects core is destroyed
+    /// </summary>
+    public void EndCoopGame()
+    {
+        GameOver = true;
+        EndGame();
     }
 }

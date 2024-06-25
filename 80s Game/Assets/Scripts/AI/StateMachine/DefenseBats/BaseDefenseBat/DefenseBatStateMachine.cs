@@ -29,6 +29,7 @@ public class DefenseBatStateMachine : AbsStateMachine<DefenseBatStateMachine.Def
     public float attackCooldown = 0.5f;
     float attackTimer;
     bool bCanAttack = true;
+    public int attackDamage = 1;
 
     // Get needed components for state machine
     KinematicSteer _MovementControls;
@@ -229,6 +230,6 @@ public class DefenseBatStateMachine : AbsStateMachine<DefenseBatStateMachine.Def
         Defendable latchedDefendable = targetLatch.transform.parent.GetComponent<Defendable>();
 
         // Deal damage
-        latchedDefendable.TakeDamage(1);
+        latchedDefendable.TakeDamage(attackDamage);
     }
 }
