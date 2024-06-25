@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SocialPlatforms.Impl;
+using UnityEngine.UI;
 
 public class ScoreBehavior : MonoBehaviour
 {
@@ -29,6 +30,11 @@ public class ScoreBehavior : MonoBehaviour
     private int leadingPlayer;
 
     public List<TextMeshProUGUI> playerNames;
+
+    //UI Elements for Defense mode
+    public Image coreHealthbar;
+    public TextMeshProUGUI coreHealthPercentage;
+    public Defendable core;   
 
     // Start is called before the first frame update
     void Start()
@@ -143,10 +149,19 @@ public class ScoreBehavior : MonoBehaviour
             finalScoreTextObject.SetText(finalScoreText);
         }
 
-        //Update Summary Screen and Round Indicator for Defense Mode
+        //Update Summary Screen and UI for Defense Mode
         if (GameManager.Instance.gameModeType == EGameMode.Defense)
         {
-            finalScoreText = "The Core was destroyed!\n\nRounds Survived: " + currentRoundNum;
+            //Set the core HP percentage
+            float coreHP = core._currentHitpoints / core._maxHitpoints;
+
+            //Update healthbar
+            coreHealthbar.fillAmount = coreHP;
+
+            //Update health percentage number
+            coreHealthPercentage.text = (coreHP * 100).ToString("F0") + "%";
+
+            finalScoreText = "The Core was destroyed!\n\nRounds Survived: " + (currentRoundNum - 1);
             finalScoreTextObject.SetText(finalScoreText);
             
             roundIndicatorTextObject.SetText(roundText + currentRoundNum);
