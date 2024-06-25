@@ -29,6 +29,7 @@ public class DefenseBatStateMachine : AbsStateMachine<DefenseBatStateMachine.Def
     public float attackCooldown = 0.5f;
     float attackTimer;
     bool bCanAttack = true;
+    public int attackDamage = 1;
 
     // Get needed components for state machine
     KinematicSteer _MovementControls;
@@ -188,6 +189,10 @@ public class DefenseBatStateMachine : AbsStateMachine<DefenseBatStateMachine.Def
             if(!curDefend.bCanBeTargeted)
                 continue;
 
+            // Only target core if its the only defendable left to attack
+            if(curDefend.bIsCore && GetActiveDefendables().Count > 1)
+                continue;
+
             // Distance check and availability check
             if(Vector3.Distance(transform.position, curDefend.transform.position) < Vector3.Distance(transform.position, closestDefendable.transform.position))
             {
@@ -220,6 +225,23 @@ public class DefenseBatStateMachine : AbsStateMachine<DefenseBatStateMachine.Def
         return null;
     }
 
+    public List<Defendable> GetActiveDefendables()
+    {
+        // Init list
+        List<Defendable> activeList = new List<Defendable>();
+
+        // Iterate through all defendables and only add active ones
+        foreach(Defendable curDefend in GameObject.FindObjectsOfType<Defendable>())
+        {
+            // Check activity
+            if(curDefend.bCanBeTargeted)
+                activeList.Add(curDefend);
+        }
+
+        // Return list
+        return activeList;
+    }
+
     /// <summary>
     /// Overridable method used for executing bat attack logic
     /// </summary>
@@ -229,6 +251,6 @@ public class DefenseBatStateMachine : AbsStateMachine<DefenseBatStateMachine.Def
         Defendable latchedDefendable = targetLatch.transform.parent.GetComponent<Defendable>();
 
         // Deal damage
-        latchedDefendable.TakeDamage(1);
+        latchedDefendable.TakeDamage(attackDamage);
     }
 }

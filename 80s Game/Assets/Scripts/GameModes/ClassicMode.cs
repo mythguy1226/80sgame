@@ -105,6 +105,7 @@ public class ClassicMode : AbsGameMode
             {
                 GameManager.EmitRoundOverEvent();
                 StartNextRound();
+                
                 // Spawn a modifier bat and increment target count
                 targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<ModifierBatStateMachine>());
                 currentRoundTargetCount++;
