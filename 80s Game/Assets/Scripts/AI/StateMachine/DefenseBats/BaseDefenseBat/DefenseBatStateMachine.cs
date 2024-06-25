@@ -189,6 +189,10 @@ public class DefenseBatStateMachine : AbsStateMachine<DefenseBatStateMachine.Def
             if(!curDefend.bCanBeTargeted)
                 continue;
 
+            // Only target core if its the only defendable left to attack
+            if(curDefend.bIsCore && GetActiveDefendables().Count > 1)
+                continue;
+
             // Distance check and availability check
             if(Vector3.Distance(transform.position, curDefend.transform.position) < Vector3.Distance(transform.position, closestDefendable.transform.position))
             {
@@ -219,6 +223,23 @@ public class DefenseBatStateMachine : AbsStateMachine<DefenseBatStateMachine.Def
         }
 
         return null;
+    }
+
+    public List<Defendable> GetActiveDefendables()
+    {
+        // Init list
+        List<Defendable> activeList = new List<Defendable>();
+
+        // Iterate through all defendables and only add active ones
+        foreach(Defendable curDefend in GameObject.FindObjectsOfType<Defendable>())
+        {
+            // Check activity
+            if(curDefend.bCanBeTargeted)
+                activeList.Add(curDefend);
+        }
+
+        // Return list
+        return activeList;
     }
 
     /// <summary>
