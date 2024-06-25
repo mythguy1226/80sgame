@@ -34,9 +34,10 @@ public class Defendable : MonoBehaviour
     SpriteRenderer sr;
     HealthBar healthbar;
 
-
     [HideInInspector]
     public bool bCanBeTargeted;
+
+    public bool bIsCore = false;
 
     private void Start()
     {
@@ -73,6 +74,15 @@ public class Defendable : MonoBehaviour
             }
 
             GetComponent<SpriteRenderer>().color = Color.gray;
+
+            // Handle when core is destroyed
+            if(bIsCore)
+            {
+                // Cast active game mode to coop mode and call custom end method
+                CooperativeMode coopMode = (CooperativeMode)GameManager.Instance.ActiveGameMode;
+                if(coopMode != null)
+                    coopMode.EndCoopGame();
+            }
         }
         if (healthbar != null)
         {
