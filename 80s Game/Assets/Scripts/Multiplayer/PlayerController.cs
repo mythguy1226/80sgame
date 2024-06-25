@@ -84,8 +84,8 @@ public class PlayerController : MonoBehaviour
             activeCrosshair.SetCrosshairSprite(pc.crosshairSprite);
             activeCrosshair.ChangeSpriteColor(pc.crossHairColor);
 
-            //Set initials under crosshair only in Competitive mode
-            if (GameManager.Instance.gameModeType == EGameMode.Competitive)
+            //Set initials under crosshair only in Competitive and Defense mode
+            if (GameManager.Instance.gameModeType == EGameMode.Competitive || GameManager.Instance.gameModeType == EGameMode.Defense)
             {
                 //Set initials under crosshair to AAA if initials haven't been changed
                 if (config.initials == null)
