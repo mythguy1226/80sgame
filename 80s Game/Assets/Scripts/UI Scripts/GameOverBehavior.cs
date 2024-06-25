@@ -18,6 +18,7 @@ public class GameOverBehavior : MonoBehaviour
     public GameObject restartButton;
     public TMP_Text leaderboardText;
     public AudioClip buttonClickSound;
+    public List<GameObject> leaderboardScoreHighlights;
     [SerializeField] AudioClip gameEndTheme;
 
     private bool gameOverTransition = true;
@@ -38,6 +39,7 @@ public class GameOverBehavior : MonoBehaviour
                 //Select continue button for non-mouse navigation
                 EventSystem.current.SetSelectedGameObject(null);
                 EventSystem.current.SetSelectedGameObject(continueButton);
+                GameManager.Instance.PointsManager.SaveScore();
                 
                 //Disable crosshairs and turn mouse cursor on
                 this.gameObject.GetComponent<PauseScreenBehavior>().ToggleCrosshairs(false);
@@ -59,11 +61,27 @@ public class GameOverBehavior : MonoBehaviour
         PointsManager pMngr = GameManager.Instance.PointsManager;
         List<PointsManager.UserRecord> records = pMngr.LoadRecords();
         string scores = "";
+        bool topSixScore = false;
+
         for(int i = records.Count - 1; i >= 0; i--)
         {
             // Formatting for high score text
             scores += $"{records[i].initials}\t{records[i].score}\n";
             scores += "\n";
+
+            //Highlight score if it's in the top six
+            if (records[i].score == pMngr.maxScore)
+            {
+                leaderboardScoreHighlights[records.Count - 1 - i].SetActive(true);
+                leaderboardScoreHighlights[records.Count - 1 - i].GetComponent<TextMeshProUGUI>().text = $"{records[i].initials}\t{records[i].score}";
+                topSixScore = true;
+            }
+        }
+
+        //If the score is not in the top six, show it at the bottom of the leaderboard
+        if (!topSixScore)
+        {
+            this.gameObject.GetComponent<ScoreBehavior>().bottomScoreTextObject.gameObject.SetActive(true);
         }
         leaderboardText.text = scores;
 
@@ -81,7 +99,6 @@ public class GameOverBehavior : MonoBehaviour
     public void RestartGame()
     {
         SoundManager.Instance.PlaySoundContinuous(buttonClickSound);
-        GameManager.Instance.PointsManager.SaveScore();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
