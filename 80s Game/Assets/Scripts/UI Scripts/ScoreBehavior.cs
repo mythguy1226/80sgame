@@ -143,8 +143,21 @@ public class ScoreBehavior : MonoBehaviour
             finalScoreTextObject.SetText(finalScoreText);
         }
 
-        //Update Round Indicator
-        roundIndicatorTextObject.SetText(roundText + currentRoundNum + "/" + maxNumOfRounds);
+        //Update Summary Screen and Round Indicator for Defense Mode
+        if (GameManager.Instance.gameModeType == EGameMode.Defense)
+        {
+            finalScoreText = "The Core was destroyed!\n\nRounds Survived: " + currentRoundNum;
+            finalScoreTextObject.SetText(finalScoreText);
+            
+            roundIndicatorTextObject.SetText(roundText + currentRoundNum);
+        }
+
+        //Update Round Indicator for other modes
+        else
+        {
+            roundIndicatorTextObject.SetText(roundText + currentRoundNum + "/" + maxNumOfRounds);
+        }
+        
     }
 
     //Update scores for the players in competitive mode
