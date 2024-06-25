@@ -54,7 +54,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  FSM: {fileID: 0}
+  FSM: {fileID: 7699794266590313434}
   bIsStunned: 0
   floatingTextPrefab: {fileID: 0}
   pointValue: 1000
@@ -324,4 +324,5 @@ MonoBehaviour:
   hitSound: {fileID: 8300000, guid: c928b956a133aa544bfa866c9b7c2b47, type: 3}
   timeUntilPursue: 8
   pursueTimer: 0
-  targetAttackLocation: {x: 0, y: 0}
+  targetLatch: {fileID: 0}
+  attackCooldown: 3

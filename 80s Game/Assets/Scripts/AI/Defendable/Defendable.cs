@@ -30,7 +30,7 @@ public class Defendable : MonoBehaviour
     int _currentHitpoints;
     int _thresholdIndex;
 
-    List<LatchPoint> latchPoints;
+    public List<LatchPoint> latchPoints;
     SpriteRenderer sr;
     HealthBar healthbar;
 
@@ -67,6 +67,12 @@ public class Defendable : MonoBehaviour
         if (_currentHitpoints <= 0)
         {
             bCanBeTargeted = false;
+            foreach(LatchPoint latch in latchPoints)
+            {
+                latch.Unlatch();
+            }
+
+            GetComponent<SpriteRenderer>().color = Color.gray;
         }
         if (healthbar != null)
         {

@@ -20,10 +20,15 @@ public class DefenseBatStateMachine : AbsStateMachine<DefenseBatStateMachine.Def
     public float deathHeight = -6.5f;
     public AudioClip hitSound;
 
-    // Fleeing fields
+    // Pursue fields
     public float timeUntilPursue = 8.0f;
     public float pursueTimer = 0.0f;
-    public Vector2 targetAttackLocation;
+    public LatchPoint targetLatch;
+
+    // Attack fields
+    public float attackCooldown = 0.5f;
+    float attackTimer;
+    bool bCanAttack = true;
 
     // Get needed components for state machine
     KinematicSteer _MovementControls;
@@ -55,6 +60,18 @@ public class DefenseBatStateMachine : AbsStateMachine<DefenseBatStateMachine.Def
     public bool IsDefault
     {
         get { return pointValue == 1000; }
+    }
+
+    public float AttackTimer
+    {
+        get { return attackTimer; }
+        set { attackTimer = value; }
+    }
+
+    public bool CanAttack
+    {
+        get { return bCanAttack; }
+        set { bCanAttack = value; }
     }
 
     void Awake()
@@ -108,6 +125,13 @@ public class DefenseBatStateMachine : AbsStateMachine<DefenseBatStateMachine.Def
     {
         GetComponent<Target>().Reset();
         SetPursueTimer();
+
+        // Reset any latch points the bat is attached to
+        if(targetLatch != null)
+        {
+            targetLatch.Unlatch();
+            targetLatch = null;
+        }
     }
 
     /// <summary>
@@ -144,5 +168,67 @@ public class DefenseBatStateMachine : AbsStateMachine<DefenseBatStateMachine.Def
     public override DefenseBatStates GetTerminalState()
     {
         return DefenseBatStates.Death;
+    }
+
+    /// <summary>
+    /// Returns the closest available latch position for the bat to target
+    /// </summary>
+    public LatchPoint GetClosestLatchPoint()
+    {
+        // Get reference to all defendables
+        List<Defendable> defendables = new List<Defendable>(GameObject.FindObjectsOfType<Defendable>());
+
+        // Init closest defendable
+        Defendable closestDefendable = defendables[0];
+
+        // Iterate through all defendables to get the closest one
+        foreach(Defendable curDefend in defendables)
+        {
+            // Only include active defendables
+            if(!curDefend.bCanBeTargeted)
+                continue;
+
+            // Distance check and availability check
+            if(Vector3.Distance(transform.position, curDefend.transform.position) < Vector3.Distance(transform.position, closestDefendable.transform.position))
+            {
+                closestDefendable = curDefend;
+            }
+        }
+
+        // Get the next available latch on the closest defendable
+        LatchPoint nextLatch = null;
+        if(closestDefendable.bCanBeTargeted)
+            nextLatch = GetAvailableLatch(closestDefendable);
+
+        // Return the closest latch
+        return nextLatch;
+    }
+
+    /// <summary>
+    /// Returns the next available latch on a given defendable
+    /// </summary>
+    public LatchPoint GetAvailableLatch(Defendable target)
+    {
+        // Iterate through all latches in defendable
+        foreach(LatchPoint curLatch in target.latchPoints)
+        {
+            // Return the next available latch
+            if(curLatch.isAvailable)
+                return curLatch;
+        }
+
+        return null;
+    }
+
+    /// <summary>
+    /// Overridable method used for executing bat attack logic
+    /// </summary>
+    public virtual void Attack()
+    {
+        // Get the defendable from the target latch
+        Defendable latchedDefendable = targetLatch.transform.parent.GetComponent<Defendable>();
+
+        // Deal damage
+        latchedDefendable.TakeDamage(1);
     }
 }
