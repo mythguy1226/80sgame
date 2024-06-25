@@ -19,7 +19,7 @@ public class WanderingState : AbsBaseState<DefenseBatStateMachine.DefenseBatStat
 	*/
     public override void EnterState()
     {
-
+        
     }
 
     /*
@@ -76,8 +76,24 @@ public class WanderingState : AbsBaseState<DefenseBatStateMachine.DefenseBatStat
         {
             if (FSM.pursueTimer <= 0.0f)
             {
+                // Try to find a latch position to target
+                LatchPoint closestLatchPoint = FSM.GetClosestLatchPoint();
+
+                // Check whether a latch was available
+                if(closestLatchPoint == null)
+                {
+                    // Keep wandering since no latch was available
+                    FSM.SetPursueTimer();
+                    return DefenseBatStateMachine.DefenseBatStates.Wandering;
+                }
+                else // Set target attack location to the latch position
+                {
+                    FSM.targetLatch = closestLatchPoint;
+                    FSM.targetLatch.isAvailable = false;
+                }
+
                 // Set new target position to be the closest attack location
-                _MovementControls.SetTargetPosition(FSM.targetAttackLocation);
+                _MovementControls.SetTargetPosition(FSM.targetLatch.transform.position);
 
                 return DefenseBatStateMachine.DefenseBatStates.Pursuing;
             }

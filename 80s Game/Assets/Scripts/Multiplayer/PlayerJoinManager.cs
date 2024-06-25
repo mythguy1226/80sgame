@@ -97,6 +97,27 @@ public class PlayerJoinManager : MonoBehaviour
                 }
             }
         }
+
+        //Set color preset based on default color
+        switch(pc.Order)
+        {
+            case 1: 
+                newPlayerPanel.GetComponent<PlayerJoinPanel>().colorDropdown.value = 1;
+                break;
+            case 2: 
+                newPlayerPanel.GetComponent<PlayerJoinPanel>().colorDropdown.value = 2;
+                break;
+            case 3: 
+                newPlayerPanel.GetComponent<PlayerJoinPanel>().colorDropdown.value = 5;
+                break;
+        }
+
+        //Disable auto scroll for color preset dropdown if using mouse and keyboard
+        if (playerInput.currentControlScheme == "KnM")
+        {
+            newPlayerPanel.GetComponent<PlayerJoinPanel>().colorDropdown.gameObject.transform.GetChild(2).GetComponent<ScrollRectEnsureVisible>().enabled = false;
+        }
+
         //joinPrompt.text = "Press Start when ready";
         //joinPrompt.rectTransform.SetLocalPositionAndRotation(new Vector3(0, -460, 0), Quaternion.identity);
 

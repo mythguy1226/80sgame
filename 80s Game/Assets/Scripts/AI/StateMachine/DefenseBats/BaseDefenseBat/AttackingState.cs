@@ -54,6 +54,22 @@ public class AttackingState : AbsBaseState<DefenseBatStateMachine.DefenseBatStat
         // Enable movement
         _MovementControls.isFleeing = false;
         _MovementControls.canMove = false;
+
+        // Manage attack timer and attacking
+        if(FSM.CanAttack) // Attack logic
+        {
+            FSM.Attack();
+            FSM.CanAttack = false;
+        }
+        else // Cooldown logic
+        {
+            FSM.AttackTimer -= Time.deltaTime;
+            if(FSM.AttackTimer <= 0.0f)
+            {
+                FSM.AttackTimer = FSM.attackCooldown;
+                FSM.CanAttack = true;
+            }
+        }
     }
 
     /*
@@ -68,7 +84,7 @@ public class AttackingState : AbsBaseState<DefenseBatStateMachine.DefenseBatStat
         // When timer is up, set target to flee
         if(FSM != null)
         {
-            if(Vector3.Distance(FSM.targetAttackLocation, FSM.transform.position) > 1.0f)
+            if(Vector3.Distance(FSM.targetLatch.transform.position, FSM.transform.position) > 1.0f)
             {
                 return DefenseBatStateMachine.DefenseBatStates.Pursuing;
             }
