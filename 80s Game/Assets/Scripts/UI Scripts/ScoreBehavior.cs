@@ -11,6 +11,7 @@ public class ScoreBehavior : MonoBehaviour
     public TMP_Text highScoreTextObject;
     public TMP_Text finalScoreTextObject;
     public TMP_Text roundIndicatorTextObject;
+    public TextMeshProUGUI bottomScoreTextObject;
 
     //Strings for text minus the score values
     private string highScoreText = "High Score:\n";
@@ -80,6 +81,17 @@ public class ScoreBehavior : MonoBehaviour
             {
                 highScoreTextObject.SetText(highScoreText + highScore);
             }
+
+            //Set initials for the leaderboard score
+            string initials = PlayerData.activePlayers[0].initials;
+            if (initials == null)
+            {
+                initials = "AAA";
+            }   
+            
+            //Update bottom score leaderboard text
+            bottomScoreTextObject.SetText(initials + "\t" + score);
+            bottomScoreTextObject.gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = bottomScoreTextObject.text;
         }
 
         //Competitive mode final scores

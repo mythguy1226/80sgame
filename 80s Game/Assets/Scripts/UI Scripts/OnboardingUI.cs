@@ -40,12 +40,6 @@ public class OnboardingUI : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     //Close the panel, active game UI elements, and unpause the game
     public void CloseOnboarding()
     {
