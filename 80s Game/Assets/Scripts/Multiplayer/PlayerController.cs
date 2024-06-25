@@ -157,6 +157,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnDisable()
+    {
+        GameManager.roundOverObservers -= ReportEndOfRound;
+    }
+
     /// <summary>
     /// Send the PointsManager bonus point information at the end of every round of gameplay
     /// </summary>
