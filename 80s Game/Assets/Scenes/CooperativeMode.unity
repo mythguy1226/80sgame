@@ -8014,6 +8014,7 @@ MonoBehaviour:
   debuffActive: 0
   buffs:
   - {fileID: 55702376141867145, guid: 6311858a13f90b740a1313dc1b64b33d, type: 3}
+  - {fileID: 55702376141867145, guid: 328b8da7f3e388840936b90e67bedf34, type: 3}
   debuffs: []
   debug: 1
 --- !u!4 &1095139975
