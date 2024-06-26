@@ -45,7 +45,8 @@ public class ModifierDefenseBatStateMachine : DefenseBatStateMachine
                 }
             }
             // Alter this if you want to force a specific modifier to drop
-            int randomIndex = Random.Range(0, modifierObjects.Count);
+            //int randomIndex = Random.Range(0, modifierObjects.Count);
+            int randomIndex = 1;
             Instantiate(modifierObjects[randomIndex], transform.position, Quaternion.identity);
             modifierDropped = true;
         }

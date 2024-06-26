@@ -7068,6 +7068,7 @@ MonoBehaviour:
   restartButton: {fileID: 393536519}
   leaderboardText: {fileID: 692398610}
   buttonClickSound: {fileID: 8300000, guid: 0f33d998cd03b1f4ebc4983ef2a6d559, type: 3}
+  leaderboardScoreHighlights: []
   gameEndTheme: {fileID: 8300000, guid: e5a6e5297d672bc4e8399d40ba2d8e43, type: 3}
 --- !u!114 &1011990666
 MonoBehaviour:
@@ -7089,6 +7090,7 @@ MonoBehaviour:
   highScoreTextObject: {fileID: 153801723}
   finalScoreTextObject: {fileID: 1117114116}
   roundIndicatorTextObject: {fileID: 736886330}
+  bottomScoreTextObject: {fileID: 0}
   playerNames:
   - {fileID: 1554343130}
   - {fileID: 1275475504}
@@ -7760,6 +7762,7 @@ MonoBehaviour:
   debuffActive: 0
   buffs:
   - {fileID: 55702376141867145, guid: 6311858a13f90b740a1313dc1b64b33d, type: 3}
+  - {fileID: 55702376141867145, guid: 328b8da7f3e388840936b90e67bedf34, type: 3}
   debuffs: []
   debug: 1
 --- !u!4 &1095139975

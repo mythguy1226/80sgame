@@ -94,6 +94,9 @@ public class KinematicSteer : MonoBehaviour
         if (GameManager.Instance.isSlowed)
         {
             modifiedSpeed *= 0.75f;
+
+            // If the stack is 0, modified speed remains unchanged at 0.75
+            modifiedSpeed *= 1.0f / ((0.4f * (float)GameManager.Instance.rustedWingsStack) + 1.0f);
         }
         // Calculate moving velocity
         Vector2 finalVelocity = currentVelocity.normalized * modifiedSpeed;

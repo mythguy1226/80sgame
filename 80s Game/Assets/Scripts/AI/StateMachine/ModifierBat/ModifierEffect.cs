@@ -11,7 +11,8 @@ public abstract class AbsModifierEffect : MonoBehaviour
         DoublePoints,
         Overcharge,
         Snail,
-        Confusion
+        Confusion,
+        RustedWings
     }
 
     [SerializeField]
