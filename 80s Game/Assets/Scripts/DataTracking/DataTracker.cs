@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -35,10 +37,16 @@ public abstract class DataSaver
 // Concrete data save class for interfacing with the local file system
 public class FileSystemDataSaver : DataSaver
 {
+    string filePath;
+    int fileLimitCount;
+    public FileSystemDataSaver()
+    {
+        filePath = Application.dataPath + "/PlayerData/GameplayStats/";
+        fileLimitCount = 10;
+    }
     public override IEnumerator Save(SaveDataItem data)
     {
         // Establish a location where the data will be locally written to
-        string filePath = Application.dataPath + "/PlayerData/GameplayStats/";
         string fileName = Guid.NewGuid().ToString() + ".json";
         string dirPath = Path.GetDirectoryName(filePath + fileName);
         if (!Directory.Exists(dirPath))
@@ -48,8 +56,60 @@ public class FileSystemDataSaver : DataSaver
 
         // Write the data
         File.WriteAllText(filePath + fileName, JsonUtility.ToJson(data));
+        EliminateExcessFiles();
         yield return null;
     }
+
+
+    /// <summary>
+    /// List all stored files of JSON game data
+    /// </summary>
+    /// <returns>A list of FileInfo objects</returns>
+    public List<FileInfo> GetDataFiles()
+    {
+        List<FileInfo> files = new DirectoryInfo(filePath).GetFiles("*.json").OrderByDescending(f => f.LastWriteTime).ToList();
+        return files;
+    }
+
+
+    /// <summary>
+    /// Eliminate all stored data files that exceed maximum limit amounts and their 
+    /// associated meta files if they exist
+    /// </summary>
+    public void EliminateExcessFiles()
+    {
+        List<FileInfo> files = GetDataFiles();
+        for (int i = fileLimitCount + 1; i < files.Count; i++)
+        {
+            File.Delete(files[i].FullName);
+            if (File.Exists(files[i].FullName + ".meta"))
+            {
+                File.Delete(files[i].FullName + ".meta");
+            }   
+        }
+    }
+
+    /// <summary>
+    /// Eliminate file in data store and it's meta store, should one exist
+    /// </summary>
+    public void DeleteFile(string fileName)
+    {
+        File.Delete(fileName);
+        if (File.Exists(fileName + ".meta"))
+        {
+            File.Delete(fileName + ".meta");
+        }
+    }
+
+    /// <summary>
+    /// Read the contents of a file
+    /// </summary>
+    /// <param name="filePath"></param>
+    /// <returns>The string contents of a file</returns>
+    public string GetFileContents(string filePath)
+    {
+        return File.ReadAllText(filePath);
+    } 
 }
 
 
@@ -58,6 +118,14 @@ public class RemoteDataSaver : DataSaver
 {
     public override IEnumerator Save(SaveDataItem data)
     {
+        //Save files locally if this is a development environment
+        if (NetworkUtility.NetworkDevEnv())
+        {
+            FileSystemDataSaver saver = new FileSystemDataSaver();
+            yield return saver.Save(data);
+            yield break;
+        }
+
         // Prepare the request
         string url = NetworkUtility.destinationURL;
         UnityWebRequest request = new UnityWebRequest(url, UnityWebRequest.kHttpVerbPOST);
@@ -76,5 +144,30 @@ public class RemoteDataSaver : DataSaver
             FileSystemDataSaver saver = new FileSystemDataSaver();
             yield return saver.Save(data);
         }
+    }
+
+    /// <summary>
+    /// Syncs files to remote
+    /// </summary>
+    /// <param name="file">Index of the file to sync</param>
+    /// <param name="data">String of JSON-compliant data to send to the server</param>
+    /// <param name="callback">The function to call when the sync process is complete</param>
+    /// <returns>Nothing, this is a couroutine</returns>
+    public IEnumerator Sync(int file, string data, Action<int, bool> callback)
+    {
+        // Prepare the request
+        string url = NetworkUtility.destinationURL;
+        UnityWebRequest request = new UnityWebRequest(url, UnityWebRequest.kHttpVerbPOST);
+        request.SetRequestHeader("Content-Type", "application/json");
+        byte[] bodyRaw = Encoding.UTF8.GetBytes(data);
+        request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+        request.downloadHandler = new DownloadHandlerBuffer();
+        
+        //Send the request
+        yield return request.SendWebRequest();
+        
+        // Fallback method in case our server becomes unreachable or the request fails
+        bool requestError = request.result != UnityWebRequest.Result.Success;
+        callback.Invoke(file, requestError);
     }
 }
