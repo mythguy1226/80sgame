@@ -19,7 +19,27 @@ public class PursuingState : AbsBaseState<DefenseBatStateMachine.DefenseBatState
 	*/
     public override void EnterState()
     {
+        // Get state machine and needed components
+        DefenseBatStateMachine FSM = (DefenseBatStateMachine)OwnerFSM;
 
+        if (FSM == null)
+            return;
+
+        _MovementControls = FSM.MovementControls;
+
+        // Early return if movement controller is null
+        if (_MovementControls == null)
+            return;
+
+        // Prevent movement until all preparation is done
+        _MovementControls.canMove = false;
+
+        // Scale bat speed with its pursue speed
+        Target targ = FSM.GetComponent<Target>();
+        targ.UpdateSpeed(targ.MovementSpeed * FSM.pursueSpeedScale);
+
+        // Call logic for beginning pursuit
+        FSM.BeginPursue();
     }
 
     /*
@@ -43,6 +63,10 @@ public class PursuingState : AbsBaseState<DefenseBatStateMachine.DefenseBatState
         DefenseBatStateMachine FSM = (DefenseBatStateMachine)OwnerFSM;
 
         if (FSM == null)
+            return;
+
+        // Return if not able to pursue
+        if(!FSM.bCanPursue)
             return;
 
         _MovementControls = FSM.MovementControls;

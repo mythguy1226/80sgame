@@ -24,6 +24,8 @@ public class DefenseBatStateMachine : AbsStateMachine<DefenseBatStateMachine.Def
     public float timeUntilPursue = 8.0f;
     public float pursueTimer = 0.0f;
     public LatchPoint targetLatch;
+    public float pursueSpeedScale = 1.0f;
+    public bool bCanPursue = false;
 
     // Attack fields
     public float attackCooldown = 0.5f;
@@ -252,5 +254,13 @@ public class DefenseBatStateMachine : AbsStateMachine<DefenseBatStateMachine.Def
 
         // Deal damage
         latchedDefendable.TakeDamage(attackDamage);
+    }
+
+    /// <summary>
+    /// Overridable method called when transitioning to pursue state
+    /// </summary>
+    public virtual void BeginPursue()
+    {
+        bCanPursue = true;
     }
 }
