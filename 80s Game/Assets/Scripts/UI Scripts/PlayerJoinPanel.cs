@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using TMPro;
+using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -43,10 +45,20 @@ public class PlayerJoinPanel : MonoBehaviour
     public bool playerReady;
     private GameObject lastSelected;
     
+    //Variables for Player Profiles
+    public GameObject profilePanel;
+    public GameObject overwriteProfilePanel;
+    public TMP_Dropdown profileDropdown;
+    public GameObject profilesButton;
+    public GameObject saveProfileButton;
+    public GameObject confirmOverwrite;
+    public TextMeshProUGUI profileSavedMessage;
+    public TextMeshProUGUI overwriteMessage;
 
     public EventSystem eventSystem;
     private int player;
     private PlayerJoinManager pjm;
+    private string filePath = Application.dataPath + "/PlayerData/PlayerProfiles";
 
     void Start()
     {
@@ -274,4 +286,108 @@ public class PlayerJoinPanel : MonoBehaviour
     {
         pjm = manager;
     }
+
+    public void SaveProfile()
+    {
+        filePath = Application.dataPath + "/PlayerData/PlayerProfiles" + "/" + PlayerData.activePlayers[player].initials + ".txt";
+
+        // Get the file directory
+        string dirPath = Path.GetDirectoryName(filePath);
+
+        // Create the file if it doesn't exist
+        if (!Directory.Exists(dirPath))
+        {
+            Directory.CreateDirectory(dirPath);
+            WriteProfileData(filePath);
+        }
+        
+        else
+        {
+            overwriteProfilePanel.SetActive(true);
+
+            overwriteMessage.text = "Profile Already Exists\n\n\"" + PlayerData.activePlayers[player].initials + "\"\n\nDo you want to overwrite it?";
+
+            eventSystem.SetSelectedGameObject(null);
+            eventSystem.SetSelectedGameObject(confirmOverwrite);
+        }
+    }
+
+    private void WriteProfileData(string filePath)
+    {
+        //Set the initials for the profile data
+        string profileData = PlayerData.activePlayers[player].initials;
+
+        //Add crosshair color to profile data
+        profileData += "\n" + PlayerData.activePlayers[player].crossHairColor.r;
+        profileData += "\n" + PlayerData.activePlayers[player].crossHairColor.g;
+        profileData += "\n" + PlayerData.activePlayers[player].crossHairColor.b;
+
+        profileData += "\n" + PlayerData.activePlayers[player].crossHairIndex;
+
+        File.WriteAllText(filePath, profileData);
+
+        profileSavedMessage.gameObject.SetActive(true);
+        profileSavedMessage.text = "\"" + PlayerData.activePlayers[player].initials + "\"\nSaved!";
+
+        ReloadProfileOptions();
+        LoadProfiles();
+    }
+
+    public void ConfirmOverwriteProfile()
+    {
+        WriteProfileData(filePath);
+        CloseOverwritePanel();
+    }
+
+    public void CloseOverwritePanel()
+    {
+        overwriteProfilePanel.SetActive(false);
+        eventSystem.SetSelectedGameObject(null);
+        eventSystem.SetSelectedGameObject(saveProfileButton);
+    }
+
+    private void LoadProfiles()
+    {
+        DirectoryInfo dir = new DirectoryInfo(Application.dataPath + "/PlayerData/PlayerProfiles");
+        FileInfo[] profiles = dir.GetFiles("*.txt");
+        List<string> profileNames = new List<string>();
+
+        foreach (FileInfo file in profiles)
+        {
+            profileNames.Add(Path.GetFileNameWithoutExtension(file.Name));
+        }
+
+        profileDropdown.AddOptions(profileNames);
+    }
+
+    public void ToggleProfilePanel()
+    {
+        profilePanel.SetActive(!profilePanel.activeInHierarchy);
+
+        if (profilePanel.activeInHierarchy)
+        {
+            LoadProfiles();
+            eventSystem.SetSelectedGameObject(null);
+            eventSystem.SetSelectedGameObject(saveProfileButton);
+        }
+
+        else
+        {
+            ReloadProfileOptions();
+            eventSystem.SetSelectedGameObject(null);
+            eventSystem.SetSelectedGameObject(profilesButton);
+        }
+    }
+
+    private void ReloadProfileOptions()
+    {
+        profileDropdown.ClearOptions();
+            
+        List<string> defaultOptions = new List<string>();
+        defaultOptions.Add("Default");
+
+        profileDropdown.AddOptions(defaultOptions);
+    }
+
+
 }
