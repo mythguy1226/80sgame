@@ -813,7 +813,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -22.000002, y: 468.00003}
+  m_AnchoredPosition: {x: -22, y: 468.00003}
   m_SizeDelta: {x: 85.45007, y: 1032.64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &415838846
@@ -3278,6 +3278,8 @@ MonoBehaviour:
   backOutPanel: {fileID: 415838844}
   backOutExit: {fileID: 43941169}
   promptTray: {fileID: 1990815586}
+  background: {fileID: 822581460}
+  defenseBG: {fileID: 21300000, guid: b1d69a59fb2697f4897abda8625e5922, type: 3}
   promptTrayIcons:
   - {fileID: 141723225}
   - {fileID: 1085861649}

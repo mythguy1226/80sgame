@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SocialPlatforms.Impl;
+using UnityEngine.UI;
 
 public class ScoreBehavior : MonoBehaviour
 {
@@ -30,6 +31,11 @@ public class ScoreBehavior : MonoBehaviour
 
     public List<TextMeshProUGUI> playerNames;
 
+    //UI Elements for Defense mode
+    public Image coreHealthbar;
+    public TextMeshProUGUI coreHealthPercentage;
+    public Defendable core;   
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,8 +49,8 @@ public class ScoreBehavior : MonoBehaviour
         else
             highScore = 0;
 
-        //Set the player names for the scores in Competitive mode
-        if (GameManager.Instance.gameModeType == EGameMode.Competitive)
+        //Set the player names for the scores in Competitive and Defense mode
+        if (GameManager.Instance.gameModeType == EGameMode.Competitive || GameManager.Instance.gameModeType == EGameMode.Defense)
         {   
             //Loop through all active player names
             for (int i =0 ; i <= PlayerData.activePlayers.Count - 1; i++)
@@ -143,8 +149,30 @@ public class ScoreBehavior : MonoBehaviour
             finalScoreTextObject.SetText(finalScoreText);
         }
 
-        //Update Round Indicator
-        roundIndicatorTextObject.SetText(roundText + currentRoundNum + "/" + maxNumOfRounds);
+        //Update Summary Screen and UI for Defense Mode
+        if (GameManager.Instance.gameModeType == EGameMode.Defense)
+        {
+            //Set the core HP percentage
+            float coreHP = (float)core._currentHitpoints / (float)core._maxHitpoints;
+
+            //Update healthbar
+            coreHealthbar.fillAmount = coreHP;
+
+            //Update health percentage number
+            coreHealthPercentage.text = (coreHP * 100).ToString("F0") + "%";
+
+            finalScoreText = "The Core was destroyed!\n\nRounds Survived: " + (currentRoundNum - 1);
+            finalScoreTextObject.SetText(finalScoreText);
+            
+            roundIndicatorTextObject.SetText(roundText + currentRoundNum);
+        }
+
+        //Update Round Indicator for other modes
+        else
+        {
+            roundIndicatorTextObject.SetText(roundText + currentRoundNum + "/" + maxNumOfRounds);
+        }
+        
     }
 
     //Update scores for the players in competitive mode
