@@ -49,8 +49,8 @@ public class ScoreBehavior : MonoBehaviour
         else
             highScore = 0;
 
-        //Set the player names for the scores in Competitive mode
-        if (GameManager.Instance.gameModeType == EGameMode.Competitive)
+        //Set the player names for the scores in Competitive and Defense mode
+        if (GameManager.Instance.gameModeType == EGameMode.Competitive || GameManager.Instance.gameModeType == EGameMode.Defense)
         {   
             //Loop through all active player names
             for (int i =0 ; i <= PlayerData.activePlayers.Count - 1; i++)
@@ -153,7 +153,7 @@ public class ScoreBehavior : MonoBehaviour
         if (GameManager.Instance.gameModeType == EGameMode.Defense)
         {
             //Set the core HP percentage
-            float coreHP = core._currentHitpoints / core._maxHitpoints;
+            float coreHP = (float)core._currentHitpoints / (float)core._maxHitpoints;
 
             //Update healthbar
             coreHealthbar.fillAmount = coreHP;
