@@ -23,13 +23,11 @@ public class PauseScreenBehavior : MonoBehaviour
 
     public void Awake()
     {
-        Debug.Log("Awake");
         UIManager.pauseEvent += PauseGame;
     }
 
     private void OnDisable()
     {
-        Debug.Log("Disable");
         UIManager.pauseEvent -= PauseGame;
     }
 
@@ -61,7 +59,6 @@ public class PauseScreenBehavior : MonoBehaviour
 
     public void PauseGame(int player)
     {
-        Debug.Log("Pause Game");
         if (GameManager.Instance.UIManager.activeUI != UIManager.UIType.None){
             return;
         }
@@ -120,6 +117,8 @@ public class PauseScreenBehavior : MonoBehaviour
                 }
 
                 SoundManager.Instance.PlaySoundContinuous(buttonClickSound);
+                LookingGlassUI lookingGlassUI = FindObjectOfType<LookingGlassUI>();
+                lookingGlassUI.Hide();
             }
         }
     }

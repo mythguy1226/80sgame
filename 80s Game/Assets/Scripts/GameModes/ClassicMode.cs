@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
+
 
 public class ClassicMode : AbsGameMode
 {
@@ -13,6 +15,15 @@ public class ClassicMode : AbsGameMode
         NumRounds = 10;
         maxTargetsOnScreen = 8;
         currentRoundTargetCount = 5;
+        allowedBats = new Dictionary<TargetManager.TargetType, bool>();
+
+
+        //Add allowed types
+        allowedBats.Add(TargetManager.TargetType.Regular, true);
+        allowedBats.Add(TargetManager.TargetType.Modifier, true);
+        allowedBats.Add(TargetManager.TargetType.Bonus, true);
+        allowedBats.Add(TargetManager.TargetType.Unstable, true);
+        debugMode = false;
     }
 
     protected override void StartNextRound(bool isFirstRound = false)
@@ -62,17 +73,21 @@ public class ClassicMode : AbsGameMode
         // find one that isn't already on screen
         for (int i = 0; i < bats.Count; i++)
         {
-            BatStateMachine FSM = (BatStateMachine)bats[i].FSM;
-            if (FSM.bIsActive)
+            Target bat = bats[i];
+            if (SkipBat(bat))
+            {
                 continue;
+            }
 
-            ModifierBatStateMachine comp = bats[i].GetComponent<ModifierBatStateMachine>();
-            if (comp != null)
-                continue;
+            // Debug Override
+            if (debugMode)
+            {
+                return i;
+            }
                 
             // If default bat, return index if no bonus bats
             // Otherwise continue
-            if (FSM.IsDefault && numBonusBats == 0)
+            if (bat.FSM.IsDefault() && numBonusBats == 0)
             {
                 return i;
             }
@@ -107,7 +122,10 @@ public class ClassicMode : AbsGameMode
                 StartNextRound();
                 
                 // Spawn a modifier bat and increment target count
-                targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<ModifierBatStateMachine>());
+                if (allowedBats[TargetManager.TargetType.Modifier])
+                {
+                    targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<ModifierBatStateMachine>());
+                }
                 currentRoundTargetCount++;
             }
                 
@@ -133,7 +151,6 @@ public class ClassicMode : AbsGameMode
         )
         {
             int targetIndex = GetNextAvailableBat();
-
             if (targetIndex >= 0)
                 targetManager.SpawnTarget(targetIndex);
         }

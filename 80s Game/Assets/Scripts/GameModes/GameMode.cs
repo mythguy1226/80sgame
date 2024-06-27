@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public enum EGameMode
@@ -21,6 +22,8 @@ public abstract class AbsGameMode
     protected int maxTargetsOnScreen;
     protected int currentRoundTargetCount;
     protected int numBonusBats = 0;
+    protected Dictionary<TargetManager.TargetType, bool> allowedBats;
+    protected bool debugMode;
 
     public AbsGameMode()
     {
@@ -39,6 +42,18 @@ public abstract class AbsGameMode
         GameManager.Instance.HandleGameOver();
     }
 
+    /// <summary>
+    /// Validation function to determine if this bat should be skipped for spawning
+    /// </summary>
+    /// <param name="target">Target to evaluate</param>
+    /// <returns>Whether or not to skip this target for spawning</returns>
+    protected bool SkipBat(Target target)
+    {
+        ModifierBatStateMachine mbsm = target.GetComponent<ModifierBatStateMachine>();
+        bool isModifierBat = mbsm != null;
+        return !allowedBats[target.type] || target.FSM.IsActive() || isModifierBat;
+    }
+
     // Needs to be public for targetManager to call
     public abstract void OnTargetReset();
 
@@ -47,4 +62,24 @@ public abstract class AbsGameMode
     protected abstract void StartNextRound(bool isFirstRound = false);
 
     protected abstract void UpdateRoundParams();
+
+    /// <summary>
+    /// Returns if a bat type can spawn in a concrete game mode
+    /// </summary>
+    /// <param name="type">Type of bat to check</param>
+    /// <returns>Whether or not it can spawn</returns>
+    public bool CanSpawnType(TargetManager.TargetType type)
+    {
+        return allowedBats[type];
+    }
+
+    /// <summary>
+    /// Toggles whether a bat is allowed to spawn or not. Useful for debugging
+    /// </summary>
+    /// <param name="type">The type to toggle</param>
+    public void ToggleAllowedBatType(TargetManager.TargetType type)
+    {
+        allowedBats[type] = !allowedBats[type];
+        debugMode = true;
+    }
 }

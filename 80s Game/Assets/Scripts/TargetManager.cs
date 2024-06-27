@@ -6,7 +6,7 @@ public class TargetManager : MonoBehaviour
 {
     public enum TargetType
     {
-        Regular,
+        Regular = 0,
         Bonus,
         Unstable,
         Modifier
@@ -148,4 +148,34 @@ public class TargetManager : MonoBehaviour
             }
         }
     }
+
+    /// <summary>
+    /// Get the index of the next non-active bat on the list by its type
+    /// </summary>
+    /// <param name="type"></param>
+    /// <returns>The index of the next non-active bat</returns>
+    public int GetNextIndexByType(TargetType type)
+    {
+        for (int i = 0; i < targets.Count; i++)
+        {
+            if (targets[i].type == type && !targets[i].FSM.IsActive())
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /* Debug Methods */
+
+    /// <summary>
+    /// Spawn a target by type. Hijacks the original spawn target function to tell it spawn a specific type of bat
+    /// </summary>
+    /// <param name="type">The type to spawn</param>
+    public void SpawnTarget(TargetType type)
+    {
+        int index = GetNextIndexByType(type);
+        SpawnTarget(index);
+    }
+    
 }

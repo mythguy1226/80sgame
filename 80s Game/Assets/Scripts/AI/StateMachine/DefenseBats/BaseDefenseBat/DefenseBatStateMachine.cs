@@ -60,9 +60,9 @@ public class DefenseBatStateMachine : AbsStateMachine<DefenseBatStateMachine.Def
         get { return _Collider; }
     }
 
-    public bool IsDefault
+    public override bool IsDefault()
     {
-        get { return pointValue == 1000; }
+        return pointValue == 1000;
     }
 
     public float AttackTimer
