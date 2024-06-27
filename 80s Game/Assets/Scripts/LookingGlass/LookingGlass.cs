@@ -24,7 +24,6 @@ public class LookingGlass : MonoBehaviour
     public void ToggleCanSpawn(int type)
     {
         TargetManager.TargetType toggleType = (TargetManager.TargetType)type;
-        Debug.Log(toggleType);
         GameManager.Instance.ActiveGameMode.ToggleAllowedBatType(toggleType);
     }
 }
