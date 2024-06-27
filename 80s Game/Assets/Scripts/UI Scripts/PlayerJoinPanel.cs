@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using TMPro;
+using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -43,10 +45,21 @@ public class PlayerJoinPanel : MonoBehaviour
     public bool playerReady;
     private GameObject lastSelected;
     
+    //Variables for Player Profiles
+    public GameObject profilePanel;
+    public GameObject overwriteProfilePanel;
+    public TMP_Dropdown profileDropdown;
+    public GameObject profilesButton;
+    public GameObject saveProfileButton;
+    public GameObject confirmOverwrite;
+    public TextMeshProUGUI profileSavedMessage;
+    public TextMeshProUGUI overwriteMessage;
+    private FileInfo[] profiles;
 
     public EventSystem eventSystem;
     private int player;
     private PlayerJoinManager pjm;
+    private string filePath = Application.dataPath + "/PlayerData/PlayerProfiles";
 
     void Start()
     {
@@ -73,6 +86,8 @@ public class PlayerJoinPanel : MonoBehaviour
         colorSliders[0].value = PlayerData.defaultColors[player].r * 255;
         colorSliders[1].value = PlayerData.defaultColors[player].g * 255;
         colorSliders[2].value = PlayerData.defaultColors[player].b * 255;
+
+        PlayerData.activePlayers[player].initials = "AAA";
 
         //Turn off the corsshairs
         PauseScreenBehavior.Instance.ToggleCrosshairs(false);
@@ -273,5 +288,206 @@ public class PlayerJoinPanel : MonoBehaviour
     public void SetManager(PlayerJoinManager manager)
     {
         pjm = manager;
+    }
+
+    //Saves the current settings to a profile that is stored as a local text file
+    public void SaveProfile()
+    {
+        //Set file path
+        filePath = Application.dataPath + "/PlayerData/PlayerProfiles" + "/" + PlayerData.activePlayers[player].initials + ".txt";
+
+        // Get the file directory
+        string dirPath = Path.GetDirectoryName(filePath);
+        
+        // Create the folder if it doesn't exist
+        if (!Directory.Exists(dirPath))
+        {
+            Directory.CreateDirectory(dirPath);
+        }
+
+        //Write to the file if it doesn't exist
+        else if (!File.Exists(filePath))
+        {
+            WriteProfileData(filePath);
+        }
+        
+        //If the profile doesn't exist, prompt the user to overwrite
+        else
+        {
+            overwriteProfilePanel.SetActive(true);
+
+            overwriteMessage.text = "Profile Already Exists\n\n\"" + PlayerData.activePlayers[player].initials + "\"\n\nDo you want to overwrite it?";
+
+            eventSystem.SetSelectedGameObject(null);
+            eventSystem.SetSelectedGameObject(confirmOverwrite);
+        }
+    }
+
+    //Writes profile data to a file at the specified path
+    private void WriteProfileData(string filePath)
+    {
+        //Set the initials for the profile data
+        string profileData = initialOne.ToString();
+        profileData += "\n" + initialTwo.ToString();
+        profileData += "\n" + initialThree.ToString();
+
+        //Add crosshair color to profile data
+        profileData += "\n" + colorSliders[0].value;
+        profileData += "\n" + colorSliders[1].value;
+        profileData += "\n" + colorSliders[2].value;
+
+        //Add crosshair sprite index to profile data
+        profileData += "\n" + PlayerData.activePlayers[player].crossHairIndex;
+
+        //Write the data to the text file
+        File.WriteAllText(filePath, profileData);
+
+        //Inform the user that the profile was saved
+        profileSavedMessage.gameObject.SetActive(true);
+        profileSavedMessage.text = "\"" + PlayerData.activePlayers[player].initials + "\"\nSaved!";
+
+        //Reload the profile options to account for the newly saved profile
+        ClearProfileOptions();
+        LoadProfiles();
+    }
+
+    //Overwrites a currently existing profile with new data
+    public void ConfirmOverwriteProfile()
+    {
+        //Writes the new data to the file with the current file path
+        WriteProfileData(filePath);
+        CloseOverwritePanel();
+    }
+
+    //Closes the panel prompting the user to overwrite a profile
+    public void CloseOverwritePanel()
+    {
+        overwriteProfilePanel.SetActive(false);
+        eventSystem.SetSelectedGameObject(null);
+        eventSystem.SetSelectedGameObject(saveProfileButton);
+    }
+
+    //Loads the profiles from the PlayerProfiles folder under PlayerData
+    private void LoadProfiles()
+    {
+        //Get all the .txt files in the folder and store their names in a list
+        DirectoryInfo dir = new DirectoryInfo(Application.dataPath + "/PlayerData/PlayerProfiles");
+        profiles = dir.GetFiles("*.txt");
+        List<string> profileNames = new List<string>();
+
+        foreach (FileInfo file in profiles)
+        {
+            profileNames.Add(Path.GetFileNameWithoutExtension(file.Name));
+        }
+
+        //Add the list of profile names as options to the profile dropdown
+        profileDropdown.AddOptions(profileNames);
+    }
+
+    //Toggles the profile panel on and off
+    public void ToggleProfilePanel()
+    {
+        profilePanel.SetActive(!profilePanel.activeInHierarchy);
+
+        if (profilePanel.activeInHierarchy)
+        {
+            //Load the profile options
+            LoadProfiles();
+            eventSystem.SetSelectedGameObject(null);
+            eventSystem.SetSelectedGameObject(saveProfileButton);
+        }
+
+        else
+        {
+            //Clear the options so only default is present (reloaded when panel is opened again)
+            ClearProfileOptions();
+            profileSavedMessage.gameObject.SetActive(false);
+            eventSystem.SetSelectedGameObject(null);
+            eventSystem.SetSelectedGameObject(profilesButton);
+        }
+    }
+
+    //Clears the profile options
+    private void ClearProfileOptions()
+    {
+        //Clear options
+        profileDropdown.ClearOptions();
+        
+        //Add default option to dropdown
+        List<string> defaultOptions = new List<string>();
+        defaultOptions.Add("Default");
+
+        profileDropdown.AddOptions(defaultOptions);
+    }
+
+    //Change the player's settings when they select a profile
+    public void SelectProfileOption()
+    {
+        //Default profile
+        if (profileDropdown.captionText.text == "Default")
+        {
+            //Change the crosshair to the default
+            crosshairIndex = 0;
+            ChangeCrosshairSprite(false);
+
+            //Change the preset to whatever the last preset selected was
+            ChangeCrosshairPreset();
+            
+            //Change initials back to AAA
+            initialOne = 66;
+            ChangeInitial(false, 0);
+
+            initialTwo = 66;
+            ChangeInitial(false, 1);
+
+            initialThree = 66;
+            ChangeInitial(false, 2);
+        }
+
+        //Reads in the player settings from the profile data
+        else
+        {
+            string filePath = null;
+
+            //Check that the file name in the directory matches the dropdown option selected
+            foreach (FileInfo file in profiles)
+            {
+                Debug.Log(Path.GetFileNameWithoutExtension(file.Name));
+                if (Path.GetFileNameWithoutExtension(file.Name) == profileDropdown.captionText.text)
+                {
+                    //Set the file path
+                    filePath = file.FullName;
+                }
+            }
+            
+            if (filePath != null)
+            {
+                //Read in the lines from the profile
+                string[] lines = File.ReadAllLines(filePath);
+
+                //Set initials then change them back and forth to update accordingly
+                initialOne = int.Parse(lines[0]);
+                ChangeInitial(false, 0);
+                ChangeInitial(true, 0);
+
+                initialTwo = int.Parse(lines[1]);
+                ChangeInitial(false, 1);
+                ChangeInitial(true, 1);
+
+                initialThree = int.Parse(lines[2]);
+                ChangeInitial(false, 2);
+                ChangeInitial(true, 2);
+
+                //Change the color of the crosshair to the saved color for the profile
+                colorSliders[0].value = int.Parse(lines[3]);
+                colorSliders[1].value = int.Parse(lines[4]);
+                colorSliders[2].value = int.Parse(lines[5]);
+
+                //Change the crosshair sprite to the saved index for the profile
+                crosshairIndex = int.Parse(lines[6]);
+                ChangeCrosshairSprite(true);
+                ChangeCrosshairSprite(false);
+            }
+        }
     }
 }
