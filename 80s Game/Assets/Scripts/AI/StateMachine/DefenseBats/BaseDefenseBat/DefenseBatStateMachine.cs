@@ -192,7 +192,8 @@ public class DefenseBatStateMachine : AbsStateMachine<DefenseBatStateMachine.Def
                 continue;
 
             // Only target core if its the only defendable left to attack
-            if(curDefend.bIsCore && GetActiveDefendables().Count > 1)
+            List<Defendable> activeDefend = GetActiveDefendables();
+            if(curDefend.bIsCore && activeDefend.Count > 1)
                 continue;
 
             // Distance check and availability check

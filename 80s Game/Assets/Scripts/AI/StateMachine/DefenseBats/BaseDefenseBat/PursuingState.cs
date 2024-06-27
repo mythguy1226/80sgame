@@ -38,6 +38,10 @@ public class PursuingState : AbsBaseState<DefenseBatStateMachine.DefenseBatState
         Target targ = FSM.GetComponent<Target>();
         targ.UpdateSpeed(targ.MovementSpeed * FSM.pursueSpeedScale);
 
+        // Disable circle collision with other colliders
+        FSM.GetComponent<CircleCollider2D>().isTrigger = true;
+        FSM.GetComponent<PolygonCollider2D>().isTrigger = true;
+
         // Call logic for beginning pursuit
         FSM.BeginPursue();
     }
@@ -49,7 +53,15 @@ public class PursuingState : AbsBaseState<DefenseBatStateMachine.DefenseBatState
 	*/
     public override void ExitState()
     {
+        // Get state machine and needed components
+        DefenseBatStateMachine FSM = (DefenseBatStateMachine)OwnerFSM;
+
+        if (FSM == null)
+            return;
+
         // Any clean up needed from this state will go here
+        FSM.GetComponent<CircleCollider2D>().isTrigger = false;
+        FSM.GetComponent<PolygonCollider2D>().isTrigger = false;
     }
 
     /*

@@ -45,4 +45,14 @@ public class DiveBombBatStateMachine : DefenseBatStateMachine
         yield return new WaitForSeconds(2.0f);
         bCanPursue = true;
     }
+
+    /// <summary>
+    /// Override: Resets specific values for dive bomb bats
+    /// </summary>
+    public override void Reset()
+    {
+        base.Reset();
+
+        SpriteRenderer.color = new Color(255, 96, 0, 255);
+    }
 }
