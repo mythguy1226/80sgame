@@ -9,7 +9,7 @@ public class Defendable : MonoBehaviour
     // on levels of damage
     // Lastly, an optional field for a health bar is included
     [SerializeField]
-    int _maxHitpoints;
+    public int _maxHitpoints;
 
     [Tooltip("Hp Thresholds to switch to the next sprite. Add these in decreasing order.")]
     [SerializeField]
@@ -27,7 +27,7 @@ public class Defendable : MonoBehaviour
     [SerializeField]
     ParticleSystem smokeSystem;
 
-    int _currentHitpoints;
+    public int _currentHitpoints;
     int _thresholdIndex;
 
     public List<LatchPoint> latchPoints;
