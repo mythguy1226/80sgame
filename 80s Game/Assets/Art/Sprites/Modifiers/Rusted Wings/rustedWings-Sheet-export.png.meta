@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 85cb2b5fb0993434e942288e56f16fc1
+guid: d34b8f18e54b4064fbe3b80c9425ba18
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -136,7 +136,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: rustedWings-Sheet_0
+      name: rustedWings-Sheet-export_0
       rect:
         serializedVersion: 2
         x: 0
@@ -150,14 +150,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0e11fca28b1d6534bbe484d946a8ae06
-      internalID: -818414973
+      spriteID: ef8009cfd8eb04243ac1e9e45bdfed1b
+      internalID: 1995301993
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rustedWings-Sheet_1
+      name: rustedWings-Sheet-export_1
       rect:
         serializedVersion: 2
         x: 32
@@ -171,14 +171,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2729efdf56fed9a48b3bff59aab78cc3
-      internalID: -1225486027
+      spriteID: 180e3136ad0da0647865afb1a982d013
+      internalID: -789697434
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rustedWings-Sheet_2
+      name: rustedWings-Sheet-export_2
       rect:
         serializedVersion: 2
         x: 64
@@ -192,14 +192,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 33eac71656f4aff43964f426f3ff3916
-      internalID: -803786438
+      spriteID: 1b30451efbaec8c479dcfd4ed89a2e64
+      internalID: -1763547932
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rustedWings-Sheet_3
+      name: rustedWings-Sheet-export_3
       rect:
         serializedVersion: 2
         x: 96
@@ -213,14 +213,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: efdd5d6b149a6794c945bfef1b6fcc73
-      internalID: 1962276362
+      spriteID: 1de0ef3bc067dff43a1a0d405a1fac42
+      internalID: 1826833731
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rustedWings-Sheet_4
+      name: rustedWings-Sheet-export_4
       rect:
         serializedVersion: 2
         x: 128
@@ -234,14 +234,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 60529d251417f5a43ba496ab957d1908
-      internalID: -779495575
+      spriteID: 1a9811706054ddc4d9314c257e9ef4df
+      internalID: -1903449363
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rustedWings-Sheet_5
+      name: rustedWings-Sheet-export_5
       rect:
         serializedVersion: 2
         x: 160
@@ -255,14 +255,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4d46fdb7728e64c4d9ad89b0c9bc5973
-      internalID: -1823047858
+      spriteID: 69c7fd654b049f34ea971a42fe9d6439
+      internalID: 347954419
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rustedWings-Sheet_6
+      name: rustedWings-Sheet-export_6
       rect:
         serializedVersion: 2
         x: 192
@@ -276,14 +276,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3054eba6d1e79134493b8b8c167321e0
-      internalID: 1546246095
+      spriteID: 055857e490626d54797e821066a9871d
+      internalID: -1629887668
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rustedWings-Sheet_7
+      name: rustedWings-Sheet-export_7
       rect:
         serializedVersion: 2
         x: 224
@@ -297,8 +297,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d1baab84826a584489722e12a41d3c9d
-      internalID: -1257664245
+      spriteID: 55444e9587906df45ab0648a5ecc2d62
+      internalID: 629704469
       vertices: []
       indices: 
       edges: []
@@ -314,14 +314,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      rustedWings-Sheet_0: -818414973
-      rustedWings-Sheet_1: -1225486027
-      rustedWings-Sheet_2: -803786438
-      rustedWings-Sheet_3: 1962276362
-      rustedWings-Sheet_4: -779495575
-      rustedWings-Sheet_5: -1823047858
-      rustedWings-Sheet_6: 1546246095
-      rustedWings-Sheet_7: -1257664245
+      rustedWings-Sheet-export_0: 1995301993
+      rustedWings-Sheet-export_1: -789697434
+      rustedWings-Sheet-export_2: -1763547932
+      rustedWings-Sheet-export_3: 1826833731
+      rustedWings-Sheet-export_4: -1903449363
+      rustedWings-Sheet-export_5: 347954419
+      rustedWings-Sheet-export_6: -1629887668
+      rustedWings-Sheet-export_7: 629704469
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
