@@ -67,6 +67,11 @@ public class FileSystemDataSaver : DataSaver
     /// <returns>A list of FileInfo objects</returns>
     public List<FileInfo> GetDataFiles()
     {
+        string dirPath = Path.GetDirectoryName(filePath);
+        if (!Directory.Exists(dirPath))
+        {
+            Directory.CreateDirectory(dirPath);
+        }
         List<FileInfo> files = new DirectoryInfo(filePath).GetFiles("*.json").OrderByDescending(f => f.LastWriteTime).ToList();
         return files;
     }

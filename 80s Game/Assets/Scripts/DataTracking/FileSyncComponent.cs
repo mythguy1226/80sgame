@@ -15,10 +15,10 @@ public class FileSyncComponent : MonoBehaviour
     private void Start()
     {
         // Escape out of this if we're in the debug environment
-        /*if (NetworkUtility.NetworkDevEnv())
+        if (NetworkUtility.NetworkDevEnv())
         {
            return;
-        }*/
+        }
 
         fileSystemInterface = new FileSystemDataSaver();
         remoteSystemInterface = new RemoteDataSaver();
