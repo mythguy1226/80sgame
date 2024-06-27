@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
 
     private ModDoublePoints doublePoints;
     private ModOvercharge overchargeMod;
+    private ModRustedWings rustedWings;
 
     public Dictionary<AbsModifierEffect.ModType, int> modifierCounter;
 
@@ -248,6 +249,8 @@ public class PlayerController : MonoBehaviour
                 return overchargeMod != null;
             case AbsModifierEffect.ModType.DoublePoints:
                 return doublePoints != null;
+            case AbsModifierEffect.ModType.RustedWings:
+                return rustedWings != null;
             default:
                 return false;
         }
@@ -277,11 +280,13 @@ public class PlayerController : MonoBehaviour
         switch (type)
         {
             case AbsModifierEffect.ModType.Overcharge:
-                
                 overchargeMod = (ModOvercharge) effect;
                 break;
             case AbsModifierEffect.ModType.DoublePoints:
-                doublePoints = (ModDoublePoints)effect;
+                doublePoints = (ModDoublePoints) effect;
+                break;
+            case AbsModifierEffect.ModType.RustedWings:
+                rustedWings = (ModRustedWings) effect;
                 break;
         }
     }
@@ -301,6 +306,9 @@ public class PlayerController : MonoBehaviour
             case AbsModifierEffect.ModType.DoublePoints:
                 doublePoints.AddDuration(duration);
                 break;
+            case AbsModifierEffect.ModType.RustedWings:
+                rustedWings.AddDuration(duration);
+                break;
         }
     }
 
@@ -317,6 +325,9 @@ public class PlayerController : MonoBehaviour
                 break;
             case AbsModifierEffect.ModType.DoublePoints:
                 doublePoints = null;
+                break;
+            case AbsModifierEffect.ModType.RustedWings:
+                rustedWings = null;
                 break;
         }
     }

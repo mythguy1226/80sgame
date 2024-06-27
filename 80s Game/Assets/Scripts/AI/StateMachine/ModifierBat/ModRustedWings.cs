@@ -8,8 +8,14 @@ public class ModRustedWings : AbsModifierEffect
 
     public override void ActivateEffect()
     {
-        Destroy(modifierUIRefs[0]);
-        AddUIRef(activator.Order);
+        if (activator.HasMod(thisType))
+        {
+            activator.ExtendModDuration(thisType, effectDuration);
+            CleanUp();
+            return;
+        }
+
+        activator.SetMod(thisType, this);
         GameManager.Instance.isSlowed = true;
         GameManager.Instance.rustedWingsStack++;
     }
@@ -18,7 +24,6 @@ public class ModRustedWings : AbsModifierEffect
     {
         activator.RemoveMod(thisType);
         GameManager.Instance.isSlowed = false;
-
         if(GameManager.Instance.rustedWingsStack > 0)
         {
             GameManager.Instance.rustedWingsStack--;
