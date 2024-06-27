@@ -34,6 +34,11 @@ public class Target : MonoBehaviour
         get { return FSM.IsActive(); }
     }
 
+    public float MovementSpeed
+    {
+        get { return _MovementControls.maxSpeed; }
+    }
+
     // Call once upon start of game
     void Awake()
     {
