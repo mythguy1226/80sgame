@@ -25,7 +25,7 @@ public class PlayerInputWrapper : MonoBehaviour
     public bool controllerInput;
     public bool isFlipped = false;
     public bool isSlowed = false;
-
+    private LookingGlass lookingGlass;
     
     private void Start()
     {
@@ -43,6 +43,8 @@ public class PlayerInputWrapper : MonoBehaviour
         currentDelay = fireDelay;
 
         SetSensitivity(controllerInput);
+        lookingGlass = FindAnyObjectByType<LookingGlass>();
+
     }
 
     public void SetSensitivity(bool controllerInput)
@@ -134,6 +136,22 @@ public class PlayerInputWrapper : MonoBehaviour
     private void OnPause(InputValue value)
     {
         player.EmitPause();
+    }
+
+    private void OnLookingGlass(InputValue value)
+    {
+        // Open the debug panel if the game is paused
+        if (Time.timeScale > 0f)
+        {
+            return;
+        }
+        LookingGlassUI lookingGlassUI = FindAnyObjectByType<LookingGlassUI>();
+        if (lookingGlassUI == null)
+        {
+            return;
+        }
+
+        lookingGlassUI.ToggleVisibility();
     }
 
     // Received through the Unity input system

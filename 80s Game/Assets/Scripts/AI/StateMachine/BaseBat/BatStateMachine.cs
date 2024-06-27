@@ -55,9 +55,9 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
         get { return _Collider; }
     }
 
-    public bool IsDefault
+    public override bool IsDefault()
     {
-        get { return pointValue == 1000; }
+        return pointValue == 1000;
     }
 
     void Awake()

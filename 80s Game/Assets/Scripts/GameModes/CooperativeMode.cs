@@ -14,6 +14,12 @@ public class CooperativeMode : AbsGameMode
         NumRounds = 5;
         maxTargetsOnScreen = 15;
         currentRoundTargetCount = 8;
+
+        //Add allowed types
+        allowedBats.Add(TargetManager.TargetType.Regular, true);
+        allowedBats.Add(TargetManager.TargetType.Modifier, true);
+        allowedBats.Add(TargetManager.TargetType.Bonus, true);
+        allowedBats.Add(TargetManager.TargetType.Unstable, true);
     }
 
     protected override void StartNextRound(bool isFirstRound = false)
@@ -68,7 +74,7 @@ public class CooperativeMode : AbsGameMode
 
             // If default bat, return index if no bonus bats
             // Otherwise continue
-            if (FSM.IsDefault && numBonusBats == 0)
+            if (FSM.IsDefault() && numBonusBats == 0)
             {
                 return i;
             }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 public class ClassicMode : AbsGameMode
 {
@@ -13,6 +14,14 @@ public class ClassicMode : AbsGameMode
         NumRounds = 10;
         maxTargetsOnScreen = 8;
         currentRoundTargetCount = 5;
+        allowedBats = new Dictionary<TargetManager.TargetType, bool>();
+
+
+        //Add allowed types
+        allowedBats.Add(TargetManager.TargetType.Regular, true);
+        allowedBats.Add(TargetManager.TargetType.Modifier, true);
+        allowedBats.Add(TargetManager.TargetType.Bonus, true);
+        allowedBats.Add(TargetManager.TargetType.Unstable, true);
     }
 
     protected override void StartNextRound(bool isFirstRound = false)
@@ -62,17 +71,15 @@ public class ClassicMode : AbsGameMode
         // find one that isn't already on screen
         for (int i = 0; i < bats.Count; i++)
         {
-            BatStateMachine FSM = (BatStateMachine)bats[i].FSM;
-            if (FSM.bIsActive)
+            Target bat = bats[i];
+            if (SkipBat(bat))
+            {
                 continue;
-
-            ModifierBatStateMachine comp = bats[i].GetComponent<ModifierBatStateMachine>();
-            if (comp != null)
-                continue;
+            }
                 
             // If default bat, return index if no bonus bats
             // Otherwise continue
-            if (FSM.IsDefault && numBonusBats == 0)
+            if (bat.FSM.IsDefault() && numBonusBats == 0)
             {
                 return i;
             }
