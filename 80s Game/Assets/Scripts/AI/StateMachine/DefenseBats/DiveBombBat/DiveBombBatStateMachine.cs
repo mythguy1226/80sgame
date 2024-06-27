@@ -53,6 +53,6 @@ public class DiveBombBatStateMachine : DefenseBatStateMachine
     {
         base.Reset();
 
-        SpriteRenderer.color = new Color(255, 96, 0, 255);
+        SpriteRenderer.color = new Color(255/255, 96/255, 0);
     }
 }
