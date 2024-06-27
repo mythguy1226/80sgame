@@ -14,6 +14,7 @@ public class CooperativeMode : AbsGameMode
         NumRounds = 5;
         maxTargetsOnScreen = 15;
         currentRoundTargetCount = 8;
+        allowedBats = new Dictionary<TargetManager.TargetType, bool>();
 
         //Add allowed types
         allowedBats.Add(TargetManager.TargetType.Regular, true);
