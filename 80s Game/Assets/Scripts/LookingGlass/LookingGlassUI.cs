@@ -27,6 +27,12 @@ public class LookingGlassUI :  MonoBehaviour
         uiParent.gameObject.SetActive(isVisible);
     }
 
+    public void Hide()
+    {
+        isVisible = false;
+        uiParent.gameObject.SetActive(isVisible);
+    }
+
     /// <summary>
     /// Sets which panel currently is active in the tool. Hides all other panels.
     /// </summary>

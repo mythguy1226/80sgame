@@ -117,6 +117,8 @@ public class PauseScreenBehavior : MonoBehaviour
                 }
 
                 SoundManager.Instance.PlaySoundContinuous(buttonClickSound);
+                LookingGlassUI lookingGlassUI = FindObjectOfType<LookingGlassUI>();
+                lookingGlassUI.Hide();
             }
         }
     }

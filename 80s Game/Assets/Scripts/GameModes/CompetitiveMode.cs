@@ -20,6 +20,7 @@ public class CompetitiveMode : AbsGameMode
         allowedBats.Add(TargetManager.TargetType.Modifier, true);
         allowedBats.Add(TargetManager.TargetType.Bonus, true);
         allowedBats.Add(TargetManager.TargetType.Unstable, true);
+        debugMode = false;
     }
 
     protected override void StartNextRound(bool isFirstRound = false)
@@ -43,7 +44,10 @@ public class CompetitiveMode : AbsGameMode
         }
 
         // Spawn a modifier bat and increment target count
-        targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<ModifierBatStateMachine>());
+        if (allowedBats[TargetManager.TargetType.Modifier])
+        {
+            targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<ModifierBatStateMachine>());
+        }
         currentRoundTargetCount++;
     }
 
@@ -78,6 +82,12 @@ public class CompetitiveMode : AbsGameMode
                 continue;
             }
 
+            // Debug Override
+            if (debugMode)
+            {
+                return i;
+            }
+
             // If default bat, return index if no bonus bats
             // Otherwise continue
             if (bat.FSM.IsDefault() && numBonusBats == 0)
@@ -103,7 +113,7 @@ public class CompetitiveMode : AbsGameMode
         // Chance to spawn a modifier bat every 5 stuns
         if(targetManager.totalStuns % 5 == 0)
         {
-            if(Random.Range(0.0f, 1.0f) < modifierChance)
+            if(Random.Range(0.0f, 1.0f) < modifierChance && allowedBats[TargetManager.TargetType.Modifier])
             {
                 // Spawn a modifier bat and increment target count
                 targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<ModifierBatStateMachine>());

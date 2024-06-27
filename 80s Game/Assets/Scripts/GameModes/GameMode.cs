@@ -23,6 +23,7 @@ public abstract class AbsGameMode
     protected int currentRoundTargetCount;
     protected int numBonusBats = 0;
     protected Dictionary<TargetManager.TargetType, bool> allowedBats;
+    protected bool debugMode;
 
     public AbsGameMode()
     {
@@ -88,5 +89,6 @@ public abstract class AbsGameMode
     public void ToggleAllowedBatType(TargetManager.TargetType type)
     {
         allowedBats[type] = !allowedBats[type];
+        debugMode = true;
     }
 }

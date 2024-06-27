@@ -1,7 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
+using UnityEngine;
+
 
 public class ClassicMode : AbsGameMode
 {
@@ -22,6 +23,7 @@ public class ClassicMode : AbsGameMode
         allowedBats.Add(TargetManager.TargetType.Modifier, true);
         allowedBats.Add(TargetManager.TargetType.Bonus, true);
         allowedBats.Add(TargetManager.TargetType.Unstable, true);
+        debugMode = false;
     }
 
     protected override void StartNextRound(bool isFirstRound = false)
@@ -76,6 +78,12 @@ public class ClassicMode : AbsGameMode
             {
                 continue;
             }
+
+            // Debug Override
+            if (debugMode)
+            {
+                return i;
+            }
                 
             // If default bat, return index if no bonus bats
             // Otherwise continue
@@ -113,7 +121,10 @@ public class ClassicMode : AbsGameMode
                 GameManager.EmitRoundOverEvent();
                 StartNextRound();
                 // Spawn a modifier bat and increment target count
-                targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<ModifierBatStateMachine>());
+                if (allowedBats[TargetManager.TargetType.Modifier])
+                {
+                    targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<ModifierBatStateMachine>());
+                }
                 currentRoundTargetCount++;
             }
                 
@@ -139,7 +150,6 @@ public class ClassicMode : AbsGameMode
         )
         {
             int targetIndex = GetNextAvailableBat();
-
             if (targetIndex >= 0)
                 targetManager.SpawnTarget(targetIndex);
         }
