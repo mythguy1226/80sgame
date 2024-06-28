@@ -25,6 +25,9 @@ public class GameManager : MonoBehaviour
 
     public UIManager UIManager { get; private set; }
     public bool isSlowed = false;
+
+    public int rustedWingsStack = 0;
+
     public bool debuffActive = false;
     public List<GameObject> buffs;
     public List<GameObject> debuffs;

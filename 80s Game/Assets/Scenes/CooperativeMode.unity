@@ -8011,9 +8011,11 @@ MonoBehaviour:
   roundEndTheme: {fileID: 8300000, guid: d513d718f482f2d42a5402d152e5f893, type: 3}
   gameModeType: 2
   isSlowed: 0
+  rustedWingsStack: 0
   debuffActive: 0
   buffs:
   - {fileID: 55702376141867145, guid: 6311858a13f90b740a1313dc1b64b33d, type: 3}
+  - {fileID: 55702376141867145, guid: 328b8da7f3e388840936b90e67bedf34, type: 3}
   debuffs: []
   debug: 1
 --- !u!4 &1095139975
@@ -8095,41 +8097,6 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
---- !u!1 &1098323054
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1098323055}
-  m_Layer: 5
-  m_Name: Handle Slide Area
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1098323055
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1098323054}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -20, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1107327210
 GameObject:
   m_ObjectHideFlags: 0
@@ -17193,7 +17160,6 @@ SceneRoots:
   - {fileID: 1011990662}
   - {fileID: 929084812}
   - {fileID: 2079267051}
-  - {fileID: 1098323055}
   - {fileID: 720413085}
   - {fileID: 494436708}
   - {fileID: 1171356859}
@@ -17211,4 +17177,3 @@ SceneRoots:
   - {fileID: 2137939950}
   - {fileID: 1068467391}
   - {fileID: 272980277}
-  - {fileID: 815463079}
