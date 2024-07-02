@@ -20,7 +20,8 @@ public class ClassicMode : AbsGameMode
         //Add allowed types
         allowedBats.Add(TargetManager.TargetType.Regular, true);
         allowedBats.Add(TargetManager.TargetType.Modifier, true);
-        allowedBats.Add(TargetManager.TargetType.Bonus, true);
+        allowedBats.Add(TargetManager.TargetType.LowBonus, true);
+        allowedBats.Add(TargetManager.TargetType.HighBonus, true);
         allowedBats.Add(TargetManager.TargetType.Unstable, true);
         debugMode = false;
 
@@ -29,7 +30,8 @@ public class ClassicMode : AbsGameMode
         // Init map types
         numBatsMap.Add(TargetManager.TargetType.Regular, 0);
         numBatsMap.Add(TargetManager.TargetType.Modifier, 0);
-        numBatsMap.Add(TargetManager.TargetType.Bonus, 0);
+        numBatsMap.Add(TargetManager.TargetType.LowBonus, 0);
+        numBatsMap.Add(TargetManager.TargetType.HighBonus, 0);
         numBatsMap.Add(TargetManager.TargetType.Unstable, 0);
     }
 
@@ -45,7 +47,10 @@ public class ClassicMode : AbsGameMode
             int targetIndex = GetNextAvailableBat();
 
             if (targetIndex == -1)
+            {
+                targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<BatStateMachine>());
                 continue;
+            }
 
             targetManager.SpawnTarget(targetIndex);
 
@@ -91,7 +96,7 @@ public class ClassicMode : AbsGameMode
             {
                 return i;
             }
-            
+
             // Check for special bat types
             foreach(SpawnRate rate in GameManager.Instance.spawnConfig.rates)
             {
@@ -101,6 +106,10 @@ public class ClassicMode : AbsGameMode
                     // Check that there are special types available
                     if(numBatsMap[rate.targetType] > 0)
                     {
+                        // Check for proper type and continue if not
+                        if(bat.FSM.IsDefault() || bat.type != rate.targetType)
+                            goto EndLoop;
+
                         numBatsMap[rate.targetType]--;
                         return i;
                     }
@@ -113,6 +122,9 @@ public class ClassicMode : AbsGameMode
             {
                 return i;
             }
+
+        EndLoop:
+            continue;
         }
 
         return -1;
@@ -178,6 +190,8 @@ public class ClassicMode : AbsGameMode
             int targetIndex = GetNextAvailableBat();
             if (targetIndex >= 0)
                 targetManager.SpawnTarget(targetIndex);
+            else
+                targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<BatStateMachine>());
         }
     }
 }

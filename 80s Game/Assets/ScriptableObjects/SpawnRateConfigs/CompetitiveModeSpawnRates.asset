@@ -15,9 +15,11 @@ MonoBehaviour:
   rates:
   - targetType: 0
     spawnRate: 0
-  - targetType: 2
-    spawnRate: 2
-  - targetType: 1
-    spawnRate: 4
   - targetType: 3
-    spawnRate: 6
+    spawnRate: 3
+  - targetType: 1
+    spawnRate: 10
+  - targetType: 2
+    spawnRate: 15
+  - targetType: 4
+    spawnRate: 60

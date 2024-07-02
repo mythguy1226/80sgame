@@ -19,7 +19,8 @@ public class CompetitiveMode : AbsGameMode
         //Add allowed types
         allowedBats.Add(TargetManager.TargetType.Regular, true);
         allowedBats.Add(TargetManager.TargetType.Modifier, true);
-        allowedBats.Add(TargetManager.TargetType.Bonus, true);
+        allowedBats.Add(TargetManager.TargetType.LowBonus, true);
+        allowedBats.Add(TargetManager.TargetType.HighBonus, true);
         allowedBats.Add(TargetManager.TargetType.Unstable, true);
         debugMode = false;
 
@@ -28,7 +29,8 @@ public class CompetitiveMode : AbsGameMode
         // Init map types
         numBatsMap.Add(TargetManager.TargetType.Regular, 0);
         numBatsMap.Add(TargetManager.TargetType.Modifier, 0);
-        numBatsMap.Add(TargetManager.TargetType.Bonus, 0);
+        numBatsMap.Add(TargetManager.TargetType.LowBonus, 0);
+        numBatsMap.Add(TargetManager.TargetType.HighBonus, 0);
         numBatsMap.Add(TargetManager.TargetType.Unstable, 0);
     }
 
@@ -43,7 +45,10 @@ public class CompetitiveMode : AbsGameMode
             int targetIndex = GetNextAvailableBat();
 
             if (targetIndex == -1)
+            {
+                targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<BatStateMachine>());
                 continue;
+            }
 
             targetManager.SpawnTarget(targetIndex);
 
@@ -106,18 +111,25 @@ public class CompetitiveMode : AbsGameMode
                     // Check that there are special types available
                     if(numBatsMap[rate.targetType] > 0)
                     {
+                        // Check for proper type and continue if not
+                        if(bat.FSM.IsDefault() || bat.type != rate.targetType)
+                            goto EndLoop;
+
                         numBatsMap[rate.targetType]--;
                         return i;
                     }
                 }
             }
-            
+
             // If default bat return index, as there were no available
             // special bats to spawn previously
             if (bat.FSM.IsDefault())
             {
                 return i;
             }
+
+        EndLoop:
+            continue;
         }
 
         return -1;
@@ -185,6 +197,8 @@ public class CompetitiveMode : AbsGameMode
 
             if (targetIndex >= 0)
                 targetManager.SpawnTarget(targetIndex);
+            else
+                targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<BatStateMachine>());
         }
     }
 }

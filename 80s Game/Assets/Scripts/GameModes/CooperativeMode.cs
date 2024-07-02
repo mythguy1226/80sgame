@@ -19,7 +19,7 @@ public class CooperativeMode : AbsGameMode
         //Add allowed types
         allowedBats.Add(TargetManager.TargetType.Regular, true);
         allowedBats.Add(TargetManager.TargetType.Modifier, true);
-        allowedBats.Add(TargetManager.TargetType.Bonus, true);
+        allowedBats.Add(TargetManager.TargetType.DiveBomb, true);
         allowedBats.Add(TargetManager.TargetType.Unstable, true);
 
         numBatsMap = new Dictionary<TargetManager.TargetType, int>();
@@ -42,7 +42,10 @@ public class CooperativeMode : AbsGameMode
             int targetIndex = GetNextAvailableBat();
 
             if (targetIndex == -1)
+            {
+                targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<BatStateMachine>());
                 continue;
+            }
 
             targetManager.SpawnTarget(targetIndex);
 
@@ -94,6 +97,10 @@ public class CooperativeMode : AbsGameMode
                     // Check that there are special types available
                     if(numBatsMap[rate.targetType] > 0)
                     {
+                        // Check for proper type and continue if not
+                        if(FSM.IsDefault() || bats[i].type != rate.targetType)
+                            goto EndLoop;
+
                         numBatsMap[rate.targetType]--;
                         return i;
                     }
@@ -106,6 +113,9 @@ public class CooperativeMode : AbsGameMode
             {
                 return i;
             }
+
+        EndLoop:
+            continue;
         }
 
         return -1;
@@ -157,6 +167,8 @@ public class CooperativeMode : AbsGameMode
 
             if (targetIndex >= 0)
                 targetManager.SpawnTarget(targetIndex);
+            else
+                targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<DefenseBatStateMachine>());
         }
     }
 
