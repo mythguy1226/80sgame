@@ -9,7 +9,8 @@ public class TargetManager : MonoBehaviour
         Regular = 0,
         Bonus,
         Unstable,
-        Modifier
+        Modifier,
+        DiveBomb
     }
     // Fields for all targets and spawn locations
     public List<Target> targets;

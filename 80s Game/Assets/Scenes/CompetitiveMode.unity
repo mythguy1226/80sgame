@@ -7353,6 +7353,9 @@ MonoBehaviour:
   - {fileID: 1275475504}
   - {fileID: 1663570781}
   - {fileID: 1728095437}
+  coreHealthbar: {fileID: 0}
+  coreHealthPercentage: {fileID: 0}
+  core: {fileID: 0}
 --- !u!114 &1011990667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7962,6 +7965,7 @@ MonoBehaviour:
   roundEndTheme: {fileID: 8300000, guid: d513d718f482f2d42a5402d152e5f893, type: 3}
   gameModeType: 1
   isSlowed: 0
+  rustedWingsStack: 0
   debuffActive: 0
   buffs:
   - {fileID: 55702376141867145, guid: 9b8df211c79ba59479819337f0c946e2, type: 3}
@@ -7970,6 +7974,7 @@ MonoBehaviour:
   - {fileID: 55702376141867145, guid: 367a188d6de1eb74aa7ebbdba130f295, type: 3}
   - {fileID: 55702376141867145, guid: 1711ae630a5eadd4c811d1c70c1e9b7b, type: 3}
   debug: 1
+  spawnConfig: {fileID: 11400000, guid: 6baa1790f5e64ae4ea8e3ff6d99e2115, type: 2}
 --- !u!4 &1095139975
 Transform:
   m_ObjectHideFlags: 0
