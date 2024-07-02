@@ -4504,9 +4504,9 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 4294967295
   m_fontSize: 42.2
-  m_fontSizeBase: 31.96
+  m_fontSizeBase: 42.2
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -6595,7 +6595,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_TargetDisplay: 0
 --- !u!224 &1011990662
 RectTransform:
@@ -6707,6 +6707,9 @@ MonoBehaviour:
   roundIndicatorTextObject: {fileID: 736886330}
   bottomScoreTextObject: {fileID: 225425479}
   playerNames: []
+  coreHealthbar: {fileID: 0}
+  coreHealthPercentage: {fileID: 0}
+  core: {fileID: 0}
 --- !u!114 &1011990667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6980,6 +6983,7 @@ MonoBehaviour:
   roundEndTheme: {fileID: 8300000, guid: d513d718f482f2d42a5402d152e5f893, type: 3}
   gameModeType: 0
   isSlowed: 0
+  rustedWingsStack: 0
   debuffActive: 0
   buffs:
   - {fileID: 55702376141867145, guid: 9b8df211c79ba59479819337f0c946e2, type: 3}

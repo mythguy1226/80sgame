@@ -110,15 +110,15 @@ public class PauseScreenBehavior : MonoBehaviour
                 pauseScreen.SetActive(false);
                 //onboardingPanel.SetActive(false);
                 gameUIElements.SetActive(true);
-
-                foreach(Crosshair c in crosshairs)
-                {
-                    c.gameObject.SetActive(true);
-                }
+                this.gameObject.GetComponent<SettingsManager>().settingsPanel.SetActive(false);
 
                 SoundManager.Instance.PlaySoundContinuous(buttonClickSound);
                 LookingGlassUI lookingGlassUI = FindObjectOfType<LookingGlassUI>();
-                lookingGlassUI.Hide();
+
+                if (lookingGlassUI != null)
+                {
+                    lookingGlassUI.Hide();
+                }
             }
         }
     }
@@ -149,8 +149,8 @@ public class PauseScreenBehavior : MonoBehaviour
 
         else
         {
+            Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Confined;
         }
     }
 

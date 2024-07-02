@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4277385306347250861}
   - component: {fileID: 3433382152933106016}
   m_Layer: 0
-  m_Name: FloatingTextP
+  m_Name: FloatingTextMod
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -110,8 +110,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294934518
-  m_fontColor: {r: 0.96418166, g: 0.49685526, b: 1, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -185,7 +185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b56cc2cd46b75d04f8c5223eef9f6487, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DestroyTime: 3
+  DestroyTime: 5
 --- !u!95 &3433382152933106016
 Animator:
   serializedVersion: 5
