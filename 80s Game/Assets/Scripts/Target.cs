@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Target : MonoBehaviour
 {
@@ -233,6 +234,20 @@ public class Target : MonoBehaviour
     private void ShowFloatingText()
     {
         GameObject text = Instantiate(floatingTextPrefab, transform.position, Quaternion.identity);
-        text.GetComponent<TextMeshPro>().text = $"{pointValue}";
+
+        if (stunningPlayer.HasMod(AbsModifierEffect.ModType.DoublePoints))
+        {
+            text.GetComponent<TextMeshPro>().text = $"{pointValue * 2}";
+        }
+
+        else
+        {
+            text.GetComponent<TextMeshPro>().text = $"{pointValue}";
+        }
+
+        if (GameModeData.activeGameMode == EGameMode.Competitive)
+        {
+            text.GetComponent<TextMeshPro>().color = stunningPlayer.activeCrosshair.gameObject.GetComponent<SpriteRenderer>().color;
+        }
     }
 }
