@@ -53,7 +53,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0866a63fd34b4504e87f09f18a541938, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 3
+  type: 4
   FSM: {fileID: 0}
   bIsStunned: 0
   floatingTextPrefab: {fileID: 0}
@@ -323,11 +323,13 @@ MonoBehaviour:
   bIsActive: 0
   unscorableStates: 
   initialState: 0
-  pointValue: 1000
+  pointValue: 1500
   deathHeight: -6.5
   hitSound: {fileID: 8300000, guid: c928b956a133aa544bfa866c9b7c2b47, type: 3}
   timeUntilPursue: 5
   pursueTimer: 0
   targetLatch: {fileID: 0}
+  pursueSpeedScale: 1
+  bCanPursue: 0
   attackCooldown: 0.5
   attackDamage: 1

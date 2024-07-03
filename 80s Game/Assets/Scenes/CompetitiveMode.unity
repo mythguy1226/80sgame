@@ -7974,6 +7974,7 @@ MonoBehaviour:
   - {fileID: 55702376141867145, guid: 367a188d6de1eb74aa7ebbdba130f295, type: 3}
   - {fileID: 55702376141867145, guid: 1711ae630a5eadd4c811d1c70c1e9b7b, type: 3}
   debug: 1
+  spawnConfig: {fileID: 11400000, guid: 6baa1790f5e64ae4ea8e3ff6d99e2115, type: 2}
 --- !u!4 &1095139975
 Transform:
   m_ObjectHideFlags: 0
