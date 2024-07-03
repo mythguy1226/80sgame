@@ -10036,7 +10036,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0866a63fd34b4504e87f09f18a541938, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
+  type: 2
   FSM: {fileID: -8368935978441067624}
   bIsStunned: 0
   floatingTextPrefab: {fileID: 5422266768498237442, guid: a675186d31f4293478ad06871f10c307, type: 3}

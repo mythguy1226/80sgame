@@ -10,14 +10,16 @@ public class BatData
 
     public int normal;
     public int unstable;
-    public int bonus;
+    public int lowbonus;
+    public int highbonus;
     public int modified;
 
     public BatData(Dictionary<TargetManager.TargetType, int> data)
     {
         normal = 0;
         unstable = 0;
-        bonus = 0;
+        lowbonus = 0;
+        highbonus = 0;
         modified = 0;
         LoadData(data);
     }
@@ -35,9 +37,14 @@ public class BatData
             normal = data[TargetManager.TargetType.Regular];
         }
 
-        if (data.ContainsKey(TargetManager.TargetType.Bonus))
+        if (data.ContainsKey(TargetManager.TargetType.LowBonus))
         {
-            bonus = data[TargetManager.TargetType.Bonus];
+            lowbonus = data[TargetManager.TargetType.LowBonus];
+        }
+
+        if (data.ContainsKey(TargetManager.TargetType.HighBonus))
+        {
+            highbonus = data[TargetManager.TargetType.HighBonus];
         }
 
         if (data.ContainsKey(TargetManager.TargetType.Unstable))

@@ -6990,6 +6990,7 @@ MonoBehaviour:
   - {fileID: 55702376141867145, guid: 6311858a13f90b740a1313dc1b64b33d, type: 3}
   debuffs: []
   debug: 1
+  spawnConfig: {fileID: 11400000, guid: 8833365eba3dfd44dab0ebfc78fd1fe5, type: 2}
 --- !u!4 &1095139975
 Transform:
   m_ObjectHideFlags: 0
