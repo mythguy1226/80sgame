@@ -19,19 +19,9 @@ public class CompetitiveMode : AbsGameMode
         //Add allowed types
         allowedBats.Add(TargetManager.TargetType.Regular, true);
         allowedBats.Add(TargetManager.TargetType.Modifier, true);
-        allowedBats.Add(TargetManager.TargetType.LowBonus, true);
-        allowedBats.Add(TargetManager.TargetType.HighBonus, true);
+        allowedBats.Add(TargetManager.TargetType.Bonus, true);
         allowedBats.Add(TargetManager.TargetType.Unstable, true);
         debugMode = false;
-
-        numBatsMap = new Dictionary<TargetManager.TargetType, int>();
-
-        // Init map types
-        numBatsMap.Add(TargetManager.TargetType.Regular, 0);
-        numBatsMap.Add(TargetManager.TargetType.Modifier, 0);
-        numBatsMap.Add(TargetManager.TargetType.LowBonus, 0);
-        numBatsMap.Add(TargetManager.TargetType.HighBonus, 0);
-        numBatsMap.Add(TargetManager.TargetType.Unstable, 0);
     }
 
     protected override void StartNextRound(bool isFirstRound = false)
@@ -45,10 +35,7 @@ public class CompetitiveMode : AbsGameMode
             int targetIndex = GetNextAvailableBat();
 
             if (targetIndex == -1)
-            {
-                targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<BatStateMachine>());
                 continue;
-            }
 
             targetManager.SpawnTarget(targetIndex);
 
@@ -102,34 +89,17 @@ public class CompetitiveMode : AbsGameMode
                 return i;
             }
 
-            // Check for special bat types
-            foreach(SpawnRate rate in GameManager.Instance.spawnConfig.rates)
-            {
-                // Check that type isnt regular
-                if(rate.targetType != TargetManager.TargetType.Regular)
-                {
-                    // Check that there are special types available
-                    if(numBatsMap[rate.targetType] > 0)
-                    {
-                        // Check for proper type and continue if not
-                        if(bat.FSM.IsDefault() || bat.type != rate.targetType)
-                            goto EndLoop;
-
-                        numBatsMap[rate.targetType]--;
-                        return i;
-                    }
-                }
-            }
-
-            // If default bat return index, as there were no available
-            // special bats to spawn previously
-            if (bat.FSM.IsDefault())
+            // If default bat, return index if no bonus bats
+            // Otherwise continue
+            if (bat.FSM.IsDefault() && numBonusBats == 0)
             {
                 return i;
             }
-
-        EndLoop:
-            continue;
+            else if (numBonusBats > 0) // Bonus bat spawning
+            {
+                numBonusBats--;
+                return i;
+            }
         }
 
         return -1;
@@ -137,16 +107,9 @@ public class CompetitiveMode : AbsGameMode
 
     public override void OnTargetReset()
     {
-        // Check rates map to see if any special bats should
-        // be added to it
-        foreach(SpawnRate rate in GameManager.Instance.spawnConfig.rates)
-        {
-            if(rate.targetType != TargetManager.TargetType.Regular)
-            {
-                if(targetManager.totalStuns % rate.spawnRate == 0)
-                    numBatsMap[rate.targetType]++;
-            }
-        }
+        // Increment bonus bats every 3 stuns
+        if (targetManager.totalStuns % 3 == 0)
+            numBonusBats++;
 
         // Chance to spawn a modifier bat every 5 stuns
         if(targetManager.totalStuns % 5 == 0)
@@ -197,8 +160,6 @@ public class CompetitiveMode : AbsGameMode
 
             if (targetIndex >= 0)
                 targetManager.SpawnTarget(targetIndex);
-            else
-                targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<BatStateMachine>());
         }
     }
 }

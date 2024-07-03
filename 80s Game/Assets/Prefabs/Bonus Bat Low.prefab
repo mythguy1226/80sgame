@@ -10038,8 +10038,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   FSM: {fileID: 2953488949255918500}
-  floatingTextPrefab: {fileID: 0}
-  pointValue: 1000
+  bIsStunned: 0
+  floatingTextPrefab: {fileID: 5422266768498237442, guid: b98f70d59d257d149abbaf4824cd7b9e, type: 3}
+  pointValue: 3000
   deathHeight: -6.5
   hitSound: {fileID: 0}
 --- !u!60 &9183759678283066155
@@ -10113,7 +10114,6 @@ MonoBehaviour:
   bIsActive: 0
   unscorableStates: 01000000
   initialState: 0
-  floatingTextPrefab: {fileID: 5422266768498237442, guid: b98f70d59d257d149abbaf4824cd7b9e, type: 3}
   pointValue: 3000
   deathHeight: -6.5
   hitSound: {fileID: 8300000, guid: c928b956a133aa544bfa866c9b7c2b47, type: 3}

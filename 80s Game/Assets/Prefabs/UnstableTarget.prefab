@@ -15,10 +15,10 @@ GameObject:
   - component: {fileID: 5432022069463102744}
   - component: {fileID: 7774082277665354212}
   - component: {fileID: 7014873915471283781}
+  - component: {fileID: 1064766512371524766}
   - component: {fileID: 8319351504079490042}
   - component: {fileID: 7156282623998708221}
   - component: {fileID: 199050564143429961}
-  - component: {fileID: 4291806361737592223}
   m_Layer: 0
   m_Name: UnstableTarget
   m_TagString: Untagged
@@ -195,6 +195,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7afb1d5d9b1c61f4a8426a9f40b5d671, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1064766512371524766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8306778490096188409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1541242eb80ec154dacf050192835f97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 2
+  FSM: {fileID: 7156282623998708221}
+  bIsStunned: 0
+  floatingTextPrefab: {fileID: 5422266768498237442, guid: 75dd293da92028a43b54e04a8792559c, type: 3}
+  pointValue: 1000
+  deathHeight: -6.5
+  hitSound: {fileID: 0}
 --- !u!60 &8319351504079490042
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -310,22 +329,3 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.01
---- !u!114 &4291806361737592223
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8306778490096188409}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0866a63fd34b4504e87f09f18a541938, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 3
-  FSM: {fileID: 7156282623998708221}
-  bIsStunned: 0
-  floatingTextPrefab: {fileID: 5422266768498237442, guid: 75dd293da92028a43b54e04a8792559c, type: 3}
-  pointValue: 2000
-  deathHeight: -6.5
-  hitSound: {fileID: 8300000, guid: c928b956a133aa544bfa866c9b7c2b47, type: 3}

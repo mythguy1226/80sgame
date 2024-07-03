@@ -37,8 +37,6 @@ public class GameManager : MonoBehaviour
     private float gameStartTime;
     private List<PlayerController> players;
 
-    public SpawnRateConfig spawnConfig;
-
     private void Awake()
     {
         // Check if the static reference matches the script instance
