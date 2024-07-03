@@ -7,11 +7,9 @@ public class TargetManager : MonoBehaviour
     public enum TargetType
     {
         Regular = 0,
-        LowBonus,
-        HighBonus,
+        Bonus,
         Unstable,
-        Modifier,
-        DiveBomb
+        Modifier
     }
     // Fields for all targets and spawn locations
     public List<Target> targets;
@@ -59,10 +57,6 @@ public class TargetManager : MonoBehaviour
     // Method for spawning a target
     public void SpawnTarget(int targetIndex)
     {
-        // Return if -1
-        if(targetIndex == -1)
-            return;
-
         Target target = targets[targetIndex];
         AddToCount(target.type, spawnCount);
         // Get the spawn point randomly and teleport the target to that point
