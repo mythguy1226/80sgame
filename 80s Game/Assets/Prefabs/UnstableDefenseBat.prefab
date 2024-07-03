@@ -210,8 +210,8 @@ MonoBehaviour:
   type: 2
   FSM: {fileID: 0}
   bIsStunned: 0
-  floatingTextPrefab: {fileID: 5422266768498237442, guid: 75dd293da92028a43b54e04a8792559c, type: 3}
-  pointValue: 2000
+  floatingTextPrefab: {fileID: 0}
+  pointValue: 1000
   deathHeight: -6.5
   hitSound: {fileID: 0}
 --- !u!60 &8319351504079490042
@@ -326,8 +326,6 @@ MonoBehaviour:
   timeUntilPursue: 6
   pursueTimer: 0
   targetLatch: {fileID: 0}
-  pursueSpeedScale: 1
-  bCanPursue: 0
   attackCooldown: 0.5
   attackDamage: 2
   chainRadius: 2

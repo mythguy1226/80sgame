@@ -209,8 +209,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 2
   FSM: {fileID: 7156282623998708221}
-  bIsStunned: 0
-  floatingTextPrefab: {fileID: 5422266768498237442, guid: 75dd293da92028a43b54e04a8792559c, type: 3}
+  floatingTextPrefab: {fileID: 0}
   pointValue: 1000
   deathHeight: -6.5
   hitSound: {fileID: 0}
@@ -285,6 +284,7 @@ MonoBehaviour:
   bIsActive: 0
   unscorableStates: 01000000
   initialState: 0
+  floatingTextPrefab: {fileID: 5422266768498237442, guid: 75dd293da92028a43b54e04a8792559c, type: 3}
   pointValue: 2000
   deathHeight: -6.5
   hitSound: {fileID: 8300000, guid: c928b956a133aa544bfa866c9b7c2b47, type: 3}
