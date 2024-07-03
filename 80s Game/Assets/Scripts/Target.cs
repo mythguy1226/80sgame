@@ -235,19 +235,22 @@ public class Target : MonoBehaviour
     {
         GameObject text = Instantiate(floatingTextPrefab, transform.position, Quaternion.identity);
 
-        if (stunningPlayer.HasMod(AbsModifierEffect.ModType.DoublePoints))
+        if (stunningPlayer != null)
         {
-            text.GetComponent<TextMeshPro>().text = $"{pointValue * 2}";
-        }
+            if (stunningPlayer.HasMod(AbsModifierEffect.ModType.DoublePoints))
+            {
+                text.GetComponent<TextMeshPro>().text = $"{pointValue * 2}";
+            }
 
-        else
-        {
-            text.GetComponent<TextMeshPro>().text = $"{pointValue}";
-        }
+            else
+            {
+                text.GetComponent<TextMeshPro>().text = $"{pointValue}";
+            }
 
-        if (GameModeData.activeGameMode == EGameMode.Competitive)
-        {
-            text.GetComponent<TextMeshPro>().color = stunningPlayer.activeCrosshair.gameObject.GetComponent<SpriteRenderer>().color;
+            if (GameModeData.activeGameMode == EGameMode.Competitive)
+            {
+                text.GetComponent<TextMeshPro>().color = stunningPlayer.activeCrosshair.gameObject.GetComponent<SpriteRenderer>().color;
+            }
         }
     }
 }
