@@ -132,22 +132,21 @@ public class SettingsManager : MonoBehaviour
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(sfxVolumeSlider.gameObject);
 
-            if (PlayerData.activePlayers[playerIndex].controlScheme == "PS4")
+            //Change input prompts for changing tabs based on the control scheme of the player who paused
+            switch (PlayerData.activePlayers[playerIndex].controlScheme)
             {
-                tabPrompts[0].sprite = controllerTabPrompts[0];
-                tabPrompts[1].sprite = controllerTabPrompts[1];
-            }
-
-            else if (PlayerData.activePlayers[playerIndex].controlScheme == "xbox")
-            {
-                tabPrompts[0].sprite = controllerTabPrompts[2];
-                tabPrompts[1].sprite = controllerTabPrompts[3];
-            }
-
-            else
-            {
-                tabPrompts[0].sprite = controllerTabPrompts[4];
-                tabPrompts[1].sprite = controllerTabPrompts[5];
+                case "PS4":
+                    tabPrompts[0].sprite = controllerTabPrompts[0];
+                    tabPrompts[1].sprite = controllerTabPrompts[1];
+                    break;
+                case "xbox":
+                    tabPrompts[0].sprite = controllerTabPrompts[2];
+                    tabPrompts[1].sprite = controllerTabPrompts[3];
+                    break;
+                case "KnM":
+                    tabPrompts[0].sprite = controllerTabPrompts[4];
+                    tabPrompts[1].sprite = controllerTabPrompts[5];
+                    break;
             }
         }
 

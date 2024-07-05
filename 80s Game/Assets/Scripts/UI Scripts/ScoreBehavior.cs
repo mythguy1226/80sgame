@@ -62,16 +62,17 @@ public class ScoreBehavior : MonoBehaviour
             }
         }
 
+        //Change the Pause Input Prompt for Classic Mode
         else
         {
-            if (PlayerData.activePlayers[0].controlScheme == "PS4")
+            switch (PlayerData.activePlayers[0].controlScheme)
             {
-                pauseInputPrompt.sprite = controllerPauseInputs[0];
-            }
-
-            else if (PlayerData.activePlayers[0].controlScheme == "xbox")
-            {
-                pauseInputPrompt.sprite = controllerPauseInputs[1];
+                case "PS4":
+                    pauseInputPrompt.sprite = controllerPauseInputs[0];
+                    break;
+                case "xbox":
+                    pauseInputPrompt.sprite = controllerPauseInputs[1];
+                    break;
             }
         }
     }

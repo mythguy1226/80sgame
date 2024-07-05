@@ -91,14 +91,15 @@ public class TitleScreenBehavior : MonoBehaviour
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(gamemodeOptions[0].gameObject);
 
-            if (PlayerData.activePlayers[0].controlScheme == "PS4")
+            //Change the prompt icon for the Gamemode help button to the proper control scheme
+            switch (PlayerData.activePlayers[0].controlScheme)
             {
-                helpInputPrompt.sprite = controllerHelpInputs[0];
-            }
-
-            else if (PlayerData.activePlayers[0].controlScheme == "xbox")
-            {
-                helpInputPrompt.sprite = controllerHelpInputs[1];
+                case "PS4":
+                    helpInputPrompt.sprite = controllerHelpInputs[0];
+                    break;
+                case "xbox":
+                    helpInputPrompt.sprite = controllerHelpInputs[1];
+                    break;
             }
         }
         else

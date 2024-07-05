@@ -88,34 +88,21 @@ public class PlayerJoinManager : MonoBehaviour
         joinPrompt.gameObject.SetActive(false);
         promptTray.gameObject.SetActive(true);
 
+        //Change Prompt Tray Icons based on which control scheme Player 1 uses
         if (pc.Order == 0)
         {
-            if (playerInput.currentControlScheme == "KnM")
+            switch (playerInput.currentControlScheme)
             {
-                for (int i = 0; i < promptTrayIcons.Count; i++)
-                {
-                    promptTrayIcons[i].sprite = keyboardInputPrompts[i];
-                    controllerConnected = false;
-                }
-            }
-
-            else if (playerInput.currentControlScheme == "PS4")
-            {
-                for (int i = 0; i < promptTrayIcons.Count; i++)
-                {
-                    promptTrayIcons[i].sprite = playstationInputPrompts[i];
-                    controllerConnected = true;
-                }
-            }
-
-            else if (playerInput.currentControlScheme == "xbox")
-            {
-                for (int i = 0; i < promptTrayIcons.Count; i++)
-                {
-                    promptTrayIcons[i].sprite = xboxInputPrompts[i];
-                    controllerConnected = true;
-                }
-            }  
+                case "KnM":
+                    ChangePromptTray(keyboardInputPrompts, false);
+                    break;
+                case "PS4":
+                    ChangePromptTray(playstationInputPrompts, true);
+                    break;
+                case "xbox":
+                    ChangePromptTray(xboxInputPrompts, true);
+                    break;
+            } 
         }
 
         //Set color preset based on default color
@@ -265,5 +252,15 @@ public class PlayerJoinManager : MonoBehaviour
     public void ExitToTitle()
     {
         SceneManager.LoadScene(0);
+    }
+
+    //Change the prompt tray icons based on the based in sprite list and whether a controller is used or not
+    private void ChangePromptTray (List<Sprite> promptSprites, bool controller)
+    {
+        for (int i = 0; i < promptTrayIcons.Count; i++)
+        {
+            promptTrayIcons[i].sprite = promptSprites[i];
+            controllerConnected = controller;
+        }
     }
 }
