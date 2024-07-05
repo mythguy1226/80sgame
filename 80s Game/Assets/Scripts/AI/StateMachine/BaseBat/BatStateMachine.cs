@@ -33,7 +33,6 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
     SpriteRenderer _SpriteRenderer;
     protected AnimationHandler _AnimControls;
     protected InputManager _InputManager;
-    protected PlayerController stunningPlayer;
     PolygonCollider2D _Collider;
 
 

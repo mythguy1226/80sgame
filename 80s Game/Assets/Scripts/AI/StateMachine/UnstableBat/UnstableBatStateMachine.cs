@@ -44,7 +44,7 @@ public class UnstableBatStateMachine : BatStateMachine
 
             // Play stun anim
             BatStateMachine FSM = (BatStateMachine)targetChain[i].FSM;
-            FSM.GetComponent<Target>().SetStunningPlayer(stunningPlayer);
+            FSM.GetComponent<Target>().SetStunningPlayer(currentTarg.GetStunningPlayer());
             targetChain[i].GetComponent<AnimationHandler>().PlayStunAnimation();
 
             // Update current target
