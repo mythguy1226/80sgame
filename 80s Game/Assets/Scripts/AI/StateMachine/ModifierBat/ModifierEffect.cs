@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEditor;
 
 public abstract class AbsModifierEffect : MonoBehaviour
 {
@@ -139,10 +140,10 @@ public abstract class AbsModifierEffect : MonoBehaviour
         bIsActive = true;
         InputManager.detectHitSub -= ListenForShot;
         ShowFloatingText();
-        transform.position = new Vector3(-15.0f, 15.0f, 0.0f); // Move off-screen for duration of lifetime
         _Rb.gravityScale = 0.0f; // Turn off gravity here
         AddUIRef(activator.Order);
         ActivateEffect();
+        transform.position = new Vector3(-15.0f, 15.0f, 0.0f); // Move off-screen for duration of lifetime
     }
 
     /// <summary>
