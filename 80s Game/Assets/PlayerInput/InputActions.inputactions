@@ -443,7 +443,7 @@
                     "path": "<Gamepad>/leftStick/up",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad;PS4",
+                    "groups": "Gamepad;PS4;xbox",
                     "action": "Navigate",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -454,7 +454,7 @@
                     "path": "<Gamepad>/rightStick/up",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad;PS4",
+                    "groups": "Gamepad;PS4;xbox",
                     "action": "Navigate",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -465,7 +465,7 @@
                     "path": "<Gamepad>/leftStick/down",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad;PS4",
+                    "groups": "Gamepad;PS4;xbox",
                     "action": "Navigate",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -476,7 +476,7 @@
                     "path": "<Gamepad>/rightStick/down",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad;PS4",
+                    "groups": "Gamepad;PS4;xbox",
                     "action": "Navigate",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -487,7 +487,7 @@
                     "path": "<Gamepad>/leftStick/left",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad;PS4",
+                    "groups": "Gamepad;PS4;xbox",
                     "action": "Navigate",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -498,7 +498,7 @@
                     "path": "<Gamepad>/rightStick/left",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad;PS4",
+                    "groups": "Gamepad;PS4;xbox",
                     "action": "Navigate",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -509,7 +509,7 @@
                     "path": "<Gamepad>/leftStick/right",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad;PS4",
+                    "groups": "Gamepad;PS4;xbox",
                     "action": "Navigate",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -520,7 +520,7 @@
                     "path": "<Gamepad>/rightStick/right",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad;PS4",
+                    "groups": "Gamepad;PS4;xbox",
                     "action": "Navigate",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -531,7 +531,7 @@
                     "path": "<Gamepad>/dpad",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad;PS4",
+                    "groups": "Gamepad;PS4;xbox",
                     "action": "Navigate",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -696,7 +696,7 @@
                     "path": "*/{Submit}",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard&Mouse;Gamepad;Touch;Joystick;XR;KnM;PS4",
+                    "groups": "Keyboard&Mouse;Gamepad;Touch;Joystick;XR;KnM;PS4;xbox",
                     "action": "Submit",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -707,7 +707,7 @@
                     "path": "*/{Cancel}",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard&Mouse;Gamepad;Touch;Joystick;XR;KnM;PS4",
+                    "groups": "Keyboard&Mouse;Gamepad;Touch;Joystick;XR;KnM;PS4;xbox",
                     "action": "Cancel",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -850,7 +850,7 @@
                     "path": "<Gamepad>/start",
                     "interactions": "",
                     "processors": "",
-                    "groups": "PS4",
+                    "groups": "PS4;xbox",
                     "action": "StartGame",
                     "isComposite": false,
                     "isPartOfComposite": false
