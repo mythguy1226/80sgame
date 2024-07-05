@@ -24,7 +24,8 @@ public class PlayerJoinManager : MonoBehaviour
     public Sprite defenseBG;
 
     public List<Image> promptTrayIcons;
-    public List<Sprite> controllerInputPrompts;
+    public List<Sprite> playstationInputPrompts;
+    public List<Sprite> xboxInputPrompts;
     public List<Sprite> keyboardInputPrompts;
 
     private GameObject lastSelected = null;
@@ -98,14 +99,23 @@ public class PlayerJoinManager : MonoBehaviour
                 }
             }
 
-            else
+            else if (playerInput.currentControlScheme == "PS4")
             {
                 for (int i = 0; i < promptTrayIcons.Count; i++)
                 {
-                    promptTrayIcons[i].sprite = controllerInputPrompts[i];
+                    promptTrayIcons[i].sprite = playstationInputPrompts[i];
                     controllerConnected = true;
                 }
             }
+
+            else if (playerInput.currentControlScheme == "xbox")
+            {
+                for (int i = 0; i < promptTrayIcons.Count; i++)
+                {
+                    promptTrayIcons[i].sprite = xboxInputPrompts[i];
+                    controllerConnected = true;
+                }
+            }  
         }
 
         //Set color preset based on default color

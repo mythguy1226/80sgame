@@ -9,7 +9,8 @@ public class OnboardingUI : MonoBehaviour
     public GameObject onboardingPanel;
     public GameObject gameUIElements;
     public GameObject mouseDiagram;
-    public GameObject controllerDiagram;
+    public GameObject xboxControllerDiagram;
+    public GameObject playstationControllerDiagram;
     [SerializeField] AudioClip gameStartTheme;
     private UIManager manager;
     private bool controllerConnected = false;
@@ -21,22 +22,19 @@ public class OnboardingUI : MonoBehaviour
         //Pause game when onboarding panel is activated
         Time.timeScale = 0.0f;
 
-        foreach (PlayerConfig pc in PlayerData.activePlayers)
+        if (PlayerData.activePlayers[0].controlScheme == "KnM")
         {
-            if (pc.controlScheme != "KnM")
-            {
-                controllerConnected = true;
-            }
+            mouseDiagram.SetActive(true);
         }
 
-        if (controllerConnected)
+        else if (PlayerData.activePlayers[0].controlScheme == "xbox")
         {
-            controllerDiagram.SetActive(true);
+            xboxControllerDiagram.SetActive(true);
         }
 
         else
         {
-            mouseDiagram.SetActive(true);
+            playstationControllerDiagram.SetActive(true);
         }
     }
 

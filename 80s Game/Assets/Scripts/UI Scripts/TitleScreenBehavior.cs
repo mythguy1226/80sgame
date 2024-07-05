@@ -21,6 +21,8 @@ public class TitleScreenBehavior : MonoBehaviour
     public TextMeshProUGUI gamemodeDescription;
     public GameObject startButton;
     public List<Button> gamemodeOptions;
+    public Image helpInputPrompt;
+    public List<Sprite> controllerHelpInputs;
 
     private int gamemodeSelected = 1;
 
@@ -88,6 +90,16 @@ public class TitleScreenBehavior : MonoBehaviour
         {
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(gamemodeOptions[0].gameObject);
+
+            if (PlayerData.activePlayers[0].controlScheme == "PS4")
+            {
+                helpInputPrompt.sprite = controllerHelpInputs[0];
+            }
+
+            else if (PlayerData.activePlayers[0].controlScheme == "xbox")
+            {
+                helpInputPrompt.sprite = controllerHelpInputs[1];
+            }
         }
         else
         {
