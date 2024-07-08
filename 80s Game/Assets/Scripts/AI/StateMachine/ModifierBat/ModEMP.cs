@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class ModEMP : AbsModifierEffect
 {
+    public override ModType GetModType()
+    {
+        return ModType.EMP;
+    }
     public GameObject particles;
 
     public override void ActivateEffect()
