@@ -198,7 +198,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69209a80cc4f9e344b6e3fd4fb73e757, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHitpoints: 20
+  _maxHitpoints: 40
   hpThresholds:
   - 10
   - 7
@@ -213,6 +213,7 @@ MonoBehaviour:
   - {fileID: 847933181, guid: 40036639e7f119049bec8c3e34a651b0, type: 3}
   _smokeIndex: 2
   smokeSystem: {fileID: 7560741631667672140}
+  _currentHitpoints: 0
   latchPoints: []
   bCanBeTargeted: 0
   bIsCore: 1

@@ -13,7 +13,8 @@ public abstract class AbsModifierEffect : MonoBehaviour
         Overcharge,
         Snail,
         Confusion,
-        RustedWings
+        RustedWings,
+        EMP
     }
 
     [SerializeField]
