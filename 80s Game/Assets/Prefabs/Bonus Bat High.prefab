@@ -10040,7 +10040,7 @@ MonoBehaviour:
   FSM: {fileID: -8368935978441067624}
   bIsStunned: 0
   floatingTextPrefab: {fileID: 5422266768498237442, guid: a675186d31f4293478ad06871f10c307, type: 3}
-  pointValue: 1000
+  pointValue: 4000
   deathHeight: -6.5
   hitSound: {fileID: 0}
 --- !u!60 &1378422487222437612
