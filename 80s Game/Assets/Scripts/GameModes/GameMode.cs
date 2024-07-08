@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using UnityEngine;
 
 public enum EGameMode
 {
@@ -23,6 +22,8 @@ public abstract class AbsGameMode
     protected int currentRoundTargetCount;
     protected int numBonusBats = 0;
     protected Dictionary<TargetManager.TargetType, bool> allowedBats;
+    protected Dictionary<AbsModifierEffect.ModType, bool> allowedBuffs;
+    protected Dictionary<AbsModifierEffect.ModType, bool> allowedDebuffs;
     protected bool debugMode;
 
     public AbsGameMode()
@@ -63,6 +64,8 @@ public abstract class AbsGameMode
 
     protected abstract void UpdateRoundParams();
 
+    protected abstract void SetupAllowedData();
+
     /// <summary>
     /// Returns if a bat type can spawn in a concrete game mode
     /// </summary>
@@ -81,5 +84,32 @@ public abstract class AbsGameMode
     {
         allowedBats[type] = !allowedBats[type];
         debugMode = true;
+    }
+
+    public void ToggleAllowedModType(AbsModifierEffect.ModType type)
+    {
+        debugMode = true;
+        if (AbsModifierEffect.ModTypeIsBuff(type))
+        {
+            allowedBuffs[type] = !allowedBuffs[type];
+        } else
+        {
+            allowedDebuffs[type] = !allowedDebuffs[type];
+        }
+        GameManager.Instance.UpdateModifiers();
+    }
+
+    public bool isModifierAllowed(AbsModifierEffect.ModType type)
+    {
+        if (AbsModifierEffect.ModTypeIsBuff(type))
+        {
+            return allowedBuffs[type];
+        }
+        return allowedDebuffs[type];
+    }
+
+    public bool isInDebugMode()
+    {
+        return debugMode;
     }
 }

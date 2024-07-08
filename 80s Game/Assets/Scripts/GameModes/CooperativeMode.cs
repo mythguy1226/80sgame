@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CooperativeMode : AbsGameMode
@@ -15,12 +17,44 @@ public class CooperativeMode : AbsGameMode
         maxTargetsOnScreen = 15;
         currentRoundTargetCount = 8;
         allowedBats = new Dictionary<TargetManager.TargetType, bool>();
+        SetupAllowedData();
+        debugMode = false;
+    }
 
-        //Add allowed types
-        allowedBats.Add(TargetManager.TargetType.Regular, true);
-        allowedBats.Add(TargetManager.TargetType.Modifier, true);
-        allowedBats.Add(TargetManager.TargetType.Bonus, true);
-        allowedBats.Add(TargetManager.TargetType.Unstable, true);
+    protected override void SetupAllowedData()
+    {
+        allowedBuffs = new Dictionary<AbsModifierEffect.ModType, bool>();
+        allowedDebuffs = new Dictionary<AbsModifierEffect.ModType, bool>();
+        allowedBats = new Dictionary<TargetManager.TargetType, bool>();
+
+        // Set everything to false by default
+        foreach (TargetManager.TargetType type in Enum.GetValues(typeof(TargetManager.TargetType)).Cast<TargetManager.TargetType>())
+        {
+            allowedBats.Add(type, false);
+        }
+        foreach (AbsModifierEffect.ModType mod in Enum.GetValues(typeof(AbsModifierEffect.ModType)).Cast<AbsModifierEffect.ModType>())
+        {
+            if (AbsModifierEffect.ModTypeIsBuff(mod))
+            {
+                allowedBuffs.Add(mod, false);
+            }
+            else
+            {
+                allowedDebuffs.Add(mod, false);
+            }
+        }
+
+        // Enable the right ones for this game mode
+        allowedBuffs[AbsModifierEffect.ModType.DoublePoints] = true;
+        allowedBuffs[AbsModifierEffect.ModType.Overcharge] = true;
+        allowedBuffs[AbsModifierEffect.ModType.RustedWings] = true;
+        allowedDebuffs[AbsModifierEffect.ModType.Confusion] = true;
+        allowedDebuffs[AbsModifierEffect.ModType.Snail] = true;
+
+        allowedBats[TargetManager.TargetType.Regular] = true;
+        allowedBats[TargetManager.TargetType.Bonus] = true;
+        allowedBats[TargetManager.TargetType.Modifier] = true;
+        allowedBats[TargetManager.TargetType.Unstable] = true;
     }
 
     protected override void StartNextRound(bool isFirstRound = false)
