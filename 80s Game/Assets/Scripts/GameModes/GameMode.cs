@@ -25,6 +25,8 @@ public abstract class AbsGameMode
     protected Dictionary<TargetManager.TargetType, bool> allowedBats;
     protected bool debugMode;
 
+    protected Dictionary<TargetManager.TargetType, int> numBatsMap;
+
     public AbsGameMode()
     {
         targetManager = GameManager.Instance.TargetManager;
