@@ -228,6 +228,11 @@ public class Target : MonoBehaviour
         stunningPlayer = controller;
     }
 
+    public PlayerController GetStunningPlayer()
+    {
+        return stunningPlayer;
+    }
+
     /// <summary>
     /// Display floating text at bat location
     /// </summary>
