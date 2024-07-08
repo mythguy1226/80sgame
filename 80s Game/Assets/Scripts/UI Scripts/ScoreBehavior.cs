@@ -30,6 +30,8 @@ public class ScoreBehavior : MonoBehaviour
     private int leadingPlayer;
 
     public List<TextMeshProUGUI> playerNames;
+    public List<Sprite> controllerPauseInputs;
+    public Image pauseInputPrompt;
 
     //UI Elements for Defense mode
     public Image coreHealthbar;
@@ -57,6 +59,20 @@ public class ScoreBehavior : MonoBehaviour
             {
                 playerNames[i].gameObject.SetActive(true);
                 playerNames[i].text = PlayerData.activePlayers[i].initials;
+            }
+        }
+
+        //Change the Pause Input Prompt for Classic Mode
+        else
+        {
+            switch (PlayerData.activePlayers[0].controlScheme)
+            {
+                case "PS4":
+                    pauseInputPrompt.sprite = controllerPauseInputs[0];
+                    break;
+                case "xbox":
+                    pauseInputPrompt.sprite = controllerPauseInputs[1];
+                    break;
             }
         }
     }

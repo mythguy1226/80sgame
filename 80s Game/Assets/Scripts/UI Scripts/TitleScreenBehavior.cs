@@ -21,6 +21,8 @@ public class TitleScreenBehavior : MonoBehaviour
     public TextMeshProUGUI gamemodeDescription;
     public GameObject startButton;
     public List<Button> gamemodeOptions;
+    public Image helpInputPrompt;
+    public List<Sprite> controllerHelpInputs;
 
     private int gamemodeSelected = 1;
 
@@ -88,6 +90,17 @@ public class TitleScreenBehavior : MonoBehaviour
         {
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(gamemodeOptions[0].gameObject);
+
+            //Change the prompt icon for the Gamemode help button to the proper control scheme
+            switch (PlayerData.activePlayers[0].controlScheme)
+            {
+                case "PS4":
+                    helpInputPrompt.sprite = controllerHelpInputs[0];
+                    break;
+                case "xbox":
+                    helpInputPrompt.sprite = controllerHelpInputs[1];
+                    break;
+            }
         }
         else
         {

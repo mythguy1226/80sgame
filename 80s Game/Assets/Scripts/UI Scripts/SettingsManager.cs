@@ -34,6 +34,8 @@ public class SettingsManager : MonoBehaviour
     public List<TextMeshProUGUI> settingsLabels;
 
     public List<GameObject> tabs;
+    public List<Image> tabPrompts;
+    public List<Sprite> controllerTabPrompts;
     private int tabIndex = 0;
 
     public List<GameObject> controlMappings;
@@ -129,6 +131,23 @@ public class SettingsManager : MonoBehaviour
         {
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(sfxVolumeSlider.gameObject);
+
+            //Change input prompts for changing tabs based on the control scheme of the player who paused
+            switch (PlayerData.activePlayers[playerIndex].controlScheme)
+            {
+                case "PS4":
+                    tabPrompts[0].sprite = controllerTabPrompts[0];
+                    tabPrompts[1].sprite = controllerTabPrompts[1];
+                    break;
+                case "xbox":
+                    tabPrompts[0].sprite = controllerTabPrompts[2];
+                    tabPrompts[1].sprite = controllerTabPrompts[3];
+                    break;
+                case "KnM":
+                    tabPrompts[0].sprite = controllerTabPrompts[4];
+                    tabPrompts[1].sprite = controllerTabPrompts[5];
+                    break;
+            }
         }
 
         else
