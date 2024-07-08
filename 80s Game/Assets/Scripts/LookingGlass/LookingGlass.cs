@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class LookingGlass : MonoBehaviour
 {
+    public GameObject[] modPrefabs;
 
     /*
      Bat Controls
@@ -25,5 +26,35 @@ public class LookingGlass : MonoBehaviour
     {
         TargetManager.TargetType toggleType = (TargetManager.TargetType)type;
         GameManager.Instance.ActiveGameMode.ToggleAllowedBatType(toggleType);
+    }
+
+    /*
+    Mod Controls 
+    */
+
+
+    /// <summary>
+    /// Toggles the availability of a particular modifier
+    /// </summary>
+    /// <param name="type">The type, as integer, of the modifier to toggle</param>
+    public void ToggleModAvailable(int type)
+    {
+        AbsModifierEffect.ModType toggleType = (AbsModifierEffect.ModType)type;
+        if (AbsModifierEffect.ModTypeIsBuff(toggleType))
+        {
+            if (!GameManager.Instance.buffs.Contains(modPrefabs[type]))
+            {
+                GameManager.Instance.buffs.Add(modPrefabs[type]);
+            }
+            
+        } else
+        {
+            if (!GameManager.Instance.debuffs.Contains(modPrefabs[type]))
+            {
+                GameManager.Instance.buffs.Add(modPrefabs[type]);
+            }
+        }
+        GameManager.Instance.ActiveGameMode.ToggleAllowedModType(toggleType);
+        
     }
 }

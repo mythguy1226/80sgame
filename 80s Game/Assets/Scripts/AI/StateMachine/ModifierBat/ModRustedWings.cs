@@ -1,28 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class ModRustedWings : AbsModifierEffect
 {
-    ModType thisType = ModType.RustedWings;
+    public override ModType GetModType()
+    {
+        return ModType.RustedWings;
+    }
 
     public override void ActivateEffect()
     {
-        if (activator.HasMod(thisType))
+        if (activator.HasMod(GetModType()))
         {
-            activator.ExtendModDuration(thisType, effectDuration);
+            activator.ExtendModDuration(GetModType(), effectDuration);
             CleanUp();
             return;
         }
 
-        activator.SetMod(thisType, this);
+        activator.SetMod(GetModType(), this);
         GameManager.Instance.isSlowed = true;
         GameManager.Instance.rustedWingsStack++;
     }
 
     public override void DeactivateEffect()
     {
-        activator.RemoveMod(thisType);
+        activator.RemoveMod(GetModType());
         GameManager.Instance.isSlowed = false;
         if(GameManager.Instance.rustedWingsStack > 0)
         {
