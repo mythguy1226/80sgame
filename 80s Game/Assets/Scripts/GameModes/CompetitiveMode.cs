@@ -50,17 +50,10 @@ public class CompetitiveMode : AbsGameMode
         allowedDebuffs[AbsModifierEffect.ModType.Snail] = true;
 
         allowedBats[TargetManager.TargetType.Regular] = true;
-        allowedBats[TargetManager.TargetType.Bonus] = true;
+        allowedBats[TargetManager.TargetType.LowBonus] = true;
+        allowedBats[TargetManager.TargetType.HighBonus] = true;
         allowedBats[TargetManager.TargetType.Modifier] = true;
         allowedBats[TargetManager.TargetType.Unstable] = true;
-
-        //Add allowed types
-        allowedBats.Add(TargetManager.TargetType.Regular, true);
-        allowedBats.Add(TargetManager.TargetType.Modifier, true);
-        allowedBats.Add(TargetManager.TargetType.LowBonus, true);
-        allowedBats.Add(TargetManager.TargetType.HighBonus, true);
-        allowedBats.Add(TargetManager.TargetType.Unstable, true);
-        debugMode = false;
 
         numBatsMap = new Dictionary<TargetManager.TargetType, int>();
 

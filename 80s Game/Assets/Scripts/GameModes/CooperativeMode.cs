@@ -52,14 +52,9 @@ public class CooperativeMode : AbsGameMode
         allowedDebuffs[AbsModifierEffect.ModType.Snail] = true;
 
         allowedBats[TargetManager.TargetType.Regular] = true;
-        allowedBats[TargetManager.TargetType.Bonus] = true;
         allowedBats[TargetManager.TargetType.Modifier] = true;
         allowedBats[TargetManager.TargetType.Unstable] = true;
-        //Add allowed types
-        allowedBats.Add(TargetManager.TargetType.Regular, true);
-        allowedBats.Add(TargetManager.TargetType.Modifier, true);
-        allowedBats.Add(TargetManager.TargetType.DiveBomb, true);
-        allowedBats.Add(TargetManager.TargetType.Unstable, true);
+        allowedBats[TargetManager.TargetType.DiveBomb] = true;
 
         numBatsMap = new Dictionary<TargetManager.TargetType, int>();
 
