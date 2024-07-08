@@ -4075,6 +4075,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: PreviousMapping
       objectReference: {fileID: 0}
+    - target: {fileID: 335379652220630017, guid: ade02431274cdbe4f8fd5b4bdc90b6b9, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -190.23994
+      objectReference: {fileID: 0}
     - target: {fileID: 1295247045107947014, guid: ade02431274cdbe4f8fd5b4bdc90b6b9, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -4128,8 +4132,12 @@ PrefabInstance:
       value: ToggleCRTEffect
       objectReference: {fileID: 0}
     - target: {fileID: 1880992134008904346, guid: ade02431274cdbe4f8fd5b4bdc90b6b9, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -386.79526
+      objectReference: {fileID: 0}
+    - target: {fileID: 1880992134008904346, guid: ade02431274cdbe4f8fd5b4bdc90b6b9, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -190.23993
+      value: -190.23994
       objectReference: {fileID: 0}
     - target: {fileID: 2033742130219460123, guid: ade02431274cdbe4f8fd5b4bdc90b6b9, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -4381,7 +4389,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4331333014142686684, guid: ade02431274cdbe4f8fd5b4bdc90b6b9, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -190.23999
+      value: -190.24
       objectReference: {fileID: 0}
     - target: {fileID: 4440939073170682342, guid: ade02431274cdbe4f8fd5b4bdc90b6b9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
