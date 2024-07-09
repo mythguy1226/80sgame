@@ -19,6 +19,7 @@ public class ModEMP : AbsModifierEffect
 
         foreach (Target target in activeTargets)
         {
+            target.SetStunningPlayer(this.activator);
             target.ResolveHit();
         }
 
