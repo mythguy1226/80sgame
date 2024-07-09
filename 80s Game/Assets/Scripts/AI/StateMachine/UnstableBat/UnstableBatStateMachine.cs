@@ -31,7 +31,7 @@ public class UnstableBatStateMachine : BatStateMachine
         // Iterate through each chained target and play their stun animations as well
         for (int i = 0; i < targetChain.Length; i++)
         {
-            if (targetChain[i] == null || targetChain[i] == myself)
+            if (targetChain[i] == null || targetChain[i] == myself || targetChain[i].bIsStunned)
             {
                 continue;
             }
