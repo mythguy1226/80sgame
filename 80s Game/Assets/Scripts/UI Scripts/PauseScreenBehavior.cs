@@ -73,8 +73,8 @@ public class PauseScreenBehavior : MonoBehaviour
             {
                 foreach (Button gamemode in this.gameObject.GetComponent<TitleScreenBehavior>().gamemodeOptions)
                 {
-                GameObject gamemodeDescription = gamemode.gameObject.transform.GetChild(2).gameObject;
-                gamemodeDescription.SetActive(!gamemodeDescription.activeInHierarchy);
+                    GameObject gamemodeDescription = gamemode.gameObject.transform.GetChild(2).gameObject;
+                    gamemodeDescription.SetActive(!gamemodeDescription.activeInHierarchy);
                 }
             }
             
