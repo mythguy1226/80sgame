@@ -27,6 +27,7 @@ public class LatchPoint : MonoBehaviour
             FSM.targetLatch = null;
             FSM.SetPursueTimer();
             FSM.TransitionToDefault();
+            FSM.AnimControls.ResetAnimation();
         }
         latchedTarget = null;
     }

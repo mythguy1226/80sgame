@@ -28,14 +28,14 @@ public class AnimationHandler : MonoBehaviour
     }
 
     /// <summary>
-    /// Sets the "stun" trigger for the animator, initiating the Stun animation
+    /// Sets the "hit" trigger for the animator, initiating the Stun animation
     /// </summary>
     public void PlayStunAnimation()
     {
         // Reset potentially active animations
         anime.ResetTrigger(_dropHash);
         anime.ResetTrigger(_resetHash);
-        anime.SetTrigger(_attackHash);
+        anime.ResetTrigger(_attackHash);
 
         // Set new animation
         anime.SetTrigger(_stunHash);
@@ -49,7 +49,7 @@ public class AnimationHandler : MonoBehaviour
         // Reset potentially active animations
         anime.ResetTrigger(_stunHash);
         anime.ResetTrigger(_resetHash);
-        anime.SetTrigger(_attackHash);
+        anime.ResetTrigger(_attackHash);
 
         // Set new animation
         anime.SetTrigger(_dropHash);
@@ -67,6 +67,7 @@ public class AnimationHandler : MonoBehaviour
 
         // Set new animation
         anime.SetTrigger(_attackHash);
+        Debug.Log("playing attack animation");
     }
 
     /// <summary>
@@ -77,9 +78,10 @@ public class AnimationHandler : MonoBehaviour
         // Reset potentially active animations
         anime.ResetTrigger(_stunHash);
         anime.ResetTrigger(_dropHash);
-        anime.SetTrigger(_attackHash);
+        anime.ResetTrigger(_attackHash);
 
         // Set new animation
         anime.SetTrigger(_resetHash);
+        Debug.Log("Resetting to default animation");
     }
 }
