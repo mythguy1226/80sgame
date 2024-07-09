@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -15,6 +16,7 @@ public class PauseScreenBehavior : MonoBehaviour
     public GameObject gameUIElements;
     public GameObject onboardingPanel;
     public GameObject onboardingCloseButton;
+    public GameObject introCutscene;
     public AudioClip buttonClickSound;
 
     public Crosshair[] crosshairs;
@@ -65,13 +67,22 @@ public class PauseScreenBehavior : MonoBehaviour
         
 
         //Show Gamemode descriptions if on the Title Screen
-        if (this.gameObject.GetComponent<TitleScreenBehavior>() != null && this.gameObject.GetComponent<TitleScreenBehavior>().gamemodePanel.activeInHierarchy)
+        if (this.gameObject.GetComponent<TitleScreenBehavior>() != null)
         {
-            foreach (Button gamemode in this.gameObject.GetComponent<TitleScreenBehavior>().gamemodeOptions)
+            if (this.gameObject.GetComponent<TitleScreenBehavior>().gamemodePanel.activeInHierarchy)
             {
-               GameObject gamemodeDescription = gamemode.gameObject.transform.GetChild(2).gameObject;
-               gamemodeDescription.SetActive(!gamemodeDescription.activeInHierarchy);
+                foreach (Button gamemode in this.gameObject.GetComponent<TitleScreenBehavior>().gamemodeOptions)
+                {
+                    GameObject gamemodeDescription = gamemode.gameObject.transform.GetChild(2).gameObject;
+                    gamemodeDescription.SetActive(!gamemodeDescription.activeInHierarchy);
+                }
             }
+            
+            else if (introCutscene != null)
+            {
+                introCutscene.GetComponent<CutsceneManager>().SkipCutscene();
+            }
+
             return;
         }
 
