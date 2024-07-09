@@ -75,7 +75,7 @@ public class CooperativeMode : AbsGameMode
         {
             int targetIndex = GetNextAvailableBat();
 
-            if (targetIndex == -1)
+            if (targetIndex == -1 && allowedBats[TargetManager.TargetType.Regular])
             {
                 targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<BatStateMachine>());
                 continue;
@@ -201,6 +201,8 @@ public class CooperativeMode : AbsGameMode
 
             if (targetIndex >= 0)
                 targetManager.SpawnTarget(targetIndex);
+            else if (!allowedBats[TargetManager.TargetType.Regular])
+                return;
             else
                 targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<DefenseBatStateMachine>());
         }

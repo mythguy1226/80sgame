@@ -25,6 +25,11 @@ public class SpawnPanel : LookingGlassPanel
         {
             spawnUIGroups.Add(type, group);
         }
+
+        if (!GameManager.Instance.ActiveGameMode.CanSpawnType(type))
+        {
+            spawnUIGroups[type].UpdateIcon(notAvailable);
+        }
     }
 
     /// <summary>
