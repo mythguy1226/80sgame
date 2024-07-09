@@ -49,9 +49,19 @@ public class ModifierBatStateMachine : BatStateMachine
                 return;
             }
 
-            // Alter this if you want to force a specific modifier to drop
-            int randomIndex = Random.Range(0, modifierObjects.Count);
-            Instantiate(modifierObjects[randomIndex], transform.position, Quaternion.identity);
+            // Make list of weights from config
+            List<float> weights = new List<float>();
+            foreach(ModifierWeight w in GameManager.Instance.weightConfig.weights)
+            {
+                weights.Add(w.chance);
+            }
+
+            // Calculate weighted index
+            int weightedIndex = GetRandomWeightedIndex(weights);
+            if(weightedIndex >= modifierObjects.Count || weightedIndex < 0)
+                weightedIndex = 0;
+
+            Instantiate(modifierObjects[weightedIndex], transform.position, Quaternion.identity);
             modifierDropped = true;
         }
     }
@@ -66,4 +76,41 @@ public class ModifierBatStateMachine : BatStateMachine
         // Reset drop flag
         modifierDropped = false;
     }
+
+    /// <summary>
+    /// Credits: Algorithm written by Andy Gainey, and edited to work
+    /// with our solution for weighted modifiers.
+    /// Link here: https://forum.unity.com/threads/random-numbers-with-a-weighted-chance.442190/ 
+    ///
+    /// Method returns a random weighted index which takes in the list
+    /// of weights for the calculation
+    /// </summary>
+    public int GetRandomWeightedIndex(List<float> weights)
+    {
+        // Get the total sum of all the weights.
+        float weightSum = 0.0f;
+        for (int i = 0; i < weights.Count; ++i)
+        {
+            weightSum += weights[i];
+        }
+     
+        // Step through all the possibilities, one by one, checking to see if each one is selected.
+        int index = 0;
+        int lastIndex = weights.Count - 1;
+        while (index < lastIndex)
+        {
+            // Do a probability check with a likelihood of weights[index] / weightSum.
+            if (Random.Range(0, weightSum) < weights[index])
+            {
+                return index;
+            }
+     
+            // Remove the last item from the sum of total untested weights and try again.
+            weightSum -= weights[index++];
+        }
+     
+        // No other item was selected, so return very last index.
+        return index;
+    }
+    
 }

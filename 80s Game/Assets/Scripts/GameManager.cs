@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     public bool debuffActive = false;
     public List<GameObject> buffs;
     public List<GameObject> debuffs;
+    public ModifierWeightsConfig weightConfig;
 
     List<GameObject> debugBuffs;
     List<GameObject> debugDebuffs;
