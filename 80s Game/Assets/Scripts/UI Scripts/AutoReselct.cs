@@ -11,10 +11,12 @@ public class AutoReselct : MonoBehaviour
     void Update()
     {
         //Always select the last selected game object (avoids clicking and being unable to navigate UI with keyboard)
-        if (EventSystem.current.currentSelectedGameObject == null)
-            EventSystem.current.SetSelectedGameObject(lastSelectedObject); // no current selection, go back to last selected
-        else
-            lastSelectedObject = EventSystem.current.currentSelectedGameObject; // keep setting current selected object
-
+        if (EventSystem.current != null)
+        {
+            if (EventSystem.current.currentSelectedGameObject == null)
+                EventSystem.current.SetSelectedGameObject(lastSelectedObject); // no current selection, go back to last selected
+            else
+                lastSelectedObject = EventSystem.current.currentSelectedGameObject; // keep setting current selected object
+        }
     }
 }

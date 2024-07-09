@@ -32,6 +32,9 @@ public class GameManager : MonoBehaviour
     public List<GameObject> buffs;
     public List<GameObject> debuffs;
     public ModifierWeightsConfig weightConfig;
+
+    List<GameObject> debugBuffs;
+    List<GameObject> debugDebuffs;
     
     [Tooltip("Debug to spawn a Player Controller for testing without having to go through the join screen")]
     public bool debug;
@@ -78,7 +81,15 @@ public class GameManager : MonoBehaviour
                     PlayerInput pi = pc.GetComponent<PlayerInput>();
                     if (PlayerData.activePlayers[i].controlScheme == "KnM")
                     {
-                        InputDevice[] devices = new InputDevice[] { PlayerData.activePlayers[i].device, Mouse.current };
+                        InputDevice[] devices = new InputDevice[2];
+                        devices[0] = PlayerData.activePlayers[i].device;
+                        if (devices[0] == Mouse.current)
+                        {
+                            devices[1] = Keyboard.current;
+                        } else
+                        {
+                            devices[1] = Mouse.current;
+                        }
                         pi.SwitchCurrentControlScheme(PlayerData.activePlayers[i].controlScheme, devices);
                     } else
                     {
@@ -90,11 +101,47 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+
+        debugBuffs = buffs;
+        debugDebuffs = debuffs;
     }
 
     private void Start() 
     {
         InitGameMode(gameModeType);
+    }
+
+    public void UpdateModifiers()
+    {
+        debugBuffs = new List<GameObject>();
+        foreach (GameObject buff in buffs)
+        {
+            AbsModifierEffect ame = buff.GetComponent<AbsModifierEffect>();
+            if (ActiveGameMode.isModifierAllowed(ame.GetModType()))
+            {
+                debugBuffs.Add(buff);
+            }
+        }
+
+        debugDebuffs = new List<GameObject>();
+        foreach (GameObject debuff in debuffs)
+        {
+            AbsModifierEffect ame = debuff.GetComponent<AbsModifierEffect>();
+            if (ActiveGameMode.isModifierAllowed(ame.GetModType()))
+            {
+                debugDebuffs.Add(debuff);
+            }
+        }
+    }
+
+    public List<GameObject> GetBuffs()
+    {
+        return debugBuffs;
+    }
+
+    public List<GameObject> GetDebuffs()
+    {
+        return debugDebuffs;
     }
 
     public void InitGameMode(EGameMode gameModeType)

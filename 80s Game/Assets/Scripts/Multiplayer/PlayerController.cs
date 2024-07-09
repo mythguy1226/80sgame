@@ -144,6 +144,7 @@ public class PlayerController : MonoBehaviour
             pjm.joinPanelContainer.transform.GetChild(Order).GetComponent<PlayerJoinPanel>().ReadyUp();
             return;
         }
+        
         UIManager.PlayerPause(Order);
     }
 

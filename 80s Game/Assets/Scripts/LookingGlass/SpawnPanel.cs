@@ -15,12 +15,16 @@ public class SpawnPanel : LookingGlassPanel
 
     /// <summary>
     /// Bind a control group to its target type in the dictionary for easy reference
+    /// Binds happen only once
     /// </summary>
     /// <param name="type">the type of bat the group belongs to</param>
     /// <param name="group">The group object itself</param>
     public void EnlistToGroup(TargetManager.TargetType type, SpawnCommandGroup group)
     {
-        spawnUIGroups.Add(type, group);
+        if (!spawnUIGroups.ContainsKey(type))
+        {
+            spawnUIGroups.Add(type, group);
+        }
     }
 
     /// <summary>

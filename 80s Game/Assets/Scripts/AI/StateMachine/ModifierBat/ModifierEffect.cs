@@ -9,7 +9,7 @@ public abstract class AbsModifierEffect : MonoBehaviour
 {
     public enum ModType
     {
-        DoublePoints,
+        DoublePoints = 0,
         Overcharge,
         Snail,
         Confusion,
@@ -20,7 +20,7 @@ public abstract class AbsModifierEffect : MonoBehaviour
     [SerializeField]
     protected float effectDuration;
     protected float maxEffectDuration;
-    
+
     [SerializeField]
     protected GameObject modifierUIPrefab;
     protected List<GameObject> modifierUIRefs;
@@ -58,7 +58,11 @@ public abstract class AbsModifierEffect : MonoBehaviour
         {
 
             effectDuration -= Time.deltaTime;
-            modifierUIElement.transform.GetChild(0).GetComponent<Image>().fillAmount = effectDuration / maxEffectDuration;
+            if (modifierUIElement)
+            {
+                modifierUIElement.transform.GetChild(0).GetComponent<Image>().fillAmount = effectDuration / maxEffectDuration;
+            }
+            
 
             // Deactivate effect once timer reaches zero
             if (effectDuration <= 0.0f)
@@ -191,5 +195,35 @@ public abstract class AbsModifierEffect : MonoBehaviour
     {
         GameObject text = Instantiate(floatingTextPrefab, transform.position, Quaternion.identity);
         text.GetComponent<TextMeshPro>().text = $"{modifierName}";
+    }
+
+    /// <summary>
+    /// Gets the mod type for a concrete class
+    /// </summary>
+    /// <returns>The mod type</returns>
+    public abstract ModType GetModType();
+
+
+    /// <summary>
+    /// Static function to test whether a modtype is a buff or not
+    /// </summary>
+    /// <param name="type">The type to test</param>
+    /// <returns>Whether or not this type is a buff</returns>
+    public static bool ModTypeIsBuff(ModType type)
+    {
+        switch (type)
+        {
+            case ModType.DoublePoints:
+                return true;
+            case ModType.Overcharge:
+                return true;
+            case ModType.Snail:
+                return false;
+            case ModType.Confusion:
+                return false;
+            case ModType.RustedWings:
+                return true;
+        }
+        return false;
     }
 }

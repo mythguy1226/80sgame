@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class ModEMP : AbsModifierEffect
 {
+    public override ModType GetModType()
+    {
+        return ModType.EMP;
+    }
     public GameObject particles;
 
     public override void ActivateEffect()
@@ -15,6 +19,7 @@ public class ModEMP : AbsModifierEffect
 
         foreach (Target target in activeTargets)
         {
+            target.SetStunningPlayer(this.activator);
             target.ResolveHit();
         }
 
