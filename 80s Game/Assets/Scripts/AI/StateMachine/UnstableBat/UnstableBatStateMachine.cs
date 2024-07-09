@@ -16,6 +16,7 @@ public class UnstableBatStateMachine : BatStateMachine
     {
         // Trigger base behavior
         base.ResolveHit();
+        Target myself = GetComponent<Target>();
 
         // Get the chain of targets
         Target[] targetChain = GetTargetChain();
@@ -30,7 +31,7 @@ public class UnstableBatStateMachine : BatStateMachine
         // Iterate through each chained target and play their stun animations as well
         for (int i = 0; i < targetChain.Length; i++)
         {
-            if (targetChain[i] == null)
+            if (targetChain[i] == null || targetChain[i] == myself)
             {
                 continue;
             }
@@ -45,7 +46,8 @@ public class UnstableBatStateMachine : BatStateMachine
             // Play stun anim
             BatStateMachine FSM = (BatStateMachine)targetChain[i].FSM;
             FSM.GetComponent<Target>().SetStunningPlayer(currentTarg.GetStunningPlayer());
-            targetChain[i].GetComponent<AnimationHandler>().PlayStunAnimation();
+            FSM.ResolveHit();
+            //targetChain[i].GetComponent<AnimationHandler>().PlayStunAnimation();
 
             // Update current target
             currentTarg = targetChain[i];
@@ -57,10 +59,11 @@ public class UnstableBatStateMachine : BatStateMachine
     /// </summary>
     /// <param name="origin">Epicenter of bat check</param>
     /// <returns>First nearby target/bat in radius</returns>
-    Target GetTargetInRadius(Vector3 origin)
+    Target GetValidTargetInRadius(Vector3 origin)
     {
         // Get all nearby targets in radius
         Collider2D[] nearbyTargets = Physics2D.OverlapCircleAll(origin, chainRadius);
+        //Collider2D[] validTargets = FilterTargets(nearbyTargets);
 
         // If there are nearby targets then return a random one
         if (nearbyTargets.Length > 0)
@@ -79,7 +82,7 @@ public class UnstableBatStateMachine : BatStateMachine
         Target[] targetChain = new Target[chainLength];
 
         // Get the current target
-        Target currentTarget = GetTargetInRadius(transform.position);
+        Target currentTarget = GetValidTargetInRadius(transform.position);
 
         // Iterate by number of chains and add to array
         for (int i = 0; i < chainLength; i++)
@@ -89,7 +92,7 @@ public class UnstableBatStateMachine : BatStateMachine
 
             // Get the next target
             if(targetChain[i] != null)
-                currentTarget = GetTargetInRadius(targetChain[i].transform.position);
+                currentTarget = GetValidTargetInRadius(targetChain[i].transform.position);
         }
 
         // Return full chain
