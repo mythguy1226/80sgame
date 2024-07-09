@@ -140,8 +140,18 @@ public class PlayerInputWrapper : MonoBehaviour
 
     private void OnLookingGlass(InputValue value)
     {
+        if (!NetworkUtility.NetworkDevEnv())
+        {
+            return;
+        }
+
         // Open the debug panel if the game is paused
-        if (Time.timeScale > 0f && !NetworkUtility.NetworkDevEnv())
+        if (Time.timeScale > 0f )
+        {
+            return;
+        }
+
+        if (!NetworkUtility.NetworkDevEnv())
         {
             return;
         }
