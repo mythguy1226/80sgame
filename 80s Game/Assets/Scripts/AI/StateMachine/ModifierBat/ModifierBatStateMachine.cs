@@ -6,8 +6,6 @@ using Random = UnityEngine.Random;
 public class ModifierBatStateMachine : BatStateMachine
 {
     // Public modifier fields
-    List<GameObject> buffs;
-    List<GameObject> debuffs;
     bool modifierDropped = false;
 
     /// <summary>
@@ -15,9 +13,6 @@ public class ModifierBatStateMachine : BatStateMachine
     /// </summary>
     void Start()
     {
-        // Get buffs and debuffs from game manager
-        buffs = GameManager.Instance.buffs;
-        debuffs = GameManager.Instance.debuffs;
     }
 
     /// <summary>
@@ -31,20 +26,29 @@ public class ModifierBatStateMachine : BatStateMachine
         // Instantiate the modifier object
         if (!modifierDropped)
         {
-            
+            List<GameObject> buffs = GameManager.Instance.GetBuffs();
+            List<GameObject> debuffs = GameManager.Instance.GetDebuffs();
+            Debug.Log("Debuffs: " + debuffs.Count.ToString());
             //Compose available modifiers into single list
             List<GameObject> modifierObjects = new List<GameObject>();
             foreach(GameObject buff in buffs)
             {
                 modifierObjects.Add(buff);
             }
-            if (!GameManager.Instance.debuffActive)
+            if (!GameManager.Instance.debuffActive || GameManager.Instance.ActiveGameMode.isInDebugMode())
             {
                 foreach(GameObject debuff in debuffs)
                 {
                     modifierObjects.Add(debuff);
                 }
             }
+
+            // Guard Clause
+            if (modifierObjects.Count == 0)
+            {
+                return;
+            }
+
             // Alter this if you want to force a specific modifier to drop
             int randomIndex = Random.Range(0, modifierObjects.Count);
             Instantiate(modifierObjects[randomIndex], transform.position, Quaternion.identity);

@@ -1,16 +1,17 @@
 using System.Collections.Generic;
 using UnityEngine;
-public class SpawnPanel : LookingGlassPanel
+using static TargetManager;
+public class ModPanel : LookingGlassPanel
 {
     [SerializeField]
     private Sprite available;
     [SerializeField]
     private Sprite notAvailable;
-    Dictionary<TargetManager.TargetType, SpawnCommandGroup> spawnUIGroups;
+    Dictionary<AbsModifierEffect.ModType, ModCommandGroup> modifierUIGroups;
 
     public void Awake()
     {
-        spawnUIGroups = new Dictionary<TargetManager.TargetType, SpawnCommandGroup>();
+        modifierUIGroups = new Dictionary<AbsModifierEffect.ModType, ModCommandGroup>();
     }
 
     /// <summary>
@@ -19,11 +20,16 @@ public class SpawnPanel : LookingGlassPanel
     /// </summary>
     /// <param name="type">the type of bat the group belongs to</param>
     /// <param name="group">The group object itself</param>
-    public void EnlistToGroup(TargetManager.TargetType type, SpawnCommandGroup group)
+    public void EnlistToGroup(AbsModifierEffect.ModType type, ModCommandGroup group)
     {
-        if (!spawnUIGroups.ContainsKey(type))
+        if (!modifierUIGroups.ContainsKey(type))
         {
-            spawnUIGroups.Add(type, group);
+            modifierUIGroups.Add(type, group);
+        }
+
+        if (!GameManager.Instance.ActiveGameMode.isModifierAllowed(type))
+        {
+            modifierUIGroups[type].UpdateIcon(notAvailable);
         }
     }
 
@@ -33,14 +39,14 @@ public class SpawnPanel : LookingGlassPanel
     /// <param name="type">The int that represents the TargetType enum</param>
     public void UpdateAvailabilityUI(int type)
     {
-        TargetManager.TargetType targetType = (TargetManager.TargetType)type;
-        bool canSpawn = GameManager.Instance.ActiveGameMode.CanSpawnType(targetType);
+        AbsModifierEffect.ModType targetType = (AbsModifierEffect.ModType)type;
+        bool canSpawn = GameManager.Instance.ActiveGameMode.isModifierAllowed(targetType);
         if (canSpawn)
         {
-            spawnUIGroups[targetType].UpdateIcon(available);
+            modifierUIGroups[targetType].UpdateIcon(available);
         } else
         {
-            spawnUIGroups[targetType].UpdateIcon(notAvailable);
+            modifierUIGroups[targetType].UpdateIcon(notAvailable);
         }
     }
 }

@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class TestModifier : AbsModifierEffect
 {
+    public override ModType GetModType()
+    {
+        return ModType.DoublePoints;
+    }
+
     /// <summary>
     /// Override: Activates test effect
     /// </summary>

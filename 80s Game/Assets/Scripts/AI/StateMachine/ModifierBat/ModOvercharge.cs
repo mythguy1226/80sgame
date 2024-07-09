@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class ModOvercharge : AbsModifierEffect
 {
-    ModType thisType = ModType.Overcharge;
+    public override ModType GetModType()
+    {
+        return ModType.Overcharge;
+    }
     public GameObject hitParticles;
 
     /// <summary>
@@ -12,14 +15,14 @@ public class ModOvercharge : AbsModifierEffect
     /// </summary>
     public override void ActivateEffect()
     {
-        if (activator.HasMod(thisType))
+        if (activator.HasMod(GetModType()))
         {
-            activator.ExtendModDuration(thisType, effectDuration);
+            activator.ExtendModDuration(GetModType(), effectDuration);
             CleanUp();
             return;
         }
 
-        activator.SetMod(thisType, this);
+        activator.SetMod(GetModType(), this);
         activator.ExpandRadius();
         activator.hitParticles = hitParticles;
     }
@@ -30,7 +33,7 @@ public class ModOvercharge : AbsModifierEffect
     /// </summary>
     public override void DeactivateEffect()
     {
-        activator.RemoveMod(thisType);
+        activator.RemoveMod(GetModType());
         activator.ResetRadius();
         activator.hitParticles = activator.defaultHitParticles;
     }
