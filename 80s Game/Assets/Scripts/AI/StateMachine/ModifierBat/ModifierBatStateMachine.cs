@@ -55,6 +55,8 @@ public class ModifierBatStateMachine : BatStateMachine
 
             // Calculate weighted index
             int weightedIndex = GetRandomWeightedIndex(weights);
+            if(weightedIndex >= modifierObjects.Count || weightedIndex < 0)
+                weightedIndex = 0;
 
             Instantiate(modifierObjects[weightedIndex], transform.position, Quaternion.identity);
             modifierDropped = true;
