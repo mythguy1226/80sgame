@@ -252,6 +252,7 @@ public class DefenseBatStateMachine : AbsStateMachine<DefenseBatStateMachine.Def
     {
         // Get the defendable from the target latch
         Defendable latchedDefendable = targetLatch.transform.parent.GetComponent<Defendable>();
+        AnimControls.PlayAttackAnimation();
 
         // Deal damage
         latchedDefendable.TakeDamage(attackDamage);
