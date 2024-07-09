@@ -238,6 +238,12 @@ public class Target : MonoBehaviour
     /// </summary>
     private void ShowFloatingText()
     {
+        //Don't Show Floating Text in Defense Mode
+        if (GameModeData.activeGameMode == EGameMode.Defense)
+        {
+            return;
+        }
+
         GameObject text = Instantiate(floatingTextPrefab, transform.position, Quaternion.identity);
 
         if (stunningPlayer != null)
