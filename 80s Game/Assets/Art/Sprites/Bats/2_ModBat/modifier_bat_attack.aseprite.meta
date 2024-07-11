@@ -55,7 +55,7 @@ ScriptedImporter:
     flipbookColumns: 0
     ignorePngGamma: 0
     cookieMode: 0
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -80,7 +80,7 @@ ScriptedImporter:
     importHiddenLayers: 0
     layerImportMode: 1
     defaultPivotSpace: 0
-    defaultPivotAlignment: 7
+    defaultPivotAlignment: 0
     customPivotPosition: {x: 0.5, y: 0.5}
     spritePadding: 0
     generateModelPrefab: 1
@@ -92,7 +92,7 @@ ScriptedImporter:
     importHiddenLayers: 0
     layerImportMode: 1
     defaultPivotSpace: 0
-    defaultPivotAlignment: 7
+    defaultPivotAlignment: 0
     customPivotPosition: {x: 0.5, y: 0.5}
     spritePadding: 0
     generateModelPrefab: 1
@@ -100,7 +100,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 638561278696495583
+  platformSettingsDirtyTick: 638563009319223513
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -126,7 +126,7 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: modifier_bat_attack_Frame_0
     originalName: 
-    pivot: {x: 0.8181819, y: -0.015873017}
+    pivot: {x: 0.8181819, y: 0.49206352}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -146,7 +146,7 @@ ScriptedImporter:
     uvTransform: {x: 126, y: 4}
   - name: modifier_bat_attack_Frame_1
     originalName: 
-    pivot: {x: 0.8181819, y: 0}
+    pivot: {x: 0.8181819, y: 0.5}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -166,7 +166,7 @@ ScriptedImporter:
     uvTransform: {x: 45, y: 79}
   - name: modifier_bat_attack_Frame_2
     originalName: 
-    pivot: {x: 0.8181819, y: -0.015873017}
+    pivot: {x: 0.8181819, y: 0.49206352}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -186,7 +186,7 @@ ScriptedImporter:
     uvTransform: {x: 126, y: 75}
   - name: modifier_bat_attack_Frame_3
     originalName: 
-    pivot: {x: 0.84375, y: 0.045454547}
+    pivot: {x: 0.84375, y: 0.53030306}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -206,7 +206,7 @@ ScriptedImporter:
     uvTransform: {x: 45, y: 151}
   - name: modifier_bat_attack_Frame_4
     originalName: 
-    pivot: {x: 0.8181819, y: 0.04477612}
+    pivot: {x: 0.8181819, y: 0.52238804}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -226,7 +226,7 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 4}
   - name: modifier_bat_attack_Frame_5
     originalName: 
-    pivot: {x: 0.8181819, y: 0.04477612}
+    pivot: {x: 0.8181819, y: 0.52238804}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -246,7 +246,7 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 79}
   - name: modifier_bat_attack_Frame_6
     originalName: 
-    pivot: {x: 0.8181819, y: -0.015873017}
+    pivot: {x: 0.8181819, y: 0.49206352}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -266,7 +266,7 @@ ScriptedImporter:
     uvTransform: {x: 126, y: 146}
   - name: modifier_bat_attack_Frame_7
     originalName: 
-    pivot: {x: 0.84375, y: 0}
+    pivot: {x: 0.84375, y: 0.50793654}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -286,7 +286,7 @@ ScriptedImporter:
     uvTransform: {x: 86, y: 78}
   - name: modifier_bat_attack_Frame_8
     originalName: 
-    pivot: {x: 0.8181819, y: -0.015873017}
+    pivot: {x: 0.8181819, y: 0.49206352}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -306,7 +306,7 @@ ScriptedImporter:
     uvTransform: {x: 167, y: 4}
   - name: modifier_bat_attack_Frame_9
     originalName: 
-    pivot: {x: 0.8181819, y: 0.04477612}
+    pivot: {x: 0.8181819, y: 0.52238804}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -326,7 +326,7 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 154}
   - name: modifier_bat_attack_Frame_10
     originalName: 
-    pivot: {x: 0.8181819, y: 0.04477612}
+    pivot: {x: 0.8181819, y: 0.52238804}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -346,7 +346,7 @@ ScriptedImporter:
     uvTransform: {x: 45, y: 4}
   - name: modifier_bat_attack_Frame_11
     originalName: 
-    pivot: {x: 0.84375, y: 0.045454547}
+    pivot: {x: 0.84375, y: 0.53030306}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
