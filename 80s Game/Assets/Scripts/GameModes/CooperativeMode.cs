@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class CooperativeMode : AbsGameMode
 {
@@ -115,15 +116,14 @@ public class CooperativeMode : AbsGameMode
         for (int i = 0; i < bats.Count; i++)
         {
             Target bat = bats[i];
+            // Debug Override
+            if (debugMode && allowedBats[bat.type] && !bat.FSM.IsActive())
+            {
+                return i;
+            }
             if (SkipBat(bat))
             {
                 continue;
-            }
-
-            // Debug Override
-            if (debugMode)
-            {
-                return i;
             }
 
             // Check for special bat types
@@ -173,7 +173,7 @@ public class CooperativeMode : AbsGameMode
         }
 
         // Start the next round if desired number of stuns is met
-        if (targetManager.numStuns >= currentRoundTargetCount)
+        if (targetManager.numStuns >= currentRoundTargetCount && allowedBats[TargetManager.TargetType.Modifier])
         {
             StartNextRound();
 
