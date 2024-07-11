@@ -13,7 +13,7 @@ public class CooperativeMode : AbsGameMode
         ModeType = EGameMode.Competitive;
 
         // Initial round parameters
-        NumRounds = 5;
+        NumRounds = 99;
         maxTargetsOnScreen = 15;
         currentRoundTargetCount = 8;
         allowedBats = new Dictionary<TargetManager.TargetType, bool>();
@@ -77,7 +77,7 @@ public class CooperativeMode : AbsGameMode
 
             if (targetIndex == -1)
             {
-                targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<BatStateMachine>());
+                targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<DefenseBatStateMachine>());
                 continue;
             }
 
@@ -114,13 +114,17 @@ public class CooperativeMode : AbsGameMode
         // find one that isn't already on screen
         for (int i = 0; i < bats.Count; i++)
         {
-            DefenseBatStateMachine FSM = (DefenseBatStateMachine)bats[i].FSM;
-            if (FSM.bIsActive)
+            Target bat = bats[i];
+            if (SkipDefenseBat(bat))
+            {
                 continue;
+            }
 
-            ModifierDefenseBatStateMachine comp = bats[i].GetComponent<ModifierDefenseBatStateMachine>();
-            if (comp != null)
-                continue;
+            // Debug Override
+            if (debugMode)
+            {
+                return i;
+            }
 
             // Check for special bat types
             foreach(SpawnRate rate in GameManager.Instance.spawnConfig.rates)
@@ -132,7 +136,7 @@ public class CooperativeMode : AbsGameMode
                     if(numBatsMap[rate.targetType] > 0)
                     {
                         // Check for proper type and continue if not
-                        if(FSM.IsDefault() || bats[i].type != rate.targetType)
+                        if(bat.FSM.IsDefault() || bat.type != rate.targetType)
                             goto EndLoop;
 
                         numBatsMap[rate.targetType]--;
@@ -143,7 +147,7 @@ public class CooperativeMode : AbsGameMode
 
             // If default bat return index, as there were no available
             // special bats to spawn previously
-            if (FSM.IsDefault())
+            if (bat.FSM.IsDefault())
             {
                 return i;
             }
