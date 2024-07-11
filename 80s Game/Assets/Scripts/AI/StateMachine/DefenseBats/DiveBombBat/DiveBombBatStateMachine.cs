@@ -36,7 +36,7 @@ public class DiveBombBatStateMachine : DefenseBatStateMachine
         SpriteRenderer.color = Color.red;
 
         //plays the telegraph ("charge") animation
-        //base.AnimControls.PlayChargeAnimation();
+        base.AnimControls.PlayChargeAnimation();
         StartCoroutine(AllowPursue());
     }
 
@@ -47,7 +47,7 @@ public class DiveBombBatStateMachine : DefenseBatStateMachine
     {
         yield return new WaitForSeconds(2.0f);
         bCanPursue = true;
-        //base.AnimControls.PlayAttackAnimation();
+        base.AnimControls.PlayAttackAnimation();
     }
 
     /// <summary>
@@ -56,6 +56,9 @@ public class DiveBombBatStateMachine : DefenseBatStateMachine
     public override void Reset()
     {
         base.Reset();
+
+        //since this bat explodes, need to reset animation after death
+        base.AnimControls.ResetAnimation();
 
         SpriteRenderer.color = new Color(255.0f/255.0f, 96.0f/255.0f, 0);
     }

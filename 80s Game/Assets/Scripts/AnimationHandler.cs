@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AnimationHandler : MonoBehaviour
 {
-    Animator anime; //animator for the given object
+    Animator animator; //animator for the given object
 
     private int _stunHash;
     private int _dropHash;
@@ -15,7 +15,7 @@ public class AnimationHandler : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        anime = GetComponent<Animator>(); //set up animator
+        animator = GetComponent<Animator>(); //set up animator
 
         _stunHash = Animator.StringToHash("hit");
         _dropHash = Animator.StringToHash("drop");
@@ -35,13 +35,13 @@ public class AnimationHandler : MonoBehaviour
     public void PlayStunAnimation()
     {
         // Reset potentially active animations
-        anime.ResetTrigger(_dropHash);
-        anime.ResetTrigger(_resetHash);
-        anime.ResetTrigger(_attackHash);
-        anime.ResetTrigger(_chargeHash);
+        animator.ResetTrigger(_dropHash);
+        animator.ResetTrigger(_resetHash);
+        animator.ResetTrigger(_attackHash);
+        animator.ResetTrigger(_chargeHash);
 
         // Set new animation
-        anime.SetTrigger(_stunHash);
+        animator.SetTrigger(_stunHash);
     }
 
     /// <summary>
@@ -50,13 +50,13 @@ public class AnimationHandler : MonoBehaviour
     public void PlayDropAnimation()
     {
         // Reset potentially active animations
-        anime.ResetTrigger(_stunHash);
-        anime.ResetTrigger(_resetHash);
-        anime.ResetTrigger(_attackHash);
-        anime.ResetTrigger(_chargeHash);
+        animator.ResetTrigger(_stunHash);
+        animator.ResetTrigger(_resetHash);
+        animator.ResetTrigger(_attackHash);
+        animator.ResetTrigger(_chargeHash);
 
         // Set new animation
-        anime.SetTrigger(_dropHash);
+        animator.SetTrigger(_dropHash);
     }
 
     /// <summary>
@@ -67,13 +67,13 @@ public class AnimationHandler : MonoBehaviour
     public void PlayAttackAnimation()
     {
         // Reset potentially active animations
-        anime.ResetTrigger(_stunHash);
-        anime.ResetTrigger(_resetHash);
-        anime.ResetTrigger(_dropHash);
-        anime.ResetTrigger(_chargeHash);
+        animator.ResetTrigger(_stunHash);
+        animator.ResetTrigger(_resetHash);
+        animator.ResetTrigger(_dropHash);
+        animator.ResetTrigger(_chargeHash);
 
         // Set new animation
-        anime.SetTrigger(_attackHash);
+        animator.SetTrigger(_attackHash);
     }
 
     /// <summary>
@@ -83,13 +83,13 @@ public class AnimationHandler : MonoBehaviour
     public void PlayChargeAnimation()
     {
         // Reset potentially active animations
-        anime.ResetTrigger(_stunHash);
-        anime.ResetTrigger(_dropHash);
-        anime.ResetTrigger(_attackHash);
-        anime.ResetTrigger(_resetHash);
+        animator.ResetTrigger(_stunHash);
+        animator.ResetTrigger(_dropHash);
+        animator.ResetTrigger(_attackHash);
+        animator.ResetTrigger(_resetHash);
 
         // Set new animation
-        anime.SetTrigger(_chargeHash);
+        animator.SetTrigger(_chargeHash);
     }
 
     /// <summary>
@@ -98,12 +98,12 @@ public class AnimationHandler : MonoBehaviour
     public void ResetAnimation()
     {
         // Reset potentially active animations
-        anime.ResetTrigger(_stunHash);
-        anime.ResetTrigger(_dropHash);
-        anime.ResetTrigger(_attackHash);
-        anime.ResetTrigger(_chargeHash);
+        animator.ResetTrigger(_stunHash);
+        animator.ResetTrigger(_dropHash);
+        animator.ResetTrigger(_attackHash);
+        animator.ResetTrigger(_chargeHash);
 
         // Set new animation
-        anime.SetTrigger(_resetHash);
+        animator.SetTrigger(_resetHash);
     }
 }
