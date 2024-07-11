@@ -54,7 +54,7 @@ public abstract class AbsGameMode
     {
         ModifierBatStateMachine mbsm = target.GetComponent<ModifierBatStateMachine>();
         bool isModifierBat = mbsm != null;
-        return !allowedBats[target.type] || target.FSM.IsActive() || isModifierBat;
+        return !allowedBats[target.type] || target.FSM.IsActive() || isModifierBat ;
     }
 
     // Needs to be public for targetManager to call

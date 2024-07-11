@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class CooperativeMode : AbsGameMode
 {
@@ -75,7 +76,7 @@ public class CooperativeMode : AbsGameMode
         {
             int targetIndex = GetNextAvailableBat();
 
-            if (targetIndex == -1)
+            if (targetIndex == -1 && allowedBats[TargetManager.TargetType.Regular])
             {
                 targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<BatStateMachine>());
                 continue;
@@ -114,16 +115,19 @@ public class CooperativeMode : AbsGameMode
         // find one that isn't already on screen
         for (int i = 0; i < bats.Count; i++)
         {
-            DefenseBatStateMachine FSM = (DefenseBatStateMachine)bats[i].FSM;
-            if (FSM.bIsActive)
+            Target bat = bats[i];
+            // Debug Override
+            if (debugMode && allowedBats[bat.type] && !bat.FSM.IsActive())
+            {
+                return i;
+            }
+            if (SkipBat(bat))
+            {
                 continue;
-
-            ModifierDefenseBatStateMachine comp = bats[i].GetComponent<ModifierDefenseBatStateMachine>();
-            if (comp != null)
-                continue;
+            }
 
             // Check for special bat types
-            foreach(SpawnRate rate in GameManager.Instance.spawnConfig.rates)
+            foreach (SpawnRate rate in GameManager.Instance.spawnConfig.rates)
             {
                 // Check that type isnt regular
                 if(rate.targetType != TargetManager.TargetType.Regular)
@@ -132,7 +136,7 @@ public class CooperativeMode : AbsGameMode
                     if(numBatsMap[rate.targetType] > 0)
                     {
                         // Check for proper type and continue if not
-                        if(FSM.IsDefault() || bats[i].type != rate.targetType)
+                        if(bat.FSM.IsDefault() || bats[i].type != rate.targetType)
                             goto EndLoop;
 
                         numBatsMap[rate.targetType]--;
@@ -143,7 +147,7 @@ public class CooperativeMode : AbsGameMode
 
             // If default bat return index, as there were no available
             // special bats to spawn previously
-            if (FSM.IsDefault())
+            if (bat.FSM.IsDefault())
             {
                 return i;
             }
@@ -169,7 +173,7 @@ public class CooperativeMode : AbsGameMode
         }
 
         // Start the next round if desired number of stuns is met
-        if (targetManager.numStuns >= currentRoundTargetCount)
+        if (targetManager.numStuns >= currentRoundTargetCount && allowedBats[TargetManager.TargetType.Modifier])
         {
             StartNextRound();
 
@@ -201,6 +205,8 @@ public class CooperativeMode : AbsGameMode
 
             if (targetIndex >= 0)
                 targetManager.SpawnTarget(targetIndex);
+            else if (!allowedBats[TargetManager.TargetType.Regular])
+                return;
             else
                 targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<DefenseBatStateMachine>());
         }
