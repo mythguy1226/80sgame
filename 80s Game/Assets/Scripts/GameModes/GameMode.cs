@@ -54,6 +54,18 @@ public abstract class AbsGameMode
     {
         ModifierBatStateMachine mbsm = target.GetComponent<ModifierBatStateMachine>();
         bool isModifierBat = mbsm != null;
+        return !allowedBats[target.type] || target.FSM.IsActive() || isModifierBat ;
+    }
+
+    /// <summary>
+    /// Validation function to determine if this bat should be skipped for spawning in defense mode
+    /// </summary>
+    /// <param name="target">Target to evaluate</param>
+    /// <returns>Whether or not to skip this target for spawning</returns>
+    protected bool SkipDefenseBat(Target target)
+    {
+        ModifierDefenseBatStateMachine mbsm = target.GetComponent<ModifierDefenseBatStateMachine>();
+        bool isModifierBat = mbsm != null;
         return !allowedBats[target.type] || target.FSM.IsActive() || isModifierBat;
     }
 
