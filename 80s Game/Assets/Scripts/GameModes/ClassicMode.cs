@@ -75,7 +75,7 @@ public class ClassicMode : AbsGameMode
         {
             int targetIndex = GetNextAvailableBat();
 
-            if (targetIndex == -1)
+            if (targetIndex == -1 && allowedBats[TargetManager.TargetType.Regular])
             {
                 targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<BatStateMachine>());
                 continue;
@@ -115,15 +115,14 @@ public class ClassicMode : AbsGameMode
         for (int i = 0; i < bats.Count; i++)
         {
             Target bat = bats[i];
+            // Debug Override
+            if (debugMode && allowedBats[bat.type] && !bat.FSM.IsActive())
+            {
+                return i;
+            }
             if (SkipBat(bat))
             {
                 continue;
-            }
-
-            // Debug Override
-            if (debugMode)
-            {
-                return i;
             }
 
             // Check for special bat types
@@ -219,6 +218,8 @@ public class ClassicMode : AbsGameMode
             int targetIndex = GetNextAvailableBat();
             if (targetIndex >= 0)
                 targetManager.SpawnTarget(targetIndex);
+            else if (!allowedBats[TargetManager.TargetType.Regular])
+                return;
             else
                 targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<BatStateMachine>());
         }

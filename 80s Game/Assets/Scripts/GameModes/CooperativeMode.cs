@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class CooperativeMode : AbsGameMode
 {
@@ -75,7 +76,7 @@ public class CooperativeMode : AbsGameMode
         {
             int targetIndex = GetNextAvailableBat();
 
-            if (targetIndex == -1)
+            if (targetIndex == -1 && allowedBats[TargetManager.TargetType.Regular])
             {
                 targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<DefenseBatStateMachine>());
                 continue;
@@ -115,19 +116,18 @@ public class CooperativeMode : AbsGameMode
         for (int i = 0; i < bats.Count; i++)
         {
             Target bat = bats[i];
+            // Debug Override
+            if (debugMode && allowedBats[bat.type] && !bat.FSM.IsActive())
+            {
+                return i;
+            }
             if (SkipDefenseBat(bat))
             {
                 continue;
             }
 
-            // Debug Override
-            if (debugMode)
-            {
-                return i;
-            }
-
             // Check for special bat types
-            foreach(SpawnRate rate in GameManager.Instance.spawnConfig.rates)
+            foreach (SpawnRate rate in GameManager.Instance.spawnConfig.rates)
             {
                 // Check that type isnt regular
                 if(rate.targetType != TargetManager.TargetType.Regular)
@@ -173,7 +173,7 @@ public class CooperativeMode : AbsGameMode
         }
 
         // Start the next round if desired number of stuns is met
-        if (targetManager.numStuns >= currentRoundTargetCount)
+        if (targetManager.numStuns >= currentRoundTargetCount && allowedBats[TargetManager.TargetType.Modifier])
         {
             StartNextRound();
 
@@ -205,6 +205,8 @@ public class CooperativeMode : AbsGameMode
 
             if (targetIndex >= 0)
                 targetManager.SpawnTarget(targetIndex);
+            else if (!allowedBats[TargetManager.TargetType.Regular])
+                return;
             else
                 targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<DefenseBatStateMachine>());
         }
