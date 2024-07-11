@@ -57,7 +57,7 @@ MonoBehaviour:
   FSM: {fileID: 0}
   bIsStunned: 0
   floatingTextPrefab: {fileID: 0}
-  pointValue: 1000
+  pointValue: 3000
   deathHeight: -6.5
   hitSound: {fileID: 0}
 --- !u!50 &4043134783524271435
