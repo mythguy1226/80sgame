@@ -36,7 +36,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3.5, y: 3.5, z: 1}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -122,8 +122,8 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.64, y: 0.64}
+    pivot: {x: 0.47457626, y: 0.18421052}
+    oldSize: {x: 0.59, y: 0.38}
     newSize: {x: 0.64, y: 0.64}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -131,17 +131,19 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.07134046, y: 0.17626765}
-      - {x: -0.05648417, y: 0.23354425}
-      - {x: -0.106239244, y: 0.1813686}
-      - {x: -0.102449246, y: 0.07703166}
-      - {x: -0.18919323, y: 0.01}
-      - {x: -0.17406332, y: -0.031901896}
-      - {x: -0.09057618, y: -0.049466718}
-      - {x: -0.099032976, y: -0.12825361}
-      - {x: -0.04330734, y: -0.17594755}
-      - {x: 0.08671771, y: -0.10610534}
-      - {x: 0.18838617, y: -0.036498513}
+    - - {x: 0.26, y: 0.21}
+      - {x: -0.06, y: 0.29}
+      - {x: -0.08, y: 0.24}
+      - {x: -0.07, y: 0.14}
+      - {x: -0.15, y: 0.07}
+      - {x: -0.19, y: 0}
+      - {x: -0.15, y: -0.049466718}
+      - {x: -0.07, y: -0.07}
+      - {x: -0.1, y: -0.14}
+      - {x: 0.18, y: -0.16}
+      - {x: 0.28, y: -0.1}
+      - {x: 0.25, y: 0.05}
+      - {x: 0.19, y: 0.05}
   m_UseDelaunayMesh: 0
 --- !u!114 &-9004518963499802162
 MonoBehaviour:
@@ -177,7 +179,7 @@ Animator:
   m_GameObject: {fileID: 232502045716647642}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1c40a341349f502408cd7689d305a5ec, type: 2}
+  m_Controller: {fileID: 9100000, guid: 85bcc58ea7bdb494ca3c05068095d070, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -197,10 +199,8 @@ Animation:
   m_GameObject: {fileID: 232502045716647642}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 69ae86a3a632d6c44b862d36f8455c9c, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: 69ae86a3a632d6c44b862d36f8455c9c, type: 2}
-  - {fileID: 7400000, guid: 3bc2ca24ee02b344c99c996b7b331e17, type: 2}
+  m_Animation: {fileID: 7400000, guid: 5925d5d93d8cc8841ba674b47d878e80, type: 2}
+  m_Animations: []
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
@@ -246,7 +246,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: b276e073f04036041ab1761e836da248, type: 3}
+  m_Sprite: {fileID: 361592523860845329, guid: 75ea44f98fdffab498b32fec784a26ce, type: 3}
   m_Color: {r: 1, g: 0.37736028, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0

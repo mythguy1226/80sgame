@@ -34,6 +34,9 @@ public class DiveBombBatStateMachine : DefenseBatStateMachine
     public override void BeginPursue()
     {
         SpriteRenderer.color = Color.red;
+
+        //plays the telegraph ("charge") animation
+        //base.AnimControls.PlayChargeAnimation();
         StartCoroutine(AllowPursue());
     }
 
@@ -44,6 +47,7 @@ public class DiveBombBatStateMachine : DefenseBatStateMachine
     {
         yield return new WaitForSeconds(2.0f);
         bCanPursue = true;
+        //base.AnimControls.PlayAttackAnimation();
     }
 
     /// <summary>
