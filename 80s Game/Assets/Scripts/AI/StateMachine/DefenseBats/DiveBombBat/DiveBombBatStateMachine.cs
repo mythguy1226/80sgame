@@ -34,7 +34,7 @@ public class DiveBombBatStateMachine : DefenseBatStateMachine
     public override void BeginPursue()
     {
         //tint the bat slightly red to signal an upcoming attack
-        SpriteRenderer.color = new Color(255.0f / 255.0f, 205.0f / 255.0f, 205.0f / 255.0f);
+        SpriteRenderer.color = new Color(255.0f / 255.0f, 225.0f / 255.0f, 225.0f / 255.0f);
 
         //plays the telegraph ("charge") animation
         base.AnimControls.PlayChargeAnimation();
