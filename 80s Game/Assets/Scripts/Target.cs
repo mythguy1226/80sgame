@@ -71,6 +71,8 @@ public class Target : MonoBehaviour
     /// <param name="newSpeed">New speed</param>
     public void UpdateSpeed(float newSpeed)
     {
+        if(_MovementControls == null)
+            _MovementControls = GetComponent<KinematicSteer>();
         _MovementControls.maxSpeed = newSpeed;
     }
 
