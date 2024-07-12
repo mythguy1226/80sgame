@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Target : MonoBehaviour
 {
@@ -200,7 +197,7 @@ public class Target : MonoBehaviour
 
 
         // Choose new wander position to be used on respawn
-        _MovementControls.SetWanderPosition();
+        _MovementControls.Initialize();
 
         // Get reference to game manager instance
         GameManager gameManager = GameManager.Instance;
