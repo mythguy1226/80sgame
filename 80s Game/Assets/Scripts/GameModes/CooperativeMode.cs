@@ -14,7 +14,7 @@ public class CooperativeMode : AbsGameMode
         ModeType = EGameMode.Competitive;
 
         // Initial round parameters
-        NumRounds = 5;
+        NumRounds = 99;
         maxTargetsOnScreen = 15;
         currentRoundTargetCount = 8;
         allowedBats = new Dictionary<TargetManager.TargetType, bool>();
@@ -78,7 +78,7 @@ public class CooperativeMode : AbsGameMode
 
             if (targetIndex == -1 && allowedBats[TargetManager.TargetType.Regular])
             {
-                targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<BatStateMachine>());
+                targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<DefenseBatStateMachine>());
                 continue;
             }
 
@@ -121,7 +121,7 @@ public class CooperativeMode : AbsGameMode
             {
                 return i;
             }
-            if (SkipBat(bat))
+            if (SkipDefenseBat(bat))
             {
                 continue;
             }
@@ -136,7 +136,7 @@ public class CooperativeMode : AbsGameMode
                     if(numBatsMap[rate.targetType] > 0)
                     {
                         // Check for proper type and continue if not
-                        if(bat.FSM.IsDefault() || bats[i].type != rate.targetType)
+                        if(bat.FSM.IsDefault() || bat.type != rate.targetType)
                             goto EndLoop;
 
                         numBatsMap[rate.targetType]--;

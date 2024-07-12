@@ -135,6 +135,8 @@ public class DefenseBatStateMachine : AbsStateMachine<DefenseBatStateMachine.Def
             targetLatch.Unlatch();
             targetLatch = null;
         }
+
+        bCanPursue = false;
     }
 
     /// <summary>

@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: 22969b4c789524e4bb9b3cc7d01a9b0d
+guid: 827d9705d20f9e943810985c09b0afc0
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects:
   - first:
       type: UnityEngine:AnimationClip
       assembly: UnityEngine.AnimationModule
-      name: modbat_drop_1frame_Clip
-    second: {fileID: 7400000, guid: 276c4c5ebde4d2245a21dc3facbe4af9, type: 2}
+      name: divebomber_bat-drop_alt_Clip
+    second: {fileID: 7400000, guid: 31936fd46f266f54eb082c9272ef8c15, type: 2}
   serializedVersion: 2
   userData: 
   assetBundleName: 
@@ -37,7 +37,7 @@ ScriptedImporter:
     sRGBTexture: 1
     spriteMode: 2
     spriteExtrude: 1
-    spriteMeshType: 0
+    spriteMeshType: 1
     alignment: 0
     spritePivot: {x: 0.5, y: 0.5}
     spritePixelsToUnits: 100
@@ -100,7 +100,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 638563009319223513
+  platformSettingsDirtyTick: 638562978480016195
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -124,18 +124,18 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: modbat_drop_1frame_Frame_0
+  - name: divebomber_bat-drop_alt
     originalName: 
-    pivot: {x: 0.7826087, y: 0.53999996}
+    pivot: {x: 0.71999997, y: 0.47457626}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 23
-      height: 50
-    spriteID: 08e2d1b9e12ca8149909c5ff844d2ef9
+      width: 25
+      height: 59
+    spriteID: 9163f1ebb026db342bb88d5506d93ae5
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -144,18 +144,18 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
-  - name: modbat_drop_1frame_Frame_1
+  - name: divebomber_bat-drop_alt_Frame_1
     originalName: 
-    pivot: {x: 0.7826087, y: 0.53999996}
+    pivot: {x: 0.71999997, y: 0.47457626}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 35
+      x: 37
       y: 4
-      width: 23
-      height: 50
-    spriteID: ec5a7c5a2c58b6e4c804a29c10ecf8e6
+      width: 25
+      height: 59
+    spriteID: fef3059248df8af48beaac686d8ef81f
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -163,32 +163,32 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 35, y: 4}
+    uvTransform: {x: 37, y: 4}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: 2014390896
-    name: modbat_drop_1frame
+    guid: 1099483069
+    name: divebomber_bat-drop_alt
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: modbat_drop_1frame_Frame_0
+    - name: divebomber_bat-drop_alt_Frame_0
       frameIndex: 0
       cellRect:
         x: 14
-        y: 5
-        width: 23
-        height: 50
-      spriteId: 08e2d1b9e12ca8149909c5ff844d2ef9
-    - name: modbat_drop_1frame_Frame_1
+        y: 4
+        width: 25
+        height: 59
+      spriteId: 9163f1ebb026db342bb88d5506d93ae5
+    - name: divebomber_bat-drop_alt_Frame_1
       frameIndex: 1
       cellRect:
         x: 14
-        y: 5
-        width: 23
-        height: 50
-      spriteId: ec5a7c5a2c58b6e4c804a29c10ecf8e6
+        y: 4
+        width: 25
+        height: 59
+      spriteId: fef3059248df8af48beaac686d8ef81f
     linkedCells: []
     parentIndex: -1
   platformSettings:
