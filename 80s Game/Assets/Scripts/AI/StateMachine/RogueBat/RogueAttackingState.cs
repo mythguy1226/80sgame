@@ -50,6 +50,40 @@ public class RogueAttackingState : AbsBaseState<RogueBatStateMachine.RogueBatSta
         // Update death timer
         FSM.deathTimer -= Time.deltaTime;
 
+        // Set bat to face direction of its target
+        Target curTarget = FSM.currentTarget;
+        Vector3 facingDir = curTarget.transform.position - FSM.transform.position;
+        facingDir.Normalize();
+        if(facingDir.x > 0)
+        {
+            _SpriteRenderer.flipX = true;
+
+            // Keep shot location on right side
+            FSM.shootLocation.position = FSM.rightShotLoc.position;
+        }
+        else
+        {
+            _SpriteRenderer.flipX = false;
+
+            // Keep shot location on left side
+            FSM.shootLocation.position = FSM.leftShotLoc.position;
+        }
+
+        // Manage shot timer and shooting
+        if(FSM.CanShoot) // Attack logic
+        {
+            FSM.LaunchProjectile();
+            FSM.CanShoot = false;
+        }
+        else // Cooldown logic
+        {
+            FSM.ShotTimer -= Time.deltaTime;
+            if(FSM.ShotTimer <= 0.0f)
+            {
+                FSM.ShotTimer = FSM.shotCooldown;
+                FSM.CanShoot = true;
+            }
+        }
     }
 
     /*
@@ -61,13 +95,19 @@ public class RogueAttackingState : AbsBaseState<RogueBatStateMachine.RogueBatSta
     {
         RogueBatStateMachine FSM = (RogueBatStateMachine)OwnerFSM;
 
-        // When timer is up, set target to flee
+        // When timer is up, kill the bat
         if(FSM != null)
         {
+            // Check death timer
             if (FSM.deathTimer <= 0.0f)
             {
                 return RogueBatStateMachine.RogueBatStates.Death;
             }
+
+            // Check for closest targets
+            FSM.currentTarget = FSM.GetClosestTarget();
+            if(FSM.currentTarget == null)
+                return RogueBatStateMachine.RogueBatStates.Observing;
         }
         
         return RogueBatStateMachine.RogueBatStates.Attacking;

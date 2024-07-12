@@ -61,13 +61,19 @@ public class ObservingState : AbsBaseState<RogueBatStateMachine.RogueBatStates>
     {
         RogueBatStateMachine FSM = (RogueBatStateMachine)OwnerFSM;
 
-        // When timer is up, set target to flee
+        // When timer is up, kill the bat
         if(FSM != null)
         {
+            // Check death timer
             if (FSM.deathTimer <= 0.0f)
             {
                 return RogueBatStateMachine.RogueBatStates.Death;
             }
+
+            // Check for closest targets
+            FSM.currentTarget = FSM.GetClosestTarget();
+            if(FSM.currentTarget != null)
+                return RogueBatStateMachine.RogueBatStates.Attacking;
         }
         
         return RogueBatStateMachine.RogueBatStates.Observing;

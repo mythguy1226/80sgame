@@ -14,7 +14,8 @@ public abstract class AbsModifierEffect : MonoBehaviour
         Snail,
         Confusion,
         RustedWings,
-        EMP
+        EMP,
+        RogueBat
     }
 
     [SerializeField]

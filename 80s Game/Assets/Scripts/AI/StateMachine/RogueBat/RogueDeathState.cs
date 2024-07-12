@@ -47,6 +47,16 @@ public class RogueDeathState : AbsBaseState<RogueBatStateMachine.RogueBatStates>
         // Get needed components
         _SpriteRenderer = FSM.SpriteRenderer;
 
+        // Set bat fall movement
+        FSM.transform.position += new Vector3(0.0f, -1.0f, 0.0f) * 6.0f * Time.deltaTime;
+
+        // Reset all target values once in this state if
+        // bat has dropped
+        if (FSM.transform.position.y <= FSM.deathHeight)
+        {
+            FSM.Reset();
+        }
+
     }
 
     /*

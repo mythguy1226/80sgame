@@ -20,6 +20,16 @@ public class RogueBatStateMachine : AbsStateMachine<RogueBatStateMachine.RogueBa
     // Public fields
     public RogueBatStates initialState = RogueBatStates.Observing;
 
+    // Combat fields
+    public Target currentTarget;
+    public GameObject projectileClass;
+    public Transform shootLocation;
+    public Transform leftShotLoc;
+    public Transform rightShotLoc;
+    public float shotCooldown = 1.0f;
+    float shotTimer;
+    bool canShoot = true;
+
     // Death fields
     public float timeUntilDeath = 8.0f;
     public float deathTimer = 0.0f;
@@ -37,6 +47,18 @@ public class RogueBatStateMachine : AbsStateMachine<RogueBatStateMachine.RogueBa
     public AnimationHandler AnimControls
     {
         get { return _AnimControls; }
+    }
+
+    public float ShotTimer
+    {
+        get { return shotTimer; }
+        set { shotTimer = value; }
+    }
+
+    public bool CanShoot
+    {
+        get { return canShoot; }
+        set { canShoot = value; }
     }
 
     public override bool IsDefault()
@@ -75,6 +97,9 @@ public class RogueBatStateMachine : AbsStateMachine<RogueBatStateMachine.RogueBa
 
         // Init flee timer
         deathTimer = timeUntilDeath;
+
+        // Init shot location to be on the left
+        shootLocation = leftShotLoc;
     }
 
     /// <summary>
@@ -92,6 +117,7 @@ public class RogueBatStateMachine : AbsStateMachine<RogueBatStateMachine.RogueBa
     {
         SetDeathTimer();
         bIsActive = false;
+        Destroy(gameObject);
     }
 
     /// <summary>
@@ -108,5 +134,44 @@ public class RogueBatStateMachine : AbsStateMachine<RogueBatStateMachine.RogueBa
     public override RogueBatStates GetTerminalState()
     {
         return RogueBatStates.Death;
+    }
+
+    /// <summary>
+    /// Get the target that is currently closest in distance to this bat
+    /// </summary>
+    /// <returns>Closest target to the bat</returns>
+    public Target GetClosestTarget()
+    {
+        // Get all active targets
+        List<Target> targets = GameManager.Instance.TargetManager.ActiveTargets;
+
+        // Only proceed if list is not empty
+        if(targets.Count > 0)
+        {
+            // Find the closest target to the bat
+            Target tempClosest = targets[0];
+            foreach(Target curTarg in targets)
+            {
+                // Distance check and choose the closest one
+                if(Vector3.Distance(transform.position, tempClosest.transform.position) > Vector3.Distance(transform.position, curTarg.transform.position))
+                {
+                    tempClosest = curTarg;
+                }
+            }
+            return tempClosest;
+        }
+
+        return null;
+    }
+
+    /// <summary>
+    /// Launches a stun projectile to hit nearby bats
+    /// </summary>
+    public void LaunchProjectile()
+    {
+        // Instantiate the projectile and set its velocity
+        GameObject projectile = Instantiate(projectileClass, shootLocation.position, transform.rotation);
+
+        projectile.GetComponent<Rigidbody2D>().velocity = (currentTarget.transform.position - transform.position) * projectile.GetComponent<Projectile>().projectileSpeed;
     }
 }
