@@ -12,6 +12,8 @@ public class CutsceneManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1f;
+
         switch (PlayerData.activePlayers[0].controlScheme)
         {
             case "PS4":

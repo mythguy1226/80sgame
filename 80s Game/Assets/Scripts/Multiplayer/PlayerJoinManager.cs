@@ -173,6 +173,23 @@ public class PlayerJoinManager : MonoBehaviour
 
     public void BackOut(int playerIndex)
     {
+        PlayerJoinPanel backOutPlayer = joinPanelContainer.transform.GetChild(playerIndex).GetComponent<PlayerJoinPanel>();
+
+        //Close color settings if player backs out with it open
+        if (backOutPlayer.colorSettings.activeInHierarchy)
+        {
+            backOutPlayer.ToggleColorSettings();
+            return;
+        }
+
+        //Close profile panel if player backs out with it open
+        else if(backOutPlayer.profilePanel.activeInHierarchy)
+        {
+            backOutPlayer.ToggleProfilePanel();
+            return;
+        }
+
+
         //Toggle the back out panel
         backOutPanel.SetActive(!backOutPanel.activeInHierarchy);
 

@@ -33,7 +33,11 @@ public class DiveBombBatStateMachine : DefenseBatStateMachine
     /// </summary>
     public override void BeginPursue()
     {
-        SpriteRenderer.color = Color.red;
+        //tint the bat slightly red to signal an upcoming attack
+        SpriteRenderer.color = new Color(255.0f / 255.0f, 185.0f / 255.0f, 185.0f / 255.0f);
+
+        //plays the telegraph ("charge") animation
+        base.AnimControls.PlayChargeAnimation();
         StartCoroutine(AllowPursue());
     }
 
@@ -44,6 +48,7 @@ public class DiveBombBatStateMachine : DefenseBatStateMachine
     {
         yield return new WaitForSeconds(2.0f);
         bCanPursue = true;
+        base.AnimControls.PlayAttackAnimation();
     }
 
     /// <summary>
@@ -53,6 +58,9 @@ public class DiveBombBatStateMachine : DefenseBatStateMachine
     {
         base.Reset();
 
-        SpriteRenderer.color = new Color(255.0f/255.0f, 96.0f/255.0f, 0);
+        //since this bat explodes, need to reset animation after death
+        base.AnimControls.ResetAnimation();
+
+        SpriteRenderer.color = new Color(255.0f/255.0f, 255.0f/255.0f, 255.0f / 255.0f);
     }
 }

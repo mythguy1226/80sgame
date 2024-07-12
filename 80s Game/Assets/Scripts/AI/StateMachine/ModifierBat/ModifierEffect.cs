@@ -15,6 +15,7 @@ public abstract class AbsModifierEffect : MonoBehaviour
         Confusion,
         RustedWings,
         EMP,
+        Rewired,
         RogueBat
     }
 
@@ -171,8 +172,11 @@ public abstract class AbsModifierEffect : MonoBehaviour
     /// <param name="player">Which player needs it</param>
     protected void AddUIRef(int player)
     {
-        modifierUIElement = GameManager.Instance.UIManager.CreateModifierUI(modifierUIPrefab, player);
-        modifierUIRefs.Add(modifierUIElement);
+        if(modifierUIPrefab != null)
+        {
+            modifierUIElement = GameManager.Instance.UIManager.CreateModifierUI(modifierUIPrefab, player);
+            modifierUIRefs.Add(modifierUIElement);
+        }
     }
 
     /// <summary>

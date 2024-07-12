@@ -11,6 +11,7 @@ public abstract class AbsStateMachine<EState> : StateMachineWrapper where EState
     // Public fields
     public bool bIsActive = true;
     public List<EState> unscorableStates;
+    public AbsBaseState<EState> CurrentState { get { return currentState; } }
 
     // Protected fields
     protected Dictionary<EState, AbsBaseState<EState>> states = new Dictionary<EState, AbsBaseState<EState>>();
