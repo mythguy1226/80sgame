@@ -171,7 +171,7 @@ public abstract class AbsModifierEffect : MonoBehaviour
     /// <param name="player">Which player needs it</param>
     protected void AddUIRef(int player)
     {
-        if(modifierUIElement != null)
+        if(modifierUIPrefab != null)
         {
             modifierUIElement = GameManager.Instance.UIManager.CreateModifierUI(modifierUIPrefab, player);
             modifierUIRefs.Add(modifierUIElement);
