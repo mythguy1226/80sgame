@@ -15,9 +15,9 @@ public class ModEMP : AbsModifierEffect
         Instantiate(particles, transform.position, Quaternion.identity);
 
         // Finds all active targets (i.e., on-screen targets).
-        List<Target> activeTargets = GameManager.Instance.TargetManager.targets.FindAll(target => target.FSM.IsActive());
+        // List<Target> activeTargets = GameManager.Instance.TargetManager.targets.FindAll(target => target.FSM.IsActive());
 
-        foreach (Target target in activeTargets)
+        foreach (Target target in GameManager.Instance.TargetManager.ActiveTargets)
         {
             target.SetStunningPlayer(this.activator);
             target.ResolveHit();
