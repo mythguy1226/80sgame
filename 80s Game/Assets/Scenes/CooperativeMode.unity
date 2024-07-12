@@ -8457,6 +8457,7 @@ MonoBehaviour:
   - {fileID: 55702376141867145, guid: 328b8da7f3e388840936b90e67bedf34, type: 3}
   - {fileID: 55702376141867145, guid: c311cfd6cab09204f8a02e1227fc65f9, type: 3}
   - {fileID: 55702376141867145, guid: 04e3fda5caf3913479eb24c66e92f824, type: 3}
+  - {fileID: 55702376141867145, guid: f41dda8ea8247cc40aa37cee109f9315, type: 3}
   debuffs: []
   weightConfig: {fileID: 11400000, guid: 483adbc0aeedb274f86e7b7863993e67, type: 2}
   debug: 1

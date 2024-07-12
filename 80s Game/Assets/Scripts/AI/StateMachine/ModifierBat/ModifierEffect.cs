@@ -16,6 +16,7 @@ public abstract class AbsModifierEffect : MonoBehaviour
         RustedWings,
         EMP,
         Rewired,
+        RogueBat
     }
 
     [SerializeField]

@@ -21,3 +21,5 @@ MonoBehaviour:
     chance: 0.2
   - modType: 6
     chance: 0.4
+  - modType: 7
+    chance: 0.7
