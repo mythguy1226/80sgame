@@ -6,6 +6,7 @@ using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Interactions;
 using UnityEngine.InputSystem.UI;
 using UnityEngine.UI;
 
@@ -122,14 +123,14 @@ public class PlayerJoinPanel : MonoBehaviour
         //Select the appropriate UI element for navigation based on if the panel is active or not
         if (colorSettings.activeInHierarchy)
         {
-            EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(colorDropdown.gameObject);
+            eventSystem.SetSelectedGameObject(null);
+            eventSystem.SetSelectedGameObject(colorDropdown.gameObject);
         }
 
         else
         {
-            EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(colorSettingsOption);
+            eventSystem.SetSelectedGameObject(null);
+            eventSystem.SetSelectedGameObject(colorSettingsOption);
         }
     }
 
