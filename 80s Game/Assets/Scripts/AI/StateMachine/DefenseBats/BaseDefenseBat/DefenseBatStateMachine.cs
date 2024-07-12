@@ -19,6 +19,7 @@ public class DefenseBatStateMachine : AbsStateMachine<DefenseBatStateMachine.Def
     public int pointValue = 1000;
     public float deathHeight = -6.5f;
     public AudioClip hitSound;
+    public bool bIsRewired = false;
 
     // Pursue fields
     public float timeUntilPursue = 8.0f;

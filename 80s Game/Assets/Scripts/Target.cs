@@ -19,6 +19,7 @@ public class Target : MonoBehaviour
     protected PlayerController stunningPlayer;
     PolygonCollider2D _Collider;
 
+
     // Default fields used for resets
     Vector3 spawnPoint;
     public bool bIsStunned = false;
@@ -28,6 +29,7 @@ public class Target : MonoBehaviour
     public int pointValue = 1000;
     public float deathHeight = -6.5f;
     public AudioClip hitSound;
+    public GameObject rewiredParticles;
 
     // Public fields
     public bool IsActive 
@@ -188,6 +190,7 @@ public class Target : MonoBehaviour
         {
             GetComponentInChildren<ParticleSystem>().Stop();
         }
+        Destroy(rewiredParticles);
 
         // Set bat to its default values
         FSM.SetActive(false);
