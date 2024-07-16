@@ -103,7 +103,15 @@ public class PlayerJoinPanel : MonoBehaviour
         else crosshairIndex--;
 
         //Clamp the index to the size of the available crosshairs
-        crosshairIndex = Mathf.Clamp(crosshairIndex, 0, crosshairSprites.Count - 1);
+        if (crosshairIndex == crosshairSprites.Count)
+        {
+            crosshairIndex = 0;
+        }
+
+        else if (crosshairIndex == -1)
+        {
+            crosshairIndex = crosshairSprites.Count - 1;
+        }
 
         //Change the sprite of the crosshair preview
         crosshairPreview.sprite = crosshairSprites[crosshairIndex];
