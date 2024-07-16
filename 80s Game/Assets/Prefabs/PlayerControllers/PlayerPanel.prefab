@@ -2202,14 +2202,9 @@ MonoBehaviour:
   - {fileID: 3528867196686144335}
   crosshairSprites:
   - {fileID: 72313475, guid: b56078464c4f4214c998e28b53dbe022, type: 3}
-  - {fileID: 1215599106, guid: b56078464c4f4214c998e28b53dbe022, type: 3}
   - {fileID: -396588872, guid: b56078464c4f4214c998e28b53dbe022, type: 3}
   - {fileID: 1580000228, guid: b56078464c4f4214c998e28b53dbe022, type: 3}
-  - {fileID: -1847946462, guid: b56078464c4f4214c998e28b53dbe022, type: 3}
-  - {fileID: -964177236, guid: b56078464c4f4214c998e28b53dbe022, type: 3}
-  - {fileID: 1441806986, guid: b56078464c4f4214c998e28b53dbe022, type: 3}
-  - {fileID: 1850062563, guid: b56078464c4f4214c998e28b53dbe022, type: 3}
-  - {fileID: 931082328, guid: b56078464c4f4214c998e28b53dbe022, type: 3}
+  - {fileID: 1215599106, guid: b56078464c4f4214c998e28b53dbe022, type: 3}
   initials:
   - {fileID: 2826053891590800211}
   - {fileID: 4819140831988380133}
