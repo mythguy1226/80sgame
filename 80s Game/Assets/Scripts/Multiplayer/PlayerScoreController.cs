@@ -1,31 +1,62 @@
-using System.Runtime.InteropServices.WindowsRuntime;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 public class PlayerScoreController
 {
     // This class encapsulates the accuracy-keeping responsibility for each player object.
     private int _shotsFired;
-    private int _shotsLanded;
 
     public int ShotsFired { get => _shotsFired; }
-    public int ShotsLanded { get => _shotsLanded; }
+
+    /// <summary>
+    /// Returns all shots that have recorded targets
+    /// </summary>
+    public int ShotsLanded { get
+        {
+            return shotHitsMap.Count(shot => shot.Value.Count > 0);
+        }
+    }
 
     public int pointsMod = 1;
 
+    // Stores shots and sets of their related hits
+    private Dictionary<int, HashSet<Target>> shotHitsMap;
 
     public PlayerScoreController()
     {
         _shotsFired = 0;
-        _shotsLanded = 0;
+        shotHitsMap = new Dictionary<int, HashSet<Target>>();
     }
 
     // Record keeping functions for managing accuracy
+    /// <summary>
+    /// Adds a new Target set for each shot made
+    /// </summary>
     public void AddShot()
     {
-        _shotsFired++;
+        shotHitsMap[_shotsFired++] = new HashSet<Target>();
     }
-    public void AddHit()
+
+    // Subject to race conditions with AddShot
+    /// <summary>
+    /// Called by a Modifier whenever shot to balance out the
+    /// extra AddShot call made by getting modifiers.
+    /// </summary>
+    public void AdjustForModShot()
     {
-        _shotsLanded++;
+        shotHitsMap.Remove(--_shotsFired);
+    }
+
+    // Subject to race conditions with AddShot
+    /// <summary>
+    /// Adds targets to a given shot's target set
+    /// </summary>
+    /// <param name="target"></param>
+    public void AddHit(Target target)
+    {
+        // Runs after each AddShot, so adds target to set of _shotsFired - 1
+        shotHitsMap[_shotsFired - 1].Add(target);
     }
 
     public float GetAccuracy()
@@ -34,6 +65,6 @@ public class PlayerScoreController
         {
             return 0.0f;
         }
-        return _shotsLanded / (float)_shotsFired;
+        return ShotsLanded / (float)_shotsFired;
     }
 }

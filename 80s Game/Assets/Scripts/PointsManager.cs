@@ -69,6 +69,7 @@ public class PointsManager : MonoBehaviour
         
         scoreBehavior.UpdateScores(player);
         scoreBehavior.UpdateAccuracy(accuracy);
+        Debug.Log("Updated accuracy: " + accuracy);
         return AddRoundPoints(player, numBonusPoints);
     }
 

@@ -156,6 +156,7 @@ public class Target : MonoBehaviour
             if (stunningPlayer == null)
             {
                 stunningPlayer = s.player;
+                stunningPlayer.scoreController.AddHit(this);
             }
 
             // Call method for stun resolution
@@ -214,7 +215,6 @@ public class Target : MonoBehaviour
             if(stunningPlayer != null)
             {
                 gameManager.TargetManager.AddToCount(GetComponent<Target>().type, gameManager.TargetManager.killCount);
-                stunningPlayer.scoreController.AddHit();
                 gameManager.PointsManager.AddRoundPoints(stunningPlayer.Order, pointValue * stunningPlayer.scoreController.pointsMod);
             }
         }
