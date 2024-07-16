@@ -174,6 +174,8 @@ public class ClassicMode : AbsGameMode
         if(targetManager.numStuns >= currentRoundTargetCount)
         {
 
+            GameManager.EmitRoundOverEvent();
+
             // If last round completed
             if(CurrentRound == NumRounds)
             {
@@ -183,7 +185,6 @@ public class ClassicMode : AbsGameMode
             // Otherwise start next round
             else
             {
-                GameManager.EmitRoundOverEvent();
                 StartNextRound();
                 
                 // Spawn a modifier bat and increment target count
