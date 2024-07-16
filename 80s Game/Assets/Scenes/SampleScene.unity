@@ -4532,8 +4532,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.0384, y: 51}
-  m_SizeDelta: {x: 667.79, y: 471.33}
+  m_AnchoredPosition: {x: 0, y: 51}
+  m_SizeDelta: {x: 762.14, y: 471.33}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &692398610
 MonoBehaviour:
@@ -4589,7 +4589,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -6719,6 +6719,7 @@ MonoBehaviour:
   gameUIElements: {fileID: 1759806105}
   onboardingPanel: {fileID: 1561009852}
   onboardingCloseButton: {fileID: 0}
+  introCutscene: {fileID: 0}
   buttonClickSound: {fileID: 8300000, guid: 0f33d998cd03b1f4ebc4983ef2a6d559, type: 3}
   crosshairs: []
   playerIndex: 0
