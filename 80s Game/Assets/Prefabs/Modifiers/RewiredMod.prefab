@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 65428d268a6b8f1469341add635e791a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d5db72b161ee0684ba78e6c1e56206ec, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -168,6 +168,7 @@ MonoBehaviour:
   modifierName: Rewired
   effectRadius: 5
   particles: {fileID: 5529488344974124207, guid: b91c3cacdd96d7d40bbe5e96d16aa1da, type: 3}
+  particlesList: []
 --- !u!1 &4642878111665775619
 GameObject:
   m_ObjectHideFlags: 0
