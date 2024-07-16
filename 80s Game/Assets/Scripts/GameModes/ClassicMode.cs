@@ -94,6 +94,9 @@ public class ClassicMode : AbsGameMode
         CurrentRound++;
         currentRoundTargetCount += 2;
         maxTargetsOnScreen += 1;
+
+        GameManager.Instance.UIManager.scoreBehavior.ShowNewRoundText();
+        
         // Keep max targets on screen to at most two fewer than object pool
         if(maxTargetsOnScreen >= targetManager.targets.Count)
         {

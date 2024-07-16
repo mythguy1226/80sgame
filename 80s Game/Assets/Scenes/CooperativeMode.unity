@@ -7555,6 +7555,7 @@ MonoBehaviour:
   coreHealthbar: {fileID: 1287514253}
   coreHealthPercentage: {fileID: 1585191500}
   core: {fileID: 1121493176}
+  newRoundTextPrefab: {fileID: 5422266768498237442, guid: fb3e11995eab6b44dbde8bef1e940d3d, type: 3}
 --- !u!114 &1011990667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8497,6 +8498,7 @@ MonoBehaviour:
   - {fileID: 1607800914}
   - {fileID: 106966640}
   postProcessVolume: {fileID: 720413084}
+  scoreBehavior: {fileID: 0}
 --- !u!114 &1095139977
 MonoBehaviour:
   m_ObjectHideFlags: 0
