@@ -38,6 +38,8 @@ public class ScoreBehavior : MonoBehaviour
     public TextMeshProUGUI coreHealthPercentage;
     public Defendable core;   
 
+    public GameObject newRoundTextPrefab;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -260,5 +262,11 @@ public class ScoreBehavior : MonoBehaviour
     public void UpdateAccuracy(float newAccuracy)
     {
         accuracy = Mathf.RoundToInt(newAccuracy * 100);
+    }
+
+    //Show text to indicate new round
+    public void ShowNewRoundText()
+    {
+        Instantiate(newRoundTextPrefab, newRoundTextPrefab.transform.position, Quaternion.identity);
     }
 }

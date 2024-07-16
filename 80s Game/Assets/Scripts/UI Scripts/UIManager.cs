@@ -25,6 +25,7 @@ public class UIManager : MonoBehaviour
     private OnboardingUI onboardingUI;
     private PauseScreenBehavior pauseScreenUI;
     private GameOverBehavior gameOverUI;
+    public ScoreBehavior scoreBehavior;
 
     private void Awake()
     {
@@ -35,6 +36,7 @@ public class UIManager : MonoBehaviour
         }
         pauseScreenUI = canvas.GetComponent<PauseScreenBehavior>();
         gameOverUI = canvas.GetComponent<GameOverBehavior>();
+        scoreBehavior = canvas.GetComponent<ScoreBehavior>();
     }
 
     public void GetFireInput(Vector3 screenPosition)

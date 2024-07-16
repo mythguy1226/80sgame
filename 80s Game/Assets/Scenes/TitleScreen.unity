@@ -842,6 +842,7 @@ MonoBehaviour:
   canvas: {fileID: 319221310}
   modifierContainers: []
   postProcessVolume: {fileID: 2125853500}
+  scoreBehavior: {fileID: 0}
 --- !u!114 &340111865
 MonoBehaviour:
   m_ObjectHideFlags: 0
