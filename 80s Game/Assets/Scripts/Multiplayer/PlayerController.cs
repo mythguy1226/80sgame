@@ -116,12 +116,14 @@ public class PlayerController : MonoBehaviour
 
             GameObject hitVFX = Instantiate(hitParticles, activeCrosshair.transform.position, Quaternion.identity);
             Destroy(hitVFX, 0.6f);
+
+            // Leave this here, or it messes up shot/hit recording order
+            scoreController.AddShot();
         }
 
         // Relay a shot information message to the Input Manager which acts as a publisher
         ShotInformation s = new(activeCrosshair.transform.position, this, modifiedShotRadius != originalShotRadius);
         InputManager.PlayerShot(s);
-        scoreController.AddShot();
     }
 
     /// <summary>
