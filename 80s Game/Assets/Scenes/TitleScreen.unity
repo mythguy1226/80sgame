@@ -823,7 +823,9 @@ MonoBehaviour:
   debuffActive: 0
   buffs: []
   debuffs: []
+  weightConfig: {fileID: 0}
   debug: 1
+  spawnConfig: {fileID: 0}
 --- !u!114 &340111864
 MonoBehaviour:
   m_ObjectHideFlags: 0
