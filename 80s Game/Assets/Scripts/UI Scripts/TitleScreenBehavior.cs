@@ -13,6 +13,8 @@ public class TitleScreenBehavior : MonoBehaviour
     public GameObject onboardingContinueButton;
     public GameObject onboardingPanel;
     public GameObject gamemodePanel;
+    public GameObject achievementsPanel;
+    public GameObject achievementsList;
     public AudioClip buttonClickSound;
     public AudioClip titleScreenMusic;
 
@@ -114,5 +116,22 @@ public class TitleScreenBehavior : MonoBehaviour
     {
         gamemodeSelected = gamemodeIndex;
         StartGame();
+    }
+
+    public void ToggleAchievementsPanel()
+    {
+        achievementsPanel.SetActive(!achievementsPanel.activeInHierarchy);
+
+        if (achievementsPanel.activeInHierarchy)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(achievementsList.transform.GetChild(0).gameObject);
+        }
+
+        else
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(startButton);
+        }
     }
 }

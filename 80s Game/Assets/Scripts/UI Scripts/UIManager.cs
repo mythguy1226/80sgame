@@ -25,6 +25,7 @@ public class UIManager : MonoBehaviour
     private OnboardingUI onboardingUI;
     private PauseScreenBehavior pauseScreenUI;
     private GameOverBehavior gameOverUI;
+    private TitleScreenBehavior titleScreenUI;
     public ScoreBehavior scoreBehavior;
 
     private void Awake()
