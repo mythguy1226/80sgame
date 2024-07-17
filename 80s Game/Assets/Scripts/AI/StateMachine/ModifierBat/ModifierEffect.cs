@@ -34,12 +34,13 @@ public abstract class AbsModifierEffect : MonoBehaviour
     protected string modifierName;
 
     protected bool bIsActive = false;
-    protected PlayerController activator;
+    public PlayerController activator;
+    public bool bIsSelfDebuff = false;
 
     Rigidbody2D _Rb;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         InputManager.detectHitSub += ListenForShot;
         _Rb = GetComponent<Rigidbody2D>();
@@ -147,7 +148,7 @@ public abstract class AbsModifierEffect : MonoBehaviour
         bIsActive = true;
         InputManager.detectHitSub -= ListenForShot;
         ShowFloatingText();
-        _Rb.gravityScale = 0.0f; // Turn off gravity here
+        GetComponent<Rigidbody2D>().gravityScale = 0.0f; // Turn off gravity here
         AddUIRef(activator.Order);
         ActivateEffect();
         transform.position = new Vector3(-15.0f, 15.0f, 0.0f); // Move off-screen for duration of lifetime
@@ -192,7 +193,8 @@ public abstract class AbsModifierEffect : MonoBehaviour
 
         if (effectDuration > maxEffectDuration)
         {
-            maxEffectDuration = effectDuration;
+            //maxEffectDuration = effectDuration;
+            effectDuration = maxEffectDuration;
         }
     }
 

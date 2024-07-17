@@ -43,8 +43,7 @@ public class UnstableDefenseBatStateMachine : DefenseBatStateMachine
             chain.PlayEffect(currentTarg.transform.position, targetChain[i].transform.position);
 
             // Play stun anim
-            DefenseBatStateMachine FSM = (DefenseBatStateMachine)targetChain[i].FSM;
-            FSM.GetComponent<Target>().SetStunningPlayer(stunningPlayer);
+            targetChain[i].GetComponent<Target>().SetStunningPlayer(stunningPlayer);
             targetChain[i].GetComponent<AnimationHandler>().PlayStunAnimation();
 
             // Update current target

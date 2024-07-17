@@ -62,6 +62,7 @@ public class ClassicMode : AbsGameMode
         numBatsMap.Add(TargetManager.TargetType.LowBonus, 0);
         numBatsMap.Add(TargetManager.TargetType.HighBonus, 0);
         numBatsMap.Add(TargetManager.TargetType.Unstable, 0);
+        numBatsMap.Add(TargetManager.TargetType.Debuff, 0);
     }
 
     protected override void StartNextRound(bool isFirstRound = false)

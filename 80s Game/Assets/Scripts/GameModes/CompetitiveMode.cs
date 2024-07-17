@@ -54,6 +54,7 @@ public class CompetitiveMode : AbsGameMode
         allowedBats[TargetManager.TargetType.HighBonus] = true;
         allowedBats[TargetManager.TargetType.Modifier] = true;
         allowedBats[TargetManager.TargetType.Unstable] = true;
+        allowedBats[TargetManager.TargetType.Debuff] = true;
 
         numBatsMap = new Dictionary<TargetManager.TargetType, int>();
 
@@ -63,6 +64,7 @@ public class CompetitiveMode : AbsGameMode
         numBatsMap.Add(TargetManager.TargetType.LowBonus, 0);
         numBatsMap.Add(TargetManager.TargetType.HighBonus, 0);
         numBatsMap.Add(TargetManager.TargetType.Unstable, 0);
+        numBatsMap.Add(TargetManager.TargetType.Debuff, 0);
     }
 
     protected override void StartNextRound(bool isFirstRound = false)

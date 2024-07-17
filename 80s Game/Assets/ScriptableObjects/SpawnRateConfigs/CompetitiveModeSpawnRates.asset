@@ -23,3 +23,5 @@ MonoBehaviour:
     spawnRate: 15
   - targetType: 4
     spawnRate: 80
+  - targetType: 6
+    spawnRate: 15

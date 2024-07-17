@@ -16,15 +16,32 @@ public class ModConfusion : AbsModifierEffect
         PlayerInput[] pIs = FindObjectsByType<PlayerInput>(FindObjectsSortMode.None);
         for(int i = 0; i < pIs.Length; i++)
         {
+            // Get player input wrapper and its controller
             PlayerInputWrapper piw = pIs[i].GetComponent<PlayerInputWrapper>();
             PlayerController pc = piw.GetPlayer();
-            if (pc.Order == activator.Order)
+
+            // If player already has mod extend it
+            if (pc.HasMod(GetModType()))
+            {
+                pc.ExtendModDuration(GetModType(), maxEffectDuration);
+                CleanUp();
+                continue;
+            }
+            else if (pc.Order == activator.Order && !bIsSelfDebuff) // Affect all players but activator
             {
                 activator.AddModToCount(GetModType());
                 continue;
             }
+            else if(pc.Order == activator.Order && bIsSelfDebuff) // Affect the activator
+            {
+                piw.isFlipped = true;
+                AddUIRef(pc.Order);
+                pc.SetMod(GetModType(), this);
+                continue;
+            }
             piw.isFlipped = true;
             AddUIRef(pc.Order);
+            pc.SetMod(GetModType(), this);
 
         }
         GameManager.Instance.debuffActive = true;
@@ -38,12 +55,20 @@ public class ModConfusion : AbsModifierEffect
         PlayerInput[] pIs = FindObjectsByType<PlayerInput>(FindObjectsSortMode.None);
         for (int i = 0; i < pIs.Length; i++)
         {
+            // Get player input wrapper
             PlayerInputWrapper piw = pIs[i].GetComponent<PlayerInputWrapper>();
-            if (piw.GetPlayer() == activator)
+            if (piw.GetPlayer() == activator && !bIsSelfDebuff) // Continue if disabling other players
             {
                 continue;
             }
+            else if (piw.GetPlayer() == activator && bIsSelfDebuff) // Continue if disabling activator
+            {
+                piw.isFlipped = false;
+                piw.GetPlayer().RemoveMod(GetModType());
+                continue;
+            }
             piw.isFlipped = false;
+            piw.GetPlayer().RemoveMod(GetModType());
         }
         GameManager.Instance.debuffActive = false;
     }

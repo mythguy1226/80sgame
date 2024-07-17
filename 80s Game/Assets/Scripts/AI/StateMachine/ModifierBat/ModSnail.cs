@@ -19,9 +19,24 @@ public class ModSnail : AbsModifierEffect
         {
             PlayerInputWrapper piw = pIs[i].GetComponent<PlayerInputWrapper>();
             PlayerController pc = piw.GetPlayer();
-            if (pc.Order == activator.Order)
+
+            // If player already has mod extend it
+            if (pc.HasMod(GetModType()))
+            {
+                pc.ExtendModDuration(GetModType(), maxEffectDuration);
+                CleanUp();
+                continue;
+            }
+            else if (pc.Order == activator.Order && !bIsSelfDebuff) // Affect all players but activator
             {
                 activator.AddModToCount(GetModType());
+                continue;
+            }
+            else if(pc.Order == activator.Order && bIsSelfDebuff) // Affect the activator
+            {
+                piw.isSlowed = true;
+                AddUIRef(pc.Order);
+                pc.SetMod(GetModType(), this);
                 continue;
             }
             piw.isSlowed = true;
@@ -42,8 +57,14 @@ public class ModSnail : AbsModifierEffect
         for (int i = 0; i < pIs.Length; i++)
         {
             PlayerInputWrapper piw = pIs[i].GetComponent<PlayerInputWrapper>();
-            if (piw.GetPlayer().Order == activator.Order)
+            if (piw.GetPlayer() == activator && !bIsSelfDebuff) // Continue if disabling other players
             {
+                continue;
+            }
+            else if (piw.GetPlayer() == activator && bIsSelfDebuff) // Continue if disabling activator
+            {
+                piw.isSlowed = false;
+                piw.GetPlayer().RemoveMod(GetModType());
                 continue;
             }
             piw.isSlowed = false;

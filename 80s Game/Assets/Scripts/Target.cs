@@ -13,7 +13,7 @@ public class Target : MonoBehaviour
     SpriteRenderer _SpriteRenderer;
     protected AnimationHandler _AnimControls;
     protected InputManager _InputManager;
-    protected PlayerController stunningPlayer;
+    public PlayerController stunningPlayer;
     PolygonCollider2D _Collider;
 
 

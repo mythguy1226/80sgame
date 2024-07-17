@@ -56,6 +56,7 @@ public class CooperativeMode : AbsGameMode
         allowedBats[TargetManager.TargetType.Modifier] = true;
         allowedBats[TargetManager.TargetType.Unstable] = true;
         allowedBats[TargetManager.TargetType.DiveBomb] = true;
+        allowedBats[TargetManager.TargetType.Debuff] = true;
 
         numBatsMap = new Dictionary<TargetManager.TargetType, int>();
 
@@ -64,6 +65,7 @@ public class CooperativeMode : AbsGameMode
         numBatsMap.Add(TargetManager.TargetType.Modifier, 0);
         numBatsMap.Add(TargetManager.TargetType.DiveBomb, 0);
         numBatsMap.Add(TargetManager.TargetType.Unstable, 0);
+        numBatsMap.Add(TargetManager.TargetType.Debuff, 0);
     }
 
     protected override void StartNextRound(bool isFirstRound = false)
