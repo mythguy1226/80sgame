@@ -244,17 +244,6 @@
                 },
                 {
                     "name": "",
-                    "id": "551df141-c74b-418e-8beb-861af8841f96",
-                    "path": "<Keyboard>/escape",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "KnM",
-                    "action": "Cancel",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "b09866b8-6928-45a0-b75d-24dc5d09a8a1",
                     "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
