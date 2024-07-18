@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -27,6 +28,11 @@ public class UIManager : MonoBehaviour
     private GameOverBehavior gameOverUI;
     public ScoreBehavior scoreBehavior;
 
+    public List<Sprite> classicModeBackgrounds;
+    public List<Sprite> defenseModeBackgrounds;
+
+    public SpriteRenderer background;
+
     private void Awake()
     {
         onboardingUI = canvas.GetComponent<OnboardingUI>();
@@ -37,6 +43,11 @@ public class UIManager : MonoBehaviour
         pauseScreenUI = canvas.GetComponent<PauseScreenBehavior>();
         gameOverUI = canvas.GetComponent<GameOverBehavior>();
         scoreBehavior = canvas.GetComponent<ScoreBehavior>();
+    }
+
+    private void Start()
+    {
+        SetBackground();
     }
 
     public void GetFireInput(Vector3 screenPosition)
@@ -65,5 +76,32 @@ public class UIManager : MonoBehaviour
     public GameObject CreateModifierUI(GameObject uiPrefab, int player)
     {
         return Instantiate(uiPrefab, modifierContainers[player].transform);
+    }
+
+    private void SetBackground()
+    {
+        if (background == null)
+        {
+            return;
+        }
+        
+        //Set background to defense if defense mode is selected
+        if (GameModeData.activeGameMode == EGameMode.Defense)
+        {
+            background.sprite = GameManager.Instance.UIManager.defenseModeBackgrounds[PlayerPrefs.GetInt("DefenseBackground")];
+            background.gameObject.transform.localScale = new Vector3(6.5f, 6.5f, 1f);
+        }
+
+        else if (GameModeData.activeGameMode == EGameMode.Classic)
+        {
+            background.sprite = GameManager.Instance.UIManager.classicModeBackgrounds[PlayerPrefs.GetInt("ClassicBackground")];
+            background.gameObject.transform.localScale = new Vector3(6.5f, 6.5f, 1f);
+        }
+
+        else if (GameModeData.activeGameMode == EGameMode.Competitive)
+        {
+            background.sprite = GameManager.Instance.UIManager.classicModeBackgrounds[PlayerPrefs.GetInt("CompetitiveBackground")];
+            background.gameObject.transform.localScale = new Vector3(6.5f, 6.5f, 1f);
+        }
     }
 }
