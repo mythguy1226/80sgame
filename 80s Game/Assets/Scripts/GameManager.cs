@@ -211,6 +211,7 @@ public class GameManager : MonoBehaviour
             playerData.crossHairIndex = config.crossHairIndex;
             playerData.sensitivity = new SensitivityData(config.sensitivity.x, config.sensitivity.y);
             playerData.modifiersCollected = new ModifierData(players[i].modifierCounter);
+            playerData.score = PointsManager.TotalPointsByPlayer[i];
             dataToSave.playerData[i] = playerData;
         }
         DataSaver saver = DataSaveFactory.MakeSaver(true);

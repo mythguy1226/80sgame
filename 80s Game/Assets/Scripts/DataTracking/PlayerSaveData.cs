@@ -8,6 +8,7 @@ public class PlayerSaveData
 
     public int shotsFired;
     public int shotsHit;
+    public int score;
     public ModifierData modifiersCollected;
     public string device;
     public string deviceMake;

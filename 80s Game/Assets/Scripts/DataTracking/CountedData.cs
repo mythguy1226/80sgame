@@ -13,6 +13,7 @@ public class BatData
     public int lowbonus;
     public int highbonus;
     public int modified;
+    public int divebomb;
 
     public BatData(Dictionary<TargetManager.TargetType, int> data)
     {
@@ -57,6 +58,11 @@ public class BatData
             modified = data[TargetManager.TargetType.Modifier];
         }
 
+        if (data.ContainsKey(TargetManager.TargetType.DiveBomb))
+        {
+            divebomb = data[TargetManager.TargetType.DiveBomb];
+        }
+
     }
 }
 
@@ -71,6 +77,10 @@ public class ModifierData
     public int overcharged;
     public int doublePoints;
     public int confusion;
+    public int rewired;
+    public int rogue;
+    public int rusted;
+    public int emp;
 
     public ModifierData(Dictionary<AbsModifierEffect.ModType, int> count)
     {
@@ -78,6 +88,10 @@ public class ModifierData
         overcharged = 0;
         doublePoints = 0;
         confusion = 0;
+        rewired = 0;
+        rogue = 0;
+        rusted = 0;
+        emp = 0;
 
         LoadData(count);
     }
@@ -108,6 +122,25 @@ public class ModifierData
         if (data.ContainsKey(AbsModifierEffect.ModType.Overcharge))
         {
             overcharged = data[AbsModifierEffect.ModType.Overcharge];
+        }
+
+        if (data.ContainsKey(AbsModifierEffect.ModType.Rewired)) {
+            rewired = data[AbsModifierEffect.ModType.Rewired];
+        }
+
+        if (data.ContainsKey(AbsModifierEffect.ModType.RogueBat))
+        {
+            rogue = data[AbsModifierEffect.ModType.RogueBat];
+        }
+
+        if (data.ContainsKey(AbsModifierEffect.ModType.RustedWings))
+        {
+            rusted = data[AbsModifierEffect.ModType.RustedWings];
+        }
+
+        if (data.ContainsKey(AbsModifierEffect.ModType.EMP))
+        {
+            emp = data[AbsModifierEffect.ModType.EMP];
         }
 
     }
