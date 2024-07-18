@@ -12,6 +12,10 @@ public class AutoSelect : MonoBehaviour, IPointerEnterHandler
     //Select element whenever it is hovered (avoids having one button selected and a different one hovered over)
 	public void OnPointerEnter(PointerEventData eventData)
 	{
+		if (selectable.transform.parent.GetComponent<VerticalLayoutGroup>() != null)
+		{
+			return;
+		}
 		selectable.Select();
 	}
 }

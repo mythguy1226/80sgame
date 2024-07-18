@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.WSA;
 
 public class UIManager : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class UIManager : MonoBehaviour
     private OnboardingUI onboardingUI;
     private PauseScreenBehavior pauseScreenUI;
     private GameOverBehavior gameOverUI;
+    private TitleScreenBehavior titleScreenUI;
     public ScoreBehavior scoreBehavior;
 
     private void Awake()
@@ -37,6 +39,7 @@ public class UIManager : MonoBehaviour
         pauseScreenUI = canvas.GetComponent<PauseScreenBehavior>();
         gameOverUI = canvas.GetComponent<GameOverBehavior>();
         scoreBehavior = canvas.GetComponent<ScoreBehavior>();
+        titleScreenUI = canvas.GetComponent<TitleScreenBehavior>();
     }
 
     public void GetFireInput(Vector3 screenPosition)
@@ -65,5 +68,23 @@ public class UIManager : MonoBehaviour
     public GameObject CreateModifierUI(GameObject uiPrefab, int player)
     {
         return Instantiate(uiPrefab, modifierContainers[player].transform);
+    }
+
+    public void CancelMenu()
+    {
+        if (titleScreenUI == null)
+        {
+            return; 
+        }
+        
+        if (titleScreenUI.achievementsPanel.activeInHierarchy)
+        {
+            titleScreenUI.ToggleAchievementsPanel();
+        }
+
+        else if (titleScreenUI.gamemodePanel.activeInHierarchy)
+        {
+            titleScreenUI.ToggleGamemodeSelection();
+        }
     }
 }

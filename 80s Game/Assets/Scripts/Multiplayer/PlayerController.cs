@@ -155,6 +155,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void EmitCancel()
     {
+        GameManager.Instance.UIManager.CancelMenu();
         if (currentState == ControllerState.JoinScreen)
         {
             pjm.BackOut(Order);
