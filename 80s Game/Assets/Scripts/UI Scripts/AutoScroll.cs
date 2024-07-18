@@ -10,6 +10,8 @@ public class AutoScroll : MonoBehaviour
     RectTransform contentPanel;
     RectTransform selectedRectTransform;
     GameObject lastSelected;
+    
+    public bool settingsPanel;
 
     void Start() {
         scrollRectTransform = GetComponent<RectTransform>();
@@ -26,7 +28,13 @@ public class AutoScroll : MonoBehaviour
         }
 
         // Return if the selected game object is not inside the scroll rect.
-        if (selected.transform.parent.transform.parent != contentPanel.transform) {
+        if (selected.transform.parent.transform.parent != contentPanel.transform && settingsPanel) {
+            return;
+        }
+
+        // Return if the selected game object is not inside the scroll rect.
+        if (selected.transform.parent != contentPanel.transform && !settingsPanel)
+        {
             return;
         }
 
@@ -37,7 +45,15 @@ public class AutoScroll : MonoBehaviour
         }
 
         // Get the rect tranform for the selected game object.
-        selectedRectTransform = selected.transform.parent.GetComponent<RectTransform>();
+        if (settingsPanel)
+        {
+            selectedRectTransform = selected.transform.parent.GetComponent<RectTransform>();
+        }
+
+        else
+        {
+            selectedRectTransform = selected.transform.GetComponent<RectTransform>();
+        }
 
         // The position of the selected UI element is the absolute anchor position,
         // ie. the local position within the scroll rect + its height if we're

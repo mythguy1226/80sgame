@@ -42,7 +42,7 @@ public class ScrollRectEnsureVisible : MonoBehaviour
 
         //Change the position of the content to fit with the selected object
         selectedRectTransform = selected.GetComponent<RectTransform>();
-        contentPanel.anchoredPosition = new Vector2(contentPanel.anchoredPosition.x, - (selectedRectTransform.localPosition.y) - (selectedRectTransform.rect.height/2));
+        contentPanel.anchoredPosition = new Vector2(contentPanel.anchoredPosition.x, - (selectedRectTransform.localPosition.y) - (selectedRectTransform.rect.height));
 
         lastSelected = selected;
     }

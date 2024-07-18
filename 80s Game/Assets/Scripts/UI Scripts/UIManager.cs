@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.UI;
+using UnityEngine.WSA;
 
 public class UIManager : MonoBehaviour
 {
@@ -26,6 +27,7 @@ public class UIManager : MonoBehaviour
     private OnboardingUI onboardingUI;
     private PauseScreenBehavior pauseScreenUI;
     private GameOverBehavior gameOverUI;
+    private TitleScreenBehavior titleScreenUI;
     public ScoreBehavior scoreBehavior;
 
     public List<Sprite> classicModeBackgrounds;
@@ -43,6 +45,7 @@ public class UIManager : MonoBehaviour
         pauseScreenUI = canvas.GetComponent<PauseScreenBehavior>();
         gameOverUI = canvas.GetComponent<GameOverBehavior>();
         scoreBehavior = canvas.GetComponent<ScoreBehavior>();
+        titleScreenUI = canvas.GetComponent<TitleScreenBehavior>();
     }
 
     private void Start()
@@ -89,19 +92,34 @@ public class UIManager : MonoBehaviour
         if (GameModeData.activeGameMode == EGameMode.Defense)
         {
             background.sprite = GameManager.Instance.UIManager.defenseModeBackgrounds[PlayerPrefs.GetInt("DefenseBackground")];
-            background.gameObject.transform.localScale = new Vector3(6.5f, 6.5f, 1f);
         }
 
         else if (GameModeData.activeGameMode == EGameMode.Classic)
         {
             background.sprite = GameManager.Instance.UIManager.classicModeBackgrounds[PlayerPrefs.GetInt("ClassicBackground")];
-            background.gameObject.transform.localScale = new Vector3(6.5f, 6.5f, 1f);
         }
 
         else if (GameModeData.activeGameMode == EGameMode.Competitive)
         {
             background.sprite = GameManager.Instance.UIManager.classicModeBackgrounds[PlayerPrefs.GetInt("CompetitiveBackground")];
-            background.gameObject.transform.localScale = new Vector3(6.5f, 6.5f, 1f);
+        }
+    }
+
+    public void CancelMenu()
+    {
+        if (titleScreenUI == null)
+        {
+            return; 
+        }
+        
+        if (titleScreenUI.achievementsPanel.activeInHierarchy)
+        {
+            titleScreenUI.ToggleAchievementsPanel();
+        }
+
+        else if (titleScreenUI.gamemodePanel.activeInHierarchy)
+        {
+            titleScreenUI.ToggleGamemodeSelection();
         }
     }
 }
