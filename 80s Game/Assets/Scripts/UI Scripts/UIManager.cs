@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.UI;
 using UnityEngine.WSA;
@@ -27,13 +29,17 @@ public class UIManager : MonoBehaviour
     private OnboardingUI onboardingUI;
     private PauseScreenBehavior pauseScreenUI;
     private GameOverBehavior gameOverUI;
-    private TitleScreenBehavior titleScreenUI;
+    public TitleScreenBehavior titleScreenUI;
     public ScoreBehavior scoreBehavior;
+    public BackgroundCustomization backgroundUI;
 
     public List<Sprite> classicModeBackgrounds;
     public List<Sprite> defenseModeBackgrounds;
 
+    public List<GameObject> gamemodeCards;
+
     public SpriteRenderer background;
+    private bool backgroundChanged = false;
 
     private void Awake()
     {
@@ -102,6 +108,35 @@ public class UIManager : MonoBehaviour
         else if (GameModeData.activeGameMode == EGameMode.Competitive)
         {
             background.sprite = GameManager.Instance.UIManager.classicModeBackgrounds[PlayerPrefs.GetInt("CompetitiveBackground")];
+        }
+    }
+
+    public void BackgroundCycle(Vector2 movement)
+    {
+        if (!backgroundChanged)
+        {
+            for(int i = 0; i < gamemodeCards.Count; i++)
+            {
+                if (EventSystem.current.currentSelectedGameObject == gamemodeCards[i])
+                {
+                    if (movement.y >= 0.7f)
+                    {
+                        backgroundUI.PreviousBackground(i + 1);
+                        backgroundChanged = true;
+                    }
+
+                    else if (movement.y <= -0.7f)
+                    {
+                        backgroundUI.NextBackground(i + 1);
+                        backgroundChanged = true;
+                    }
+                }
+            }
+        }
+
+        if (movement == Vector2.zero)
+        {
+            backgroundChanged = false;
         }
     }
 

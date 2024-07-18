@@ -1268,13 +1268,19 @@ MonoBehaviour:
   canvas: {fileID: 319221310}
   modifierContainers: []
   postProcessVolume: {fileID: 2125853500}
+  titleScreenUI: {fileID: 0}
   scoreBehavior: {fileID: 0}
+  backgroundUI: {fileID: 1894973268}
   classicModeBackgrounds:
   - {fileID: 21300000, guid: adc65da9af63f8941ab6f09c18774659, type: 3}
   - {fileID: 21300000, guid: 4fdaf93c4ae21d14689ceaaddeac185c, type: 3}
   defenseModeBackgrounds:
   - {fileID: 21300000, guid: b1d69a59fb2697f4897abda8625e5922, type: 3}
   - {fileID: 21300000, guid: eefe79d2900ee5c469c25a19ac90ac80, type: 3}
+  gamemodeCards:
+  - {fileID: 778108194}
+  - {fileID: 927240345}
+  - {fileID: 1069083629}
   background: {fileID: 0}
 --- !u!114 &340111865
 MonoBehaviour:
@@ -2663,6 +2669,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6533086523291417148, guid: ade02431274cdbe4f8fd5b4bdc90b6b9, type: 3}
   m_PrefabInstance: {fileID: 1867834258203497347}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &778108194 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9149441382811802754, guid: caa788b6073da9145bd994395ff228c5, type: 3}
+  m_PrefabInstance: {fileID: 825267115}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &825267115
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2834,11 +2845,11 @@ PrefabInstance:
     - target: {fileID: 8482207954832739412, guid: caa788b6073da9145bd994395ff228c5, type: 3}
       propertyPath: m_Navigation.m_SelectOnUp
       value: 
-      objectReference: {fileID: 1372121362}
+      objectReference: {fileID: 0}
     - target: {fileID: 8482207954832739412, guid: caa788b6073da9145bd994395ff228c5, type: 3}
       propertyPath: m_Navigation.m_SelectOnDown
       value: 
-      objectReference: {fileID: 215539936}
+      objectReference: {fileID: 0}
     - target: {fileID: 8482207954832739412, guid: caa788b6073da9145bd994395ff228c5, type: 3}
       propertyPath: m_Navigation.m_SelectOnRight
       value: 
@@ -2870,7 +2881,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8482207954832739412, guid: caa788b6073da9145bd994395ff228c5, type: 3}
   m_PrefabInstance: {fileID: 825267115}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 778108194}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
@@ -2922,6 +2933,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &927240345 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9149441382811802754, guid: caa788b6073da9145bd994395ff228c5, type: 3}
+  m_PrefabInstance: {fileID: 1052698249}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &958586289 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1866027868665589085, guid: ade02431274cdbe4f8fd5b4bdc90b6b9, type: 3}
@@ -3728,7 +3744,7 @@ PrefabInstance:
     - target: {fileID: 8482207954832739412, guid: caa788b6073da9145bd994395ff228c5, type: 3}
       propertyPath: m_Navigation.m_SelectOnDown
       value: 
-      objectReference: {fileID: 963602667}
+      objectReference: {fileID: 0}
     - target: {fileID: 8482207954832739412, guid: caa788b6073da9145bd994395ff228c5, type: 3}
       propertyPath: m_Navigation.m_SelectOnLeft
       value: 
@@ -3778,7 +3794,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8482207954832739412, guid: caa788b6073da9145bd994395ff228c5, type: 3}
   m_PrefabInstance: {fileID: 1052698249}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 927240345}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
@@ -3859,6 +3875,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1054700064}
   m_CullTransparentMesh: 1
+--- !u!1 &1069083629 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9149441382811802754, guid: caa788b6073da9145bd994395ff228c5, type: 3}
+  m_PrefabInstance: {fileID: 1301689755}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1082227965
 GameObject:
   m_ObjectHideFlags: 0
@@ -4503,11 +4524,11 @@ PrefabInstance:
     - target: {fileID: 8482207954832739412, guid: caa788b6073da9145bd994395ff228c5, type: 3}
       propertyPath: m_Navigation.m_SelectOnUp
       value: 
-      objectReference: {fileID: 1992540566}
+      objectReference: {fileID: 0}
     - target: {fileID: 8482207954832739412, guid: caa788b6073da9145bd994395ff228c5, type: 3}
       propertyPath: m_Navigation.m_SelectOnDown
       value: 
-      objectReference: {fileID: 452523704}
+      objectReference: {fileID: 0}
     - target: {fileID: 8482207954832739412, guid: caa788b6073da9145bd994395ff228c5, type: 3}
       propertyPath: m_Navigation.m_SelectOnLeft
       value: 
@@ -4548,7 +4569,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8482207954832739412, guid: caa788b6073da9145bd994395ff228c5, type: 3}
   m_PrefabInstance: {fileID: 1301689755}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1069083629}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
