@@ -5050,9 +5050,9 @@ ParticleSystem:
         m_RotationOrder: 4
     startColor:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 2
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 1}
+      maxColor: {r: 1, g: 0.58451253, b: 0.44968545, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -8703,7 +8703,7 @@ ParticleSystem:
     - serializedVersion: 3
       emitter: {fileID: 4864498910290321956}
       type: 0
-      properties: 0
+      properties: 1
       emitProbability: 1
   LightsModule:
     enabled: 0
