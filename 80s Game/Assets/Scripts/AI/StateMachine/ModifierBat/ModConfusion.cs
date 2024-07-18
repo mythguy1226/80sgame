@@ -27,9 +27,18 @@ public class ModConfusion : AbsModifierEffect
                 CleanUp();
                 continue;
             }
-            else if (pc.Order == activator.Order && !bIsSelfDebuff) // Affect all players but activator
+            else if (GameManager.Instance.gameModeType == EGameMode.Defense) // Affect all players in defense mode
             {
-                activator.AddModToCount(GetModType());
+                piw.isFlipped = true;
+                AddUIRef(pc.Order);
+                pc.SetMod(GetModType(), this);
+                continue;
+            }
+            else if (pc.Order != activator.Order && !bIsSelfDebuff) // Affect all players but activator
+            {
+                piw.isFlipped = true;
+                AddUIRef(pc.Order);
+                pc.SetMod(GetModType(), this);
                 continue;
             }
             else if(pc.Order == activator.Order && bIsSelfDebuff) // Affect the activator
@@ -39,9 +48,7 @@ public class ModConfusion : AbsModifierEffect
                 pc.SetMod(GetModType(), this);
                 continue;
             }
-            piw.isFlipped = true;
-            AddUIRef(pc.Order);
-            pc.SetMod(GetModType(), this);
+            activator.AddModToCount(GetModType());
 
         }
         GameManager.Instance.debuffActive = true;

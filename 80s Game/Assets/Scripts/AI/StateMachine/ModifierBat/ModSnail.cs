@@ -27,9 +27,19 @@ public class ModSnail : AbsModifierEffect
                 CleanUp();
                 continue;
             }
-            else if (pc.Order == activator.Order && !bIsSelfDebuff) // Affect all players but activator
+            else if (GameManager.Instance.gameModeType == EGameMode.Defense) // Affect all players in defense mode
             {
-                activator.AddModToCount(GetModType());
+                Debug.Log("Defense Mode!");
+                piw.isSlowed = true;
+                AddUIRef(pc.Order);
+                pc.SetMod(GetModType(), this);
+                continue;
+            }
+            else if (pc.Order != activator.Order && !bIsSelfDebuff) // Affect all players but activator
+            {
+                piw.isSlowed = true;
+                AddUIRef(pc.Order);
+                pc.SetMod(GetModType(), this);
                 continue;
             }
             else if(pc.Order == activator.Order && bIsSelfDebuff) // Affect the activator
@@ -39,8 +49,7 @@ public class ModSnail : AbsModifierEffect
                 pc.SetMod(GetModType(), this);
                 continue;
             }
-            piw.isSlowed = true;
-            AddUIRef(pc.Order);
+            activator.AddModToCount(GetModType());
         }
         GameManager.Instance.isSlowed = true;
         GameManager.Instance.debuffActive = true;
