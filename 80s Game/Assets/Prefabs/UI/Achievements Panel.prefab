@@ -785,7 +785,7 @@ MonoBehaviour:
   m_Direction: 2
   m_Value: 0.000000031041708
   m_Size: 0.4300781
-  m_NumberOfSteps: 11
+  m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -948,8 +948,7 @@ GameObject:
   - component: {fileID: 8580431273768573789}
   - component: {fileID: 39583144917327818}
   - component: {fileID: 4315052507779897758}
-  - component: {fileID: 842228403961219813}
-  - component: {fileID: 2713850979624095708}
+  - component: {fileID: 3732451332839772360}
   m_Layer: 5
   m_Name: AchievementScrollList
   m_TagString: Untagged
@@ -1035,7 +1034,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 0
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 10
   m_Viewport: {fileID: 4298511149970650908}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 5198637222287885497}
@@ -1046,7 +1045,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &842228403961219813
+--- !u!114 &3732451332839772360
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1059,19 +1058,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eventSystem: {fileID: 0}
---- !u!114 &2713850979624095708
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4225811781322759674}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9a100df30e4ab14e9774695933f9178, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  settingsPanel: 0
 --- !u!1 &4922213863021084772
 GameObject:
   m_ObjectHideFlags: 0
@@ -1538,10 +1524,10 @@ RectTransform:
   - {fileID: 5261450430301970868}
   m_Father: {fileID: 4298511149970650908}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -0.00024414062, y: 491.55765}
-  m_SizeDelta: {x: -786, y: 983.1153}
+  m_SizeDelta: {x: 64, y: 1725.1152}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &621014814363630126
 MonoBehaviour:
