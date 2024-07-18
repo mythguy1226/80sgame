@@ -192,11 +192,7 @@ public class DefenseBatStateMachine : AbsStateMachine<DefenseBatStateMachine.Def
         else
             closestDef = activeDefendables[0];
 
-        LatchPoint nextLatch = null;
-        if (closestDef.bCanBeTargeted)
-            nextLatch = GetAvailableLatch(closestDef);
-
-        return nextLatch;
+        return GetAvailableLatch(closestDef);
     }
 
     /// <summary>
