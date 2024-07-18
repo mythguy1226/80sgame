@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -180,38 +181,18 @@ public class DefenseBatStateMachine : AbsStateMachine<DefenseBatStateMachine.Def
     /// </summary>
     public LatchPoint GetClosestLatchPoint()
     {
-        // Get reference to all defendables
-        List<Defendable> defendables = new List<Defendable>(GameObject.FindObjectsOfType<Defendable>());
+        List<Defendable> activeDefendables = GetActiveDefendables()
+            // Order by distance to target
+            .OrderBy(def => Vector3.Distance(transform.position, def.transform.position))
+            .ToList<Defendable>();
 
-        // Init closest defendable
-        Defendable closestDefendable = defendables[0];
+        Defendable closestDef = null;
+        if(activeDefendables.Count > 1)
+            closestDef = activeDefendables.Find(def => !def.bIsCore);
+        else
+            closestDef = activeDefendables[0];
 
-        // Iterate through all defendables to get the closest one
-        foreach(Defendable curDefend in defendables)
-        {
-            // Only include active defendables
-            if(!curDefend.bCanBeTargeted)
-                continue;
-
-            // Only target core if its the only defendable left to attack
-            List<Defendable> activeDefend = GetActiveDefendables();
-            if(curDefend.bIsCore && activeDefend.Count > 1)
-                continue;
-
-            // Distance check and availability check
-            if(Vector3.Distance(transform.position, curDefend.transform.position) < Vector3.Distance(transform.position, closestDefendable.transform.position))
-            {
-                closestDefendable = curDefend;
-            }
-        }
-
-        // Get the next available latch on the closest defendable
-        LatchPoint nextLatch = null;
-        if(closestDefendable.bCanBeTargeted)
-            nextLatch = GetAvailableLatch(closestDefendable);
-
-        // Return the closest latch
-        return nextLatch;
+        return GetAvailableLatch(closestDef);
     }
 
     /// <summary>
@@ -219,32 +200,14 @@ public class DefenseBatStateMachine : AbsStateMachine<DefenseBatStateMachine.Def
     /// </summary>
     public LatchPoint GetAvailableLatch(Defendable target)
     {
-        // Iterate through all latches in defendable
-        foreach(LatchPoint curLatch in target.latchPoints)
-        {
-            // Return the next available latch
-            if(curLatch.isAvailable)
-                return curLatch;
-        }
-
-        return null;
+        return target.latchPoints.Find(latch => latch.isAvailable);
     }
 
     public List<Defendable> GetActiveDefendables()
     {
-        // Init list
-        List<Defendable> activeList = new List<Defendable>();
-
-        // Iterate through all defendables and only add active ones
-        foreach(Defendable curDefend in GameObject.FindObjectsOfType<Defendable>())
-        {
-            // Check activity
-            if(curDefend.bCanBeTargeted)
-                activeList.Add(curDefend);
-        }
-
-        // Return list
-        return activeList;
+        return GameObject.FindObjectsOfType<Defendable>()
+            .ToList<Defendable>()
+            .FindAll(defendable => defendable.bCanBeTargeted);
     }
 
     /// <summary>

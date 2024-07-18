@@ -3,8 +3,7 @@ using UnityEngine;
 public enum MovementStrategy
 {
     SimpleFlocking,
-    BoidFlocking,
-    ReciprocalCollisionAvoidance
+    ObstacleAvoidance
 }
 
 public static class FlockingData
@@ -21,8 +20,16 @@ public static class FlockingData
 
 public abstract class AbsMovementStrategy
 {
+    protected KinematicSteer movementController;
+
+    public AbsMovementStrategy(KinematicSteer controller)
+    {
+        movementController =  controller;
+    }
+
     public abstract void Initialize();
     public abstract Vector2 Move();
+    protected abstract Vector2 Steer(Vector2 desired);
 
     // Method used for limiting magnitude of a vector
     protected Vector2 LimitMagnitude(Vector2 baseVector, float maxMagnitude)
@@ -34,32 +41,11 @@ public abstract class AbsMovementStrategy
         }
         return baseVector;
     }
-}
 
-public class FlockingMovement : AbsMovementStrategy
-{
-    KinematicSteer movementController;
-    public FlockingMovement(KinematicSteer controller)
-    {
-        movementController = controller;
-    }
-
-    public override void Initialize()
-    {
-        
-    }
-
-    public override Vector2 Move()
-    {
-        Flock();
-        UpdateVelocity();
-        return UpdatePosition();
-
-    }
     // Method for updating the agent position based on the current velocity
-    private Vector2 UpdatePosition()
+    protected Vector2 UpdatePosition()
     {
-        float modifiedSpeed = movementController.maxSpeed;
+        float modifiedSpeed = movementController.GetMaxSpeed();
         if (GameManager.Instance.isSlowed)
         {
             modifiedSpeed *= 0.75f;
@@ -76,139 +62,15 @@ public class FlockingMovement : AbsMovementStrategy
 
     // Method used for updating the current velocity 
     // to steer towards wander point
-    private void UpdateVelocity()
+    protected void UpdateVelocity()
     {
         // Desired velocity for target position
-        Vector2 currentPosition = new Vector2(movementController.transform.position.x, movementController.gameObject.transform.position.y);
+        Vector3 position = movementController.gameObject.transform.position;
+        Vector2 currentPosition = new Vector2(position.x, position.y);
         Vector2 desiredVelocity = movementController.targetPosition - currentPosition;
 
         // Steer agent to the wander point
-        movementController.currentVelocity += Steer(desiredVelocity.normalized * movementController.maxSpeed);
-        movementController.currentVelocity = LimitMagnitude(movementController.currentVelocity, movementController.maxSpeed);
-    }
-
-    // Method for returning a steering velocity
-    // to reach a desired velocity
-    private Vector2 Steer(Vector2 desired)
-    {
-        Vector2 steer = desired - movementController.currentVelocity;
-        steer = LimitMagnitude(steer, movementController.maxForce);
-
-        return steer;
-    }
-
-    // Method for applying flocking
-    private void Flock()
-    {
-        // Get the targets on screen
-        Target[] targetsOnScreen = GameManager.Instance.TargetManager.ActiveTargets.ToArray();
-
-        // Apply the 3 flocking algorithms to the current velocity
-        movementController.currentVelocity += Separate(targetsOnScreen) * FlockingData.separationStrength;
-        movementController.currentVelocity += Alignment(targetsOnScreen) * FlockingData.alignmentStrength;
-        movementController.currentVelocity += Cohesion(targetsOnScreen) * FlockingData.cohesionStrength;
-    }
-
-    // Method used for separation
-    private Vector2 Separate(Target[] neighbors)
-    {
-        // Check that neighbors arent empty
-        if (neighbors.Length == 0)
-            return Vector2.zero;
-
-        // Init direction to default vector
-        Vector2 direction = Vector2.zero;
-        Vector3 currentPosition = movementController.gameObject.transform.position;
-
-        // Iterate through each neighbor
-        foreach (Target neighbor in neighbors)
-        {
-            
-            // Continue if the bat isnt on screen
-            if (!neighbor.GetComponent<KinematicSteer>().canMove)
-                continue;
-
-            // Continue if the bat isnt in the flock radius
-            if (Vector3.Distance(currentPosition, neighbor.transform.position) > FlockingData.flockSize)
-                continue;
-
-            // Calculate a vector pointing to the neighbor
-            Vector2 difference = currentPosition - neighbor.transform.position;
-
-            // Calculate new direction by dividing by the distance
-            direction += difference.normalized / difference.magnitude;
-        }
-
-        // Divide the direction by total number of neighbors
-        direction /= neighbors.Length;
-
-        // Return desired velocity from steer
-        return Steer(direction.normalized * movementController.maxSpeed);
-    }
-
-    // Method used for Alignment
-    private Vector2 Alignment(Target[] neighbors)
-    {
-        // Check that neighbors arent empty
-        if (neighbors.Length == 0)
-            return Vector2.zero;
-
-        // Init velocity to default vector
-        Vector2 velocity = Vector2.zero;
-
-        // Iterate through each neighbor
-        foreach (Target neighbor in neighbors)
-        {
-            // Continue if the bat isnt on screen
-            if (!neighbor.GetComponent<KinematicSteer>().canMove)
-                continue;
-
-            // Continue if the bat isnt in the flock radius
-            if (Vector3.Distance(movementController.gameObject.transform.position, neighbor.transform.position) > FlockingData.flockSize)
-                continue;
-
-            // Add up the velocity of the surrounding neighbors
-            velocity += neighbor.GetComponent<KinematicSteer>().currentVelocity;
-        }
-
-        // Get the average velocity from the neighbors
-        velocity /= neighbors.Length;
-
-        // Return desired velocity from steer
-        return Steer(velocity.normalized * movementController.maxSpeed);
-    }
-
-    // Method for Cohesion
-    private Vector2 Cohesion(Target[] neighbors)
-    {
-        // Check that neighbors arent empty
-        if (neighbors.Length == 0)
-            return Vector2.zero;
-
-        // Init sum of neighbor positions
-        Vector2 sumPositions = Vector2.zero;
-        Vector3 currentPosition = movementController.gameObject.transform.position;
-
-        // Iterate through each neighbor
-        foreach (Target neighbor in neighbors)
-        {
-            // Continue if the bat isnt on screen
-            if (!neighbor.GetComponent<KinematicSteer>().canMove)
-                continue;
-
-            // Continue if the bat isnt in the flock radius
-            if (Vector3.Distance(currentPosition, neighbor.transform.position) > FlockingData.flockSize)
-                continue;
-
-            // Add position to total
-            sumPositions += new Vector2(neighbor.transform.position.x, neighbor.transform.position.y);
-        }
-
-        // Calculate the average position and direction towards that average
-        Vector2 average = sumPositions / neighbors.Length;
-        Vector2 direction = average - new Vector2(currentPosition.x, currentPosition.y);
-
-        // Return desired velocity from steer
-        return Steer(direction.normalized * movementController.maxSpeed);
+        movementController.currentVelocity += Steer(desiredVelocity.normalized * movementController.GetMaxSpeed());
+        movementController.currentVelocity = LimitMagnitude(movementController.currentVelocity, movementController.GetMaxSpeed());
     }
 }

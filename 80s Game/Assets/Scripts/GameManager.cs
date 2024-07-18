@@ -44,6 +44,12 @@ public class GameManager : MonoBehaviour
 
     public SpawnRateConfig spawnConfig;
 
+
+    // Kinematic Movement Flywheel
+
+    [Range(.1f, 2.0f)]
+    public float maxForce = .25f;
+
     private void Awake()
     {
         // Check if the static reference matches the script instance

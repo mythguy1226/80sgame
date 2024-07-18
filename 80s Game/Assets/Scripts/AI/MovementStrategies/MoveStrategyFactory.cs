@@ -10,12 +10,19 @@ public static class MovementStrategyFactory
     {
         switch (type)
         {
+            case MovementStrategy.ObstacleAvoidance:
+                return new VelocityObstacleAvoidance(controller);
             default:
                 return new FlockingMovement(controller);
         }
     }
 
-    public static MovementStrategy GetRandomMovementStrategy()
+    public static AbsMovementStrategy MakeRandomMovementStrategy(KinematicSteer controller) {
+        MovementStrategy movementStrategy = GetRandomMovementStrategy();
+        return MakeMovementStrategy(movementStrategy, controller);
+    }
+
+    private static MovementStrategy GetRandomMovementStrategy()
     {
         return movementTypes[Random.Range(0, movementTypes.Count)];
     }
