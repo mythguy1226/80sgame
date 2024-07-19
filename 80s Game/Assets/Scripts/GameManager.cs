@@ -216,4 +216,12 @@ public class GameManager : MonoBehaviour
         DataSaver saver = DataSaveFactory.MakeSaver(true);
         StartCoroutine(saver.Save(dataToSave));
     }
+
+    /// <summary>
+    /// Returns number of players in the game
+    /// </summary>
+    public int GetPlayerCount()
+    {
+        return players.Count;
+    }
 }

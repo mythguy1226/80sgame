@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weights:
   - modType: 1
-    chance: 0.5
+    chance: 0.3
   - modType: 4
     chance: 0.8
   - modType: 5

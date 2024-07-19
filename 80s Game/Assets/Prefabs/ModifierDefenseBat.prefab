@@ -60,6 +60,7 @@ MonoBehaviour:
   pointValue: 1500
   deathHeight: -6.5
   hitSound: {fileID: 0}
+  rewiredParticles: {fileID: 0}
 --- !u!50 &4043134783524271435
 Rigidbody2D:
   serializedVersion: 4
@@ -164,12 +165,7 @@ MonoBehaviour:
   isWandering: 0
   isFleeing: 0
   maxSpeed: 6
-  maxForce: 0.03
   currentVelocity: {x: 0, y: 0}
-  flockSize: 1
-  separationStrength: 1
-  cohesionStrength: 1
-  alignmentStrength: 1
 --- !u!95 &5122440697510579374
 Animator:
   serializedVersion: 5
@@ -328,5 +324,5 @@ MonoBehaviour:
   targetLatch: {fileID: 0}
   pursueSpeedScale: 1
   bCanPursue: 0
-  attackCooldown: 0.5
+  attackCooldown: 3
   attackDamage: 1

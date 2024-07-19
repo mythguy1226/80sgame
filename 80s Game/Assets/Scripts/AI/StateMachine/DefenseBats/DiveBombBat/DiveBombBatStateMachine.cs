@@ -46,7 +46,7 @@ public class DiveBombBatStateMachine : DefenseBatStateMachine
     /// </summary>
     IEnumerator AllowPursue()
     {
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(1.5f);
         bCanPursue = true;
         base.AnimControls.PlayAttackAnimation();
     }

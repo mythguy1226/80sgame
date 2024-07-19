@@ -86,12 +86,7 @@ MonoBehaviour:
   isWandering: 0
   isFleeing: 0
   maxSpeed: 6
-  maxForce: 0.03
   currentVelocity: {x: 0, y: 0}
-  flockSize: 1.75
-  separationStrength: 1
-  cohesionStrength: 0.7
-  alignmentStrength: 1
 --- !u!95 &3464643637762033909
 Animator:
   serializedVersion: 5
@@ -309,7 +304,7 @@ MonoBehaviour:
   targetLatch: {fileID: 0}
   pursueSpeedScale: 1
   bCanPursue: 0
-  attackCooldown: 0.5
+  attackCooldown: 3
   attackDamage: 1
   chainRadius: 2
   chainLength: 3
@@ -333,3 +328,4 @@ MonoBehaviour:
   pointValue: 2000
   deathHeight: -6.5
   hitSound: {fileID: 8300000, guid: c928b956a133aa544bfa866c9b7c2b47, type: 3}
+  rewiredParticles: {fileID: 0}
