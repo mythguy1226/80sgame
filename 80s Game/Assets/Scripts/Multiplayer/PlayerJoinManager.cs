@@ -20,9 +20,6 @@ public class PlayerJoinManager : MonoBehaviour
     public GameObject backOutExit;
     public GameObject promptTray;
 
-    public SpriteRenderer background;
-    public Sprite defenseBG;
-
     public List<Image> promptTrayIcons;
     public List<Sprite> playstationInputPrompts;
     public List<Sprite> xboxInputPrompts;
@@ -37,13 +34,6 @@ public class PlayerJoinManager : MonoBehaviour
     private void Awake()
     {
         joinStatus = new Dictionary<int, bool>();
-
-        //Set background to defense if defense mode is selected
-        if (GameModeData.activeGameMode == EGameMode.Defense)
-        {
-            background.sprite = defenseBG;
-            background.gameObject.transform.localScale = new Vector3(6.5f, 6.5f, 1f);
-        }
     }
 
     private void OnPlayerJoined(PlayerInput playerInput)
@@ -186,6 +176,12 @@ public class PlayerJoinManager : MonoBehaviour
         else if(backOutPlayer.profilePanel.activeInHierarchy)
         {
             backOutPlayer.ToggleProfilePanel();
+            return;
+        }
+
+        else if (backOutPlayer.stunPanel.activeInHierarchy)
+        {
+            backOutPlayer.ToggleStunSettings();
             return;
         }
 

@@ -36,7 +36,7 @@ public class Target : MonoBehaviour
 
     public float MovementSpeed
     {
-        get { return _MovementControls.maxSpeed; }
+        get { return _MovementControls.GetMaxSpeed(); }
     }
 
     // Call once upon start of game
@@ -265,5 +265,10 @@ public class Target : MonoBehaviour
                 text.GetComponent<TextMeshPro>().color = stunningPlayer.activeCrosshair.gameObject.GetComponent<SpriteRenderer>().color;
             }
         }
+    }
+
+    public KinematicSteer GetMovementController()
+    {
+        return _MovementControls;
     }
 }

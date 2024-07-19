@@ -53,14 +53,13 @@ public class PlayerController : MonoBehaviour
         if (config != null)
         {
             activeCrosshair.ChangeSpriteColor(config.crossHairColor);
-            
+            hitParticles = config.stunParticles;
         } else
         {
             Order = PlayerData.activePlayers.Count;
+            hitParticles = defaultHitParticles;
         }
         modifiedShotRadius = originalShotRadius;
-        hitParticles = defaultHitParticles;
-        
     }
 
     /// <summary>
@@ -86,6 +85,8 @@ public class PlayerController : MonoBehaviour
         {
             activeCrosshair.SetCrosshairSprite(pc.crosshairSprite);
             activeCrosshair.ChangeSpriteColor(pc.crossHairColor);
+
+            hitParticles = pc.stunParticles;
 
             //Set initials under crosshair only in Competitive and Defense mode
             if (GameManager.Instance.gameModeType == EGameMode.Competitive || GameManager.Instance.gameModeType == EGameMode.Defense)
@@ -157,6 +158,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void EmitCancel()
     {
+        GameManager.Instance.UIManager.CancelMenu();
         if (currentState == ControllerState.JoinScreen)
         {
             pjm.BackOut(Order);

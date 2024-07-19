@@ -10,13 +10,10 @@ public class KinematicSteer : MonoBehaviour
     public bool canMove;
     public bool isWandering;
     public bool isFleeing;
-
     // Maximums
     [Range(0, 10)]
     public float maxSpeed = 3f;
 
-    [Range(.1f, .5f)]
-    public float maxForce = .03f;
 
     // Private fields for calculations
     public Vector2 currentVelocity;
@@ -31,7 +28,9 @@ public class KinematicSteer : MonoBehaviour
 
     public void Initialize()
     {
+        movementStrategy = MovementStrategyFactory.MakeRandomMovementStrategy(this);
         SetWanderPosition();
+        _rb.velocity = (targetPosition - new Vector2(transform.position.x, transform.position.y)).normalized;
     }
 
     // Ran at beginning of game
@@ -40,7 +39,7 @@ public class KinematicSteer : MonoBehaviour
         // Init components
         spriteRenderer = GetComponent<SpriteRenderer>();
         _rb = GetComponent<Rigidbody2D>();
-        movementStrategy = MovementStrategyFactory.MakeMovementStrategy(MovementStrategy.SimpleFlocking, this);
+        
 
         // Set the first wander position
         Initialize();
@@ -66,7 +65,12 @@ public class KinematicSteer : MonoBehaviour
             // Agents flock together and also steer
             // towards a wander location in the level
             _rb.velocity = movementStrategy.Move();
-            
+            if (GameManager.Instance.ActiveGameMode.isInDebugMode())
+            {
+                Debug.DrawLine(transform.position, targetPosition, Color.red);
+            }
+
+
         }
         else
         {
@@ -78,6 +82,8 @@ public class KinematicSteer : MonoBehaviour
             transform.localScale = new Vector2(-originalScale.x, originalScale.y);
         else
             transform.localScale = originalScale;
+        
+        
 
     }
 
@@ -135,4 +141,21 @@ public class KinematicSteer : MonoBehaviour
                 targetPosition.x = UnityEngine.Random.Range((-maxWidth * 2) + spriteRenderer.size.x, (maxWidth * 2) - spriteRenderer.size.x);
         }
     }
+
+    public Vector2 GetPosition()
+    {
+        
+        return new Vector2(transform.position.x, transform.position.y);
+    }
+
+    public float GetMaxSpeed()
+    {
+        return maxSpeed;
+    }
+
+    public float GetMaxForce()
+    {
+        return GameManager.Instance.maxForce;
+    }
+
 }

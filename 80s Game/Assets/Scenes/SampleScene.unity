@@ -7226,6 +7226,7 @@ MonoBehaviour:
   weightConfig: {fileID: 11400000, guid: f8f4ebc440b07674286e2139cca876b5, type: 2}
   debug: 1
   spawnConfig: {fileID: 11400000, guid: 8833365eba3dfd44dab0ebfc78fd1fe5, type: 2}
+  maxForce: 0.25
 --- !u!4 &1095139975
 Transform:
   m_ObjectHideFlags: 0
@@ -7259,6 +7260,13 @@ MonoBehaviour:
   - {fileID: 454436789}
   postProcessVolume: {fileID: 1156324655}
   scoreBehavior: {fileID: 0}
+  classicModeBackgrounds:
+  - {fileID: 21300000, guid: adc65da9af63f8941ab6f09c18774659, type: 3}
+  - {fileID: 21300000, guid: 4fdaf93c4ae21d14689ceaaddeac185c, type: 3}
+  defenseModeBackgrounds:
+  - {fileID: 21300000, guid: b1d69a59fb2697f4897abda8625e5922, type: 3}
+  - {fileID: 21300000, guid: eefe79d2900ee5c469c25a19ac90ac80, type: 3}
+  background: {fileID: 729109293}
 --- !u!114 &1095139977
 MonoBehaviour:
   m_ObjectHideFlags: 0

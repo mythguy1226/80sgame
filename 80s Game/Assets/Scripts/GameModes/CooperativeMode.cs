@@ -20,6 +20,10 @@ public class CooperativeMode : AbsGameMode
         allowedBats = new Dictionary<TargetManager.TargetType, bool>();
         SetupAllowedData();
         debugMode = false;
+
+        // Get number of players to pass into scaling method
+        int playerCount = GameManager.Instance.GetPlayerCount();
+        ScaleGameValues(playerCount);
     }
 
     protected override void SetupAllowedData()
@@ -225,5 +229,36 @@ public class CooperativeMode : AbsGameMode
     {
         GameOver = true;
         EndGame();
+    }
+
+    /// <summary>
+    /// Method takes in number of players and updates initial
+    /// values to scale. The more players the more difficulty
+    /// the game is balanced to.
+    /// </summary>
+    public void ScaleGameValues(int playerCount)
+    {
+        // Subtract 1 from count value for scale
+        int valueScale = playerCount - 1;
+
+        // Increase target counts by value scale
+        maxTargetsOnScreen += (2 * valueScale);
+        currentRoundTargetCount += (2 * valueScale);
+
+        // Modify target values based on scale
+        List<Target> bats = targetManager.targets;
+        for (int i = 0; i < bats.Count; i++)
+        {
+            // Affect only defense bats
+            DefenseBatStateMachine dFSM = bats[i].GetComponent<DefenseBatStateMachine>();
+            if(dFSM == null)
+                continue;
+
+            // Decrease timers/cooldowns and increase speed
+            dFSM.timeUntilPursue -= (0.5f * valueScale);
+            dFSM.attackCooldown -= (0.5f * valueScale);
+            dFSM.pursueSpeedScale += (0.1f * valueScale);
+        }
+
     }
 }
