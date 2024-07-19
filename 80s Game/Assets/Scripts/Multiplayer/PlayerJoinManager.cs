@@ -179,6 +179,12 @@ public class PlayerJoinManager : MonoBehaviour
             return;
         }
 
+        else if (backOutPlayer.stunPanel.activeInHierarchy)
+        {
+            backOutPlayer.ToggleStunSettings();
+            return;
+        }
+
 
         //Toggle the back out panel
         backOutPanel.SetActive(!backOutPanel.activeInHierarchy);

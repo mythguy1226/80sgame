@@ -168,6 +168,11 @@ public class PlayerJoinPanel : MonoBehaviour
     //Method for toggling the panel to change crosshair color settings
     public void ToggleColorSettings()
     {
+        if (stunPanel.activeInHierarchy)   
+        {
+            ToggleStunSettings();
+        }
+        
         //Set the panel on or off
         colorSettings.SetActive(!colorSettings.activeInHierarchy);
 
