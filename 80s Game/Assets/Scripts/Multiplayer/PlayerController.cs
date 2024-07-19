@@ -28,6 +28,8 @@ public class PlayerController : MonoBehaviour
     private ModDoublePoints doublePoints;
     private ModOvercharge overchargeMod;
     private ModRustedWings rustedWings;
+    private ModConfusion confusion;
+    private ModSnail snail;
 
     public Dictionary<AbsModifierEffect.ModType, int> modifierCounter;
 
@@ -256,6 +258,10 @@ public class PlayerController : MonoBehaviour
                 return doublePoints != null;
             case AbsModifierEffect.ModType.RustedWings:
                 return rustedWings != null;
+            case AbsModifierEffect.ModType.Confusion:
+                return confusion != null;
+            case AbsModifierEffect.ModType.Snail:
+                return snail != null;
             default:
                 return false;
         }
@@ -293,6 +299,12 @@ public class PlayerController : MonoBehaviour
             case AbsModifierEffect.ModType.RustedWings:
                 rustedWings = (ModRustedWings) effect;
                 break;
+            case AbsModifierEffect.ModType.Confusion:
+                confusion = (ModConfusion) effect;
+                break;
+            case AbsModifierEffect.ModType.Snail:
+                snail = (ModSnail) effect;
+                break;
         }
     }
 
@@ -314,6 +326,12 @@ public class PlayerController : MonoBehaviour
             case AbsModifierEffect.ModType.RustedWings:
                 rustedWings.AddDuration(duration);
                 break;
+            case AbsModifierEffect.ModType.Confusion:
+                confusion.AddDuration(duration);
+                break;
+            case AbsModifierEffect.ModType.Snail:
+                snail.AddDuration(duration);
+                break;
         }
     }
 
@@ -333,6 +351,12 @@ public class PlayerController : MonoBehaviour
                 break;
             case AbsModifierEffect.ModType.RustedWings:
                 rustedWings = null;
+                break;
+            case AbsModifierEffect.ModType.Confusion:
+                confusion = null;
+                break;
+            case AbsModifierEffect.ModType.Snail:
+                snail = null;
                 break;
         }
     }

@@ -10,7 +10,8 @@ public class TargetManager : MonoBehaviour
         HighBonus,
         Unstable,
         Modifier,
-        DiveBomb
+        DiveBomb,
+        Debuff
     }
     // Fields for all targets and spawn locations
     public List<Target> targets;

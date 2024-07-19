@@ -19,13 +19,37 @@ public class ModSnail : AbsModifierEffect
         {
             PlayerInputWrapper piw = pIs[i].GetComponent<PlayerInputWrapper>();
             PlayerController pc = piw.GetPlayer();
-            if (pc.Order == activator.Order)
+
+            // If player already has mod extend it
+            if (pc.HasMod(GetModType()))
             {
-                activator.AddModToCount(GetModType());
+                pc.ExtendModDuration(GetModType(), maxEffectDuration);
+                CleanUp();
                 continue;
             }
-            piw.isSlowed = true;
-            AddUIRef(pc.Order);
+            else if (GameManager.Instance.gameModeType == EGameMode.Defense) // Affect all players in defense mode
+            {
+                Debug.Log("Defense Mode!");
+                piw.isSlowed = true;
+                AddUIRef(pc.Order);
+                pc.SetMod(GetModType(), this);
+                continue;
+            }
+            else if (pc.Order != activator.Order && !bIsSelfDebuff) // Affect all players but activator
+            {
+                piw.isSlowed = true;
+                AddUIRef(pc.Order);
+                pc.SetMod(GetModType(), this);
+                continue;
+            }
+            else if(pc.Order == activator.Order && bIsSelfDebuff) // Affect the activator
+            {
+                piw.isSlowed = true;
+                AddUIRef(pc.Order);
+                pc.SetMod(GetModType(), this);
+                continue;
+            }
+            activator.AddModToCount(GetModType());
         }
         GameManager.Instance.isSlowed = true;
         GameManager.Instance.debuffActive = true;
@@ -42,8 +66,14 @@ public class ModSnail : AbsModifierEffect
         for (int i = 0; i < pIs.Length; i++)
         {
             PlayerInputWrapper piw = pIs[i].GetComponent<PlayerInputWrapper>();
-            if (piw.GetPlayer().Order == activator.Order)
+            if (piw.GetPlayer() == activator && !bIsSelfDebuff) // Continue if disabling other players
             {
+                continue;
+            }
+            else if (piw.GetPlayer() == activator && bIsSelfDebuff) // Continue if disabling activator
+            {
+                piw.isSlowed = false;
+                piw.GetPlayer().RemoveMod(GetModType());
                 continue;
             }
             piw.isSlowed = false;
