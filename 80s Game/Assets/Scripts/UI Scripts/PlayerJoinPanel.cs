@@ -190,7 +190,7 @@ public class PlayerJoinPanel : MonoBehaviour
         stunPanel.SetActive(!stunPanel.activeInHierarchy);
 
         //Select the appropriate UI element for navigation based on if the panel is active or not
-        if (colorSettings.activeInHierarchy)
+        if (stunPanel.activeInHierarchy)
         {
             eventSystem.SetSelectedGameObject(null);
             eventSystem.SetSelectedGameObject(stunRightArrow.gameObject);
