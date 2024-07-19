@@ -72,7 +72,7 @@ public class PlayerInputWrapper : MonoBehaviour
     {
         if (GameManager.Instance.UIManager.titleScreenUI != null)
         {
-            if (GameManager.Instance.UIManager.titleScreenUI.gamemodePanel.activeInHierarchy)
+            if (GameManager.Instance.UIManager.titleScreenUI.gamemodePanel.activeInHierarchy && PlayerData.activePlayers[player.Order].controlScheme != "KnM")
             {
                 GameManager.Instance.UIManager.BackgroundCycle(value.Get<Vector2>());
             }
