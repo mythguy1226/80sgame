@@ -1248,6 +1248,7 @@ MonoBehaviour:
   debuffActive: 0
   buffs: []
   debuffs: []
+  selfDebuffs: []
   weightConfig: {fileID: 0}
   debug: 1
   spawnConfig: {fileID: 0}
@@ -1453,7 +1454,7 @@ MonoBehaviour:
   m_Navigation:
     m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
+    m_SelectOnUp: {fileID: 1279264832}
     m_SelectOnDown: {fileID: 1312814416}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
@@ -6210,7 +6211,7 @@ MonoBehaviour:
     m_Mode: 4
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 1312814416}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnDown: {fileID: 1279264832}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
