@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.UI;
 using UnityEngine.WSA;
 
 public class UIManager : MonoBehaviour
@@ -26,8 +29,17 @@ public class UIManager : MonoBehaviour
     private OnboardingUI onboardingUI;
     private PauseScreenBehavior pauseScreenUI;
     private GameOverBehavior gameOverUI;
-    private TitleScreenBehavior titleScreenUI;
+    public TitleScreenBehavior titleScreenUI;
     public ScoreBehavior scoreBehavior;
+    public BackgroundCustomization backgroundUI;
+
+    public List<Sprite> classicModeBackgrounds;
+    public List<Sprite> defenseModeBackgrounds;
+
+    public List<GameObject> gamemodeCards;
+
+    public SpriteRenderer background;
+    private bool backgroundChanged = false;
 
     private void Awake()
     {
@@ -40,6 +52,11 @@ public class UIManager : MonoBehaviour
         gameOverUI = canvas.GetComponent<GameOverBehavior>();
         scoreBehavior = canvas.GetComponent<ScoreBehavior>();
         titleScreenUI = canvas.GetComponent<TitleScreenBehavior>();
+    }
+
+    private void Start()
+    {
+        SetBackground();
     }
 
     public void GetFireInput(Vector3 screenPosition)
@@ -68,6 +85,59 @@ public class UIManager : MonoBehaviour
     public GameObject CreateModifierUI(GameObject uiPrefab, int player)
     {
         return Instantiate(uiPrefab, modifierContainers[player].transform);
+    }
+
+    private void SetBackground()
+    {
+        if (background == null)
+        {
+            return;
+        }
+        
+        //Set background to defense if defense mode is selected
+        if (GameModeData.activeGameMode == EGameMode.Defense)
+        {
+            background.sprite = GameManager.Instance.UIManager.defenseModeBackgrounds[PlayerPrefs.GetInt("DefenseBackground")];
+        }
+
+        else if (GameModeData.activeGameMode == EGameMode.Classic)
+        {
+            background.sprite = GameManager.Instance.UIManager.classicModeBackgrounds[PlayerPrefs.GetInt("ClassicBackground")];
+        }
+
+        else if (GameModeData.activeGameMode == EGameMode.Competitive)
+        {
+            background.sprite = GameManager.Instance.UIManager.classicModeBackgrounds[PlayerPrefs.GetInt("CompetitiveBackground")];
+        }
+    }
+
+    public void BackgroundCycle(Vector2 movement)
+    {
+        if (!backgroundChanged)
+        {
+            for(int i = 0; i < gamemodeCards.Count; i++)
+            {
+                if (EventSystem.current.currentSelectedGameObject == gamemodeCards[i])
+                {
+                    if (movement.y >= 0.7f)
+                    {
+                        backgroundUI.PreviousBackground(i + 1);
+                        backgroundChanged = true;
+                    }
+
+                    else if (movement.y <= -0.7f)
+                    {
+                        backgroundUI.NextBackground(i + 1);
+                        backgroundChanged = true;
+                    }
+                }
+            }
+        }
+
+        if (movement == Vector2.zero)
+        {
+            backgroundChanged = false;
+        }
     }
 
     public void CancelMenu()
