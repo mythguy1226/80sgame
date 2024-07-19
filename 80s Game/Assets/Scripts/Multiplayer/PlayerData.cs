@@ -12,6 +12,8 @@ public class PlayerConfig
     public Vector2 sensitivity;
     public int playerIndex;
     public string initials;
+    public GameObject stunParticles;
+    public int stunParticleIndex;
     public string controlScheme;
     public InputDevice device;
     public PlayerConfig(int i, Color col, Vector2 sens)

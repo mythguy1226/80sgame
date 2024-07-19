@@ -30,6 +30,16 @@ public class PlayerJoinPanel : MonoBehaviour
     public List<Sprite> crosshairSprites;
     private int crosshairIndex = 0;
 
+    //Variables for Stun Effect Customization
+    public GameObject stunPanel;
+    public GameObject stunSettingsOption;
+    public TextMeshProUGUI stunText;
+    public List<GameObject> stunParticlePreviews;
+    public List<GameObject> stunPrefabs;
+    public Button stunLeftArrow;
+    public Button stunRightArrow;
+    private int stunIndex = 0;
+
     //List of elements for setting player initials
     public List<TextMeshProUGUI> initials;
     public List<Button> initialUpButtons;
@@ -71,9 +81,15 @@ public class PlayerJoinPanel : MonoBehaviour
         crosshairLeftArrow.onClick.AddListener(() => ChangeCrosshairSprite(false));
         crosshairRightArrow.onClick.AddListener(() => ChangeCrosshairSprite(true));
 
+        //Set button events for stun arrow buttons
+        stunLeftArrow.onClick.AddListener(() => ChangeStunParticle(false));
+        stunRightArrow.onClick.AddListener(() => ChangeStunParticle(true));
+
         //Set the text for the crosshair indicator under the preview
         TextMeshProUGUI crosshairText = crosshairPreview.gameObject.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
         crosshairText.text = (crosshairIndex + 1) + "/" + crosshairSprites.Count;
+
+        stunText.text = (stunIndex + 1) + "/" + stunParticlePreviews.Count;
         
         //Set the button events for the initial buttons
         for (int i = 0; i < initials.Count; i++)
@@ -121,6 +137,33 @@ public class PlayerJoinPanel : MonoBehaviour
         crosshairText.text = (crosshairIndex + 1) + "/" + crosshairSprites.Count;
         UpdatePlayerConfig();
     }
+
+    public void ChangeStunParticle(bool forward)
+    {   
+        stunParticlePreviews[stunIndex].SetActive(false);
+
+        //Increase or decrease the index based on the passed in parameter
+        if (forward) stunIndex++;
+        else stunIndex--;
+
+        //Clamp the index to the size of the available crosshairs
+        if (stunIndex == stunParticlePreviews.Count)
+        {
+            stunIndex = 0;
+        }
+
+        else if (stunIndex == -1)
+        {
+            stunIndex = stunParticlePreviews.Count - 1;
+        }
+
+        //Change the sprite of the crosshair preview
+        stunParticlePreviews[stunIndex].SetActive(true);
+
+        //Update the text and player config to match
+        stunText.text = (stunIndex + 1) + "/" + stunParticlePreviews.Count;
+        UpdatePlayerConfig();
+    }
     
     //Method for toggling the panel to change crosshair color settings
     public void ToggleColorSettings()
@@ -139,6 +182,24 @@ public class PlayerJoinPanel : MonoBehaviour
         {
             eventSystem.SetSelectedGameObject(null);
             eventSystem.SetSelectedGameObject(colorSettingsOption);
+        }
+    }
+
+    public void ToggleStunSettings()
+    {
+        stunPanel.SetActive(!stunPanel.activeInHierarchy);
+
+        //Select the appropriate UI element for navigation based on if the panel is active or not
+        if (colorSettings.activeInHierarchy)
+        {
+            eventSystem.SetSelectedGameObject(null);
+            eventSystem.SetSelectedGameObject(stunRightArrow.gameObject);
+        }
+
+        else
+        {
+            eventSystem.SetSelectedGameObject(null);
+            eventSystem.SetSelectedGameObject(stunSettingsOption);
         }
     }
 
@@ -257,6 +318,8 @@ public class PlayerJoinPanel : MonoBehaviour
         PlayerData.activePlayers[player].crossHairColor = new Color(colorSliders[0].value / 255, colorSliders[1].value / 255, colorSliders[2].value / 255);
         PlayerData.activePlayers[player].crosshairSprite = crosshairPreview.sprite;
         PlayerData.activePlayers[player].crossHairIndex = crosshairIndex;
+        PlayerData.activePlayers[player].stunParticleIndex = stunIndex;
+        PlayerData.activePlayers[player].stunParticles = stunPrefabs[stunIndex];
     }
 
     //Method for updating the number of the initial variables
@@ -348,6 +411,9 @@ public class PlayerJoinPanel : MonoBehaviour
         //Add crosshair sprite index to profile data
         profileData += "\n" + PlayerData.activePlayers[player].crossHairIndex;
 
+        //Add stun effect index to profile data
+        profileData += "\n" + PlayerData.activePlayers[player].stunParticleIndex;
+
         //Write the data to the text file
         File.WriteAllText(filePath, profileData);
 
@@ -438,6 +504,13 @@ public class PlayerJoinPanel : MonoBehaviour
             //Change the crosshair to the default
             crosshairIndex = 0;
             ChangeCrosshairSprite(false);
+            ChangeCrosshairSprite(true);
+
+            //Change stun particle to default
+            stunParticlePreviews[stunIndex].SetActive(false);
+            stunIndex = 0;
+            ChangeStunParticle(false);
+            ChangeStunParticle(true);
 
             //Change the preset to whatever the last preset selected was
             ChangeCrosshairPreset();
@@ -496,6 +569,12 @@ public class PlayerJoinPanel : MonoBehaviour
                 crosshairIndex = int.Parse(lines[6]);
                 ChangeCrosshairSprite(true);
                 ChangeCrosshairSprite(false);
+
+                //Change the stun effect to the saved index for the profile
+                stunParticlePreviews[stunIndex].SetActive(false);
+                stunIndex = int.Parse(lines[7]);
+                ChangeStunParticle(false);
+                ChangeStunParticle(true);
             }
         }
     }
