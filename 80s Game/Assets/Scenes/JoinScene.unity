@@ -1951,6 +1951,13 @@ MonoBehaviour:
   modifierContainers: []
   postProcessVolume: {fileID: 1198401663}
   scoreBehavior: {fileID: 0}
+  classicModeBackgrounds:
+  - {fileID: 21300000, guid: adc65da9af63f8941ab6f09c18774659, type: 3}
+  - {fileID: 21300000, guid: 4fdaf93c4ae21d14689ceaaddeac185c, type: 3}
+  defenseModeBackgrounds:
+  - {fileID: 21300000, guid: b1d69a59fb2697f4897abda8625e5922, type: 3}
+  - {fileID: 21300000, guid: eefe79d2900ee5c469c25a19ac90ac80, type: 3}
+  background: {fileID: 822581460}
 --- !u!1 &1471414901
 GameObject:
   m_ObjectHideFlags: 0
@@ -3454,8 +3461,6 @@ MonoBehaviour:
   backOutPanel: {fileID: 415838844}
   backOutExit: {fileID: 43941169}
   promptTray: {fileID: 1990815586}
-  background: {fileID: 822581460}
-  defenseBG: {fileID: 21300000, guid: b1d69a59fb2697f4897abda8625e5922, type: 3}
   promptTrayIcons:
   - {fileID: 141723225}
   - {fileID: 1085861649}

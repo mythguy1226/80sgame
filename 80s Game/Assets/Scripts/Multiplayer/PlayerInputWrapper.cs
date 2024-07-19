@@ -70,6 +70,14 @@ public class PlayerInputWrapper : MonoBehaviour
     //Handle inputs received from the Unity input system
     private void OnMove(InputValue value)
     {
+        if (GameManager.Instance.UIManager.titleScreenUI != null)
+        {
+            if (GameManager.Instance.UIManager.titleScreenUI.gamemodePanel.activeInHierarchy)
+            {
+                GameManager.Instance.UIManager.BackgroundCycle(value.Get<Vector2>());
+            }
+        }
+
         PlayerConfig config = PlayerData.activePlayers[player.Order];
         float snailModifier = 1.0f;
 
