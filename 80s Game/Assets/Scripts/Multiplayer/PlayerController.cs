@@ -86,7 +86,10 @@ public class PlayerController : MonoBehaviour
             activeCrosshair.SetCrosshairSprite(pc.crosshairSprite);
             activeCrosshair.ChangeSpriteColor(pc.crossHairColor);
 
-            hitParticles = pc.stunParticles;
+            if (pc.stunParticles != null)
+            {
+                hitParticles = pc.stunParticles;
+            }
 
             //Set initials under crosshair only in Competitive and Defense mode
             if (GameManager.Instance.gameModeType == EGameMode.Competitive || GameManager.Instance.gameModeType == EGameMode.Defense)
