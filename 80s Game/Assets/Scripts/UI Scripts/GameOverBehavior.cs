@@ -19,7 +19,7 @@ public class GameOverBehavior : MonoBehaviour
     public TMP_Text leaderboardText;
     public AudioClip buttonClickSound;
     public List<GameObject> leaderboardScoreHighlights;
-    [SerializeField] AudioClip gameEndTheme;
+    [SerializeField] MusicTrack gameEndTheme;
 
     private bool gameOverTransition = true;
     

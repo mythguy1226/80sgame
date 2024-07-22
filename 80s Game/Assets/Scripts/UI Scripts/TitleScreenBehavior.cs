@@ -16,7 +16,7 @@ public class TitleScreenBehavior : MonoBehaviour
     public GameObject achievementsPanel;
     public GameObject achievementsList;
     public AudioClip buttonClickSound;
-    public AudioClip titleScreenMusic;
+    public MusicTrack titleScreenMusic;
 
     //UI Elements for selecting game modes
     public TextMeshProUGUI gamemodeName;

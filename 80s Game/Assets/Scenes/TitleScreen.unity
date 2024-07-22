@@ -1074,7 +1074,7 @@ MonoBehaviour:
   achievementsPanel: {fileID: 1705306704}
   achievementsList: {fileID: 1203544902}
   buttonClickSound: {fileID: 8300000, guid: 0f33d998cd03b1f4ebc4983ef2a6d559, type: 3}
-  titleScreenMusic: {fileID: 8300000, guid: cfe034b71fe4ea643985be29de64a383, type: 3}
+  titleScreenMusic: {fileID: 11400000, guid: 8017975349db49843bed656899ffeb7e, type: 2}
   gamemodeName: {fileID: 0}
   gamemodeDescription: {fileID: 0}
   startButton: {fileID: 1959031504}
