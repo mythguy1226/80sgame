@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 public class AchievementInfo : MonoBehaviour
 {
-    public TextMeshProUGUI title;
+    public TextMeshProUGUI achievementName;
     public TextMeshProUGUI description;
 
     public AchievementsUI achievementsUI;
