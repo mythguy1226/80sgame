@@ -8185,6 +8185,8 @@ MonoBehaviour:
   xboxControllerDiagram: {fileID: 2011530929}
   playstationControllerDiagram: {fileID: 1792028612}
   gameStartTheme: {fileID: 8300000, guid: e942b01d049936e498911c35cd71e6c8, type: 3}
+  gameLoopIntro: {fileID: 8300000, guid: c59508f72d8e31a489b08c6846784b48, type: 3}
+  gameLoopBGM: {fileID: 8300000, guid: 70204c16acca66e43b2d93ce1a32eb96, type: 3}
 --- !u!114 &1011990665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9016,13 +9018,16 @@ MonoBehaviour:
   - {fileID: 1750715996}
   - {fileID: 953598794}
   postProcessVolume: {fileID: 720413084}
+  titleScreenUI: {fileID: 0}
   scoreBehavior: {fileID: 0}
+  backgroundUI: {fileID: 0}
   classicModeBackgrounds:
   - {fileID: 21300000, guid: adc65da9af63f8941ab6f09c18774659, type: 3}
   - {fileID: 21300000, guid: 4fdaf93c4ae21d14689ceaaddeac185c, type: 3}
   defenseModeBackgrounds:
   - {fileID: 21300000, guid: b1d69a59fb2697f4897abda8625e5922, type: 3}
   - {fileID: 21300000, guid: eefe79d2900ee5c469c25a19ac90ac80, type: 3}
+  gamemodeCards: []
   background: {fileID: 729109293}
 --- !u!114 &1095139977
 MonoBehaviour:

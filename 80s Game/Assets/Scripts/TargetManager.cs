@@ -184,4 +184,11 @@ public class TargetManager : MonoBehaviour
         SpawnTarget(index);
     }
     
+    /// <summary>
+    /// Calls upon active game mode's coroutine function for starting delayed rounds
+    /// </summary>
+    public void StartRoundDelay()
+    {
+        StartCoroutine(GameManager.Instance.ActiveGameMode.DelayNextRound(GameManager.Instance.roundEndTheme.length));
+    }
 }

@@ -71,7 +71,7 @@ public class OnboardingUI : MonoBehaviour
         SoundManager.Instance.PlaySoundContinuous(gameLoopIntro);
         if(!playedBGM)
         {
-            StartCoroutine(DelayPersistentBGM(gameLoopIntro.length));
+            StartCoroutine(DelayPersistentBGM(gameLoopIntro.length - 0.4f));
             playedBGM = true;
         }
     }
