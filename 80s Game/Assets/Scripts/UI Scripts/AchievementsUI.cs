@@ -25,7 +25,7 @@ public class AchievementsUI : MonoBehaviour
 
     public void UpdateInfoPanel(AchievementInfo achievement)
     {
-        infoPanelName.text = achievement.title.text;
+        infoPanelName.text = achievement.achievementName.text;
         infoPanelDescription.text = achievement.description.text;
     }
 }

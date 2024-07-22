@@ -1140,7 +1140,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1035576977932210131, guid: 97534f9267428ea42800058db77cbf79, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2314231584200955767, guid: 97534f9267428ea42800058db77cbf79, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -7259,13 +7259,16 @@ MonoBehaviour:
   modifierContainers:
   - {fileID: 454436789}
   postProcessVolume: {fileID: 1156324655}
+  titleScreenUI: {fileID: 0}
   scoreBehavior: {fileID: 0}
+  backgroundUI: {fileID: 0}
   classicModeBackgrounds:
   - {fileID: 21300000, guid: adc65da9af63f8941ab6f09c18774659, type: 3}
   - {fileID: 21300000, guid: 4fdaf93c4ae21d14689ceaaddeac185c, type: 3}
   defenseModeBackgrounds:
   - {fileID: 21300000, guid: b1d69a59fb2697f4897abda8625e5922, type: 3}
   - {fileID: 21300000, guid: eefe79d2900ee5c469c25a19ac90ac80, type: 3}
+  gamemodeCards: []
   background: {fileID: 729109293}
 --- !u!114 &1095139977
 MonoBehaviour:
@@ -8984,7 +8987,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1561009853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10178,7 +10181,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1759806106
 RectTransform:
   m_ObjectHideFlags: 0
