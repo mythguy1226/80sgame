@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.UI;
-using UnityEngine.WSA;
+//using UnityEngine.WSA;
 
 public class UIManager : MonoBehaviour
 {
