@@ -6,6 +6,10 @@ public static class AchievementManager
 {
     public static Dictionary<string, int> requirements;
 
+    /// <summary>
+    /// Register the requirement values for unlocking achievements.
+    /// </summary>
+    /// <param name="achievements">The list of achievements in the game</param>
     public static void RegisterRequirements(List<AchievementData> achievements)
     {
         requirements = new Dictionary<string, int>();
@@ -16,22 +20,41 @@ public static class AchievementManager
         }
     }
 
+    /// <summary>
+    /// Returns whether an achievement has been unlocked
+    /// </summary>
+    /// <param name="name">The key of the achievement to test</param>
+    /// <returns>If this achievement has been unlocked in the past</returns>
     public static bool HasBeenUnlocked(string name)
     {
         int value = PlayerPrefs.GetInt(name, 0);
         return value == 1;
     }
 
+    /// <summary>
+    /// Register tracking data for achievement purposes
+    /// </summary>
+    /// <param name="name">The key of data to track</param>
+    /// <param name="value">The value to register</param>
     public static void RegisterData(string name, int value)
     {
         PlayerPrefs.SetInt(name, value);
     }
 
+    /// <summary>
+    /// Get data from the register
+    /// </summary>
+    /// <param name="name">The key to fetch</param>
+    /// <returns>The value currently stored in the register</returns>
     public static int GetData(string name) { 
     
         return PlayerPrefs.GetInt(name, 0);
     }
 
+    /// <summary>
+    /// Procedure to permanently mark an achievement as unlocked
+    /// </summary>
+    /// <param name="name">The key of the achievement to unlock. Will get saved to PlayerPrefs</param>
     public static void UnlockAchievement(string name)
     {
         Debug.Log("Unlocking Achievement " + name);
@@ -39,6 +62,9 @@ public static class AchievementManager
         TestForPlat();
     }
 
+    /// <summary>
+    /// Tests whether to unlock the plat achievement or not
+    /// </summary>
     private static void TestForPlat()
     {
         bool plat = true;
@@ -51,11 +77,18 @@ public static class AchievementManager
             }
         }
 
-        if (plat) {
+        if (plat && !HasBeenUnlocked(AchievementConstants.EMPLOYEE_OF_THE_MONTH)) {
             UnlockAchievement(AchievementConstants.EMPLOYEE_OF_THE_MONTH);
         }
     }
 
+    /// <summary>
+    /// Test two values to see if an achievement meets unlock requirements
+    /// </summary>
+    /// <param name="testType">Type of test to perform</param>
+    /// <param name="expectedValue">Value required to unlock</param>
+    /// <param name="testValue">The value to test</param>
+    /// <returns>Whether the test determines an achievement should be unlocked </returns>
     private static bool TestUnlock(TestType testType, int expectedValue, int testValue)
     {
         bool testSuccessful = false;
@@ -81,6 +114,13 @@ public static class AchievementManager
         return testSuccessful;
     }
 
+    /// <summary>
+    /// Test two values to see if an achievement meets unlock requirements
+    /// </summary>
+    /// <param name="testType">Type of test to perform</param>
+    /// <param name="expectedValue">Value required to unlock</param>
+    /// <param name="testValue">The value to test</param>
+    /// <returns>Whether the test determines an achievement should be unlocked </returns>
     public static bool TestUnlock(TestType testType, float expectedValue, float testValue)
     {
         bool testSuccessful = false;
@@ -106,6 +146,12 @@ public static class AchievementManager
         return testSuccessful;
     }
 
+    /// <summary>
+    /// Test the end-of-game-mode achievements
+    /// </summary>
+    /// <param name="gameMode">Game Mode to guide tests by</param>
+    /// <param name="currentRound">The current round</param>
+    /// <param name="score">The score the player has achieved</param>
     public static void TestEndGameAchievements(EGameMode gameMode, int currentRound, int score)
     {
         TestType greaterTest = TestType.GreaterThanOrEqual;
@@ -137,6 +183,10 @@ public static class AchievementManager
         }
     }
 
+    /// <summary>
+    /// Handle all stun-related achievements
+    /// </summary>
+    /// <param name="type">The stunned target type</param>
     public static void HandleStunAchievements(TargetManager.TargetType type)
     {
         string dataKey = "stun-" + type.ToString().ToLower();
@@ -177,51 +227,64 @@ public static class AchievementManager
                 stunnedBatsOfThisType++;
                 break;
         }
-        TestUnlockByType(type, dataKey, stunnedBatsOfThisType);
+        TestStunUnlockByType(type, dataKey, stunnedBatsOfThisType);
     }
 
-    private static void TestUnlockByType(TargetManager.TargetType type, string dataKey, int stunnedBatsOfThisType)
+    /// <summary>
+    /// Test whether the type of stunned bat has unlocked related achievements
+    /// </summary>
+    /// <param name="type">Type of the stunned bat</param>
+    /// <param name="dataKey">The tracked key for this bat type</param>
+    /// <param name="stunnedBatsOfThisType">The stun count for this type</param>
+    private static void TestStunUnlockByType(TargetManager.TargetType type, string dataKey, int stunCount)
     {
         string key;
         switch (type)
         {
             case TargetManager.TargetType.Unstable:
                 key = AchievementConstants.UNSTABLE_EXPERT;
-                TestAndUnlock(key, requirements[key], stunnedBatsOfThisType, TestType.GreaterThanOrEqual);
+                TestAndUnlock(key, requirements[key], stunCount, TestType.GreaterThanOrEqual);
                 key = AchievementConstants.UNSTABLE_ADEPT;
-                TestAndUnlock(key, requirements[key], stunnedBatsOfThisType, TestType.GreaterThanOrEqual);
+                TestAndUnlock(key, requirements[key], stunCount, TestType.GreaterThanOrEqual);
                 key = AchievementConstants.UNSTABLE_NOVICE;
-                TestAndUnlock(key, requirements[key], stunnedBatsOfThisType, TestType.GreaterThanOrEqual);
+                TestAndUnlock(key, requirements[key], stunCount, TestType.GreaterThanOrEqual);
                 break;
             case TargetManager.TargetType.Modifier:
                 key = AchievementConstants.MOD_BAT_EXPERT;
-                TestAndUnlock(key, requirements[key], stunnedBatsOfThisType, TestType.GreaterThanOrEqual);
+                TestAndUnlock(key, requirements[key], stunCount, TestType.GreaterThanOrEqual);
                 key = AchievementConstants.MOD_BAT_ADEPT;
-                TestAndUnlock(key, requirements[key], stunnedBatsOfThisType, TestType.GreaterThanOrEqual);
+                TestAndUnlock(key, requirements[key], stunCount, TestType.GreaterThanOrEqual);
                 key = AchievementConstants.MOD_BAT_NOVICE;
-                TestAndUnlock(key, requirements[key], stunnedBatsOfThisType, TestType.GreaterThanOrEqual);
+                TestAndUnlock(key, requirements[key], stunCount, TestType.GreaterThanOrEqual);
                 break;
             case TargetManager.TargetType.LowBonus:
             case TargetManager.TargetType.HighBonus:
                 key = AchievementConstants.BONUS_EXPERT;
-                TestAndUnlock(key, requirements[key], stunnedBatsOfThisType, TestType.GreaterThanOrEqual);
+                TestAndUnlock(key, requirements[key], stunCount, TestType.GreaterThanOrEqual);
                 key = AchievementConstants.BONUS_ADEPT;
-                TestAndUnlock(key, requirements[key], stunnedBatsOfThisType, TestType.GreaterThanOrEqual);
+                TestAndUnlock(key, requirements[key], stunCount, TestType.GreaterThanOrEqual);
                 key = AchievementConstants.BONUS_NOVICE;
-                TestAndUnlock(key, requirements[key], stunnedBatsOfThisType, TestType.GreaterThanOrEqual);
+                TestAndUnlock(key, requirements[key], stunCount, TestType.GreaterThanOrEqual);
                 break;
             case TargetManager.TargetType.Regular:
                 key = AchievementConstants.MK1_EXPERT;
-                TestAndUnlock(key, requirements[key], stunnedBatsOfThisType, TestType.GreaterThanOrEqual);
+                TestAndUnlock(key, requirements[key], stunCount, TestType.GreaterThanOrEqual);
                 key = AchievementConstants.MK1_ADEPT;
-                TestAndUnlock(key, requirements[key], stunnedBatsOfThisType, TestType.GreaterThanOrEqual);
+                TestAndUnlock(key, requirements[key], stunCount, TestType.GreaterThanOrEqual);
                 key = AchievementConstants.MK1_NOVICE;
-                TestAndUnlock(key, requirements[key], stunnedBatsOfThisType, TestType.GreaterThanOrEqual);
+                TestAndUnlock(key, requirements[key], stunCount, TestType.GreaterThanOrEqual);
                 break;
         }
-        RegisterData(dataKey, stunnedBatsOfThisType);
+        RegisterData(dataKey, stunCount);
     }
 
+    /// <summary>
+    /// A more complete wrapper for the TestUnlock function
+    /// </summary>
+    /// <param name="key">The achievement key to test</param>
+    /// <param name="expected">Required or expected value for unlock</param>
+    /// <param name="actual">Actual value obtained by the player</param>
+    /// <param name="testType">Which type of test to use</param>
     private static void TestAndUnlock(string key, int expected, int actual, TestType testType)
     {
         if (HasBeenUnlocked(key))
@@ -234,6 +297,9 @@ public static class AchievementManager
         }
     }
 
+    /// <summary>
+    /// Handle accuracy achievements
+    /// </summary>
     private static void HandleAccuracyAchievements()
     {
         int currentKillCount = GetData("killCount");
@@ -246,6 +312,10 @@ public static class AchievementManager
         TestAndUnlock(key, requirements[key], currentKillCount, TestType.GreaterThanOrEqual);
     }
 
+    /// <summary>
+    /// Handle the test for the Unfazed achievement
+    /// </summary>
+    /// <param name="stunningPlayerOrder"></param>
     public static void UnfazedTest(int stunningPlayerOrder)
     {
         int confusionCount = GetData("confmod-pi-" + stunningPlayerOrder.ToString());
@@ -258,8 +328,14 @@ public static class AchievementManager
         RegisterData("confmod-pi-" + stunningPlayerOrder.ToString(), confusionCount + 1);
     }
 
+    /// <summary>
+    /// Handle the test for the Bullseye! achievement
+    /// </summary>
+    /// <param name="player">The player controller to test</param>
     public static void BullseyeTest(PlayerController player)
     {
-        
+        PlayerScoreController scoreController = player.scoreController;
+        int accuracy = (int)(scoreController.GetAccuracy()*100);
+        TestAndUnlock(AchievementConstants.BULLSEYE, requirements[AchievementConstants.BULLSEYE], accuracy, TestType.GreaterThanOrEqual);
     }
 }
