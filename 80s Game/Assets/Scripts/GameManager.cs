@@ -226,4 +226,13 @@ public class GameManager : MonoBehaviour
     {
         return players.Count;
     }
+
+    /// <summary>
+    /// Calls upon active game mode's coroutine function for starting delayed rounds
+    /// </summary>
+    public void StartRoundDelay()
+    {
+        float delay = roundEndTheme.Clip.length - (float)roundEndTheme.EndOffset;
+        StartCoroutine(ActiveGameMode.DelayNextRound(delay));
+    }
 }

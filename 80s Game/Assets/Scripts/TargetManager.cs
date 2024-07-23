@@ -183,13 +183,4 @@ public class TargetManager : MonoBehaviour
         int index = GetNextIndexByType(type);
         SpawnTarget(index);
     }
-    
-    /// <summary>
-    /// Calls upon active game mode's coroutine function for starting delayed rounds
-    /// </summary>
-    public void StartRoundDelay()
-    {
-        float delay = GameManager.Instance.roundEndTheme.Clip.length - (float)GameManager.Instance.roundEndTheme.EndOffset;
-        StartCoroutine(GameManager.Instance.ActiveGameMode.DelayNextRound(delay));
-    }
 }

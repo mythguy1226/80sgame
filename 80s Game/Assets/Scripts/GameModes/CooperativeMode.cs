@@ -184,7 +184,7 @@ public class CooperativeMode : AbsGameMode
             if (GameManager.Instance.roundEndTheme != null)
                 SoundManager.Instance.PlayNonloopMusic(GameManager.Instance.roundEndTheme);
             GameManager.Instance.UIManager.scoreBehavior.ShowNewRoundText();
-            GameManager.Instance.TargetManager.StartRoundDelay();
+            GameManager.Instance.StartRoundDelay();
             return;
         }
 
