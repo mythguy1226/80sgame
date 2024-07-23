@@ -18,6 +18,11 @@ public class MusicTrack : ScriptableObject
     /// music to start after the file begins playing.
     /// </summary>
     [SerializeField] double _startOffset;
+    /// <summary>
+    /// Public property for the song's Start Offset, i.e. the time between the beginning 
+    /// of the sound file and the intended starting point of the song.
+    /// Should default to 0.
+    /// </summary>
     public double StartOffset
     {
         get { return _startOffset; }
@@ -29,6 +34,11 @@ public class MusicTrack : ScriptableObject
     /// of the clip's music and the end of its actual duration.
     /// </summary>
     [SerializeField] double _endOffset;
+    /// <summary>
+    /// Public property for the song's End Offset, i.e. the time between the end 
+    /// of the audible sound and the end of the sound file's total duration.
+    /// Should default to 0.
+    /// </summary>
     public double EndOffset
     { 
         get { return _endOffset; } 
@@ -39,6 +49,9 @@ public class MusicTrack : ScriptableObject
     /// The music track.
     /// </summary>
     [SerializeField] AudioClip _clip;
+    /// <summary>
+    /// Public property for the MusicTrack's AudioClip.
+    /// </summary>
     public AudioClip Clip
     {
         get { return _clip; }
