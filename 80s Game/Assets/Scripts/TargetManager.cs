@@ -189,6 +189,7 @@ public class TargetManager : MonoBehaviour
     /// </summary>
     public void StartRoundDelay()
     {
-        StartCoroutine(GameManager.Instance.ActiveGameMode.DelayNextRound(GameManager.Instance.roundEndTheme.Clip.length));
+        float delay = GameManager.Instance.roundEndTheme.Clip.length - (float)GameManager.Instance.roundEndTheme.EndOffset;
+        StartCoroutine(GameManager.Instance.ActiveGameMode.DelayNextRound(delay));
     }
 }
