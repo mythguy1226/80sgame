@@ -25,6 +25,7 @@ public class ModOvercharge : AbsModifierEffect
         activator.SetMod(GetModType(), this);
         activator.ExpandRadius();
         activator.hitParticles = hitParticles;
+        HandleModifierCountAchievement();
     }
 
 

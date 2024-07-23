@@ -52,6 +52,7 @@ public class ModConfusion : AbsModifierEffect
 
         }
         GameManager.Instance.debuffActive = true;
+        HandleModifierCountAchievement();
     }
 
     /// <summary>
@@ -76,6 +77,7 @@ public class ModConfusion : AbsModifierEffect
             }
             piw.isFlipped = false;
             piw.GetPlayer().RemoveMod(GetModType());
+            AchievementManager.RegisterData("confmod-pi-" + i.ToString(), 0);
         }
         GameManager.Instance.debuffActive = false;
     }

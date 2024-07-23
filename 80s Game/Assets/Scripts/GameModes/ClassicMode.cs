@@ -1,8 +1,7 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
+
 
 
 public class ClassicMode : AbsGameMode
@@ -205,6 +204,14 @@ public class ClassicMode : AbsGameMode
 
         // If not the end of a round, check if more targets can be spawned
         SpawnMoreTargets();
+    }
+
+    protected override void EndGame()
+    {
+        int score = GameManager.Instance.PointsManager.maxScore;
+        AchievementManager.TestEndGameAchievements(ModeType, CurrentRound, score);
+        AchievementManager.BullseyeTest(GameManager.Instance.GetPlayer(0));
+        GameManager.Instance.HandleGameOver();
     }
 
     private void SpawnMoreTargets()

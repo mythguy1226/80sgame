@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cda513d27d6ded04ba47b0f0911cbe9d, type: 3}
+  m_Name: Bonus-N
+  m_EditorClassIdentifier: 
+  order: 13
+  nameText: Bonus Stun Novice
+  requirementText: Stun 50 Total Bonus Bat Bots
+  descriptionText: "Laboratory Journal Entry 14:\r\nDevelopment for the mass production
+    of the robots is underway. The team in charge of materials have drafted several
+    supply requirements that will need to be met to ensure that manufacturing is
+    kept to pace. The proposed Mk.I design features a cost-effective frame that should
+    perform well in most field scenarios.\r"
+  internalAchivementKey: bb-1
+  testValue: 50
+  image: {fileID: 0}

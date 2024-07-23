@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cda513d27d6ded04ba47b0f0911cbe9d, type: 3}
+  m_Name: Mod-N
+  m_EditorClassIdentifier: 
+  order: 16
+  nameText: Mod Bat Stun Novice
+  requirementText: Stun 100 Total Mod Bats
+  descriptionText: "Laboratory Journal Entry 21:\r\nAs an alternative to the graphite
+    reactors, an internal generator composed of tightly-nested gyroscopic dynamos
+    has been developed. This device, which has been named the \u201CPowerCore,\u201D
+    also doubles as a self-contained data storage and processing unit. While its
+    design requires a sizable frame to accommodate it, the PowerCore\u2019s incredible
+    utility will aid the development of more varied models in the future.\r"
+  internalAchivementKey: mod-1
+  testValue: 100
+  image: {fileID: 0}

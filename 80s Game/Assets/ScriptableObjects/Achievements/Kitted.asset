@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cda513d27d6ded04ba47b0f0911cbe9d, type: 3}
+  m_Name: Kitted
+  m_EditorClassIdentifier: 
+  order: 20
+  nameText: Kitted Out
+  requirementText: Collect a total of 150 modifiers
+  descriptionText: "Laboratory Journal Entry 42:\r\nThe development of the Mk.I Recovery
+    Device has been done with PowerCore compatibility in mind. Using the data and
+    auxiliary energy provided by the PowerCore, the Recovery Device\u2019s performance
+    can be vastly increased in myriad ways. These expanded capabilities drain PowerCores
+    dramatically, however, and the effects can only be sustained briefly.\r"
+  internalAchivementKey: kitted
+  testValue: 150
+  image: {fileID: 0}

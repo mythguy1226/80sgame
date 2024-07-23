@@ -24,6 +24,7 @@ public class ModDoublePoints : AbsModifierEffect
 
         activator.SetMod(GetModType(), this);
         activator.scoreController.pointsMod = 2;
+        HandleModifierCountAchievement();
     }
 
     /// <summary>

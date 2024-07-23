@@ -15,6 +15,7 @@ public class ModRogueBat : AbsModifierEffect
     {
         // Spawn a new rogue bat
         Instantiate(rogueBat, transform.position, Quaternion.identity);
+        HandleModifierCountAchievement();
     }
 
     public override void DeactivateEffect()

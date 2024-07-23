@@ -40,10 +40,7 @@ public abstract class AbsGameMode
         StartNextRound(true);
     }
 
-    protected void EndGame()
-    {
-        GameManager.Instance.HandleGameOver();
-    }
+    protected abstract void EndGame();
 
     /// <summary>
     /// Validation function to determine if this bat should be skipped for spawning

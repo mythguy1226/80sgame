@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cda513d27d6ded04ba47b0f0911cbe9d, type: 3}
+  m_Name: Unst-E
+  m_EditorClassIdentifier: 
+  order: 12
+  nameText: Unstable Stun Expert
+  requirementText: Stun 500 Total Unstable Bat Bots
+  descriptionText: "[Memorandum from the Field Applications Director]\r\nLeader bats
+    are becoming a serious issue - whenever their hostility dampeners malfunction,
+    their signal emissions transmit the effect to nearby bats, making them run amok.
+    This needs to be resolved as soon as possible. We will not lose the Leader Bat
+    program to incompetence.\r"
+  internalAchivementKey: unst-3
+  testValue: 500
+  image: {fileID: 0}
