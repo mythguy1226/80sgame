@@ -7,44 +7,43 @@ public class SoundManager : MonoBehaviour
     //singleton implementation adapted from an online tutorial: https://www.youtube.com/watch?v=tEsuLTpz_DU
     public static SoundManager Instance;
 
+    //AudioSources for sound playback.
     public AudioSource interruptSource;     //audio source for sounds which cancel each other out
     public AudioSource continuousSource;    //audio source for sounds which cannot be interrupted
-    [SerializeField] AudioSource[] musicLoopSources;     //audio sources for looping music track(s) seamlessly
+    [SerializeField] AudioSource[] _musicLoopSources;     //audio sources for looping music track(s) seamlessly
 
     //NOTE: non-looping music like between-round and game end themes should use PlayNonloopMusic()!
 
     //param(s) for music volume
-    private float _musicvolume = 1f;
-    public float MusicVolume
+    private float _musicVolume = 1f;    //volume for music. Adjusted in SettingsManager via the accessor below.
+    public float MusicVolume            //accessor for the above _musicVolume variable.
     {
-        get { return _musicvolume; }
+        get { return _musicVolume; }
+        //setter auto-updates the _musicLoopSources' volume whenever music volume is adjusted.
+        //saves unnecessary assignments in update.
         set 
         {
-            _musicvolume = value;
-            for(int i = 0; i < musicLoopSources.Length; i++)
+            _musicVolume = value;
+            for(int i = 0; i < _musicLoopSources.Length; i++)
             {
-                if (musicLoopSources[i] != null) musicLoopSources[i].volume = value;
+                if (_musicLoopSources[i] != null) _musicLoopSources[i].volume = value;
             }
         }
     }
 
-    //param for sfx volume
-    public float sfxVolume = 1f;
+    public float sfxVolume = 1f; //param for sfx volume
 
     //fields for music loops
     //music loop implementation taken from the unity online manual: https://docs.unity3d.com/2021.3/Documentation/ScriptReference/AudioSource.PlayScheduled.html
+
     private bool _bIsMusicPlaying;        //whether or not music is currently playing
-    public bool bIsMusicPlaying {  get { return _bIsMusicPlaying; } }
+    public bool BIsMusicPlaying {  get { return _bIsMusicPlaying; } }
+
 
     private MusicTrack _musicLoopClip;        //MusicTrack to loop
-    //private double _musicLoopStartOffset;
-    //private double _musicLoopEndOffset;
 
-    private double nextEventTime;           //time to next loop plays
-    private int flip = 0;                   //which loop source is being used?
-
-    //fields for non-looping music tracks
-    //TODO: add functionality to mute the currently looping track temporarily while jingle plays (see also PlayNonloopMusic())
+    private double _nextEventTime;           //time at which next loop plays
+    private int _flip = 0;                   //which loop source is being used?
 
     void Awake()
     {
@@ -58,9 +57,14 @@ public class SoundManager : MonoBehaviour
     private void Start()
     {
         _bIsMusicPlaying = true;
-        nextEventTime = AudioSettings.dspTime + 0.5f;
+        _nextEventTime = AudioSettings.dspTime + 0.5f;
     }
 
+    /// <summary>
+    /// Plays an AudioClip once using sfxVolume. Use this for sounds that should not layer on top of
+    /// one another (e.g. stunning sounds).
+    /// </summary>
+    /// <param name="clip">The AudioClip to be played.</param>
     public void PlaySoundInterrupt(AudioClip clip)
     {
         if (interruptSource.isPlaying)
@@ -70,95 +74,125 @@ public class SoundManager : MonoBehaviour
         interruptSource.PlayOneShot(clip, sfxVolume);
 
     }
-
+    /// <summary>
+    /// Plays an AudioClip once using sfxVolume. Use this for sounds that can be allowed to 
+    /// layer on top of one another, e.g. shoot sounds.
+    /// </summary>
+    /// 
+    /// <param name="clip">AudioClip to be played.</param>
     public void PlaySoundContinuous(AudioClip clip)
     { 
         continuousSource.PlayOneShot(clip, sfxVolume);
     }
+
+
     /// <summary>
     /// Plays a designated MusicTrack once, respecting the current Music Volume setting.
-    /// Also mutes both musicLoopSources while this 
+    /// Note that this uses a <b>MusicTrack</b>, <i>not an AudioClip</i>.
     /// </summary>
+    /// 
     /// <param name="clip">The MusicTrack to be played.</param>
     public void PlayNonloopMusic(MusicTrack clip)
     {
-        if (_bIsMusicPlaying)
+        if (clip != null && clip.Clip != null)
         {
-            foreach (AudioSource aS in musicLoopSources)
-            {
-                aS.volume = 0;
-            }
+            //if (_bIsMusicPlaying) //outdated, but keeping here in case we end up needing it.
+            //{
+            //    foreach (AudioSource aS in _musicLoopSources)
+            //    {
+            //        aS.volume *= 0.2f; //sets the volume of the _musicLoopSources to 20%.
+            //    }
+            //}
+            continuousSource.PlayOneShot(clip.Clip, _musicVolume);
+            //StartCoroutine(NonloopUnmute(clip)); //starts a coroutine to unmute the _musicLoopSources
         }
-        continuousSource.PlayOneShot(clip.Clip, _musicvolume);
-        StartCoroutine(NonloopUnmute(clip));
     }
+    /// <summary>
+    /// Coroutine to time unmuting the _musicLoopSources.
+    /// Should <i>only</i> be called by methods that mute and unmute the BGM.
+    /// </summary>
+    /// 
+    /// <param name="clip">The clip for whose duration the _musicLoopSources will be muted.</param>
+    /// 
+    /// <returns>IEnumerator, as this is a coroutine.</returns>
     IEnumerator NonloopUnmute(MusicTrack clip)
     {
         yield return new WaitForSeconds(clip.Clip.length - (float)(clip.EndOffset + clip.StartOffset));
-        foreach (AudioSource aS in musicLoopSources)
+        foreach (AudioSource aS in _musicLoopSources)
         {
-            aS.volume = _musicvolume;
+            aS.volume = _musicVolume;
         }
     }
-
     /// <summary>
     /// Immediately stop whatever looping track is playing.
     /// </summary>
     public void StopMusicLoop()
     {
-        for(int i = 0; i < musicLoopSources.Length; i++)
+        for(int i = 0; i < _musicLoopSources.Length; i++)
         {
-            if (musicLoopSources[i] == null) continue;
-            musicLoopSources[i].Stop();
+            if (_musicLoopSources[i] == null) continue;
+            _musicLoopSources[i].Stop();
         }
 
         _bIsMusicPlaying = false;
     }
 
-    public void SetMusicToLoop(MusicTrack clip, double introEndDelay = 0) //sets up music to loop. This DOES NOT PLAY the music
+
+    /// <summary>
+    /// Sets the MusicTrack to loop, and schedules the initial play time.
+    /// This does <i>not</i> play the music.
+    /// </summary>
+    /// 
+    /// <param name="clip">The MusicTrack to be looped.</param>
+    /// 
+    /// <param name="introEndDelay">
+    /// Delay after which clip playback should start. Used for scheduling the initial loop play time.
+    /// Defaults to zero.
+    /// Set this up if the looping clip <i>immediately</i> follows an intro segment.
+    /// </param>
+    public void SetMusicToLoop(MusicTrack clip, double introEndDelay = 0)
     {
         //probably dangerous, but shouldn't need to be triggered anyway
-        if (musicLoopSources == null || musicLoopSources.Length == 0)
+        if (_musicLoopSources == null || _musicLoopSources.Length == 0)
         {
 
-            musicLoopSources = new AudioSource[2];
-            musicLoopSources[0] = new AudioSource();
-            musicLoopSources[0].volume = _musicvolume;
-            musicLoopSources[1] = new AudioSource();
-            musicLoopSources[1].volume = _musicvolume;
+            _musicLoopSources = new AudioSource[2];
+            _musicLoopSources[0] = new AudioSource();
+            _musicLoopSources[0].volume = _musicVolume;
+            _musicLoopSources[1] = new AudioSource();
+            _musicLoopSources[1].volume = _musicVolume;
         }
         else
         {
-            if (musicLoopSources[0] == null)
+            if (_musicLoopSources[0] == null)
             {
-                musicLoopSources[0] = new AudioSource();
-                musicLoopSources[0].volume = _musicvolume;
+                _musicLoopSources[0] = new AudioSource();
+                _musicLoopSources[0].volume = _musicVolume;
             }
-            if (musicLoopSources[1] == null)
+            if (_musicLoopSources[1] == null)
             {
-                musicLoopSources[1] = new AudioSource();
-                musicLoopSources[1].volume = _musicvolume;
+                _musicLoopSources[1] = new AudioSource();
+                _musicLoopSources[1].volume = _musicVolume;
             }
         }
-
+        //stop whatever might be looping before scheduling another song to loop
         StopMusicLoop();
         if (clip != null)
         {
+            //duplicates clip and overwrites _musicLoopClip.
             _musicLoopClip = new MusicTrack(clip);
-            Debug.Log("Clip length: " + _musicLoopClip.Clip.length);
 
-            nextEventTime = AudioSettings.dspTime + (introEndDelay > 1.0? introEndDelay:1.0);
+            //schedules the music to start looping after 1 second or after the intro is finished, whichever would be longer.
+            //defaults to 0, as not every looping song will have an intro (e.g. the Title theme).
+            _nextEventTime = AudioSettings.dspTime + (introEndDelay > 1.0? introEndDelay:1.0);
 
+            //congratulations, music is now playing if it wasn't already.
             _bIsMusicPlaying = true;
         }
-        else
-        {
-
-            return;
-        }
+        else return;
     }
 
-    //unabashedly copied from my (~QP) IGME670 (Spr 2024) IME Lab 9 implementation
+    //<i>~unabashedly~</i> mostly copied from my (~QP) Spring 2024 IGME670 IME Lab 9 implementation.
     private void Update()
     {
         if (!_bIsMusicPlaying) //update does nothing if music is not currently set to play
@@ -175,15 +209,17 @@ public class SoundManager : MonoBehaviour
             _bIsMusicPlaying = false;
             return;
         }
-        if (time + 1.0 > nextEventTime) //if the next loop will play within the next second
+        if (time + 1.0 > _nextEventTime) //if the next loop will play within the next second...
         {
-            musicLoopSources[flip].clip = _musicLoopClip.Clip;
-            musicLoopSources[flip].PlayScheduled(nextEventTime);
+            //sets the currently free _musicLoopSource to play the looping clip at _nextEventTime.
+            _musicLoopSources[_flip].clip = _musicLoopClip.Clip;
+            _musicLoopSources[_flip].PlayScheduled(_nextEventTime);
 
             //schedule next event based on the Start and End Offsets of the clip.
-            nextEventTime += _musicLoopClip.Clip.length - (_musicLoopClip.StartOffset + _musicLoopClip.EndOffset);
+            _nextEventTime += _musicLoopClip.Clip.length - (_musicLoopClip.StartOffset + _musicLoopClip.EndOffset);
 
-            flip = 1 - flip;
+            //invert flip so the next loop will start playing on a vacant AudioSource.
+            _flip = 1 - _flip;
         }
     }
 }
