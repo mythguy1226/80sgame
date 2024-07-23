@@ -13,6 +13,7 @@ public class TitleScreenBehavior : MonoBehaviour
     public GameObject onboardingContinueButton;
     public GameObject onboardingPanel;
     public GameObject gamemodePanel;
+    public GameObject achievementsButton;
     public GameObject achievementsPanel;
     public GameObject achievementsList;
     public AudioClip buttonClickSound;
@@ -131,7 +132,7 @@ public class TitleScreenBehavior : MonoBehaviour
         else
         {
             EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(startButton);
+            EventSystem.current.SetSelectedGameObject(achievementsButton);
         }
     }
 }

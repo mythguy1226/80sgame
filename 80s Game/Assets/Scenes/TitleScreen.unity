@@ -1071,6 +1071,7 @@ MonoBehaviour:
   onboardingContinueButton: {fileID: 1641958615}
   onboardingPanel: {fileID: 1450942076}
   gamemodePanel: {fileID: 1894973264}
+  achievementsButton: {fileID: 1279264828}
   achievementsPanel: {fileID: 1705306704}
   achievementsList: {fileID: 1203544902}
   buttonClickSound: {fileID: 8300000, guid: 0f33d998cd03b1f4ebc4983ef2a6d559, type: 3}
