@@ -13,7 +13,7 @@ public class CompetitiveMode : AbsGameMode
         ModeType = EGameMode.Competitive;
 
         // Initial round parameters
-        NumRounds = 15;
+        NumRounds = 12;
         maxTargetsOnScreen = 15;
         currentRoundTargetCount = 8;
         SetupAllowedData();
