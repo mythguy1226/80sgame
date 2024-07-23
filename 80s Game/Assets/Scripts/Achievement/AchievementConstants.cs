@@ -1,3 +1,6 @@
+//This class holds the internal reference for all achievement keys
+//Any achievement Scriptable Object created must have a key in this registry otherwise
+//it will never unlock
 public static class AchievementConstants
 {
     public static string CLASSIC_FAN = "classic-1";

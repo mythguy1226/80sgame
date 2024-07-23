@@ -26,6 +26,8 @@ public class AchievementData : ScriptableObject
     public int testValue;
 
     public Sprite image;
+    
+    //Defer this test to the AchievementManager, just in case
     public bool isUnlocked()
     {
         return AchievementManager.HasBeenUnlocked(internalAchivementKey);
