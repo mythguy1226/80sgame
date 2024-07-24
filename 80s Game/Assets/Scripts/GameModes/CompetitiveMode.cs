@@ -207,7 +207,7 @@ public class CompetitiveMode : AbsGameMode
             {
                 // Play round-end jingle and call method for delayed round start
                 if (GameManager.Instance.roundEndTheme != null)
-                    SoundManager.Instance.PlayNonloopMusic(GameManager.Instance.roundEndTheme);
+                    SoundManager.Instance.PlaySoundContinuous(GameManager.Instance.roundEndTheme.Clip);
                 GameManager.Instance.UIManager.scoreBehavior.ShowNewRoundText();
                 GameManager.Instance.StartRoundDelay();
             }
