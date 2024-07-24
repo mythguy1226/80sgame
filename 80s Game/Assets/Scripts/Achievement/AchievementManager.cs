@@ -5,6 +5,7 @@ using static AchievementData;
 public static class AchievementManager
 {
     public static Dictionary<string, int> requirements;
+    private static Dictionary<string, AchievementData> lookupTable;
 
     /// <summary>
     /// Register the requirement values for unlocking achievements.
@@ -13,10 +14,12 @@ public static class AchievementManager
     public static void RegisterRequirements(List<AchievementData> achievements)
     {
         requirements = new Dictionary<string, int>();
+        lookupTable = new Dictionary<string, AchievementData>();
         for (int i = 0; i < achievements.Count; i++)
         {
             AchievementData achievement = achievements[i];
             requirements[achievement.internalAchivementKey] = achievement.testValue;
+            lookupTable[achievement.internalAchivementKey] = achievement;
         }
     }
 
@@ -60,6 +63,16 @@ public static class AchievementManager
         Debug.Log("Unlocking Achievement " + name);
         PlayerPrefs.SetInt(name , 1);
         TestForPlat();
+    }
+
+    /// <summary>
+    /// Look up an achievement by use of its key
+    /// </summary>
+    /// <param name="key">Key for lookup. Should come from the list found in AchievementConstants</param>
+    /// <returns>The AchivementData ScriptableObject</returns>
+    public static AchievementData GetAchievementByKey(string key)
+    {
+        return lookupTable[key];
     }
 
     /// <summary>
