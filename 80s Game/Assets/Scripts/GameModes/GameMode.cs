@@ -1,4 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 public enum EGameMode
 {
@@ -73,6 +75,8 @@ public abstract class AbsGameMode
 
     protected abstract void StartNextRound(bool isFirstRound = false);
 
+    protected abstract void CallNextRound();
+
     protected abstract void UpdateRoundParams();
 
     protected abstract void SetupAllowedData();
@@ -122,5 +126,14 @@ public abstract class AbsGameMode
     public bool isInDebugMode()
     {
         return debugMode;
+    }
+
+    /// <summary>
+    /// Coroutine used for delaying beginning of next round
+    /// </summary>
+    public IEnumerator DelayNextRound(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        CallNextRound();
     }
 }

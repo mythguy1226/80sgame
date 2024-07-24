@@ -6874,7 +6874,9 @@ MonoBehaviour:
   mouseDiagram: {fileID: 275948030}
   xboxControllerDiagram: {fileID: 519723845}
   playstationControllerDiagram: {fileID: 1388510295}
-  gameStartTheme: {fileID: 8300000, guid: e942b01d049936e498911c35cd71e6c8, type: 3}
+  gameStartTheme: {fileID: 11400000, guid: e190702bc3aadc743824ccd149a20d91, type: 2}
+  gameLoopIntro: {fileID: 11400000, guid: 36db92fbc24e03a47882b903c91e0946, type: 2}
+  gameLoopBGM: {fileID: 11400000, guid: 69b894590886a974e8bdfbad5173cdbf, type: 2}
 --- !u!114 &1011990665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6902,7 +6904,7 @@ MonoBehaviour:
   - {fileID: 898002236}
   - {fileID: 417171212}
   - {fileID: 1231367926}
-  gameEndTheme: {fileID: 8300000, guid: e5a6e5297d672bc4e8399d40ba2d8e43, type: 3}
+  gameEndTheme: {fileID: 11400000, guid: 7bf2dd83420dbd14da610dd4c2cb8f63, type: 2}
 --- !u!114 &1011990666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7210,7 +7212,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 3927707039747870840, guid: bc3f50abd22028041ab5a1ce97145ecf, type: 3}
-  roundEndTheme: {fileID: 8300000, guid: d513d718f482f2d42a5402d152e5f893, type: 3}
+  roundEndTheme: {fileID: 11400000, guid: 26fbd5bf8368daa499bc3563ce622138, type: 2}
   gameModeType: 0
   isSlowed: 0
   rustedWingsStack: 0

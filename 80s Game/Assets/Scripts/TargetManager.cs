@@ -183,5 +183,4 @@ public class TargetManager : MonoBehaviour
         int index = GetNextIndexByType(type);
         SpawnTarget(index);
     }
-    
 }

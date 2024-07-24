@@ -94,8 +94,6 @@ public class ClassicMode : AbsGameMode
         CurrentRound++;
         currentRoundTargetCount += 2;
         maxTargetsOnScreen += 1;
-
-        GameManager.Instance.UIManager.scoreBehavior.ShowNewRoundText();
         
         // Keep max targets on screen to at most two fewer than object pool
         if(maxTargetsOnScreen >= targetManager.targets.Count)
@@ -105,8 +103,6 @@ public class ClassicMode : AbsGameMode
 
         targetManager.numStuns = 0;
         targetManager.UpdateTargetParams();
-        if (GameManager.Instance.roundEndTheme != null)
-            SoundManager.Instance.PlayNonloopMusic(GameManager.Instance.roundEndTheme);
     }
 
     protected override int GetNextAvailableBat()
@@ -188,14 +184,11 @@ public class ClassicMode : AbsGameMode
             // Otherwise start next round
             else
             {
-                StartNextRound();
-                
-                // Spawn a modifier bat and increment target count
-                if (allowedBats[TargetManager.TargetType.Modifier])
-                {
-                    targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<ModifierBatStateMachine>());
-                }
-                currentRoundTargetCount++;
+                // Play round-end jingle and call method for delayed round start
+                if (GameManager.Instance.roundEndTheme != null)
+                    SoundManager.Instance.PlaySoundContinuous(GameManager.Instance.roundEndTheme.Clip);
+                GameManager.Instance.UIManager.scoreBehavior.ShowNewRoundText();
+                GameManager.Instance.StartRoundDelay();
             }
                 
 
@@ -235,5 +228,18 @@ public class ClassicMode : AbsGameMode
             else
                 targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<BatStateMachine>());
         }
+    }
+
+    protected override void CallNextRound()
+    {
+        // Begin the next round
+        StartNextRound();
+                
+        // Spawn a modifier bat and increment target count
+        if (allowedBats[TargetManager.TargetType.Modifier])
+        {
+            targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<ModifierBatStateMachine>());
+        }
+        currentRoundTargetCount++;
     }
 }

@@ -105,8 +105,6 @@ public class CompetitiveMode : AbsGameMode
         CurrentRound++;
         currentRoundTargetCount += 4;
         maxTargetsOnScreen += 1;
-        
-        GameManager.Instance.UIManager.scoreBehavior.ShowNewRoundText();
 
         // Keep max targets on screen to at most two fewer than object pool
         if (maxTargetsOnScreen >= targetManager.targets.Count)
@@ -116,8 +114,6 @@ public class CompetitiveMode : AbsGameMode
 
         targetManager.numStuns = 0;
         targetManager.UpdateTargetParams();
-        if (GameManager.Instance.roundEndTheme != null)
-            SoundManager.Instance.PlayNonloopMusic(GameManager.Instance.roundEndTheme);
     }
 
     protected override int GetNextAvailableBat()
@@ -210,7 +206,13 @@ public class CompetitiveMode : AbsGameMode
                 
             // Otherwise start next round
             else
-                StartNextRound();
+            {
+                // Play round-end jingle and call method for delayed round start
+                if (GameManager.Instance.roundEndTheme != null)
+                    SoundManager.Instance.PlaySoundContinuous(GameManager.Instance.roundEndTheme.Clip);
+                GameManager.Instance.UIManager.scoreBehavior.ShowNewRoundText();
+                GameManager.Instance.StartRoundDelay();
+            }
 
             return;
         }
@@ -248,5 +250,11 @@ public class CompetitiveMode : AbsGameMode
             else
                 targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<BatStateMachine>());
         }
+    }
+
+    protected override void CallNextRound()
+    {
+        // Begin the next round
+        StartNextRound();
     }
 }

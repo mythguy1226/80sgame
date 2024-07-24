@@ -11,9 +11,12 @@ public class OnboardingUI : MonoBehaviour
     public GameObject mouseDiagram;
     public GameObject xboxControllerDiagram;
     public GameObject playstationControllerDiagram;
-    [SerializeField] AudioClip gameStartTheme;
+    [SerializeField] MusicTrack gameStartTheme;
+    [SerializeField] MusicTrack gameLoopIntro;
+    [SerializeField] MusicTrack gameLoopBGM;
     private UIManager manager;
     private bool controllerConnected = false;
+    private bool playedBGM = false;
 
 
     // Start is called before the first frame update
@@ -41,7 +44,7 @@ public class OnboardingUI : MonoBehaviour
     //Close the panel, active game UI elements, and unpause the game
     public void CloseOnboarding()
     {
-        SoundManager.Instance.PlayNonloopMusic(gameStartTheme);
+        //SoundManager.Instance.PlayNonloopMusic(gameStartTheme);
         onboardingPanel.SetActive(false);
         gameUIElements.SetActive(true);
 
@@ -49,10 +52,39 @@ public class OnboardingUI : MonoBehaviour
 
         Time.timeScale = 1.0f;
         manager.activeUI = UIManager.UIType.None;
+
+        // Start coroutine for playing BGM
+        StartCoroutine(DelayPersistentBGMIntro());
     }
 
     public void SetManager(UIManager reference)
     {
         manager = reference;
+    }
+
+    /// <summary>
+    /// Coroutine used for delaying play of BGM intro
+    /// </summary>
+    IEnumerator DelayPersistentBGMIntro()
+    {
+        //yield return new WaitForSeconds(gameStartTheme.Clip.length - (float)(gameStartTheme.EndOffset + gameLoopIntro.StartOffset));
+        yield return new WaitForSeconds(0);
+        SoundManager.Instance.PlayNonloopMusic(gameLoopIntro);
+        if(!playedBGM)
+        {
+            //StartCoroutine(DelayPersistentBGM());
+            SoundManager.Instance.SetMusicToLoop(gameLoopBGM, gameLoopIntro.Clip.length - (gameLoopIntro.StartOffset + gameLoopIntro.EndOffset));
+            playedBGM = true;
+        }
+    }
+
+    /// <summary>
+    /// Coroutine used for delaying play of persistent BGM.
+    /// QP: I dummied this out as SoundManager has inbuilt functionality for scheduling the loop playback.
+    /// </summary>
+    IEnumerator DelayPersistentBGM()
+    {
+        yield return new WaitForSeconds(gameLoopIntro.Clip.length - (float)(gameLoopIntro.StartOffset + gameLoopIntro.EndOffset));
+        SoundManager.Instance.SetMusicToLoop(gameLoopBGM, gameLoopIntro.EndOffset);
     }
 }
