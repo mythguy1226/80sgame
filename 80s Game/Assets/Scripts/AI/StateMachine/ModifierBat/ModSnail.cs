@@ -54,6 +54,7 @@ public class ModSnail : AbsModifierEffect
         GameManager.Instance.isSlowed = true;
         GameManager.Instance.debuffActive = true;
         GameManager.Instance.UIManager.postProcessVolume.profile.GetSetting<Vignette>().active = true;
+        HandleModifierCountAchievement();
     }
 
     /// <summary>

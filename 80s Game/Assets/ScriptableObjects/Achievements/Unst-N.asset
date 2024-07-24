@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cda513d27d6ded04ba47b0f0911cbe9d, type: 3}
+  m_Name: Unst-N
+  m_EditorClassIdentifier: 
+  order: 10
+  nameText: Unstable Stun Novice
+  requirementText: Stun 100 Total Unstable Bat Bots
+  descriptionText: "Field Applications R&D Entry 8:\r\nAs more units are developed,
+    a failsafe system is required to ensure that units can be returned should an
+    unexpected event occur. To this end, we are in the process of developing a leader
+    unit that dictates the behavior of other bats in its vicinity. To easily distinguish
+    them in the field, Aesthetics & Design have given them a fluorescent yellow coat.\r"
+  internalAchivementKey: unst-1
+  testValue: 100
+  image: {fileID: 0}

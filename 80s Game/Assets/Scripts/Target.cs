@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using static AchievementData;
 
 public class Target : MonoBehaviour
 {
@@ -157,6 +158,7 @@ public class Target : MonoBehaviour
             {
                 stunningPlayer = s.player;
                 stunningPlayer.scoreController.AddHit(this);
+
             }
 
             // Call method for stun resolution
@@ -213,7 +215,8 @@ public class Target : MonoBehaviour
         {
             // Add a successful hit
             if(stunningPlayer != null)
-            {
+            {   
+                AchievementManager.HandleStunAchievements(type);
                 gameManager.TargetManager.AddToCount(GetComponent<Target>().type, gameManager.TargetManager.killCount);
                 gameManager.PointsManager.AddRoundPoints(stunningPlayer.Order, pointValue * stunningPlayer.scoreController.pointsMod);
             }

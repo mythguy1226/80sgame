@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cda513d27d6ded04ba47b0f0911cbe9d, type: 3}
+  m_Name: BulwarkOfResistance
+  m_EditorClassIdentifier: 
+  order: 6
+  nameText: Bulwark of Resistance
+  requirementText: Survive 25 Rounds in Defense Mode
+  descriptionText: "[Recovered email between lab technicians]\r\nJust got back from
+    medical. I went by the containment facility and felt [redacted]. My vision [redacted]
+    and I swear I could feel [redacted]. I think it\u2019s the crystal resonators
+    - you ever hear someone play music on glass? Too many notes at the same time
+    and you\u2019ll [redacted]. It\u2019s the same thing here, I swear.\r"
+  internalAchivementKey: def-3
+  testValue: 25
+  image: {fileID: 0}

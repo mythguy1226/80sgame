@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class CompetitiveMode : AbsGameMode
 {
@@ -215,6 +217,13 @@ public class CompetitiveMode : AbsGameMode
 
         // If not the end of a round, check if more targets can be spawned
         SpawnMoreTargets();
+    }
+
+    protected override void EndGame()
+    {
+        int score = GameManager.Instance.PointsManager.maxScore;
+        AchievementManager.TestEndGameAchievements(ModeType, CurrentRound, score);
+        GameManager.Instance.HandleGameOver();
     }
 
     private void SpawnMoreTargets()

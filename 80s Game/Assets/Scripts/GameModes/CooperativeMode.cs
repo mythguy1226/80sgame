@@ -1,14 +1,12 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class CooperativeMode : AbsGameMode
 {
     float modifierChance = 0.3f;
-
+    Defendable coreObject;
     public CooperativeMode() : base()
     {
         ModeType = EGameMode.Competitive;
@@ -20,6 +18,17 @@ public class CooperativeMode : AbsGameMode
         allowedBats = new Dictionary<TargetManager.TargetType, bool>();
         SetupAllowedData();
         debugMode = false;
+
+        // Find the core
+        List<Defendable> defendables = new List<Defendable>(GameObject.FindObjectsOfType<Defendable>());
+        foreach(Defendable defendable in defendables)
+        {
+            if (defendable.bIsCore)
+            {
+                coreObject = defendable;
+                break;
+            }
+        }
 
         // Get number of players to pass into scaling method
         int playerCount = GameManager.Instance.GetPlayerCount();
@@ -93,6 +102,14 @@ public class CooperativeMode : AbsGameMode
             // Check if screen is now full
             if (targetManager.ActiveTargets.Count == maxTargetsOnScreen)
                 return;
+        }
+
+        string key = AchievementConstants.CAREFUL_FRAGILE;
+        AchievementData.TestType testType = AchievementData.TestType.LessThanOrEqual;
+        float testValue = coreObject._currentHitpoints / (float) coreObject._maxHitpoints;
+        if (AchievementManager.TestUnlock(testType, AchievementManager.requirements[key], testValue*100))
+        {
+            AchievementManager.UnlockAchievement(key);
         }
     }
 
@@ -229,6 +246,13 @@ public class CooperativeMode : AbsGameMode
     {
         GameOver = true;
         EndGame();
+    }
+
+    protected override void EndGame()
+    {
+        int score = GameManager.Instance.PointsManager.maxScore;
+        AchievementManager.TestEndGameAchievements(ModeType, CurrentRound, score);
+        GameManager.Instance.HandleGameOver();
     }
 
     /// <summary>

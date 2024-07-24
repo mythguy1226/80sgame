@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cda513d27d6ded04ba47b0f0911cbe9d, type: 3}
+  m_Name: Bullseye
+  m_EditorClassIdentifier: 
+  order: 25
+  nameText: Bullseye!
+  requirementText: Achieve an accuracy rating of 85% or greater in a game of Classic
+    Mode.
+  descriptionText: "[Excerpt from the Mk.I Recovery Device field manual]\r\n\u2026although
+    the gun is perfectly safe to use near other personnel, do not allow it to come
+    in contact with your skin, eyes, or mouth, and do not discharge it in the presence
+    of people you suspect might be pregnant or have cardiac conditions, pulmonary
+    conditions, diabetes, gout, IBS\u2026\r"
+  internalAchivementKey: bulls
+  testValue: 85
+  image: {fileID: 0}

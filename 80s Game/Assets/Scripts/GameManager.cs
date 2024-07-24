@@ -226,4 +226,10 @@ public class GameManager : MonoBehaviour
     {
         return players.Count;
     }
+
+    public PlayerController GetPlayer(int index)
+    {
+
+    return players[index]; 
+    }
 }

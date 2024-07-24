@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 /* CLASS: BatStateMachine
@@ -128,7 +127,13 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
         // Trigger stun animation
         _AnimControls.PlayStunAnimation();
         SoundManager.Instance.PlaySoundInterrupt(hitSound);
-        GetComponent<Target>().bIsStunned = true;
+        Target target = GetComponent<Target>();
+        target.bIsStunned = true;
+
+        if (target.stunningPlayer.HasMod(AbsModifierEffect.ModType.Confusion))
+        {
+            AchievementManager.UnfazedTest(target.stunningPlayer.Order);
+        }
     }
 
     /// <summary>

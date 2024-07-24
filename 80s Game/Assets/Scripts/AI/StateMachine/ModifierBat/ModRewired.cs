@@ -34,6 +34,7 @@ public class ModRewired : AbsModifierEffect
                 dFSM.pursueTimer = effectDuration;
             }
         }
+        HandleModifierCountAchievement();
     }
 
     public override void DeactivateEffect()

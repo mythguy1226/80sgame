@@ -90,6 +90,18 @@ public abstract class AbsModifierEffect : MonoBehaviour
     /// </summary>
     public abstract void ActivateEffect();
 
+    protected void HandleModifierCountAchievement()
+    {
+        int totalModCount = AchievementManager.GetData("mod-count");
+        string key = AchievementConstants.KITTED_OUT;
+        AchievementData.TestType test = AchievementData.TestType.GreaterThanOrEqual;
+        if (AchievementManager.TestUnlock(test, AchievementManager.requirements[key], totalModCount+1)) {
+            AchievementManager.UnlockAchievement(AchievementConstants.KITTED_OUT);
+            return;
+        }
+        AchievementManager.RegisterData("mod-count", totalModCount + 1);
+    }
+
     /// <summary>
     /// Abstract method each modifier class will implement
     /// to implement deactivation of effects
