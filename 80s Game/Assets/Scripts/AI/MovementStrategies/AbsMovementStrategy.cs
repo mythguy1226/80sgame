@@ -11,9 +11,9 @@ public static class FlockingData
     // Flocking values
     public static float flockSize = 1f;
 
-    public static float separationStrength = 1f;
+    public static float separationStrength = 1.25f;
 
-    public static float cohesionStrength = 1f;
+    public static float cohesionStrength = 0.5f;
 
     public static float alignmentStrength = 1f;
 }
