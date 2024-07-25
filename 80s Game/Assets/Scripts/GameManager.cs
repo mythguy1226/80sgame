@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     public PlayerController playerPrefab;
 
-    public AudioClip roundEndTheme;     //putting this here so it can be called by GameMode subclasses
+    public MusicTrack roundEndTheme;     //putting this here so it can be called by GameMode subclasses
     //public AudioClip failstateTheme;  //for future implementation of losable game mode(s), e.g. defense mode
 
     // Change in Inspector
@@ -225,5 +225,18 @@ public class GameManager : MonoBehaviour
     public int GetPlayerCount()
     {
         return players.Count;
+    }
+
+    public PlayerController GetPlayer(int index)
+    {
+        return players[index]; 
+    }
+    /// <summary>
+    /// Calls upon active game mode's coroutine function for starting delayed rounds
+    /// </summary>
+    public void StartRoundDelay()
+    {
+        float delay = roundEndTheme.Clip.length - (float)roundEndTheme.EndOffset;
+        StartCoroutine(ActiveGameMode.DelayNextRound(delay));
     }
 }

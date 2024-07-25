@@ -6668,15 +6668,15 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2.3787675, y: 2.3787675, z: 2.3787675}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1902051786}
   m_Father: {fileID: 978044360}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 11, y: -291}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 11, y: -223.53}
+  m_SizeDelta: {x: 64, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &758606373
 MonoBehaviour:
@@ -6691,16 +6691,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b276e073f04036041ab1761e836da248, type: 3}
+  m_Sprite: {fileID: 7240875460241612957, guid: d3a1c7a06d8170c4d91d4c0363789c16, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -8184,7 +8184,9 @@ MonoBehaviour:
   mouseDiagram: {fileID: 2133569414}
   xboxControllerDiagram: {fileID: 2011530929}
   playstationControllerDiagram: {fileID: 1792028612}
-  gameStartTheme: {fileID: 8300000, guid: e942b01d049936e498911c35cd71e6c8, type: 3}
+  gameStartTheme: {fileID: 11400000, guid: e190702bc3aadc743824ccd149a20d91, type: 2}
+  gameLoopIntro: {fileID: 11400000, guid: 36db92fbc24e03a47882b903c91e0946, type: 2}
+  gameLoopBGM: {fileID: 11400000, guid: 69b894590886a974e8bdfbad5173cdbf, type: 2}
 --- !u!114 &1011990665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8206,7 +8208,7 @@ MonoBehaviour:
   leaderboardText: {fileID: 692398610}
   buttonClickSound: {fileID: 8300000, guid: 0f33d998cd03b1f4ebc4983ef2a6d559, type: 3}
   leaderboardScoreHighlights: []
-  gameEndTheme: {fileID: 8300000, guid: e5a6e5297d672bc4e8399d40ba2d8e43, type: 3}
+  gameEndTheme: {fileID: 11400000, guid: 7bf2dd83420dbd14da610dd4c2cb8f63, type: 2}
 --- !u!114 &1011990666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8963,7 +8965,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 3927707039747870840, guid: bc3f50abd22028041ab5a1ce97145ecf, type: 3}
-  roundEndTheme: {fileID: 8300000, guid: d513d718f482f2d42a5402d152e5f893, type: 3}
+  roundEndTheme: {fileID: 11400000, guid: 26fbd5bf8368daa499bc3563ce622138, type: 2}
   gameModeType: 1
   isSlowed: 0
   rustedWingsStack: 0
@@ -9022,6 +9024,8 @@ MonoBehaviour:
   classicModeBackgrounds:
   - {fileID: 21300000, guid: adc65da9af63f8941ab6f09c18774659, type: 3}
   - {fileID: 21300000, guid: 4fdaf93c4ae21d14689ceaaddeac185c, type: 3}
+  - {fileID: 21300000, guid: 514d5d03b63a55940aa2fe7edf9e1838, type: 3}
+  - {fileID: 21300000, guid: 3c683b6031c5d214cab93b872ac10392, type: 3}
   defenseModeBackgrounds:
   - {fileID: 21300000, guid: b1d69a59fb2697f4897abda8625e5922, type: 3}
   - {fileID: 21300000, guid: eefe79d2900ee5c469c25a19ac90ac80, type: 3}
@@ -14970,7 +14974,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 4.2038574, y: -24.382355}
+  m_AnchoredPosition: {x: 4.2038574, y: -38.7}
   m_SizeDelta: {x: 476.0932, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1902051787

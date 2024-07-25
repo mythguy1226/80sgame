@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cda513d27d6ded04ba47b0f0911cbe9d, type: 3}
+  m_Name: Careful
+  m_EditorClassIdentifier: 
+  order: 26
+  nameText: Careful, Fragile
+  requirementText: Survive a round of Defense with the core at 10% health or lower.
+  descriptionText: "Warning!\r\nThe containment field shell is extremely fragile.
+    Please do not sit on it, hit it, drop it, carry it by means of uncertified forklift
+    operation, throw heavy objects at it, scratch it with sharp objects, or expose
+    it to direct sunlight or excessive heat or cold.\r\nFailure to comply will result
+    in [redacted].\r"
+  internalAchivementKey: fragile
+  testValue: 10
+  image: {fileID: 0}

@@ -12,7 +12,6 @@ public class ModConfusion : AbsModifierEffect
     /// </summary>
     public override void ActivateEffect()
     {
-        Destroy(modifierUIRefs[0]);
         PlayerInput[] pIs = FindObjectsByType<PlayerInput>(FindObjectsSortMode.None);
         for(int i = 0; i < pIs.Length; i++)
         {
@@ -52,6 +51,7 @@ public class ModConfusion : AbsModifierEffect
 
         }
         GameManager.Instance.debuffActive = true;
+        HandleModifierCountAchievement();
     }
 
     /// <summary>
@@ -76,6 +76,7 @@ public class ModConfusion : AbsModifierEffect
             }
             piw.isFlipped = false;
             piw.GetPlayer().RemoveMod(GetModType());
+            AchievementManager.RegisterData("confmod-pi-" + i.ToString(), 0);
         }
         GameManager.Instance.debuffActive = false;
     }

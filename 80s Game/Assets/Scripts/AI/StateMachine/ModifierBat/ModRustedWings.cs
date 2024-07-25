@@ -17,6 +17,7 @@ public class ModRustedWings : AbsModifierEffect
         activator.SetMod(GetModType(), this);
         GameManager.Instance.isSlowed = true;
         GameManager.Instance.rustedWingsStack++;
+        HandleModifierCountAchievement();
     }
 
     public override void DeactivateEffect()

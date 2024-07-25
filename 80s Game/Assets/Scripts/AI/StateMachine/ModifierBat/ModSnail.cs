@@ -13,7 +13,6 @@ public class ModSnail : AbsModifierEffect
     /// </summary>
     public override void ActivateEffect()
     {
-        Destroy(modifierUIRefs[0]);
         PlayerInput[] pIs = FindObjectsByType<PlayerInput>(FindObjectsSortMode.None);
         for (int i = 0; i < pIs.Length; i++)
         {
@@ -54,6 +53,7 @@ public class ModSnail : AbsModifierEffect
         GameManager.Instance.isSlowed = true;
         GameManager.Instance.debuffActive = true;
         GameManager.Instance.UIManager.postProcessVolume.profile.GetSetting<Vignette>().active = true;
+        HandleModifierCountAchievement();
     }
 
     /// <summary>
