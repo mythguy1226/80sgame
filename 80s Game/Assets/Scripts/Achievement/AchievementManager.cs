@@ -167,16 +167,16 @@ public static class AchievementManager
         switch (testType)
         {
             case TestType.GreaterThan:
-                testSuccessful = expectedValue > testValue;
-                break;
-            case TestType.LessThan:
                 testSuccessful = expectedValue < testValue;
                 break;
+            case TestType.LessThan:
+                testSuccessful = expectedValue > testValue;
+                break;
             case TestType.LessThanOrEqual:
-                testSuccessful = expectedValue <= testValue;
+                testSuccessful = expectedValue >= testValue;
                 break;
             case TestType.GreaterThanOrEqual:
-                testSuccessful = expectedValue >= testValue;
+                testSuccessful = expectedValue <= testValue;
                 break;
             default:
                 testSuccessful = expectedValue == testValue;
@@ -209,11 +209,11 @@ public static class AchievementManager
                 RegisterData(lookupTable[key].requirementTrackingKey, score);
                 TestAndUnlock(key, requirements[key], score, greaterTest);
                 key = AchievementConstants.PROUD_OF_YOU;
-                TestAndUnlock(key, requirements[key], 0, TestType.EqualTo);
+                TestAndUnlock(key, requirements[key], score, TestType.EqualTo);
                 break;
             case EGameMode.Competitive:
                 key = AchievementConstants.PROUD_OF_YOU;
-                TestAndUnlock(key, requirements[key], 0, TestType.EqualTo);
+                TestAndUnlock(key, requirements[key], score, TestType.EqualTo);
                 break;
             case EGameMode.Defense:
                 key = AchievementConstants.BULWARK_OF_RESISTANCE;
@@ -246,8 +246,8 @@ public static class AchievementManager
                 {
                     return;
                 }
-                dataKey = AchievementConstants.UNSTABLE_EXPERT;
-                stunnedBatsOfThisType = GetData(lookupTable[dataKey].requirementTrackingKey);
+                dataKey = lookupTable[AchievementConstants.UNSTABLE_EXPERT].requirementTrackingKey;
+                stunnedBatsOfThisType = GetData(dataKey);
                 stunnedBatsOfThisType++;
                 break;
             case TargetManager.TargetType.Modifier:
@@ -255,8 +255,8 @@ public static class AchievementManager
                 {
                     return;
                 }
-                dataKey = AchievementConstants.MOD_BAT_EXPERT;
-                stunnedBatsOfThisType = GetData(lookupTable[dataKey].requirementTrackingKey);
+                dataKey = lookupTable[AchievementConstants.MOD_BAT_EXPERT].requirementTrackingKey;
+                stunnedBatsOfThisType = GetData(dataKey);
                 stunnedBatsOfThisType++;
                 break;
             case TargetManager.TargetType.LowBonus:
@@ -265,8 +265,8 @@ public static class AchievementManager
                 {
                     return;
                 }
-                dataKey = AchievementConstants.MOD_BAT_EXPERT;
-                stunnedBatsOfThisType = GetData(lookupTable[dataKey].requirementTrackingKey);
+                dataKey = lookupTable[AchievementConstants.BONUS_EXPERT].requirementTrackingKey;
+                stunnedBatsOfThisType = GetData(dataKey);
                 stunnedBatsOfThisType++;
                 break;
             case TargetManager.TargetType.Regular:
@@ -274,8 +274,8 @@ public static class AchievementManager
                 {
                     return;
                 }
-                dataKey = AchievementConstants.MK1_EXPERT;
-                stunnedBatsOfThisType = GetData(lookupTable[dataKey].requirementTrackingKey);
+                dataKey = lookupTable[AchievementConstants.MK1_EXPERT].requirementTrackingKey;
+                stunnedBatsOfThisType = GetData(dataKey);
                 stunnedBatsOfThisType++;
                 break;
         }
