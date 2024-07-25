@@ -33,6 +33,7 @@ public class UIManager : MonoBehaviour
     public TitleScreenBehavior titleScreenUI;
     public ScoreBehavior scoreBehavior;
     public BackgroundCustomization backgroundUI;
+    public AchievementsUI achievementsUI;
 
     public List<Sprite> classicModeBackgrounds;
     public List<Sprite> defenseModeBackgrounds;
@@ -187,5 +188,13 @@ public class UIManager : MonoBehaviour
     public void ClearNotification()
     {
         notifPlaying = false;
+    }
+
+    public void LoadAchievements(List<AchievementData> achievements)
+    {
+        if (achievementsUI != null)
+        {
+            achievementsUI.CreateAchievements(achievements);
+        }
     }
 }
