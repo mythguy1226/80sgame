@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cda513d27d6ded04ba47b0f0911cbe9d, type: 3}
+  m_Name: ClassicEnjoyer
+  m_EditorClassIdentifier: 
+  order: 2
+  nameText: Classic Enjoyer
+  requirementText: Finish Classic mode with 500,000 points
+  descriptionText: "Laboratory Journal Entry 41: \r\nThere\u2019s been an unexpected
+    power outage and the bats have escaped containment. Fortunately, no technicians
+    were injured during this incident. Teams are being dispatched to prevent the
+    bat robots from reaching populated areas.\r"
+  internalAchivementKey: classic-2
+  requirementTrackingKey: classic-2
+  testValue: 500000
+  image: {fileID: 0}
+  rewardText: 
+  rewardSprites: []
+  showProgressBar: 1

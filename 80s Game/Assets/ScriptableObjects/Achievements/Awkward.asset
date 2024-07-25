@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cda513d27d6ded04ba47b0f0911cbe9d, type: 3}
+  m_Name: Awkward
+  m_EditorClassIdentifier: 
+  order: 24
+  nameText: Well That's Awkward...
+  requirementText: Stun 0 bats with EMP
+  descriptionText: "[Email from the Finance Director to the Laboratory Director]\r\nThe
+    development of the electromagnetic pulse resonator seems like an ill-advised
+    plan. Not only is the cost of manufacturing a single one extremely prohibitive,
+    but its operation is all but guaranteed to render all units caught in its radius
+    irreparable. Why are we spending resources on technology that is so hazardous
+    to our own research materials?\r"
+  internalAchivementKey: awkward
+  testValue: 0
+  image: {fileID: 0}

@@ -36,7 +36,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3.5, y: 3.5, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -124,8 +124,8 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.64, y: 0.64}
+    pivot: {x: 0.5, y: 0.1891892}
+    oldSize: {x: 0.48, y: 0.37}
     newSize: {x: 0.64, y: 0.64}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -133,17 +133,30 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.07134046, y: 0.17626765}
-      - {x: -0.05648417, y: 0.23354425}
-      - {x: -0.106239244, y: 0.1813686}
-      - {x: -0.102449246, y: 0.07703166}
-      - {x: -0.18919323, y: 0.01}
-      - {x: -0.17406332, y: -0.031901896}
-      - {x: -0.09057618, y: -0.049466718}
-      - {x: -0.099032976, y: -0.12825361}
-      - {x: -0.04330734, y: -0.17594755}
-      - {x: 0.08671771, y: -0.10610534}
-      - {x: 0.18838617, y: -0.036498513}
+    - - {x: 0.14, y: 0.3}
+      - {x: -0.06, y: 0.29}
+      - {x: -0.08, y: 0.21}
+      - {x: -0.04, y: 0.11}
+      - {x: -0.07, y: 0.07}
+      - {x: -0.14, y: 0.12}
+      - {x: -0.24, y: 0.06}
+      - {x: -0.23, y: 0}
+      - {x: -0.13, y: 0}
+      - {x: -0.04, y: -0.05}
+      - {x: -0.08, y: -0.1}
+      - {x: -0.06, y: -0.17}
+      - {x: 0.07, y: -0.2}
+      - {x: 0.17, y: -0.18}
+      - {x: 0.13, y: -0.1}
+      - {x: 0.14, y: -0.02}
+      - {x: 0.2, y: -0.05}
+      - {x: 0.24, y: -0.03}
+      - {x: 0.26, y: 0.03}
+      - {x: 0.16, y: 0.05}
+      - {x: 0.13, y: 0.08}
+      - {x: 0.16, y: 0.11}
+      - {x: 0.15, y: 0.17}
+      - {x: 0.19, y: 0.2}
   m_UseDelaunayMesh: 0
 --- !u!114 &-9004518963499802162
 MonoBehaviour:
@@ -163,7 +176,6 @@ MonoBehaviour:
   isWandering: 0
   isFleeing: 0
   maxSpeed: 6
-  maxForce: 0.03
   currentVelocity: {x: 0, y: 0}
 --- !u!95 &5122440697510579374
 Animator:
@@ -175,7 +187,7 @@ Animator:
   m_GameObject: {fileID: 232502045716647642}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1c40a341349f502408cd7689d305a5ec, type: 2}
+  m_Controller: {fileID: 9100000, guid: b10be62b54b01294b91d23f83a80f33c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -195,10 +207,11 @@ Animation:
   m_GameObject: {fileID: 232502045716647642}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 69ae86a3a632d6c44b862d36f8455c9c, type: 2}
+  m_Animation: {fileID: 7400000, guid: 772851c3ad1f3954bb57da54f62fdb9b, type: 2}
   m_Animations:
-  - {fileID: 7400000, guid: 69ae86a3a632d6c44b862d36f8455c9c, type: 2}
-  - {fileID: 7400000, guid: 3bc2ca24ee02b344c99c996b7b331e17, type: 2}
+  - {fileID: 7400000, guid: 772851c3ad1f3954bb57da54f62fdb9b, type: 2}
+  - {fileID: 7400000, guid: e406dd5828e6d094fbeecb4118e1808c, type: 2}
+  - {fileID: 7400000, guid: 93674d0ceca09cb4fbc170d1e5faa098, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
@@ -244,8 +257,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b276e073f04036041ab1761e836da248, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 7240875460241612957, guid: d3a1c7a06d8170c4d91d4c0363789c16, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

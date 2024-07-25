@@ -104,8 +104,6 @@ public class PlayerJoinPanel : MonoBehaviour
         colorSliders[1].value = PlayerData.defaultColors[player].g * 255;
         colorSliders[2].value = PlayerData.defaultColors[player].b * 255;
 
-        PlayerData.activePlayers[player].initials = "AAA";
-
         //Turn off the corsshairs
         PauseScreenBehavior.Instance.ToggleCrosshairs(false);
     }
@@ -314,6 +312,34 @@ public class PlayerJoinPanel : MonoBehaviour
         }
 
         UpdatePlayerConfig();
+    }
+
+    public void SetDefaultInitials(int playerNum)
+    {
+        switch (playerNum)
+        {
+            case 1:
+                for (int i = 0; i < 3; i++)
+                {
+                    ChangeInitial(true, i);
+                }
+                break;
+            case 2:
+                for (int i = 0; i < 3; i++)
+                {
+                    ChangeInitial(true, i);
+                    ChangeInitial(true, i);
+                }
+                break;
+            case 3:
+                for (int i = 0; i < 3; i++)
+                {
+                    ChangeInitial(true, i);
+                    ChangeInitial(true, i);
+                    ChangeInitial(true, i);
+                }
+                break;
+        }
     }
 
     //Method for updating the player's config values

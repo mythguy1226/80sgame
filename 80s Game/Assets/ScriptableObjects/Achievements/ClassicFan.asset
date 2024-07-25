@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cda513d27d6ded04ba47b0f0911cbe9d, type: 3}
+  m_Name: ClassicFan
+  m_EditorClassIdentifier: 
+  order: 1
+  nameText: Classic Fan
+  requirementText: Finish Classic mode with 150,000 points
+  descriptionText: "Laboratory Journal Entry 36: \r\nDevelopment of the new flight
+    controllers has severely impacted the hostility dampeners on the retrofitted
+    units. Their behavior has become erratic and technicians are reporting odd changes
+    in their hunting patterns.\r"
+  internalAchivementKey: classic-1
+  requirementTrackingKey: classic-1
+  testValue: 150000
+  image: {fileID: 0}
+  rewardText: 
+  rewardSprites: []
+  showProgressBar: 1

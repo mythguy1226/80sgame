@@ -109,6 +109,9 @@ public class PlayerJoinManager : MonoBehaviour
                 break;
         }
 
+        //Set initials to default values for each player
+        newPlayerPanel.GetComponent<PlayerJoinPanel>().SetDefaultInitials(pc.Order);
+
         //Disable auto scroll for dropdowns if using mouse and keyboard
         if (playerInput.currentControlScheme == "KnM")
         {

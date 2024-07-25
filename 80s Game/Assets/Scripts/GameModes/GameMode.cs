@@ -1,4 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 public enum EGameMode
 {
@@ -40,10 +42,7 @@ public abstract class AbsGameMode
         StartNextRound(true);
     }
 
-    protected void EndGame()
-    {
-        GameManager.Instance.HandleGameOver();
-    }
+    protected abstract void EndGame();
 
     /// <summary>
     /// Validation function to determine if this bat should be skipped for spawning
@@ -75,6 +74,8 @@ public abstract class AbsGameMode
     protected abstract int GetNextAvailableBat();
 
     protected abstract void StartNextRound(bool isFirstRound = false);
+
+    protected abstract void CallNextRound();
 
     protected abstract void UpdateRoundParams();
 
@@ -125,5 +126,14 @@ public abstract class AbsGameMode
     public bool isInDebugMode()
     {
         return debugMode;
+    }
+
+    /// <summary>
+    /// Coroutine used for delaying beginning of next round
+    /// </summary>
+    public IEnumerator DelayNextRound(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        CallNextRound();
     }
 }

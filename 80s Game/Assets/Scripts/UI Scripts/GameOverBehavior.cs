@@ -19,7 +19,7 @@ public class GameOverBehavior : MonoBehaviour
     public TMP_Text leaderboardText;
     public AudioClip buttonClickSound;
     public List<GameObject> leaderboardScoreHighlights;
-    [SerializeField] AudioClip gameEndTheme;
+    [SerializeField] MusicTrack gameEndTheme;
 
     private bool gameOverTransition = true;
     
@@ -44,6 +44,9 @@ public class GameOverBehavior : MonoBehaviour
                 //Disable crosshairs and turn mouse cursor on
                 this.gameObject.GetComponent<PauseScreenBehavior>().ToggleCrosshairs(false);
                 Cursor.visible = true;
+
+                //Stop the persistent BGM and play the game end jingle
+                SoundManager.Instance.StopMusicLoop();
                 if (gameEndTheme != null)
                     SoundManager.Instance.PlayNonloopMusic(gameEndTheme);
 

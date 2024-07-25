@@ -1,14 +1,12 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class CooperativeMode : AbsGameMode
 {
     float modifierChance = 0.3f;
-
+    Defendable coreObject;
     public CooperativeMode() : base()
     {
         ModeType = EGameMode.Competitive;
@@ -20,6 +18,17 @@ public class CooperativeMode : AbsGameMode
         allowedBats = new Dictionary<TargetManager.TargetType, bool>();
         SetupAllowedData();
         debugMode = false;
+
+        // Find the core
+        List<Defendable> defendables = new List<Defendable>(GameObject.FindObjectsOfType<Defendable>());
+        foreach(Defendable defendable in defendables)
+        {
+            if (defendable.bIsCore)
+            {
+                coreObject = defendable;
+                break;
+            }
+        }
 
         // Get number of players to pass into scaling method
         int playerCount = GameManager.Instance.GetPlayerCount();
@@ -94,6 +103,14 @@ public class CooperativeMode : AbsGameMode
             if (targetManager.ActiveTargets.Count == maxTargetsOnScreen)
                 return;
         }
+
+        string key = AchievementConstants.CAREFUL_FRAGILE;
+        AchievementData.TestType testType = AchievementData.TestType.LessThanOrEqual;
+        float testValue = coreObject._currentHitpoints / (float) coreObject._maxHitpoints;
+        if (AchievementManager.TestUnlock(testType, AchievementManager.requirements[key], testValue*100))
+        {
+            AchievementManager.UnlockAchievement(key);
+        }
     }
 
     protected override void UpdateRoundParams()
@@ -101,8 +118,6 @@ public class CooperativeMode : AbsGameMode
         CurrentRound++;
         currentRoundTargetCount += 4;
         maxTargetsOnScreen += 1;
-
-        GameManager.Instance.UIManager.scoreBehavior.ShowNewRoundText();
         
         // Keep max targets on screen to at most two fewer than object pool
         if (maxTargetsOnScreen >= targetManager.targets.Count)
@@ -112,8 +127,6 @@ public class CooperativeMode : AbsGameMode
 
         targetManager.numStuns = 0;
         targetManager.UpdateTargetParams();
-        if (GameManager.Instance.roundEndTheme != null)
-            SoundManager.Instance.PlayNonloopMusic(GameManager.Instance.roundEndTheme);
     }
 
     protected override int GetNextAvailableBat()
@@ -184,12 +197,11 @@ public class CooperativeMode : AbsGameMode
         // Start the next round if desired number of stuns is met
         if (targetManager.numStuns >= currentRoundTargetCount && allowedBats[TargetManager.TargetType.Modifier])
         {
-            StartNextRound();
-
-            // Spawn a modifier bat and increment target count
-            targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<ModifierDefenseBatStateMachine>());
-            currentRoundTargetCount++;
-
+            // Play round-end jingle and call method for delayed round start
+            if (GameManager.Instance.roundEndTheme != null)
+                SoundManager.Instance.PlaySoundContinuous(GameManager.Instance.roundEndTheme.Clip);
+            GameManager.Instance.UIManager.scoreBehavior.ShowNewRoundText();
+            GameManager.Instance.StartRoundDelay();
             return;
         }
 
@@ -231,6 +243,13 @@ public class CooperativeMode : AbsGameMode
         EndGame();
     }
 
+    protected override void EndGame()
+    {
+        int score = GameManager.Instance.PointsManager.maxScore;
+        AchievementManager.TestEndGameAchievements(ModeType, CurrentRound, score);
+        GameManager.Instance.HandleGameOver();
+    }
+
     /// <summary>
     /// Method takes in number of players and updates initial
     /// values to scale. The more players the more difficulty
@@ -260,5 +279,15 @@ public class CooperativeMode : AbsGameMode
             dFSM.pursueSpeedScale += (0.1f * valueScale);
         }
 
+    }
+
+    protected override void CallNextRound()
+    {
+        // Begin the next round
+        StartNextRound();
+
+        // Spawn a modifier bat and increment target count
+        targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<ModifierDefenseBatStateMachine>());
+        currentRoundTargetCount++;
     }
 }

@@ -306,9 +306,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interruptSource: {fileID: 1190138292627115924}
   continuousSource: {fileID: 4839469585174707557}
-  musicLoopSources:
+  _musicLoopSources:
   - {fileID: 8770998945435923915}
   - {fileID: 4954575699069882609}
+  sfxVolume: 1
 --- !u!1 &4799641485286617298
 GameObject:
   m_ObjectHideFlags: 0
