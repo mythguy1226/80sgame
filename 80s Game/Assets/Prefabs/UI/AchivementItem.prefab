@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c02f1ca5ff70c346b5e60dc2f1e3e64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: {fileID: 8464192126462962683}
+  achievementName: {fileID: 8464192126462962683}
   description: {fileID: 3540107837372821808}
   achievementsUI: {fileID: 0}
 --- !u!1 &2744224760112503312

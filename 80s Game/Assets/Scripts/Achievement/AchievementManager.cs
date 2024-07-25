@@ -61,6 +61,7 @@ public static class AchievementManager
     public static void UnlockAchievement(string name)
     {
         Debug.Log("Unlocking Achievement " + name);
+        GameManager.Instance.UIManager.ShowAchievementNotification(GetAchievementByKey(name));
         PlayerPrefs.SetInt(name , 1);
         TestForPlat();
     }
