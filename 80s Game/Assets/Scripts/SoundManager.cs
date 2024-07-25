@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class SoundManager : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class SoundManager : MonoBehaviour
     [SerializeField] AudioSource[] _musicLoopSources;     //audio sources for looping music track(s) seamlessly
 
     //NOTE: non-looping music like between-round and game end themes should use PlayNonloopMusic()!
+    IObjectPool<PitchedAudioSource> pitchedAudioSources;
+    public bool collectionChecks = true;
+    public int maxPoolSize = 10;
 
     //param(s) for music volume
     private float _musicVolume = 1f;    //volume for music. Adjusted in SettingsManager via the accessor below.
@@ -56,8 +60,47 @@ public class SoundManager : MonoBehaviour
     }
     private void Start()
     {
+        pitchedAudioSources = new ObjectPool<PitchedAudioSource>(
+            CreateAudioSource,
+            OnTakeFromPool,
+            OnReturnedToPool,
+            OnDestroyPoolObject,
+            collectionChecks,
+            10,
+            maxPoolSize
+        );
+
         _bIsMusicPlaying = true;
         _nextEventTime = AudioSettings.dspTime + 0.5f;
+    }
+
+    private void OnDestroyPoolObject(PitchedAudioSource source)
+    {
+        Destroy(source.gameObject);
+    }
+
+    public void ReturnToPool(PitchedAudioSource source)
+    {
+        pitchedAudioSources.Release(source);
+    }
+
+    private void OnReturnedToPool(PitchedAudioSource source)
+    {
+        source.gameObject.SetActive(false);
+    }
+
+    private void OnTakeFromPool(PitchedAudioSource source)
+    {
+        source.gameObject.SetActive(true);
+    }
+
+    private PitchedAudioSource CreateAudioSource()
+    {
+        GameObject sourceObj = new GameObject("Pooled Audio Source");
+        PitchedAudioSource audioSource = sourceObj.AddComponent<PitchedAudioSource>();
+        sourceObj.transform.SetParent(this.transform);
+        sourceObj.SetActive(false);
+        return audioSource;
     }
 
     /// <summary>
@@ -65,14 +108,15 @@ public class SoundManager : MonoBehaviour
     /// one another (e.g. stunning sounds).
     /// </summary>
     /// <param name="clip">The AudioClip to be played.</param>
-    public void PlaySoundInterrupt(AudioClip clip)
+    public void PlaySoundInterrupt(AudioClip clip, float minPitch = 1f, float maxPitch = 1f)
     {
         if (interruptSource.isPlaying)
         {
             interruptSource.Stop(); //interrupts current sound playing through interruptSource, to avoid sounds stacking on top of one another
         }
-        interruptSource.PlayOneShot(clip, sfxVolume);
 
+        interruptSource.pitch = Random.Range(minPitch, maxPitch);
+        interruptSource.PlayOneShot(clip, sfxVolume);
     }
     /// <summary>
     /// Plays an AudioClip once using sfxVolume. Use this for sounds that can be allowed to 
@@ -85,6 +129,14 @@ public class SoundManager : MonoBehaviour
         continuousSource.PlayOneShot(clip, sfxVolume);
     }
 
+    public void PlaySoundContPitched(AudioClip clip, float pitchMin = 0.9f, float pitchMax = 1.1f)
+    {
+        pitchedAudioSources.Get()
+            .WithClip(clip)
+            .WithVolume(sfxVolume)
+            .WithPitch(pitchMin, pitchMax)
+            .Play();
+    }
 
     /// <summary>
     /// Plays a designated MusicTrack once, respecting the current Music Volume setting.
