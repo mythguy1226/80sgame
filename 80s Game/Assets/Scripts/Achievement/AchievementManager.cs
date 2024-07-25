@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 using static AchievementData;
 
 public static class AchievementManager
 {
     public static Dictionary<string, int> requirements;
     private static Dictionary<string, AchievementData> lookupTable;
+    private static Queue<string> rewards;
 
     /// <summary>
     /// Register the requirement values for unlocking achievements.
@@ -21,6 +23,17 @@ public static class AchievementManager
             requirements[achievement.internalAchivementKey] = achievement.testValue;
             lookupTable[achievement.internalAchivementKey] = achievement;
         }
+    }
+
+    public static AchievementData GetNextReward()
+    {
+        if (rewards.Count == 0)
+        {
+            return null;
+        }
+
+        string achievementKey = rewards.Dequeue();
+        return lookupTable[achievementKey];
     }
 
     /// <summary>
@@ -62,6 +75,7 @@ public static class AchievementManager
     {
         Debug.Log("Unlocking Achievement " + name);
         PlayerPrefs.SetInt(name , 1);
+        rewards.Enqueue(name);
         TestForPlat();
     }
 
