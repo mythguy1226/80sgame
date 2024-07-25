@@ -926,7 +926,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interruptSource: {fileID: 546722975}
   continuousSource: {fileID: 1826288560}
-  musicLoopSources: []
+  _musicLoopSources: []
   sfxVolume: 1
 --- !u!4 &370928177
 Transform:
@@ -1915,6 +1915,7 @@ MonoBehaviour:
   debuffActive: 0
   buffs: []
   debuffs: []
+  selfDebuffs: []
   weightConfig: {fileID: 0}
   debug: 0
   spawnConfig: {fileID: 0}
@@ -1950,13 +1951,19 @@ MonoBehaviour:
   canvas: {fileID: 1540043243}
   modifierContainers: []
   postProcessVolume: {fileID: 1198401663}
+  titleScreenUI: {fileID: 0}
   scoreBehavior: {fileID: 0}
+  backgroundUI: {fileID: 0}
   classicModeBackgrounds:
   - {fileID: 21300000, guid: adc65da9af63f8941ab6f09c18774659, type: 3}
   - {fileID: 21300000, guid: 4fdaf93c4ae21d14689ceaaddeac185c, type: 3}
+  - {fileID: 21300000, guid: 514d5d03b63a55940aa2fe7edf9e1838, type: 3}
+  - {fileID: 21300000, guid: 3c683b6031c5d214cab93b872ac10392, type: 3}
   defenseModeBackgrounds:
   - {fileID: 21300000, guid: b1d69a59fb2697f4897abda8625e5922, type: 3}
   - {fileID: 21300000, guid: eefe79d2900ee5c469c25a19ac90ac80, type: 3}
+  - {fileID: 21300000, guid: 4e8779f31b85f214983256b0033a735e, type: 3}
+  gamemodeCards: []
   background: {fileID: 822581460}
 --- !u!1 &1471414901
 GameObject:
