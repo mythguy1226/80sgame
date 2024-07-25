@@ -79,6 +79,12 @@ public static class AchievementManager
     /// <param name="name">The key of the achievement to unlock. Will get saved to PlayerPrefs</param>
     public static void UnlockAchievement(string name)
     {
+        
+        if (HasBeenUnlocked(name))
+        {
+            return;
+        }
+        
         Debug.Log("Unlocking Achievement " + name);
         GameManager.Instance.UIManager.ShowAchievementNotification(GetAchievementByKey(name));
         PlayerPrefs.SetInt(name , 1);
@@ -111,7 +117,7 @@ public static class AchievementManager
             }
         }
 
-        if (plat && !HasBeenUnlocked(AchievementConstants.EMPLOYEE_OF_THE_MONTH)) {
+        if (plat) {
             UnlockAchievement(AchievementConstants.EMPLOYEE_OF_THE_MONTH);
         }
     }
@@ -333,10 +339,6 @@ public static class AchievementManager
     /// <param name="testType">Which type of test to use</param>
     private static void TestAndUnlock(string key, int expected, int actual, TestType testType)
     {
-        if (HasBeenUnlocked(key))
-        {
-            return;
-        }
         if (TestUnlock(testType, expected, actual))
         {
             UnlockAchievement(key);
