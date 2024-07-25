@@ -13,7 +13,6 @@ public class ModSnail : AbsModifierEffect
     /// </summary>
     public override void ActivateEffect()
     {
-        Destroy(modifierUIRefs[0]);
         PlayerInput[] pIs = FindObjectsByType<PlayerInput>(FindObjectsSortMode.None);
         for (int i = 0; i < pIs.Length; i++)
         {
