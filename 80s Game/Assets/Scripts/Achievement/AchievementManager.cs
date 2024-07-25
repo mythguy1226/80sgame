@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
 using static AchievementData;
 
 public static class AchievementManager
@@ -15,13 +14,17 @@ public static class AchievementManager
     /// <param name="achievements">The list of achievements in the game</param>
     public static void RegisterRequirements(List<AchievementData> achievements)
     {
-        requirements = new Dictionary<string, int>();
-        lookupTable = new Dictionary<string, AchievementData>();
-        for (int i = 0; i < achievements.Count; i++)
+        if (requirements.Count == 0)
         {
-            AchievementData achievement = achievements[i];
-            requirements[achievement.internalAchivementKey] = achievement.testValue;
-            lookupTable[achievement.internalAchivementKey] = achievement;
+            requirements = new Dictionary<string, int>();
+            lookupTable = new Dictionary<string, AchievementData>();
+            rewards = new Queue<string>();
+            for (int i = 0; i < achievements.Count; i++)
+            {
+                AchievementData achievement = achievements[i];
+                requirements[achievement.internalAchivementKey] = achievement.testValue;
+                lookupTable[achievement.internalAchivementKey] = achievement;
+            }
         }
     }
 
