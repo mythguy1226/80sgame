@@ -66,18 +66,25 @@ public class FlockingMovement : AbsMovementStrategy
             // Continue if the bat isnt in the flock radius
             if (distance > FlockingData.flockSize)
                 continue;
+            
+            if (distance == 0)
+            {
+                // Would cause division by zero error instead we give it a small value
+                distance = 0.01f;
+            }
 
             Debug.DrawLine(currentPosition, neighbor.transform.position, Color.magenta);
 
             // Calculate a vector pointing to the neighbor
             Vector2 difference = currentPosition - neighbor.transform.position;
-            float inverseMagnitude = 1 / distance;
+            float inverseMagnitude = 1.0f / distance;
             // Calculate new direction by dividing by the distance
-            direction += difference.normalized * inverseMagnitude;
+            direction += Vector2.Scale(difference.normalized, new Vector2(inverseMagnitude, inverseMagnitude));
         }
 
         // Divide the direction by total number of neighbors
-        //direction /= neighbors.Length;
+        direction /= neighbors.Length;
+        //Debug.Log(direction.normalized);
 
         // Return desired velocity from steer
         Debug.DrawLine(currentPosition, new Vector2(currentPosition.x, currentPosition.y) + direction.normalized, Color.green);
