@@ -6,6 +6,7 @@ public static class AchievementManager
 {
     public static Dictionary<string, int> requirements;
     private static Dictionary<string, AchievementData> lookupTable;
+    private static Queue<string> rewards;
 
     /// <summary>
     /// Register the requirement values for unlocking achievements.
@@ -13,14 +14,29 @@ public static class AchievementManager
     /// <param name="achievements">The list of achievements in the game</param>
     public static void RegisterRequirements(List<AchievementData> achievements)
     {
-        requirements = new Dictionary<string, int>();
-        lookupTable = new Dictionary<string, AchievementData>();
-        for (int i = 0; i < achievements.Count; i++)
+        if (requirements.Count == 0)
         {
-            AchievementData achievement = achievements[i];
-            requirements[achievement.internalAchivementKey] = achievement.testValue;
-            lookupTable[achievement.internalAchivementKey] = achievement;
+            requirements = new Dictionary<string, int>();
+            lookupTable = new Dictionary<string, AchievementData>();
+            rewards = new Queue<string>();
+            for (int i = 0; i < achievements.Count; i++)
+            {
+                AchievementData achievement = achievements[i];
+                requirements[achievement.internalAchivementKey] = achievement.testValue;
+                lookupTable[achievement.internalAchivementKey] = achievement;
+            }
         }
+    }
+
+    public static AchievementData GetNextReward()
+    {
+        if (rewards.Count == 0)
+        {
+            return null;
+        }
+
+        string achievementKey = rewards.Dequeue();
+        return lookupTable[achievementKey];
     }
 
     /// <summary>
@@ -63,6 +79,7 @@ public static class AchievementManager
         Debug.Log("Unlocking Achievement " + name);
         GameManager.Instance.UIManager.ShowAchievementNotification(GetAchievementByKey(name));
         PlayerPrefs.SetInt(name , 1);
+        rewards.Enqueue(name);
         TestForPlat();
     }
 
