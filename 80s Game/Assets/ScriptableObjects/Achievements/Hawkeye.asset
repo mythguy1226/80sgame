@@ -21,5 +21,8 @@ MonoBehaviour:
     allow for moderate applause. No later than the following day, the Shift Supervisor
     should send an email congratulating the technician for their commitment to science.\r"
   internalAchivementKey: acc-3
+  requirementTrackingKey: stun-acc-3
   testValue: 10000
   image: {fileID: 0}
+  rewardText: 
+  rewardSprites: []

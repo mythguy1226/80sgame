@@ -23,5 +23,8 @@ MonoBehaviour:
 
 '
   internalAchivementKey: reg-1
+  requirementTrackingKey: stun-reg-3
   testValue: 500
   image: {fileID: 0}
+  rewardText: 
+  rewardSprites: []

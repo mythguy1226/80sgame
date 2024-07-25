@@ -193,10 +193,13 @@ public static class AchievementManager
         {
             case EGameMode.Classic:
                 key = AchievementConstants.TIMELESS_CLASSIC;
+                RegisterData(lookupTable[key].requirementTrackingKey, score);
                 TestAndUnlock(key, requirements[key], score, greaterTest);
                 key = AchievementConstants.CLASSIC_ENJOYER;
+                RegisterData(lookupTable[key].requirementTrackingKey, score);
                 TestAndUnlock(key, requirements[key], score, greaterTest);
                 key = AchievementConstants.CLASSIC_FAN;
+                RegisterData(lookupTable[key].requirementTrackingKey, score);
                 TestAndUnlock(key, requirements[key], score, greaterTest);
                 key = AchievementConstants.PROUD_OF_YOU;
                 TestAndUnlock(key, requirements[key], 0, TestType.EqualTo);
@@ -207,10 +210,13 @@ public static class AchievementManager
                 break;
             case EGameMode.Defense:
                 key = AchievementConstants.BULWARK_OF_RESISTANCE;
+                RegisterData(lookupTable[key].requirementTrackingKey, currentRound);
                 TestAndUnlock(key, requirements[key], currentRound, greaterTest);
                 key = AchievementConstants.STAUNCH_DEFENDER;
+                RegisterData(lookupTable[key].requirementTrackingKey, currentRound);
                 TestAndUnlock(key, requirements[key], currentRound, greaterTest);
                 key = AchievementConstants.PROMPT_PROTECTOR;
+                RegisterData(lookupTable[key].requirementTrackingKey, currentRound);
                 TestAndUnlock(key, requirements[key], currentRound, greaterTest);
                 break;
         }
@@ -222,17 +228,19 @@ public static class AchievementManager
     /// <param name="type">The stunned target type</param>
     public static void HandleStunAchievements(TargetManager.TargetType type)
     {
-        string dataKey = "stun-" + type.ToString().ToLower();
-        int stunnedBatsOfThisType = GetData(dataKey);
+        int stunnedBatsOfThisType = 0;
+        string dataKey = "";
         HandleAccuracyAchievements();
         // Test for the highest thing first. This can bypass execution of all other checks
         switch (type)
         {
             case TargetManager.TargetType.Unstable:
-                if (HasBeenUnlocked(AchievementConstants.MOD_BAT_EXPERT))
+                if (HasBeenUnlocked(AchievementConstants.UNSTABLE_EXPERT))
                 {
                     return;
                 }
+                dataKey = AchievementConstants.UNSTABLE_EXPERT;
+                stunnedBatsOfThisType = GetData(lookupTable[dataKey].requirementTrackingKey);
                 stunnedBatsOfThisType++;
                 break;
             case TargetManager.TargetType.Modifier:
@@ -240,6 +248,8 @@ public static class AchievementManager
                 {
                     return;
                 }
+                dataKey = AchievementConstants.MOD_BAT_EXPERT;
+                stunnedBatsOfThisType = GetData(lookupTable[dataKey].requirementTrackingKey);
                 stunnedBatsOfThisType++;
                 break;
             case TargetManager.TargetType.LowBonus:
@@ -248,15 +258,17 @@ public static class AchievementManager
                 {
                     return;
                 }
-                int lowBonusCount = GetData("stun-lowbonus");
-                int highBonusCount = GetData("stun-highbonus");
-                stunnedBatsOfThisType = lowBonusCount + highBonusCount + 1;
+                dataKey = AchievementConstants.MOD_BAT_EXPERT;
+                stunnedBatsOfThisType = GetData(lookupTable[dataKey].requirementTrackingKey);
+                stunnedBatsOfThisType++;
                 break;
             case TargetManager.TargetType.Regular:
                 if (HasBeenUnlocked(AchievementConstants.MK1_EXPERT))
                 {
                     return;
                 }
+                dataKey = AchievementConstants.MK1_EXPERT;
+                stunnedBatsOfThisType = GetData(lookupTable[dataKey].requirementTrackingKey);
                 stunnedBatsOfThisType++;
                 break;
         }
@@ -335,14 +347,15 @@ public static class AchievementManager
     /// </summary>
     private static void HandleAccuracyAchievements()
     {
-        int currentKillCount = GetData("killCount");
-        currentKillCount++;
         string key = AchievementConstants.HAWKEYE;
+        int currentKillCount = GetData(lookupTable[key].requirementTrackingKey);
+        currentKillCount++;
         TestAndUnlock(key, requirements[key], currentKillCount, TestType.GreaterThanOrEqual);
         key = AchievementConstants.SHARPSHOOTER;
         TestAndUnlock(key, requirements[key], currentKillCount, TestType.GreaterThanOrEqual);
         key = AchievementConstants.MARKSMAN;
         TestAndUnlock(key, requirements[key], currentKillCount, TestType.GreaterThanOrEqual);
+        RegisterData(lookupTable[AchievementConstants.HAWKEYE].requirementTrackingKey, currentKillCount);
     }
 
     /// <summary>

@@ -21,5 +21,8 @@ MonoBehaviour:
     the procurement of a commemorative acrylic plaque that reads \u201CFine work,
     <technician\u2019s name>\u201D. \r"
   internalAchivementKey: acc-2
+  requirementTrackingKey: stun-acc-3
   testValue: 5000
   image: {fileID: 0}
+  rewardText: 
+  rewardSprites: []

@@ -22,5 +22,8 @@ MonoBehaviour:
     often leads to failures in innovation and we must strive to excel even in the
     face of uncertainty.\r"
   internalAchivementKey: reg-3
+  requirementTrackingKey: stun-reg-3
   testValue: 3000
   image: {fileID: 0}
+  rewardText: 
+  rewardSprites: []

@@ -21,5 +21,8 @@ MonoBehaviour:
     records and analyzes the attached unit\u2019s sensor data to compute and transmit
     information on how best to navigate and interact with field obstacles\u2026\r"
   internalAchivementKey: mod-2
+  requirementTrackingKey: stun-mod-3
   testValue: 150
   image: {fileID: 0}
+  rewardText: 
+  rewardSprites: []

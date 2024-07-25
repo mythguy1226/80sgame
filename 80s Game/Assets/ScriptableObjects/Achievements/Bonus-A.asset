@@ -21,5 +21,8 @@ MonoBehaviour:
     Furthermore, replacing the battery modules with internal graphite reactors can
     substantially reduce the overall frame weight and increase flight time.\r"
   internalAchivementKey: bb-2
+  requirementTrackingKey: stun-bb-3
   testValue: 150
   image: {fileID: 0}
+  rewardText: 
+  rewardSprites: []

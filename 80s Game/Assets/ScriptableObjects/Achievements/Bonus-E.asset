@@ -20,5 +20,8 @@ MonoBehaviour:
     While there may be potential market applications in the surveillance sector,
     the development of such tools is not within the scope of this institution.\r"
   internalAchivementKey: bb-3
+  requirementTrackingKey: stun-bb-3
   testValue: 500
   image: {fileID: 0}
+  rewardText: 
+  rewardSprites: []

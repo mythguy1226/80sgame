@@ -21,5 +21,8 @@ MonoBehaviour:
     are particularly noteworthy in this regard, as they would require a powerful
     amplifier to be able to perform adequately in field conditions.\r"
   internalAchivementKey: def-2
+  requirementTrackingKey: def-2
   testValue: 20
   image: {fileID: 0}
+  rewardText: 
+  rewardSprites: []
