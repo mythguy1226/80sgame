@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,12 +25,15 @@ public class AchievementData : ScriptableObject
 
 
     public string internalAchivementKey;
+    public string requirementTrackingKey;
     public int testValue;
 
     public Sprite image;
 
     public string rewardText;
     public List<Sprite> rewardSprites;
+
+    public bool showProgressBar;
     
     //Defer this test to the AchievementManager, just in case
     public bool isUnlocked()

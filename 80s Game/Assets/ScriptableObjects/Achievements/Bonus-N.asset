@@ -21,5 +21,9 @@ MonoBehaviour:
     kept to pace. The proposed Mk.I design features a cost-effective frame that should
     perform well in most field scenarios.\r"
   internalAchivementKey: bb-1
+  requirementTrackingKey: stun-bb-3
   testValue: 50
   image: {fileID: 0}
+  rewardText: 
+  rewardSprites: []
+  showProgressBar: 1
