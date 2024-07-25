@@ -20,5 +20,9 @@ MonoBehaviour:
     were injured during this incident. Teams are being dispatched to prevent the
     bat robots from reaching populated areas.\r"
   internalAchivementKey: classic-2
+  requirementTrackingKey: classic-2
   testValue: 500000
   image: {fileID: 0}
+  rewardText: 
+  rewardSprites: []
+  showProgressBar: 1

@@ -20,5 +20,9 @@ MonoBehaviour:
     are mostly theoretical, the data stored in the PowerCore modules could be used
     to improve the containment field alignment, increasing its effectiveness dramatically.\r"
   internalAchivementKey: mod-3
+  requirementTrackingKey: stun-mod-3
   testValue: 250
   image: {fileID: 0}
+  rewardText: 
+  rewardSprites: []
+  showProgressBar: 1

@@ -21,5 +21,9 @@ MonoBehaviour:
     This needs to be resolved as soon as possible. We will not lose the Leader Bat
     program to incompetence.\r"
   internalAchivementKey: unst-3
+  requirementTrackingKey: stun-unst-3
   testValue: 500
   image: {fileID: 0}
+  rewardText: 
+  rewardSprites: []
+  showProgressBar: 1

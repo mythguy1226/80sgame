@@ -21,5 +21,9 @@ MonoBehaviour:
     procure refreshments and organize a 30-minute celebration break to recognize
     the hard-working technician.\r"
   internalAchivementKey: acc-1
+  requirementTrackingKey: stun-acc-3
   testValue: 1000
   image: {fileID: 0}
+  rewardText: 
+  rewardSprites: []
+  showProgressBar: 1

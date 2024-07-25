@@ -22,5 +22,9 @@ MonoBehaviour:
     also emit their own shutdown signal, causing cascade failure. The cause of this
     behavior is currently unknown.\r"
   internalAchivementKey: unst-2
+  requirementTrackingKey: stun-unst-3
   testValue: 250
   image: {fileID: 0}
+  rewardText: 
+  rewardSprites: []
+  showProgressBar: 1

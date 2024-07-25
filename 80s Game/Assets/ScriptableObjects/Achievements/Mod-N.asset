@@ -22,5 +22,9 @@ MonoBehaviour:
     design requires a sizable frame to accommodate it, the PowerCore\u2019s incredible
     utility will aid the development of more varied models in the future.\r"
   internalAchivementKey: mod-1
+  requirementTrackingKey: stun-mod-3
   testValue: 100
   image: {fileID: 0}
+  rewardText: 
+  rewardSprites: []
+  showProgressBar: 1

@@ -20,5 +20,9 @@ MonoBehaviour:
     units. Their behavior has become erratic and technicians are reporting odd changes
     in their hunting patterns.\r"
   internalAchivementKey: classic-1
+  requirementTrackingKey: classic-1
   testValue: 150000
   image: {fileID: 0}
+  rewardText: 
+  rewardSprites: []
+  showProgressBar: 1
