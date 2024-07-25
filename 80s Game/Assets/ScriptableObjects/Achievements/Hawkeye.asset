@@ -24,6 +24,6 @@ MonoBehaviour:
   requirementTrackingKey: stun-acc-3
   testValue: 10000
   image: {fileID: 0}
-  rewardText: 
+  rewardText: CROSSHAIRS
   rewardSprites: []
   showProgressBar: 1

@@ -21,9 +21,9 @@ MonoBehaviour:
     - you ever hear someone play music on glass? Too many notes at the same time
     and you\u2019ll [redacted]. It\u2019s the same thing here, I swear.\r"
   internalAchivementKey: def-3
-  requirementTrackingKey: def-3
+  requirementTrackingKey: def-3-key
   testValue: 25
   image: {fileID: 0}
-  rewardText: 
+  rewardText: BACKGROUND
   rewardSprites: []
   showProgressBar: 1

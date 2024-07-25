@@ -21,9 +21,9 @@ MonoBehaviour:
     a focused frequency emitter that disables bat robots mid-flight while preventing
     human injury.\r"
   internalAchivementKey: classic-3
-  requirementTrackingKey: classic-3
+  requirementTrackingKey: classic-3-key
   testValue: 1000000
   image: {fileID: 0}
-  rewardText: 
+  rewardText: BACKGROUND
   rewardSprites: []
   showProgressBar: 1

@@ -24,6 +24,6 @@ MonoBehaviour:
   requirementTrackingKey: kit
   testValue: 150
   image: {fileID: 0}
-  rewardText: 
+  rewardText: STUN EFFECT
   rewardSprites: []
   showProgressBar: 1

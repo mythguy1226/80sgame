@@ -22,5 +22,9 @@ MonoBehaviour:
     irreparable. Why are we spending resources on technology that is so hazardous
     to our own research materials?\r"
   internalAchivementKey: awkward
+  requirementTrackingKey: 
   testValue: 0
   image: {fileID: 0}
+  rewardText: STUN EFFECT
+  rewardSprites: []
+  showProgressBar: 0
