@@ -25,6 +25,6 @@ MonoBehaviour:
   requirementTrackingKey: stun-mod-3
   testValue: 100
   image: {fileID: 0}
-  rewardText: 
+  rewardText: BAT COLOR
   rewardSprites: []
   showProgressBar: 1

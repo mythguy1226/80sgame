@@ -130,9 +130,12 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
         Target target = GetComponent<Target>();
         target.bIsStunned = true;
 
-        if (target.stunningPlayer.HasMod(AbsModifierEffect.ModType.Confusion))
+        if (target.stunningPlayer != null)
         {
-            AchievementManager.UnfazedTest(target.stunningPlayer.Order);
+            if (target.stunningPlayer.HasMod(AbsModifierEffect.ModType.Confusion))
+            {
+                AchievementManager.UnfazedTest(target.stunningPlayer.Order);
+            }
         }
     }
 

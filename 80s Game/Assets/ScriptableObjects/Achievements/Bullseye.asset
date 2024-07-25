@@ -22,5 +22,9 @@ MonoBehaviour:
     of people you suspect might be pregnant or have cardiac conditions, pulmonary
     conditions, diabetes, gout, IBS\u2026\r"
   internalAchivementKey: bulls
+  requirementTrackingKey: 
   testValue: 85
   image: {fileID: 0}
+  rewardText: STUN EFFECT
+  rewardSprites: []
+  showProgressBar: 0

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -32,11 +33,16 @@ public class UIManager : MonoBehaviour
     public TitleScreenBehavior titleScreenUI;
     public ScoreBehavior scoreBehavior;
     public BackgroundCustomization backgroundUI;
+    public AchievementsUI achievementsUI;
 
     public List<Sprite> classicModeBackgrounds;
     public List<Sprite> defenseModeBackgrounds;
 
     public List<GameObject> gamemodeCards;
+
+    public GameObject achievementNotifPrefab;
+    private Queue<GameObject> achievementNotifs;
+    private bool notifPlaying = false;
 
     public SpriteRenderer background;
     private bool backgroundChanged = false;
@@ -52,11 +58,24 @@ public class UIManager : MonoBehaviour
         gameOverUI = canvas.GetComponent<GameOverBehavior>();
         scoreBehavior = canvas.GetComponent<ScoreBehavior>();
         titleScreenUI = canvas.GetComponent<TitleScreenBehavior>();
+        achievementNotifs = new Queue<GameObject>();
     }
 
     private void Start()
     {
         SetBackground();
+    }
+
+    private void Update()
+    {
+        if (achievementNotifs != null)
+        {
+            if(achievementNotifs.Count > 0 && !notifPlaying)
+            {
+                Instantiate(achievementNotifs.Dequeue(), canvas.transform);
+                notifPlaying = true;
+            }        
+        }
     }
 
     public void GetFireInput(Vector3 screenPosition)
@@ -155,6 +174,27 @@ public class UIManager : MonoBehaviour
         else if (titleScreenUI.gamemodePanel.activeInHierarchy)
         {
             titleScreenUI.ToggleGamemodeSelection();
+        }
+    }
+
+    public void ShowAchievementNotification(AchievementData achievement)
+    {
+        achievementNotifPrefab.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = achievement.nameText;
+
+        achievementNotifs.Enqueue(achievementNotifPrefab);
+        //Instantiate(achievementNotifs[0], canvas.transform);
+    }
+
+    public void ClearNotification()
+    {
+        notifPlaying = false;
+    }
+
+    public void LoadAchievements(List<AchievementData> achievements)
+    {
+        if (achievementsUI != null)
+        {
+            achievementsUI.CreateAchievements(achievements);
         }
     }
 }

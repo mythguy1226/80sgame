@@ -97,7 +97,6 @@ public abstract class AbsModifierEffect : MonoBehaviour
     {
         string key = AchievementConstants.KITTED_OUT;
         int totalModCount = AchievementManager.GetData(AchievementManager.GetAchievementByKey(key).requirementTrackingKey);
-        
         AchievementData.TestType test = AchievementData.TestType.GreaterThanOrEqual;
         if (AchievementManager.TestUnlock(test, AchievementManager.requirements[key], totalModCount+1)) {
             AchievementManager.UnlockAchievement(AchievementConstants.KITTED_OUT);

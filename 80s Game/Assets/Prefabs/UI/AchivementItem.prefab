@@ -148,8 +148,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c02f1ca5ff70c346b5e60dc2f1e3e64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: {fileID: 8464192126462962683}
+  data: {fileID: 0}
+  achievementName: {fileID: 8464192126462962683}
   description: {fileID: 3540107837372821808}
+  icon: {fileID: 6559452036370693969}
   achievementsUI: {fileID: 0}
 --- !u!1 &2744224760112503312
 GameObject:
@@ -263,8 +265,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -47.05857, y: 33.2953}
-  m_SizeDelta: {x: 394.652, y: 33.4086}
+  m_AnchoredPosition: {x: 68.268394, y: 33.2953}
+  m_SizeDelta: {x: 625.306, y: 33.4086}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6147141289439331305
 CanvasRenderer:

@@ -11,5 +11,6 @@ public class AchievementLoader : MonoBehaviour
     private void Start()
     {
         AchievementManager.RegisterRequirements(achievements);
+        GameManager.Instance.UIManager.LoadAchievements(achievements);
     }
 }
