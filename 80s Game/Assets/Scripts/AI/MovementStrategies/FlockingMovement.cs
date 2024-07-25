@@ -47,7 +47,7 @@ public class FlockingMovement : AbsMovementStrategy
     private Vector2 Separate(Target[] neighbors)
     {
         // Check that neighbors arent empty
-        if (neighbors.Length == 0)
+        if (neighbors.Length <= 1)
             return Vector2.zero;
 
         // Init direction to default vector
@@ -57,18 +57,21 @@ public class FlockingMovement : AbsMovementStrategy
         // Iterate through each neighbor
         foreach (Target neighbor in neighbors)
         {
+            float distance = Vector3.Distance(currentPosition, neighbor.transform.position);
 
             // Continue if the bat isnt on screen
             if (!neighbor.GetComponent<KinematicSteer>().canMove)
                 continue;
 
             // Continue if the bat isnt in the flock radius
-            if (Vector3.Distance(currentPosition, neighbor.transform.position) > FlockingData.flockSize)
+            if (distance > FlockingData.flockSize)
                 continue;
+
+            Debug.DrawLine(currentPosition, neighbor.transform.position, Color.magenta);
 
             // Calculate a vector pointing to the neighbor
             Vector2 difference = currentPosition - neighbor.transform.position;
-            float inverseMagnitude = 1 / difference.magnitude;
+            float inverseMagnitude = 1 / distance;
             // Calculate new direction by dividing by the distance
             direction += difference.normalized * inverseMagnitude;
         }
@@ -85,7 +88,7 @@ public class FlockingMovement : AbsMovementStrategy
     private Vector2 Alignment(Target[] neighbors)
     {
         // Check that neighbors arent empty
-        if (neighbors.Length == 0)
+        if (neighbors.Length <= 1)
             return Vector2.zero;
 
         // Init velocity to default vector
@@ -117,7 +120,7 @@ public class FlockingMovement : AbsMovementStrategy
     private Vector2 Cohesion(Target[] neighbors)
     {
         // Check that neighbors arent empty
-        if (neighbors.Length == 0)
+        if (neighbors.Length <= 1)
             return Vector2.zero;
 
         // Init sum of neighbor positions
