@@ -73,8 +73,6 @@ public class FlockingMovement : AbsMovementStrategy
                 distance = 0.01f;
             }
 
-            Debug.DrawLine(currentPosition, neighbor.transform.position, Color.magenta);
-
             // Calculate a vector pointing to the neighbor
             Vector2 difference = currentPosition - neighbor.transform.position;
             float inverseMagnitude = 1.0f / distance;
@@ -84,7 +82,6 @@ public class FlockingMovement : AbsMovementStrategy
 
         // Divide the direction by total number of neighbors
         direction /= neighbors.Length;
-        //Debug.Log(direction.normalized);
 
         // Return desired velocity from steer
         Debug.DrawLine(currentPosition, new Vector2(currentPosition.x, currentPosition.y) + direction.normalized, Color.green);
