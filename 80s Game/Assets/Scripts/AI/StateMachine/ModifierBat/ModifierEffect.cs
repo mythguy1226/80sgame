@@ -37,6 +37,9 @@ public abstract class AbsModifierEffect : MonoBehaviour
     public PlayerController activator;
     public bool bIsSelfDebuff = false;
 
+    [SerializeField]
+    protected AudioClip pickupSound;
+
     Rigidbody2D _Rb;
 
     // Start is called before the first frame update
@@ -163,6 +166,7 @@ public abstract class AbsModifierEffect : MonoBehaviour
         bIsActive = true;
         InputManager.detectHitSub -= ListenForShot;
         ShowFloatingText();
+        SoundManager.Instance.PlaySoundContinuous(pickupSound);
         GetComponent<Rigidbody2D>().gravityScale = 0.0f; // Turn off gravity here
         if (GetModType() != ModType.Confusion && GetModType() != ModType.Snail)
         {

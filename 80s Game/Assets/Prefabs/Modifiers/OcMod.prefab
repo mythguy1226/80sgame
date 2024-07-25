@@ -166,6 +166,9 @@ MonoBehaviour:
   modifierUIPrefab: {fileID: 2369580833882870520, guid: 7de7a0df7195efc4d913b933d983ceb7, type: 3}
   floatingTextPrefab: {fileID: 5422266768498237442, guid: ea6ce9b2907459549a09b70e5ab052ff, type: 3}
   modifierName: Overcharge
+  activator: {fileID: 0}
+  bIsSelfDebuff: 0
+  pickupSound: {fileID: 8300000, guid: bf2ab697f37b98b47bab78b77f1b5b99, type: 3}
   hitParticles: {fileID: 3537340124483570280, guid: 7f86aa82b0946c7498238b9fe89ac5aa, type: 3}
 --- !u!1 &296570686799991648
 GameObject:
