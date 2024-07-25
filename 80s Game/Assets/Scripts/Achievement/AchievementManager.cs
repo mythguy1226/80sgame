@@ -7,6 +7,7 @@ public static class AchievementManager
     public static Dictionary<string, int> requirements;
     private static Dictionary<string, AchievementData> lookupTable;
     private static Queue<string> rewards;
+    private static bool originalSetup = false;
 
     /// <summary>
     /// Register the requirement values for unlocking achievements.
@@ -14,7 +15,8 @@ public static class AchievementManager
     /// <param name="achievements">The list of achievements in the game</param>
     public static void RegisterRequirements(List<AchievementData> achievements)
     {
-        if (requirements.Count == 0)
+
+        if (!originalSetup)
         {
             requirements = new Dictionary<string, int>();
             lookupTable = new Dictionary<string, AchievementData>();
@@ -25,6 +27,7 @@ public static class AchievementManager
                 requirements[achievement.internalAchivementKey] = achievement.testValue;
                 lookupTable[achievement.internalAchivementKey] = achievement;
             }
+            originalSetup = true;
         }
     }
 
