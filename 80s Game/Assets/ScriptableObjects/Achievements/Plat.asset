@@ -17,5 +17,9 @@ MonoBehaviour:
   requirementText: Unlock all other achievements in the game
   descriptionText: Congratulations!
   internalAchivementKey: plat
+  requirementTrackingKey: 
   testValue: 0
   image: {fileID: 0}
+  rewardText: 
+  rewardSprites: []
+  showProgressBar: 0

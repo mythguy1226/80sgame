@@ -21,5 +21,9 @@ MonoBehaviour:
     can be vastly increased in myriad ways. These expanded capabilities drain PowerCores
     dramatically, however, and the effects can only be sustained briefly.\r"
   internalAchivementKey: kitted
+  requirementTrackingKey: kit
   testValue: 150
   image: {fileID: 0}
+  rewardText: 
+  rewardSprites: []
+  showProgressBar: 1

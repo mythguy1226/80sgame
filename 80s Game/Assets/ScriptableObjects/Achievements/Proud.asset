@@ -20,5 +20,9 @@ MonoBehaviour:
     your work as Office Supplies Labeler\u201D\r\n\u201CYou put the FUN in Funds
     Mismanagement Audit Officer\u201D\r"
   internalAchivementKey: good-1
+  requirementTrackingKey: 
   testValue: 0
   image: {fileID: 0}
+  rewardText: 
+  rewardSprites: []
+  showProgressBar: 1

@@ -26,3 +26,4 @@ MonoBehaviour:
   image: {fileID: 0}
   rewardText: 
   rewardSprites: []
+  showProgressBar: 1
