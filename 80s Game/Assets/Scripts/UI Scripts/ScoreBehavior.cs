@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
+using Unity.VisualScripting;
 
 public class ScoreBehavior : MonoBehaviour
 {
@@ -61,6 +62,7 @@ public class ScoreBehavior : MonoBehaviour
             {
                 playerNames[i].gameObject.SetActive(true);
                 playerNames[i].text = PlayerData.activePlayers[i].initials;
+                playerNames[i].color = PlayerData.activePlayers[i].crossHairColor;
             }
         }
 

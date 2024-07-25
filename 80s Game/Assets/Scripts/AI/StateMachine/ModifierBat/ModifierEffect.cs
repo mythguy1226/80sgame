@@ -61,9 +61,12 @@ public abstract class AbsModifierEffect : MonoBehaviour
         {
 
             effectDuration -= Time.deltaTime;
-            if (modifierUIElement)
+            if (modifierUIRefs.Count > 0)
             {
-                modifierUIElement.transform.GetChild(0).GetComponent<Image>().fillAmount = effectDuration / maxEffectDuration;
+                foreach(GameObject uiRef in modifierUIRefs)
+                {
+                    uiRef.transform.GetChild(0).GetComponent<Image>().fillAmount = effectDuration / maxEffectDuration;
+                }
             }
             
 
@@ -161,7 +164,10 @@ public abstract class AbsModifierEffect : MonoBehaviour
         InputManager.detectHitSub -= ListenForShot;
         ShowFloatingText();
         GetComponent<Rigidbody2D>().gravityScale = 0.0f; // Turn off gravity here
-        AddUIRef(activator.Order);
+        if (GetModType() != ModType.Confusion && GetModType() != ModType.Snail)
+        {
+            AddUIRef(activator.Order);
+        }
         ActivateEffect();
         transform.position = new Vector3(-15.0f, 15.0f, 0.0f); // Move off-screen for duration of lifetime
         // Mods should effectively revert whatever "addShot" was made when hit
