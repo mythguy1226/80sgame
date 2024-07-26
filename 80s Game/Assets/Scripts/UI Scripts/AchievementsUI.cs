@@ -64,7 +64,7 @@ public class AchievementsUI : MonoBehaviour
 
         else
         {
-            infoPanelLore.text = "Files Encrypted";
+            infoPanelLore.text = "Unlock this achievement to read encrypted files";
             infoPanelLore.alignment = TextAlignmentOptions.Center;
         }
     }

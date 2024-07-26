@@ -63,4 +63,12 @@ public class DiveBombBatStateMachine : DefenseBatStateMachine
 
         SpriteRenderer.color = new Color(255.0f/255.0f, 255.0f/255.0f, 255.0f / 255.0f);
     }
+
+    public override void ResolveHit()
+    {
+        base.ResolveHit();
+        if (bCanPursue) {
+            AchievementManager.UnlockAchievement(AchievementConstants.BOMB_VOYAGE);
+        }
+    }
 }

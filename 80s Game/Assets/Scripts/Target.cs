@@ -158,7 +158,10 @@ public class Target : MonoBehaviour
             {
                 stunningPlayer = s.player;
                 stunningPlayer.scoreController.AddHit(this);
-
+                if (s.isRadiusCheck)
+                {
+                    AchievementManager.AddToFCCount(s.player.Order);
+                }
             }
 
             // Call method for stun resolution

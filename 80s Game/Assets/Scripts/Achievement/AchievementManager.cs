@@ -8,6 +8,7 @@ public static class AchievementManager
     private static Dictionary<string, AchievementData> lookupTable;
     private static Queue<string> rewards;
     private static bool originalSetup = false;
+    private static Dictionary<int, int> fullyChargedByPlayer;
 
     /// <summary>
     /// Register the requirement values for unlocking achievements.
@@ -21,6 +22,7 @@ public static class AchievementManager
             requirements = new Dictionary<string, int>();
             lookupTable = new Dictionary<string, AchievementData>();
             rewards = new Queue<string>();
+            fullyChargedByPlayer = new Dictionary<int, int>();
             for (int i = 0; i < achievements.Count; i++)
             {
                 AchievementData achievement = achievements[i];
@@ -386,5 +388,19 @@ public static class AchievementManager
         PlayerScoreController scoreController = player.scoreController;
         int accuracy = (int)(scoreController.GetAccuracy()*100);
         TestAndUnlock(AchievementConstants.BULLSEYE, requirements[AchievementConstants.BULLSEYE], accuracy, TestType.GreaterThanOrEqual);
+    }
+
+    public static void ResetOverchargedByPlayer(int player)
+    {
+        fullyChargedByPlayer[player] = 0;
+    }
+
+    public static void AddToFCCount(int player)
+    {
+        fullyChargedByPlayer[player]++;
+        if (TestUnlock(TestType.GreaterThanOrEqual, requirements[AchievementConstants.FULLY_CHARGED], fullyChargedByPlayer[player]))
+        {
+            UnlockAchievement(AchievementConstants.FULLY_CHARGED);
+        }
     }
 }
