@@ -181,7 +181,7 @@ public abstract class AbsModifierEffect : MonoBehaviour
         transform.position = new Vector3(-15.0f, 15.0f, 0.0f); // Move off-screen for duration of lifetime
         // Mods should effectively revert whatever "addShot" was made when hit
         // Don't move from here, important for avoiding race conditions
-            activator.scoreController.AdjustForModShot();
+        activator.scoreController.AdjustForModShot();
     }
 
     /// <summary>
