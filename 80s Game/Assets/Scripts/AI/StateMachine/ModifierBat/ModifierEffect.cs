@@ -162,7 +162,7 @@ public abstract class AbsModifierEffect : MonoBehaviour
     /// </summary>
     public void ResolveShot()
     {
-        if (activator != null)
+        if (activator == null)
         {
             Destroy(gameObject);
             return;
