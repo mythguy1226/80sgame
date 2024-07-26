@@ -99,6 +99,12 @@ public class PlayerJoinPanel : MonoBehaviour
             initialDownButtons[i].onClick.AddListener(() => ChangeInitial(true, iCopy));
         }
 
+        //Create player profiles folder if it does not exist
+        if (!Directory.Exists(filePath))
+        {
+            Directory.CreateDirectory(filePath);
+        }
+
         //Set preview crosshair to default color for that player
         colorSliders[0].value = PlayerData.defaultColors[player].r * 255;
         colorSliders[1].value = PlayerData.defaultColors[player].g * 255;
