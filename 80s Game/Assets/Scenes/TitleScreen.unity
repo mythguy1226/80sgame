@@ -1271,7 +1271,7 @@ MonoBehaviour:
   canvas: {fileID: 319221310}
   modifierContainers: []
   postProcessVolume: {fileID: 2125853500}
-  titleScreenUI: {fileID: 0}
+  titleScreenUI: {fileID: 319221312}
   scoreBehavior: {fileID: 0}
   backgroundUI: {fileID: 1894973268}
   achievementsUI: {fileID: 1533475159705674493}
