@@ -398,7 +398,6 @@ public static class AchievementManager
     public static void AddToFCCount(int player)
     {
         fullyChargedByPlayer[player]++;
-
         if (TestUnlock(TestType.GreaterThanOrEqual, requirements[AchievementConstants.FULLY_CHARGED], fullyChargedByPlayer[player]))
         {
             UnlockAchievement(AchievementConstants.FULLY_CHARGED);
