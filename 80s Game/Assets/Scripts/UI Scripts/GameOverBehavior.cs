@@ -94,13 +94,14 @@ public class GameOverBehavior : MonoBehaviour
 
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(restartButton);
-
+        SoundManager.Instance.StopAllAudio();
         SoundManager.Instance.PlaySoundInterrupt(buttonClickSound);
     }
 
     //Restart the game by reloading the scene
     public void RestartGame()
     {
+        SoundManager.Instance.StopAllAudio();
         SoundManager.Instance.PlaySoundContinuous(buttonClickSound);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }

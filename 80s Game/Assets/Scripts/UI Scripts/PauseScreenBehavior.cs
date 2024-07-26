@@ -139,7 +139,7 @@ public class PauseScreenBehavior : MonoBehaviour
         Time.timeScale = 1f;
 
         SceneManager.LoadScene(0);
-
+        SoundManager.Instance.StopAllAudio();
         SoundManager.Instance.PlaySoundContinuous(buttonClickSound);
     }
 
