@@ -21,5 +21,9 @@ MonoBehaviour:
     We need to tell R&D about this immediately, otherwise you and I are going to
     get [redacted]!\r"
   internalAchivementKey: charged
+  requirementTrackingKey: zap
   testValue: 6
   image: {fileID: 0}
+  rewardText: STUN EFFECT
+  rewardSprites: []
+  showProgressBar: 0

@@ -166,6 +166,9 @@ MonoBehaviour:
   modifierUIPrefab: {fileID: 8934627380610990763, guid: 8db0b1d577046204a9a74e1078d9ae3d, type: 3}
   floatingTextPrefab: {fileID: 5422266768498237442, guid: ea6ce9b2907459549a09b70e5ab052ff, type: 3}
   modifierName: Confusion
+  activator: {fileID: 0}
+  bIsSelfDebuff: 0
+  pickupSound: {fileID: 8300000, guid: bf2ab697f37b98b47bab78b77f1b5b99, type: 3}
 --- !u!1 &7846474267763612607
 GameObject:
   m_ObjectHideFlags: 0

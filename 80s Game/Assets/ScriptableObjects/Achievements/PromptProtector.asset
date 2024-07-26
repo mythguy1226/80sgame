@@ -23,9 +23,9 @@ MonoBehaviour:
     should be taken to prevent damage to them. Are there plans to invest in more
     durable containment technology?\r"
   internalAchivementKey: def-1
-  requirementTrackingKey: def-1
+  requirementTrackingKey: def-1-key
   testValue: 10
   image: {fileID: 0}
-  rewardText: 
+  rewardText: BACKGROUND
   rewardSprites: []
   showProgressBar: 1

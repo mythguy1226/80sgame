@@ -1,8 +1,6 @@
-using JetBrains.Annotations;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
@@ -39,6 +37,10 @@ public class InputManager : MonoBehaviour
 
     public static void PlayerShot(ShotInformation s)
     {
+        if (s.isRadiusCheck)
+        {
+            AchievementManager.ResetOverchargedByPlayer(s.player.Order);
+        }
         detectHitSub?.Invoke(s);
     }
 }

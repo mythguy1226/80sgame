@@ -8,6 +8,7 @@ public static class AchievementManager
     private static Dictionary<string, AchievementData> lookupTable;
     private static Queue<string> rewards;
     private static bool originalSetup = false;
+    private static Dictionary<int, int> fullyChargedByPlayer;
 
     /// <summary>
     /// Register the requirement values for unlocking achievements.
@@ -21,6 +22,7 @@ public static class AchievementManager
             requirements = new Dictionary<string, int>();
             lookupTable = new Dictionary<string, AchievementData>();
             rewards = new Queue<string>();
+            fullyChargedByPlayer = new Dictionary<int, int>();
             for (int i = 0; i < achievements.Count; i++)
             {
                 AchievementData achievement = achievements[i];
@@ -79,7 +81,14 @@ public static class AchievementManager
     /// <param name="name">The key of the achievement to unlock. Will get saved to PlayerPrefs</param>
     public static void UnlockAchievement(string name)
     {
+        
+        if (HasBeenUnlocked(name))
+        {
+            return;
+        }
+        
         Debug.Log("Unlocking Achievement " + name);
+        GameManager.Instance.UIManager.ShowAchievementNotification(GetAchievementByKey(name));
         PlayerPrefs.SetInt(name , 1);
         rewards.Enqueue(name);
         TestForPlat();
@@ -110,7 +119,7 @@ public static class AchievementManager
             }
         }
 
-        if (plat && !HasBeenUnlocked(AchievementConstants.EMPLOYEE_OF_THE_MONTH)) {
+        if (plat) {
             UnlockAchievement(AchievementConstants.EMPLOYEE_OF_THE_MONTH);
         }
     }
@@ -160,16 +169,16 @@ public static class AchievementManager
         switch (testType)
         {
             case TestType.GreaterThan:
-                testSuccessful = expectedValue > testValue;
-                break;
-            case TestType.LessThan:
                 testSuccessful = expectedValue < testValue;
                 break;
+            case TestType.LessThan:
+                testSuccessful = expectedValue > testValue;
+                break;
             case TestType.LessThanOrEqual:
-                testSuccessful = expectedValue <= testValue;
+                testSuccessful = expectedValue >= testValue;
                 break;
             case TestType.GreaterThanOrEqual:
-                testSuccessful = expectedValue >= testValue;
+                testSuccessful = expectedValue <= testValue;
                 break;
             default:
                 testSuccessful = expectedValue == testValue;
@@ -202,11 +211,11 @@ public static class AchievementManager
                 RegisterData(lookupTable[key].requirementTrackingKey, score);
                 TestAndUnlock(key, requirements[key], score, greaterTest);
                 key = AchievementConstants.PROUD_OF_YOU;
-                TestAndUnlock(key, requirements[key], 0, TestType.EqualTo);
+                TestAndUnlock(key, requirements[key], score, TestType.EqualTo);
                 break;
             case EGameMode.Competitive:
                 key = AchievementConstants.PROUD_OF_YOU;
-                TestAndUnlock(key, requirements[key], 0, TestType.EqualTo);
+                TestAndUnlock(key, requirements[key], score, TestType.EqualTo);
                 break;
             case EGameMode.Defense:
                 key = AchievementConstants.BULWARK_OF_RESISTANCE;
@@ -239,8 +248,8 @@ public static class AchievementManager
                 {
                     return;
                 }
-                dataKey = AchievementConstants.UNSTABLE_EXPERT;
-                stunnedBatsOfThisType = GetData(lookupTable[dataKey].requirementTrackingKey);
+                dataKey = lookupTable[AchievementConstants.UNSTABLE_EXPERT].requirementTrackingKey;
+                stunnedBatsOfThisType = GetData(dataKey);
                 stunnedBatsOfThisType++;
                 break;
             case TargetManager.TargetType.Modifier:
@@ -248,8 +257,8 @@ public static class AchievementManager
                 {
                     return;
                 }
-                dataKey = AchievementConstants.MOD_BAT_EXPERT;
-                stunnedBatsOfThisType = GetData(lookupTable[dataKey].requirementTrackingKey);
+                dataKey = lookupTable[AchievementConstants.MOD_BAT_EXPERT].requirementTrackingKey;
+                stunnedBatsOfThisType = GetData(dataKey);
                 stunnedBatsOfThisType++;
                 break;
             case TargetManager.TargetType.LowBonus:
@@ -258,8 +267,8 @@ public static class AchievementManager
                 {
                     return;
                 }
-                dataKey = AchievementConstants.MOD_BAT_EXPERT;
-                stunnedBatsOfThisType = GetData(lookupTable[dataKey].requirementTrackingKey);
+                dataKey = lookupTable[AchievementConstants.BONUS_EXPERT].requirementTrackingKey;
+                stunnedBatsOfThisType = GetData(dataKey);
                 stunnedBatsOfThisType++;
                 break;
             case TargetManager.TargetType.Regular:
@@ -267,8 +276,8 @@ public static class AchievementManager
                 {
                     return;
                 }
-                dataKey = AchievementConstants.MK1_EXPERT;
-                stunnedBatsOfThisType = GetData(lookupTable[dataKey].requirementTrackingKey);
+                dataKey = lookupTable[AchievementConstants.MK1_EXPERT].requirementTrackingKey;
+                stunnedBatsOfThisType = GetData(dataKey);
                 stunnedBatsOfThisType++;
                 break;
         }
@@ -332,10 +341,6 @@ public static class AchievementManager
     /// <param name="testType">Which type of test to use</param>
     private static void TestAndUnlock(string key, int expected, int actual, TestType testType)
     {
-        if (HasBeenUnlocked(key))
-        {
-            return;
-        }
         if (TestUnlock(testType, expected, actual))
         {
             UnlockAchievement(key);
@@ -383,5 +388,19 @@ public static class AchievementManager
         PlayerScoreController scoreController = player.scoreController;
         int accuracy = (int)(scoreController.GetAccuracy()*100);
         TestAndUnlock(AchievementConstants.BULLSEYE, requirements[AchievementConstants.BULLSEYE], accuracy, TestType.GreaterThanOrEqual);
+    }
+
+    public static void ResetOverchargedByPlayer(int player)
+    {
+        fullyChargedByPlayer[player] = 0;
+    }
+
+    public static void AddToFCCount(int player)
+    {
+        fullyChargedByPlayer[player]++;
+        if (TestUnlock(TestType.GreaterThanOrEqual, requirements[AchievementConstants.FULLY_CHARGED], fullyChargedByPlayer[player]))
+        {
+            UnlockAchievement(AchievementConstants.FULLY_CHARGED);
+        }
     }
 }

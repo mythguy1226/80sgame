@@ -20,5 +20,9 @@ MonoBehaviour:
     potent electromagnetic resonance amplifier. Be sure to warn any downstream departments
     so they can implement countermeasures.\r\nSafety is everyone\u2019s responsibility!\r"
   internalAchivementKey: grease
+  requirementTrackingKey: 
   testValue: 5
   image: {fileID: 0}
+  rewardText: STUN EFFECT
+  rewardSprites: []
+  showProgressBar: 0

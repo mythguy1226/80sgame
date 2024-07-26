@@ -1274,16 +1274,21 @@ MonoBehaviour:
   titleScreenUI: {fileID: 0}
   scoreBehavior: {fileID: 0}
   backgroundUI: {fileID: 1894973268}
+  achievementsUI: {fileID: 1533475159705674493}
   classicModeBackgrounds:
   - {fileID: 21300000, guid: adc65da9af63f8941ab6f09c18774659, type: 3}
   - {fileID: 21300000, guid: 4fdaf93c4ae21d14689ceaaddeac185c, type: 3}
+  - {fileID: 21300000, guid: 514d5d03b63a55940aa2fe7edf9e1838, type: 3}
+  - {fileID: 21300000, guid: 3c683b6031c5d214cab93b872ac10392, type: 3}
   defenseModeBackgrounds:
   - {fileID: 21300000, guid: b1d69a59fb2697f4897abda8625e5922, type: 3}
   - {fileID: 21300000, guid: eefe79d2900ee5c469c25a19ac90ac80, type: 3}
+  - {fileID: 21300000, guid: 4e8779f31b85f214983256b0033a735e, type: 3}
   gamemodeCards:
   - {fileID: 778108194}
   - {fileID: 927240345}
   - {fileID: 1069083629}
+  achievementNotifPrefab: {fileID: 0}
   background: {fileID: 0}
 --- !u!114 &340111865
 MonoBehaviour:
@@ -2409,7 +2414,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000061035156, y: -478}
+  m_AnchoredPosition: {x: 0, y: -478}
   m_SizeDelta: {x: -1412.46, y: -1016.18}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &653409315
@@ -7407,6 +7412,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6427119491508286791, guid: ab59c26f739a3db4ca513b49cd23e1b1, type: 3}
   m_PrefabInstance: {fileID: 1533475159705674491}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1533475159705674493 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8865433173759386580, guid: ab59c26f739a3db4ca513b49cd23e1b1, type: 3}
+  m_PrefabInstance: {fileID: 1533475159705674491}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1705306704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cec471629e18aa34aa6b22a7162f658f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1867834258203497347
 PrefabInstance:
   m_ObjectHideFlags: 0
