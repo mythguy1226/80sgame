@@ -162,6 +162,11 @@ public abstract class AbsModifierEffect : MonoBehaviour
     /// </summary>
     public void ResolveShot()
     {
+        if (activator != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
         // Activate the effect
         bIsActive = true;
         InputManager.detectHitSub -= ListenForShot;
@@ -176,7 +181,6 @@ public abstract class AbsModifierEffect : MonoBehaviour
         transform.position = new Vector3(-15.0f, 15.0f, 0.0f); // Move off-screen for duration of lifetime
         // Mods should effectively revert whatever "addShot" was made when hit
         // Don't move from here, important for avoiding race conditions
-        if(activator != null)
             activator.scoreController.AdjustForModShot();
     }
 
