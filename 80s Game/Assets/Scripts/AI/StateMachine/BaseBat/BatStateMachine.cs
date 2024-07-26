@@ -126,7 +126,7 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
     {
         // Trigger stun animation
         _AnimControls.PlayStunAnimation();
-        SoundManager.Instance.PlaySoundInterrupt(hitSound);
+        SoundManager.Instance.PlaySoundInterrupt(hitSound, 0.9f, 1.1f);
         Target target = GetComponent<Target>();
         target.bIsStunned = true;
 

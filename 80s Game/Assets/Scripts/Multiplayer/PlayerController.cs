@@ -130,7 +130,8 @@ public class PlayerController : MonoBehaviour
         // Play the shoot sound and animation if the game is not paused 
         if (Time.timeScale > 0 && activeCrosshair.gameObject.activeInHierarchy)
         {
-            SoundManager.Instance.PlaySoundContinuous(shootSound);
+            // SoundManager.Instance.PlaySoundContinuous(shootSound);
+            SoundManager.Instance.PlaySoundContPitched(shootSound, 0.8f, 1.2f);
             GameObject hr = Instantiate(hitRadius, activeCrosshair.transform.position, Quaternion.identity);
             hr.transform.localScale *= modifiedShotRadius / originalShotRadius;
             EndAndDie ed = hr.GetComponent<EndAndDie>();

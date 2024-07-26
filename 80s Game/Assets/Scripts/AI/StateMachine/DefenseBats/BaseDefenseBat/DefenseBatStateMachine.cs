@@ -156,7 +156,7 @@ public class DefenseBatStateMachine : AbsStateMachine<DefenseBatStateMachine.Def
     {
         // Trigger stun animation
         _AnimControls.PlayStunAnimation();
-        SoundManager.Instance.PlaySoundInterrupt(hitSound);
+        SoundManager.Instance.PlaySoundInterrupt(hitSound, 0.9f, 1.1f);
         GetComponent<Target>().bIsStunned = true;
     }
 
