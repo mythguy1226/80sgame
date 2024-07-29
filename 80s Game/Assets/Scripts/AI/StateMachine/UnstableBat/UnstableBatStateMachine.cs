@@ -16,6 +16,10 @@ public class UnstableBatStateMachine : BatStateMachine
     {
         // Trigger base behavior
         base.ResolveHit();
+        if (!AchievementManager.isCountingUnstable())
+        {
+            AchievementManager.StartCountingUnstable(this);
+        }
         Target myself = GetComponent<Target>();
 
         // Get the chain of targets
@@ -36,6 +40,8 @@ public class UnstableBatStateMachine : BatStateMachine
                 continue;
             }
 
+            AchievementManager.AddToUnstCount();
+
             // Create instance of lightning
             GameObject effect = Instantiate(lightning, currentTarg.transform.position, Quaternion.identity);
             ChainLightning chain = effect.GetComponent<ChainLightning>();
@@ -52,6 +58,7 @@ public class UnstableBatStateMachine : BatStateMachine
             // Update current target
             currentTarg = targetChain[i];
         }
+        AchievementManager.StopCountingUnstable(this);
     }
 
     /// <summary>
