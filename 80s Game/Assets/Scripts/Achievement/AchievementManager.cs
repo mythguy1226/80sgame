@@ -419,11 +419,11 @@ public static class AchievementManager
         if (machine == counterOrigin)
         {
             countingUnstable = false;
-            Debug.Log("UNSTABLE COUNT "+unstableCount.ToString());
             if(TestUnlock(TestType.GreaterThanOrEqual, requirements[AchievementConstants.FULLY_CHARGED], unstableCount))
             {
                 UnlockAchievement(AchievementConstants.FULLY_CHARGED);
             }
+            counterOrigin = null;
         }
     }
 
