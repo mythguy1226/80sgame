@@ -70,7 +70,7 @@ public class SoundManager : MonoBehaviour
             maxPoolSize
         );
 
-        _bIsMusicPlaying = true;
+        _bIsMusicPlaying = false;
         _nextEventTime = AudioSettings.dspTime + 0.5f;
     }
 
@@ -148,18 +148,11 @@ public class SoundManager : MonoBehaviour
     {
         if (clip != null && clip.Clip != null)
         {
-            //if (_bIsMusicPlaying) //outdated, but keeping here in case we end up needing it.
-            //{
-            //    foreach (AudioSource aS in _musicLoopSources)
-            //    {
-            //        aS.volume *= 0.2f; //sets the volume of the _musicLoopSources to 20%.
-            //    }
-            //}
             continuousSource.PlayOneShot(clip.Clip, _musicVolume);
-            //StartCoroutine(NonloopUnmute(clip)); //starts a coroutine to unmute the _musicLoopSources
         }
     }
     /// <summary>
+    /// <b><i>CURRENTLY UNUSED</i></b>
     /// Coroutine to time unmuting the _musicLoopSources.
     /// Should <i>only</i> be called by methods that mute and unmute the BGM.
     /// </summary>
@@ -175,6 +168,8 @@ public class SoundManager : MonoBehaviour
             aS.volume = _musicVolume;
         }
     }
+
+
     /// <summary>
     /// Immediately stop whatever looping track is playing.
     /// </summary>
@@ -187,6 +182,17 @@ public class SoundManager : MonoBehaviour
         }
 
         _bIsMusicPlaying = false;
+    }
+    /// <summary>
+    /// Immediately stops all currently playing audio sources.
+    /// Also clears the pitchedAudioSources pool.
+    /// </summary>
+    public void StopAllAudio()
+    {
+        StopMusicLoop();
+        continuousSource.Stop();
+        interruptSource.Stop();
+        pitchedAudioSources.Clear();
     }
 
 
@@ -207,23 +213,22 @@ public class SoundManager : MonoBehaviour
         //probably dangerous, but shouldn't need to be triggered anyway
         if (_musicLoopSources == null || _musicLoopSources.Length == 0)
         {
-
             _musicLoopSources = new AudioSource[2];
-            _musicLoopSources[0] = new AudioSource();
+            _musicLoopSources[0] = gameObject.AddComponent<AudioSource>();
             _musicLoopSources[0].volume = _musicVolume;
-            _musicLoopSources[1] = new AudioSource();
+            _musicLoopSources[1] = gameObject.AddComponent<AudioSource>();
             _musicLoopSources[1].volume = _musicVolume;
         }
         else
         {
             if (_musicLoopSources[0] == null)
             {
-                _musicLoopSources[0] = new AudioSource();
+                _musicLoopSources[0] = gameObject.AddComponent<AudioSource>();
                 _musicLoopSources[0].volume = _musicVolume;
             }
             if (_musicLoopSources[1] == null)
             {
-                _musicLoopSources[1] = new AudioSource();
+                _musicLoopSources[1] = gameObject.AddComponent<AudioSource>();
                 _musicLoopSources[1].volume = _musicVolume;
             }
         }
@@ -232,7 +237,7 @@ public class SoundManager : MonoBehaviour
         if (clip != null)
         {
             //duplicates clip and overwrites _musicLoopClip.
-            _musicLoopClip = new MusicTrack(clip);
+            _musicLoopClip = clip;
 
             //schedules the music to start looping after 1 second or after the intro is finished, whichever would be longer.
             //defaults to 0, as not every looping song will have an intro (e.g. the Title theme).

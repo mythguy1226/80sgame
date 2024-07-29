@@ -60,8 +60,8 @@ public class TitleScreenBehavior : MonoBehaviour
     //Used within the StartGame button element
     public void StartGame()
     {
+        SoundManager.Instance.StopAllAudio();
         SoundManager.Instance.PlaySoundContinuous(buttonClickSound);
-        SoundManager.Instance.StopMusicLoop();
         PlayerData.Reset();
         SceneManager.LoadScene(1);
     }
@@ -70,6 +70,7 @@ public class TitleScreenBehavior : MonoBehaviour
     //Used within the ExitGame button element
     public void ExitGame()
     {
+        SoundManager.Instance.StopAllAudio();
         SoundManager.Instance.PlaySoundContinuous(buttonClickSound);
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
