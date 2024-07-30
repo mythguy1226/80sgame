@@ -74,7 +74,13 @@ public class UnstableBatStateMachine : BatStateMachine
 
         // If there are nearby targets then return a random one
         if (nearbyTargets.Length > 0)
-            return nearbyTargets[Random.Range(0, nearbyTargets.Length - 1)].gameObject.GetComponent<Target>();
+        {
+            // Get target and ensure target isn't a debuff bat
+            Target curTarg = nearbyTargets[Random.Range(0, nearbyTargets.Length - 1)].gameObject.GetComponent<Target>();
+            DebuffBatStateMachine debuff = curTarg.GetComponent<DebuffBatStateMachine>();
+            if(debuff == null) // Return target if not debuff
+                return curTarg;
+        }
 
         return null;
     }
