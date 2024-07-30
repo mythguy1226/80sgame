@@ -19,7 +19,8 @@ public class AttackingState : AbsBaseState<DefenseBatStateMachine.DefenseBatStat
 	*/
     public override void EnterState()
     {
-
+        OwnerFSM.GetComponent<CircleCollider2D>().isTrigger = false;
+        OwnerFSM.GetComponent<PolygonCollider2D>().isTrigger = false;
     }
 
     /*
