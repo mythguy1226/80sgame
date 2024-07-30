@@ -21,6 +21,9 @@ public class Crosshair : MonoBehaviour
     {
         Vector3 newPosition = Clamp(new Vector3(transform.position.x + movementDelta.x, transform.position.y + movementDelta.y, transform.position.z));
         transform.position = newPosition;
+
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public void SetMovementDelta(Vector2 movementData)

@@ -1,4 +1,5 @@
 
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -87,13 +88,15 @@ public class PlayerInputWrapper : MonoBehaviour
             snailModifier = 0.5f;
         }
 
-
         Vector2 adjustedInput = Vector2.Scale(value.Get<Vector2>(), sensitivity * config.sensitivity * snailModifier);
         if (isFlipped)
         {
             adjustedInput *= -1;
         }
-        player.HandleMovement(adjustedInput * Time.deltaTime);
+
+        // Mouse deltas are already a displacement-based value, so lag-spikes
+        // will cause the cursor to jump around (No Time.deltaTime adjustments)
+        player.HandleMovement(adjustedInput / 150f);
     }
 
     // On move override for Joycons
