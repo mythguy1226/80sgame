@@ -16,6 +16,11 @@ public class UnstableDefenseBatStateMachine : DefenseBatStateMachine
     {
         // Trigger base behavior
         base.ResolveHit();
+        if (!AchievementManager.isCountingUnstable())
+        {
+            AchievementManager.StartCountingDefenseUnstable(this);
+        }
+        Target myself = GetComponent<Target>();
 
         // Get the chain of targets
         Target[] targetChain = GetTargetChain();
@@ -30,10 +35,12 @@ public class UnstableDefenseBatStateMachine : DefenseBatStateMachine
         // Iterate through each chained target and play their stun animations as well
         for (int i = 0; i < targetChain.Length; i++)
         {
-            if (targetChain[i] == null)
+            if (targetChain[i] == null || targetChain[i] == myself || targetChain[i].bIsStunned)
             {
                 continue;
             }
+
+            AchievementManager.AddToUnstCount();
 
             // Create instance of lightning
             GameObject effect = Instantiate(lightning, currentTarg.transform.position, Quaternion.identity);
@@ -43,12 +50,15 @@ public class UnstableDefenseBatStateMachine : DefenseBatStateMachine
             chain.PlayEffect(currentTarg.transform.position, targetChain[i].transform.position);
 
             // Play stun anim
-            targetChain[i].GetComponent<Target>().SetStunningPlayer(stunningPlayer);
-            targetChain[i].GetComponent<AnimationHandler>().PlayStunAnimation();
+            DefenseBatStateMachine FSM = (DefenseBatStateMachine)targetChain[i].FSM;
+            FSM.GetComponent<Target>().SetStunningPlayer(currentTarg.GetStunningPlayer());
+            FSM.ResolveHit();
+            //targetChain[i].GetComponent<AnimationHandler>().PlayStunAnimation();
 
             // Update current target
             currentTarg = targetChain[i];
         }
+        AchievementManager.StopCountingDefenseUnstable(this);
     }
 
     /// <summary>
@@ -56,10 +66,11 @@ public class UnstableDefenseBatStateMachine : DefenseBatStateMachine
     /// </summary>
     /// <param name="origin">Epicenter of bat check</param>
     /// <returns>First nearby target/bat in radius</returns>
-    Target GetTargetInRadius(Vector3 origin)
+    Target GetValidTargetInRadius(Vector3 origin)
     {
         // Get all nearby targets in radius
         Collider2D[] nearbyTargets = Physics2D.OverlapCircleAll(origin, chainRadius);
+        //Collider2D[] validTargets = FilterTargets(nearbyTargets);
 
         // If there are nearby targets then return a random one
         if (nearbyTargets.Length > 0)
@@ -84,7 +95,7 @@ public class UnstableDefenseBatStateMachine : DefenseBatStateMachine
         Target[] targetChain = new Target[chainLength];
 
         // Get the current target
-        Target currentTarget = GetTargetInRadius(transform.position);
+        Target currentTarget = GetValidTargetInRadius(transform.position);
 
         // Iterate by number of chains and add to array
         for (int i = 0; i < chainLength; i++)
@@ -94,7 +105,7 @@ public class UnstableDefenseBatStateMachine : DefenseBatStateMachine
 
             // Get the next target
             if(targetChain[i] != null)
-                currentTarget = GetTargetInRadius(targetChain[i].transform.position);
+                currentTarget = GetValidTargetInRadius(targetChain[i].transform.position);
         }
 
         // Return full chain
