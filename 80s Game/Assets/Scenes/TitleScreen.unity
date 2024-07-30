@@ -954,6 +954,7 @@ GameObject:
   - component: {fileID: 319221313}
   - component: {fileID: 319221314}
   - component: {fileID: 319221315}
+  - component: {fileID: 319221316}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1074,6 +1075,7 @@ MonoBehaviour:
   achievementsButton: {fileID: 1279264828}
   achievementsPanel: {fileID: 1705306704}
   achievementsList: {fileID: 1203544902}
+  achievementRewardPrefab: {fileID: 1923514397185271933, guid: c487211524a31c34eb4eacc9f0db0189, type: 3}
   buttonClickSound: {fileID: 8300000, guid: 0f33d998cd03b1f4ebc4983ef2a6d559, type: 3}
   titleScreenMusic: {fileID: 11400000, guid: 8017975349db49843bed656899ffeb7e, type: 2}
   gamemodeName: {fileID: 0}
@@ -1169,6 +1171,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 885baa7af02d6ca40a430cf4db00a272, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &319221316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 319221307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 4cd1a43699b6777479603de9a2b24d64, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 319221312}
+          m_TargetAssemblyTypeName: TitleScreenBehavior, Assembly-CSharp
+          m_MethodName: CreateAchievementRewards
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &339623330 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3470052555585639282, guid: ade02431274cdbe4f8fd5b4bdc90b6b9, type: 3}
@@ -1987,7 +2019,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 1959031504}
+  m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &450670734
@@ -5425,6 +5457,8 @@ PlayableDirector:
     value: {fileID: 30442192}
   - key: {fileID: -3849222014909586700, guid: 19a991647102e0d49a3127f7e0ac0201, type: 2}
     value: {fileID: 1279264830}
+  - key: {fileID: -5048406066407209177, guid: 19a991647102e0d49a3127f7e0ac0201, type: 2}
+    value: {fileID: 319221316}
   m_ExposedReferences:
     m_References: []
 --- !u!4 &1533786595
