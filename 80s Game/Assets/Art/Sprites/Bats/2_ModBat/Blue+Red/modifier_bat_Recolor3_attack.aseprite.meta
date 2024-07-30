@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: aee46e28e6dd8874b84dbf32e9b153a1
+guid: cf5ccfbaf5363d045b3e30b040516a81
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects:
   - first:
       type: UnityEngine:AnimationClip
       assembly: UnityEngine.AnimationModule
-      name: modifier_bat_attack_v2_Clip
-    second: {fileID: 7400000, guid: 475169f74cccaa54ba7ef86267b395c3, type: 2}
+      name: modifier_bat_Recolor3_attack_Clip
+    second: {fileID: 7400000, guid: e445277ec42396843a84b87e13ee45d8, type: 2}
   serializedVersion: 2
   userData: 
   assetBundleName: 
@@ -100,7 +100,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 638566640877485542
+  platformSettingsDirtyTick: 638579407512684777
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -124,7 +124,7 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: modifier_bat_attack_v2_Frame_0
+  - name: modifier_bat_Recolor3_attack_Frame_0
     originalName: 
     pivot: {x: 0.8181819, y: 0.49206352}
     alignment: 9
@@ -135,7 +135,7 @@ ScriptedImporter:
       y: 4
       width: 33
       height: 63
-    spriteID: 3eee59d5c73438e4082997980c3cf9f4
+    spriteID: f1cb2921b90bdd843a3c035850de7c6a
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -144,7 +144,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 126, y: 4}
-  - name: modifier_bat_attack_v2_Frame_1
+  - name: modifier_bat_Recolor3_attack_Frame_1
     originalName: 
     pivot: {x: 0.8181819, y: 0.5}
     alignment: 9
@@ -155,7 +155,7 @@ ScriptedImporter:
       y: 79
       width: 33
       height: 64
-    spriteID: 47eb25581c6a5184da185970f8a5c31a
+    spriteID: a5e42691af8ca0248bae0a1866697ce8
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -164,7 +164,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 45, y: 79}
-  - name: modifier_bat_attack_v2_Frame_2
+  - name: modifier_bat_Recolor3_attack_Frame_2
     originalName: 
     pivot: {x: 0.8181819, y: 0.49206352}
     alignment: 9
@@ -175,7 +175,7 @@ ScriptedImporter:
       y: 75
       width: 33
       height: 63
-    spriteID: 7c30f48671beb3447b17ac7d00d20847
+    spriteID: 5892d0f35e3ed994bbbddf77d71ea217
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -184,7 +184,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 126, y: 75}
-  - name: modifier_bat_attack_v2_Frame_3
+  - name: modifier_bat_Recolor3_attack_Frame_3
     originalName: 
     pivot: {x: 0.84375, y: 0.53030306}
     alignment: 9
@@ -195,7 +195,7 @@ ScriptedImporter:
       y: 151
       width: 32
       height: 66
-    spriteID: 64b266827c88d1d45a7c84866de75018
+    spriteID: efd74b04e8d23644eb6a275865d80fb7
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -204,7 +204,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 45, y: 151}
-  - name: modifier_bat_attack_v2_Frame_4
+  - name: modifier_bat_Recolor3_attack_Frame_4
     originalName: 
     pivot: {x: 0.8181819, y: 0.52238804}
     alignment: 9
@@ -215,7 +215,7 @@ ScriptedImporter:
       y: 4
       width: 33
       height: 67
-    spriteID: 39a3f5f518b67de4a81631b8ad39aa9a
+    spriteID: 461faa2fb471acc46a610e44810096e7
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -224,7 +224,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
-  - name: modifier_bat_attack_v2_Frame_5
+  - name: modifier_bat_Recolor3_attack_Frame_5
     originalName: 
     pivot: {x: 0.8181819, y: 0.52238804}
     alignment: 9
@@ -235,7 +235,7 @@ ScriptedImporter:
       y: 79
       width: 33
       height: 67
-    spriteID: fd57359ed353fa848828935ea3feeccd
+    spriteID: 65cc9ad6a5c6b994c974ab852520c7cc
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -244,7 +244,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 79}
-  - name: modifier_bat_attack_v2_Frame_6
+  - name: modifier_bat_Recolor3_attack_Frame_6
     originalName: 
     pivot: {x: 0.8181819, y: 0.49206352}
     alignment: 9
@@ -255,7 +255,7 @@ ScriptedImporter:
       y: 146
       width: 33
       height: 63
-    spriteID: c76ccee353530444b811a3190f2bf6b1
+    spriteID: a00fc77feb212dd4db006f5f6c59319e
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -264,7 +264,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 126, y: 146}
-  - name: modifier_bat_attack_v2_Frame_7
+  - name: modifier_bat_Recolor3_attack_Frame_7
     originalName: 
     pivot: {x: 0.84375, y: 0.50793654}
     alignment: 9
@@ -275,7 +275,7 @@ ScriptedImporter:
       y: 78
       width: 32
       height: 63
-    spriteID: 2d05c83950eb75d4ca3269e0ea130fcb
+    spriteID: 2b682cc8955f1a34597ed23e7a47f5b3
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -284,7 +284,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 86, y: 78}
-  - name: modifier_bat_attack_v2_Frame_8
+  - name: modifier_bat_Recolor3_attack_Frame_8
     originalName: 
     pivot: {x: 0.8181819, y: 0.49206352}
     alignment: 9
@@ -295,7 +295,7 @@ ScriptedImporter:
       y: 4
       width: 33
       height: 63
-    spriteID: e1209ea22ddf33c43ade4023ee9e43b6
+    spriteID: 38c71359dc91200408539316e410119d
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -304,7 +304,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 167, y: 4}
-  - name: modifier_bat_attack_v2_Frame_9
+  - name: modifier_bat_Recolor3_attack_Frame_9
     originalName: 
     pivot: {x: 0.8181819, y: 0.52238804}
     alignment: 9
@@ -315,7 +315,7 @@ ScriptedImporter:
       y: 154
       width: 33
       height: 67
-    spriteID: 6631c7366ac22a140908d8d26e12f205
+    spriteID: bde6f83b705cc014886fec0a58c2a51c
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -324,7 +324,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 154}
-  - name: modifier_bat_attack_v2_Frame_10
+  - name: modifier_bat_Recolor3_attack_Frame_10
     originalName: 
     pivot: {x: 0.8181819, y: 0.52238804}
     alignment: 9
@@ -335,7 +335,7 @@ ScriptedImporter:
       y: 4
       width: 33
       height: 67
-    spriteID: 6810adf66e542fd48ba198c405115af6
+    spriteID: 32717300683471845bc89b7b05121154
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -344,7 +344,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 45, y: 4}
-  - name: modifier_bat_attack_v2_Frame_11
+  - name: modifier_bat_Recolor3_attack_Frame_11
     originalName: 
     pivot: {x: 0.84375, y: 0.53030306}
     alignment: 9
@@ -355,7 +355,7 @@ ScriptedImporter:
       y: 4
       width: 32
       height: 66
-    spriteID: 37aa1fcca2f154a4fb7d53c69a120601
+    spriteID: 8aff7d89b3923124e933e21d7edad712
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -367,108 +367,108 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: -75593533
-    name: modifier_bat_attack_v2
+    guid: 704217366
+    name: modifier_bat_Recolor3_attack
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: modifier_bat_attack_v2_Frame_0
+    - name: modifier_bat_Recolor3_attack_Frame_0
       frameIndex: 0
       cellRect:
         x: 5
         y: 1
         width: 33
         height: 63
-      spriteId: 3eee59d5c73438e4082997980c3cf9f4
-    - name: modifier_bat_attack_v2_Frame_1
+      spriteId: f1cb2921b90bdd843a3c035850de7c6a
+    - name: modifier_bat_Recolor3_attack_Frame_1
       frameIndex: 1
       cellRect:
         x: 5
         y: 0
         width: 33
         height: 64
-      spriteId: 47eb25581c6a5184da185970f8a5c31a
-    - name: modifier_bat_attack_v2_Frame_2
+      spriteId: a5e42691af8ca0248bae0a1866697ce8
+    - name: modifier_bat_Recolor3_attack_Frame_2
       frameIndex: 2
       cellRect:
         x: 5
         y: 1
         width: 33
         height: 63
-      spriteId: 7c30f48671beb3447b17ac7d00d20847
-    - name: modifier_bat_attack_v2_Frame_3
+      spriteId: 5892d0f35e3ed994bbbddf77d71ea217
+    - name: modifier_bat_Recolor3_attack_Frame_3
       frameIndex: 3
       cellRect:
         x: 5
         y: -3
         width: 32
         height: 66
-      spriteId: 64b266827c88d1d45a7c84866de75018
-    - name: modifier_bat_attack_v2_Frame_4
+      spriteId: efd74b04e8d23644eb6a275865d80fb7
+    - name: modifier_bat_Recolor3_attack_Frame_4
       frameIndex: 4
       cellRect:
         x: 5
         y: -3
         width: 33
         height: 67
-      spriteId: 39a3f5f518b67de4a81631b8ad39aa9a
-    - name: modifier_bat_attack_v2_Frame_5
+      spriteId: 461faa2fb471acc46a610e44810096e7
+    - name: modifier_bat_Recolor3_attack_Frame_5
       frameIndex: 5
       cellRect:
         x: 5
         y: -3
         width: 33
         height: 67
-      spriteId: fd57359ed353fa848828935ea3feeccd
-    - name: modifier_bat_attack_v2_Frame_6
+      spriteId: 65cc9ad6a5c6b994c974ab852520c7cc
+    - name: modifier_bat_Recolor3_attack_Frame_6
       frameIndex: 6
       cellRect:
         x: 5
         y: 1
         width: 33
         height: 63
-      spriteId: c76ccee353530444b811a3190f2bf6b1
-    - name: modifier_bat_attack_v2_Frame_7
+      spriteId: a00fc77feb212dd4db006f5f6c59319e
+    - name: modifier_bat_Recolor3_attack_Frame_7
       frameIndex: 7
       cellRect:
         x: 5
         y: 0
         width: 32
         height: 63
-      spriteId: 2d05c83950eb75d4ca3269e0ea130fcb
-    - name: modifier_bat_attack_v2_Frame_8
+      spriteId: 2b682cc8955f1a34597ed23e7a47f5b3
+    - name: modifier_bat_Recolor3_attack_Frame_8
       frameIndex: 8
       cellRect:
         x: 5
         y: 1
         width: 33
         height: 63
-      spriteId: e1209ea22ddf33c43ade4023ee9e43b6
-    - name: modifier_bat_attack_v2_Frame_9
+      spriteId: 38c71359dc91200408539316e410119d
+    - name: modifier_bat_Recolor3_attack_Frame_9
       frameIndex: 9
       cellRect:
         x: 5
         y: -3
         width: 33
         height: 67
-      spriteId: 6631c7366ac22a140908d8d26e12f205
-    - name: modifier_bat_attack_v2_Frame_10
+      spriteId: bde6f83b705cc014886fec0a58c2a51c
+    - name: modifier_bat_Recolor3_attack_Frame_10
       frameIndex: 10
       cellRect:
         x: 5
         y: -3
         width: 33
         height: 67
-      spriteId: 6810adf66e542fd48ba198c405115af6
-    - name: modifier_bat_attack_v2_Frame_11
+      spriteId: 32717300683471845bc89b7b05121154
+    - name: modifier_bat_Recolor3_attack_Frame_11
       frameIndex: 11
       cellRect:
         x: 5
         y: -3
         width: 32
         height: 66
-      spriteId: 37aa1fcca2f154a4fb7d53c69a120601
+      spriteId: 8aff7d89b3923124e933e21d7edad712
     linkedCells: []
     parentIndex: -1
   platformSettings:
