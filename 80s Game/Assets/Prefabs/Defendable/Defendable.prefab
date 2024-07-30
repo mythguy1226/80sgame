@@ -164,7 +164,7 @@ MonoBehaviour:
   - {fileID: -770970113, guid: 0f50e8c7a469a9b489e6bf4832ba3fce, type: 3}
   _smokeIndex: 2
   smokeSystem: {fileID: 7560741631667672140}
-  _currentHitpoints: 0
+  _currentHitpoints: 20
   latchPoints: []
   bCanBeTargeted: 0
   bIsCore: 0
