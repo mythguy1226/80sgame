@@ -21,11 +21,6 @@ public class OnboardingUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // gameLoopBGM is a large audio file that isn't being preloaded
-        // for some reason, so loading the data here prevents a lag spike
-        // during early gameplay when it is first played
-        gameLoopBGM.Clip.LoadAudioData();
-
         //Pause game when onboarding panel is activated
         Time.timeScale = 0.0f;
 
