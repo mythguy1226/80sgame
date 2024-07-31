@@ -57,8 +57,8 @@ MonoBehaviour:
   FSM: {fileID: 0}
   stunningPlayer: {fileID: 0}
   bIsStunned: 0
-  floatingTextPrefab: {fileID: 5422266768498237442, guid: 9fb18532ede7ca047b852b0d60f79673, type: 3}
-  pointValue: 1000
+  floatingTextPrefab: {fileID: 0}
+  pointValue: 0
   deathHeight: -6.5
   hitSound: {fileID: 0}
   rewiredParticles: {fileID: 0}
