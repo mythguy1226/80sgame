@@ -12,13 +12,32 @@ public class BatCustomizationManager : MonoBehaviour
     public List<Sprite> lowBonusColors;
     public List<Sprite> highBonusColors;
 
-    private List<int> selectedColors;
+    private int[] selectedColors;
 
     public List<Image> recolorPreviewSprites;
     public Image previewImage;
 
+    private int modScaleX = 63;
+    private int modScaleY = 50;
+    private int batScale = 64;
+
+    private void Start()
+    {
+        selectedColors = new int[5];
+        for (int i = 0; i < selectedColors.Length; i++)
+        {
+            selectedColors[i] = 0;
+        }
+    }
+
     public void ChangeSelectedBat(int batIndex)
     {
+        previewImage.rectTransform.sizeDelta = new Vector2(batScale, batScale);
+        foreach (Image recolorImage in recolorPreviewSprites)
+        {
+            recolorImage.rectTransform.sizeDelta = new Vector2(batScale, batScale);
+        }
+
         switch (batIndex)
         {
             case 0:
@@ -37,10 +56,14 @@ public class BatCustomizationManager : MonoBehaviour
                 break;
             case 2:
                 previewImage.sprite = modColors[selectedColors[2]];
+                previewImage.rectTransform.sizeDelta = new Vector2(modScaleX, modScaleY);
+
                 for (int i = 0; i < modColors.Count; i++)
                 {
                     recolorPreviewSprites[i].sprite = modColors[i];
+                    recolorPreviewSprites[i].rectTransform.sizeDelta = new Vector2(modScaleX, modScaleY);
                 }
+
                 break;
             case 3:
                 previewImage.sprite = lowBonusColors[selectedColors[3]];

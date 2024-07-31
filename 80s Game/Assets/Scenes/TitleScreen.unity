@@ -402,9 +402,9 @@ RectTransform:
   - {fileID: 1694450044}
   m_Father: {fileID: 1841038966}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 65.505, y: -642.5}
   m_SizeDelta: {x: 125, y: 125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &79694865
@@ -501,7 +501,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 79694865}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 178891303}
+        m_TargetAssemblyTypeName: BatCustomizationManager, Assembly-CSharp
+        m_MethodName: ChangeSelectedBat
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &154591517 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8138026058187265971, guid: ade02431274cdbe4f8fd5b4bdc90b6b9, type: 3}
@@ -525,7 +537,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &178891300
 RectTransform:
   m_ObjectHideFlags: 0
@@ -601,29 +613,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mk1Colors:
   - {fileID: 21300000, guid: b276e073f04036041ab1761e836da248, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: b276e073f04036041ab1761e836da248, type: 3}
+  - {fileID: 21300000, guid: b276e073f04036041ab1761e836da248, type: 3}
+  - {fileID: 21300000, guid: b276e073f04036041ab1761e836da248, type: 3}
   unstableColors:
   - {fileID: 21300000, guid: 2b7c1976fcac39a4aa4f8a7c4ca52e06, type: 3}
   - {fileID: 21300000, guid: 21a4e39c414d4604bb1f10997abf8ff3, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: 2b7c1976fcac39a4aa4f8a7c4ca52e06, type: 3}
+  - {fileID: 21300000, guid: 2b7c1976fcac39a4aa4f8a7c4ca52e06, type: 3}
   modColors:
   - {fileID: -2327383762117539993, guid: 71e301db95b0307489b1741185c6baf1, type: 3}
   - {fileID: -5611458483260715425, guid: 1221589518a869949b12fefb2afa19db, type: 3}
   - {fileID: -3854859203906565997, guid: 1dd95a96ee987994c87d8737d984ead5, type: 3}
   - {fileID: 663130311987773585, guid: 00fc057479aa65f4e82ba23c6709f330, type: 3}
   lowBonusColors:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: b276e073f04036041ab1761e836da248, type: 3}
+  - {fileID: 21300000, guid: b276e073f04036041ab1761e836da248, type: 3}
+  - {fileID: 21300000, guid: b276e073f04036041ab1761e836da248, type: 3}
+  - {fileID: 21300000, guid: b276e073f04036041ab1761e836da248, type: 3}
   highBonusColors:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: b276e073f04036041ab1761e836da248, type: 3}
+  - {fileID: 21300000, guid: b276e073f04036041ab1761e836da248, type: 3}
+  - {fileID: 21300000, guid: b276e073f04036041ab1761e836da248, type: 3}
+  - {fileID: 21300000, guid: b276e073f04036041ab1761e836da248, type: 3}
   recolorPreviewSprites:
   - {fileID: 201819870}
   - {fileID: 429724218}
@@ -2824,7 +2836,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -233}
-  m_SizeDelta: {x: 0, y: 100}
+  m_SizeDelta: {x: 650, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &623465600
 MonoBehaviour:
@@ -3719,9 +3731,9 @@ RectTransform:
   - {fileID: 2034571014}
   m_Father: {fileID: 623465599}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 412.5, y: -50}
   m_SizeDelta: {x: 125, y: 125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &871197920
@@ -5175,9 +5187,9 @@ RectTransform:
   - {fileID: 1368357546}
   m_Father: {fileID: 623465599}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 587.5, y: -50}
   m_SizeDelta: {x: 125, y: 125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1209109622
@@ -6501,9 +6513,9 @@ RectTransform:
   - {fileID: 201819869}
   m_Father: {fileID: 623465599}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 62.5, y: -50}
   m_SizeDelta: {x: 125, y: 125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1414823968
@@ -6790,9 +6802,9 @@ RectTransform:
   - {fileID: 818198186}
   m_Father: {fileID: 1841038966}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 65.505, y: -207.5}
   m_SizeDelta: {x: 125, y: 125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1510776426
@@ -6889,7 +6901,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1510776426}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 178891303}
+        m_TargetAssemblyTypeName: BatCustomizationManager, Assembly-CSharp
+        m_MethodName: ChangeSelectedBat
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1533786593
 GameObject:
   m_ObjectHideFlags: 0
@@ -7017,9 +7041,9 @@ RectTransform:
   - {fileID: 429724217}
   m_Father: {fileID: 623465599}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 237.5, y: -50}
   m_SizeDelta: {x: 125, y: 125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1571512149
@@ -8037,7 +8061,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -537, y: 0}
-  m_SizeDelta: {x: 131.01, y: 0}
+  m_SizeDelta: {x: 131.01, y: 705}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1841038967
 MonoBehaviour:
@@ -8119,9 +8143,9 @@ RectTransform:
   - {fileID: 1140861433}
   m_Father: {fileID: 1841038966}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 65.505, y: -497.5}
   m_SizeDelta: {x: 125, y: 125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1862317127
@@ -8218,7 +8242,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1862317127}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 178891303}
+        m_TargetAssemblyTypeName: BatCustomizationManager, Assembly-CSharp
+        m_MethodName: ChangeSelectedBat
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1894973264
 GameObject:
   m_ObjectHideFlags: 0
@@ -8724,9 +8760,9 @@ RectTransform:
   - {fileID: 1911215176}
   m_Father: {fileID: 1841038966}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 65.505, y: -352.5}
   m_SizeDelta: {x: 125, y: 125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1976438275
@@ -8823,7 +8859,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1976438275}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 178891303}
+        m_TargetAssemblyTypeName: BatCustomizationManager, Assembly-CSharp
+        m_MethodName: ChangeSelectedBat
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1985799109
 GameObject:
   m_ObjectHideFlags: 0
@@ -9161,9 +9209,9 @@ RectTransform:
   - {fileID: 2103648643}
   m_Father: {fileID: 1841038966}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 65.505, y: -62.5}
   m_SizeDelta: {x: 125, y: 125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2019067435
@@ -9260,7 +9308,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2019067435}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 178891303}
+        m_TargetAssemblyTypeName: BatCustomizationManager, Assembly-CSharp
+        m_MethodName: ChangeSelectedBat
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2034571013
 GameObject:
   m_ObjectHideFlags: 0
@@ -9512,7 +9572,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 191.71002, y: -0.000061035156}
+  m_AnchoredPosition: {x: 191.71002, y: 0}
   m_SizeDelta: {x: -717.94, y: -375}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2141681988
