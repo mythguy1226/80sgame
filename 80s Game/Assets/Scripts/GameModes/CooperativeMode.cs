@@ -9,7 +9,7 @@ public class CooperativeMode : AbsGameMode
     Defendable coreObject;
     public CooperativeMode() : base()
     {
-        ModeType = EGameMode.Competitive;
+        ModeType = EGameMode.Defense;
 
         // Initial round parameters
         NumRounds = 99;
