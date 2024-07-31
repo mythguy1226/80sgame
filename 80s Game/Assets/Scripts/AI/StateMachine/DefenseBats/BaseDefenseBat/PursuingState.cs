@@ -53,15 +53,9 @@ public class PursuingState : AbsBaseState<DefenseBatStateMachine.DefenseBatState
 	*/
     public override void ExitState()
     {
-        // Get state machine and needed components
-        DefenseBatStateMachine FSM = (DefenseBatStateMachine)OwnerFSM;
-
-        if (FSM == null)
-            return;
-
         // Any clean up needed from this state will go here
-        FSM.GetComponent<CircleCollider2D>().isTrigger = false;
-        FSM.GetComponent<PolygonCollider2D>().isTrigger = false;
+        OwnerFSM.GetComponent<CircleCollider2D>().isTrigger = false;
+        OwnerFSM.GetComponent<PolygonCollider2D>().isTrigger = false;
     }
 
     /*

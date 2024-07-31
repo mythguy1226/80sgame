@@ -1565,6 +1565,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 494436708}
     m_Modifications:
+    - target: {fileID: -7610428466214683308, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
+      propertyPath: bIsStunned
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 232502045716647642, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
       propertyPath: m_Name
       value: DefenseBat (2)
@@ -2132,6 +2136,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 494436708}
     m_Modifications:
+    - target: {fileID: -7610428466214683308, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
+      propertyPath: bIsStunned
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 232502045716647642, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
       propertyPath: m_Name
       value: DefenseBat (27)
@@ -2860,6 +2868,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 494436708}
     m_Modifications:
+    - target: {fileID: -7610428466214683308, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
+      propertyPath: bIsStunned
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 232502045716647642, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
       propertyPath: m_Name
       value: DefenseBat (25)
@@ -2998,6 +3010,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 494436708}
     m_Modifications:
+    - target: {fileID: -7610428466214683308, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
+      propertyPath: bIsStunned
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 232502045716647642, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
       propertyPath: m_Name
       value: DefenseBat (10)
@@ -3122,6 +3138,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 494436708}
     m_Modifications:
+    - target: {fileID: -7610428466214683308, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
+      propertyPath: bIsStunned
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 232502045716647642, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
       propertyPath: m_Name
       value: DefenseBat (11)
@@ -3184,6 +3204,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 494436708}
     m_Modifications:
+    - target: {fileID: -7610428466214683308, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
+      propertyPath: bIsStunned
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 232502045716647642, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
       propertyPath: m_Name
       value: DefenseBat (5)
@@ -4105,6 +4129,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 494436708}
     m_Modifications:
+    - target: {fileID: -7610428466214683308, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
+      propertyPath: bIsStunned
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 232502045716647642, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
       propertyPath: m_Name
       value: DefenseBat (8)
@@ -5705,6 +5733,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 494436708}
     m_Modifications:
+    - target: {fileID: -7610428466214683308, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
+      propertyPath: bIsStunned
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 232502045716647642, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
       propertyPath: m_Name
       value: DefenseBat (29)
@@ -6399,6 +6431,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 494436708}
     m_Modifications:
+    - target: {fileID: -7610428466214683308, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
+      propertyPath: bIsStunned
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 232502045716647642, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
       propertyPath: m_Name
       value: DefenseBat (3)
@@ -6806,6 +6842,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 494436708}
     m_Modifications:
+    - target: {fileID: -7610428466214683308, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
+      propertyPath: bIsStunned
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 232502045716647642, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
       propertyPath: m_Name
       value: DefenseBat (4)
@@ -6868,6 +6908,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 494436708}
     m_Modifications:
+    - target: {fileID: -7610428466214683308, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
+      propertyPath: bIsStunned
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 232502045716647642, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
       propertyPath: m_Name
       value: DefenseBat (16)
@@ -6992,6 +7036,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 494436708}
     m_Modifications:
+    - target: {fileID: -7610428466214683308, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
+      propertyPath: bIsStunned
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 232502045716647642, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
       propertyPath: m_Name
       value: DefenseBat (15)
@@ -8071,6 +8119,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 494436708}
     m_Modifications:
+    - target: {fileID: -7610428466214683308, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
+      propertyPath: bIsStunned
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 232502045716647642, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
       propertyPath: m_Name
       value: DefenseBat (14)
@@ -9392,6 +9444,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 494436708}
     m_Modifications:
+    - target: {fileID: -7610428466214683308, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
+      propertyPath: bIsStunned
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 232502045716647642, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
       propertyPath: m_Name
       value: DefenseBat (20)
@@ -9648,6 +9704,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 494436708}
     m_Modifications:
+    - target: {fileID: -7610428466214683308, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
+      propertyPath: bIsStunned
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 232502045716647642, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
       propertyPath: m_Name
       value: DefenseBat (6)
@@ -9710,6 +9770,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 494436708}
     m_Modifications:
+    - target: {fileID: -7610428466214683308, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
+      propertyPath: bIsStunned
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 232502045716647642, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
       propertyPath: m_Name
       value: DefenseBat
@@ -9772,6 +9836,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 494436708}
     m_Modifications:
+    - target: {fileID: -7610428466214683308, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
+      propertyPath: bIsStunned
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 232502045716647642, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
       propertyPath: m_Name
       value: DefenseBat (28)
@@ -10119,6 +10187,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 494436708}
     m_Modifications:
+    - target: {fileID: -7610428466214683308, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
+      propertyPath: bIsStunned
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 232502045716647642, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
       propertyPath: m_Name
       value: DefenseBat (18)
@@ -10261,6 +10333,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 494436708}
     m_Modifications:
+    - target: {fileID: -7610428466214683308, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
+      propertyPath: bIsStunned
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 232502045716647642, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
       propertyPath: m_Name
       value: DefenseBat (21)
@@ -10833,6 +10909,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 494436708}
     m_Modifications:
+    - target: {fileID: -7610428466214683308, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
+      propertyPath: bIsStunned
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 232502045716647642, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
       propertyPath: m_Name
       value: DefenseBat (23)
@@ -10895,6 +10975,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 494436708}
     m_Modifications:
+    - target: {fileID: -7610428466214683308, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
+      propertyPath: bIsStunned
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 232502045716647642, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
       propertyPath: m_Name
       value: DefenseBat (7)
@@ -11536,6 +11620,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 494436708}
     m_Modifications:
+    - target: {fileID: -7610428466214683308, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
+      propertyPath: bIsStunned
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 232502045716647642, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
       propertyPath: m_Name
       value: DefenseBat (12)
@@ -11598,6 +11686,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 494436708}
     m_Modifications:
+    - target: {fileID: -7610428466214683308, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
+      propertyPath: bIsStunned
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 232502045716647642, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
       propertyPath: m_Name
       value: DefenseBat (22)
@@ -14253,6 +14345,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 494436708}
     m_Modifications:
+    - target: {fileID: -7610428466214683308, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
+      propertyPath: bIsStunned
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 232502045716647642, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
       propertyPath: m_Name
       value: DefenseBat (9)
@@ -14909,6 +15005,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 494436708}
     m_Modifications:
+    - target: {fileID: -7610428466214683308, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
+      propertyPath: bIsStunned
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 232502045716647642, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
       propertyPath: m_Name
       value: DefenseBat (1)
@@ -15205,6 +15305,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 494436708}
     m_Modifications:
+    - target: {fileID: -7610428466214683308, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
+      propertyPath: bIsStunned
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 232502045716647642, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
       propertyPath: m_Name
       value: DefenseBat (17)
@@ -15267,6 +15371,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 494436708}
     m_Modifications:
+    - target: {fileID: -7610428466214683308, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
+      propertyPath: bIsStunned
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 232502045716647642, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
       propertyPath: m_Name
       value: DefenseBat (19)
@@ -16200,6 +16308,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 494436708}
     m_Modifications:
+    - target: {fileID: -7610428466214683308, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
+      propertyPath: bIsStunned
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 232502045716647642, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
       propertyPath: m_Name
       value: DefenseBat (26)
@@ -16262,6 +16374,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 494436708}
     m_Modifications:
+    - target: {fileID: -7610428466214683308, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
+      propertyPath: bIsStunned
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 232502045716647642, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
       propertyPath: m_Name
       value: DefenseBat (13)
@@ -17540,6 +17656,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 494436708}
     m_Modifications:
+    - target: {fileID: -7610428466214683308, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
+      propertyPath: bIsStunned
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 232502045716647642, guid: 7f47d9b0f5053204392f11117f857e0e, type: 3}
       propertyPath: m_Name
       value: DefenseBat (24)
