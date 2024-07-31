@@ -88,6 +88,7 @@ public class PlayerController : MonoBehaviour
 
             if (pc.stunParticles != null)
             {
+                defaultHitParticles = pc.stunParticles;
                 hitParticles = pc.stunParticles;
             }
 
