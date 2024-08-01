@@ -113,37 +113,44 @@ public class UIManager : MonoBehaviour
             return;
         }
         
-        //Set background to defense if defense mode is selected
+        //Set background for defense mode
         if (GameModeData.activeGameMode == EGameMode.Defense)
         {
             background.sprite = GameManager.Instance.UIManager.defenseModeBackgrounds[PlayerPrefs.GetInt("DefenseBackground")];
         }
 
+        //Set background for classic mode
         else if (GameModeData.activeGameMode == EGameMode.Classic)
         {
             background.sprite = GameManager.Instance.UIManager.classicModeBackgrounds[PlayerPrefs.GetInt("ClassicBackground")];
         }
 
+        //Set background for competitive mode
         else if (GameModeData.activeGameMode == EGameMode.Competitive)
         {
             background.sprite = GameManager.Instance.UIManager.classicModeBackgrounds[PlayerPrefs.GetInt("CompetitiveBackground")];
         }
     }
 
+    //Cycle through the different backgrounds that can be customized
     public void BackgroundCycle(Vector2 movement)
     {
+        //Only change the background once if the user holds up or down on the stick/d-pad
         if (!backgroundChanged)
         {
+            //Check if any of the gamemode cards are selected
             for(int i = 0; i < gamemodeCards.Count; i++)
             {
                 if (EventSystem.current.currentSelectedGameObject == gamemodeCards[i])
                 {
+                    //If it is selected and the user presses up, go to the previous background
                     if (movement.y >= 0.7f)
                     {
                         backgroundUI.PreviousBackground(i + 1);
                         backgroundChanged = true;
                     }
 
+                    //If the user presses down, go to the next background
                     else if (movement.y <= -0.7f)
                     {
                         backgroundUI.NextBackground(i + 1);
@@ -153,12 +160,14 @@ public class UIManager : MonoBehaviour
             }
         }
 
+        //Allow the background to be changed again once there is no movement from the user
         if (movement == Vector2.zero)
         {
             backgroundChanged = false;
         }
     }
 
+    //Cancel out of a menu on the title screen when pressing the cancel input
     public void CancelMenu()
     {
         if (titleScreenUI == null)
@@ -166,23 +175,26 @@ public class UIManager : MonoBehaviour
             return; 
         }
         
+        //Cancel out of achievements screen if it's active
         if (titleScreenUI.achievementsPanel.activeInHierarchy)
         {
             titleScreenUI.ToggleAchievementsPanel();
         }
 
+        //Cancel out of gamemode screen if it's active
         else if (titleScreenUI.gamemodePanel.activeInHierarchy)
         {
             titleScreenUI.ToggleGamemodeSelection();
         }
     }
 
+    //Show an achievement notification when it is unlocked
     public void ShowAchievementNotification(AchievementData achievement)
     {
         achievementNotifPrefab.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = achievement.nameText;
+        achievementNotifPrefab.transform.GetChild(2).GetComponent<Image>().sprite = achievement.image;
 
         achievementNotifs.Enqueue(achievementNotifPrefab);
-        //Instantiate(achievementNotifs[0], canvas.transform);
     }
 
     public void ClearNotification()

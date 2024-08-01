@@ -23,7 +23,8 @@ MonoBehaviour:
   internalAchivementKey: mod-2
   requirementTrackingKey: stun-mod-3
   testValue: 150
-  image: {fileID: 0}
+  image: {fileID: -449408586, guid: 083a1430fdd3b6d46aa71e8b78c21d1b, type: 3}
   rewardText: BAT COLOR
-  rewardSprites: []
+  rewardSprites:
+  - {fileID: 463367631, guid: 25aaaaff52eba244a85a0e49719bf9ee, type: 3}
   showProgressBar: 1

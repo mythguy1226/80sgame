@@ -22,7 +22,8 @@ MonoBehaviour:
   internalAchivementKey: voyage
   requirementTrackingKey: 
   testValue: 1
-  image: {fileID: 0}
+  image: {fileID: 2039007060, guid: 083a1430fdd3b6d46aa71e8b78c21d1b, type: 3}
   rewardText: STUN EFFECT
-  rewardSprites: []
+  rewardSprites:
+  - {fileID: -1335101950, guid: 25aaaaff52eba244a85a0e49719bf9ee, type: 3}
   showProgressBar: 0

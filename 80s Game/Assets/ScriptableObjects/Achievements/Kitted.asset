@@ -23,7 +23,9 @@ MonoBehaviour:
   internalAchivementKey: kitted
   requirementTrackingKey: kit
   testValue: 150
-  image: {fileID: 0}
+  image: {fileID: 1763876235, guid: 083a1430fdd3b6d46aa71e8b78c21d1b, type: 3}
   rewardText: STUN EFFECT
-  rewardSprites: []
+  rewardSprites:
+  - {fileID: -1357140666, guid: 25aaaaff52eba244a85a0e49719bf9ee, type: 3}
+  - {fileID: -362082852, guid: 25aaaaff52eba244a85a0e49719bf9ee, type: 3}
   showProgressBar: 1
