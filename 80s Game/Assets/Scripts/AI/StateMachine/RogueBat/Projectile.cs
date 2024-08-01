@@ -31,11 +31,11 @@ public class Projectile : MonoBehaviour
         if(hitTarget != null) // null check
             hitTarget.ResolveHit();
 
-        // Destroy this object
-        Destroy(gameObject);
-
         // Spawn impact particles and destroy on timer
         GameObject impact = Instantiate(impactParticles, transform.position, transform.rotation);
         Destroy(impact, 1.0f);
+
+        // Destroy this object
+        Destroy(gameObject);
     }
 }

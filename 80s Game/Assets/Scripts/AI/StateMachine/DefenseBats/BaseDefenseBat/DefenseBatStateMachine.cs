@@ -155,9 +155,10 @@ public class DefenseBatStateMachine : AbsStateMachine<DefenseBatStateMachine.Def
     public virtual void ResolveHit()
     {
         // Trigger stun animation
+        GetComponent<Target>().bIsStunned = true;
         _AnimControls.PlayStunAnimation();
         SoundManager.Instance.PlaySoundInterrupt(hitSound, 0.9f, 1.1f);
-        GetComponent<Target>().bIsStunned = true;
+        
     }
 
     /// <summary>
@@ -215,6 +216,12 @@ public class DefenseBatStateMachine : AbsStateMachine<DefenseBatStateMachine.Def
     /// </summary>
     public virtual void Attack()
     {
+        Target target = GetComponent<Target>();
+        if (target.bIsStunned)
+        {
+            target.ResolveHit();
+        }
+
         // Get the defendable from the target latch
         Defendable latchedDefendable = targetLatch.transform.parent.GetComponent<Defendable>();
         AnimControls.PlayAttackAnimation();

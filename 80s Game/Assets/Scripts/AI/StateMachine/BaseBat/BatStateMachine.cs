@@ -124,11 +124,13 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
     /// </summary>
     public virtual void ResolveHit()
     {
+        Target target = GetComponent<Target>();
+        target.bIsStunned = true;
+
         // Trigger stun animation
         _AnimControls.PlayStunAnimation();
         SoundManager.Instance.PlaySoundInterrupt(hitSound, 0.9f, 1.1f);
-        Target target = GetComponent<Target>();
-        target.bIsStunned = true;
+        
 
         if (target.stunningPlayer != null)
         {

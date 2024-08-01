@@ -24,18 +24,15 @@ public class ModRewired : AbsModifierEffect
             DefenseBatStateMachine dFSM = (target.FSM as DefenseBatStateMachine);
 
             // Protect against dead but still technically "active" bats
-            if (dFSM != null)
-            {
-                if (dFSM.CurrentState.StateKey != DefenseBatStateMachine.DefenseBatStates.Death)
-                {
-                    GameObject particle = Instantiate(particles, target.transform);
-                    particlesList.Add(particle);
-                    target.rewiredParticles = particle;
-                    dFSM.TransitionToState(DefenseBatStateMachine.DefenseBatStates.Wandering);
-                    dFSM.AnimControls.ResetAnimation();
-                    dFSM.pursueTimer = effectDuration;
-                }
-            }
+            if (dFSM == null || target.bIsStunned) continue;
+            if (dFSM.CurrentState.StateKey == DefenseBatStateMachine.DefenseBatStates.Death) continue;
+
+            GameObject particle = Instantiate(particles, target.transform);
+            particlesList.Add(particle);
+            target.rewiredParticles = particle;
+            dFSM.TransitionToState(DefenseBatStateMachine.DefenseBatStates.Wandering);
+            dFSM.AnimControls.ResetAnimation();
+            dFSM.pursueTimer = effectDuration;
 
         }
         HandleModifierCountAchievement();
