@@ -138,6 +138,12 @@ public class PauseScreenBehavior : MonoBehaviour
     {
         Time.timeScale = 1f;
 
+        if (GameManager.Instance.ActiveGameMode.ModeType == EGameMode.Defense)
+        {
+            AbsGameMode gameMode = GameManager.Instance.ActiveGameMode;
+            AchievementManager.TestEndGameAchievements(gameMode.ModeType, gameMode.CurrentRound, 0);
+        }
+
         SceneManager.LoadScene(0);
         SoundManager.Instance.StopAllAudio();
         SoundManager.Instance.PlaySoundContinuous(buttonClickSound);

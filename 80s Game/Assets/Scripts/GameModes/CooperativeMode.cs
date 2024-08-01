@@ -9,7 +9,7 @@ public class CooperativeMode : AbsGameMode
     Defendable coreObject;
     public CooperativeMode() : base()
     {
-        ModeType = EGameMode.Competitive;
+        ModeType = EGameMode.Defense;
 
         // Initial round parameters
         NumRounds = 99;
@@ -106,7 +106,7 @@ public class CooperativeMode : AbsGameMode
 
         string key = AchievementConstants.CAREFUL_FRAGILE;
         AchievementData.TestType testType = AchievementData.TestType.LessThanOrEqual;
-        float testValue = coreObject._currentHitpoints / (float) coreObject._maxHitpoints;
+        float testValue = (float) coreObject._currentHitpoints / (float) coreObject._maxHitpoints;
         if (AchievementManager.TestUnlock(testType, AchievementManager.requirements[key], testValue*100))
         {
             AchievementManager.UnlockAchievement(key);
