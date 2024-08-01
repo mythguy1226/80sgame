@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -16,6 +17,7 @@ public class TitleScreenBehavior : MonoBehaviour
     public GameObject achievementsButton;
     public GameObject achievementsPanel;
     public GameObject achievementsList;
+    public GameObject achievementRewardPrefab;
     public AudioClip buttonClickSound;
     public MusicTrack titleScreenMusic;
 
@@ -30,7 +32,7 @@ public class TitleScreenBehavior : MonoBehaviour
     private int gamemodeSelected = 1;
 
     void Start()
-    {
+    {     
         SoundManager.Instance.SetMusicToLoop(titleScreenMusic);
 
         //Set up Gamemode Selection Buttons
@@ -120,6 +122,7 @@ public class TitleScreenBehavior : MonoBehaviour
         StartGame();
     }
 
+    //Toggles the Achievements Screen on and off
     public void ToggleAchievementsPanel()
     {
         achievementsPanel.SetActive(!achievementsPanel.activeInHierarchy);
@@ -134,6 +137,29 @@ public class TitleScreenBehavior : MonoBehaviour
         {
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(achievementsButton);
+        }
+    }
+    
+    //Creates a screen showing achievement rewards
+    public void CreateAchievementRewards()
+    {
+        //Get Next AchievementData from the rewards list
+        AchievementData unlockedAchievement = AchievementManager.GetNextReward();
+
+        if (unlockedAchievement != null)
+        {
+            //Set reward type and reward thumbnails
+            achievementRewardPrefab.GetComponent<AchievementReward>().rewardType = unlockedAchievement.rewardText;
+            achievementRewardPrefab.GetComponent<AchievementReward>().rewardThumbnails = unlockedAchievement.rewardSprites;
+
+            Instantiate(achievementRewardPrefab, GameManager.Instance.UIManager.canvas.transform);
+        }   
+
+        //If there are no rewards left, select the start button
+        else
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(startButton);
         }
     }
 }
