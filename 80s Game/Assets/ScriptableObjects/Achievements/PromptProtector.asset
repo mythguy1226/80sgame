@@ -25,7 +25,8 @@ MonoBehaviour:
   internalAchivementKey: def-1
   requirementTrackingKey: def-1-key
   testValue: 10
-  image: {fileID: 0}
+  image: {fileID: 638295509, guid: 083a1430fdd3b6d46aa71e8b78c21d1b, type: 3}
   rewardText: BACKGROUND
-  rewardSprites: []
+  rewardSprites:
+  - {fileID: -781497532, guid: 25aaaaff52eba244a85a0e49719bf9ee, type: 3}
   showProgressBar: 1

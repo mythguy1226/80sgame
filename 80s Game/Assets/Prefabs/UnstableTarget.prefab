@@ -86,12 +86,7 @@ MonoBehaviour:
   isWandering: 0
   isFleeing: 0
   maxSpeed: 6
-  maxForce: 0.03
   currentVelocity: {x: 0, y: 0}
-  flockSize: 1.75
-  separationStrength: 1
-  cohesionStrength: 0.7
-  alignmentStrength: 1
 --- !u!95 &3464643637762033909
 Animator:
   serializedVersion: 5
@@ -127,6 +122,7 @@ Animation:
   - {fileID: 7400000, guid: f3d2036cc702b1943b37e73d212565a0, type: 2}
   - {fileID: 7400000, guid: 25c6ae07580eb9a47bc7ff29cee3542d, type: 2}
   - {fileID: 7400000, guid: 8006413ff1b305e469c031b21abe4465, type: 2}
+  - {fileID: 7400000, guid: 014624eb176d02d4e927b13d4860cebf, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
@@ -324,8 +320,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 3
   FSM: {fileID: 7156282623998708221}
+  stunningPlayer: {fileID: 0}
   bIsStunned: 0
   floatingTextPrefab: {fileID: 5422266768498237442, guid: 75dd293da92028a43b54e04a8792559c, type: 3}
   pointValue: 2000
   deathHeight: -6.5
   hitSound: {fileID: 0}
+  rewiredParticles: {fileID: 0}

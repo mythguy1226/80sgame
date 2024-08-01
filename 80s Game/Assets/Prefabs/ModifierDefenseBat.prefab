@@ -55,6 +55,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 4
   FSM: {fileID: 0}
+  stunningPlayer: {fileID: 0}
   bIsStunned: 0
   floatingTextPrefab: {fileID: 0}
   pointValue: 1500
@@ -196,8 +197,12 @@ Animation:
   m_GameObject: {fileID: 232502045716647642}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 18883f54d9a9fd340985d6536b9dca18, type: 2}
-  m_Animations: []
+  m_Animation: {fileID: 7400000, guid: 9c9869384b1ca3f4f9561a423f89dfb1, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 9c9869384b1ca3f4f9561a423f89dfb1, type: 2}
+  - {fileID: 7400000, guid: 727d43dbcae8334458b7aac5d524b64e, type: 2}
+  - {fileID: 7400000, guid: 276c4c5ebde4d2245a21dc3facbe4af9, type: 2}
+  - {fileID: 7400000, guid: 475169f74cccaa54ba7ef86267b395c3, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
@@ -242,8 +247,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 9bae5245bf230f840bde84dd1997f7c5, type: 3}
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 21300000, guid: 9d017572c855514459c14b353177f087, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

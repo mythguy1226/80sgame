@@ -24,7 +24,8 @@ MonoBehaviour:
   internalAchivementKey: bulls
   requirementTrackingKey: 
   testValue: 85
-  image: {fileID: 0}
+  image: {fileID: -1874842185, guid: 083a1430fdd3b6d46aa71e8b78c21d1b, type: 3}
   rewardText: STUN EFFECT
-  rewardSprites: []
+  rewardSprites:
+  - {fileID: 1448493829, guid: 25aaaaff52eba244a85a0e49719bf9ee, type: 3}
   showProgressBar: 0

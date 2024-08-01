@@ -9,6 +9,10 @@ public static class AchievementManager
     private static Queue<string> rewards;
     private static bool originalSetup = false;
     private static Dictionary<int, int> fullyChargedByPlayer;
+    private static bool countingUnstable = false;
+    private static int unstableCount = 0;
+    private static UnstableBatStateMachine counterOrigin;
+    private static UnstableDefenseBatStateMachine counterDefenseOrigin;
 
     /// <summary>
     /// Register the requirement values for unlocking achievements.
@@ -402,5 +406,54 @@ public static class AchievementManager
         {
             UnlockAchievement(AchievementConstants.FULLY_CHARGED);
         }
+    }
+
+    public static void StartCountingUnstable(UnstableBatStateMachine machine)
+    {
+        countingUnstable = true;
+        unstableCount = 1;
+        counterOrigin = machine;
+    }
+
+    public static void StopCountingUnstable(UnstableBatStateMachine machine)
+    {
+        if (machine == counterOrigin)
+        {
+            countingUnstable = false;
+            if(TestUnlock(TestType.GreaterThanOrEqual, requirements[AchievementConstants.FULLY_CHARGED], unstableCount))
+            {
+                UnlockAchievement(AchievementConstants.FULLY_CHARGED);
+            }
+            counterOrigin = null;
+        }
+    }
+
+    public static void StartCountingDefenseUnstable(UnstableDefenseBatStateMachine machine)
+    {
+        countingUnstable = true;
+        unstableCount = 1;
+        counterDefenseOrigin = machine;
+    }
+
+    public static void StopCountingDefenseUnstable(UnstableDefenseBatStateMachine machine)
+    {
+        if (machine == counterDefenseOrigin)
+        {
+            countingUnstable = false;
+            if(TestUnlock(TestType.GreaterThanOrEqual, requirements[AchievementConstants.FULLY_CHARGED], unstableCount))
+            {
+                UnlockAchievement(AchievementConstants.FULLY_CHARGED);
+            }
+            counterDefenseOrigin = null;
+        }
+    }
+
+    public static bool isCountingUnstable()
+    {
+        return countingUnstable;
+    }
+
+    public static void AddToUnstCount() {
+        unstableCount++;
     }
 }

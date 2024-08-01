@@ -23,7 +23,8 @@ MonoBehaviour:
   internalAchivementKey: classic-3
   requirementTrackingKey: classic-3-key
   testValue: 1000000
-  image: {fileID: 0}
+  image: {fileID: 2086538197, guid: 083a1430fdd3b6d46aa71e8b78c21d1b, type: 3}
   rewardText: BACKGROUND
-  rewardSprites: []
+  rewardSprites:
+  - {fileID: -1501980978, guid: 25aaaaff52eba244a85a0e49719bf9ee, type: 3}
   showProgressBar: 1
