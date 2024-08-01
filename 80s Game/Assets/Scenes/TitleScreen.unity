@@ -1075,7 +1075,7 @@ MonoBehaviour:
   achievementsButton: {fileID: 1279264828}
   achievementsPanel: {fileID: 1705306704}
   achievementsList: {fileID: 1203544902}
-  achievementRewardPrefab: {fileID: 0}
+  achievementRewardPrefab: {fileID: 1923514397185271933, guid: c487211524a31c34eb4eacc9f0db0189, type: 3}
   buttonClickSound: {fileID: 8300000, guid: 0f33d998cd03b1f4ebc4983ef2a6d559, type: 3}
   titleScreenMusic: {fileID: 11400000, guid: 8017975349db49843bed656899ffeb7e, type: 2}
   gamemodeName: {fileID: 0}
