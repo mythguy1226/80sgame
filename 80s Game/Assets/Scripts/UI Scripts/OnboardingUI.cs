@@ -18,7 +18,6 @@ public class OnboardingUI : MonoBehaviour
     private bool controllerConnected = false;
     private bool playedBGM = false;
 
-
     // Start is called before the first frame update
     void Start()
     {

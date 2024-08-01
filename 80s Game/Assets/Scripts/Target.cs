@@ -179,6 +179,7 @@ public class Target : MonoBehaviour
 
     public void Spawn()
     {
+        bIsStunned = false;
         FSM.SetActive(true);
         InputManager.detectHitSub += ListenForShot;
         FSM.TransitionToDefault();
