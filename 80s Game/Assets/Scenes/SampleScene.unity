@@ -4323,7 +4323,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1.1887817, y: 96.711}
+  m_AnchoredPosition: {x: 1.1888428, y: 96.711}
   m_SizeDelta: {x: 128.49, y: -146.53}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &663706629
@@ -6543,6 +6543,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: JoyConManager
       objectReference: {fileID: 0}
+    - target: {fileID: 6002553141989283555, guid: c390f7ab294c51b4f80431bfd15a88d2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7015461387610519740, guid: c390f7ab294c51b4f80431bfd15a88d2, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.6138519
@@ -7264,6 +7268,7 @@ MonoBehaviour:
   titleScreenUI: {fileID: 0}
   scoreBehavior: {fileID: 0}
   backgroundUI: {fileID: 0}
+  achievementsUI: {fileID: 0}
   classicModeBackgrounds:
   - {fileID: 21300000, guid: adc65da9af63f8941ab6f09c18774659, type: 3}
   - {fileID: 21300000, guid: 4fdaf93c4ae21d14689ceaaddeac185c, type: 3}
@@ -9052,7 +9057,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1.1887817, y: 0}
+  m_AnchoredPosition: {x: 1.1888428, y: 0}
   m_SizeDelta: {x: -480.37012, y: -289.17004}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1570677852
