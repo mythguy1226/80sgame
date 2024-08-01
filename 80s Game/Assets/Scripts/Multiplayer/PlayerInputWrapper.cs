@@ -9,6 +9,7 @@ public class PlayerInputWrapper : MonoBehaviour
 {
     // Class that wraps around the PlayerInput object to better handle
     // how input behaves and where it sends its messages to
+    private const float sensitivityMultiplier = 1 / 150f;
 
     public Vector2 mouseSensitivity;
     public Vector2 controllerSensitivity;
@@ -27,7 +28,7 @@ public class PlayerInputWrapper : MonoBehaviour
     public bool isFlipped = false;
     public bool isSlowed = false;
     private LookingGlass lookingGlass;
-    
+
     private void Start()
     {
         joycons = JoyconManager.Instance.j;
@@ -96,7 +97,7 @@ public class PlayerInputWrapper : MonoBehaviour
 
         // Mouse deltas are already a displacement-based value, so lag-spikes
         // will cause the cursor to jump around (No Time.deltaTime adjustments)
-        player.HandleMovement(adjustedInput / 150f);
+        player.HandleMovement(adjustedInput * sensitivityMultiplier);
     }
 
     // On move override for Joycons
