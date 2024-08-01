@@ -70,7 +70,7 @@ public class SoundManager : MonoBehaviour
             maxPoolSize
         );
 
-        _bIsMusicPlaying = false;
+        _bIsMusicPlaying = true;
         _nextEventTime = AudioSettings.dspTime + 0.5f;
     }
 
