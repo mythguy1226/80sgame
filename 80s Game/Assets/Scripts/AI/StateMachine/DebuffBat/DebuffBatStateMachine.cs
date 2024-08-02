@@ -39,10 +39,6 @@ public class DebuffBatStateMachine : BatStateMachine
         // Set the activator for the effect to be stunning player
         effect.activator = GetComponent<Target>().stunningPlayer;
         effect.bIsSelfDebuff = true;
-
-        // Instantly resolve a shot to activate the effect
-        effect.ResolveShot();
-
     }
 
     /// <summary>
