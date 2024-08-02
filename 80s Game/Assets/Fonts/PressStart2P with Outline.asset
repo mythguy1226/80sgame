@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: PressStart2P-vaV7 SDF Material
   m_Shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
-  m_Parent: {fileID: 2100000, guid: 738e2cb56765e8245ab93e0b9649fe92, type: 2}
+  m_Parent: {fileID: 2100000, guid: 3cbf2cfd3ea04c74f8f50e423d79477b, type: 2}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -24,7 +24,8 @@ Material:
     serializedVersion: 3
     m_TexEnvs: []
     m_Ints: []
-    m_Floats: []
+    m_Floats:
+    - _OutlineWidth: 0.2
     m_Colors: []
   m_BuildTextureStacks: []
 --- !u!114 &11400000
@@ -37,11 +38,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
-  m_Name: PressStart2P-vaV7 SDF
+  m_Name: PressStart2P with Outline
   m_EditorClassIdentifier: 
-  hashCode: 437394479
+  hashCode: -1949880441
   material: {fileID: -507269567956872517}
-  materialHashCode: 456190895
+  materialHashCode: -1912678457
   m_Version: 1.1.0
   m_SourceFontFileGUID: acf3a40de50f60b469e07c21eb64342e
   m_SourceFontFile_EditorRef: {fileID: 12800000, guid: acf3a40de50f60b469e07c21eb64342e, type: 3}
