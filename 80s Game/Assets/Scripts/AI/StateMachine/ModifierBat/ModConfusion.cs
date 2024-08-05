@@ -79,7 +79,7 @@ public class ModConfusion : AbsModifierEffect
                     Crosshair ch = pc.activeCrosshair;
 
                     // Update rotation of crosshair
-                    ch.transform.rotation *= Quaternion.AngleAxis(0.1f, new Vector3(0.0f, 0.0f, 1.0f));
+                    ch.transform.rotation *= Quaternion.AngleAxis(0.2f, new Vector3(0.0f, 0.0f, 1.0f));
                 }
             }
         }
