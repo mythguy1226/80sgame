@@ -124,8 +124,8 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.1891892}
-    oldSize: {x: 0.48, y: 0.37}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.64, y: 0.64}
     newSize: {x: 0.64, y: 0.64}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -207,11 +207,11 @@ Animation:
   m_GameObject: {fileID: 232502045716647642}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 772851c3ad1f3954bb57da54f62fdb9b, type: 2}
+  m_Animation: {fileID: 7400000, guid: 1db30aeb377efd44aaa5e72585bec5dd, type: 2}
   m_Animations:
-  - {fileID: 7400000, guid: 772851c3ad1f3954bb57da54f62fdb9b, type: 2}
-  - {fileID: 7400000, guid: e406dd5828e6d094fbeecb4118e1808c, type: 2}
-  - {fileID: 7400000, guid: 93674d0ceca09cb4fbc170d1e5faa098, type: 2}
+  - {fileID: 7400000, guid: 1db30aeb377efd44aaa5e72585bec5dd, type: 2}
+  - {fileID: 7400000, guid: 7e965a81b1e21064997bb120d49c6e84, type: 2}
+  - {fileID: 7400000, guid: ab6dfe52fc397ff4686c8d82c40a4376, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
@@ -257,7 +257,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 7240875460241612957, guid: d3a1c7a06d8170c4d91d4c0363789c16, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5a301c55307cb6d47b3e2f8533e2ad74, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
