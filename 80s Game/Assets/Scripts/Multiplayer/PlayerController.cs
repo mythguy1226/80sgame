@@ -40,6 +40,13 @@ public class PlayerController : MonoBehaviour
 
     private PlayerConfig config;
 
+
+    public float overheatMax;
+    public float maxShootOverheat;
+    public float heatAdd;
+    public float heatRemove;
+    private Overheat _overheat;
+
     [SerializeField]
     private Crosshair crosshairPrefab;
     public Crosshair activeCrosshair;
@@ -60,6 +67,7 @@ public class PlayerController : MonoBehaviour
             hitParticles = defaultHitParticles;
         }
         modifiedShotRadius = originalShotRadius;
+        _overheat = new Overheat(maxShootOverheat, overheatMax, heatRemove, heatAdd);
     }
 
     /// <summary>
@@ -131,6 +139,13 @@ public class PlayerController : MonoBehaviour
         // Play the shoot sound and animation if the game is not paused 
         if (Time.timeScale > 0 && activeCrosshair.gameObject.activeInHierarchy)
         {
+
+            // Overheat interferes here
+            if (!_overheat.CanShoot())
+            {
+                return;
+            }
+
             // SoundManager.Instance.PlaySoundContinuous(shootSound);
             SoundManager.Instance.PlaySoundContPitched(shootSound, 0.8f, 1.2f);
             GameObject hr = Instantiate(hitRadius, activeCrosshair.transform.position, Quaternion.identity);
@@ -145,9 +160,17 @@ public class PlayerController : MonoBehaviour
             scoreController.AddShot();
         }
 
+        
         // Relay a shot information message to the Input Manager which acts as a publisher
+        _overheat.AddHeat();
         ShotInformation s = new(activeCrosshair.transform.position, this, modifiedShotRadius != originalShotRadius);
         InputManager.PlayerShot(s);
+    }
+
+    private void Update()
+    {
+        _overheat.ReduceHeat(Time.deltaTime);
+        activeCrosshair.overheatUI.fillAmount = _overheat.GetHeatProportion();
     }
 
     /// <summary>
@@ -244,6 +267,7 @@ public class PlayerController : MonoBehaviour
     public void ExpandRadius()
     {
         modifiedShotRadius = originalShotRadius * 2.0f;
+        _overheat.OverchargeHeatAdd();
     }
 
     /// <summary>
@@ -253,6 +277,7 @@ public class PlayerController : MonoBehaviour
     {
         modifiedShotRadius = originalShotRadius;
         overchargeMod = null;
+        _overheat.ResetHeadAdd();
     }
 
     /// <summary>

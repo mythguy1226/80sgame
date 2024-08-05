@@ -51,7 +51,12 @@ MonoBehaviour:
   hitRadius: {fileID: 1163927658063404605, guid: 6e24b71edf843674988aacca09abff88, type: 3}
   hitParticles: {fileID: 0}
   defaultHitParticles: {fileID: 5529488344974124207, guid: 998c37ef7e0d6e940a17cc61dd1d8cf6, type: 3}
+  overheatMax: 60
+  maxShootOverheat: 55
+  heatAdd: 5
+  heatRemove: 10
   crosshairPrefab: {fileID: 6026067595286513962, guid: 3531d3616a21b724e92a89ba431bf8c2, type: 3}
+  activeCrosshair: {fileID: 0}
 --- !u!114 &8036583239399895434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,6 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mouseSensitivity: {x: 1, y: 1}
   controllerSensitivity: {x: 5, y: 5}
+  fireDelay: 0.2
   controllerInput: 0
   isFlipped: 0
   isSlowed: 0
