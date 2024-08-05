@@ -72,7 +72,7 @@ public abstract class AbsModifierEffect : MonoBehaviour
     }
 
     // Called once every frame
-    void Update()
+    protected void Update()
     {
         // Manage duration timer if active
         if(bIsActive)

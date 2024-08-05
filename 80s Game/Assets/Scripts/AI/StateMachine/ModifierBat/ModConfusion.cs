@@ -54,6 +54,37 @@ public class ModConfusion : AbsModifierEffect
         HandleModifierCountAchievement();
     }
 
+    // Called once every frame
+    void Update()
+    {
+        // Call base method
+        base.Update();
+
+        // Make all players affected rotate their cursors while
+        // modifier is active
+        if(bIsActive)
+        {
+            // Iterate through each player
+            PlayerInput[] pIs = FindObjectsByType<PlayerInput>(FindObjectsSortMode.None);
+            for(int i = 0; i < pIs.Length; i++)
+            {
+                // Get player input wrapper and its controller
+                PlayerInputWrapper piw = pIs[i].GetComponent<PlayerInputWrapper>();
+                PlayerController pc = piw.GetPlayer();
+
+                // If player has mod, rotate their cursor
+                if (pc.HasMod(GetModType()))
+                {
+                    // Get player's crosshair
+                    Crosshair ch = pc.activeCrosshair;
+
+                    // Update rotation of crosshair
+                    ch.transform.rotation *= Quaternion.AngleAxis(0.1f, new Vector3(0.0f, 0.0f, 1.0f));
+                }
+            }
+        }
+    }
+
     /// <summary>
     /// Override: Deactivates inverse controller effect
     /// </summary>
@@ -72,10 +103,12 @@ public class ModConfusion : AbsModifierEffect
             {
                 piw.isFlipped = false;
                 piw.GetPlayer().RemoveMod(GetModType());
+                piw.GetPlayer().activeCrosshair.transform.rotation = Quaternion.identity;
                 continue;
             }
             piw.isFlipped = false;
             piw.GetPlayer().RemoveMod(GetModType());
+            piw.GetPlayer().activeCrosshair.transform.rotation = Quaternion.identity;
             AchievementManager.RegisterData("confmod-pi-" + i.ToString(), 0);
         }
         GameManager.Instance.debuffActive = false;

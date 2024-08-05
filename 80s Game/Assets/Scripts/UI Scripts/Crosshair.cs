@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Crosshair : MonoBehaviour
 {
-    SpriteRenderer sprite;
+    public SpriteRenderer sprite;
     Vector2 movementDelta;
 
     //Cursor clamping
