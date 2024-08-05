@@ -170,6 +170,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         _overheat.ReduceHeat(Time.deltaTime);
+        activeCrosshair.overheatUI.fillAmount = _overheat.GetHeatProportion();
     }
 
     /// <summary>
