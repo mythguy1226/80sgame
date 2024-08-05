@@ -171,6 +171,7 @@ MonoBehaviour:
   bIsSelfDebuff: 0
   pickupSound: {fileID: 8300000, guid: 79fe80edab028bd4c8d6496bb59f4be4, type: 3}
   lifeTime: 3
+  vfx: {fileID: 3537340124483570280, guid: 0cb189c052284334ba104f6100b43bc1, type: 3}
 --- !u!95 &6587963294559198232
 Animator:
   serializedVersion: 5

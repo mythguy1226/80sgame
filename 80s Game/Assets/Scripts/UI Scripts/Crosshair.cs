@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class Crosshair : MonoBehaviour
 {
-    SpriteRenderer sprite;
+    public SpriteRenderer sprite;
     Vector2 movementDelta;
 
     public Image overheatUI;
