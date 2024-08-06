@@ -6,6 +6,8 @@ public class Overheat
     private float _heatLossFactor;
     private float _originalHeadAddFactor;
     private float _heatAddFactor;
+    private float _emergencyVentFactor;
+    private bool _bIsVenting;
     
     public Overheat(float maxHeat, float maxOverheat, float lossFactor, float addFactor)
     {
@@ -13,8 +15,10 @@ public class Overheat
         _maxOverheat = maxOverheat;
         _currentHeat = 0;
         _heatLossFactor = lossFactor;
+        _emergencyVentFactor = 2 * _heatLossFactor;
         _originalHeadAddFactor = addFactor;
         _heatAddFactor = addFactor;
+        _bIsVenting = false;
     }
 
     public float AddHeat()
@@ -23,6 +27,10 @@ public class Overheat
         if (_currentHeat > _maxOverheat)
         {
             _currentHeat = _maxOverheat;
+        }
+        if (_currentHeat >= _maxHeat)
+        {
+            _bIsVenting = true;
         }
         return _currentHeat;
     }
@@ -39,16 +47,27 @@ public class Overheat
 
     public float ReduceHeat(float timeDelta)
     {
-        _currentHeat -= timeDelta * _heatLossFactor;
+        float factorToUse = _heatLossFactor;
+        if ( _bIsVenting)
+        {
+            factorToUse = _emergencyVentFactor;
+        }
+        _currentHeat -= timeDelta * factorToUse;
         if ( _currentHeat < 0)
         {
             _currentHeat = 0;
+            _bIsVenting = false;
         }
         return _currentHeat;
     }
 
     public bool CanShoot() { 
-        return _currentHeat <= _maxHeat;
+        return _currentHeat <= _maxHeat && !_bIsVenting;
+    }
+
+    public bool IsVenting()
+    {
+        return _bIsVenting;
     }
 
     public float GetHeatProportion()
