@@ -80,6 +80,14 @@ public class PlayerInputWrapper : MonoBehaviour
             }
         }
 
+        else if (GameManager.Instance.UIManager.onboardingUI != null)
+        {
+            if (GameManager.Instance.UIManager.onboardingUI.onboardingPanel.activeInHierarchy && PlayerData.activePlayers[player.Order].controlScheme != "KnM")
+            {
+                GameManager.Instance.UIManager.onboardingUI.ChangePage(value.Get<Vector2>());
+            }
+        }
+
         PlayerConfig config = PlayerData.activePlayers[player.Order];
         float snailModifier = 1.0f;
 
