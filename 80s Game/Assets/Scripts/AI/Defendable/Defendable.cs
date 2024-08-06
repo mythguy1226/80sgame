@@ -32,6 +32,7 @@ public class Defendable : MonoBehaviour
 
     public List<LatchPoint> latchPoints;
     SpriteRenderer sr;
+    Animator animator;
     HealthBar healthbar;
 
     [HideInInspector]
@@ -39,15 +40,24 @@ public class Defendable : MonoBehaviour
 
     public bool bIsCore = false;
 
+    [Tooltip("Object responsible for local positioning of sprite animation")]
+    [SerializeField]
+    private GameObject spriteObject;
+
     private void Start()
     {
         bCanBeTargeted = true;
-        sr = GetComponent<SpriteRenderer>();
+        sr = spriteObject.GetComponent<SpriteRenderer>();
+        animator = spriteObject.GetComponent<Animator>();
         smokeSystem.Stop();
         latchPoints = new List<LatchPoint>();
         foreach (Transform child in transform)
         {
-            latchPoints.Add(child.GetComponent<LatchPoint>());
+            // SpriteObject is now also a child
+            if(child.gameObject.name == "LatchPoint")
+            {
+                latchPoints.Add(child.GetComponent<LatchPoint>());
+            }
         }
         _thresholdIndex = 0;
 
@@ -64,6 +74,8 @@ public class Defendable : MonoBehaviour
     /// <param name="damage">The amount of damage to receive</param>
     public void TakeDamage(int damage)
     {
+        animator.SetTrigger("TakeDamage");
+
         _currentHitpoints -= damage;
         if (_currentHitpoints <= 0)
         {
@@ -73,7 +85,8 @@ public class Defendable : MonoBehaviour
                 latch.Unlatch();
             }
 
-            GetComponent<SpriteRenderer>().color = Color.gray;
+            sr.color = Color.red;
+            animator.SetBool("IsDead", true);
 
             // Handle when core is destroyed
             if(bIsCore)
