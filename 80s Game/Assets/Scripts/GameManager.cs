@@ -239,4 +239,12 @@ public class GameManager : MonoBehaviour
         float delay = roundEndTheme.Clip.length - (float)roundEndTheme.EndOffset;
         StartCoroutine(ActiveGameMode.DelayNextRound(delay));
     }
+
+    /// <summary>
+    /// General call for debug lines for non-monobehavior scripts
+    /// </summary>
+    public void AddDebugMessage(string msg)
+    {
+        Debug.Log(msg);
+    }
 }

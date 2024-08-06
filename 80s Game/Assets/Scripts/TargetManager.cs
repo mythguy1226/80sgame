@@ -144,6 +144,33 @@ public class TargetManager : MonoBehaviour
         return -1;
     }
 
+    /// <summary>
+    /// Templated method that finds the next target
+    /// containing the type from target enum
+    /// </summary>
+    /// <typeparam name="type">Target Type</typeparam>
+    /// <returns>Index of available bat</returns>
+    public int GetNextAvailableTargetOfEnumType(TargetType type)
+    {
+        // Iterate through the targets until you
+        // find one that isn't already on screen
+        for (int i = 0; i < targets.Count; i++)
+        {
+            // Keep iterating if already active
+            if (targets[i].IsActive)
+                continue;
+
+            // Keep iterating if target isnt of the correct type
+            if (targets[i].type != type)
+                continue;
+
+            // Return index of bat
+            return i;
+        }
+
+        return -1;
+    }
+
     private void DisablePolyCollisions()
     {
         for (int i = 0; i < targets.Count; i++)
