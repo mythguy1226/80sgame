@@ -268,8 +268,8 @@ MonoBehaviour:
   timeUntilFlee: 8
   fleeTimer: 0
   fleeLocation: {x: 0, y: 10}
-  chainRadius: 2
-  chainLength: 3
+  chainRadius: 5
+  chainLength: 4
   lightning: {fileID: 2958280814618220372, guid: 128a538b50a004e42bbe4ec0f3c37708, type: 3}
 --- !u!58 &199050564143429961
 CircleCollider2D:

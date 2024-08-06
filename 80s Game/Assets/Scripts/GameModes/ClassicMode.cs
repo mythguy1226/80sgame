@@ -48,10 +48,10 @@ public class ClassicMode : AbsGameMode
         allowedBuffs[AbsModifierEffect.ModType.Overcharge] = true;
 
         allowedBats[TargetManager.TargetType.Regular] = true;
-        allowedBats[TargetManager.TargetType.HighBonus] = true;
-        allowedBats[TargetManager.TargetType.LowBonus] = true;
-        allowedBats[TargetManager.TargetType.Modifier] = true;
-        allowedBats[TargetManager.TargetType.Unstable] = true;
+        allowedBats[TargetManager.TargetType.HighBonus] = false;
+        allowedBats[TargetManager.TargetType.LowBonus] = false;
+        allowedBats[TargetManager.TargetType.Modifier] = false;
+        allowedBats[TargetManager.TargetType.Unstable] = false;
 
         numBatsMap = new Dictionary<TargetManager.TargetType, int>();
 
@@ -74,10 +74,12 @@ public class ClassicMode : AbsGameMode
         for(int i = 0; i < currentRoundTargetCount; i++)
         {
             int targetIndex = GetNextAvailableBat();
-
+            
             if (targetIndex == -1 && allowedBats[TargetManager.TargetType.Regular])
             {
-                targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<BatStateMachine>());
+                targetIndex = targetManager.GetNextAvailableTargetOfEnumType(TargetManager.TargetType.Regular);
+                if(targetIndex != -1)
+                    targetManager.SpawnTarget(targetIndex);
                 continue;
             }
 
@@ -226,12 +228,21 @@ public class ClassicMode : AbsGameMode
             else if (!allowedBats[TargetManager.TargetType.Regular])
                 return;
             else
-                targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<BatStateMachine>());
+            {
+                targetIndex = targetManager.GetNextAvailableTargetOfEnumType(TargetManager.TargetType.Regular);
+                if(targetIndex != -1)
+                    targetManager.SpawnTarget(targetIndex);
+                else
+                    targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<BatStateMachine>());
+            }
         }
     }
 
     protected override void CallNextRound()
     {
+        // Incorporate new bats based on round
+        UpdateAllowedBats();
+
         // Begin the next round
         StartNextRound();
                 
@@ -239,7 +250,53 @@ public class ClassicMode : AbsGameMode
         if (allowedBats[TargetManager.TargetType.Modifier])
         {
             targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<ModifierBatStateMachine>());
+            currentRoundTargetCount++;
         }
-        currentRoundTargetCount++;
+
+        // Spawn some bonus bats and increment target count
+        for(int i = 0; i < 2; i++)
+        {
+            if (allowedBats[TargetManager.TargetType.LowBonus])
+            {
+                targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfEnumType(TargetManager.TargetType.LowBonus));
+                currentRoundTargetCount++;
+            }
+            if (allowedBats[TargetManager.TargetType.HighBonus])
+            {
+                targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfEnumType(TargetManager.TargetType.HighBonus));
+                currentRoundTargetCount++;
+            }
+        }
+
+        // Spawn some debuff bats and increment target count
+        for(int i = 0; i < 2; i++)
+        {
+            if (allowedBats[TargetManager.TargetType.Debuff])
+            {
+                targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<DebuffBatStateMachine>());
+                currentRoundTargetCount++;
+            }
+        }
+    }
+
+    public void UpdateAllowedBats()
+    {
+        // Check round numbers and unlock specific bat types at specific rounds
+        switch(CurrentRound)
+        {
+            case 2:
+                allowedBats[TargetManager.TargetType.Unstable] = true;
+                break;
+            case 4:
+                allowedBats[TargetManager.TargetType.LowBonus] = true;
+                allowedBats[TargetManager.TargetType.HighBonus] = true;
+                break;
+            case 5:
+                allowedBats[TargetManager.TargetType.Modifier] = true;
+                break;
+            case 6:
+                allowedBats[TargetManager.TargetType.Debuff] = true;
+                break;
+        }
     }
 }
