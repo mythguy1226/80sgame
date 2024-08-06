@@ -27,7 +27,7 @@ public class UIManager : MonoBehaviour
     public List<GameObject> modifierContainers;
     public PostProcessVolume postProcessVolume;
 
-    private OnboardingUI onboardingUI;
+    public OnboardingUI onboardingUI;
     private PauseScreenBehavior pauseScreenUI;
     private GameOverBehavior gameOverUI;
     public TitleScreenBehavior titleScreenUI;
@@ -83,7 +83,7 @@ public class UIManager : MonoBehaviour
         switch (activeUI)
         {
             case UIType.Onboarding:
-                onboardingUI.CloseOnboarding();
+                //onboardingUI.CloseOnboarding();
                 break;
             case UIType.Pause:
                 // Test each element and see wtf?
