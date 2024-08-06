@@ -115,8 +115,8 @@ public class PlayerJoinManager : MonoBehaviour
         //Disable auto scroll for dropdowns if using mouse and keyboard
         if (playerInput.currentControlScheme == "KnM")
         {
-            newPlayerPanel.GetComponent<PlayerJoinPanel>().colorDropdown.gameObject.transform.GetChild(2).GetComponent<ScrollRectEnsureVisible>().enabled = false;
-            newPlayerPanel.GetComponent<PlayerJoinPanel>().profileDropdown.gameObject.transform.GetChild(2).GetComponent<ScrollRectEnsureVisible>().enabled = false;
+            newPlayerPanel.GetComponent<PlayerJoinPanel>().colorDropdown.gameObject.transform.GetChild(3).GetComponent<ScrollRectEnsureVisible>().enabled = false;
+            newPlayerPanel.GetComponent<PlayerJoinPanel>().profileDropdown.gameObject.transform.GetChild(3).GetComponent<ScrollRectEnsureVisible>().enabled = false;
         }
 
         //joinPrompt.text = "Press Start when ready";

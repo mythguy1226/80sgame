@@ -191,8 +191,8 @@ public class UIManager : MonoBehaviour
     //Show an achievement notification when it is unlocked
     public void ShowAchievementNotification(AchievementData achievement)
     {
-        achievementNotifPrefab.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = achievement.nameText;
-        achievementNotifPrefab.transform.GetChild(2).GetComponent<Image>().sprite = achievement.image;
+        achievementNotifPrefab.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = achievement.nameText;
+        achievementNotifPrefab.transform.GetChild(3).GetComponent<Image>().sprite = achievement.image;
 
         achievementNotifs.Enqueue(achievementNotifPrefab);
     }

@@ -165,12 +165,21 @@ public class PlayerController : MonoBehaviour
         _overheat.AddHeat();
         ShotInformation s = new(activeCrosshair.transform.position, this, modifiedShotRadius != originalShotRadius);
         InputManager.PlayerShot(s);
+
+        if (_overheat.IsVenting())
+        {
+            activeCrosshair.EnableVentEffects();
+        }
     }
 
     private void Update()
     {
         _overheat.ReduceHeat(Time.deltaTime);
         activeCrosshair.overheatUI.fillAmount = _overheat.GetHeatProportion();
+        if (!_overheat.IsVenting())
+        {
+            activeCrosshair.StopVentEffects();
+        }
     }
 
     /// <summary>
