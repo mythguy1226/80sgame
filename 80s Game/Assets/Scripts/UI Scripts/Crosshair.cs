@@ -18,6 +18,9 @@ public class Crosshair : MonoBehaviour
     float jigglePhaseShift = 2.0f;
     float currentJiggleTimer;
 
+    Color startColor;
+    Color endColor;
+
     private void Awake()
     {
         sprite = GetComponent<SpriteRenderer>();
@@ -26,6 +29,8 @@ public class Crosshair : MonoBehaviour
         Cursor.visible = false;
         currentJiggleTimer = 0.0f;
         _bIsJiggling = false;
+        startColor = overheatUI.color;
+        endColor = new Color(1f, 0.5f, 0f);
     }
 
     void Update()
@@ -37,6 +42,7 @@ public class Crosshair : MonoBehaviour
             currentJiggleTimer += Time.deltaTime;
             jiggleOffsetX = Mathf.Sin(jiggleFrequency * currentJiggleTimer) * jiggleWidth;
             jiggleOffsetY = Mathf.Sin(jiggleFrequency * currentJiggleTimer + jigglePhaseShift) * jiggleHeight;
+            overheatUI.color = Color.Lerp(startColor, endColor, Mathf.Sin(jiggleFrequency * currentJiggleTimer * 0.5f) * 0.5f + 0.5f);
         }
 
         float finalX = transform.position.x + movementDelta.x + jiggleOffsetX;
@@ -124,5 +130,6 @@ public class Crosshair : MonoBehaviour
     {
         _bIsJiggling = false;
         currentJiggleTimer = 0;
+        overheatUI.color = startColor;
     }
 }
