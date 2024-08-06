@@ -18,6 +18,10 @@ public class OnboardingUI : MonoBehaviour
     private bool controllerConnected = false;
     private bool playedBGM = false;
 
+    public List<GameObject> onboardingPages;
+
+    private int pageNumber = 1;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +41,44 @@ public class OnboardingUI : MonoBehaviour
         else
         {
             playstationControllerDiagram.SetActive(true);
+        }
+    }
+
+    public void NextPage()
+    {
+        pageNumber++;
+        Mathf.Clamp(pageNumber, 1, 4);
+        ActivatePage();
+    }
+
+    public void PreviousPage()
+    {
+        pageNumber--;
+        Mathf.Clamp(pageNumber, 1, 4);
+        ActivatePage();
+    }
+
+    private void ActivatePage()
+    {
+        foreach(GameObject page in onboardingPages)
+        {
+            page.SetActive(false);
+        }
+
+        switch(pageNumber)
+        {
+            case 1:
+                onboardingPages[0].SetActive(true);
+                break;
+            case 2:
+                onboardingPages[1].SetActive(true);
+                break;
+            case 3:
+                onboardingPages[2].SetActive(true);
+                break;
+            case 4:
+                onboardingPages[3].SetActive(true);
+                break;
         }
     }
 
