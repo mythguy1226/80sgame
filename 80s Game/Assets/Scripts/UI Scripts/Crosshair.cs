@@ -11,6 +11,15 @@ public class Crosshair : MonoBehaviour
 
     //Cursor clamping
     float minY, maxY, minX, maxX;
+    bool _bIsJiggling;
+    float jiggleWidth = 0.005f;
+    float jiggleHeight = 0.003f;
+    float jiggleFrequency = 50.0f;
+    float jigglePhaseShift = 2.0f;
+    float currentJiggleTimer;
+
+    Color startColor;
+    Color endColor;
 
     private void Awake()
     {
@@ -18,11 +27,27 @@ public class Crosshair : MonoBehaviour
         SetClamps();
         //Hide mouse cursor
         Cursor.visible = false;
+        currentJiggleTimer = 0.0f;
+        _bIsJiggling = false;
+        startColor = overheatUI.color;
+        endColor = new Color(1f, 0.5f, 0f);
     }
 
     void Update()
     {
-        Vector3 newPosition = Clamp(new Vector3(transform.position.x + movementDelta.x, transform.position.y + movementDelta.y, transform.position.z));
+        float jiggleOffsetX = 0.0f;
+        float jiggleOffsetY = 0.0f;
+        if (_bIsJiggling)
+        {
+            currentJiggleTimer += Time.deltaTime;
+            jiggleOffsetX = Mathf.Sin(jiggleFrequency * currentJiggleTimer) * jiggleWidth;
+            jiggleOffsetY = Mathf.Sin(jiggleFrequency * currentJiggleTimer + jigglePhaseShift) * jiggleHeight;
+            overheatUI.color = Color.Lerp(startColor, endColor, Mathf.Sin(jiggleFrequency * currentJiggleTimer * 0.5f) * 0.5f + 0.5f);
+        }
+
+        float finalX = transform.position.x + movementDelta.x + jiggleOffsetX;
+        float finalY = transform.position.y + movementDelta.y + jiggleOffsetY;
+        Vector3 newPosition = Clamp(new Vector3(finalX, finalY, transform.position.z));
         transform.position = newPosition;
     }
 
@@ -94,5 +119,17 @@ public class Crosshair : MonoBehaviour
     public void SetCrosshairSprite(Sprite newSprite)
     {
         sprite.sprite = newSprite;
+    }
+
+    public void EnableVentEffects()
+    {
+        _bIsJiggling = true;
+    }
+
+    public void StopVentEffects()
+    {
+        _bIsJiggling = false;
+        currentJiggleTimer = 0;
+        overheatUI.color = startColor;
     }
 }

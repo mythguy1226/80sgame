@@ -101,7 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mouseSensitivity: {x: 1, y: 1}
   controllerSensitivity: {x: 5, y: 5}
-  fireDelay: 0.2
+  fireDelay: 0.27
   controllerInput: 0
   isFlipped: 0
   isSlowed: 0
