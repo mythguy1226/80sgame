@@ -12,8 +12,8 @@ public class Crosshair : MonoBehaviour
     //Cursor clamping
     float minY, maxY, minX, maxX;
     bool _bIsJiggling;
-    float jiggleWidth = 0.01f;
-    float jiggleHeight = 0.008f;
+    float jiggleWidth = 0.005f;
+    float jiggleHeight = 0.003f;
     float jiggleFrequency = 50.0f;
     float jigglePhaseShift = 2.0f;
     float currentJiggleTimer;
