@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4381980901079759553}
   - component: {fileID: 6085170486272359493}
   - component: {fileID: -5540377812659272480}
+  - component: {fileID: 2818747846867464362}
   m_Layer: 0
   m_Name: OcMod
   m_TagString: Untagged
@@ -138,7 +139,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0.5
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -169,7 +170,29 @@ MonoBehaviour:
   activator: {fileID: 0}
   bIsSelfDebuff: 0
   pickupSound: {fileID: 8300000, guid: bf2ab697f37b98b47bab78b77f1b5b99, type: 3}
+  lifeTime: 3
   hitParticles: {fileID: 3537340124483570280, guid: 7f86aa82b0946c7498238b9fe89ac5aa, type: 3}
+--- !u!95 &2818747846867464362
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 55702376141867145}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 521202c39c5a50748af975cbe5fd093d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &296570686799991648
 GameObject:
   m_ObjectHideFlags: 0

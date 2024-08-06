@@ -1,10 +1,13 @@
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Crosshair : MonoBehaviour
 {
-    SpriteRenderer sprite;
+    public SpriteRenderer sprite;
     Vector2 movementDelta;
+
+    public Image overheatUI;
 
     //Cursor clamping
     float minY, maxY, minX, maxX;

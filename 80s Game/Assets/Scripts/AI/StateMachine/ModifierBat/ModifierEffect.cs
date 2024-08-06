@@ -40,6 +40,17 @@ public abstract class AbsModifierEffect : MonoBehaviour
     [SerializeField]
     protected AudioClip pickupSound;
 
+    // Flicker fields
+    [SerializeField]
+    protected float lifeTime = 3.0f;
+    protected float flickerTimer = 0.0f;
+
+    // Bob lerp fields
+    Vector3 bobUpPos;
+    Vector3 bobDownPos;
+    float bobTime = 0.0f;
+    float bobDirCoef = 1.0f;
+
     Rigidbody2D _Rb;
 
     // Start is called before the first frame update
@@ -49,6 +60,10 @@ public abstract class AbsModifierEffect : MonoBehaviour
         _Rb = GetComponent<Rigidbody2D>();
         modifierUIRefs = new List<GameObject>();
         maxEffectDuration = effectDuration;
+
+        flickerTimer = lifeTime;
+        bobUpPos = transform.position + new Vector3(0.0f, 0.5f, 0.0f);
+        bobDownPos = transform.position;
     }
 
     void OnDisable()
@@ -57,7 +72,7 @@ public abstract class AbsModifierEffect : MonoBehaviour
     }
 
     // Called once every frame
-    void Update()
+    protected void Update()
     {
         // Manage duration timer if active
         if(bIsActive)
@@ -79,6 +94,24 @@ public abstract class AbsModifierEffect : MonoBehaviour
                 DeactivateEffect();
                 CleanUp();
                 
+            }
+        }
+        else
+        {
+            // Manage flicker timer for non-active mods
+            flickerTimer -= Time.deltaTime;
+
+            // Have modifier bob up and down
+            transform.position = Vector3.Lerp(bobDownPos, bobUpPos, bobTime);
+            bobTime += (Time.deltaTime * bobDirCoef);
+            if(bobTime >= 1.0f || bobTime <= 0.0f)
+                bobDirCoef *= -1.0f;
+
+            // Destroy modifier once timer is up
+            if(flickerTimer <= 0.0f)
+            {
+                InputManager.detectHitSub -= ListenForShot;
+                Destroy(gameObject);
             }
         }
 
