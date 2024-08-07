@@ -21,6 +21,7 @@ public class AttackingState : AbsBaseState<DefenseBatStateMachine.DefenseBatStat
     {
         OwnerFSM.GetComponent<CircleCollider2D>().isTrigger = false;
         OwnerFSM.GetComponent<PolygonCollider2D>().isTrigger = false;
+        OwnerFSM.gameObject.GetComponent<Target>().bIsStunned = false;
     }
 
     /*

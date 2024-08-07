@@ -174,6 +174,10 @@ public class Target : MonoBehaviour
     /// </summary>
     public void ResolveHit()
     {
+        if (bIsStunned)
+        {
+            return;
+        }
         FSM.ResolveEvent();
     }
 
