@@ -7,10 +7,13 @@ public class AttackingState : AbsBaseState<DefenseBatStateMachine.DefenseBatStat
     // Get components
     KinematicSteer _MovementControls;
     SpriteRenderer _SpriteRenderer;
+    AnimationHandler _AnimControls;
 
     // Constructor with call to base state class
-    public AttackingState() : base(DefenseBatStateMachine.DefenseBatStates.Attacking)
-    { }
+    public AttackingState(AnimationHandler animationHandler) : base(DefenseBatStateMachine.DefenseBatStates.Attacking)
+    {
+        this._AnimControls = animationHandler;
+    }
 
     /*
 	USAGE: Handler for state enter
@@ -21,6 +24,7 @@ public class AttackingState : AbsBaseState<DefenseBatStateMachine.DefenseBatStat
     {
         OwnerFSM.GetComponent<CircleCollider2D>().isTrigger = false;
         OwnerFSM.GetComponent<PolygonCollider2D>().isTrigger = false;
+        _AnimControls.SetLatched(true);
     }
 
     /*
@@ -31,6 +35,7 @@ public class AttackingState : AbsBaseState<DefenseBatStateMachine.DefenseBatStat
     public override void ExitState()
     {
         // Any clean up needed from this state will go here
+        _AnimControls.SetLatched(false);
     }
 
     /*
@@ -59,7 +64,7 @@ public class AttackingState : AbsBaseState<DefenseBatStateMachine.DefenseBatStat
         // Manage attack timer and attacking
         if(FSM.CanAttack) // Attack logic
         {
-            FSM.Attack();
+            _AnimControls.PlayAttackAnimation();
             FSM.CanAttack = false;
         }
         else // Cooldown logic
