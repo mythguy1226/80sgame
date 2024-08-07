@@ -420,9 +420,9 @@ public static class AchievementManager
         if (machine == counterOrigin)
         {
             countingUnstable = false;
-            if(TestUnlock(TestType.GreaterThanOrEqual, requirements[AchievementConstants.FULLY_CHARGED], unstableCount))
+            if(TestUnlock(TestType.GreaterThanOrEqual, requirements[AchievementConstants.GREASED_LIGHTNING], unstableCount))
             {
-                UnlockAchievement(AchievementConstants.FULLY_CHARGED);
+                UnlockAchievement(AchievementConstants.GREASED_LIGHTNING);
             }
             counterOrigin = null;
         }
@@ -440,9 +440,9 @@ public static class AchievementManager
         if (machine == counterDefenseOrigin)
         {
             countingUnstable = false;
-            if(TestUnlock(TestType.GreaterThanOrEqual, requirements[AchievementConstants.FULLY_CHARGED], unstableCount))
+            if(TestUnlock(TestType.GreaterThanOrEqual, requirements[AchievementConstants.GREASED_LIGHTNING], unstableCount))
             {
-                UnlockAchievement(AchievementConstants.FULLY_CHARGED);
+                UnlockAchievement(AchievementConstants.GREASED_LIGHTNING);
             }
             counterDefenseOrigin = null;
         }
