@@ -187,6 +187,9 @@ public class DefenseBatStateMachine : AbsStateMachine<DefenseBatStateMachine.Def
             .OrderBy(def => Vector3.Distance(transform.position, def.transform.position))
             .ToList<Defendable>();
 
+        if (activeDefendables.Count <= 0)
+            return null;
+
         Defendable closestDef = null;
         if(activeDefendables.Count > 1)
             closestDef = activeDefendables.Find(def => !def.bIsCore);

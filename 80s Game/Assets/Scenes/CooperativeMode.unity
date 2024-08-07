@@ -5755,6 +5755,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5689023120108696937, guid: b1bc8a45fe191ba448c97f3b5b8cf6cb, type: 3}
+      propertyPath: forceFieldParticles
+      value: 
+      objectReference: {fileID: 1121493177}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9478,6 +9482,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69209a80cc4f9e344b6e3fd4fb73e757, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!198 &1121493177 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 141259365318769373, guid: e46a0272f1717f74b9b6c4e080bbe27d, type: 3}
+  m_PrefabInstance: {fileID: 1121493175}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1128652023 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8028416525910563981, guid: ade02431274cdbe4f8fd5b4bdc90b6b9, type: 3}
@@ -9763,6 +9772,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5689023120108696937, guid: b1bc8a45fe191ba448c97f3b5b8cf6cb, type: 3}
+      propertyPath: forceFieldParticles
+      value: 
+      objectReference: {fileID: 1121493177}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
