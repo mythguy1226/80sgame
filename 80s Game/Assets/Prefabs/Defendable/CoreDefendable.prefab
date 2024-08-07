@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3131540547639447212}
   - component: {fileID: 3227315327736258328}
   m_Layer: 0
-  m_Name: LatchPoint (3)
+  m_Name: LatchPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 7390690754257015673}
   - component: {fileID: 5164412905945780352}
   m_Layer: 0
-  m_Name: LatchPoint (6)
+  m_Name: LatchPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5018,7 +5018,7 @@ GameObject:
   - component: {fileID: 4489704701733141764}
   - component: {fileID: 6821018824330320490}
   m_Layer: 0
-  m_Name: LatchPoint (4)
+  m_Name: LatchPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5064,7 +5064,7 @@ GameObject:
   - component: {fileID: 2032272178210087614}
   - component: {fileID: 5370583680964338227}
   m_Layer: 0
-  m_Name: LatchPoint (5)
+  m_Name: LatchPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5110,7 +5110,7 @@ GameObject:
   - component: {fileID: 3283006333190955682}
   - component: {fileID: 445557943879089235}
   m_Layer: 0
-  m_Name: LatchPoint (1)
+  m_Name: LatchPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5262,7 +5262,7 @@ GameObject:
   - component: {fileID: 6100609900607292680}
   - component: {fileID: 6519458868458430452}
   m_Layer: 0
-  m_Name: LatchPoint (2)
+  m_Name: LatchPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
