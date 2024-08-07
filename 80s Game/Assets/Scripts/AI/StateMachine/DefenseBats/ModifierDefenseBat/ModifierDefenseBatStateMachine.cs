@@ -32,7 +32,7 @@ public class ModifierDefenseBatStateMachine : DefenseBatStateMachine
         {
             List<GameObject> buffs = GameManager.Instance.GetBuffs();
             List<GameObject> debuffs = GameManager.Instance.GetDebuffs();
-            Debug.Log("Debuffs: " + debuffs.Count.ToString());
+
             //Compose available modifiers into single list
             List<GameObject> modifierObjects = new List<GameObject>();
             foreach(GameObject buff in buffs)

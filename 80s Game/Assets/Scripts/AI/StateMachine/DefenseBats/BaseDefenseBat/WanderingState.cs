@@ -19,7 +19,7 @@ public class WanderingState : AbsBaseState<DefenseBatStateMachine.DefenseBatStat
 	*/
     public override void EnterState()
     {
-        
+        OwnerFSM.gameObject.GetComponent<Target>().bIsStunned = false;
     }
 
     /*
