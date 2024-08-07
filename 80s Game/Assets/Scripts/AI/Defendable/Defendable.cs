@@ -28,6 +28,8 @@ public class Defendable : MonoBehaviour
     ParticleSystem smokeSystem;
     [SerializeField]
     ParticleSystem forceFieldParticles;
+    [SerializeField]
+    ParticleSystem burstParticles;
 
     [SerializeField]
     AudioClip damageSFX;
@@ -94,16 +96,7 @@ public class Defendable : MonoBehaviour
             sr.color = Color.red;
             animator.SetBool("IsDead", true);
 
-            forceFieldParticles.emission.SetBurst(0, 
-                new ParticleSystem.Burst(
-                    0, 
-                    new ParticleSystem.MinMaxCurve(
-                        forceFieldParticles.emission.GetBurst(0).count.constant / 4
-                    ),
-                    0,
-                    0.01f
-                )
-            );
+            UpdateForceField();
         }
         if (healthbar != null)
         {
@@ -137,6 +130,22 @@ public class Defendable : MonoBehaviour
         // We might want to extend this change with an animation and some sound
     }
 
+
+    private void UpdateForceField()
+    {
+        forceFieldParticles.emission.SetBurst(0,
+            new ParticleSystem.Burst(
+                0,
+                new ParticleSystem.MinMaxCurve(
+                    forceFieldParticles.emission.GetBurst(0).count.constant / 4
+                ),
+                0,
+                0.01f
+            )
+        );
+
+        burstParticles.Play();
+    }
 
     // Bats that collide with the latch radius should be offered a latch point, if one exists
     private void OnCollisionEnter2D(Collision2D collision)

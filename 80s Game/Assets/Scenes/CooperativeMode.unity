@@ -5756,6 +5756,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5689023120108696937, guid: b1bc8a45fe191ba448c97f3b5b8cf6cb, type: 3}
+      propertyPath: burstParticles
+      value: 
+      objectReference: {fileID: 1121493178}
+    - target: {fileID: 5689023120108696937, guid: b1bc8a45fe191ba448c97f3b5b8cf6cb, type: 3}
       propertyPath: forceFieldParticles
       value: 
       objectReference: {fileID: 1121493177}
@@ -9466,6 +9470,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5689023120108696937, guid: e46a0272f1717f74b9b6c4e080bbe27d, type: 3}
+      propertyPath: burstParticles
+      value: 
+      objectReference: {fileID: 1121493178}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9485,6 +9493,11 @@ MonoBehaviour:
 --- !u!198 &1121493177 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 141259365318769373, guid: e46a0272f1717f74b9b6c4e080bbe27d, type: 3}
+  m_PrefabInstance: {fileID: 1121493175}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &1121493178 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 4228640630882574826, guid: e46a0272f1717f74b9b6c4e080bbe27d, type: 3}
   m_PrefabInstance: {fileID: 1121493175}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1128652023 stripped
@@ -9772,6 +9785,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5689023120108696937, guid: b1bc8a45fe191ba448c97f3b5b8cf6cb, type: 3}
+      propertyPath: burstParticles
+      value: 
+      objectReference: {fileID: 1121493178}
     - target: {fileID: 5689023120108696937, guid: b1bc8a45fe191ba448c97f3b5b8cf6cb, type: 3}
       propertyPath: forceFieldParticles
       value: 
