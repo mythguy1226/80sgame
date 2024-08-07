@@ -7198,6 +7198,7 @@ MonoBehaviour:
   - {fileID: 55702376141867145, guid: 1711ae630a5eadd4c811d1c70c1e9b7b, type: 3}
   - {fileID: 55702376141867145, guid: 367a188d6de1eb74aa7ebbdba130f295, type: 3}
   weightConfig: {fileID: 11400000, guid: 483adbc0aeedb274f86e7b7863993e67, type: 2}
+  overheatParams: {fileID: 11400000, guid: 927d126a21b8ff24dad82b10f4cd79df, type: 2}
   debug: 1
   spawnConfig: {fileID: 11400000, guid: ed0fbc7bf94ec6c48917bb2b3ff2984d, type: 2}
   maxForce: 0.25
