@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
     public List<GameObject> debuffs;
     public List<GameObject> selfDebuffs;
     public ModifierWeightsConfig weightConfig;
+    public OverheatParameters overheatParams;
 
     List<GameObject> debugBuffs;
     List<GameObject> debugDebuffs;
@@ -85,6 +86,7 @@ public class GameManager : MonoBehaviour
                 for(int i = 0; i < PlayerData.activePlayers.Count; i++)
                 {
                     PlayerController pc = Instantiate(playerPrefab, transform.position, Quaternion.identity);
+                    pc.SetOverheatParameters(overheatParams);
                     pc.SetConfig(PlayerData.activePlayers[i], PlayerController.ControllerState.Gameplay);
                     PlayerInput pi = pc.GetComponent<PlayerInput>();
                     if (PlayerData.activePlayers[i].controlScheme == "KnM")

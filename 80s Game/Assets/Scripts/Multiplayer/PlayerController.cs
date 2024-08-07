@@ -420,6 +420,16 @@ public class PlayerController : MonoBehaviour
                 break;
         }
     }
+
+    public void SetOverheatParameters(OverheatParameters ovh)
+    {
+        if (ovh == null) return;
+        _overheat = new Overheat(ovh.maxShootOverheat, ovh.overheatMax, ovh.heatRemove, ovh.heatAdd);
+        maxShootOverheat = ovh.maxShootOverheat;
+        overheatMax = ovh.overheatMax;
+        heatRemove = ovh.heatRemove;
+        heatAdd = ovh.heatAdd;
+    }
 }
 
 public struct ShotInformation
