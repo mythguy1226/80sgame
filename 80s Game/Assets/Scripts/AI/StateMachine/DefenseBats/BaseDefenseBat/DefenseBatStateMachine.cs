@@ -86,7 +86,7 @@ public class DefenseBatStateMachine : AbsStateMachine<DefenseBatStateMachine.Def
         // Fill the dictionary with needed states
         states[DefenseBatStates.Wandering] = new WanderingState();
         states[DefenseBatStates.Pursuing] = new PursuingState();
-        states[DefenseBatStates.Attacking] = new AttackingState();
+        states[DefenseBatStates.Attacking] = new AttackingState(_AnimControls);
         states[DefenseBatStates.Death] = new DefenseDeathState();
 
         // Default state will be wandering
@@ -224,7 +224,7 @@ public class DefenseBatStateMachine : AbsStateMachine<DefenseBatStateMachine.Def
 
         // Get the defendable from the target latch
         Defendable latchedDefendable = targetLatch.transform.parent.GetComponent<Defendable>();
-        AnimControls.PlayAttackAnimation();
+        // AnimControls.PlayAttackAnimation(); Moved to AttackingState
 
         // Deal damage
         latchedDefendable.TakeDamage(attackDamage);
