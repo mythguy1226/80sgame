@@ -20,11 +20,12 @@ public class PursuingState : AbsBaseState<DefenseBatStateMachine.DefenseBatState
     public override void EnterState()
     {
         // Get state machine and needed components
+        
         DefenseBatStateMachine FSM = (DefenseBatStateMachine)OwnerFSM;
 
         if (FSM == null)
             return;
-
+        OwnerFSM.gameObject.GetComponent<Target>().bIsStunned = false;
         _MovementControls = FSM.MovementControls;
 
         // Early return if movement controller is null
