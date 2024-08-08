@@ -16,6 +16,9 @@ public class AchievementReward : MonoBehaviour
     //Reward text header object
     public TextMeshProUGUI rewardText;
 
+    //Mod Description Text Object
+    public TextMeshProUGUI modDescription;
+
     //List of thumbnail image objects within the reward screen
     public List<Image> rewardThumbnailImages;
 
@@ -32,6 +35,8 @@ public class AchievementReward : MonoBehaviour
         //Set text to the correct cosmetic reward type
         rewardText.text = "NEW " + rewardType + " UNLOCKED!";
 
+        rewardThumbnailImages[1].color = Color.white;
+
         //Set the reward thumbnails for the image thumbnails
         if (rewardThumbnails.Count > 1)
         {
@@ -44,6 +49,34 @@ public class AchievementReward : MonoBehaviour
         {
             rewardThumbnailImages[0].sprite = rewardThumbnails[0];
             rewardThumbnailImages[1].gameObject.SetActive(false);
+        }
+
+        switch (rewardType)
+        {
+            case "OVERCHARGED":
+                rewardText.text = rewardType + " UNLOCKED!";
+                rewardThumbnailImages[1].gameObject.SetActive(true);
+                rewardThumbnailImages[1].color = new Color(255,255,255,0);
+
+                modDescription.gameObject.SetActive(true);
+                modDescription.text = "Overcharged:\n\nBigger Shot Radius";
+                break;
+            case "ROGUE BAT":
+                rewardText.text = rewardType + " UNLOCKED!";
+                rewardThumbnailImages[1].gameObject.SetActive(true);
+                rewardThumbnailImages[1].color = new Color(255,255,255,0);
+
+                modDescription.gameObject.SetActive(true);
+                modDescription.text = "Rogue Bat:\n\nSpawns A Friendly Bat That Stuns Other Bats";
+                break;
+            case "EMP":
+                rewardText.text = rewardType + " UNLOCKED!";
+                rewardThumbnailImages[1].gameObject.SetActive(true);
+                rewardThumbnailImages[1].color = new Color(255,255,255,0);
+
+                modDescription.gameObject.SetActive(true);
+                modDescription.text = "EMP:\n\nStuns All Bats On Screen";
+                break;
         }
     }
 

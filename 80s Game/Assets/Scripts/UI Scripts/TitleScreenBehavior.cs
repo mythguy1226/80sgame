@@ -28,6 +28,8 @@ public class TitleScreenBehavior : MonoBehaviour
     public List<Button> gamemodeOptions;
     public Image helpInputPrompt;
     public List<Sprite> controllerHelpInputs;
+    
+    public List<Button> titleScreenButtons;
 
     private int gamemodeSelected = 1;
 
@@ -90,6 +92,7 @@ public class TitleScreenBehavior : MonoBehaviour
     public void ToggleGamemodeSelection()
     {
         gamemodePanel.SetActive(!gamemodePanel.activeInHierarchy);
+        ToggleButtonInteractability(!gamemodePanel.activeInHierarchy);
 
         //Select the proper UI element for navigation
         if (gamemodePanel.activeInHierarchy)
@@ -126,6 +129,7 @@ public class TitleScreenBehavior : MonoBehaviour
     public void ToggleAchievementsPanel()
     {
         achievementsPanel.SetActive(!achievementsPanel.activeInHierarchy);
+        ToggleButtonInteractability(!achievementsPanel.activeInHierarchy);
 
         if (achievementsPanel.activeInHierarchy)
         {
@@ -144,10 +148,12 @@ public class TitleScreenBehavior : MonoBehaviour
     public void CreateAchievementRewards()
     {
         //Get Next AchievementData from the rewards list
-        AchievementData unlockedAchievement = AchievementManager.GetNextReward();
+        AchievementData unlockedAchievement = AchievementManager.GetNextReward();        
 
         if (unlockedAchievement != null)
         {
+            ToggleButtonInteractability(false);
+
             //Set reward type and reward thumbnails
             achievementRewardPrefab.GetComponent<AchievementReward>().rewardType = unlockedAchievement.rewardText;
             achievementRewardPrefab.GetComponent<AchievementReward>().rewardThumbnails = unlockedAchievement.rewardSprites;
@@ -160,6 +166,14 @@ public class TitleScreenBehavior : MonoBehaviour
         {
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(startButton);
+        }
+    }
+
+    private void ToggleButtonInteractability(bool toggle)
+    {
+        foreach (Button button in titleScreenButtons)
+        {
+            button.interactable = toggle;
         }
     }
 }
