@@ -67,6 +67,10 @@ public class PlayerJoinPanel : MonoBehaviour
     public TextMeshProUGUI overwriteMessage;
     private FileInfo[] profiles;
 
+    public GameObject crosshairLockedIcon;
+    public GameObject stunEffectLockedIcon;
+
+
     public EventSystem eventSystem;
     private int player;
     private PlayerJoinManager pjm;
@@ -133,6 +137,16 @@ public class PlayerJoinPanel : MonoBehaviour
             crosshairIndex = crosshairSprites.Count - 1;
         }
 
+        if (CrosshairLocked())
+        {
+            crosshairLockedIcon.SetActive(true);
+        }
+
+        else
+        {
+            crosshairLockedIcon.SetActive(false);
+        }
+
         //Change the sprite of the crosshair preview
         crosshairPreview.sprite = crosshairSprites[crosshairIndex];
 
@@ -159,6 +173,15 @@ public class PlayerJoinPanel : MonoBehaviour
         else if (stunIndex == -1)
         {
             stunIndex = stunParticlePreviews.Count - 1;
+        }
+
+        if (StunEffectLocked())
+        {
+            stunEffectLockedIcon.SetActive(true);
+        }
+        else
+        {
+            stunEffectLockedIcon.SetActive(false);
         }
 
         //Change the sprite of the crosshair preview
@@ -196,6 +219,11 @@ public class PlayerJoinPanel : MonoBehaviour
 
     public void ToggleStunSettings()
     {
+        if (stunPanel.activeInHierarchy && StunEffectLocked())
+        {
+            return;
+        }
+
         stunPanel.SetActive(!stunPanel.activeInHierarchy);
 
         //Select the appropriate UI element for navigation based on if the panel is active or not
@@ -256,6 +284,11 @@ public class PlayerJoinPanel : MonoBehaviour
     //Method for readying up
     public void ReadyUp()
     {   
+        if (CrosshairLocked() || StunEffectLocked())
+        {
+            return;
+        }
+        
         //Toggle whether the player is ready
         playerReady = !playerReady;
 
@@ -613,6 +646,103 @@ public class PlayerJoinPanel : MonoBehaviour
                 ChangeStunParticle(false);
                 ChangeStunParticle(true);
             }
+        }
+    }
+
+    private bool CrosshairLocked()
+    {
+        switch(crosshairIndex)
+        {
+            case 0:
+            case 1:
+            case 2:
+            case 3:
+                return false;
+            case 4:
+            case 5:
+            case 6:
+            case 7:
+                if (AchievementManager.GetAchievementByKey("acc-1").isUnlocked())
+                    return false;
+                else
+                    return true;
+            case 8:
+            case 9:
+            case 10:
+            case 11:
+                if (AchievementManager.GetAchievementByKey("acc-2").isUnlocked())
+                    return false;
+                else
+                    return true;
+            case 12:
+            case 13:
+            case 14:
+            case 15:
+                if (AchievementManager.GetAchievementByKey("acc-3").isUnlocked())
+                    return false;
+                else
+                    return true;
+            default:
+                return true;
+        }
+    }
+
+    private bool StunEffectLocked()
+    {
+        switch(stunIndex)
+        {
+            case 0:
+                return false;
+            case 1:
+            case 10:
+                if (AchievementManager.GetAchievementByKey("kitted").isUnlocked())
+                    return false;
+                else
+                    return true;
+            case 2:
+            case 12:
+                if (AchievementManager.GetAchievementByKey("good-1").isUnlocked())
+                    return false;
+                else
+                    return true;
+            case 3:
+                if (AchievementManager.GetAchievementByKey("charged").isUnlocked())
+                    return false;
+                else
+                    return true;
+            case 4:
+                if (AchievementManager.GetAchievementByKey("voyage").isUnlocked())
+                    return false;
+                else
+                    return true;
+            case 5:
+                if (AchievementManager.GetAchievementByKey("grease").isUnlocked())
+                    return false;
+                else
+                    return true;
+            case 6:
+                if (AchievementManager.GetAchievementByKey("unfazed").isUnlocked())
+                    return false;
+                else
+                    return true;
+            case 7:
+            case 11:
+                if (AchievementManager.GetAchievementByKey("awkward").isUnlocked())
+                    return false;
+                else
+                    return true;
+            case 8:
+                if (AchievementManager.GetAchievementByKey("bulls").isUnlocked())
+                    return false;
+                else
+                    return true;
+            case 9:
+                if (AchievementManager.GetAchievementByKey("fragile").isUnlocked())
+                    return false;
+                else
+                    return true;
+            default:
+                return true;
         }
     }
 }
