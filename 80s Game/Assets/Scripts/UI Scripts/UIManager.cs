@@ -191,7 +191,7 @@ public class UIManager : MonoBehaviour
     }
 
     //Show an achievement notification when it is unlocked
-    public void ShowAchievementNotification(AchievementData achievement)
+    public void EnqueueAchievementNotification(AchievementData achievement)
     {
         AchievementNotificationData notificationData = new AchievementNotificationData(achievement.nameText, achievement.image);
         achievementNotifs.Enqueue(notificationData);

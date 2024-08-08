@@ -92,7 +92,7 @@ public static class AchievementManager
         }
         
         Debug.Log("Unlocking Achievement " + name);
-        GameManager.Instance.UIManager.ShowAchievementNotification(GetAchievementByKey(name));
+        GameManager.Instance.UIManager.EnqueueAchievementNotification(GetAchievementByKey(name));
         PlayerPrefs.SetInt(name , 1);
         rewards.Enqueue(name);
         TestForPlat();
