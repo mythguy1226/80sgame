@@ -79,4 +79,10 @@ public class LookingGlass : MonoBehaviour
     {
         achievementInteger = newValue;
     }
+
+    public void DoubleAchievementTest()
+    {
+        AchievementManager.UnlockAchievement(AchievementConstants.CLASSIC_FAN);
+        AchievementManager.UnlockAchievement(AchievementConstants.CLASSIC_ENJOYER);
+    }
 }
