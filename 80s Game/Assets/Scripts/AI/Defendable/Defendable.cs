@@ -26,12 +26,20 @@ public class Defendable : MonoBehaviour
     [Tooltip("Particles for showing a smoke effect at a certain HP threshold")]
     [SerializeField]
     ParticleSystem smokeSystem;
+    [SerializeField]
+    ParticleSystem forceFieldParticles;
+    [SerializeField]
+    ParticleSystem burstParticles;
+
+    [SerializeField]
+    AudioClip damageSFX;
 
     public int _currentHitpoints;
     int _thresholdIndex;
 
     public List<LatchPoint> latchPoints;
     SpriteRenderer sr;
+    Animator animator;
     HealthBar healthbar;
 
     [HideInInspector]
@@ -39,15 +47,24 @@ public class Defendable : MonoBehaviour
 
     public bool bIsCore = false;
 
+    [Tooltip("Object responsible for local positioning of sprite animation")]
+    [SerializeField]
+    private GameObject spriteObject;
+
     private void Start()
     {
         bCanBeTargeted = true;
-        sr = GetComponent<SpriteRenderer>();
+        sr = spriteObject.GetComponent<SpriteRenderer>();
+        animator = spriteObject.GetComponent<Animator>();
         smokeSystem.Stop();
         latchPoints = new List<LatchPoint>();
         foreach (Transform child in transform)
         {
-            latchPoints.Add(child.GetComponent<LatchPoint>());
+            // SpriteObject is now also a child
+            if(child.gameObject.name == "LatchPoint")
+            {
+                latchPoints.Add(child.GetComponent<LatchPoint>());
+            }
         }
         _thresholdIndex = 0;
 
@@ -64,6 +81,9 @@ public class Defendable : MonoBehaviour
     /// <param name="damage">The amount of damage to receive</param>
     public void TakeDamage(int damage)
     {
+        animator.SetTrigger("TakeDamage");
+        SoundManager.Instance.PlaySoundInterrupt(damageSFX, bIsCore ? 0.5f : .9f, bIsCore ? .7f : 1.1f);
+
         _currentHitpoints -= damage;
         if (_currentHitpoints <= 0)
         {
@@ -73,24 +93,19 @@ public class Defendable : MonoBehaviour
                 latch.Unlatch();
             }
 
-            GetComponent<SpriteRenderer>().color = Color.gray;
+            sr.color = Color.red;
+            animator.SetBool("IsDead", true);
 
-            // Handle when core is destroyed
-            if(bIsCore)
-            {
-                // Cast active game mode to coop mode and call custom end method
-                CooperativeMode coopMode = (CooperativeMode)GameManager.Instance.ActiveGameMode;
-                if(coopMode != null)
-                    coopMode.EndCoopGame();
-            }
+            UpdateForceField();
         }
         if (healthbar != null)
         {
             healthbar.DecreaseValue(damage);
         }
-        for(int i = _thresholdIndex + 1;  i < hpThresholds.Count; i++)
+
+        for(int i = _thresholdIndex; i < hpThresholds.Count; i++)
         {
-            if (_currentHitpoints < hpThresholds[i])
+            if(_currentHitpoints < hpThresholds[i])
             {
                 _thresholdIndex = i;
                 UpdateSprite();
@@ -110,11 +125,27 @@ public class Defendable : MonoBehaviour
     private void UpdateSprite()
     {
         // Immediately change the sprite to the next 
-        sr.sprite = damageLevelSprites[_thresholdIndex];
+        sr.sprite = damageLevelSprites[_thresholdIndex + 1];
 
         // We might want to extend this change with an animation and some sound
     }
 
+
+    private void UpdateForceField()
+    {
+        forceFieldParticles.emission.SetBurst(0,
+            new ParticleSystem.Burst(
+                0,
+                new ParticleSystem.MinMaxCurve(
+                    forceFieldParticles.emission.GetBurst(0).count.constant / 4
+                ),
+                0,
+                0.01f
+            )
+        );
+
+        burstParticles.Play();
+    }
 
     // Bats that collide with the latch radius should be offered a latch point, if one exists
     private void OnCollisionEnter2D(Collision2D collision)

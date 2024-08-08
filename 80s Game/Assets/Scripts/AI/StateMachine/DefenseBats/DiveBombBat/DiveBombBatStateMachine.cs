@@ -27,6 +27,16 @@ public class DiveBombBatStateMachine : DefenseBatStateMachine
         Reset();
     }
 
+    protected override void Update()
+    {
+        base.Update();
+
+        if(currentState.StateKey == DefenseBatStates.Attacking)
+        {
+            Attack();
+        }
+    }
+
     /// <summary>
     /// Override: Wait a few seconds before letting bat pursue
     /// and also add indicators to telegraph pursuit

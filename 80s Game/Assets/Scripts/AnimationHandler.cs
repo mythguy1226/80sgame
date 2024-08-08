@@ -29,6 +29,11 @@ public class AnimationHandler : MonoBehaviour
     {
     }
 
+    public void SetLatched(bool isLatched)
+    {
+        _animator.SetBool("isLatched", isLatched);
+    }
+
     /// <summary>
     /// Sets the "hit" trigger for the _animator, initiating the Stun animation
     /// </summary>
