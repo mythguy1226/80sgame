@@ -45,7 +45,9 @@ public class ClassicMode : AbsGameMode
 
         // Enable the right ones for this game mode
         allowedBuffs[AbsModifierEffect.ModType.DoublePoints] = true;
-        allowedBuffs[AbsModifierEffect.ModType.Overcharge] = true;
+        allowedBuffs[AbsModifierEffect.ModType.RustedWings] = true;
+        if(AchievementManager.GetAchievementByKey("mod-1").isUnlocked())
+            allowedBuffs[AbsModifierEffect.ModType.Overcharge] = true;
 
         allowedBats[TargetManager.TargetType.Regular] = true;
         allowedBats[TargetManager.TargetType.HighBonus] = false;

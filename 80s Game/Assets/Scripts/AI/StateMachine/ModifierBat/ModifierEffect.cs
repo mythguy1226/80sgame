@@ -293,6 +293,12 @@ public abstract class AbsModifierEffect : MonoBehaviour
                 return false;
             case ModType.RustedWings:
                 return true;
+            case ModType.Rewired:
+                return true;
+            case ModType.RogueBat:
+                return true;
+            case ModType.EMP:
+                return true;
         }
         return false;
     }
