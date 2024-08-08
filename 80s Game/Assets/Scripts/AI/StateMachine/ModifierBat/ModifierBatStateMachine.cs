@@ -28,12 +28,19 @@ public class ModifierBatStateMachine : BatStateMachine
         {
             List<GameObject> buffs = GameManager.Instance.GetBuffs();
             List<GameObject> debuffs = GameManager.Instance.GetDebuffs();
-            Debug.Log("Debuffs: " + debuffs.Count.ToString());
-            //Compose available modifiers into single list
+
+            // Compose available modifiers into single list and make list of weights from config
             List<GameObject> modifierObjects = new List<GameObject>();
-            foreach(GameObject buff in buffs)
+            List<float> weights = new List<float>();
+
+            for(int i = 0; i < buffs.Count; i++)
             {
-                modifierObjects.Add(buff);
+                // Add to list of buffs and weighted list if unlocked
+                if(GameManager.Instance.ActiveGameMode.isModifierAllowed(buffs[i].GetComponent<AbsModifierEffect>().GetModType()))
+                {
+                    modifierObjects.Add(buffs[i]);
+                    weights.Add(GameManager.Instance.weightConfig.weights[i].chance);
+                }
             }
             if (!GameManager.Instance.debuffActive || GameManager.Instance.ActiveGameMode.isInDebugMode())
             {
@@ -47,13 +54,6 @@ public class ModifierBatStateMachine : BatStateMachine
             if (modifierObjects.Count == 0)
             {
                 return;
-            }
-
-            // Make list of weights from config
-            List<float> weights = new List<float>();
-            foreach(ModifierWeight w in GameManager.Instance.weightConfig.weights)
-            {
-                weights.Add(w.chance);
             }
 
             // Calculate weighted index

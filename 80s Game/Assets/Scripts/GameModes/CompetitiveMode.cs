@@ -47,9 +47,9 @@ public class CompetitiveMode : AbsGameMode
 
         // Enable the right ones for this game mode
         allowedBuffs[AbsModifierEffect.ModType.DoublePoints] = true;
-        allowedBuffs[AbsModifierEffect.ModType.Overcharge] = true;
-        allowedDebuffs[AbsModifierEffect.ModType.Confusion] = true;
-        allowedDebuffs[AbsModifierEffect.ModType.Snail] = true;
+        allowedBuffs[AbsModifierEffect.ModType.RustedWings] = true;
+        if(AchievementManager.GetAchievementByKey("mod-1").isUnlocked())
+            allowedBuffs[AbsModifierEffect.ModType.Overcharge] = true;
 
         allowedBats[TargetManager.TargetType.Regular] = true;
         allowedBats[TargetManager.TargetType.LowBonus] = true;

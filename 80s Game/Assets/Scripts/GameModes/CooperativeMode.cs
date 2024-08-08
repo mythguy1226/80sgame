@@ -59,11 +59,14 @@ public class CooperativeMode : AbsGameMode
         }
 
         // Enable the right ones for this game mode
-        allowedBuffs[AbsModifierEffect.ModType.DoublePoints] = true;
-        allowedBuffs[AbsModifierEffect.ModType.Overcharge] = true;
+        allowedBuffs[AbsModifierEffect.ModType.Rewired] = true;
         allowedBuffs[AbsModifierEffect.ModType.RustedWings] = true;
-        allowedDebuffs[AbsModifierEffect.ModType.Confusion] = true;
-        allowedDebuffs[AbsModifierEffect.ModType.Snail] = true;
+        if(AchievementManager.GetAchievementByKey("mod-1").isUnlocked())
+            allowedBuffs[AbsModifierEffect.ModType.Overcharge] = true;
+        if(AchievementManager.GetAchievementByKey("mod-2").isUnlocked())
+            allowedBuffs[AbsModifierEffect.ModType.RogueBat] = true;
+        if(AchievementManager.GetAchievementByKey("mod-3").isUnlocked())
+            allowedBuffs[AbsModifierEffect.ModType.EMP] = true;
 
         allowedBats[TargetManager.TargetType.Regular] = true;
         allowedBats[TargetManager.TargetType.Modifier] = true;

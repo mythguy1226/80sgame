@@ -247,7 +247,7 @@ public static class AchievementManager
         // Test for the highest thing first. This can bypass execution of all other checks
         switch (type)
         {
-            case TargetManager.TargetType.Unstable:
+            /*case TargetManager.TargetType.Unstable:
                 if (HasBeenUnlocked(AchievementConstants.UNSTABLE_EXPERT))
                 {
                     return;
@@ -255,7 +255,7 @@ public static class AchievementManager
                 dataKey = lookupTable[AchievementConstants.UNSTABLE_EXPERT].requirementTrackingKey;
                 stunnedBatsOfThisType = GetData(dataKey);
                 stunnedBatsOfThisType++;
-                break;
+                break;*/
             case TargetManager.TargetType.Modifier:
                 if (HasBeenUnlocked(AchievementConstants.MOD_BAT_EXPERT))
                 {
@@ -265,7 +265,7 @@ public static class AchievementManager
                 stunnedBatsOfThisType = GetData(dataKey);
                 stunnedBatsOfThisType++;
                 break;
-            case TargetManager.TargetType.LowBonus:
+            /*case TargetManager.TargetType.LowBonus:
             case TargetManager.TargetType.HighBonus:
                 if (HasBeenUnlocked(AchievementConstants.BONUS_EXPERT))
                 {
@@ -283,7 +283,7 @@ public static class AchievementManager
                 dataKey = lookupTable[AchievementConstants.MK1_EXPERT].requirementTrackingKey;
                 stunnedBatsOfThisType = GetData(dataKey);
                 stunnedBatsOfThisType++;
-                break;
+                break;*/
         }
         TestStunUnlockByType(type, dataKey, stunnedBatsOfThisType);
     }
@@ -299,14 +299,14 @@ public static class AchievementManager
         string key;
         switch (type)
         {
-            case TargetManager.TargetType.Unstable:
+            /*case TargetManager.TargetType.Unstable:
                 key = AchievementConstants.UNSTABLE_EXPERT;
                 TestAndUnlock(key, requirements[key], stunCount, TestType.GreaterThanOrEqual);
                 key = AchievementConstants.UNSTABLE_ADEPT;
                 TestAndUnlock(key, requirements[key], stunCount, TestType.GreaterThanOrEqual);
                 key = AchievementConstants.UNSTABLE_NOVICE;
                 TestAndUnlock(key, requirements[key], stunCount, TestType.GreaterThanOrEqual);
-                break;
+                break;*/
             case TargetManager.TargetType.Modifier:
                 key = AchievementConstants.MOD_BAT_EXPERT;
                 TestAndUnlock(key, requirements[key], stunCount, TestType.GreaterThanOrEqual);
@@ -315,7 +315,7 @@ public static class AchievementManager
                 key = AchievementConstants.MOD_BAT_NOVICE;
                 TestAndUnlock(key, requirements[key], stunCount, TestType.GreaterThanOrEqual);
                 break;
-            case TargetManager.TargetType.LowBonus:
+            /*case TargetManager.TargetType.LowBonus:
             case TargetManager.TargetType.HighBonus:
                 key = AchievementConstants.BONUS_EXPERT;
                 TestAndUnlock(key, requirements[key], stunCount, TestType.GreaterThanOrEqual);
@@ -331,7 +331,7 @@ public static class AchievementManager
                 TestAndUnlock(key, requirements[key], stunCount, TestType.GreaterThanOrEqual);
                 key = AchievementConstants.MK1_NOVICE;
                 TestAndUnlock(key, requirements[key], stunCount, TestType.GreaterThanOrEqual);
-                break;
+                break;*/
         }
         RegisterData(dataKey, stunCount);
     }
