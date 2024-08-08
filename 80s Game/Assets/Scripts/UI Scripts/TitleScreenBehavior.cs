@@ -121,6 +121,9 @@ public class TitleScreenBehavior : MonoBehaviour
     //Select Gamemode and start the game
     public void SelectGamemode(int gamemodeIndex)
     {
+        if (gamemodePanel.GetComponent<BackgroundCustomization>().BackgroundLocked(gamemodeIndex))
+            return;
+        
         gamemodeSelected = gamemodeIndex;
         StartGame();
     }

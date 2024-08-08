@@ -32,7 +32,7 @@ public abstract class AbsStateMachine<EState> : StateMachineWrapper where EState
     }
 
     // Update is called once every frame
-    void Update()
+    protected virtual void Update()
     {
         // Early return if activity is disabled
         if (!bIsActive)
