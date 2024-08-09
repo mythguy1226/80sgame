@@ -186,6 +186,12 @@ public class UIManager : MonoBehaviour
         {
             titleScreenUI.ToggleGamemodeSelection();
         }
+
+        //Cancel out of credits screen if it's active
+        else if (titleScreenUI.creditsScreen.activeInHierarchy)
+        {
+            titleScreenUI.ToggleCredisPanel();
+        }
     }
 
     //Show an achievement notification when it is unlocked
