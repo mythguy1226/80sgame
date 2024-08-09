@@ -109,8 +109,12 @@ public class OnboardingUI : MonoBehaviour
 
     private void ActivatePage()
     {
-        leftArrow.SetActive(true);
-        rightArrow.SetActive(true);
+        leftArrow.GetComponent<Button>().interactable = true;
+        rightArrow.GetComponent<Button>().interactable = true;
+
+        leftArrow.GetComponent<TextMeshProUGUI>().color = Color.white;
+        rightArrow.GetComponent<TextMeshProUGUI>().color = Color.white;
+
         foreach(GameObject page in onboardingPages)
         {
             page.SetActive(false);
@@ -120,7 +124,8 @@ public class OnboardingUI : MonoBehaviour
         {
             case 1:
                 onboardingPages[0].SetActive(true);
-                leftArrow.SetActive(false);
+                leftArrow.GetComponent<Button>().interactable = false;
+                leftArrow.GetComponent<TextMeshProUGUI>().color = new Color(1, 1, 1, 0);
                 break;
             case 2:
                 onboardingPages[1].SetActive(true);
@@ -130,7 +135,8 @@ public class OnboardingUI : MonoBehaviour
                 break;
             case 4:
                 onboardingPages[3].SetActive(true);
-                rightArrow.SetActive(false);
+                rightArrow.GetComponent<Button>().interactable = false;
+                rightArrow.GetComponent<TextMeshProUGUI>().color = new Color(1, 1, 1, 0);
                 break;
         }
     }

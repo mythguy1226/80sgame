@@ -284,7 +284,7 @@ public class PlayerJoinPanel : MonoBehaviour
     //Method for readying up
     public void ReadyUp()
     {   
-        if (CrosshairLocked() || StunEffectLocked())
+        if (CrosshairLocked() || StunEffectLocked() || pjm.backOutPanel.activeInHierarchy)
         {
             return;
         }
