@@ -1,4 +1,6 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// The UI manager for the LookingGlass tool
@@ -9,6 +11,7 @@ public class LookingGlassUI :  MonoBehaviour
     [SerializeField]
     private GameObject uiParent;
     private bool isVisible;
+    public TMP_Dropdown AchievementDropdown;
 
     private void Awake()
     {
@@ -50,5 +53,10 @@ public class LookingGlassUI :  MonoBehaviour
     public void ShowActivePanel()
     {
         activePanel.gameObject.SetActive(true);
+    }
+
+    public void UpdateLookingGlassAchievementInt()
+    {
+        GetComponent<LookingGlass>().SetAchievementInteger(AchievementDropdown.value);
     }
 }
