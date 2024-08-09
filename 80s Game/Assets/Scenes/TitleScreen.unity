@@ -1230,6 +1230,7 @@ MonoBehaviour:
   achievementsPanel: {fileID: 1705306704}
   achievementsList: {fileID: 1203544902}
   achievementRewardPrefab: {fileID: 1923514397185271933, guid: c487211524a31c34eb4eacc9f0db0189, type: 3}
+  creditsScreen: {fileID: 10163740}
   buttonClickSound: {fileID: 8300000, guid: 0f33d998cd03b1f4ebc4983ef2a6d559, type: 3}
   titleScreenMusic: {fileID: 11400000, guid: 8017975349db49843bed656899ffeb7e, type: 2}
   gamemodeName: {fileID: 0}
@@ -1765,6 +1766,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: b1d69a59fb2697f4897abda8625e5922, type: 3}
   - {fileID: 21300000, guid: eefe79d2900ee5c469c25a19ac90ac80, type: 3}
   - {fileID: 21300000, guid: 4e8779f31b85f214983256b0033a735e, type: 3}
+  - {fileID: 21300000, guid: ed32c8de8de6e334b80ea78175c0e06c, type: 3}
   gamemodeCards:
   - {fileID: 778108194}
   - {fileID: 927240345}
