@@ -457,8 +457,23 @@ public static class AchievementManager
         unstableCount++;
     }
 
+    public static void ResetTrackingKeys()
+    {
+        foreach(KeyValuePair<string, AchievementData> kvp_achiev in lookupTable)
+        {
+            if(kvp_achiev.Value.requirementTrackingKey == null || kvp_achiev.Value.requirementTrackingKey == ""){
+                continue;
+            }
+            RegisterData(kvp_achiev.Value.requirementTrackingKey, 0);
+        }
+    }
+
     public static void SetAchievementStatus(int value)
     {
+        if (value == 0)
+        {
+            ResetTrackingKeys();
+        }
         PlayerPrefs.SetInt(AchievementConstants.CLASSIC_FAN,value);
         PlayerPrefs.SetInt(AchievementConstants.CLASSIC_ENJOYER,value);
         PlayerPrefs.SetInt(AchievementConstants.TIMELESS_CLASSIC,value);
