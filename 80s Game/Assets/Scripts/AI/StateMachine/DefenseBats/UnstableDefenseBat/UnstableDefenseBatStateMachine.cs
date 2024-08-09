@@ -78,11 +78,7 @@ public class UnstableDefenseBatStateMachine : DefenseBatStateMachine
             // Get target and ensure target isn't a debuff bat
             Target curTarg = nearbyTargets[Random.Range(0, nearbyTargets.Length - 1)].gameObject.GetComponent<Target>();
             if(curTarg != null)
-            {
-                DebuffBatStateMachine debuff = curTarg.GetComponent<DebuffBatStateMachine>();
-                if(debuff == null) // Return target if not debuff
-                    return curTarg;
-            }
+                return curTarg;
         }
 
         return null;
