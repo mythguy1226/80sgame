@@ -29,21 +29,21 @@ public class ModConfusion : AbsModifierEffect
             else if (GameManager.Instance.gameModeType == EGameMode.Defense) // Affect all players in defense mode
             {
                 piw.isFlipped = true;
-                AddUIRef(pc.Order);
+                AnimateUIRef();
                 pc.SetMod(GetModType(), this);
                 continue;
             }
             else if (pc.Order != activator.Order && !bIsSelfDebuff) // Affect all players but activator
             {
                 piw.isFlipped = true;
-                AddUIRef(pc.Order);
+                AnimateUIRef();
                 pc.SetMod(GetModType(), this);
                 continue;
             }
             else if(pc.Order == activator.Order && bIsSelfDebuff) // Affect the activator
             {
                 piw.isFlipped = true;
-                AddUIRef(pc.Order);
+                AnimateUIRef();
                 pc.SetMod(GetModType(), this);
                 continue;
             }

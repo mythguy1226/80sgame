@@ -28,7 +28,7 @@ public class UIManager : MonoBehaviour
     public PostProcessVolume postProcessVolume;
 
     public OnboardingUI onboardingUI;
-    private PauseScreenBehavior pauseScreenUI;
+    public PauseScreenBehavior pauseScreenUI;
     private GameOverBehavior gameOverUI;
     public TitleScreenBehavior titleScreenUI;
     public ScoreBehavior scoreBehavior;

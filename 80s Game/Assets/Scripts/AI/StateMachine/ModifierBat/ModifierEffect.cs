@@ -27,6 +27,7 @@ public abstract class AbsModifierEffect : MonoBehaviour
     protected GameObject modifierUIPrefab;
     protected List<GameObject> modifierUIRefs;
     protected GameObject modifierUIElement;
+    protected GameObject animatedModifierUIElement;
 
     [SerializeField]
     protected GameObject floatingTextPrefab;
@@ -94,6 +95,20 @@ public abstract class AbsModifierEffect : MonoBehaviour
                 DeactivateEffect();
                 CleanUp();
                 
+            }
+
+            if (animatedModifierUIElement != null)
+            {
+                Debug.Log("MOD POS: " + animatedModifierUIElement.transform.position.ToString());
+                Debug.Log("PLAYER POS: " + GameManager.Instance.UIManager.modifierContainers[activator.Order].transform.position.ToString());
+                animatedModifierUIElement.transform.position = Vector3.Lerp(animatedModifierUIElement.transform.position, GameManager.Instance.UIManager.modifierContainers[activator.Order].transform.position, Time.deltaTime * 2);
+
+                if (animatedModifierUIElement.transform.position.ToString() == GameManager.Instance.UIManager.modifierContainers[activator.Order].transform.position.ToString())
+                {
+                    modifierUIRefs.Remove(animatedModifierUIElement);
+                    Destroy(animatedModifierUIElement);
+                    AddUIRef(activator.Order);
+                }
             }
         }
         else
@@ -208,7 +223,7 @@ public abstract class AbsModifierEffect : MonoBehaviour
         GetComponent<Rigidbody2D>().gravityScale = 0.0f; // Turn off gravity here
         if (GetModType() != ModType.Confusion && GetModType() != ModType.Snail)
         {
-            AddUIRef(activator.Order);
+            AnimateUIRef();
         }
         ActivateEffect();
         transform.position = new Vector3(-15.0f, 15.0f, 0.0f); // Move off-screen for duration of lifetime
@@ -228,6 +243,20 @@ public abstract class AbsModifierEffect : MonoBehaviour
         {
             Destroy(uiRef);
         }
+    }
+
+    /// <summary>
+    /// Create a UI reference of this power to be animated towards the activator
+    /// </summary>
+    protected void AnimateUIRef()
+    {
+        animatedModifierUIElement = Instantiate(modifierUIPrefab, this.transform.position, Quaternion.identity);
+        animatedModifierUIElement.transform.position = this.transform.position;
+
+        animatedModifierUIElement.transform.SetParent(GameManager.Instance.UIManager.pauseScreenUI.gameUIElements.transform);
+        animatedModifierUIElement.transform.localScale = Vector3.one;
+
+        modifierUIRefs.Add(animatedModifierUIElement);
     }
 
     /// <summary>
