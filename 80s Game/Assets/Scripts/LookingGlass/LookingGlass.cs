@@ -3,6 +3,7 @@ using UnityEngine;
 public class LookingGlass : MonoBehaviour
 {
     public GameObject[] modPrefabs;
+    int achievementInteger = 0;
 
     /*
      Bat Controls
@@ -56,5 +57,32 @@ public class LookingGlass : MonoBehaviour
         }
         GameManager.Instance.ActiveGameMode.ToggleAllowedModType(toggleType);
         
+    }
+
+    public void ResetAchievements()
+    {
+        AchievementManager.SetAchievementStatus(0);
+    }
+
+    public void UnlockAllAchievements()
+    {
+        AchievementManager.SetAchievementStatus(1);
+    }
+
+    public void UnlockSpecificAchievement()
+    {
+        string achievementKey = AchievementConstants.MapEnumToKey((AchievementConstants.Achievements)achievementInteger);
+        AchievementManager.UnlockAchievement(achievementKey);
+    }
+
+    public void SetAchievementInteger(int newValue)
+    {
+        achievementInteger = newValue;
+    }
+
+    public void DoubleAchievementTest()
+    {
+        AchievementManager.UnlockAchievement(AchievementConstants.CLASSIC_FAN);
+        AchievementManager.UnlockAchievement(AchievementConstants.CLASSIC_ENJOYER);
     }
 }

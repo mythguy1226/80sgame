@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering.PostProcessing;
@@ -41,7 +40,7 @@ public class UIManager : MonoBehaviour
     public List<GameObject> gamemodeCards;
 
     public GameObject achievementNotifPrefab;
-    private Queue<GameObject> achievementNotifs;
+    private Queue<AchievementNotificationData> achievementNotifs;
     private bool notifPlaying = false;
 
     public SpriteRenderer background;
@@ -58,7 +57,7 @@ public class UIManager : MonoBehaviour
         gameOverUI = canvas.GetComponent<GameOverBehavior>();
         scoreBehavior = canvas.GetComponent<ScoreBehavior>();
         titleScreenUI = canvas.GetComponent<TitleScreenBehavior>();
-        achievementNotifs = new Queue<GameObject>();
+        achievementNotifs = new Queue<AchievementNotificationData>();
     }
 
     private void Start()
@@ -72,7 +71,10 @@ public class UIManager : MonoBehaviour
         {
             if(achievementNotifs.Count > 0 && !notifPlaying)
             {
-                Instantiate(achievementNotifs.Dequeue(), canvas.transform);
+                AchievementNotificationData data = achievementNotifs.Dequeue();
+                GameObject clone = Instantiate(achievementNotifPrefab, canvas.transform);
+                clone.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = data.text;
+                clone.transform.GetChild(3).GetComponent<Image>().sprite = data.image;
                 notifPlaying = true;
             }        
         }
@@ -189,12 +191,10 @@ public class UIManager : MonoBehaviour
     }
 
     //Show an achievement notification when it is unlocked
-    public void ShowAchievementNotification(AchievementData achievement)
+    public void EnqueueAchievementNotification(AchievementData achievement)
     {
-        achievementNotifPrefab.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = achievement.nameText;
-        achievementNotifPrefab.transform.GetChild(3).GetComponent<Image>().sprite = achievement.image;
-
-        achievementNotifs.Enqueue(achievementNotifPrefab);
+        AchievementNotificationData notificationData = new AchievementNotificationData(achievement.nameText, achievement.image);
+        achievementNotifs.Enqueue(notificationData);
     }
 
     public void ClearNotification()

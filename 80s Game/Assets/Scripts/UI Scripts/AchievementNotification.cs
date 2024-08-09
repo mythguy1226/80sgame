@@ -11,3 +11,15 @@ public class AchievementNotification : MonoBehaviour
         Destroy(this.gameObject);
     }
 }
+
+public struct AchievementNotificationData
+{
+    public string text;
+    public Sprite image;
+
+    public AchievementNotificationData(string t, Sprite i)
+    {
+        text = t;
+        image = i;
+    }
+}
