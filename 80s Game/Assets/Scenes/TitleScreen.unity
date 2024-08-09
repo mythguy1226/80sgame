@@ -3042,10 +3042,10 @@ MonoBehaviour:
   m_Navigation:
     m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 963602667}
+    m_SelectOnUp: {fileID: 1052698252}
     m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnLeft: {fileID: 825267117}
+    m_SelectOnRight: {fileID: 1301689758}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
@@ -3646,6 +3646,10 @@ PrefabInstance:
       propertyPath: m_Navigation.m_SelectOnDown
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8482207954832739412, guid: caa788b6073da9145bd994395ff228c5, type: 3}
+      propertyPath: m_Navigation.m_SelectOnLeft
+      value: 
+      objectReference: {fileID: 1301689758}
     - target: {fileID: 8482207954832739412, guid: caa788b6073da9145bd994395ff228c5, type: 3}
       propertyPath: m_Navigation.m_SelectOnRight
       value: 
@@ -5635,6 +5639,10 @@ PrefabInstance:
       propertyPath: m_Navigation.m_SelectOnLeft
       value: 
       objectReference: {fileID: 1052698252}
+    - target: {fileID: 8482207954832739412, guid: caa788b6073da9145bd994395ff228c5, type: 3}
+      propertyPath: m_Navigation.m_SelectOnRight
+      value: 
+      objectReference: {fileID: 825267117}
     - target: {fileID: 8934075256389379631, guid: caa788b6073da9145bd994395ff228c5, type: 3}
       propertyPath: m_Name
       value: Defense Background
