@@ -94,6 +94,8 @@ public class TitleScreenBehavior : MonoBehaviour
         gamemodePanel.SetActive(!gamemodePanel.activeInHierarchy);
         ToggleButtonInteractability(!gamemodePanel.activeInHierarchy);
 
+        SoundManager.Instance.PlaySoundContinuous(buttonClickSound);
+
         //Select the proper UI element for navigation
         if (gamemodePanel.activeInHierarchy)
         {
@@ -131,6 +133,7 @@ public class TitleScreenBehavior : MonoBehaviour
     //Toggles the Achievements Screen on and off
     public void ToggleAchievementsPanel()
     {
+        SoundManager.Instance.PlaySoundContinuous(buttonClickSound);
         achievementsPanel.SetActive(!achievementsPanel.activeInHierarchy);
         ToggleButtonInteractability(!achievementsPanel.activeInHierarchy);
 
@@ -144,6 +147,24 @@ public class TitleScreenBehavior : MonoBehaviour
         {
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(achievementsButton);
+        }
+    }
+
+    public void ToggleCredisPanel()
+    {
+        SoundManager.Instance.PlaySoundContinuous(buttonClickSound);
+        creditsScreen.SetActive(!creditsScreen.activeInHierarchy);
+
+        if (creditsScreen.activeInHierarchy)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(creditsScreen.transform.GetChild(1).gameObject);
+        }
+
+        else
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(startButton);
         }
     }
     
