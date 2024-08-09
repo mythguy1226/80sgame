@@ -306,7 +306,7 @@ MonoBehaviour:
   bCanPursue: 0
   attackCooldown: 3
   attackDamage: 1
-  chainRadius: 2
+  chainRadius: 5
   chainLength: 3
   lightning: {fileID: 2958280814618220372, guid: 128a538b50a004e42bbe4ec0f3c37708, type: 3}
 --- !u!114 &6679666869986788104
@@ -323,6 +323,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 3
   FSM: {fileID: 809741508517341380}
+  stunningPlayer: {fileID: 0}
   bIsStunned: 0
   floatingTextPrefab: {fileID: 5422266768498237442, guid: 75dd293da92028a43b54e04a8792559c, type: 3}
   pointValue: 2000

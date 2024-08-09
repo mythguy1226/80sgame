@@ -12,7 +12,7 @@ public class ClassicMode : AbsGameMode
         ModeType = EGameMode.Classic;
 
         // Initial round parameters
-        NumRounds = 10;
+        NumRounds = 12;
         maxTargetsOnScreen = 8;
         currentRoundTargetCount = 5;
 
@@ -279,6 +279,20 @@ public class ClassicMode : AbsGameMode
                 currentRoundTargetCount++;
             }
         }
+
+        // Spawn more modifier bats during rounds 6 and 7 to introduce mods as a mechanic
+        if(CurrentRound == 6 || CurrentRound == 7)
+        {
+            // Spawn some debuff bats and increment target count
+            for(int i = 0; i < 2; i++)
+            {
+                if (allowedBats[TargetManager.TargetType.Modifier])
+                {
+                    targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<ModifierBatStateMachine>());
+                    currentRoundTargetCount++;
+                }
+            }
+        }
     }
 
     public void UpdateAllowedBats()
@@ -295,9 +309,17 @@ public class ClassicMode : AbsGameMode
                 break;
             case 5:
                 allowedBats[TargetManager.TargetType.Modifier] = true;
+                allowedBats[TargetManager.TargetType.Unstable] = false;
+                allowedBats[TargetManager.TargetType.LowBonus] = false;
+                allowedBats[TargetManager.TargetType.HighBonus] = false;
                 break;
             case 6:
                 allowedBats[TargetManager.TargetType.Debuff] = true;
+                break;
+            case 7:
+                allowedBats[TargetManager.TargetType.Unstable] = true;
+                allowedBats[TargetManager.TargetType.LowBonus] = true;
+                allowedBats[TargetManager.TargetType.HighBonus] = true;
                 break;
         }
     }
