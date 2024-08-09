@@ -102,6 +102,10 @@ public class TitleScreenBehavior : MonoBehaviour
             EventSystem.current.SetSelectedGameObject(gamemodeOptions[0].gameObject);
 
             //Change the prompt icon for the Gamemode help button to the proper control scheme
+            if (PlayerData.activePlayers.Count == 0)
+            {
+                return;
+            }
             switch (PlayerData.activePlayers[0].controlScheme)
             {
                 case "PS4":
