@@ -69,10 +69,10 @@ public class CooperativeMode : AbsGameMode
             allowedBuffs[AbsModifierEffect.ModType.EMP] = true;
 
         allowedBats[TargetManager.TargetType.Regular] = true;
-        allowedBats[TargetManager.TargetType.Modifier] = true;
-        allowedBats[TargetManager.TargetType.Unstable] = true;
-        allowedBats[TargetManager.TargetType.DiveBomb] = true;
-        allowedBats[TargetManager.TargetType.Debuff] = true;
+        allowedBats[TargetManager.TargetType.Modifier] = false;
+        allowedBats[TargetManager.TargetType.Unstable] = false;
+        allowedBats[TargetManager.TargetType.DiveBomb] = false;
+        allowedBats[TargetManager.TargetType.Debuff] = false;
 
         numBatsMap = new Dictionary<TargetManager.TargetType, int>();
 
@@ -96,7 +96,16 @@ public class CooperativeMode : AbsGameMode
 
             if (targetIndex == -1 && allowedBats[TargetManager.TargetType.Regular])
             {
-                targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<DefenseBatStateMachine>());
+                if(CurrentRound <= 5)
+                {
+                    targetIndex = targetManager.GetNextAvailableTargetOfEnumType(TargetManager.TargetType.Regular);
+                    if(targetIndex != -1)
+                        targetManager.SpawnTarget(targetIndex);
+                }
+                else
+                {
+                    targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<DefenseBatStateMachine>());
+                }
                 continue;
             }
 
@@ -198,7 +207,7 @@ public class CooperativeMode : AbsGameMode
         }
 
         // Start the next round if desired number of stuns is met
-        if (targetManager.numStuns >= currentRoundTargetCount && allowedBats[TargetManager.TargetType.Modifier])
+        if (targetManager.numStuns >= currentRoundTargetCount)
         {
             // Play round-end jingle and call method for delayed round start
             if (GameManager.Instance.roundEndTheme != null)
@@ -232,7 +241,11 @@ public class CooperativeMode : AbsGameMode
             else if (!allowedBats[TargetManager.TargetType.Regular])
                 return;
             else
-                targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<DefenseBatStateMachine>());
+                targetIndex = targetManager.GetNextAvailableTargetOfEnumType(TargetManager.TargetType.Regular);
+                if(targetIndex != -1)
+                    targetManager.SpawnTarget(targetIndex);
+                else
+                    targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<DefenseBatStateMachine>());
         }
     }
 
@@ -286,11 +299,65 @@ public class CooperativeMode : AbsGameMode
 
     protected override void CallNextRound()
     {
+        // Incorporate new bats based on round
+        UpdateAllowedBats();
+
         // Begin the next round
         StartNextRound();
 
         // Spawn a modifier bat and increment target count
-        targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<ModifierDefenseBatStateMachine>());
-        currentRoundTargetCount++;
+        if (allowedBats[TargetManager.TargetType.Modifier])
+        {
+            targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<ModifierDefenseBatStateMachine>());
+            currentRoundTargetCount++;
+        }
+
+        // Spawn more modifier bats during rounds 3 and 4 to introduce mods as a mechanic
+        if(CurrentRound == 3 || CurrentRound == 4)
+        {
+            // Spawn some debuff bats and increment target count
+            for(int i = 0; i < 2; i++)
+            {
+                if (allowedBats[TargetManager.TargetType.Modifier])
+                {
+                    targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<ModifierDefenseBatStateMachine>());
+                    currentRoundTargetCount++;
+                }
+            }
+        }
+
+        // Spawn some debuff bats and increment target count
+        for(int i = 0; i < 2; i++)
+        {
+            if (allowedBats[TargetManager.TargetType.Debuff])
+            {
+                targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<DebuffBatStateMachine>());
+                currentRoundTargetCount++;
+            }
+        }
+    }
+
+    public void UpdateAllowedBats()
+    {
+        // Check round numbers and unlock specific bat types at specific rounds
+        switch(CurrentRound)
+        {
+            case 1:
+                allowedBats[TargetManager.TargetType.Unstable] = true;
+                allowedBats[TargetManager.TargetType.DiveBomb] = true;
+                break;
+            case 2:
+                allowedBats[TargetManager.TargetType.Unstable] = false;
+                allowedBats[TargetManager.TargetType.DiveBomb] = false;
+                allowedBats[TargetManager.TargetType.Modifier] = true;
+                break;
+            case 4:
+                allowedBats[TargetManager.TargetType.Debuff] = true;
+                break;
+            case 5:
+                allowedBats[TargetManager.TargetType.DiveBomb] = true;
+                allowedBats[TargetManager.TargetType.Unstable] = true;
+                break;
+        }
     }
 }
