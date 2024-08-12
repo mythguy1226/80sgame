@@ -202,21 +202,4 @@ public class TitleScreenBehavior : MonoBehaviour
             button.interactable = toggle;
         }
     }
-
-    public void ToggleCredisPanel()
-    {
-        creditsScreen.SetActive(!creditsScreen.activeInHierarchy);
-
-        if (creditsScreen.activeInHierarchy)
-        {
-            EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(creditsScreen.transform.GetChild(1).gameObject);
-        }
-
-        else
-        {
-            EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(startButton);
-        }
-    }
 }
