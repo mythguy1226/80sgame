@@ -167,6 +167,7 @@ public class TitleScreenBehavior : MonoBehaviour
         //If there are no rewards left, select the start button
         else
         {
+            ToggleButtonInteractability(true);
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(startButton);
         }
