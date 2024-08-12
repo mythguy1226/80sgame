@@ -10,7 +10,7 @@ public class SplashTransition : MonoBehaviour
     private VideoClip clip;
 
     [Tooltip("Time of transition in seconds")]
-    public float transitionTime = 1.0f;
+    public float transitionBuffer = 0.25f;
 
     // Start is called before the first frame update
     void Start()
@@ -20,7 +20,7 @@ public class SplashTransition : MonoBehaviour
 
     IEnumerator TransitionToTitleScreen()
     {
-        yield return new WaitForSeconds((float)clip.length);
+        yield return new WaitForSeconds((float)clip.length + transitionBuffer);
         SceneManager.LoadScene(1);
     }
 }
