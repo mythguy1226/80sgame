@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 5121942957274129258}
   - component: {fileID: -9004518963499802162}
   - component: {fileID: 5122440697510579374}
-  - component: {fileID: 5352364880851083079}
   - component: {fileID: 1142854938126180406}
   - component: {fileID: 8052041500902039558}
   - component: {fileID: 7392182150163370368}
@@ -55,11 +54,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   FSM: {fileID: 7699794266590313434}
+  stunningPlayer: {fileID: 0}
   bIsStunned: 0
   floatingTextPrefab: {fileID: 0}
   pointValue: 1000
   deathHeight: -6.5
   hitSound: {fileID: 0}
+  rewiredParticles: {fileID: 0}
 --- !u!50 &4043134783524271435
 Rigidbody2D:
   serializedVersion: 4
@@ -132,14 +133,14 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: 0.07134046, y: 0.17626765}
-      - {x: -0.05648417, y: 0.23354425}
-      - {x: -0.106239244, y: 0.1813686}
-      - {x: -0.102449246, y: 0.07703166}
+      - {x: 0.01, y: 0.32}
+      - {x: -0.1, y: 0.24}
+      - {x: -0.102449246, y: 0.11}
       - {x: -0.18919323, y: 0.01}
       - {x: -0.17406332, y: -0.031901896}
       - {x: -0.09057618, y: -0.049466718}
-      - {x: -0.099032976, y: -0.12825361}
-      - {x: -0.04330734, y: -0.17594755}
+      - {x: -0.09, y: -0.18}
+      - {x: -0.02, y: -0.24}
       - {x: 0.08671771, y: -0.10610534}
       - {x: 0.18838617, y: -0.036498513}
   m_UseDelaunayMesh: 0
@@ -161,12 +162,7 @@ MonoBehaviour:
   isWandering: 0
   isFleeing: 0
   maxSpeed: 6
-  maxForce: 0.03
   currentVelocity: {x: 0, y: 0}
-  flockSize: 1
-  separationStrength: 1.2
-  cohesionStrength: 0.4
-  alignmentStrength: 1
 --- !u!95 &5122440697510579374
 Animator:
   serializedVersion: 5
@@ -188,23 +184,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!111 &5352364880851083079
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 232502045716647642}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 69ae86a3a632d6c44b862d36f8455c9c, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: 69ae86a3a632d6c44b862d36f8455c9c, type: 2}
-  - {fileID: 7400000, guid: 3bc2ca24ee02b344c99c996b7b331e17, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!212 &1142854938126180406
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -325,5 +304,7 @@ MonoBehaviour:
   timeUntilPursue: 4
   pursueTimer: 0
   targetLatch: {fileID: 0}
+  pursueSpeedScale: 1
+  bCanPursue: 0
   attackCooldown: 3
   attackDamage: 1

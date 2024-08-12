@@ -6209,7 +6209,7 @@ MonoBehaviour:
   onboardingPanel: {fileID: 0}
   onboardingCloseButton: {fileID: 0}
   introCutscene: {fileID: 0}
-  buttonClickSound: {fileID: 8300000, guid: 0f33d998cd03b1f4ebc4983ef2a6d559, type: 3}
+  buttonClickSound: {fileID: 8300000, guid: 22eeadc8c63c06e438e04029774dfaf5, type: 3}
   crosshairs: []
   playerIndex: 0
 --- !u!114 &1011990664
@@ -6269,7 +6269,7 @@ MonoBehaviour:
   continueButton: {fileID: 378632285}
   restartButton: {fileID: 393536519}
   leaderboardText: {fileID: 692398610}
-  buttonClickSound: {fileID: 8300000, guid: 0f33d998cd03b1f4ebc4983ef2a6d559, type: 3}
+  buttonClickSound: {fileID: 8300000, guid: 22eeadc8c63c06e438e04029774dfaf5, type: 3}
   leaderboardScoreHighlights: []
   gameEndTheme: {fileID: 11400000, guid: 7bf2dd83420dbd14da610dd4c2cb8f63, type: 2}
 --- !u!114 &1011990666
@@ -14039,6 +14039,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 3461611791098616396, guid: 2299d4f9757c4bf419fea5ff373c1153, type: 3}
+        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
+        m_MethodName: PlaySoundContinuous
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 22eeadc8c63c06e438e04029774dfaf5, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2092589300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14680,7 +14692,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9bae2afbe0099e24e99f457f3c53b189, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5a301c55307cb6d47b3e2f8533e2ad74, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
