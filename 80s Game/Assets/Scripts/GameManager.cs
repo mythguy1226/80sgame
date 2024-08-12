@@ -173,8 +173,11 @@ public class GameManager : MonoBehaviour
         Scene activeScene = SceneManager.GetActiveScene();
         if (activeScene.buildIndex > 1)
         {
-            ActiveGameMode.StartGame();
-            gameStartTime = Time.time;
+            if(ActiveGameMode != null)
+            {
+                ActiveGameMode.StartGame();
+                gameStartTime = Time.time;
+            }
         }
     }
 
