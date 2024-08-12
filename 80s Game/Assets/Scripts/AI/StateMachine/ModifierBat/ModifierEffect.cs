@@ -101,7 +101,7 @@ public abstract class AbsModifierEffect : MonoBehaviour
             {
                 Debug.Log("MOD POS: " + animatedModifierUIElement.transform.position.ToString());
                 Debug.Log("PLAYER POS: " + GameManager.Instance.UIManager.modifierContainers[activator.Order].transform.position.ToString());
-                animatedModifierUIElement.transform.position = Vector3.Lerp(animatedModifierUIElement.transform.position, GameManager.Instance.UIManager.modifierContainers[activator.Order].transform.position, Time.deltaTime * 2);
+                animatedModifierUIElement.transform.position = Vector3.Lerp(animatedModifierUIElement.transform.position, GameManager.Instance.UIManager.modifierContainers[activator.Order].transform.position, Time.deltaTime * 4);
 
                 if (animatedModifierUIElement.transform.position.ToString() == GameManager.Instance.UIManager.modifierContainers[activator.Order].transform.position.ToString())
                 {
