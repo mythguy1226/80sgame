@@ -144,7 +144,7 @@ public class PauseScreenBehavior : MonoBehaviour
             AchievementManager.TestEndGameAchievements(gameMode.ModeType, gameMode.CurrentRound, 0);
         }
 
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(2);
         SoundManager.Instance.StopAllAudio();
         SoundManager.Instance.PlaySoundContinuous(buttonClickSound);
     }

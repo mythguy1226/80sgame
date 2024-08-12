@@ -21,6 +21,6 @@ public class SplashTransition : MonoBehaviour
     IEnumerator TransitionToTitleScreen()
     {
         yield return new WaitForSeconds((float)clip.length + transitionBuffer);
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
     }
 }
