@@ -387,8 +387,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clip: {fileID: 32900000, guid: 3ee6661c61ce0c54bad6e5ded0491060, type: 3}
-  transitionController: {fileID: 1112902302}
-  transitionTime: 1
+  transitionBuffer: 0.25
 --- !u!1 &1127772380
 GameObject:
   m_ObjectHideFlags: 0
