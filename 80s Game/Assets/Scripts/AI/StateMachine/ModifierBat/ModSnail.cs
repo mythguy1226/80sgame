@@ -37,7 +37,7 @@ public class ModSnail : AbsModifierEffect
             else if (GameManager.Instance.gameModeType == EGameMode.Defense) // Affect all players in defense mode
             {
                 piw.isSlowed = true;
-                AddUIRef(pc.Order);
+                AnimateUIRef();
                 pc.SetMod(GetModType(), this);
                 EnableVFX(pc);
                 continue;
@@ -45,7 +45,7 @@ public class ModSnail : AbsModifierEffect
             else if (pc.Order != activator.Order && !bIsSelfDebuff) // Affect all players but activator
             {
                 piw.isSlowed = true;
-                AddUIRef(pc.Order);
+                AnimateUIRef();
                 pc.SetMod(GetModType(), this);
                 EnableVFX(pc);
                 continue;
@@ -53,7 +53,7 @@ public class ModSnail : AbsModifierEffect
             else if(pc.Order == activator.Order && bIsSelfDebuff) // Affect the activator
             {
                 piw.isSlowed = true;
-                AddUIRef(pc.Order);
+                AnimateUIRef();
                 pc.SetMod(GetModType(), this);
                 EnableVFX(pc);
                 continue;

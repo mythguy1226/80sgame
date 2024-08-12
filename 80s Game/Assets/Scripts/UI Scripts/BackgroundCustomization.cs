@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class BackgroundCustomization : MonoBehaviour
@@ -9,6 +10,8 @@ public class BackgroundCustomization : MonoBehaviour
     public Image competitiveBackgroundPreview;
     public Image defenseBackgroundPreview;
 
+    public List<GameObject> gamemodeCardArrows;
+
     private int selectedClassicBackground = 0;
     private int selectedCompetitiveBackground = 0;
     private int selectedDefenseBackground = 0;
@@ -16,6 +19,51 @@ public class BackgroundCustomization : MonoBehaviour
     public void Start()
     {
         LoadBackgrounds();
+    }
+
+    public void Update()
+    {
+        //Animate Classic Mode Background Arrows
+        if (EventSystem.current.currentSelectedGameObject == GameManager.Instance.UIManager.gamemodeCards[0]
+        || EventSystem.current.currentSelectedGameObject == gamemodeCardArrows[0]
+        || EventSystem.current.currentSelectedGameObject == gamemodeCardArrows[1])
+        {
+            foreach(GameObject arrow in gamemodeCardArrows)
+            {
+                arrow.GetComponent<Animator>().enabled = false;
+            }
+
+            gamemodeCardArrows[0].GetComponent<Animator>().enabled = true;
+            gamemodeCardArrows[1].GetComponent<Animator>().enabled = true;
+        }
+
+        //Animate Competitive Mode Background Arrows
+        else if (EventSystem.current.currentSelectedGameObject == GameManager.Instance.UIManager.gamemodeCards[1]
+        || EventSystem.current.currentSelectedGameObject == gamemodeCardArrows[2]
+        || EventSystem.current.currentSelectedGameObject == gamemodeCardArrows[3])
+        {
+            foreach(GameObject arrow in gamemodeCardArrows)
+            {
+                arrow.GetComponent<Animator>().enabled = false;
+            }
+
+            gamemodeCardArrows[2].GetComponent<Animator>().enabled = true;
+            gamemodeCardArrows[3].GetComponent<Animator>().enabled = true;
+        }
+
+        //Animate Defense Mode Background Arrows
+        else if (EventSystem.current.currentSelectedGameObject == GameManager.Instance.UIManager.gamemodeCards[2]
+        || EventSystem.current.currentSelectedGameObject == gamemodeCardArrows[4]
+        || EventSystem.current.currentSelectedGameObject == gamemodeCardArrows[5])
+        {
+            foreach(GameObject arrow in gamemodeCardArrows)
+            {
+                arrow.GetComponent<Animator>().enabled = false;
+            }
+
+            gamemodeCardArrows[4].GetComponent<Animator>().enabled = true;
+            gamemodeCardArrows[5].GetComponent<Animator>().enabled = true;
+        }
     }
 
     public void NextBackground(int gamemode)

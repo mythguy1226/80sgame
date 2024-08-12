@@ -8,14 +8,12 @@ public class Crosshair : MonoBehaviour
     Vector2 movementDelta;
 
     public Image overheatUI;
-    public AudioClip overheatEffect;
-    public ParticleSystem smokeEffect;
 
     //Cursor clamping
     float minY, maxY, minX, maxX;
     bool _bIsJiggling;
-    float jiggleWidth = 0.008f;
-    float jiggleHeight = 0.005f;
+    float jiggleWidth = 0.005f;
+    float jiggleHeight = 0.003f;
     float jiggleFrequency = 50.0f;
     float jigglePhaseShift = 2.0f;
     float currentJiggleTimer;
@@ -33,7 +31,6 @@ public class Crosshair : MonoBehaviour
         _bIsJiggling = false;
         startColor = overheatUI.color;
         endColor = new Color(1f, 0.5f, 0f);
-        smokeEffect.Stop();
     }
 
     void Update()
@@ -127,8 +124,6 @@ public class Crosshair : MonoBehaviour
     public void EnableVentEffects()
     {
         _bIsJiggling = true;
-        SoundManager.Instance.PlaySoundContinuous(overheatEffect);
-        smokeEffect.Play();
     }
 
     public void StopVentEffects()
@@ -136,6 +131,5 @@ public class Crosshair : MonoBehaviour
         _bIsJiggling = false;
         currentJiggleTimer = 0;
         overheatUI.color = startColor;
-        smokeEffect.Stop();
     }
 }

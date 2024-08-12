@@ -18,7 +18,6 @@ public class TitleScreenBehavior : MonoBehaviour
     public GameObject achievementsPanel;
     public GameObject achievementsList;
     public GameObject achievementRewardPrefab;
-    public GameObject creditsScreen;
     public AudioClip buttonClickSound;
     public MusicTrack titleScreenMusic;
 
@@ -147,23 +146,6 @@ public class TitleScreenBehavior : MonoBehaviour
             EventSystem.current.SetSelectedGameObject(achievementsButton);
         }
     }
-
-    public void ToggleCredisPanel()
-    {
-        creditsScreen.SetActive(!creditsScreen.activeInHierarchy);
-
-        if (creditsScreen.activeInHierarchy)
-        {
-            EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(creditsScreen.transform.GetChild(1).gameObject);
-        }
-
-        else
-        {
-            EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(startButton);
-        }
-    }
     
     //Creates a screen showing achievement rewards
     public void CreateAchievementRewards()
@@ -185,6 +167,7 @@ public class TitleScreenBehavior : MonoBehaviour
         //If there are no rewards left, select the start button
         else
         {
+            ToggleButtonInteractability(true);
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(startButton);
         }
