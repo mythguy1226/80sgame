@@ -267,7 +267,7 @@ public class PlayerJoinManager : MonoBehaviour
 
     public void ExitToTitle()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(2);
     }
 
     //Change the prompt tray icons based on the based in sprite list and whether a controller is used or not

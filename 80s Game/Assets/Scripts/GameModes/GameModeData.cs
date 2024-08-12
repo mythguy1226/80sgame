@@ -10,11 +10,11 @@ public static class GameModeData
         switch (activeGameMode)
         {
             case EGameMode.Defense:
-                return 4;
+                return 5;
             case EGameMode.Competitive:
-                return 3;
+                return 4;
             default:
-                return 2;
+                return 3;
         }
     }
 
