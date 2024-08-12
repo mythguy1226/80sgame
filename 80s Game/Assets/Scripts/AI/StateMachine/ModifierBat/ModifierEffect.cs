@@ -52,6 +52,9 @@ public abstract class AbsModifierEffect : MonoBehaviour
     float bobTime = 0.0f;
     float bobDirCoef = 1.0f;
 
+    // acquisition animation lerp field
+    private float _motionValueCoefficient;
+
     Rigidbody2D _Rb;
 
     // Start is called before the first frame update
@@ -65,6 +68,8 @@ public abstract class AbsModifierEffect : MonoBehaviour
         flickerTimer = lifeTime;
         bobUpPos = transform.position + new Vector3(0.0f, 0.5f, 0.0f);
         bobDownPos = transform.position;
+
+        _motionValueCoefficient = -10.0f;
     }
 
     void OnDisable()
@@ -99,15 +104,19 @@ public abstract class AbsModifierEffect : MonoBehaviour
 
             if (animatedModifierUIElement != null)
             {
+                float motionValue = (_motionValueCoefficient>=0?_motionValueCoefficient:0) * Time.deltaTime * 0.15f;
+                _motionValueCoefficient++;
                 Debug.Log("MOD POS: " + animatedModifierUIElement.transform.position.ToString());
                 Debug.Log("PLAYER POS: " + GameManager.Instance.UIManager.modifierContainers[activator.Order].transform.position.ToString());
-                animatedModifierUIElement.transform.position = Vector3.Lerp(animatedModifierUIElement.transform.position, GameManager.Instance.UIManager.modifierContainers[activator.Order].transform.position, Time.deltaTime * 4);
+                //animatedModifierUIElement.transform.position = Vector3.Lerp(animatedModifierUIElement.transform.position, GameManager.Instance.UIManager.modifierContainers[activator.Order].transform.position, Time.deltaTime * 4);
+                animatedModifierUIElement.transform.position = Vector3.Lerp(animatedModifierUIElement.transform.position, GameManager.Instance.UIManager.modifierContainers[activator.Order].transform.position, motionValue);
 
                 if (animatedModifierUIElement.transform.position.ToString() == GameManager.Instance.UIManager.modifierContainers[activator.Order].transform.position.ToString())
                 {
                     modifierUIRefs.Remove(animatedModifierUIElement);
                     Destroy(animatedModifierUIElement);
                     AddUIRef(activator.Order);
+                    _motionValueCoefficient = 0;
                 }
             }
         }
