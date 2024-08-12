@@ -7246,6 +7246,7 @@ MonoBehaviour:
   - {fileID: 106966640}
   postProcessVolume: {fileID: 720413084}
   onboardingUI: {fileID: 0}
+  pauseScreenUI: {fileID: 0}
   titleScreenUI: {fileID: 0}
   scoreBehavior: {fileID: 0}
   backgroundUI: {fileID: 0}
@@ -7259,6 +7260,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: b1d69a59fb2697f4897abda8625e5922, type: 3}
   - {fileID: 21300000, guid: eefe79d2900ee5c469c25a19ac90ac80, type: 3}
   - {fileID: 21300000, guid: 4e8779f31b85f214983256b0033a735e, type: 3}
+  - {fileID: 21300000, guid: ed32c8de8de6e334b80ea78175c0e06c, type: 3}
   gamemodeCards: []
   achievementNotifPrefab: {fileID: 620959811953644945, guid: a499eadc9a8de1e4e94da12ae6e3f191, type: 3}
   background: {fileID: 729109293}
