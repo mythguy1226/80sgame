@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 5121942957274129258}
   - component: {fileID: -9004518963499802162}
   - component: {fileID: 5122440697510579374}
-  - component: {fileID: 5352364880851083079}
   - component: {fileID: 1142854938126180406}
   - component: {fileID: 8052041500902039558}
   - component: {fileID: 7392182150163370368}
@@ -55,6 +54,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 5
   FSM: {fileID: 0}
+  stunningPlayer: {fileID: 0}
   bIsStunned: 0
   floatingTextPrefab: {fileID: 0}
   pointValue: 3000
@@ -123,8 +123,8 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.47457626, y: 0.18421052}
-    oldSize: {x: 0.59, y: 0.38}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.64, y: 0.64}
     newSize: {x: 0.64, y: 0.64}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -132,7 +132,7 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.26, y: 0.27}
+    - - {x: 0.2, y: 0.27}
       - {x: -0.06, y: 0.29}
       - {x: -0.08, y: 0.24}
       - {x: -0.07, y: 0.14}
@@ -145,6 +145,7 @@ PolygonCollider2D:
       - {x: 0.31, y: -0.1}
       - {x: 0.31, y: 0.02}
       - {x: 0.19, y: 0.05}
+      - {x: 0.28, y: 0.17}
   m_UseDelaunayMesh: 0
 --- !u!114 &-9004518963499802162
 MonoBehaviour:
@@ -186,21 +187,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!111 &5352364880851083079
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 232502045716647642}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 5925d5d93d8cc8841ba674b47d878e80, type: 2}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!212 &1142854938126180406
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -242,7 +228,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 361592523860845329, guid: 75ea44f98fdffab498b32fec784a26ce, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 038ed5401d6614f40bdd8e846fb19d71, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

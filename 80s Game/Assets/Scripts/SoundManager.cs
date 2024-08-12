@@ -11,6 +11,7 @@ public class SoundManager : MonoBehaviour
     //AudioSources for sound playback.
     public AudioSource interruptSource;     //audio source for sounds which cancel each other out
     public AudioSource continuousSource;    //audio source for sounds which cannot be interrupted
+    [SerializeField] AudioSource _musicNonloopSource;
     [SerializeField] AudioSource[] _musicLoopSources;     //audio sources for looping music track(s) seamlessly
 
     //NOTE: non-looping music like between-round and game end themes should use PlayNonloopMusic()!
@@ -32,6 +33,7 @@ public class SoundManager : MonoBehaviour
             {
                 if (_musicLoopSources[i] != null) _musicLoopSources[i].volume = value;
             }
+            if(_musicNonloopSource != null) _musicNonloopSource.volume = value;
         }
     }
 
@@ -148,7 +150,7 @@ public class SoundManager : MonoBehaviour
     {
         if (clip != null && clip.Clip != null)
         {
-            continuousSource.PlayOneShot(clip.Clip, _musicVolume);
+            _musicNonloopSource.PlayOneShot(clip.Clip, _musicVolume);
         }
     }
     /// <summary>

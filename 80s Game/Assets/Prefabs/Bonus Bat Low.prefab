@@ -9841,7 +9841,6 @@ GameObject:
   - component: {fileID: 2954919173862499726}
   - component: {fileID: 4632424115148975929}
   - component: {fileID: 3464643637762033909}
-  - component: {fileID: 5432022069463102744}
   - component: {fileID: 7774082277665354212}
   - component: {fileID: 7014873915471283781}
   - component: {fileID: 7037331219643080041}
@@ -9938,24 +9937,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!111 &5432022069463102744
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8306778490096188409}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: cb7800d510ac99b4da9ae8282ecad95c, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: cb7800d510ac99b4da9ae8282ecad95c, type: 2}
-  - {fileID: 7400000, guid: d1372a782501f3f408f0ff42ca88e95c, type: 2}
-  - {fileID: 7400000, guid: 905aa369f369e9147920e91276579a56, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!212 &7774082277665354212
 SpriteRenderer:
   m_ObjectHideFlags: 0

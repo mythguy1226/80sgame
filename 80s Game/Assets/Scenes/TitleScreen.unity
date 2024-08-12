@@ -1274,7 +1274,8 @@ MonoBehaviour:
   achievementsPanel: {fileID: 1705306704}
   achievementsList: {fileID: 1203544902}
   achievementRewardPrefab: {fileID: 1923514397185271933, guid: c487211524a31c34eb4eacc9f0db0189, type: 3}
-  buttonClickSound: {fileID: 8300000, guid: 0f33d998cd03b1f4ebc4983ef2a6d559, type: 3}
+  creditsScreen: {fileID: 10163740}
+  buttonClickSound: {fileID: 8300000, guid: 22eeadc8c63c06e438e04029774dfaf5, type: 3}
   titleScreenMusic: {fileID: 11400000, guid: 8017975349db49843bed656899ffeb7e, type: 2}
   gamemodeName: {fileID: 0}
   gamemodeDescription: {fileID: 0}
@@ -2058,6 +2059,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 586626691}
+        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
+        m_MethodName: PlaySoundContinuous
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 22eeadc8c63c06e438e04029774dfaf5, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2915,6 +2928,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &586626691 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3461611791098616396, guid: 2299d4f9757c4bf419fea5ff373c1153, type: 3}
+  m_PrefabInstance: {fileID: 4229236438130621606}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2dadec502d609343a86c314a816809a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &653409313
 GameObject:
   m_ObjectHideFlags: 0
