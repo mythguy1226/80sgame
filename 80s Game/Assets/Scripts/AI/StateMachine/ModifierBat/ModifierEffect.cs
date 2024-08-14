@@ -259,6 +259,9 @@ public abstract class AbsModifierEffect : MonoBehaviour
     /// </summary>
     protected void AnimateUIRef()
     {
+        if (modifierUIPrefab == null)
+            return;
+            
         animatedModifierUIElement = Instantiate(modifierUIPrefab, this.transform.position, Quaternion.identity);
         animatedModifierUIElement.transform.position = this.transform.position;
 
