@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectDuration: 0
-  modifierUIPrefab: {fileID: 2011110001720158753, guid: d4485d39dcffd10438c4ce40e2bff1f4, type: 3}
+  modifierUIPrefab: {fileID: 0}
   floatingTextPrefab: {fileID: 5422266768498237442, guid: ea6ce9b2907459549a09b70e5ab052ff, type: 3}
   modifierName: Rogue Bat
   activator: {fileID: 0}

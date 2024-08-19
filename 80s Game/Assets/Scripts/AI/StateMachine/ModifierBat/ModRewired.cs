@@ -33,7 +33,6 @@ public class ModRewired : AbsModifierEffect
             dFSM.TransitionToState(DefenseBatStateMachine.DefenseBatStates.Wandering);
             dFSM.AnimControls.ResetAnimation();
             dFSM.pursueTimer = effectDuration;
-
         }
         HandleModifierCountAchievement();
     }
