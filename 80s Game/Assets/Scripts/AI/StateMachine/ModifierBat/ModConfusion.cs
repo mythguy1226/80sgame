@@ -33,14 +33,14 @@ public class ModConfusion : AbsModifierEffect
                 pc.SetMod(GetModType(), this);
                 continue;
             }
-            else if (pc.Order != activator.Order && !bIsSelfDebuff) // Affect all players but activator
+            else if (pc != activator && !bIsSelfDebuff) // Affect all players but activator
             {
                 piw.isFlipped = true;
                 AnimateUIRef();
                 pc.SetMod(GetModType(), this);
                 continue;
             }
-            else if(pc.Order == activator.Order && bIsSelfDebuff) // Affect the activator
+            else if(pc == activator && bIsSelfDebuff) // Affect the activator
             {
                 piw.isFlipped = true;
                 AnimateUIRef();

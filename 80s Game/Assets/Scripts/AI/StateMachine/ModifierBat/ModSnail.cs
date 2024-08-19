@@ -42,7 +42,7 @@ public class ModSnail : AbsModifierEffect
                 EnableVFX(pc);
                 continue;
             }
-            else if (pc.Order != activator.Order && !bIsSelfDebuff) // Affect all players but activator
+            else if (pc != activator && !bIsSelfDebuff) // Affect all players but activator
             {
                 piw.isSlowed = true;
                 AnimateUIRef();
@@ -50,7 +50,7 @@ public class ModSnail : AbsModifierEffect
                 EnableVFX(pc);
                 continue;
             }
-            else if(pc.Order == activator.Order && bIsSelfDebuff) // Affect the activator
+            else if(pc == activator && bIsSelfDebuff) // Affect the activator
             {
                 piw.isSlowed = true;
                 AnimateUIRef();
