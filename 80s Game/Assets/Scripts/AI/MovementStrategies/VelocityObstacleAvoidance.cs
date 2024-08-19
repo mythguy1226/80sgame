@@ -1,7 +1,4 @@
-using TMPro;
 using UnityEngine;
-using UnityEngine.UIElements;
-using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class VelocityObstacleAvoidance : AbsMovementStrategy
 {
@@ -13,7 +10,14 @@ public class VelocityObstacleAvoidance : AbsMovementStrategy
     {
         UpdateVelocity();
         AvoidObstacles();
-        
+        if (DistanceOverride())
+        {
+            
+            Vector3 position = movementController.gameObject.transform.position;
+            Vector2 currentPosition = new Vector2(position.x, position.y);
+            movementController.currentVelocity = (movementController.targetPosition - currentPosition).normalized * movementController.GetMaxSpeed();
+            Debug.DrawLine(currentPosition, currentPosition + movementController.currentVelocity);
+        }
         return UpdatePosition();
         
     }
@@ -138,5 +142,11 @@ public class VelocityObstacleAvoidance : AbsMovementStrategy
         }
         Vector2 whisker = Quaternion.AngleAxis(angle, rotationAngle) * velocity.normalized;
         return whisker.normalized;
+    }
+
+    private bool DistanceOverride()
+    {
+        float distance = Vector2.Distance(movementController.targetPosition, movementController.gameObject.transform.position);
+        return distance > movementController.maxDistance;
     }
 }

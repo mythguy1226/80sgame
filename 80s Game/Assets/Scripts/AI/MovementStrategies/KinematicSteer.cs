@@ -13,7 +13,8 @@ public class KinematicSteer : MonoBehaviour
     // Maximums
     [Range(0, 10)]
     public float maxSpeed = 3f;
-
+    [Range(2, 15)]
+    public float maxDistance = 8.0f;
 
     // Private fields for calculations
     public Vector2 currentVelocity;
