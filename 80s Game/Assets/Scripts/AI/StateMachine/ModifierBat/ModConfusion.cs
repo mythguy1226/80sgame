@@ -20,7 +20,7 @@ public class ModConfusion : AbsModifierEffect
             PlayerController pc = piw.GetPlayer();
 
             // If player already has mod extend it
-            if (pc.HasMod(GetModType()))
+            if (pc.HasMod(GetModType()) && pc == activator)
             {
                 pc.ExtendModDuration(GetModType(), maxEffectDuration);
                 CleanUp();
@@ -29,6 +29,7 @@ public class ModConfusion : AbsModifierEffect
             else if (GameManager.Instance.gameModeType == EGameMode.Defense) // Affect all players in defense mode
             {
                 piw.isFlipped = true;
+                affectedPlayers.Add(pc);
                 AnimateUIRef();
                 pc.SetMod(GetModType(), this);
                 continue;
@@ -43,6 +44,7 @@ public class ModConfusion : AbsModifierEffect
             else if(pc == activator && bIsSelfDebuff) // Affect the activator
             {
                 piw.isFlipped = true;
+                affectedPlayers.Add(pc);
                 AnimateUIRef();
                 pc.SetMod(GetModType(), this);
                 continue;
@@ -99,16 +101,13 @@ public class ModConfusion : AbsModifierEffect
             {
                 continue;
             }
-            else if (piw.GetPlayer() == activator && bIsSelfDebuff) // Continue if disabling activator
+            else if (affectedPlayers.Contains(piw.GetPlayer()) && bIsSelfDebuff) // Continue if disabling activator
             {
                 piw.isFlipped = false;
                 piw.GetPlayer().RemoveMod(GetModType());
                 piw.GetPlayer().activeCrosshair.transform.rotation = Quaternion.identity;
                 continue;
             }
-            piw.isFlipped = false;
-            piw.GetPlayer().RemoveMod(GetModType());
-            piw.GetPlayer().activeCrosshair.transform.rotation = Quaternion.identity;
             AchievementManager.RegisterData("confmod-pi-" + i.ToString(), 0);
         }
         GameManager.Instance.debuffActive = false;
