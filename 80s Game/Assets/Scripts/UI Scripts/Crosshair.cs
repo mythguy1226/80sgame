@@ -48,8 +48,8 @@ public class Crosshair : MonoBehaviour
             overheatUI.color = Color.Lerp(startColor, endColor, Mathf.Sin(jiggleFrequency * currentJiggleTimer * 0.5f) * 0.5f + 0.5f);
         }
 
-        float finalX = transform.position.x + movementDelta.x + jiggleOffsetX;
-        float finalY = transform.position.y + movementDelta.y + jiggleOffsetY;
+        float finalX = transform.position.x + movementDelta.x + jiggleOffsetX * Time.deltaTime;
+        float finalY = transform.position.y + movementDelta.y + jiggleOffsetY * Time.deltaTime;
         Vector3 newPosition = Clamp(new Vector3(finalX, finalY, transform.position.z));
         transform.position = newPosition;
     }

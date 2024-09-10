@@ -222,17 +222,6 @@
                 },
                 {
                     "name": "",
-                    "id": "0cc735a6-d948-4c5a-9607-5e317b0d70da",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "PS4;xbox",
-                    "action": "Recenter",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "6e8af115-8cb3-4762-8716-2acb31b1ed96",
                     "path": "<Gamepad>/buttonEast",
                     "interactions": "",
