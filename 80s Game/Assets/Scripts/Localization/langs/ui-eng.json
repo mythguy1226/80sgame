@@ -25,6 +25,10 @@
       "value": "Controls"
     },
     {
+      "label": "snst",
+      "value": "Crosshair Sensitivity"
+    },
+    {
       "label": "sfxv",
       "value": "SFX Volume"
     },

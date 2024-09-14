@@ -117,6 +117,9 @@ namespace Localization
                     case "sfxv":
                         UIEncoder.Add(data.label, UITextLabels.SFX_Volume);
                         break;
+                    case "snst":
+                        UIEncoder.Add(data.label, UITextLabels.Sensitivity);
+                        break;
                     case "mscv":
                         UIEncoder.Add(data.label, UITextLabels.Music_Volume);
                         break;

@@ -25,6 +25,10 @@
       "value": "Controles"
     },
     {
+      "label": "snst",
+      "value": "Sensibilidad del Cursor"
+    },
+    {
       "label": "sfxv",
       "value": "Volumen: Efectos"
     },
