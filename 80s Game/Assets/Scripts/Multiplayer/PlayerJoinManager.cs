@@ -29,7 +29,8 @@ public class PlayerJoinManager : MonoBehaviour
     private int backOutPlayerRef;
     private bool controllerConnected;
     private bool sceneTransition = false;
-    private float defaultSensitivity = 4.0f;
+    private float defaultSensitivity = 4.5f;
+    private float mouseDefaultSensitivity = 2.5f;
 
     private void Awake()
     {
@@ -55,6 +56,11 @@ public class PlayerJoinManager : MonoBehaviour
         // To avoid the 0-sensitivity bug, we begin by defining a sensitivity value that might get overriden later
         // Sensitivity values change by input, so we begin by detecting input type
         string currentControlScheme = playerInput.currentControlScheme;
+        float defaultDeviceSensitivity = defaultSensitivity;
+        if(currentControlScheme == "KnM")
+        {
+            defaultDeviceSensitivity = mouseDefaultSensitivity;
+        }
         
         // We then create a data object that will persist player's information from the join scene to the gameplay scene
         PlayerConfig config = new PlayerConfig(playerInput.playerIndex, PlayerData.defaultColors[playerInput.playerIndex], new Vector2(2.5f,2.5f));
@@ -69,7 +75,7 @@ public class PlayerJoinManager : MonoBehaviour
         // Set back sensitivity override if this is player one
         if(playerInput.playerIndex == 0)
         {
-            config.sensitivity = new Vector2(PlayerPrefs.GetFloat("Sensitivity", defaultSensitivity), PlayerPrefs.GetFloat("Sensitivity", defaultSensitivity));
+            config.sensitivity = new Vector2(PlayerPrefs.GetFloat("Sensitivity", defaultDeviceSensitivity), PlayerPrefs.GetFloat("Sensitivity", defaultDeviceSensitivity));
         } else
         {
             config.sensitivity = new Vector2(defaultSensitivity, defaultSensitivity);
