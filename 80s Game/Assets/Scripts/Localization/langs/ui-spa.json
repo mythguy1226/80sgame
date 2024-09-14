@@ -1,0 +1,89 @@
+{
+  "textElements": [
+    {
+      "label": "strt",
+      "value": "Iniciar Partida"
+    },
+    {
+      "label": "achv",
+      "value": "Logros"
+    },
+    {
+      "label": "stng",
+      "value": "Opciones"
+    },
+    {
+      "label": "exit",
+      "value": "Salir"
+    },
+    {
+      "label": "crdt",
+      "value": "Creditos"
+    },
+    {
+      "label": "ctrl",
+      "value": "Controles"
+    },
+    {
+      "label": "sfxv",
+      "value": "Volumen: Efectos"
+    },
+    {
+      "label": "mscv",
+      "value": "Volumen: Música"
+    },
+    {
+      "label": "blum",
+      "value": "Resplandor"
+    },
+    {
+      "label": "crte",
+      "value": "Efecto CRT"
+    },
+    {
+      "label": "crvt",
+      "value": "Curvatura"
+    },
+    {
+      "label": "aply",
+      "value": "Aplicar"
+    },
+    {
+      "label": "cncl",
+      "value": "Cancelar"
+    },
+    {
+      "label": "aim",
+      "value": "Apuntar"
+    },
+    {
+      "label": "fire",
+      "value": "Disparar"
+    },
+    {
+      "label": "mnkb",
+      "value": "Raton & Teclado"
+    },
+    {
+      "label": "extq",
+      "value": "¿Salir?"
+    },
+    {
+      "label": "stnp",
+      "value": "Tus opciones no se han aplicado.\n Salir ahora revertirá tus cambios."
+    },
+    {
+      "label": "svex",
+      "value": "Guardar & Salir"
+    },
+    {
+      "label": "exws",
+      "value": "Salir sin Guardar"
+    },
+    {
+      "label": "paus",
+      "value": "Pausa"
+    }
+
+  ]
+}

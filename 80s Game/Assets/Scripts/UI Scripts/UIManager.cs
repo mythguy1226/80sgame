@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.UI;
+using SteamIntegration;
 //using UnityEngine.WSA;
 
 public class UIManager : MonoBehaviour
@@ -29,6 +30,7 @@ public class UIManager : MonoBehaviour
     public OnboardingUI onboardingUI;
     public PauseScreenBehavior pauseScreenUI;
     private GameOverBehavior gameOverUI;
+    private SteamInterface steamInterface;
     public TitleScreenBehavior titleScreenUI;
     public ScoreBehavior scoreBehavior;
     public BackgroundCustomization backgroundUI;
@@ -57,6 +59,7 @@ public class UIManager : MonoBehaviour
         gameOverUI = canvas.GetComponent<GameOverBehavior>();
         scoreBehavior = canvas.GetComponent<ScoreBehavior>();
         titleScreenUI = canvas.GetComponent<TitleScreenBehavior>();
+        steamInterface = GetComponent<SteamInterface>();
         achievementNotifs = new Queue<AchievementNotificationData>();
     }
 
@@ -100,6 +103,11 @@ public class UIManager : MonoBehaviour
     public static void PlayerPause(int player)
     {
         pauseEvent?.Invoke(player);
+    }
+
+    public void SystemInterruptPause()
+    {
+        pauseEvent?.Invoke(1);
     }
 
     //Create status effect UI for the appropriate modifier and proper player
