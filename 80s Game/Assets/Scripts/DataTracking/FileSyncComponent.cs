@@ -23,7 +23,7 @@ public class FileSyncComponent : MonoBehaviour
     {
         // Localization setup
         SteamInterface steamComponent = GetComponent<SteamInterface>();
-        LoadLocalizationData(SupportedLanguages.SPANISH);
+        LoadLocalizationData(steamComponent.gameLanguage);
 
         // Network Setup
         // Escape out of this if we're in the debug environment
