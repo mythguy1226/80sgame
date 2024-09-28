@@ -1,0 +1,93 @@
+{
+  "textElements": [
+    {
+      "label": "strt",
+      "value": "Start Game"
+    },
+    {
+      "label": "achv",
+      "value": "Achievements"
+    },
+    {
+      "label": "stng",
+      "value": "Settings"
+    },
+    {
+      "label": "exit",
+      "value": "Exit Game"
+    },
+    {
+      "label": "crdt",
+      "value": "Credits"
+    },
+    {
+      "label": "ctrl",
+      "value": "Controls"
+    },
+    {
+      "label": "snst",
+      "value": "Crosshair Sensitivity"
+    },
+    {
+      "label": "sfxv",
+      "value": "SFX Volume"
+    },
+    {
+      "label": "mscv",
+      "value": "Music Volume"
+    },
+    {
+      "label": "blum",
+      "value": "Bloom"
+    },
+    {
+      "label": "crte",
+      "value": "CRT Effect"
+    },
+    {
+      "label": "crvt",
+      "value":  "Curvature"
+    },
+    {
+      "label": "aply",
+      "value": "Apply"
+    },
+    {
+      "label": "cncl",
+      "value": "Cancel"
+    },
+    {
+      "label": "aim",
+      "value": "Aim"
+    },
+    {
+      "label": "fire",
+      "value": "Fire"
+    },
+    {
+      "label": "mnkb",
+      "value": "Mouse & Keyboard"
+    },
+    {
+      "label": "extq",
+      "value": "Exit?"
+    },
+    {
+      "label": "stnp",
+      "value": "Your settings have not been applied.\nQuitting now will remove any changes"
+    },
+    {
+      "label": "svex",
+      "value": "Save & Exit"
+    },
+    {
+      "label": "exws",
+      "value": "Exit Without Saving"
+    },
+    {
+      "label": "paus",
+      "value": "Pause"
+    }
+
+  ]
+}
