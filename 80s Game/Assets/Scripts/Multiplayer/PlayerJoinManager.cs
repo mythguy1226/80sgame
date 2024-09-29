@@ -29,8 +29,8 @@ public class PlayerJoinManager : MonoBehaviour
     private int backOutPlayerRef;
     private bool controllerConnected;
     private bool sceneTransition = false;
-    private float defaultSensitivity = 4.5f;
-    private float mouseDefaultSensitivity = 2.5f;
+    private float defaultSensitivity = 2.5f;
+    private float mouseDefaultSensitivity = 3.25f;
 
     private void Awake()
     {
