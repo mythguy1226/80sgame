@@ -16,7 +16,7 @@ public class OnboardingUI : MonoBehaviour
     [SerializeField] MusicTrack gameLoopIntro;
     [SerializeField] MusicTrack gameLoopBGM;
     private UIManager manager;
-    private bool controllerConnected = false;
+    //private bool controllerConnected = false;
     private bool playedBGM = false;
 
     public List<GameObject> onboardingPages;
