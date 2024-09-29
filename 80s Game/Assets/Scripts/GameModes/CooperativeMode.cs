@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CooperativeMode : AbsGameMode
 {
-    float modifierChance = 0.3f;
+    //float modifierChance = 0.3f;
     Defendable coreObject;
     public CooperativeMode() : base()
     {

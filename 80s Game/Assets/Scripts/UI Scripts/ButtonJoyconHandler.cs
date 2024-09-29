@@ -9,7 +9,7 @@ public class ButtonJoyconHandler : MonoBehaviour
     public bool pauseButton = false;
 
     private Button _button;
-    private bool hovered;
+    //private bool hovered;
 
     void Awake()
     {
@@ -37,11 +37,11 @@ public class ButtonJoyconHandler : MonoBehaviour
     //Attach to the PointerEnter and PointerExit event triggers on the button's game object
     public void ButtonHover()
     {
-        hovered = true;
+        //hovered = true;
     }
 
     public void ButtonUnhover()
     {
-        hovered = false;
+        //hovered = false;
     }
 }
