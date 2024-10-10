@@ -4975,6 +4975,8 @@ MonoBehaviour:
   coreHealthPercentage: {fileID: 0}
   core: {fileID: 0}
   newRoundTextPrefab: {fileID: 5422266768498237442, guid: fb3e11995eab6b44dbde8bef1e940d3d, type: 3}
+  accuracyTextPrefab: {fileID: 5422266768498237442, guid: e6e18e1c06e0c9c4eb1332faf76aa60a, type: 3}
+  bonusPoints: 0
 --- !u!114 &1011990667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5391,6 +5393,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aedf6b149ca39fa4b8f75744e6f88757, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameLanguage: 0
 --- !u!1 &1107327210
 GameObject:
   m_ObjectHideFlags: 0
