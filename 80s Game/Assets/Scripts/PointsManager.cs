@@ -67,6 +67,7 @@ public class PointsManager : MonoBehaviour
         }
         int numBonusPoints = Mathf.RoundToInt(RoundScoreByPlayer[player] * accuracy);
         
+        scoreBehavior.bonusPoints = numBonusPoints;
         scoreBehavior.UpdateScores(player);
         scoreBehavior.UpdateAccuracy(accuracy);
         Debug.Log("Updated accuracy: " + accuracy);
