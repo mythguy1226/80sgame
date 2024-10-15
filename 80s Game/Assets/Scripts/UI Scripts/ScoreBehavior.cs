@@ -40,6 +40,8 @@ public class ScoreBehavior : MonoBehaviour
     public Defendable core;   
 
     public GameObject newRoundTextPrefab;
+    public GameObject accuracyTextPrefab;
+    public float bonusPoints;
 
     // Start is called before the first frame update
     void Start()
@@ -270,5 +272,13 @@ public class ScoreBehavior : MonoBehaviour
     public void ShowNewRoundText()
     {
         Instantiate(newRoundTextPrefab, newRoundTextPrefab.transform.position, Quaternion.identity);
+    }
+
+    //Show text to indicate accuracy and points gained
+    public void ShowAccuracy()
+    {
+        GameObject accText = Instantiate(accuracyTextPrefab, accuracyTextPrefab.transform.position, Quaternion.identity);
+        accText.GetComponent<AccuracyText>().accuracy = accuracy;
+        accText.GetComponent<AccuracyText>().bonusPoints = bonusPoints;
     }
 }

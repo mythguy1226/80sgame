@@ -192,6 +192,7 @@ public class ClassicMode : AbsGameMode
                 if (GameManager.Instance.roundEndTheme != null)
                     SoundManager.Instance.PlaySoundContinuous(GameManager.Instance.roundEndTheme.Clip);
                 GameManager.Instance.UIManager.scoreBehavior.ShowNewRoundText();
+                GameManager.Instance.UIManager.scoreBehavior.ShowAccuracy();
                 GameManager.Instance.StartRoundDelay();
             }
                 
