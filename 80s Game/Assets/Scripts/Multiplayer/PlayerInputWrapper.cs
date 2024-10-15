@@ -96,9 +96,20 @@ public class PlayerInputWrapper : MonoBehaviour
         {
             snailModifier = 0.5f;
         }
-        Vector2 debugVector = value.Get<Vector2>();
-        Vector2 adjustedInput = value.Get<Vector2>().normalized;
-        adjustedInput = Vector2.Scale(adjustedInput, sensitivity * config.sensitivity * snailModifier);
+        Vector2 scalingVector = sensitivity * config.sensitivity * snailModifier * Time.deltaTime;
+        Vector2 input = value.Get<Vector2>();
+        if (!controllerInput)
+        {
+            if (input.magnitude < 1.0f)
+            {
+                scalingVector *= input.magnitude;
+            }
+        }
+        
+        Vector2 adjustedInput = input.normalized;
+        adjustedInput = Vector2.Scale(adjustedInput, scalingVector);
+        
+
         if (isFlipped)
         {
             adjustedInput *= -1;
