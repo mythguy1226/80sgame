@@ -318,6 +318,17 @@
                     "action": "LookingGlass",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "55cc2ef7-0b0f-4869-b61a-6f15115dcba7",
+                    "path": "<DualShockGamepad>/rightStickPress",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PS4",
+                    "action": "LookingGlass",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
