@@ -58,9 +58,10 @@ public class AttackingState : AbsBaseState<DefenseBatStateMachine.DefenseBatStat
         if (_MovementControls == null)
             return;
 
-        // Enable movement
+        // Disable movement and keep bat at latch point
         _MovementControls.isFleeing = false;
         _MovementControls.canMove = false;
+        FSM.transform.position = FSM.targetLatch.transform.position;
 
         // Manage attack timer and attacking
         if(FSM.CanAttack) // Attack logic
