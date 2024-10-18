@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEditor;
-using UnityEngine.Rendering.PostProcessing;
 
 public abstract class AbsModifierEffect : MonoBehaviour
 {
@@ -81,6 +79,11 @@ public abstract class AbsModifierEffect : MonoBehaviour
         InputManager.detectHitSub -= ListenForShot;
     }
 
+    private void OnDestroy()
+    {
+        InputManager.detectHitSub -= ListenForShot; 
+    }
+
     // Called once every frame
     protected void Update()
     {
@@ -112,8 +115,7 @@ public abstract class AbsModifierEffect : MonoBehaviour
                 {
                     float motionValue = (_motionValueCoefficient>=0?_motionValueCoefficient:0) * Time.deltaTime * 0.15f;
                     _motionValueCoefficient++;
-                    Debug.Log("MOD POS: " + animatedModifierUIElements[i].transform.position.ToString());
-                    Debug.Log("PLAYER POS: " + GameManager.Instance.UIManager.modifierContainers[activator.Order].transform.position.ToString());
+
                     //animatedModifierUIElement.transform.position = Vector3.Lerp(animatedModifierUIElement.transform.position, GameManager.Instance.UIManager.modifierContainers[activator.Order].transform.position, Time.deltaTime * 4);
                     animatedModifierUIElements[i].transform.position = Vector3.Lerp(animatedModifierUIElements[i].transform.position, GameManager.Instance.UIManager.modifierContainers[affectedPlayers[i].Order].transform.position, motionValue);
 
