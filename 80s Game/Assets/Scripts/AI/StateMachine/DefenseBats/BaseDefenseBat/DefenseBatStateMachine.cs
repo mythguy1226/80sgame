@@ -225,6 +225,12 @@ public class DefenseBatStateMachine : AbsStateMachine<DefenseBatStateMachine.Def
             target.ResolveHit();
         }
 
+        // Test for bats having been unlatched
+        if (targetLatch == null)
+        {
+            return;
+        }
+
         // Get the defendable from the target latch
         Defendable latchedDefendable = targetLatch.transform.parent.GetComponent<Defendable>();
         // AnimControls.PlayAttackAnimation(); Moved to AttackingState

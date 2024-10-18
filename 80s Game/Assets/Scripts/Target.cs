@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using static AchievementData;
 
 public class Target : MonoBehaviour
 {
@@ -49,6 +48,12 @@ public class Target : MonoBehaviour
 
     void OnDisable()
     {
+        InputManager.detectHitSub -= ListenForShot;
+    }
+
+    private void OnDestroy()
+    {
+        Debug.Log("On Destroy Called");
         InputManager.detectHitSub -= ListenForShot;
     }
 
