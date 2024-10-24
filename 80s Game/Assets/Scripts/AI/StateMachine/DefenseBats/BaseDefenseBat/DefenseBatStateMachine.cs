@@ -32,6 +32,7 @@ public class DefenseBatStateMachine : AbsStateMachine<DefenseBatStateMachine.Def
     public float attackCooldown = 0.5f;
     float attackTimer;
     bool bCanAttack = true;
+    public bool canLatch = true;
     public int attackDamage = 1;
 
     // Get needed components for state machine
@@ -223,6 +224,12 @@ public class DefenseBatStateMachine : AbsStateMachine<DefenseBatStateMachine.Def
         if (target.bIsStunned)
         {
             target.ResolveHit();
+        }
+
+        // Test for bats having been unlatched
+        if (targetLatch == null)
+        {
+            return;
         }
 
         // Get the defendable from the target latch
