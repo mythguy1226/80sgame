@@ -22,10 +22,14 @@ public class AttackingState : AbsBaseState<DefenseBatStateMachine.DefenseBatStat
 	*/
     public override void EnterState()
     {
+        DefenseBatStateMachine FSM = (DefenseBatStateMachine)OwnerFSM;
         OwnerFSM.GetComponent<CircleCollider2D>().isTrigger = false;
         OwnerFSM.GetComponent<PolygonCollider2D>().isTrigger = false;
         OwnerFSM.gameObject.GetComponent<Target>().bIsStunned = false;
-        _AnimControls.SetLatched(true);
+        if (FSM.canLatch)
+        {
+            _AnimControls.SetLatched(true);
+        }
     }
 
     /*
@@ -35,8 +39,12 @@ public class AttackingState : AbsBaseState<DefenseBatStateMachine.DefenseBatStat
 	*/
     public override void ExitState()
     {
-        // Any clean up needed from this state will go here
-        _AnimControls.SetLatched(false);
+        DefenseBatStateMachine FSM = (DefenseBatStateMachine)OwnerFSM;
+        if (FSM.canLatch)
+        {
+            // Any clean up needed from this state will go here
+            _AnimControls.SetLatched(false);
+        }
     }
 
     /*

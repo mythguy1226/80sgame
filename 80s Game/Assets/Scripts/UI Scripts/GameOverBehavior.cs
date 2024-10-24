@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.EventSystems;
-using Unity.VisualScripting;
 using UnityEngine.InputSystem;
 
 public class GameOverBehavior : MonoBehaviour

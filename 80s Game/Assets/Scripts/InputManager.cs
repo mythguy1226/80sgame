@@ -43,4 +43,9 @@ public class InputManager : MonoBehaviour
         }
         detectHitSub?.Invoke(s);
     }
+
+    public void OnDestroy()
+    {
+        detectHitSub = null;
+    }
 }
