@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class OnboardingUI : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class OnboardingUI : MonoBehaviour
     public GameObject mouseDiagram;
     public GameObject xboxControllerDiagram;
     public GameObject playstationControllerDiagram;
+    public GameObject backOutPanel;
+    public GameObject backOutExit;
     [SerializeField] MusicTrack gameStartTheme;
     [SerializeField] MusicTrack gameLoopIntro;
     [SerializeField] MusicTrack gameLoopBGM;
@@ -160,6 +163,22 @@ public class OnboardingUI : MonoBehaviour
     public void SetManager(UIManager reference)
     {
         manager = reference;
+    }
+
+    public void BackOut()
+    {
+        backOutPanel.SetActive(!backOutPanel.activeInHierarchy);
+
+        if (backOutPanel.activeInHierarchy)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(backOutExit);
+        }
+        
+        else
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+        }
     }
 
     /// <summary>

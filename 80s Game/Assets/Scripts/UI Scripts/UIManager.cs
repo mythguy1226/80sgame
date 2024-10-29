@@ -180,6 +180,11 @@ public class UIManager : MonoBehaviour
     //Cancel out of a menu on the title screen when pressing the cancel input
     public void CancelMenu()
     {
+        if (onboardingUI != null && onboardingUI.onboardingPanel.activeInHierarchy)
+        {
+            onboardingUI.BackOut();
+        }
+
         if (titleScreenUI == null)
         {
             return; 

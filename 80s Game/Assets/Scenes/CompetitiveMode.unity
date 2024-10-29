@@ -3008,6 +3008,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Onboarding Panel
       objectReference: {fileID: 0}
+    - target: {fileID: 3484289122437587113, guid: 83b74d6f69f25834085d2c64da72cf07, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1011990663}
+    - target: {fileID: 3484289122437587113, guid: 83b74d6f69f25834085d2c64da72cf07, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: QuitGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 3484289122437587113, guid: 83b74d6f69f25834085d2c64da72cf07, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PauseScreenBehavior, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 8304386652386480786, guid: 83b74d6f69f25834085d2c64da72cf07, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -3035,6 +3047,18 @@ PrefabInstance:
     - target: {fileID: 8304386652386480786, guid: 83b74d6f69f25834085d2c64da72cf07, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8366747788728445030, guid: 83b74d6f69f25834085d2c64da72cf07, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1011990664}
+    - target: {fileID: 8366747788728445030, guid: 83b74d6f69f25834085d2c64da72cf07, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: BackOut
+      objectReference: {fileID: 0}
+    - target: {fileID: 8366747788728445030, guid: 83b74d6f69f25834085d2c64da72cf07, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: OnboardingUI, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8699236009786162830, guid: 83b74d6f69f25834085d2c64da72cf07, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -6013,6 +6037,8 @@ MonoBehaviour:
   mouseDiagram: {fileID: 462073297}
   xboxControllerDiagram: {fileID: 462073296}
   playstationControllerDiagram: {fileID: 462073295}
+  backOutPanel: {fileID: 2104834233}
+  backOutExit: {fileID: 2104834232}
   gameStartTheme: {fileID: 11400000, guid: e190702bc3aadc743824ccd149a20d91, type: 2}
   gameLoopIntro: {fileID: 11400000, guid: 36db92fbc24e03a47882b903c91e0946, type: 2}
   gameLoopBGM: {fileID: 11400000, guid: 69b894590886a974e8bdfbad5173cdbf, type: 2}
@@ -6026,7 +6052,7 @@ MonoBehaviour:
   - {fileID: 462073289}
   iconSprites:
   - {fileID: 21300000, guid: 2252ebb5542a3994b838cc133994bb36, type: 3}
-  - {fileID: 21300000, guid: c8e3102adee278f43b68cb5d1e0657fb, type: 3}
+  - {fileID: 21300000, guid: e6dcd0c360eb1054b804f8beae7c723c, type: 3}
   - {fileID: 21300000, guid: 140b532f2fbd18f4d9723e286e42665b, type: 3}
   - {fileID: 21300000, guid: c4bef494bc09fb345b90199870dd29fc, type: 3}
   - {fileID: 21300000, guid: 0e1ce84a9977dcc4c8b3468bab1bb51c, type: 3}
@@ -6088,6 +6114,8 @@ MonoBehaviour:
   coreHealthPercentage: {fileID: 0}
   core: {fileID: 0}
   newRoundTextPrefab: {fileID: 5422266768498237442, guid: fb3e11995eab6b44dbde8bef1e940d3d, type: 3}
+  accuracyTextPrefab: {fileID: 0}
+  bonusPoints: 0
 --- !u!114 &1011990667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6807,6 +6835,9 @@ MonoBehaviour:
   - {x: 7.43, y: 6.81, z: 0}
   numStuns: 0
   totalStuns: 0
+  speedIncrement: 0.1
+  minSpeedCap: 3.5
+  maxSpeedCap: 4
 --- !u!114 &1095139973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6892,6 +6923,7 @@ MonoBehaviour:
   - {fileID: 953598794}
   postProcessVolume: {fileID: 720413084}
   onboardingUI: {fileID: 0}
+  pauseScreenUI: {fileID: 0}
   titleScreenUI: {fileID: 0}
   scoreBehavior: {fileID: 0}
   backgroundUI: {fileID: 0}
@@ -13157,6 +13189,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectable: {fileID: 2092589299}
+--- !u!1 &2104834232 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3917187769252455111, guid: 83b74d6f69f25834085d2c64da72cf07, type: 3}
+  m_PrefabInstance: {fileID: 462073284}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2104834233 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1798423766840851459, guid: 83b74d6f69f25834085d2c64da72cf07, type: 3}
+  m_PrefabInstance: {fileID: 462073284}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2121754666
 PrefabInstance:
   m_ObjectHideFlags: 0
