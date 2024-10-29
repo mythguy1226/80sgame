@@ -31,6 +31,7 @@ public class OnboardingUI : MonoBehaviour
 
     private int pageNumber = 1;
     private bool pageChanged = false;
+    private bool onboardingClosedOnce = false;
 
     // Start is called before the first frame update
     void Start()
@@ -147,8 +148,15 @@ public class OnboardingUI : MonoBehaviour
     //Close the panel, active game UI elements, and unpause the game
     public void CloseOnboarding()
     {
+        if (onboardingClosedOnce)
+        {
+            GameManager.Instance.UIManager.pauseScreenUI.HowToPlay();
+            return;
+        }
+
         //SoundManager.Instance.PlayNonloopMusic(gameStartTheme);
         onboardingPanel.SetActive(false);
+
         gameUIElements.SetActive(true);
 
         PauseScreenBehavior.Instance.ToggleCrosshairs(true);
@@ -158,6 +166,8 @@ public class OnboardingUI : MonoBehaviour
 
         // Start coroutine for playing BGM
         StartCoroutine(DelayPersistentBGMIntro());
+
+        onboardingClosedOnce = true;
     }
 
     public void SetManager(UIManager reference)

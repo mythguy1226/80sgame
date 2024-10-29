@@ -202,7 +202,10 @@ public class PlayerController : MonoBehaviour
             pjm.joinPanelContainer.transform.GetChild(Order).GetComponent<PlayerJoinPanel>().ReadyUp();
             return;
         }
-        
+
+        if (GameManager.Instance.UIManager.onboardingUI != null && GameManager.Instance.UIManager.onboardingUI.onboardingPanel.activeInHierarchy)
+            return;
+
         UIManager.PlayerPause(Order);
     }
 

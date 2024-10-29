@@ -14,12 +14,12 @@ public class PauseScreenBehavior : MonoBehaviour
     public GameObject pauseScreen;
     public GameObject continueButton;
     public GameObject gameUIElements;
-    public GameObject onboardingPanel;
-    public GameObject onboardingCloseButton;
     public GameObject introCutscene;
     public AudioClip buttonClickSound;
 
     public Crosshair[] crosshairs;
+    public Image howToPlayPrompt;
+    public List<Sprite> howToPlayIcons;
 
     public int playerIndex;
 
@@ -53,10 +53,7 @@ public class PauseScreenBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (onboardingPanel == null)
-        {
-            return;
-        }
+   
     }
 
     public void PauseGame(int player)
@@ -111,6 +108,19 @@ public class PauseScreenBehavior : MonoBehaviour
                 EventSystem.current.SetSelectedGameObject(continueButton);
 
                 SoundManager.Instance.PlaySoundContinuous(buttonClickSound);
+
+                switch (PlayerData.activePlayers[playerIndex].controlScheme)
+                {
+                    case "PS4":
+                        howToPlayPrompt.sprite = howToPlayIcons[0];
+                        break;
+                    case "xbox":
+                        howToPlayPrompt.sprite = howToPlayIcons[1];
+                        break;
+                    case "KnM":
+                        howToPlayPrompt.sprite = howToPlayIcons[2];
+                        break;
+                }
             }
 
             else
@@ -131,6 +141,18 @@ public class PauseScreenBehavior : MonoBehaviour
                     lookingGlassUI.Hide();
                 }
             }
+        }
+    }
+
+    public void HowToPlay()
+    {
+        GameManager.Instance.UIManager.onboardingUI.onboardingPanel.SetActive(!GameManager.Instance.UIManager.onboardingUI.onboardingPanel.activeInHierarchy);
+        pauseScreen.SetActive(!pauseScreen.activeInHierarchy);
+
+        if (pauseScreen.activeInHierarchy)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject (continueButton);
         }
     }
 

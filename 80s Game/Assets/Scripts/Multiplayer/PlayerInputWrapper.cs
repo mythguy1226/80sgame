@@ -229,10 +229,18 @@ public class PlayerInputWrapper : MonoBehaviour
 
     private void OnJoin()
     {
-        if (GameManager.Instance.UIManager.activeUI == UIManager.UIType.Onboarding)
+        if (GameManager.Instance.UIManager.onboardingUI != null && GameManager.Instance.UIManager.onboardingUI.onboardingPanel.activeInHierarchy)
         {
             GameManager.Instance.UIManager.onboardingUI.CloseOnboarding();
             return;
+        }
+    }
+
+    private void OnHowToPlay()
+    {
+        if (GameManager.Instance.UIManager.pauseScreenUI != null && GameManager.Instance.UIManager.pauseScreenUI.isPaused)
+        {
+            GameManager.Instance.UIManager.pauseScreenUI.HowToPlay();
         }
     }
 

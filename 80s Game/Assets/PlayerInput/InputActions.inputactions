@@ -85,6 +85,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "HowToPlay",
+                    "type": "Button",
+                    "id": "f9e62166-7bab-4081-9798-c2f06df67cf8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -338,6 +347,28 @@
                     "processors": "",
                     "groups": "PS4",
                     "action": "LookingGlass",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "09d7a6d1-0908-40a5-9a58-77cebb52566e",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KnM",
+                    "action": "HowToPlay",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1b1d3092-8610-43b6-a24a-5ab6ee618b7b",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PS4;xbox",
+                    "action": "HowToPlay",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
