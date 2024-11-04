@@ -15,6 +15,7 @@ public class TargetManager : MonoBehaviour
     }
     // Fields for all targets and spawn locations
     public List<Target> targets;
+    public List<Target> activeTargets;
     public List<Vector3> spawnLocations;
 
     // Default values
@@ -37,7 +38,7 @@ public class TargetManager : MonoBehaviour
 
     public List<Target> ActiveTargets
     {
-        get { return targets.FindAll(target => target.IsActive); }
+        get { return activeTargets; }
     }
 
     private void Start()
@@ -202,6 +203,17 @@ public class TargetManager : MonoBehaviour
             }
         }
         return -1;
+    }
+
+    public int RegisterActiveTarget(Target target)
+    {
+        activeTargets.Add(target);
+        return activeTargets.Count - 1;
+    }
+
+    public void RemoveActiveTarget(Target target)
+    {
+        activeTargets.Remove(target);
     }
 
     /* Debug Methods */

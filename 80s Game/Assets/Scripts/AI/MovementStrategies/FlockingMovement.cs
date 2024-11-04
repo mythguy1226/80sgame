@@ -57,10 +57,12 @@ public class FlockingMovement : AbsMovementStrategy
         // Iterate through each neighbor
         foreach (Target neighbor in neighbors)
         {
-            float distance = Vector3.Distance(currentPosition, neighbor.transform.position);
+            Vector3 neighborPosition = neighbor.transform.position;
+            float distance = Vector3.Distance(currentPosition, neighborPosition);
 
             // Continue if the bat isnt on screen
-            if (!neighbor.GetComponent<KinematicSteer>().canMove)
+            KinematicSteer neighborMovementController = neighbor.GetMovementController();
+            if (!neighborMovementController.canMove)
                 continue;
 
             // Continue if the bat isnt in the flock radius
@@ -74,7 +76,7 @@ public class FlockingMovement : AbsMovementStrategy
             }
 
             // Calculate a vector pointing to the neighbor
-            Vector2 difference = currentPosition - neighbor.transform.position;
+            Vector2 difference = currentPosition - neighborPosition;
             float inverseMagnitude = 1.0f / distance;
             // Calculate new direction by dividing by the distance
             direction += Vector2.Scale(difference.normalized, new Vector2(inverseMagnitude, inverseMagnitude));
@@ -97,25 +99,30 @@ public class FlockingMovement : AbsMovementStrategy
 
         // Init velocity to default vector
         Vector2 velocity = Vector2.zero;
+        //Cache current position
+        Vector2 currentPosition = movementController.GetPosition();
 
         // Iterate through each neighbor
         foreach (Target neighbor in neighbors)
         {
             // Continue if the bat isnt on screen
-            if (!neighbor.GetComponent<KinematicSteer>().canMove)
+
+            // Access neighbor cached movementController reference
+            KinematicSteer neighborMovementController = neighbor.GetMovementController();
+            if (!neighborMovementController.canMove)
                 continue;
 
             // Continue if the bat isnt in the flock radius
-            if (Vector3.Distance(movementController.GetPosition(), neighbor.transform.position) > FlockingData.flockSize)
+            if (Vector3.Distance(currentPosition, neighbor.transform.position) > FlockingData.flockSize)
                 continue;
 
             // Add up the velocity of the surrounding neighbors
-            velocity += neighbor.GetComponent<KinematicSteer>().currentVelocity;
+            velocity += neighborMovementController.currentVelocity;
         }
 
         // Get the average velocity from the neighbors
         velocity /= neighbors.Length;
-        Debug.DrawLine(movementController.GetPosition(), movementController.GetPosition() + velocity, Color.red);
+        Debug.DrawLine(currentPosition, currentPosition + velocity, Color.red);
         // Return desired velocity from steer
         return Steer(velocity.normalized * movementController.GetMaxSpeed());
     }
@@ -135,7 +142,8 @@ public class FlockingMovement : AbsMovementStrategy
         foreach (Target neighbor in neighbors)
         {
             // Continue if the bat isnt on screen
-            if (!neighbor.GetComponent<KinematicSteer>().canMove)
+            KinematicSteer neighborMovementController = neighbor.GetMovementController();
+            if (!neighborMovementController.canMove)
                 continue;
 
             // Continue if the bat isnt in the flock radius
