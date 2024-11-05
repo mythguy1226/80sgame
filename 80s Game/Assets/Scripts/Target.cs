@@ -20,7 +20,7 @@ public class Target : MonoBehaviour
     // Default fields used for resets
     Vector3 spawnPoint;
     public bool bIsStunned = false;
-
+    
     // Public fields
     public GameObject floatingTextPrefab;
     public int pointValue = 1000;
@@ -53,7 +53,7 @@ public class Target : MonoBehaviour
 
     private void OnDestroy()
     {
-        Debug.Log("On Destroy Called");
+        //Debug.Log("On Destroy Called");
         InputManager.detectHitSub -= ListenForShot;
     }
 
@@ -67,7 +67,6 @@ public class Target : MonoBehaviour
         _SpriteRenderer = GetComponent<SpriteRenderer>();
         _AnimControls = GetComponent<AnimationHandler>();
         _Collider = GetComponent<PolygonCollider2D>();
-
         spawnPoint = transform.position;
     }
 
@@ -191,6 +190,7 @@ public class Target : MonoBehaviour
         bIsStunned = false;
         FSM.SetActive(true);
         InputManager.detectHitSub += ListenForShot;
+        GameManager.Instance.TargetManager.RegisterActiveTarget(this);
         FSM.TransitionToDefault();
     }
 
@@ -209,6 +209,7 @@ public class Target : MonoBehaviour
 
         // Set bat to its default values
         FSM.SetActive(false);
+        GameManager.Instance.TargetManager.RemoveActiveTarget(this);
         transform.position = spawnPoint;
         _MovementControls.canMove = false;
         _AnimControls.ResetAnimation();
