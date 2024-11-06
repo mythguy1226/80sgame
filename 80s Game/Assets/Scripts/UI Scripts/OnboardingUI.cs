@@ -154,6 +154,9 @@ public class OnboardingUI : MonoBehaviour
             return;
         }
 
+        else if (backOutPanel.activeInHierarchy)
+            return;
+
         //SoundManager.Instance.PlayNonloopMusic(gameStartTheme);
         onboardingPanel.SetActive(false);
 

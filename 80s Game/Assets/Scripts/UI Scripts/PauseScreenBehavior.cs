@@ -146,6 +146,9 @@ public class PauseScreenBehavior : MonoBehaviour
 
     public void HowToPlay()
     {
+        if (GameManager.Instance.UIManager.onboardingUI.backOutPanel.activeInHierarchy)
+            return;
+
         GameManager.Instance.UIManager.onboardingUI.onboardingPanel.SetActive(!GameManager.Instance.UIManager.onboardingUI.onboardingPanel.activeInHierarchy);
         pauseScreen.SetActive(!pauseScreen.activeInHierarchy);
 
