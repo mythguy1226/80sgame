@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   order: 19
   nameText: Unfazed
-  requirementText: While under the effect of Confusion, stun 20 Bats
+  requirementText: While under the effect of Confusion, stun 20 Bat Bots
   descriptionText: "[Q&A Bug Report 4152-A]\r\nMajor bug: Mk.I Recovery Device interacts
     negatively with some PowerCore modules. When installed, PowerCores with corrupted
     data may invert the rotation of the Recovery Device\u2019s stabilizers. Effects

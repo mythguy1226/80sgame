@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   order: 28
   nameText: Marksman
-  requirementText: Stun a total of 1,000 bats
+  requirementText: Stun a cumulative total of 2,000 Bat Bots
   descriptionText: "[Excerpt from Laboratory Recognition Protocol]\r\nIn the case
     of a laboratory technician performing their duties without interruption and demonstrating
     punctual attendance for a period of one (1) month, the Shift Supervisor should
@@ -22,7 +22,7 @@ MonoBehaviour:
     the hard-working technician.\r"
   internalAchivementKey: acc-1
   requirementTrackingKey: stun-acc-3
-  testValue: 1000
+  testValue: 2000
   image: {fileID: 1942656173, guid: 083a1430fdd3b6d46aa71e8b78c21d1b, type: 3}
   rewardText: CROSSHAIRS
   rewardSprites:

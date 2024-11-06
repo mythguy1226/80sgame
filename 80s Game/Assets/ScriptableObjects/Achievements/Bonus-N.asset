@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   order: 13
   nameText: Bonus Stun Novice
-  requirementText: Stun 50 Total Bonus Bat Bots
+  requirementText: Stun a total of 75 Bonus Bat Bots
   descriptionText: "Laboratory Journal Entry 14:\r\nDevelopment for the mass production
     of the robots is underway. The team in charge of materials have drafted several
     supply requirements that will need to be met to ensure that manufacturing is
@@ -22,7 +22,7 @@ MonoBehaviour:
     perform well in most field scenarios.\r"
   internalAchivementKey: bb-1
   requirementTrackingKey: stun-bb-3
-  testValue: 50
+  testValue: 75
   image: {fileID: 535397635, guid: 083a1430fdd3b6d46aa71e8b78c21d1b, type: 3}
   rewardText: BAT COLOR
   rewardSprites:

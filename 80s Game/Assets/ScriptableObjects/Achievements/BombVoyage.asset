@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   order: 22
   nameText: Bomb Voyage
-  requirementText: Stun a divebomb bat while it's diving
+  requirementText: Stun a Divebomb Bat Bot while it's diving
   descriptionText: "Laboratory Journal Entry 30:\r\nThe bats\u2019 artificial intelligence
     seems to have adapted to the interference caused by the resonator field. Rather
     than being forced away, certain models have been observed flying directly towards

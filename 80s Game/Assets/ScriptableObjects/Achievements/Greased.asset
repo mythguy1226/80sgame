@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   order: 23
   nameText: Greased Lightning
-  requirementText: Stun 5 bats with a single unstable bat chain
+  requirementText: Stun 5 Bat Bots with a single Unstable Bat Bot chain
   descriptionText: "[Excerpt from a discarded Aesthetics & Design warehouse notice]\r\nAttention!
     \r\nFluorescent yellow pigment stored in this facility contains an extremely
     potent electromagnetic resonance amplifier. Be sure to warn any downstream departments

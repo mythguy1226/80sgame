@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   order: 2
   nameText: Classic Enjoyer
-  requirementText: Finish Classic mode with 500,000 points
+  requirementText: Finish Classic Mode with 500,000 points
   descriptionText: "Laboratory Journal Entry 41: \r\nThere\u2019s been an unexpected
     power outage and the bats have escaped containment. Fortunately, no technicians
     were injured during this incident. Teams are being dispatched to prevent the

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   order: 12
   nameText: Unstable Stun Expert
-  requirementText: Stun 500 Total Unstable Bat Bots
+  requirementText: Stun a total of 800 Unstable Bat Bots
   descriptionText: "[Memorandum from the Field Applications Director]\r\nLeader bats
     are becoming a serious issue - whenever their hostility dampeners malfunction,
     their signal emissions transmit the effect to nearby bats, making them run amok.
@@ -22,7 +22,7 @@ MonoBehaviour:
     program to incompetence.\r"
   internalAchivementKey: unst-3
   requirementTrackingKey: stun-unst-3
-  testValue: 500
+  testValue: 800
   image: {fileID: -1324935171, guid: 083a1430fdd3b6d46aa71e8b78c21d1b, type: 3}
   rewardText: BAT COLOR
   rewardSprites:

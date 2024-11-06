@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   order: 24
   nameText: Well That's Awkward...
-  requirementText: Stun 0 bats with EMP
+  requirementText: Stun 0 Bat Bots with an EMP
   descriptionText: "[Email from the Finance Director to the Laboratory Director]\r\nThe
     development of the electromagnetic pulse resonator seems like an ill-advised
     plan. Not only is the cost of manufacturing a single one extremely prohibitive,

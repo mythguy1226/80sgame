@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   order: 9
   nameText: Mk1 Stun Expert
-  requirementText: Stun 3,000 Total Bat Bot Mk 1s
+  requirementText: Stun a total of 3,250 Mk 1 Bat Bots
   descriptionText: "[Excerpt from a company-wide email from the Program Director]\r\nWhile
     it is unfortunate that the stability of the behavioral module has regressed below
     the standards, the development of the new flight controller is critical to contribute
@@ -23,7 +23,7 @@ MonoBehaviour:
     face of uncertainty.\r"
   internalAchivementKey: reg-3
   requirementTrackingKey: stun-reg-3
-  testValue: 3000
+  testValue: 3250
   image: {fileID: 734694345, guid: 083a1430fdd3b6d46aa71e8b78c21d1b, type: 3}
   rewardText: BAT COLOR
   rewardSprites:

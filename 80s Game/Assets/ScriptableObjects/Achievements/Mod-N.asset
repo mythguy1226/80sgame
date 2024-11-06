@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   order: 16
   nameText: Mod Bat Stun Novice
-  requirementText: Stun 100 Total Mod Bats
+  requirementText: Stun a total of 150 Modifier Bat Bots
   descriptionText: "Laboratory Journal Entry 21:\r\nAs an alternative to the graphite
     reactors, an internal generator composed of tightly-nested gyroscopic dynamos
     has been developed. This device, which has been named the \u201CPowerCore,\u201D
@@ -23,7 +23,7 @@ MonoBehaviour:
     utility will aid the development of more varied models in the future.\r"
   internalAchivementKey: mod-1
   requirementTrackingKey: stun-mod-3
-  testValue: 100
+  testValue: 150
   image: {fileID: -99678855, guid: 083a1430fdd3b6d46aa71e8b78c21d1b, type: 3}
   rewardText: OVERCHARGED
   rewardSprites:

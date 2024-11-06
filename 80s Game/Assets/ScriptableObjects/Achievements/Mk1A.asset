@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   order: 8
   nameText: Mk1 Stun Adept
-  requirementText: Stun 1,500 Total Bat Bot Mk 1s
+  requirementText: Stun a total of 2,000 Mk 1 Bat Bots
   descriptionText: 'Laboratory Journal Entry 8:
 
     Aesthetics & Design has brought
@@ -26,7 +26,7 @@ MonoBehaviour:
 '
   internalAchivementKey: reg-2
   requirementTrackingKey: stun-reg-3
-  testValue: 1500
+  testValue: 2000
   image: {fileID: 2043041703, guid: 083a1430fdd3b6d46aa71e8b78c21d1b, type: 3}
   rewardText: BAT COLOR
   rewardSprites:

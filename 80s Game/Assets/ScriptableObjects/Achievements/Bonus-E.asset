@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   order: 15
   nameText: Bonus Stun Expert
-  requirementText: Stun 500 Total Bonus Bat Bots
+  requirementText: Stun a total of 500 Bonus Bat Bots
   descriptionText: "Field Applications R&D Entry 38:\r\nDespite extensive scenario
     testing, no specific niche has been identified for the high-performance models.
     While there may be potential market applications in the surveillance sector,

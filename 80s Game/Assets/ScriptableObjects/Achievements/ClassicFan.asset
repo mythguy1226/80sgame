@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   order: 1
   nameText: Classic Fan
-  requirementText: Finish Classic mode with 150,000 points
+  requirementText: Finish Classic Mode with 150,000 points
   descriptionText: "Laboratory Journal Entry 36: \r\nDevelopment of the new flight
     controllers has severely impacted the hostility dampeners on the retrofitted
     units. Their behavior has become erratic and technicians are reporting odd changes

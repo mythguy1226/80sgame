@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   order: 0
   nameText: Hawkeye
-  requirementText: Stun a Total of 10,000 bats
+  requirementText: Stun a cumulative total of 10,000 Bat Bots
   descriptionText: "[Excerpt from Laboratory Recognition Protocol]\r\nIn the case
     of a laboratory technician directly preventing injury or loss of life in the
     workplace, the Shift Supervisor is permitted to interrupt laboratory work to

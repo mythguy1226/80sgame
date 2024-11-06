@@ -15,7 +15,7 @@ MonoBehaviour:
   order: 25
   nameText: Bullseye!
   requirementText: Achieve an accuracy rating of 85% or greater in a game of Classic
-    Mode.
+    Mode
   descriptionText: "[Excerpt from the Mk.I Recovery Device field manual]\r\n\u2026although
     the gun is perfectly safe to use near other personnel, do not allow it to come
     in contact with your skin, eyes, or mouth, and do not discharge it in the presence

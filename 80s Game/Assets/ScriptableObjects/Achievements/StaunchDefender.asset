@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   order: 5
   nameText: Staunch Defender
-  requirementText: Survive 20 Rounds in Defense Mode
+  requirementText: Survive 15 rounds in Defense Mode
   descriptionText: "Field Applications R&D Entry 27:\r\nThere is a possibility the
     containment field resonator technology could be made portable. However, there
     are several factors that make this unfeasible at present. The crystal components
@@ -22,7 +22,7 @@ MonoBehaviour:
     amplifier to be able to perform adequately in field conditions.\r"
   internalAchivementKey: def-2
   requirementTrackingKey: def-2-key
-  testValue: 20
+  testValue: 15
   image: {fileID: -846074038, guid: 083a1430fdd3b6d46aa71e8b78c21d1b, type: 3}
   rewardText: BACKGROUND
   rewardSprites:

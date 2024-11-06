@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   order: 26
   nameText: Careful, Fragile
-  requirementText: Survive a round of Defense with the core at 10% health or lower.
+  requirementText: Survive a round of Defense Mode with the core at 10% health or
+    lower
   descriptionText: "Warning!\r\nThe containment field shell is extremely fragile.
     Please do not sit on it, hit it, drop it, carry it by means of uncertified forklift
     operation, throw heavy objects at it, scratch it with sharp objects, or expose
