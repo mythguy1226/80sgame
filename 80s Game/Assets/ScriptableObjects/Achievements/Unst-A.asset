@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   order: 11
   nameText: Unstable Stun Adept
-  requirementText: Stun a total of 500 Unstable Bat Bots
+  requirementText: Stun a total of 500 Unstable Bats
   descriptionText: "Field Applications R&D Entry 9:\r\nDevelopment on the leader
     module has proved extremely problematic. The sudden deactivation of a leader
     unit often causes uncontrollable system failure in nearby bat robots. To make
@@ -24,7 +24,7 @@ MonoBehaviour:
   internalAchivementKey: unst-2
   requirementTrackingKey: stun-unst-3
   testValue: 500
-  image: {fileID: 1099816633, guid: 083a1430fdd3b6d46aa71e8b78c21d1b, type: 3}
+  image: {fileID: 356600058, guid: 1d4dc37ca2af7194c80dba4819d7ea21, type: 3}
   rewardText: BAT COLOR
   rewardSprites:
   - {fileID: 463367631, guid: 25aaaaff52eba244a85a0e49719bf9ee, type: 3}

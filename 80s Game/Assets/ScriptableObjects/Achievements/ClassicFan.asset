@@ -22,7 +22,7 @@ MonoBehaviour:
   internalAchivementKey: classic-1
   requirementTrackingKey: classic-1-key
   testValue: 150000
-  image: {fileID: -1933441688, guid: 083a1430fdd3b6d46aa71e8b78c21d1b, type: 3}
+  image: {fileID: 995673116, guid: 1d4dc37ca2af7194c80dba4819d7ea21, type: 3}
   rewardText: BACKGROUND
   rewardSprites:
   - {fileID: 1365492857, guid: 25aaaaff52eba244a85a0e49719bf9ee, type: 3}

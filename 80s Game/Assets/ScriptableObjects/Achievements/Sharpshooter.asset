@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   order: 29
   nameText: Sharpshooter
-  requirementText: Stun a cumulative total of 7,500 Bat Bots
+  requirementText: Stun a cumulative total of 7,500 Bats
   descriptionText: "[Excerpt from Laboratory Recognition Protocol]\r\nIn the case
     of a laboratory technician presenting groundbreaking work that advances our mission
     as an institution, the Shift Supervisor should consult with Human Resources for
@@ -23,7 +23,7 @@ MonoBehaviour:
   internalAchivementKey: acc-2
   requirementTrackingKey: stun-acc-3
   testValue: 7500
-  image: {fileID: -1007917174, guid: 083a1430fdd3b6d46aa71e8b78c21d1b, type: 3}
+  image: {fileID: -1622762432, guid: 1d4dc37ca2af7194c80dba4819d7ea21, type: 3}
   rewardText: CROSSHAIRS
   rewardSprites:
   - {fileID: 1321153254, guid: 25aaaaff52eba244a85a0e49719bf9ee, type: 3}

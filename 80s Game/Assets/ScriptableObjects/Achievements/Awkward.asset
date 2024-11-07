@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   order: 24
   nameText: Well That's Awkward...
-  requirementText: Stun 0 Bat Bots with an EMP
+  requirementText: Stun 0 Bats with an EMP
   descriptionText: "[Email from the Finance Director to the Laboratory Director]\r\nThe
     development of the electromagnetic pulse resonator seems like an ill-advised
     plan. Not only is the cost of manufacturing a single one extremely prohibitive,
@@ -24,7 +24,7 @@ MonoBehaviour:
   internalAchivementKey: awkward
   requirementTrackingKey: 
   testValue: 0
-  image: {fileID: -627779279, guid: 083a1430fdd3b6d46aa71e8b78c21d1b, type: 3}
+  image: {fileID: 765986512, guid: 1d4dc37ca2af7194c80dba4819d7ea21, type: 3}
   rewardText: STUN EFFECT
   rewardSprites:
   - {fileID: 1329382947, guid: 25aaaaff52eba244a85a0e49719bf9ee, type: 3}

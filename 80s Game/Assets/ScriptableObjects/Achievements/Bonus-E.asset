@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   order: 15
   nameText: Bonus Stun Expert
-  requirementText: Stun a total of 500 Bonus Bat Bots
+  requirementText: Stun a total of 500 Bonus Bats
   descriptionText: "Field Applications R&D Entry 38:\r\nDespite extensive scenario
     testing, no specific niche has been identified for the high-performance models.
     While there may be potential market applications in the surveillance sector,
@@ -22,7 +22,7 @@ MonoBehaviour:
   internalAchivementKey: bb-3
   requirementTrackingKey: stun-bb-3
   testValue: 500
-  image: {fileID: -1275354941, guid: 083a1430fdd3b6d46aa71e8b78c21d1b, type: 3}
+  image: {fileID: -726315725, guid: 1d4dc37ca2af7194c80dba4819d7ea21, type: 3}
   rewardText: BAT COLOR
   rewardSprites:
   - {fileID: 463367631, guid: 25aaaaff52eba244a85a0e49719bf9ee, type: 3}
