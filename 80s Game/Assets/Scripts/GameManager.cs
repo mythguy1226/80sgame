@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
             players = new List<PlayerController>();
 
             if (PlayerData.activePlayers.Count == 0 && debug) {
-                float sensitivity = PlayerPrefs.GetFloat("Sensitivity", 1.0f);
+                float sensitivity = PlayerPrefs.GetFloat("Sensitivity", 3.25f);
 
                 PlayerConfig defaultConfig = new PlayerConfig(0, PlayerData.defaultColors[0], new Vector2(sensitivity, sensitivity));
                 PlayerData.activePlayers.Add(defaultConfig);
