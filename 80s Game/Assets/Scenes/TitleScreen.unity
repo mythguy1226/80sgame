@@ -1311,11 +1311,11 @@ MonoBehaviour:
   pauseScreen: {fileID: 0}
   continueButton: {fileID: 0}
   gameUIElements: {fileID: 0}
-  onboardingPanel: {fileID: 0}
-  onboardingCloseButton: {fileID: 0}
   introCutscene: {fileID: 1533786593}
   buttonClickSound: {fileID: 0}
   crosshairs: []
+  howToPlayPrompt: {fileID: 0}
+  howToPlayIcons: []
   playerIndex: 0
 --- !u!114 &319221314
 MonoBehaviour:

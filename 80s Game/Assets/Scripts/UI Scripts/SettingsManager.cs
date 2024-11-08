@@ -213,7 +213,7 @@ public class SettingsManager : MonoBehaviour
         int bloomOn = PlayerPrefs.GetInt("Bloom", 1);
         int crtOn = PlayerPrefs.GetInt("CRTOn", 1);
         float curvature = PlayerPrefs.GetFloat("CRTCurvature",0.2f);
-        float sensitivity = PlayerPrefs.GetFloat("Sensitivity",20);
+        float sensitivity = PlayerPrefs.GetFloat("Sensitivity",3.25f);
 
         //Overwrite sensitivity with the current player reference (i.e. show player 2's sensitivity if they pause the game)
         if (playerIndex >= 0)

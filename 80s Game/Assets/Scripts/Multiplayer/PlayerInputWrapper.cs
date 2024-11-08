@@ -227,6 +227,23 @@ public class PlayerInputWrapper : MonoBehaviour
         SettingsManager.Instance.NextTab();
     }
 
+    private void OnJoin()
+    {
+        if (GameManager.Instance.UIManager.onboardingUI != null && GameManager.Instance.UIManager.onboardingUI.onboardingPanel.activeInHierarchy)
+        {
+            GameManager.Instance.UIManager.onboardingUI.CloseOnboarding();
+            return;
+        }
+    }
+
+    private void OnHowToPlay()
+    {
+        if (GameManager.Instance.UIManager.pauseScreenUI != null && GameManager.Instance.UIManager.pauseScreenUI.isPaused)
+        {
+            GameManager.Instance.UIManager.pauseScreenUI.HowToPlay();
+        }
+    }
+
     // Most of this update thing is for Joycons
     public void Update()
     {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class OnboardingUI : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class OnboardingUI : MonoBehaviour
     public GameObject mouseDiagram;
     public GameObject xboxControllerDiagram;
     public GameObject playstationControllerDiagram;
+    public GameObject backOutPanel;
+    public GameObject backOutExit;
     [SerializeField] MusicTrack gameStartTheme;
     [SerializeField] MusicTrack gameLoopIntro;
     [SerializeField] MusicTrack gameLoopBGM;
@@ -28,6 +31,7 @@ public class OnboardingUI : MonoBehaviour
 
     private int pageNumber = 1;
     private bool pageChanged = false;
+    private bool onboardingClosedOnce = false;
 
     // Start is called before the first frame update
     void Start()
@@ -144,8 +148,18 @@ public class OnboardingUI : MonoBehaviour
     //Close the panel, active game UI elements, and unpause the game
     public void CloseOnboarding()
     {
+        if (onboardingClosedOnce)
+        {
+            GameManager.Instance.UIManager.pauseScreenUI.HowToPlay();
+            return;
+        }
+
+        else if (backOutPanel.activeInHierarchy)
+            return;
+
         //SoundManager.Instance.PlayNonloopMusic(gameStartTheme);
         onboardingPanel.SetActive(false);
+
         gameUIElements.SetActive(true);
 
         PauseScreenBehavior.Instance.ToggleCrosshairs(true);
@@ -155,11 +169,29 @@ public class OnboardingUI : MonoBehaviour
 
         // Start coroutine for playing BGM
         StartCoroutine(DelayPersistentBGMIntro());
+
+        onboardingClosedOnce = true;
     }
 
     public void SetManager(UIManager reference)
     {
         manager = reference;
+    }
+
+    public void BackOut()
+    {
+        backOutPanel.SetActive(!backOutPanel.activeInHierarchy);
+
+        if (backOutPanel.activeInHierarchy)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(backOutExit);
+        }
+        
+        else
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+        }
     }
 
     /// <summary>
