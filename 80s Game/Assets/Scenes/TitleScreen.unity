@@ -140,7 +140,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &10163741
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3347,7 +3347,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &677961755
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5139,8 +5139,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -7}
-  m_SizeDelta: {x: 1668.51, y: 629.72}
+  m_AnchoredPosition: {x: 0.0050006, y: -26}
+  m_SizeDelta: {x: 1114.5, y: 622.72}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1252168120
 MonoBehaviour:
@@ -5162,9 +5162,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\nhttps://github.com/Looking-Glass/JoyconLib\r\n\n\nhttps://github.com/GlaireDaggers/RetroTVFX\r\n\n\nhttps://github.com/mob-sakai/ParticleEffectForUGUI\r\n\n\nhttps://kenney.nl/assets/input-prompts\r\nhttps://kenney.nl/assets/input-prompts-pixel-16\r\n\n\n\t\t 
-    \t\n\nhttps://freesound.org/people/LittleRobotSoundFactory/sounds/270343/\r\n\n\n
-    https://freesound.org/people/LittleRobotSoundFactory/sounds/270308/\r\n\n\nhttps://www.zapsplat.com/music/game-tone-digital-arcade-high-pitched-generic/\r\n\n\nhttps://www.fontspace.com/press-start-2p-font-f11591\n\n\nhttps://8bitsamples.com/products/magic-mushrooms-sfx\nhttps://plugins4free.com/plugin/3125/\nhttps://decomposer.de/sitala/"
+  m_text: "https://github.com/GlaireDaggers/RetroTVFX\r\n\n\nhttps://github.com/mob-sakai/ParticleEffectForUGUI\r\n\n\n\nhttps://kenney.nl/assets/input-prompts\r\nhttps://kenney.nl/assets/input-prompts-pixel-16\r\n\n\t 
+    \t\n\n\nhttps://freesound.org/people/LittleRobotSoundFactory/sounds/270343/\r\n\n\n
+    https://freesound.org/people/LittleRobotSoundFactory/sounds/270308/\r\n\n\nhttps://www.zapsplat.com/music/game-tone-digital-arcade-high-pitched-generic/\r\n\n\n\nhttps://www.fontspace.com/press-start-2p-font-f11591\n\n\nhttps://8bitsamples.com/products/magic-mushrooms-sfx\nhttps://plugins4free.com/plugin/3125/\nhttps://decomposer.de/sitala/"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4ffe7c97efad09e458ea5fc5958a4597, type: 2}
   m_sharedMaterial: {fileID: -507269567956872517, guid: 4ffe7c97efad09e458ea5fc5958a4597, type: 2}
@@ -5191,8 +5191,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 18
+  m_fontSizeBase: 18
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -5572,8 +5572,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -5.015}
-  m_SizeDelta: {x: 1668.51, y: 629.72}
+  m_AnchoredPosition: {x: 277.01, y: -5.015}
+  m_SizeDelta: {x: 1114.49, y: 629.72}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1300914167
 MonoBehaviour:
@@ -5595,9 +5595,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "JoyCon Library: \n\r\n\nCRT Shader Effect: \n\n\nParticle Effect for GUI
-    Library: \n\n\nControls UI Packs: \r\n\n\n\nSounds:\r\n\n- Shoot:\n\n\n- Stun:
-    \n\n\n- Modifier Pick-up: \n\n\nRetro Font: \n\n\n8-bit Instruments:\n\n"
+  m_text: "CRT Shader Effect: \n\n\nParticle Effect for GUI Library: \n\n\nControls
+    UI Packs: \r\n\n\n\nSounds:\r\n\n- Shoot:\n\n\n\n- Stun: \n\n\n\n- Modifier Pick-up:
+    \n\n\n\nRetro Font: \n\n\n8-bit Instruments:\n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4ffe7c97efad09e458ea5fc5958a4597, type: 2}
   m_sharedMaterial: {fileID: -507269567956872517, guid: 4ffe7c97efad09e458ea5fc5958a4597, type: 2}
