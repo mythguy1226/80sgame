@@ -30,6 +30,10 @@ public static class AchievementManager
             for (int i = 0; i < achievements.Count; i++)
             {
                 AchievementData achievement = achievements[i];
+                if (!achievement.platRelevant)
+                {
+                    continue;
+                }
                 requirements[achievement.internalAchivementKey] = achievement.testValue;
                 lookupTable[achievement.internalAchivementKey] = achievement;
             }
@@ -90,8 +94,7 @@ public static class AchievementManager
         {
             return;
         }
-        
-        Debug.Log("Unlocking Achievement " + name);
+
         GameManager.Instance.UIManager.EnqueueAchievementNotification(GetAchievementByKey(name));
         PlayerPrefs.SetInt(name , 1);
         rewards.Enqueue(name);
@@ -264,6 +267,7 @@ public static class AchievementManager
                 dataKey = lookupTable[AchievementConstants.MOD_BAT_EXPERT].requirementTrackingKey;
                 stunnedBatsOfThisType = GetData(dataKey);
                 stunnedBatsOfThisType++;
+                GameManager.Instance.SteamInterface.SetSteamData(SteamIntegration.SteamConstants.MOD_STUN, stunnedBatsOfThisType);
                 break;
             /*case TargetManager.TargetType.LowBonus:
             case TargetManager.TargetType.HighBonus:
@@ -359,6 +363,7 @@ public static class AchievementManager
         string key = AchievementConstants.HAWKEYE;
         int currentKillCount = GetData(lookupTable[key].requirementTrackingKey);
         currentKillCount++;
+        GameManager.Instance.SteamInterface.SetSteamData(SteamIntegration.SteamConstants.STUN_COUNT, currentKillCount);
         TestAndUnlock(key, requirements[key], currentKillCount, TestType.GreaterThanOrEqual);
         key = AchievementConstants.SHARPSHOOTER;
         TestAndUnlock(key, requirements[key], currentKillCount, TestType.GreaterThanOrEqual);

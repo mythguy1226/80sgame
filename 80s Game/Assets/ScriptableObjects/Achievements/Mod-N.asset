@@ -24,6 +24,7 @@ MonoBehaviour:
   internalAchivementKey: mod-1
   requirementTrackingKey: stun-mod-3
   testValue: 150
+  platRelevant: 1
   image: {fileID: -1639741479, guid: 1d4dc37ca2af7194c80dba4819d7ea21, type: 3}
   rewardText: OVERCHARGED
   rewardSprites:

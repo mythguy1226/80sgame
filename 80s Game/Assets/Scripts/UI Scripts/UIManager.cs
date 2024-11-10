@@ -30,7 +30,6 @@ public class UIManager : MonoBehaviour
     public OnboardingUI onboardingUI;
     public PauseScreenBehavior pauseScreenUI;
     private GameOverBehavior gameOverUI;
-    private SteamInterface steamInterface;
     public TitleScreenBehavior titleScreenUI;
     public ScoreBehavior scoreBehavior;
     public BackgroundCustomization backgroundUI;
@@ -59,7 +58,6 @@ public class UIManager : MonoBehaviour
         gameOverUI = canvas.GetComponent<GameOverBehavior>();
         scoreBehavior = canvas.GetComponent<ScoreBehavior>();
         titleScreenUI = canvas.GetComponent<TitleScreenBehavior>();
-        steamInterface = GetComponent<SteamInterface>();
         achievementNotifs = new Queue<AchievementNotificationData>();
     }
 
@@ -212,6 +210,7 @@ public class UIManager : MonoBehaviour
     //Show an achievement notification when it is unlocked
     public void EnqueueAchievementNotification(AchievementData achievement)
     {
+        GameManager.Instance.SteamInterface.UnlockSteamAchievement(achievement.internalAchivementKey);
         AchievementNotificationData notificationData = new AchievementNotificationData(achievement.nameText, achievement.image);
         achievementNotifs.Enqueue(notificationData);
     }

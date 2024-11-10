@@ -17,6 +17,7 @@ public class CompetitiveMode : AbsGameMode
         currentRoundTargetCount = 8;
         SetupAllowedData();
         debugMode = false;
+        GameManager.Instance.SteamInterface.InitData();
     }
 
     protected override void SetupAllowedData()
@@ -221,6 +222,7 @@ public class CompetitiveMode : AbsGameMode
     protected override void EndGame()
     {
         int score = GameManager.Instance.PointsManager.maxScore;
+        GameManager.Instance.SteamInterface.UpdateSteamServer();
         AchievementManager.TestEndGameAchievements(ModeType, CurrentRound, score);
         GameManager.Instance.HandleGameOver();
     }
