@@ -123,32 +123,7 @@ public class RemoteDataSaver : DataSaver
 {
     public override IEnumerator Save(SaveDataItem data)
     {
-        //Save files locally if this is a development environment
-        if (NetworkUtility.NetworkDevEnv())
-        {
-            FileSystemDataSaver saver = new FileSystemDataSaver();
-            yield return saver.Save(data);
-            yield break;
-        }
-
-        // Prepare the request
-        string url = NetworkUtility.destinationURL;
-        UnityWebRequest request = new UnityWebRequest(url, UnityWebRequest.kHttpVerbPOST);
-        request.SetRequestHeader("Content-Type", "application/json");
-        byte[] bodyRaw = Encoding.UTF8.GetBytes(JsonUtility.ToJson(data));
-        request.uploadHandler = new UploadHandlerRaw(bodyRaw);
-        request.downloadHandler = new DownloadHandlerBuffer();
-        
-        //Send the request
-        yield return request.SendWebRequest();
-        
-        // Fallback method in case our server becomes unreachable or the request fails
-        bool requestError = request.result != UnityWebRequest.Result.Success;
-        if ( requestError )
-        {
-            FileSystemDataSaver saver = new FileSystemDataSaver();
-            yield return saver.Save(data);
-        }
+        yield break;
     }
 
     /// <summary>
@@ -160,19 +135,6 @@ public class RemoteDataSaver : DataSaver
     /// <returns>Nothing, this is a couroutine</returns>
     public IEnumerator Sync(int file, string data, Action<int, bool> callback)
     {
-        // Prepare the request
-        string url = NetworkUtility.destinationURL;
-        UnityWebRequest request = new UnityWebRequest(url, UnityWebRequest.kHttpVerbPOST);
-        request.SetRequestHeader("Content-Type", "application/json");
-        byte[] bodyRaw = Encoding.UTF8.GetBytes(data);
-        request.uploadHandler = new UploadHandlerRaw(bodyRaw);
-        request.downloadHandler = new DownloadHandlerBuffer();
-        
-        //Send the request
-        yield return request.SendWebRequest();
-        
-        // Fallback method in case our server becomes unreachable or the request fails
-        bool requestError = request.result != UnityWebRequest.Result.Success;
-        callback.Invoke(file, requestError);
+        yield break;
     }
 }
