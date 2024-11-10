@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   order: 17
   nameText: Mod Bat Stun Adept
-  requirementText: Stun 150 Total Mod Bats
+  requirementText: Stun a total of 200 Modifier Bats
   descriptionText: "[Excerpt from the revised PowerCore\u2122 Manual]\r\n\u2026this
     spherical multi-purpose device is outfitted with universal connectors, allowing
     it to be integrated seamlessly to all models from Mk.III onward. The PowerCore\u2122
@@ -22,8 +22,8 @@ MonoBehaviour:
     information on how best to navigate and interact with field obstacles\u2026\r"
   internalAchivementKey: mod-2
   requirementTrackingKey: stun-mod-3
-  testValue: 150
-  image: {fileID: -449408586, guid: 083a1430fdd3b6d46aa71e8b78c21d1b, type: 3}
+  testValue: 200
+  image: {fileID: -158431992, guid: 1d4dc37ca2af7194c80dba4819d7ea21, type: 3}
   rewardText: ROGUE BAT
   rewardSprites:
   - {fileID: 1258383917, guid: 25aaaaff52eba244a85a0e49719bf9ee, type: 3}

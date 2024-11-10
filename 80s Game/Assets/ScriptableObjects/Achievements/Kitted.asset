@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   order: 20
   nameText: Kitted Out
-  requirementText: Collect a total of 150 modifiers
+  requirementText: Collect a total of 150 Modifiers
   descriptionText: "Laboratory Journal Entry 42:\r\nThe development of the Mk.I Recovery
     Device has been done with PowerCore compatibility in mind. Using the data and
     auxiliary energy provided by the PowerCore, the Recovery Device\u2019s performance
@@ -23,7 +23,7 @@ MonoBehaviour:
   internalAchivementKey: kitted
   requirementTrackingKey: kit
   testValue: 150
-  image: {fileID: 1763876235, guid: 083a1430fdd3b6d46aa71e8b78c21d1b, type: 3}
+  image: {fileID: 1255533815, guid: 1d4dc37ca2af7194c80dba4819d7ea21, type: 3}
   rewardText: STUN EFFECT
   rewardSprites:
   - {fileID: -1357140666, guid: 25aaaaff52eba244a85a0e49719bf9ee, type: 3}

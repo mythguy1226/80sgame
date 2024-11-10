@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   order: 22
   nameText: Bomb Voyage
-  requirementText: Stun a divebomb bat while it's diving
+  requirementText: Stun a Divebomb Bat while it's diving
   descriptionText: "Laboratory Journal Entry 30:\r\nThe bats\u2019 artificial intelligence
     seems to have adapted to the interference caused by the resonator field. Rather
     than being forced away, certain models have been observed flying directly towards
@@ -22,7 +22,7 @@ MonoBehaviour:
   internalAchivementKey: voyage
   requirementTrackingKey: 
   testValue: 1
-  image: {fileID: 2039007060, guid: 083a1430fdd3b6d46aa71e8b78c21d1b, type: 3}
+  image: {fileID: 1956533439, guid: 1d4dc37ca2af7194c80dba4819d7ea21, type: 3}
   rewardText: STUN EFFECT
   rewardSprites:
   - {fileID: -1335101950, guid: 25aaaaff52eba244a85a0e49719bf9ee, type: 3}
