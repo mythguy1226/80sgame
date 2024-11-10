@@ -207,13 +207,21 @@ public class TargetManager : MonoBehaviour
 
     public int RegisterActiveTarget(Target target)
     {
-        activeTargets.Add(target);
+        if (!activeTargets.Contains(target))
+        {
+            activeTargets.Add(target);
+        }
         return activeTargets.Count - 1;
     }
 
     public void RemoveActiveTarget(Target target)
     {
-        activeTargets.Remove(target);
+        bool removal = activeTargets.Remove(target);
+        if (!removal)
+        {
+            string errorString = string.Format("Removal error! Target {0} not removed", target);
+            Debug.LogError(errorString);
+        }
     }
 
     /* Debug Methods */
