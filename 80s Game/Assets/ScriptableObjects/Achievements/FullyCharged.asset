@@ -23,6 +23,7 @@ MonoBehaviour:
   internalAchivementKey: charged
   requirementTrackingKey: zap
   testValue: 6
+  platRelevant: 1
   image: {fileID: 245243851, guid: 1d4dc37ca2af7194c80dba4819d7ea21, type: 3}
   rewardText: STUN EFFECT
   rewardSprites:

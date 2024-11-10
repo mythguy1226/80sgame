@@ -23,6 +23,7 @@ MonoBehaviour:
   internalAchivementKey: unfazed
   requirementTrackingKey: 
   testValue: 20
+  platRelevant: 1
   image: {fileID: -371767070, guid: 1d4dc37ca2af7194c80dba4819d7ea21, type: 3}
   rewardText: STUN EFFECT
   rewardSprites:

@@ -22,6 +22,7 @@ MonoBehaviour:
   internalAchivementKey: classic-2
   requirementTrackingKey: classic-2-key
   testValue: 500000
+  platRelevant: 1
   image: {fileID: 1163598745, guid: 1d4dc37ca2af7194c80dba4819d7ea21, type: 3}
   rewardText: BACKGROUND
   rewardSprites:

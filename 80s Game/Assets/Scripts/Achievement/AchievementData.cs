@@ -27,6 +27,7 @@ public class AchievementData : ScriptableObject
     public string internalAchivementKey;
     public string requirementTrackingKey;
     public int testValue;
+    public bool platRelevant;
 
     public Sprite image;
 

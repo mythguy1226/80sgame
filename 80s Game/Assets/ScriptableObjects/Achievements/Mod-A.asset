@@ -23,6 +23,7 @@ MonoBehaviour:
   internalAchivementKey: mod-2
   requirementTrackingKey: stun-mod-3
   testValue: 200
+  platRelevant: 1
   image: {fileID: -158431992, guid: 1d4dc37ca2af7194c80dba4819d7ea21, type: 3}
   rewardText: ROGUE BAT
   rewardSprites:

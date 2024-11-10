@@ -23,6 +23,7 @@ MonoBehaviour:
   internalAchivementKey: acc-1
   requirementTrackingKey: stun-acc-3
   testValue: 2000
+  platRelevant: 1
   image: {fileID: -87850807, guid: 1d4dc37ca2af7194c80dba4819d7ea21, type: 3}
   rewardText: CROSSHAIRS
   rewardSprites:

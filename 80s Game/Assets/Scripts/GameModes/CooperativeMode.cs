@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using SteamIntegration;
 
 public class CooperativeMode : AbsGameMode
 {
@@ -33,6 +34,7 @@ public class CooperativeMode : AbsGameMode
         // Get number of players to pass into scaling method
         int playerCount = GameManager.Instance.GetPlayerCount();
         ScaleGameValues(playerCount);
+        GameManager.Instance.SteamInterface.InitData();
     }
 
     protected override void SetupAllowedData()
@@ -262,6 +264,8 @@ public class CooperativeMode : AbsGameMode
     protected override void EndGame()
     {
         int score = GameManager.Instance.PointsManager.maxScore;
+        GameManager.Instance.SteamInterface.SetSteamData(SteamConstants.DEFENSE_ROUNDS, CurrentRound, true);
+        GameManager.Instance.SteamInterface.UpdateSteamServer();
         AchievementManager.TestEndGameAchievements(ModeType, CurrentRound, score);
         GameManager.Instance.HandleGameOver();
     }

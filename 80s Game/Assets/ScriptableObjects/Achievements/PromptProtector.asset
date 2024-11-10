@@ -25,6 +25,7 @@ MonoBehaviour:
   internalAchivementKey: def-1
   requirementTrackingKey: def-1-key
   testValue: 10
+  platRelevant: 1
   image: {fileID: 1289695690, guid: 1d4dc37ca2af7194c80dba4819d7ea21, type: 3}
   rewardText: BACKGROUND
   rewardSprites:

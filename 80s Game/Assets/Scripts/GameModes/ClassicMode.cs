@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using SteamIntegration;
 
 
 public class ClassicMode : AbsGameMode
@@ -18,6 +18,7 @@ public class ClassicMode : AbsGameMode
 
         SetupAllowedData();
         debugMode = false;
+        GameManager.Instance.SteamInterface.InitData();
     }
 
     protected override void SetupAllowedData()
@@ -207,6 +208,8 @@ public class ClassicMode : AbsGameMode
     protected override void EndGame()
     {
         int score = GameManager.Instance.PointsManager.maxScore;
+        GameManager.Instance.SteamInterface.SetSteamData(SteamConstants.CLASSIC_SCORE, score, true);
+        GameManager.Instance.SteamInterface.UpdateSteamServer();
         AchievementManager.TestEndGameAchievements(ModeType, CurrentRound, score);
         AchievementManager.BullseyeTest(GameManager.Instance.GetPlayer(0));
         GameManager.Instance.HandleGameOver();
