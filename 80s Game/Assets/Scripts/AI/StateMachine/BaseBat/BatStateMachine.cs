@@ -58,6 +58,11 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
         return pointValue == 1000;
     }
 
+    public override string GetCurrentState()
+    {
+        return currentState.ToString();
+    }
+
     void Awake()
     {
         // Initialize all components

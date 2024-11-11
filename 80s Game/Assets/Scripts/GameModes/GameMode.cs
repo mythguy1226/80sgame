@@ -51,9 +51,7 @@ public abstract class AbsGameMode
     /// <returns>Whether or not to skip this target for spawning</returns>
     protected bool SkipBat(Target target)
     {
-        ModifierBatStateMachine mbsm = target.GetComponent<ModifierBatStateMachine>();
-        bool isModifierBat = mbsm != null;
-        return !allowedBats[target.type] || target.FSM.IsActive() || isModifierBat;
+        return !allowedBats[target.type] || target.FSM.IsActive() || target.type == TargetManager.TargetType.Modifier;
     }
 
     /// <summary>
@@ -63,9 +61,7 @@ public abstract class AbsGameMode
     /// <returns>Whether or not to skip this target for spawning</returns>
     protected bool SkipDefenseBat(Target target)
     {
-        ModifierDefenseBatStateMachine mbsm = target.GetComponent<ModifierDefenseBatStateMachine>();
-        bool isModifierBat = mbsm != null;
-        return !allowedBats[target.type] || target.FSM.IsActive() || isModifierBat;
+        return !allowedBats[target.type] || target.FSM.IsActive() || target.type == TargetManager.TargetType.Modifier;
     }
 
     // Needs to be public for targetManager to call

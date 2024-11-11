@@ -96,8 +96,20 @@ public class PlayerInputWrapper : MonoBehaviour
         {
             snailModifier = 0.5f;
         }
+        Vector2 scalingVector = sensitivity * config.sensitivity * snailModifier * Time.deltaTime;
+        Vector2 input = value.Get<Vector2>();
+        if (!controllerInput)
+        {
+            if (input.magnitude < 1.0f)
+            {
+                scalingVector *= input.magnitude;
+            }
+        }
+        
+        Vector2 adjustedInput = input.normalized;
+        adjustedInput = Vector2.Scale(adjustedInput, scalingVector);
+        
 
-        Vector2 adjustedInput = Vector2.Scale(value.Get<Vector2>(), sensitivity * config.sensitivity * snailModifier);
         if (isFlipped)
         {
             adjustedInput *= -1;
@@ -113,6 +125,14 @@ public class PlayerInputWrapper : MonoBehaviour
     {
         Vector2 adjustedInput = Vector2.Scale(value, sensitivity * joyconSensitivyAdjust);
         player.HandleMovement(adjustedInput);
+    }
+
+    private void OnPrintDebug()
+    {
+        foreach(Target target in GameManager.Instance.TargetManager.ActiveTargets)
+        {
+            Debug.LogError(target.ToString());
+        }
     }
 
     //Handle fire inputs received through the Unity input system
@@ -213,6 +233,23 @@ public class PlayerInputWrapper : MonoBehaviour
     private void OnNextTab()
     {
         SettingsManager.Instance.NextTab();
+    }
+
+    private void OnJoin()
+    {
+        if (GameManager.Instance.UIManager.onboardingUI != null && GameManager.Instance.UIManager.onboardingUI.onboardingPanel.activeInHierarchy)
+        {
+            GameManager.Instance.UIManager.onboardingUI.CloseOnboarding();
+            return;
+        }
+    }
+
+    private void OnHowToPlay()
+    {
+        if (GameManager.Instance.UIManager.pauseScreenUI != null && GameManager.Instance.UIManager.pauseScreenUI.isPaused)
+        {
+            GameManager.Instance.UIManager.pauseScreenUI.HowToPlay();
+        }
     }
 
     // Most of this update thing is for Joycons

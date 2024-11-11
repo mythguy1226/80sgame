@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   order: 21
   nameText: Fully Charged
-  requirementText: Stun 6 bats with one overcharge shot
+  requirementText: Stun 6 Bats with one Overcharge shot
   descriptionText: "[Recovered email between lab technicians]\r\nHey!\r\nI thought
     the [redacted] were only meant to work on the robots. I got shocked the other
     day when I was testing the [redacted] and let me tell you, IT WAS NOT PLEASANT.
@@ -23,7 +23,8 @@ MonoBehaviour:
   internalAchivementKey: charged
   requirementTrackingKey: zap
   testValue: 6
-  image: {fileID: 984355894, guid: 083a1430fdd3b6d46aa71e8b78c21d1b, type: 3}
+  platRelevant: 1
+  image: {fileID: 245243851, guid: 1d4dc37ca2af7194c80dba4819d7ea21, type: 3}
   rewardText: STUN EFFECT
   rewardSprites:
   - {fileID: -655644817, guid: 25aaaaff52eba244a85a0e49719bf9ee, type: 3}

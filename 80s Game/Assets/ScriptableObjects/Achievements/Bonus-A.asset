@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   order: 14
   nameText: Bonus Stun Adept
-  requirementText: Stun 150 Total Bonus Bat Bots
+  requirementText: Stun a total of 200 Bonus Bats
   descriptionText: "Laboratory Journal Entry 18:\r\nMaterials research has produced
     a breakthrough. By augmenting the wing\u2019s imitation epidermis with elastic
     nano-carbon lattices, the Mk. I model can achieve superior agility and aerodynamics.
@@ -22,8 +22,8 @@ MonoBehaviour:
     substantially reduce the overall frame weight and increase flight time.\r"
   internalAchivementKey: bb-2
   requirementTrackingKey: stun-bb-3
-  testValue: 150
-  image: {fileID: 2062929586, guid: 083a1430fdd3b6d46aa71e8b78c21d1b, type: 3}
+  testValue: 200
+  image: {fileID: 1633053054, guid: 1d4dc37ca2af7194c80dba4819d7ea21, type: 3}
   rewardText: BAT COLOR
   rewardSprites:
   - {fileID: 463367631, guid: 25aaaaff52eba244a85a0e49719bf9ee, type: 3}

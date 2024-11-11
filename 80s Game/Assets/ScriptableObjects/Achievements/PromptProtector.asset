@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   order: 4
   nameText: Prompt Protector
-  requirementText: Survive 10 Rounds in Defense Mode
+  requirementText: Survive 10 rounds in Defense Mode
   descriptionText: "[Excerpt from a memo to the Program Director]\r\nThe containment
     field resonator has been installed in the bat housing facility. The frequency
     emitted by the resonator interferes with the bats\u2019 navigation systems, so
@@ -25,7 +25,8 @@ MonoBehaviour:
   internalAchivementKey: def-1
   requirementTrackingKey: def-1-key
   testValue: 10
-  image: {fileID: 638295509, guid: 083a1430fdd3b6d46aa71e8b78c21d1b, type: 3}
+  platRelevant: 1
+  image: {fileID: 1289695690, guid: 1d4dc37ca2af7194c80dba4819d7ea21, type: 3}
   rewardText: BACKGROUND
   rewardSprites:
   - {fileID: -781497532, guid: 25aaaaff52eba244a85a0e49719bf9ee, type: 3}

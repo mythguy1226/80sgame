@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 663682550276029941}
   - component: {fileID: 4277385306347250861}
   - component: {fileID: 3433382152933106016}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: FloatingTextMod
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79,7 +79,7 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &663682550276029941
 MonoBehaviour:

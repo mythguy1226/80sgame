@@ -15,7 +15,7 @@ MonoBehaviour:
   order: 25
   nameText: Bullseye!
   requirementText: Achieve an accuracy rating of 85% or greater in a game of Classic
-    Mode.
+    Mode
   descriptionText: "[Excerpt from the Mk.I Recovery Device field manual]\r\n\u2026although
     the gun is perfectly safe to use near other personnel, do not allow it to come
     in contact with your skin, eyes, or mouth, and do not discharge it in the presence
@@ -24,7 +24,8 @@ MonoBehaviour:
   internalAchivementKey: bulls
   requirementTrackingKey: 
   testValue: 85
-  image: {fileID: -1874842185, guid: 083a1430fdd3b6d46aa71e8b78c21d1b, type: 3}
+  platRelevant: 1
+  image: {fileID: 151938439, guid: 1d4dc37ca2af7194c80dba4819d7ea21, type: 3}
   rewardText: STUN EFFECT
   rewardSprites:
   - {fileID: 1448493829, guid: 25aaaaff52eba244a85a0e49719bf9ee, type: 3}

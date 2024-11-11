@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEditor;
 
 public abstract class AbsModifierEffect : MonoBehaviour
 {
@@ -27,7 +26,8 @@ public abstract class AbsModifierEffect : MonoBehaviour
     protected GameObject modifierUIPrefab;
     protected List<GameObject> modifierUIRefs;
     protected GameObject modifierUIElement;
-    protected GameObject animatedModifierUIElement;
+    protected List<GameObject> animatedModifierUIElements;
+    protected List<PlayerController> affectedPlayers;
 
     [SerializeField]
     protected GameObject floatingTextPrefab;
@@ -63,6 +63,8 @@ public abstract class AbsModifierEffect : MonoBehaviour
         InputManager.detectHitSub += ListenForShot;
         _Rb = GetComponent<Rigidbody2D>();
         modifierUIRefs = new List<GameObject>();
+        animatedModifierUIElements = new List<GameObject>();
+        affectedPlayers = new List<PlayerController>();
         maxEffectDuration = effectDuration;
 
         flickerTimer = lifeTime;
@@ -75,6 +77,11 @@ public abstract class AbsModifierEffect : MonoBehaviour
     void OnDisable()
     {
         InputManager.detectHitSub -= ListenForShot;
+    }
+
+    private void OnDestroy()
+    {
+        InputManager.detectHitSub -= ListenForShot; 
     }
 
     // Called once every frame
@@ -102,21 +109,22 @@ public abstract class AbsModifierEffect : MonoBehaviour
                 
             }
 
-            if (animatedModifierUIElement != null)
+            for (int i = 0; i < animatedModifierUIElements.Count; i++)
             {
-                float motionValue = (_motionValueCoefficient>=0?_motionValueCoefficient:0) * Time.deltaTime * 0.15f;
-                _motionValueCoefficient++;
-                Debug.Log("MOD POS: " + animatedModifierUIElement.transform.position.ToString());
-                Debug.Log("PLAYER POS: " + GameManager.Instance.UIManager.modifierContainers[activator.Order].transform.position.ToString());
-                //animatedModifierUIElement.transform.position = Vector3.Lerp(animatedModifierUIElement.transform.position, GameManager.Instance.UIManager.modifierContainers[activator.Order].transform.position, Time.deltaTime * 4);
-                animatedModifierUIElement.transform.position = Vector3.Lerp(animatedModifierUIElement.transform.position, GameManager.Instance.UIManager.modifierContainers[activator.Order].transform.position, motionValue);
-
-                if (animatedModifierUIElement.transform.position.ToString() == GameManager.Instance.UIManager.modifierContainers[activator.Order].transform.position.ToString())
+                if (animatedModifierUIElements[i] != null)
                 {
-                    modifierUIRefs.Remove(animatedModifierUIElement);
-                    Destroy(animatedModifierUIElement);
-                    AddUIRef(activator.Order);
-                    _motionValueCoefficient = 0;
+                    float motionValue = (_motionValueCoefficient>=0?_motionValueCoefficient:0) * Time.deltaTime * 0.15f;
+                    _motionValueCoefficient++;
+
+                    animatedModifierUIElements[i].transform.position = Vector3.Lerp(animatedModifierUIElements[i].transform.position, GameManager.Instance.UIManager.modifierContainers[affectedPlayers[i].Order].transform.position, motionValue);
+
+                    if (animatedModifierUIElements[i].transform.position.ToString() == GameManager.Instance.UIManager.modifierContainers[affectedPlayers[i].Order].transform.position.ToString())
+                    {
+                        modifierUIRefs.Remove(animatedModifierUIElements[i]);
+                        Destroy(animatedModifierUIElements[i]);
+                        AddUIRef(affectedPlayers[i].Order);
+                        _motionValueCoefficient = 0;
+                    }
                 }
             }
         }
@@ -259,14 +267,19 @@ public abstract class AbsModifierEffect : MonoBehaviour
     /// </summary>
     protected void AnimateUIRef()
     {
-        animatedModifierUIElement = Instantiate(modifierUIPrefab, this.transform.position, Quaternion.identity);
+        if (modifierUIPrefab == null)
+            return;
+            
+        GameObject animatedModifierUIElement = Instantiate(modifierUIPrefab, this.transform.position, Quaternion.identity);
         animatedModifierUIElement.transform.position = this.transform.position;
 
         animatedModifierUIElement.transform.SetParent(GameManager.Instance.UIManager.pauseScreenUI.gameUIElements.transform);
         animatedModifierUIElement.transform.localScale = Vector3.one;
 
+        animatedModifierUIElements.Add(animatedModifierUIElement);
         modifierUIRefs.Add(animatedModifierUIElement);
     }
+
 
     /// <summary>
     /// Create a UI reference of this power for a specific player and keep track of it

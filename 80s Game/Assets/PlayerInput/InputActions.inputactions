@@ -85,6 +85,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "HowToPlay",
+                    "type": "Button",
+                    "id": "f9e62166-7bab-4081-9798-c2f06df67cf8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "PrintDebug",
+                    "type": "Button",
+                    "id": "ceac2f80-2887-4144-b48b-63f9a24efb21",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -222,22 +240,22 @@
                 },
                 {
                     "name": "",
-                    "id": "0cc735a6-d948-4c5a-9607-5e317b0d70da",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "PS4;xbox",
-                    "action": "Recenter",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "6e8af115-8cb3-4762-8716-2acb31b1ed96",
                     "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": "PS4;Xbox;xbox",
+                    "action": "Cancel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6ff1818e-fb7c-4985-bf40-3c50885ba3c8",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KnM",
                     "action": "Cancel",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -327,6 +345,50 @@
                     "processors": "",
                     "groups": "KnM",
                     "action": "LookingGlass",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "55cc2ef7-0b0f-4869-b61a-6f15115dcba7",
+                    "path": "<DualShockGamepad>/rightStickPress",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PS4",
+                    "action": "LookingGlass",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "09d7a6d1-0908-40a5-9a58-77cebb52566e",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KnM",
+                    "action": "HowToPlay",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1b1d3092-8610-43b6-a24a-5ab6ee618b7b",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PS4;xbox",
+                    "action": "HowToPlay",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0e760883-2968-4e0e-88df-81c31ed961a3",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PS4;xbox",
+                    "action": "PrintDebug",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

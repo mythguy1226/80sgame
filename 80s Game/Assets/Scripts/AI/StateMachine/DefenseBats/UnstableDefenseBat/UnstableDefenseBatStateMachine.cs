@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -50,9 +51,18 @@ public class UnstableDefenseBatStateMachine : DefenseBatStateMachine
             chain.PlayEffect(currentTarg.transform.position, targetChain[i].transform.position);
 
             // Play stun anim
-            DefenseBatStateMachine FSM = (DefenseBatStateMachine)targetChain[i].FSM;
-            FSM.GetComponent<Target>().SetStunningPlayer(currentTarg.GetStunningPlayer());
-            FSM.ResolveHit();
+            try{
+                DefenseBatStateMachine FSM = (DefenseBatStateMachine)targetChain[i].FSM;
+                FSM.GetComponent<Target>().SetStunningPlayer(currentTarg.GetStunningPlayer());
+                FSM.ResolveHit();
+            }
+            catch (InvalidCastException)
+            {
+                DebuffBatStateMachine FSM = (DebuffBatStateMachine)targetChain[i].FSM;
+                FSM.GetComponent<Target>().SetStunningPlayer(currentTarg.GetStunningPlayer());
+                FSM.ResolveHit();
+            }
+            
             //targetChain[i].GetComponent<AnimationHandler>().PlayStunAnimation();
 
             // Update current target
@@ -76,7 +86,7 @@ public class UnstableDefenseBatStateMachine : DefenseBatStateMachine
         if (nearbyTargets.Length > 0)
         {
             // Get target and ensure target isn't a debuff bat
-            Target curTarg = nearbyTargets[Random.Range(0, nearbyTargets.Length - 1)].gameObject.GetComponent<Target>();
+            Target curTarg = nearbyTargets[UnityEngine.Random.Range(0, nearbyTargets.Length - 1)].gameObject.GetComponent<Target>();
             if(curTarg != null)
                 return curTarg;
         }

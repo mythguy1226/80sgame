@@ -22,10 +22,14 @@ public class AttackingState : AbsBaseState<DefenseBatStateMachine.DefenseBatStat
 	*/
     public override void EnterState()
     {
+        DefenseBatStateMachine FSM = (DefenseBatStateMachine)OwnerFSM;
         OwnerFSM.GetComponent<CircleCollider2D>().isTrigger = false;
         OwnerFSM.GetComponent<PolygonCollider2D>().isTrigger = false;
         OwnerFSM.gameObject.GetComponent<Target>().bIsStunned = false;
-        _AnimControls.SetLatched(true);
+        if (FSM.canLatch)
+        {
+            _AnimControls.SetLatched(true);
+        }
     }
 
     /*
@@ -35,8 +39,12 @@ public class AttackingState : AbsBaseState<DefenseBatStateMachine.DefenseBatStat
 	*/
     public override void ExitState()
     {
-        // Any clean up needed from this state will go here
-        _AnimControls.SetLatched(false);
+        DefenseBatStateMachine FSM = (DefenseBatStateMachine)OwnerFSM;
+        if (FSM.canLatch)
+        {
+            // Any clean up needed from this state will go here
+            _AnimControls.SetLatched(false);
+        }
     }
 
     /*
@@ -58,9 +66,10 @@ public class AttackingState : AbsBaseState<DefenseBatStateMachine.DefenseBatStat
         if (_MovementControls == null)
             return;
 
-        // Enable movement
+        // Disable movement and keep bat at latch point
         _MovementControls.isFleeing = false;
         _MovementControls.canMove = false;
+        FSM.transform.position = FSM.targetLatch.transform.position;
 
         // Manage attack timer and attacking
         if(FSM.CanAttack) // Attack logic

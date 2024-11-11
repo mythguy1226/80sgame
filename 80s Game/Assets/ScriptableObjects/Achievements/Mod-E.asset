@@ -14,15 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   order: 18
   nameText: Mod Bat Stun Expert
-  requirementText: Stun 250 Total Mod Bats
+  requirementText: Stun a total of 300 Modifier Bats
   descriptionText: "Field Application R&D Entry 30:\r\nPowerCore technology might
     be the key to enhancing our containment field capabilities. Though these applications
     are mostly theoretical, the data stored in the PowerCore modules could be used
     to improve the containment field alignment, increasing its effectiveness dramatically.\r"
   internalAchivementKey: mod-3
   requirementTrackingKey: stun-mod-3
-  testValue: 250
-  image: {fileID: -11574742, guid: 083a1430fdd3b6d46aa71e8b78c21d1b, type: 3}
+  testValue: 300
+  platRelevant: 1
+  image: {fileID: -709303713, guid: 1d4dc37ca2af7194c80dba4819d7ea21, type: 3}
   rewardText: EMP
   rewardSprites:
   - {fileID: -1786472516, guid: 25aaaaff52eba244a85a0e49719bf9ee, type: 3}

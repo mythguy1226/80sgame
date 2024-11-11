@@ -28,7 +28,7 @@ public class ModSnail : AbsModifierEffect
             PlayerController pc = piw.GetPlayer();
 
             // If player already has mod extend it
-            if (pc.HasMod(GetModType()))
+            if (pc.HasMod(GetModType()) && pc == activator)
             {
                 pc.ExtendModDuration(GetModType(), maxEffectDuration);
                 CleanUp();
@@ -37,12 +37,13 @@ public class ModSnail : AbsModifierEffect
             else if (GameManager.Instance.gameModeType == EGameMode.Defense) // Affect all players in defense mode
             {
                 piw.isSlowed = true;
+                affectedPlayers.Add(pc);
                 AnimateUIRef();
                 pc.SetMod(GetModType(), this);
                 EnableVFX(pc);
                 continue;
             }
-            else if (pc.Order != activator.Order && !bIsSelfDebuff) // Affect all players but activator
+            else if (pc != activator && !bIsSelfDebuff) // Affect all players but activator
             {
                 piw.isSlowed = true;
                 AnimateUIRef();
@@ -50,9 +51,10 @@ public class ModSnail : AbsModifierEffect
                 EnableVFX(pc);
                 continue;
             }
-            else if(pc.Order == activator.Order && bIsSelfDebuff) // Affect the activator
+            else if(pc == activator && bIsSelfDebuff) // Affect the activator
             {
                 piw.isSlowed = true;
+                affectedPlayers.Add(pc);
                 AnimateUIRef();
                 pc.SetMod(GetModType(), this);
                 EnableVFX(pc);
@@ -80,14 +82,12 @@ public class ModSnail : AbsModifierEffect
             {
                 continue;
             }
-            else if (piw.GetPlayer() == activator && bIsSelfDebuff) // Continue if disabling activator
+            else if (affectedPlayers.Contains(piw.GetPlayer()) && bIsSelfDebuff) // Continue if disabling activator
             {
                 piw.isSlowed = false;
                 piw.GetPlayer().RemoveMod(GetModType());
                 continue;
             }
-            piw.isSlowed = false;
-
         }
 
         if (!slowedRemains)

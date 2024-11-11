@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   order: 6
   nameText: Bulwark of Resistance
-  requirementText: Survive 25 Rounds in Defense Mode
+  requirementText: Survive 20 rounds in Defense Mode
   descriptionText: "[Recovered email between lab technicians]\r\nJust got back from
     medical. I went by the containment facility and felt [redacted]. My vision [redacted]
     and I swear I could feel [redacted]. I think it\u2019s the crystal resonators
@@ -22,8 +22,9 @@ MonoBehaviour:
     and you\u2019ll [redacted]. It\u2019s the same thing here, I swear.\r"
   internalAchivementKey: def-3
   requirementTrackingKey: def-3-key
-  testValue: 25
-  image: {fileID: -1459116030, guid: 083a1430fdd3b6d46aa71e8b78c21d1b, type: 3}
+  testValue: 20
+  platRelevant: 1
+  image: {fileID: 467260495, guid: 1d4dc37ca2af7194c80dba4819d7ea21, type: 3}
   rewardText: BACKGROUND
   rewardSprites:
   - {fileID: -376455217, guid: 25aaaaff52eba244a85a0e49719bf9ee, type: 3}

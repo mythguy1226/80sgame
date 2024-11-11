@@ -15,6 +15,7 @@ public class TargetManager : MonoBehaviour
     }
     // Fields for all targets and spawn locations
     public List<Target> targets;
+    public List<Target> activeTargets;
     public List<Vector3> spawnLocations;
 
     // Default values
@@ -25,6 +26,10 @@ public class TargetManager : MonoBehaviour
     float minSpeed = 3.0f;
     float maxSpeed = 3.5f;
 
+    public float speedIncrement = 0.1f;
+    public float minSpeedCap = 3.5f;
+    public float maxSpeedCap = 4.0f;
+
     // Scale values
     float minScale = 2.8f;
     float maxScale = 3.5f;
@@ -33,7 +38,7 @@ public class TargetManager : MonoBehaviour
 
     public List<Target> ActiveTargets
     {
-        get { return targets.FindAll(target => target.IsActive); }
+        get { return activeTargets; }
     }
 
     private void Start()
@@ -47,13 +52,13 @@ public class TargetManager : MonoBehaviour
     public void UpdateTargetParams()
     {
         // Update min and max target speeds
-        minSpeed += 0.1f;
-        if (minSpeed >= 3.5f)
-            minSpeed = 3.5f;
+        minSpeed += speedIncrement;
+        if (minSpeed >= minSpeedCap)
+            minSpeed = minSpeedCap;
 
-        maxSpeed += 0.1f;
-        if (maxSpeed >= 4.0f)
-            maxSpeed = 4.0f;
+        maxSpeed += speedIncrement;
+        if (maxSpeed >= maxSpeedCap)
+            maxSpeed = maxSpeedCap;
     }
 
     // Method for spawning a target
@@ -76,7 +81,8 @@ public class TargetManager : MonoBehaviour
         }
 
         // Update target's speed and scaling
-        target.UpdateSpeed(Random.Range(minSpeed, maxSpeed));
+        if(target.type != TargetType.LowBonus && target.type != TargetType.HighBonus)
+            target.UpdateSpeed(Random.Range(minSpeed, maxSpeed));
 
         float newScale = Random.Range(minScale, maxScale);
         target.gameObject.transform.localScale = new Vector3(newScale, newScale, newScale);
@@ -197,6 +203,25 @@ public class TargetManager : MonoBehaviour
             }
         }
         return -1;
+    }
+
+    public int RegisterActiveTarget(Target target)
+    {
+        if (!activeTargets.Contains(target))
+        {
+            activeTargets.Add(target);
+        }
+        return activeTargets.Count - 1;
+    }
+
+    public void RemoveActiveTarget(Target target)
+    {
+        bool removal = activeTargets.Remove(target);
+        if (!removal)
+        {
+            string errorString = string.Format("Removal error! Target {0} not removed", target);
+            Debug.LogError(errorString);
+        }
     }
 
     /* Debug Methods */

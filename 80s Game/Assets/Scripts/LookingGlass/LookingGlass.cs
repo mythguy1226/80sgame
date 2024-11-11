@@ -85,4 +85,14 @@ public class LookingGlass : MonoBehaviour
         AchievementManager.UnlockAchievement(AchievementConstants.CLASSIC_FAN);
         AchievementManager.UnlockAchievement(AchievementConstants.CLASSIC_ENJOYER);
     }
+
+    public void LockFrameRate30()
+    {
+        Application.targetFrameRate = 30;
+    }
+
+    public void LockFrameRate60()
+    {
+        Application.targetFrameRate = 60;
+    }
 }

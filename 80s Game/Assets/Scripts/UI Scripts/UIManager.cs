@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.UI;
+using SteamIntegration;
 //using UnityEngine.WSA;
 
 public class UIManager : MonoBehaviour
@@ -102,6 +103,11 @@ public class UIManager : MonoBehaviour
         pauseEvent?.Invoke(player);
     }
 
+    public void SystemInterruptPause()
+    {
+        pauseEvent?.Invoke(1);
+    }
+
     //Create status effect UI for the appropriate modifier and proper player
     public GameObject CreateModifierUI(GameObject uiPrefab, int player)
     {
@@ -172,6 +178,11 @@ public class UIManager : MonoBehaviour
     //Cancel out of a menu on the title screen when pressing the cancel input
     public void CancelMenu()
     {
+        if (onboardingUI != null && onboardingUI.onboardingPanel.activeInHierarchy)
+        {
+            onboardingUI.BackOut();
+        }
+
         if (titleScreenUI == null)
         {
             return; 
@@ -199,6 +210,7 @@ public class UIManager : MonoBehaviour
     //Show an achievement notification when it is unlocked
     public void EnqueueAchievementNotification(AchievementData achievement)
     {
+        GameManager.Instance.SteamInterface.UnlockSteamAchievement(achievement.internalAchivementKey);
         AchievementNotificationData notificationData = new AchievementNotificationData(achievement.nameText, achievement.image);
         achievementNotifs.Enqueue(notificationData);
     }

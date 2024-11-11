@@ -85,6 +85,7 @@ MonoBehaviour:
   isWandering: 0
   isFleeing: 0
   maxSpeed: 6
+  maxDistance: 15
   currentVelocity: {x: 0, y: 0}
 --- !u!95 &3464643637762033909
 Animator:

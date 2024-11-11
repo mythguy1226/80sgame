@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectDuration: 1
-  modifierUIPrefab: {fileID: 2011110001720158753, guid: 36d6513b4ab389e45a3d1ca3abb6c42b, type: 3}
+  modifierUIPrefab: {fileID: 0}
   floatingTextPrefab: {fileID: 5422266768498237442, guid: ea6ce9b2907459549a09b70e5ab052ff, type: 3}
   modifierName: EMP
   activator: {fileID: 0}

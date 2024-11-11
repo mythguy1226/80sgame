@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using static AchievementData;
 
 public class Target : MonoBehaviour
 {
@@ -21,7 +20,7 @@ public class Target : MonoBehaviour
     // Default fields used for resets
     Vector3 spawnPoint;
     public bool bIsStunned = false;
-
+    
     // Public fields
     public GameObject floatingTextPrefab;
     public int pointValue = 1000;
@@ -52,6 +51,12 @@ public class Target : MonoBehaviour
         InputManager.detectHitSub -= ListenForShot;
     }
 
+    private void OnDestroy()
+    {
+        //Debug.Log("On Destroy Called");
+        InputManager.detectHitSub -= ListenForShot;
+    }
+
     /// <summary>
     /// Initialize the target's fields and components
     /// </summary>
@@ -62,7 +67,6 @@ public class Target : MonoBehaviour
         _SpriteRenderer = GetComponent<SpriteRenderer>();
         _AnimControls = GetComponent<AnimationHandler>();
         _Collider = GetComponent<PolygonCollider2D>();
-
         spawnPoint = transform.position;
     }
 
@@ -174,7 +178,7 @@ public class Target : MonoBehaviour
     /// </summary>
     public void ResolveHit()
     {
-        if (bIsStunned)
+        if (bIsStunned && FSM.GetCurrentState() == "DeathState")
         {
             return;
         }
@@ -186,6 +190,7 @@ public class Target : MonoBehaviour
         bIsStunned = false;
         FSM.SetActive(true);
         InputManager.detectHitSub += ListenForShot;
+        GameManager.Instance.TargetManager.RegisterActiveTarget(this);
         FSM.TransitionToDefault();
     }
 
@@ -204,6 +209,7 @@ public class Target : MonoBehaviour
 
         // Set bat to its default values
         FSM.SetActive(false);
+        GameManager.Instance.TargetManager.RemoveActiveTarget(this);
         transform.position = spawnPoint;
         _MovementControls.canMove = false;
         _AnimControls.ResetAnimation();
@@ -281,5 +287,11 @@ public class Target : MonoBehaviour
     public KinematicSteer GetMovementController()
     {
         return _MovementControls;
+    }
+
+    public override string ToString()
+    {
+        string output = string.Format("{0}: bIsStunned: {1}, FSM isActive: {2}, FSM currentState: {3}", name, bIsStunned, FSM.IsActive(), FSM.GetCurrentState());
+        return output;
     }
 }

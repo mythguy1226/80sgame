@@ -1,3 +1,4 @@
+using SteamIntegration;
 using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -23,6 +24,8 @@ public class GameManager : MonoBehaviour
     public InputManager InputManager { get; private set;  }
     public TargetManager TargetManager { get; private set; }
     public PointsManager PointsManager { get; private set; }
+
+    public SteamInterface SteamInterface { get; private set; }
 
     public UIManager UIManager { get; private set; }
     public bool isSlowed = false;
@@ -68,11 +71,12 @@ public class GameManager : MonoBehaviour
             InputManager = GetComponent<InputManager>();
             TargetManager = GetComponent<TargetManager>();
             PointsManager = GetComponent<PointsManager>();
+            SteamInterface = GetComponent<SteamInterface>();
             UIManager = GetComponent<UIManager>();
             players = new List<PlayerController>();
 
             if (PlayerData.activePlayers.Count == 0 && debug) {
-                float sensitivity = PlayerPrefs.GetFloat("Sensitivity", 1.0f);
+                float sensitivity = PlayerPrefs.GetFloat("Sensitivity", 3.25f);
 
                 PlayerConfig defaultConfig = new PlayerConfig(0, PlayerData.defaultColors[0], new Vector2(sensitivity, sensitivity));
                 PlayerData.activePlayers.Add(defaultConfig);

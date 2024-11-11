@@ -30,7 +30,7 @@ public class DiveBombBatStateMachine : DefenseBatStateMachine
     protected override void Update()
     {
         base.Update();
-
+        canLatch = false;
         if(currentState.StateKey == DefenseBatStates.Attacking)
         {
             Attack();

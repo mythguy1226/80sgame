@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   order: 3
   nameText: Timeless Classic
-  requirementText: Finish Classic Mode with 1,000,000 points
+  requirementText: Finish Classic Mode with 750,000 points
   descriptionText: "Field Applications R&D Entry 43: \r\nThe Mk.I Recovery Device
     has been rushed through prototyping to contain the breach. By adapting the bat\u2019s
     echolocation module and the containment field resonator, our technicians engineered
@@ -22,8 +22,9 @@ MonoBehaviour:
     human injury.\r"
   internalAchivementKey: classic-3
   requirementTrackingKey: classic-3-key
-  testValue: 1000000
-  image: {fileID: 2086538197, guid: 083a1430fdd3b6d46aa71e8b78c21d1b, type: 3}
+  testValue: 750000
+  platRelevant: 1
+  image: {fileID: 498406190, guid: 1d4dc37ca2af7194c80dba4819d7ea21, type: 3}
   rewardText: BACKGROUND
   rewardSprites:
   - {fileID: -1501980978, guid: 25aaaaff52eba244a85a0e49719bf9ee, type: 3}

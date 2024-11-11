@@ -23,6 +23,7 @@ public class ModRustedWings : AbsModifierEffect
         }
 
         // Update game manager to slow down bats
+        affectedPlayers.Add(activator);
         activator.SetMod(GetModType(), this);
         GameManager.Instance.isSlowed = true;
         GameManager.Instance.rustedWingsStack++;

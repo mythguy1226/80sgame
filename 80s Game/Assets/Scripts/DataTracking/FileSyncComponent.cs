@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using SteamIntegration;
+using Localization;
 using UnityEngine;
 
 public class FileSyncComponent : MonoBehaviour
@@ -12,8 +14,18 @@ public class FileSyncComponent : MonoBehaviour
     RemoteDataSaver remoteSystemInterface;
     Dictionary<int, bool> syncStatus;
     List<FileInfo> filenames;
+
+    public TextAsset engUIJson;
+    public TextAsset spanishUIJson;
+    public TextAsset frenchUIJson;
+
     private void Start()
     {
+        // Localization setup
+        SteamInterface steamComponent = GetComponent<SteamInterface>();
+        LoadLocalizationData(steamComponent.gameLanguage);
+
+        // Network Setup
         // Escape out of this if we're in the debug environment
         if (NetworkUtility.NetworkDevEnv())
         {
@@ -73,5 +85,29 @@ public class FileSyncComponent : MonoBehaviour
         {
             if (!kvp.Value) { fileSystemInterface.DeleteFile(filenames[kvp.Key].FullName); }
         }
+    }
+
+    private void LoadLocalizationData(SupportedLanguages language)
+    {
+        TextAsset whichTextAssset;
+        switch (language)
+        {
+            case SupportedLanguages.FRENCH:
+                whichTextAssset = frenchUIJson;
+                break;
+            case SupportedLanguages.SPANISH:
+                whichTextAssset = spanishUIJson;
+                break;
+            default:
+                whichTextAssset = engUIJson;
+                break;
+        }
+
+        //UI Text
+        TextElements uiTextElements = JsonUtility.FromJson<TextElements>(whichTextAssset.text);
+        LocalizationManager.SetUpLanguageIndex(TextDomain.UI, uiTextElements);
+
+
+        LocalizationManager.IsReady = true;
     }
 }
