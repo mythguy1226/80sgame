@@ -1287,8 +1287,8 @@ MonoBehaviour:
   - {fileID: 1301689758}
   helpInputPrompt: {fileID: 1029659480}
   controllerHelpInputs:
-  - {fileID: 21300000, guid: 2fa78ecfaa23c6a41bdc963c0cf10c85, type: 3}
-  - {fileID: 21300000, guid: c4bef494bc09fb345b90199870dd29fc, type: 3}
+  - {fileID: 21300000, guid: 689dbd43c9fcdfe4a8473653610edde1, type: 3}
+  - {fileID: 21300000, guid: d0390ad8a40b6af41937e32c8c17e4f4, type: 3}
   titleScreenButtons:
   - {fileID: 1959031508}
   - {fileID: 1279264832}
@@ -2563,7 +2563,7 @@ RectTransform:
   m_GameObject: {fileID: 446618958}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9, y: 0.9, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 937136101}
@@ -2571,7 +2571,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -526.94, y: 295}
+  m_AnchoredPosition: {x: -547, y: 313}
   m_SizeDelta: {x: 561.01, y: 43.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &446618960
@@ -3800,6 +3800,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 586279785082144575, guid: caa788b6073da9145bd994395ff228c5, type: 3}
+      propertyPath: m_text
+      value: '-1 Player
+
+
+
+        -12 Rounds
+
+
+
+        -Beat the High Score!'
+      objectReference: {fileID: 0}
     - target: {fileID: 1004619290351585007, guid: caa788b6073da9145bd994395ff228c5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -4114,38 +4126,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '
-
-
-
-    Lucas Corey
-
-
-
-
-
-    Eduardo Escudero
-
-
-
-
-
-    Kevin Insinna
-
-
-
-
-
-    Quinn
-    Poyneer
-
-
-
-
-
-    Rob Reddick
-
-'
+  m_text: "\n\n\nLucas Corey\n\n\n\n\nEduardo Escudero\n\n\n\n\nKevin Insinna\n\n\n\n\nQuinn
+    Poyneer\n\n\n\n\nRob Reddick\n\n\n\nSpecial Thanks:\n\nErika Mesh, \nDavid Sanchez,
+    Elouise Oyzon\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4ffe7c97efad09e458ea5fc5958a4597, type: 2}
   m_sharedMaterial: {fileID: -507269567956872517, guid: 4ffe7c97efad09e458ea5fc5958a4597, type: 2}
@@ -5030,7 +5013,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c8e3102adee278f43b68cb5d1e0657fb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: bd55d15f584c96b49a217239f95cc2f6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6038,7 +6021,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 349.05, y: -5.015}
+  m_AnchoredPosition: {x: 399, y: 0}
   m_SizeDelta: {x: 970.41, y: 629.72}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1300914167
