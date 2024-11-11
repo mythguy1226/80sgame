@@ -94,6 +94,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "PrintDebug",
+                    "type": "Button",
+                    "id": "ceac2f80-2887-4144-b48b-63f9a24efb21",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -369,6 +378,17 @@
                     "processors": "",
                     "groups": "PS4;xbox",
                     "action": "HowToPlay",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0e760883-2968-4e0e-88df-81c31ed961a3",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PS4;xbox",
+                    "action": "PrintDebug",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

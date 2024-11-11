@@ -66,6 +66,11 @@ public class RogueBatStateMachine : AbsStateMachine<RogueBatStateMachine.RogueBa
         return false;
     }
 
+    public override string GetCurrentState()
+    {
+        return currentState.ToString();
+    }
+
     void Awake()
     {
         // Initialize all components

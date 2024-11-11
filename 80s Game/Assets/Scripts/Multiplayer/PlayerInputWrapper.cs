@@ -127,6 +127,14 @@ public class PlayerInputWrapper : MonoBehaviour
         player.HandleMovement(adjustedInput);
     }
 
+    private void OnPrintDebug()
+    {
+        foreach(Target target in GameManager.Instance.TargetManager.ActiveTargets)
+        {
+            Debug.LogError(target.ToString());
+        }
+    }
+
     //Handle fire inputs received through the Unity input system
     private void OnFire(InputValue value)
     {

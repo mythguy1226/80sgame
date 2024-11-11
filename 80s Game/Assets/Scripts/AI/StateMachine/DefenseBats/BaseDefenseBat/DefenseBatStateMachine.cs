@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using TMPro;
 using UnityEngine;
 
 public class DefenseBatStateMachine : AbsStateMachine<DefenseBatStateMachine.DefenseBatStates>
@@ -77,6 +76,11 @@ public class DefenseBatStateMachine : AbsStateMachine<DefenseBatStateMachine.Def
     {
         get { return bCanAttack; }
         set { bCanAttack = value; }
+    }
+
+    public override string GetCurrentState()
+    {
+        return currentState.ToString();
     }
 
     void Awake()

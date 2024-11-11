@@ -12,4 +12,6 @@ public abstract class StateMachineWrapper : MonoBehaviour
     public abstract bool InUnscorableState();
 
     public virtual void ResolveEvent(){}
+
+    public abstract string GetCurrentState();
 }

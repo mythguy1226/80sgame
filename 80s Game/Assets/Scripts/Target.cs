@@ -178,7 +178,7 @@ public class Target : MonoBehaviour
     /// </summary>
     public void ResolveHit()
     {
-        if (bIsStunned)
+        if (bIsStunned && FSM.GetCurrentState() == "DeathState")
         {
             return;
         }
@@ -287,5 +287,11 @@ public class Target : MonoBehaviour
     public KinematicSteer GetMovementController()
     {
         return _MovementControls;
+    }
+
+    public override string ToString()
+    {
+        string output = string.Format("{0}: bIsStunned: {1}, FSM isActive: {2}, FSM currentState: {3}", name, bIsStunned, FSM.IsActive(), FSM.GetCurrentState());
+        return output;
     }
 }
