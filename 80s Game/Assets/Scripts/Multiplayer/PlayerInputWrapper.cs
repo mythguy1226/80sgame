@@ -250,6 +250,9 @@ public class PlayerInputWrapper : MonoBehaviour
         {
             GameManager.Instance.UIManager.pauseScreenUI.HowToPlay();
         }
+
+        else if (GameManager.Instance.UIManager.titleScreenUI != null)
+            GameManager.Instance.UIManager.pauseScreenUI.HowToPlay();
     }
 
     // Most of this update thing is for Joycons
