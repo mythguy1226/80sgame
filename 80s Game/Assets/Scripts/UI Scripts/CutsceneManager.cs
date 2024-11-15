@@ -13,16 +13,8 @@ public class CutsceneManager : MonoBehaviour
     void Start()
     {
         Time.timeScale = 1f;
-
-        switch (PlayerData.activePlayers[0].controlScheme)
-        {
-            case "PS4":
-                skipPrompt.sprite = skipPromptIcons[0];
-                break;
-            case "xbox":
-                skipPrompt.sprite = skipPromptIcons[1];
-                break;
-        }
+        Debug.Log("Cutscene Manager");
+        UpdatePrompts();
     }
 
     // Update is called once per frame
@@ -34,5 +26,18 @@ public class CutsceneManager : MonoBehaviour
     public void SkipCutscene()
     {
         this.gameObject.GetComponent<PlayableDirector>().time = 4.2f;
+    }
+
+    public void UpdatePrompts()
+    {
+        switch (PlayerData.activePlayers[0].controlScheme)
+        {
+            case "PS4":
+                skipPrompt.sprite = skipPromptIcons[0];
+                break;
+            case "xbox":
+                skipPrompt.sprite = skipPromptIcons[1];
+                break;
+        }
     }
 }

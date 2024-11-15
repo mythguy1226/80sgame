@@ -111,15 +111,18 @@ public class ScoreBehavior : MonoBehaviour
             }
 
             //Set initials for the leaderboard score
-            string initials = PlayerData.activePlayers[0].initials;
-            if (initials == null)
+            if (PlayerData.activePlayers.Count > 0)
             {
-                initials = "AAA";
-            }   
-            
-            //Update bottom score leaderboard text
-            bottomScoreTextObject.SetText(initials + "\t" + score);
-            bottomScoreTextObject.gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = bottomScoreTextObject.text;
+                string initials = PlayerData.activePlayers[0].initials;
+                if (initials == null)
+                {
+                    initials = "AAA";
+                }
+
+                //Update bottom score leaderboard text
+                bottomScoreTextObject.SetText(initials + "\t" + score);
+                bottomScoreTextObject.gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = bottomScoreTextObject.text;
+            }
         }
 
         //Competitive mode final scores

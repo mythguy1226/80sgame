@@ -69,6 +69,7 @@ public class PlayerInputWrapper : MonoBehaviour
         } 
     }
 
+
     //Handle inputs received from the Unity input system
     private void OnMove(InputValue value)
     {
@@ -175,6 +176,7 @@ public class PlayerInputWrapper : MonoBehaviour
     // Received through the Unity input system
     private void OnPause(InputValue value)
     {
+        Debug.Log("OnPause");
         player.EmitPause();
     }
 
@@ -207,12 +209,7 @@ public class PlayerInputWrapper : MonoBehaviour
     // Received through the Unity input system
     private void OnStartGame(InputValue value)
     {
-        player.EmitPause();
-    }
-
-    // Override for joycons
-    private void OnPause()
-    {
+        Debug.Log("OnStartGame");
         player.EmitPause();
     }
 
@@ -226,6 +223,7 @@ public class PlayerInputWrapper : MonoBehaviour
     //Switches tabs for when settings panel is active
     private void OnPreviousTab()
     {
+
         SettingsManager.Instance.PreviousTab();
     }
 
@@ -280,11 +278,6 @@ public class PlayerInputWrapper : MonoBehaviour
             {
                 OnRecenter();
             }
-
-            if ((j.GetButtonDown(Joycon.Button.PLUS) || j.GetButtonDown(Joycon.Button.MINUS)) && Time.timeScale > 0)
-            {
-                OnPause();
-            }
         }
 
         //Increase delay between shots
@@ -312,5 +305,10 @@ public class PlayerInputWrapper : MonoBehaviour
     public PlayerController GetPlayer()
     {
         return player;
+    }
+
+    public string GimmeControlScheme(int playerIndex)
+    {
+        return PlayerData.activePlayers[playerIndex].controlScheme;
     }
 }

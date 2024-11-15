@@ -174,6 +174,7 @@ public class PauseScreenBehavior : MonoBehaviour
         }
         GameManager.Instance.SteamInterface.UpdateSteamServer();
         SceneManager.LoadScene(2);
+        PlayerData.Reset();
         SoundManager.Instance.StopAllAudio();
         SoundManager.Instance.PlaySoundContinuous(buttonClickSound);
     }

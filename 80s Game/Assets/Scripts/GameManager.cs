@@ -1,6 +1,7 @@
 using SteamIntegration;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -78,13 +79,16 @@ public class GameManager : MonoBehaviour
             if (PlayerData.activePlayers.Count == 0 && debug) {
                 float sensitivity = PlayerPrefs.GetFloat("Sensitivity", 3.25f);
 
+                /*
                 PlayerConfig defaultConfig = new PlayerConfig(0, PlayerData.defaultColors[0], new Vector2(sensitivity, sensitivity));
                 PlayerData.activePlayers.Add(defaultConfig);
                 PlayerController pc = Instantiate(playerPrefab, transform.position, Quaternion.identity);
                 pc.SetConfig(defaultConfig, PlayerController.ControllerState.Gameplay);
                 PlayerInput pi = pc.GetComponent<PlayerInput>();
                 pi.SwitchCurrentControlScheme(pi.currentControlScheme, pi.devices[0]);
-            } else
+                */
+            }
+            else
             {
                 // Main Gameplay Player Instantiation
                 for(int i = 0; i < PlayerData.activePlayers.Count; i++)
@@ -255,5 +259,18 @@ public class GameManager : MonoBehaviour
     public void AddDebugMessage(string msg)
     {
         Debug.Log(msg);
+    }
+
+    private void OnPlayerJoined(PlayerInput playerInput)
+    {
+        Debug.Log("Received");
+        if (PlayerData.activePlayers.Count == 0 && debug)
+        {
+            float sensitivity = PlayerPrefs.GetFloat("Sensitivity", 3.25f);
+            PlayerConfig defaultConfig = new PlayerConfig(0, PlayerData.defaultColors[0], new Vector2(sensitivity, sensitivity));
+            defaultConfig.controlScheme = playerInput.currentControlScheme;
+            defaultConfig.device = playerInput.devices[0];
+            PlayerData.activePlayers.Add(defaultConfig);
+        }
     }
 }
