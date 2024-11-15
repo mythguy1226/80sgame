@@ -73,6 +73,7 @@ public class ScoreBehavior : MonoBehaviour
         {
             switch (PlayerData.activePlayers[0].controlScheme)
             {
+                case "PS5":
                 case "PS4":
                     pauseInputPrompt.sprite = controllerPauseInputs[0];
                     break;

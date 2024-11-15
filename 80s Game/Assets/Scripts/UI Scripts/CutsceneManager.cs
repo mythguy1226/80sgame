@@ -32,6 +32,7 @@ public class CutsceneManager : MonoBehaviour
     {
         switch (PlayerData.activePlayers[0].controlScheme)
         {
+            case "PS5":
             case "PS4":
                 skipPrompt.sprite = skipPromptIcons[0];
                 break;

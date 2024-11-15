@@ -102,6 +102,7 @@ public class PauseScreenBehavior : MonoBehaviour
 
                 switch (PlayerData.activePlayers[playerIndex].controlScheme)
                 {
+                    case "PS5":
                     case "PS4":
                         howToPlayPrompt.sprite = howToPlayIcons[0];
                         break;

@@ -150,6 +150,7 @@ public class SettingsManager : MonoBehaviour
         //Change input prompts for changing tabs based on the control scheme of the player who paused
         switch (PlayerData.activePlayers[playerIndex].controlScheme)
         {
+            case "PS5":
             case "PS4":
                 tabPrompts[0].sprite = controllerTabPrompts[0];
                 tabPrompts[1].sprite = controllerTabPrompts[1];

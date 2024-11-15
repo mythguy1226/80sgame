@@ -67,6 +67,7 @@ public class PlayerJoinManager : MonoBehaviour
         config.controlScheme = playerInput.currentControlScheme;
         config.device = playerInput.devices[0];
 
+
         // We get the PlayerController object of the player who has joined to bind it to this manager and make sure no awkardness happens
         // with UI controls. We also set its PlayerConfig.
         PlayerController pc = playerInput.gameObject.GetComponent<PlayerController>();
@@ -97,11 +98,13 @@ public class PlayerJoinManager : MonoBehaviour
         //Change Prompt Tray Icons based on which control scheme Player 1 uses
         if (pc.Order == 0)
         {
+            Debug.Log(currentControlScheme);
             switch (currentControlScheme)
             {
                 case "KnM":
                     ChangePromptTray(keyboardInputPrompts, false);
                     break;
+                case "PS5":
                 case "PS4":
                     ChangePromptTray(playstationInputPrompts, true);
                     break;
