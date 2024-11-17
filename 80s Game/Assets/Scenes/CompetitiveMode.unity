@@ -1651,8 +1651,6 @@ GameObject:
   - component: {fileID: 302036271}
   - component: {fileID: 302036275}
   - component: {fileID: 302036274}
-  - component: {fileID: 302036273}
-  - component: {fileID: 302036272}
   m_Layer: 5
   m_Name: How To Play
   m_TagString: Untagged
@@ -1680,32 +1678,6 @@ RectTransform:
   m_AnchoredPosition: {x: 773, y: -441.52997}
   m_SizeDelta: {x: -1583.79, y: -1002.05}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &302036272
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 302036270}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a057874a223fd04b8bdd6145686d1b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selectable: {fileID: 0}
---- !u!114 &302036273
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 302036270}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebf9a18c2bdece04b8a9babe4112e403, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pauseButton: 0
 --- !u!114 &302036274
 MonoBehaviour:
   m_ObjectHideFlags: 0

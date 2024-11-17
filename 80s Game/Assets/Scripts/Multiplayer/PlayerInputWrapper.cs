@@ -69,24 +69,10 @@ public class PlayerInputWrapper : MonoBehaviour
         } 
     }
 
+
     //Handle inputs received from the Unity input system
     private void OnMove(InputValue value)
     {
-        if (GameManager.Instance.UIManager.titleScreenUI != null)
-        {
-            if (GameManager.Instance.UIManager.titleScreenUI.gamemodePanel.activeInHierarchy && PlayerData.activePlayers[player.Order].controlScheme != "KnM")
-            {
-                GameManager.Instance.UIManager.BackgroundCycle(value.Get<Vector2>());
-            }
-        }
-
-        else if (GameManager.Instance.UIManager.onboardingUI != null)
-        {
-            if (GameManager.Instance.UIManager.onboardingUI.onboardingPanel.activeInHierarchy && PlayerData.activePlayers[player.Order].controlScheme != "KnM")
-            {
-                GameManager.Instance.UIManager.onboardingUI.ChangePage(value.Get<Vector2>());
-            }
-        }
 
         PlayerConfig config = PlayerData.activePlayers[player.Order];
         float snailModifier = 1.0f;
@@ -120,12 +106,24 @@ public class PlayerInputWrapper : MonoBehaviour
         player.HandleMovement(adjustedInput * sensitivityMultiplier);
     }
 
-    // On move override for Joycons
-    private void OnMove(Vector2 value)
+    private void OnNavigate(InputValue inputValue)
     {
-        Vector2 adjustedInput = Vector2.Scale(value, sensitivity * joyconSensitivyAdjust);
-        player.HandleMovement(adjustedInput);
+        if (GameManager.Instance.UIManager.titleScreenUI != null)
+        {
+            if (GameManager.Instance.UIManager.titleScreenUI.gamemodePanel.activeInHierarchy)
+            {
+                GameManager.Instance.UIManager.BackgroundCycle(inputValue.Get<Vector2>());
+            }
+        }
+        else if (GameManager.Instance.UIManager.onboardingUI != null)
+        {
+            if (GameManager.Instance.UIManager.onboardingUI.onboardingPanel.activeInHierarchy && PlayerData.activePlayers[player.Order].controlScheme != "KnM")
+            {
+                GameManager.Instance.UIManager.onboardingUI.ChangePage(inputValue.Get<Vector2>());
+            }
+        }
     }
+        
 
     private void OnPrintDebug()
     {
@@ -138,9 +136,12 @@ public class PlayerInputWrapper : MonoBehaviour
     //Handle fire inputs received through the Unity input system
     private void OnFire(InputValue value)
     {
+
+
         // If the onboarding screen is on, dismiss it
         if (GameManager.Instance.UIManager.activeUI != UIManager.UIType.None)
         {
+
             GameManager.Instance.UIManager.GetFireInput(player.activeCrosshair.PositionToScreen());
             currentDelay = 0.0f;
         }
@@ -148,17 +149,6 @@ public class PlayerInputWrapper : MonoBehaviour
         fireHeld = !fireHeld;
     }
 
-    // On fire override for joycons
-    private void OnFire()
-    {
-        player.HandleFire();
-
-        if (JoyconManager.Instance.j.Count > 0)
-        {
-            Joycon j = JoyconManager.Instance.j[player.Order];
-            j.SetRumble(160, 320, 0.6f, 200);
-        }   
-    }
 
     //Received through the Unity Input system
     private void OnRecenter(InputValue value)
@@ -175,6 +165,7 @@ public class PlayerInputWrapper : MonoBehaviour
     // Received through the Unity input system
     private void OnPause(InputValue value)
     {
+        Debug.Log("OnPause");
         player.EmitPause();
     }
 
@@ -210,12 +201,6 @@ public class PlayerInputWrapper : MonoBehaviour
         player.EmitPause();
     }
 
-    // Override for joycons
-    private void OnPause()
-    {
-        player.EmitPause();
-    }
-
     // Received through the Unity input system
     private void OnCancel()
     {
@@ -226,6 +211,7 @@ public class PlayerInputWrapper : MonoBehaviour
     //Switches tabs for when settings panel is active
     private void OnPreviousTab()
     {
+
         SettingsManager.Instance.PreviousTab();
     }
 
@@ -258,38 +244,8 @@ public class PlayerInputWrapper : MonoBehaviour
     // Most of this update thing is for Joycons
     public void Update()
     {
-        // make sure the Joycon only gets checked if attached
-        if (joycons.Count > 0)
-        {
-            Joycon j = joycons[player.Order-1];
-
-            // Gyro values: x, y, z axis values (in radians per second)
-            Vector3 gyro = j.GetGyro();
-
-            // Update cursor position based on gyroscope values
-            OnMove(new Vector2(gyro.z, gyro.y));
-
-            // Get right trigger input
-            if (j.GetButtonDown(Joycon.Button.SHOULDER_2))
-            {
-                OnFire();
-            }
-
-            //shoulderPressed = true;
-            if (j.GetButtonDown(Joycon.Button.DPAD_DOWN))
-            {
-                OnRecenter();
-            }
-
-            if ((j.GetButtonDown(Joycon.Button.PLUS) || j.GetButtonDown(Joycon.Button.MINUS)) && Time.timeScale > 0)
-            {
-                OnPause();
-            }
-        }
-
         //Increase delay between shots
         currentDelay += Time.deltaTime;
-
         //If fire button is held and the delay is exceeded
         if (fireHeld && currentDelay >= fireDelay)
         {
@@ -297,20 +253,20 @@ public class PlayerInputWrapper : MonoBehaviour
             player.HandleFire();
             currentDelay = 0.0f;
         }
-
-        if (playerInput.currentControlScheme == "KnM")
-        {
-            controllerInput = false;
-            SetSensitivity(controllerInput);
-        } else
-        {
-            controllerInput = true;
-            SetSensitivity(controllerInput);
-        }
     }
 
     public PlayerController GetPlayer()
     {
         return player;
+    }
+
+    public string GimmeControlScheme(int playerIndex)
+    {
+        return PlayerData.activePlayers[playerIndex].controlScheme;
+    }
+
+    private void OnSubmit()
+    {
+        Debug.Log("OnSubmit");
     }
 }

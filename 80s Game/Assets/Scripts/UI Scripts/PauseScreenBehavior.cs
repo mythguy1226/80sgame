@@ -102,6 +102,7 @@ public class PauseScreenBehavior : MonoBehaviour
 
                 switch (PlayerData.activePlayers[playerIndex].controlScheme)
                 {
+                    case "PS5":
                     case "PS4":
                         howToPlayPrompt.sprite = howToPlayIcons[0];
                         break;
@@ -174,6 +175,7 @@ public class PauseScreenBehavior : MonoBehaviour
         }
         GameManager.Instance.SteamInterface.UpdateSteamServer();
         SceneManager.LoadScene(2);
+        PlayerData.Reset();
         SoundManager.Instance.StopAllAudio();
         SoundManager.Instance.PlaySoundContinuous(buttonClickSound);
     }

@@ -32,6 +32,7 @@ namespace SteamIntegration
         // Doesn't work in-editor. http://steamworks.github.io/faq/
         private void OnGameOverlayActivated(GameOverlayActivated_t callbackData)
         {
+            Debug.LogError("Invoking Game Overlay");
             gameOverlayEvent?.Invoke();
         }
 
@@ -80,5 +81,11 @@ namespace SteamIntegration
                 Debug.LogError("Steam Server Data Update Failed!");
             }
         }
+
+        public void OnDestroy()
+        {
+            gameOverlayEvent = null;
+        }
+
     }
 }

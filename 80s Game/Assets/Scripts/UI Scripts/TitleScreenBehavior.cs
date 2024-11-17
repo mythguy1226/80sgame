@@ -106,6 +106,7 @@ public class TitleScreenBehavior : MonoBehaviour
             //Change the prompt icon for the Gamemode help button to the proper control scheme
             switch (PlayerData.activePlayers[0].controlScheme)
             {
+                case "PS5":
                 case "PS4":
                     helpInputPrompt.sprite = controllerHelpInputs[0];
                     break;

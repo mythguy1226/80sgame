@@ -45,6 +45,7 @@ public class PlayerController : MonoBehaviour
     public float maxShootOverheat;
     public float heatAdd;
     public float heatRemove;
+    private int startCounter = 0;
     private Overheat _overheat;
 
     [SerializeField]
@@ -197,8 +198,15 @@ public class PlayerController : MonoBehaviour
     public void EmitPause()
     {
         // The JoinScreen uses this event to ready up the player
+
         if (currentState == ControllerState.JoinScreen)
         {
+            if (pjm == null)
+            {
+                return;
+            }
+
+            PlayerInputWrapper piw = GetComponent<PlayerInputWrapper>();
             pjm.joinPanelContainer.transform.GetChild(Order).GetComponent<PlayerJoinPanel>().ReadyUp();
             return;
         }
@@ -215,6 +223,9 @@ public class PlayerController : MonoBehaviour
     public void EmitCancel()
     {
         GameManager.Instance.UIManager.CancelMenu();
+        if (pjm == null){
+            return;
+        }
         if (currentState == ControllerState.JoinScreen)
         {
             pjm.BackOut(Order);
