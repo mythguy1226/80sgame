@@ -112,7 +112,7 @@
                     "path": "<Gamepad>/leftStick",
                     "interactions": "",
                     "processors": "",
-                    "groups": "PS4;xbox;PS5",
+                    "groups": "PS4;PS5",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -189,7 +189,7 @@
                     "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
-                    "groups": "PS4;xbox;PS5",
+                    "groups": "PS4;PS5",
                     "action": "Fire",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -211,7 +211,7 @@
                     "path": "<Gamepad>/start",
                     "interactions": "",
                     "processors": "",
-                    "groups": "PS4;xbox;PS5",
+                    "groups": "PS4;PS5",
                     "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -244,7 +244,7 @@
                     "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
-                    "groups": "PS4;Xbox;xbox;PS5",
+                    "groups": "PS4;PS5",
                     "action": "Cancel",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -266,7 +266,7 @@
                     "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
                     "processors": "",
-                    "groups": "PS4;xbox;PS5",
+                    "groups": "PS4;PS5",
                     "action": "NextTab",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -288,7 +288,7 @@
                     "path": "<Gamepad>/leftShoulder",
                     "interactions": "",
                     "processors": "",
-                    "groups": "PS4;xbox;PS5",
+                    "groups": "PS4;PS5",
                     "action": "PreviousTab",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -321,7 +321,7 @@
                     "path": "<Gamepad>/start",
                     "interactions": "",
                     "processors": "",
-                    "groups": "PS4;xbox;PS5",
+                    "groups": "PS4;PS5",
                     "action": "Join",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -376,7 +376,7 @@
                     "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
-                    "groups": "PS4;xbox;PS5",
+                    "groups": "PS4;PS5",
                     "action": "HowToPlay",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -387,7 +387,7 @@
                     "path": "<Gamepad>/leftTrigger",
                     "interactions": "",
                     "processors": "",
-                    "groups": "PS4;xbox",
+                    "groups": "PS4",
                     "action": "PrintDebug",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -534,7 +534,7 @@
                     "path": "<Gamepad>/leftStick/up",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad;PS4;xbox;PS5",
+                    "groups": "Gamepad;PS4;PS5",
                     "action": "Navigate",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -545,7 +545,7 @@
                     "path": "<Gamepad>/rightStick/up",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad;PS4;xbox;PS5",
+                    "groups": "Gamepad;PS4;PS5",
                     "action": "Navigate",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -556,7 +556,7 @@
                     "path": "<Gamepad>/leftStick/down",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad;PS4;xbox;PS5",
+                    "groups": "Gamepad;PS4;PS5",
                     "action": "Navigate",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -567,7 +567,7 @@
                     "path": "<Gamepad>/rightStick/down",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad;PS4;xbox;PS5",
+                    "groups": "Gamepad;PS4;PS5",
                     "action": "Navigate",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -578,7 +578,7 @@
                     "path": "<Gamepad>/leftStick/left",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad;PS4;xbox;PS5",
+                    "groups": "Gamepad;PS4;PS5",
                     "action": "Navigate",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -589,7 +589,7 @@
                     "path": "<Gamepad>/rightStick/left",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad;PS4;xbox;PS5",
+                    "groups": "Gamepad;PS4;PS5",
                     "action": "Navigate",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -600,7 +600,7 @@
                     "path": "<Gamepad>/leftStick/right",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad;PS4;xbox;PS5",
+                    "groups": "Gamepad;PS4;PS5",
                     "action": "Navigate",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -611,7 +611,7 @@
                     "path": "<Gamepad>/rightStick/right",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad;PS4;xbox;PS5",
+                    "groups": "Gamepad;PS4;PS5",
                     "action": "Navigate",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -622,7 +622,7 @@
                     "path": "<Gamepad>/dpad",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad;PS4;xbox;PS5",
+                    "groups": "Gamepad;PS4;PS5",
                     "action": "Navigate",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -795,10 +795,10 @@
                 {
                     "name": "",
                     "id": "d05bd0ce-09c3-4673-82f6-aa2a6c3b6139",
-                    "path": "<Gamepad>/buttonSouth",
+                    "path": "<DualShockGamepad>/{Submit}",
                     "interactions": "",
                     "processors": "",
-                    "groups": "PS4;xbox;PS5",
+                    "groups": "PS4;PS5",
                     "action": "Submit",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -820,7 +820,7 @@
                     "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
-                    "groups": "PS4;xbox;PS5",
+                    "groups": "PS4;PS5",
                     "action": "Cancel",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -963,7 +963,7 @@
                     "path": "<Gamepad>/start",
                     "interactions": "",
                     "processors": "",
-                    "groups": "PS4;xbox;PS5",
+                    "groups": "PS4;PS5",
                     "action": "StartGame",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -996,7 +996,7 @@
                     "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
                     "processors": "",
-                    "groups": "PS4;xbox;PS5",
+                    "groups": "PS4;PS5",
                     "action": "NextTab",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -1029,7 +1029,7 @@
                     "path": "<Gamepad>/leftShoulder",
                     "interactions": "",
                     "processors": "",
-                    "groups": "xbox;PS4;PS5",
+                    "groups": "PS4;PS5",
                     "action": "PreviousTab",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -1060,17 +1060,6 @@
             "devices": [
                 {
                     "devicePath": "<DualShockGamepad>",
-                    "isOptional": false,
-                    "isOR": false
-                }
-            ]
-        },
-        {
-            "name": "xbox",
-            "bindingGroup": "xbox",
-            "devices": [
-                {
-                    "devicePath": "<XInputController>",
                     "isOptional": false,
                     "isOR": false
                 }
