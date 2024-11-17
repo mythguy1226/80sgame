@@ -297,16 +297,6 @@ public class PlayerInputWrapper : MonoBehaviour
             player.HandleFire();
             currentDelay = 0.0f;
         }
-
-        if (playerInput.currentControlScheme == "KnM")
-        {
-            controllerInput = false;
-            SetSensitivity(controllerInput);
-        } else
-        {
-            controllerInput = true;
-            SetSensitivity(controllerInput);
-        }
     }
 
     public PlayerController GetPlayer()
