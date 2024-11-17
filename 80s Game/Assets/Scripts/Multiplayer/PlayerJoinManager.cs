@@ -98,7 +98,6 @@ public class PlayerJoinManager : MonoBehaviour
         //Change Prompt Tray Icons based on which control scheme Player 1 uses
         if (pc.Order == 0)
         {
-            Debug.Log(currentControlScheme);
             switch (currentControlScheme)
             {
                 case "KnM":
@@ -287,6 +286,7 @@ public class PlayerJoinManager : MonoBehaviour
     public void ExitToTitle()
     {
         SceneManager.LoadScene(2);
+        PlayerData.Reset();
     }
 
     //Change the prompt tray icons based on the based in sprite list and whether a controller is used or not

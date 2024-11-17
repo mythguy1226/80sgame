@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 901ff8a36ca907943a2356a4cf8ad6ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSensitivity: {x: 200, y: 200}
+  mouseSensitivity: {x: 300, y: 300}
   controllerSensitivity: {x: 300, y: 300}
   fireDelay: 0.27
   controllerInput: 0

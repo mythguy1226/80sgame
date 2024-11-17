@@ -205,12 +205,9 @@ public class PlayerController : MonoBehaviour
             {
                 return;
             }
-            startCounter++;
+
             PlayerInputWrapper piw = GetComponent<PlayerInputWrapper>();
-            if (startCounter > 1 || (startCounter == 1 && piw.GimmeControlScheme(Order) == "KnM"))
-            {
-                pjm.joinPanelContainer.transform.GetChild(Order).GetComponent<PlayerJoinPanel>().ReadyUp();
-            }
+            pjm.joinPanelContainer.transform.GetChild(Order).GetComponent<PlayerJoinPanel>().ReadyUp();
             return;
         }
 

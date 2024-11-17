@@ -263,7 +263,7 @@ public class GameManager : MonoBehaviour
 
     private void OnPlayerJoined(PlayerInput playerInput)
     {
-        Debug.Log("Received");
+        Debug.Log(playerInput.currentActionMap.name);
         if (PlayerData.activePlayers.Count == 0 && debug)
         {
             float sensitivity = PlayerPrefs.GetFloat("Sensitivity", 3.25f);

@@ -784,10 +784,21 @@
                 {
                     "name": "",
                     "id": "31ffe2c8-e89a-4093-b8f9-af3e4321c203",
-                    "path": "*/{Submit}",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard&Mouse;Gamepad;Touch;Joystick;XR;KnM;PS4;xbox;PS5",
+                    "groups": "Keyboard&Mouse;Gamepad;Touch;Joystick;XR;KnM",
+                    "action": "Submit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d05bd0ce-09c3-4673-82f6-aa2a6c3b6139",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PS4;xbox;PS5",
                     "action": "Submit",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -795,10 +806,21 @@
                 {
                     "name": "",
                     "id": "d1af3400-9a08-4f06-881d-64d0f10297fa",
-                    "path": "*/{Cancel}",
+                    "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard&Mouse;Gamepad;Touch;Joystick;XR;KnM;PS4;xbox;PS5",
+                    "groups": "Keyboard&Mouse;Gamepad;Touch;Joystick;XR;KnM",
+                    "action": "Cancel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "92aec064-3971-4ff4-917c-d9582711b3f8",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PS4;xbox;PS5",
                     "action": "Cancel",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -1038,11 +1060,6 @@
             "devices": [
                 {
                     "devicePath": "<DualShockGamepad>",
-                    "isOptional": false,
-                    "isOR": false
-                },
-                {
-                    "devicePath": "<Gamepad>",
                     "isOptional": false,
                     "isOR": false
                 }

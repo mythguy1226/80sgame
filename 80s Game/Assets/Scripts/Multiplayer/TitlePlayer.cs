@@ -23,8 +23,9 @@ public class TitlePlayer : MonoBehaviour
 
     private void OnControlsChanged(PlayerInput newInput)
     {
-        //Debug.Log("Controls Changed");
+        Debug.Log("Controls Changed");
         Debug.Log(newInput.currentControlScheme);
+        Debug.Log(newInput.currentActionMap.name);
         if ( newInput.currentControlScheme == currentControlScheme || PlayerData.activePlayers.Count == 0)
         {
             return;
