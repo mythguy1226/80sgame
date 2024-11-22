@@ -34,14 +34,16 @@ public class SettingsManager : MonoBehaviour
     public List<TextMeshProUGUI> settingsLabels;
 
     public List<GameObject> tabs;
-    public List<Image> tabPrompts;
-    public List<Sprite> controllerTabPrompts;
+    /*public List<Image> tabPrompts;
+    public List<Sprite> controllerTabPrompts;*/
     private int tabIndex = 0;
 
     public List<GameObject> controlMappings;
     private int mappingIndex = 0;
 
     private float sensitivityValue;
+    private float tempSensitivity;
+    private bool settingsApplied;
 
     private GameObject lastSelected;
 
@@ -132,8 +134,13 @@ public class SettingsManager : MonoBehaviour
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(sfxVolumeSlider.gameObject);
 
+            StorePreviousSensitivity(playerIndex);
+            Debug.Log(tempSensitivity);
+
+            settingsApplied = false;
+
             //Change input prompts for changing tabs based on the control scheme of the player who paused
-            switch (PlayerData.activePlayers[playerIndex].controlScheme)
+            /*switch (PlayerData.activePlayers[playerIndex].controlScheme)
             {
                 case "PS4":
                     tabPrompts[0].sprite = controllerTabPrompts[0];
@@ -147,14 +154,20 @@ public class SettingsManager : MonoBehaviour
                     tabPrompts[0].sprite = controllerTabPrompts[4];
                     tabPrompts[1].sprite = controllerTabPrompts[5];
                     break;
-            }
+            }*/
         }
 
         else
         {
             EventSystem.current.SetSelectedGameObject(null);
-            
-            if(settingsButton != null)
+
+            if (!settingsApplied)
+            {
+                float sensitivity = tempSensitivity;
+                PlayerData.activePlayers[playerIndex].sensitivity = new Vector2(sensitivity, sensitivity);
+            }
+
+            if (settingsButton != null)
             {
                 EventSystem.current.SetSelectedGameObject(settingsButton.gameObject);
             }
@@ -170,6 +183,8 @@ public class SettingsManager : MonoBehaviour
         PlayerPrefs.SetInt("Bloom", System.Convert.ToInt32(bloomToggle.isOn));
         PlayerPrefs.SetInt("CRTOn", System.Convert.ToInt32(crtToggle.isOn));
         PlayerPrefs.SetFloat("CRTCurvature", crtCurvature.value);
+
+        settingsApplied = true;
 
         ToggleSettingsPanel();
     }
@@ -259,6 +274,15 @@ public class SettingsManager : MonoBehaviour
         //Set curvature of the CRT effect
         crtEffect.Curvature = curvature;
         crtCurvature.value = curvature;
+    }
+
+    private void StorePreviousSensitivity(int playerIndex)
+    {
+        if (PlayerData.activePlayers.Count == 0)
+            tempSensitivity = PlayerPrefs.GetFloat("Sensitivity", 3.25f);
+
+        else
+            tempSensitivity = PlayerData.activePlayers[playerIndex].sensitivity.x;
     }
 
     //Switch to the next tab in the settings
