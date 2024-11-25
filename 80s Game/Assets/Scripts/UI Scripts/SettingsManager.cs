@@ -67,6 +67,7 @@ public class SettingsManager : MonoBehaviour
         playerIndex = -1;
 
         //Load in the settings from PlayerPrefs
+        sensitivityValue = PlayerPrefs.GetFloat("Sensitivity", 3.25f);
         LoadSettings();
     }
 
@@ -135,8 +136,6 @@ public class SettingsManager : MonoBehaviour
             EventSystem.current.SetSelectedGameObject(sfxVolumeSlider.gameObject);
 
             StorePreviousSensitivity(playerIndex);
-            Debug.Log(tempSensitivity);
-
             settingsApplied = false;
 
             //Change input prompts for changing tabs based on the control scheme of the player who paused
@@ -177,13 +176,13 @@ public class SettingsManager : MonoBehaviour
     //Save the settings, then close the menu
     public void ApplySettings()
     {
+
         PlayerPrefs.SetFloat("MusicVolume", musicVolumeSlider.value);
         PlayerPrefs.SetFloat("SFXVolume", sfxVolumeSlider.value);
         PlayerPrefs.SetFloat("Sensitivity", sensitivityValue);
         PlayerPrefs.SetInt("Bloom", System.Convert.ToInt32(bloomToggle.isOn));
         PlayerPrefs.SetInt("CRTOn", System.Convert.ToInt32(crtToggle.isOn));
         PlayerPrefs.SetFloat("CRTCurvature", crtCurvature.value);
-
         settingsApplied = true;
 
         ToggleSettingsPanel();

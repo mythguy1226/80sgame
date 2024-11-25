@@ -96,6 +96,7 @@ public class PlayerInputWrapper : MonoBehaviour
         {
             snailModifier = 0.5f;
         }
+
         Vector2 scalingVector = sensitivity * config.sensitivity * snailModifier * Time.deltaTime;
         Vector2 input = value.Get<Vector2>();
         if (!controllerInput)
