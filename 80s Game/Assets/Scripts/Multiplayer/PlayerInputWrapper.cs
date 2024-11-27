@@ -99,15 +99,11 @@ public class PlayerInputWrapper : MonoBehaviour
 
         Vector2 scalingVector = sensitivity * config.sensitivity * snailModifier * Time.deltaTime;
         Vector2 input = value.Get<Vector2>();
-        if (!controllerInput)
+        Vector2 adjustedInput = input;
+        if (controllerInput)
         {
-            if (input.magnitude < 1.0f)
-            {
-                scalingVector *= input.magnitude;
-            }
+            adjustedInput = input.normalized;
         }
-        
-        Vector2 adjustedInput = input.normalized;
         adjustedInput = Vector2.Scale(adjustedInput, scalingVector);
         
 
@@ -192,10 +188,6 @@ public class PlayerInputWrapper : MonoBehaviour
             return;
         }
 
-        if (!NetworkUtility.NetworkDevEnv())
-        {
-            return;
-        }
         LookingGlassUI lookingGlassUI = FindAnyObjectByType<LookingGlassUI>();
         if (lookingGlassUI == null)
         {
