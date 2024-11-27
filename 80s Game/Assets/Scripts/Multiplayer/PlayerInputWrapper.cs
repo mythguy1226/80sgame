@@ -188,10 +188,6 @@ public class PlayerInputWrapper : MonoBehaviour
             return;
         }
 
-        if (!NetworkUtility.NetworkDevEnv())
-        {
-            return;
-        }
         LookingGlassUI lookingGlassUI = FindAnyObjectByType<LookingGlassUI>();
         if (lookingGlassUI == null)
         {
