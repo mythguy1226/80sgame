@@ -17,23 +17,19 @@ public class ModEMP : AbsModifierEffect
         // Finds all active targets (i.e., on-screen targets).
         List<Target> activeTargets = GameManager.Instance.TargetManager.targets.FindAll(target => target.FSM.IsActive());
         bool awkward = true;
-        foreach(Target target in activeTargets)
+       
+        foreach (Target target in activeTargets)
         {
             if (!target.bIsStunned)
             {
-                awkward = false; 
-                break;
+                awkward = false;
             }
-        }
-        if (awkward) {
-            AchievementManager.UnlockAchievement(AchievementConstants.WELL_THATS_AWKWARD);
-        }
-
-
-        foreach (Target target in GameManager.Instance.TargetManager.ActiveTargets)
-        {
             target.SetStunningPlayer(this.activator);
             target.ResolveHit();
+        }
+
+        if (awkward) {
+            AchievementManager.UnlockAchievement(AchievementConstants.WELL_THATS_AWKWARD);
         }
 
         effectDuration = 0.0f;
