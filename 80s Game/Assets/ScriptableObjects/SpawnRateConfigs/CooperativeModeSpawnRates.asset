@@ -16,10 +16,10 @@ MonoBehaviour:
   - targetType: 0
     spawnRate: 0
   - targetType: 3
-    spawnRate: 3
+    spawnRate: 6
   - targetType: 5
     spawnRate: 6
   - targetType: 4
-    spawnRate: 60
+    spawnRate: 18
   - targetType: 6
     spawnRate: 10

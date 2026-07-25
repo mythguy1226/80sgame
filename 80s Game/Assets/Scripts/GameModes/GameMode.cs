@@ -61,7 +61,7 @@ public abstract class AbsGameMode
     /// <returns>Whether or not to skip this target for spawning</returns>
     protected bool SkipDefenseBat(Target target)
     {
-        return !allowedBats[target.type] || target.FSM.IsActive() || target.type == TargetManager.TargetType.Modifier;
+        return !allowedBats[target.type] || target.FSM.IsActive() /*|| target.type == TargetManager.TargetType.Modifier*/;
     }
 
     // Needs to be public for targetManager to call

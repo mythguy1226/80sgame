@@ -8,6 +8,8 @@ public class CooperativeMode : AbsGameMode
 {
     //float modifierChance = 0.3f;
     Defendable coreObject;
+    List<TargetManager.TargetType> specialTypes;
+
     public CooperativeMode() : base()
     {
         ModeType = EGameMode.Defense;
@@ -35,6 +37,7 @@ public class CooperativeMode : AbsGameMode
         int playerCount = GameManager.Instance.GetPlayerCount();
         ScaleGameValues(playerCount);
         GameManager.Instance.SteamInterface.InitData();
+        specialTypes = new List<TargetManager.TargetType>();
     }
 
     protected override void SetupAllowedData()
@@ -115,7 +118,7 @@ public class CooperativeMode : AbsGameMode
 
             // Check if screen is now full
             if (targetManager.ActiveTargets.Count == maxTargetsOnScreen)
-                return;
+                break;
         }
 
         string key = AchievementConstants.CAREFUL_FRAGILE;
@@ -147,6 +150,10 @@ public class CooperativeMode : AbsGameMode
     {
         List<Target> bats = targetManager.targets;
 
+        // Change the order of the special types to check to improve spawn variety
+        ChangeSpecialListOrder();
+
+
         // Iterate through the targets until you
         // find one that isn't already on screen
         for (int i = 0; i < bats.Count; i++)
@@ -162,34 +169,22 @@ public class CooperativeMode : AbsGameMode
                 continue;
             }
 
-            // Check for special bat types
-            foreach (SpawnRate rate in GameManager.Instance.spawnConfig.rates)
-            {
-                // Check that type isnt regular
-                if(rate.targetType != TargetManager.TargetType.Regular)
-                {
-                    // Check that there are special types available
-                    if(numBatsMap[rate.targetType] > 0)
-                    {
-                        // Check for proper type and continue if not
-                        if(bat.FSM.IsDefault() || bat.type != rate.targetType)
-                            goto EndLoop;
-
-                        numBatsMap[rate.targetType]--;
-                        return i;
-                    }
-                }
-            }
-
-            // If default bat return index, as there were no available
-            // special bats to spawn previously
+            // Automatically return default bats
             if (bat.FSM.IsDefault())
             {
                 return i;
             }
 
-        EndLoop:
-            continue;
+            foreach (TargetManager.TargetType specialType in specialTypes)
+            {
+                // Check that there are special types available
+                if(numBatsMap[specialType] > 0)
+                {
+                    int index = targetManager.GetNextAvailableTargetOfEnumType(specialType);
+                    return index;
+                }
+
+            }
         }
 
         return -1;
@@ -225,10 +220,14 @@ public class CooperativeMode : AbsGameMode
 
     private void SpawnMoreTargets()
     {
+        
         // Check if the player still needs stuns for the round
         int neededStuns = currentRoundTargetCount - targetManager.numStuns;
         if (neededStuns <= 0)
+        {
+            Debug.LogError("No more targets to spawn but round not ended");
             return;
+        }
 
         // If maximum number of targets isn't on screen
         if (
@@ -236,6 +235,7 @@ public class CooperativeMode : AbsGameMode
             && targetManager.ActiveTargets.Count < neededStuns
         )
         {
+
             int targetIndex = GetNextAvailableBat();
 
             if (targetIndex >= 0)
@@ -319,7 +319,7 @@ public class CooperativeMode : AbsGameMode
         // Spawn more modifier bats during rounds 3 and 4 to introduce mods as a mechanic
         if(CurrentRound == 3 || CurrentRound == 4)
         {
-            // Spawn some debuff bats and increment target count
+            // Spawn some modifer bats and increment target count
             for(int i = 0; i < 2; i++)
             {
                 if (allowedBats[TargetManager.TargetType.Modifier])
@@ -348,20 +348,42 @@ public class CooperativeMode : AbsGameMode
         {
             case 1:
                 allowedBats[TargetManager.TargetType.Unstable] = true;
+                specialTypes.Add(TargetManager.TargetType.Unstable);
                 allowedBats[TargetManager.TargetType.DiveBomb] = true;
+                specialTypes.Add(TargetManager.TargetType.DiveBomb);
                 break;
             case 2:
                 allowedBats[TargetManager.TargetType.Unstable] = false;
+                specialTypes.Remove(TargetManager.TargetType.Unstable);
                 allowedBats[TargetManager.TargetType.DiveBomb] = false;
+                specialTypes.Remove(TargetManager.TargetType.DiveBomb);
                 allowedBats[TargetManager.TargetType.Modifier] = true;
+                specialTypes.Add(TargetManager.TargetType.Modifier);
                 break;
             case 4:
                 allowedBats[TargetManager.TargetType.Debuff] = true;
+                specialTypes.Add(TargetManager.TargetType.Debuff);
                 break;
             case 5:
                 allowedBats[TargetManager.TargetType.DiveBomb] = true;
+                specialTypes.Add(TargetManager.TargetType.DiveBomb);
                 allowedBats[TargetManager.TargetType.Unstable] = true;
+                specialTypes.Add(TargetManager.TargetType.Unstable);
                 break;
         }
+    }
+
+    private void ChangeSpecialListOrder()
+    {
+        if (specialTypes.Count < 2)
+        {
+            return;
+        }
+
+        int index = UnityEngine.Random.Range(0, specialTypes.Count);
+        int swap = UnityEngine.Random.Range(1, specialTypes.Count);
+        TargetManager.TargetType temp = specialTypes[swap];
+        specialTypes[swap] = specialTypes[index];
+        specialTypes[index] = temp;
     }
 }
