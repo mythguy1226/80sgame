@@ -373,6 +373,9 @@ public class CooperativeMode : AbsGameMode
         }
     }
 
+    /// <summary>
+    /// Shuffles two indices of the Special List to reduce spawn bias
+    /// </summary>
     private void ChangeSpecialListOrder()
     {
         if (specialTypes.Count < 2)
