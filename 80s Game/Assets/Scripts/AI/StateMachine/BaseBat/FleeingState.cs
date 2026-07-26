@@ -46,6 +46,7 @@ public class FleeingState : AbsBaseState<BatStateMachine.BatStates>
             return;
 
         _MovementControls.isFleeing = true;
+        _MovementControls.targetPosition = FSM.fleeLocation;
 
 
         // Check if destination is reached

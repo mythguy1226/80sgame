@@ -67,6 +67,9 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
 
+            // Limit frame rate to avoid running at hundreds of frames per second when unnecessary
+            Application.targetFrameRate = 60;
+
             // Initialize managers
             InputManager = GetComponent<InputManager>();
             TargetManager = GetComponent<TargetManager>();
