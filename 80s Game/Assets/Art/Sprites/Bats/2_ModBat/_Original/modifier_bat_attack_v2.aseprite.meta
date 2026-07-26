@@ -13,6 +13,7 @@ ScriptedImporter:
   assetBundleName: 
   assetBundleVariant: 
   script: {fileID: 11500000, guid: 62a9f0aa5b59740cfbadc7e5f9823bb0, type: 3}
+  importerVersion: 2
   textureImporterSettings:
     alphaSource: 1
     mipMapMode: 0
@@ -82,6 +83,7 @@ ScriptedImporter:
     defaultPivotSpace: 0
     defaultPivotAlignment: 0
     customPivotPosition: {x: 0.5, y: 0.5}
+    mosaicPadding: 4
     spritePadding: 0
     generateModelPrefab: 1
     generateAnimationClips: 1
@@ -94,6 +96,7 @@ ScriptedImporter:
     defaultPivotSpace: 0
     defaultPivotAlignment: 0
     customPivotPosition: {x: 0.5, y: 0.5}
+    mosaicPadding: 4
     spritePadding: 0
     generateModelPrefab: 1
     generateAnimationClips: 1
@@ -367,102 +370,119 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: -75593533
+    uuid:
+      value0: 692197263
+      value1: 0
+      value2: 0
+      value3: 0
+    guid: 692197263
     name: modifier_bat_attack_v2
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: modifier_bat_attack_v2_Frame_0
+    - name: Frame_0
       frameIndex: 0
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: 1
         width: 33
         height: 63
       spriteId: e05b6885550534e4db2f6dab01792a9f
-    - name: modifier_bat_attack_v2_Frame_1
+    - name: Frame_1
       frameIndex: 1
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: 0
         width: 33
         height: 64
       spriteId: 93e6dd8dec867cd4e845fefc2e3aea36
-    - name: modifier_bat_attack_v2_Frame_2
+    - name: Frame_2
       frameIndex: 2
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: 1
         width: 33
         height: 63
       spriteId: b39b3bb215583114db4ddf03ff034193
-    - name: modifier_bat_attack_v2_Frame_3
+    - name: Frame_3
       frameIndex: 3
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: -3
         width: 32
         height: 66
       spriteId: af0e8a69a0355e44cb9fccba1b05720b
-    - name: modifier_bat_attack_v2_Frame_4
+    - name: Frame_4
       frameIndex: 4
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: -3
         width: 33
         height: 67
       spriteId: daa0a979f8e32d44290fa61e9692f66c
-    - name: modifier_bat_attack_v2_Frame_5
+    - name: Frame_5
       frameIndex: 5
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: -3
         width: 33
         height: 67
       spriteId: fb01ec47c81953546995e6af5a2925cb
-    - name: modifier_bat_attack_v2_Frame_6
+    - name: Frame_6
       frameIndex: 6
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: 1
         width: 33
         height: 63
       spriteId: ccc202d50e7a2d8449e5a6a870972c28
-    - name: modifier_bat_attack_v2_Frame_7
+    - name: Frame_7
       frameIndex: 7
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: 0
         width: 32
         height: 63
       spriteId: 1d9159349e55f1644aa64ec5ec76d63b
-    - name: modifier_bat_attack_v2_Frame_8
+    - name: Frame_8
       frameIndex: 8
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: 1
         width: 33
         height: 63
       spriteId: 407cb26609266b44b8bf2c5c41c7cfbd
-    - name: modifier_bat_attack_v2_Frame_9
+    - name: Frame_9
       frameIndex: 9
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: -3
         width: 33
         height: 67
       spriteId: 8029e58f390a9a644b21f0aa02e6b5c0
-    - name: modifier_bat_attack_v2_Frame_10
+    - name: Frame_10
       frameIndex: 10
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: -3
         width: 33
         height: 67
       spriteId: d3939889c3940264c89e4db7a6914ad2
-    - name: modifier_bat_attack_v2_Frame_11
+    - name: Frame_11
       frameIndex: 11
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: -3
@@ -508,6 +528,8 @@ ScriptedImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     androidETC2FallbackOverride: 0
+  generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
   canvasSize: {x: 64, y: 64}
+  previousTextureSize: {x: 256, y: 256}

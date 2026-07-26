@@ -18,6 +18,9 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
 
     // Public fields
     public BatStates initialState = BatStates.Moving;
+    [SerializeField]
+    BatStates visibleState = BatStates.Moving;
+
     public int pointValue = 1000;
     public float deathHeight = -6.5f;
     public AudioClip hitSound;
@@ -75,6 +78,7 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
 
         // Default state will be wandering
         currentState = states[initialState];
+        visibleState = currentState.StateKey;
 
         // Iterate through each state to pass game object as owner reference
         // putting this in here as well as base class to beat race condition
@@ -96,6 +100,16 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
 
         // Init flee timer
         fleeTimer = timeUntilFlee;
+    }
+
+    /// <summary>
+    /// Override for debug purposes
+    /// </summary>
+    /// <param name="stateKey"></param>
+    public override void TransitionToState(BatStates stateKey)
+    {
+        base.TransitionToState(stateKey);
+        visibleState = stateKey;
     }
 
     /// <summary>

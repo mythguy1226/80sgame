@@ -73,12 +73,18 @@ namespace SteamIntegration
             if (!_connected)
             {
                 Debug.LogWarning("Steam Data API failed");
+                return;
             }
             bool result = achievementsInterface.StoreUserStats();
             if (!result)
             {
                 Debug.LogError("Steam Server Data Update Failed!");
             }
+        }
+
+        public void OnDestroy()
+        {
+            gameOverlayEvent = null;
         }
     }
 }
