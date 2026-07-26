@@ -10,14 +10,21 @@ public class KinematicSteer : MonoBehaviour
     public bool canMove;
     public bool isWandering;
     public bool isFleeing;
+    public Vector2 currentVelocity;
     // Maximums
     [Range(0, 10)]
     public float maxSpeed = 3f;
     [Range(2, 15)]
     public float maxDistance = 8.0f;
 
+    [Header("Debug Fields")]
+    [SerializeField]
+    float distanceToTarget;
+
+    [SerializeField]
+    MovementStrategy movementStrategyType;
+
     // Private fields for calculations
-    public Vector2 currentVelocity;
     private Vector2 originalScale;
 
     // Get the sprite renderer
@@ -30,6 +37,7 @@ public class KinematicSteer : MonoBehaviour
     public void Initialize()
     {
         movementStrategy = MovementStrategyFactory.MakeRandomMovementStrategy(this);
+        movementStrategyType = movementStrategy.strategy;
         SetWanderPosition();
         _rb.velocity = (targetPosition - new Vector2(transform.position.x, transform.position.y)).normalized;
     }
@@ -116,7 +124,8 @@ public class KinematicSteer : MonoBehaviour
         // Get the direction towards target position
         Vector2 direction = targetPosition - new Vector2(transform.position.x, transform.position.y);
         float distance = direction.magnitude;
-
+        
+        distanceToTarget = distance;
         // Return result
         return distance <= targetRadius;
     }
@@ -139,7 +148,7 @@ public class KinematicSteer : MonoBehaviour
             if (!isFleeing)
                 SetWanderPosition();
             else
-                targetPosition.x = UnityEngine.Random.Range((-maxWidth * 2) + spriteRenderer.size.x, (maxWidth * 2) - spriteRenderer.size.x);
+                targetPosition.x = Random.Range((-maxWidth * 2) + spriteRenderer.size.x, (maxWidth * 2) - spriteRenderer.size.x);
         }
     }
 

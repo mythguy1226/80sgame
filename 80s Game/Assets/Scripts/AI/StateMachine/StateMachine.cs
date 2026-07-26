@@ -55,7 +55,7 @@ public abstract class AbsStateMachine<EState> : StateMachineWrapper where EState
     -	EState stateKey -> state to transition to
 	OUTPUT: ---
 	*/
-    public void TransitionToState(EState stateKey)
+    public virtual void TransitionToState(EState stateKey)
     {
         // Exit the current state,
         // set the new state

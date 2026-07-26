@@ -70,24 +70,27 @@ public class MovingState : AbsBaseState<BatStateMachine.BatStates>
     public override BatStateMachine.BatStates GetNextState()
     {
         BatStateMachine FSM = (BatStateMachine)OwnerFSM;
+        // Test for StateMachine nullity
+        if(FSM == null)
+        {
+            return BatStateMachine.BatStates.Moving;
+        }
+
+        // Check timer status
+        if (FSM.fleeTimer > 0.0f)
+        {
+            return BatStateMachine.BatStates.Moving;
+        }
 
         // When timer is up, set target to flee
-        if(FSM != null)
-        {
-            if (FSM.fleeTimer <= 0.0f)
-            {
-                // Get max height and width values from screen
-                float maxHeight = Camera.main.GetComponent<Camera>().orthographicSize;
-                float maxWidth = maxHeight * (Screen.width / Screen.height);
+        // Get max height and width values from screen
+        float maxHeight = Camera.main.GetComponent<Camera>().orthographicSize;
+        float maxWidth = maxHeight * (Screen.width / Screen.height);
 
-                // Find random x position
-                FSM.fleeLocation.x = UnityEngine.Random.Range((-maxWidth * 2) + _SpriteRenderer.size.x, (maxWidth * 2) - _SpriteRenderer.size.x);
-                _MovementControls.SetTargetPosition(FSM.fleeLocation);
+        // Find random x position
+        FSM.fleeLocation.x = Random.Range((-maxWidth * 2) + _SpriteRenderer.size.x, (maxWidth * 2) - _SpriteRenderer.size.x);
+        _MovementControls.SetTargetPosition(FSM.fleeLocation);
 
-                return BatStateMachine.BatStates.Fleeing;
-            }
-        }
-        
-        return BatStateMachine.BatStates.Moving;
+        return BatStateMachine.BatStates.Fleeing;        
     }
 }
