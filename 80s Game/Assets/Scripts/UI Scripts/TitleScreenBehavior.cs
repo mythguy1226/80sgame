@@ -18,6 +18,7 @@ public class TitleScreenBehavior : MonoBehaviour
     public GameObject achievementsPanel;
     public GameObject achievementsList;
     public GameObject achievementRewardPrefab;
+    public GameObject campaignFiles;
     public GameObject creditsScreen;
     public AudioClip buttonClickSound;
     public MusicTrack titleScreenMusic;
@@ -98,26 +99,45 @@ public class TitleScreenBehavior : MonoBehaviour
         SoundManager.Instance.PlaySoundContinuous(buttonClickSound);
 
         //Select the proper UI element for navigation
-        if (gamemodePanel.activeInHierarchy)
+        if (!gamemodePanel.activeInHierarchy)
         {
-            EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(gamemodeOptions[0].gameObject);
-
-            //Change the prompt icon for the Gamemode help button to the proper control scheme
-            switch (PlayerData.activePlayers[0].controlScheme)
-            {
-                case "PS4":
-                    helpInputPrompt.sprite = controllerHelpInputs[0];
-                    break;
-                case "xbox":
-                    helpInputPrompt.sprite = controllerHelpInputs[1];
-                    break;
-            }
+            ResetEventSelection();
+            return;
         }
-        else
+
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(gamemodeOptions[0].gameObject);
+
+        //Change the prompt icon for the Gamemode help button to the proper control scheme
+        switch (PlayerData.activePlayers[0].controlScheme)
         {
-            EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(startButton);
+            case "PS4":
+                helpInputPrompt.sprite = controllerHelpInputs[0];
+                break;
+            case "xbox":
+                helpInputPrompt.sprite = controllerHelpInputs[1];
+                break;
+        }
+    }
+
+    private void ResetEventSelection()
+    {
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(startButton);
+    }
+
+    // Toggles the visibility of the options of the campaign menu
+    public void ToggleCampaignMenu()
+    {
+        campaignFiles.SetActive(!campaignFiles.activeInHierarchy);
+        ToggleButtonInteractability(!gamemodePanel.activeInHierarchy);
+
+        SoundManager.Instance.PlaySoundContinuous(buttonClickSound);
+
+        if (!campaignFiles.activeInHierarchy)
+        {
+            ResetEventSelection();
+            return;
         }
     }
 

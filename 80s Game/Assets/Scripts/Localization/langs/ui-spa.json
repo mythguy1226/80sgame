@@ -1,8 +1,12 @@
 {
   "textElements": [
     {
-      "label": "strt",
-      "value": "Iniciar Partida"
+      "label":"cmpn",
+      "value":"Campaña"
+    },
+    {
+      "label": "arcd",
+      "value": "Partida Rápida"
     },
     {
       "label": "achv",
@@ -18,7 +22,7 @@
     },
     {
       "label": "crdt",
-      "value": "Creditos"
+      "value": "Créditos"
     },
     {
       "label": "ctrl",

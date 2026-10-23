@@ -1,8 +1,12 @@
 {
   "textElements": [
     {
-      "label": "strt",
-      "value": "Start Game"
+      "label":"cmpn",
+      "value":"Campaign"
+    },
+    {
+      "label": "arcd",
+      "value": "Arcade"
     },
     {
       "label": "achv",
