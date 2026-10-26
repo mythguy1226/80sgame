@@ -65,17 +65,8 @@ public class PauseScreenBehavior : MonoBehaviour
 
         //Show Gamemode descriptions if on the Title Screen
         if (this.gameObject.GetComponent<TitleScreenBehavior>() != null)
-        {
-            if (this.gameObject.GetComponent<TitleScreenBehavior>().gamemodePanel.activeInHierarchy)
-            {
-                foreach (Button gamemode in this.gameObject.GetComponent<TitleScreenBehavior>().gamemodeOptions)
-                {
-                    GameObject gamemodeDescription = gamemode.gameObject.transform.GetChild(2).gameObject;
-                    gamemodeDescription.SetActive(!gamemodeDescription.activeInHierarchy);
-                }
-            }
-            
-            else if (introCutscene != null)
+        {            
+            if (introCutscene != null)
             {
                 introCutscene.GetComponent<CutsceneManager>().SkipCutscene();
             }
@@ -146,6 +137,19 @@ public class PauseScreenBehavior : MonoBehaviour
 
     public void HowToPlay()
     {
+        if (this.gameObject.GetComponent<TitleScreenBehavior>() != null)
+        {
+            if (this.gameObject.GetComponent<TitleScreenBehavior>().gamemodePanel.activeInHierarchy)
+            {
+                foreach (Button gamemode in this.gameObject.GetComponent<TitleScreenBehavior>().gamemodeOptions)
+                {
+                    GameObject gamemodeDescription = gamemode.gameObject.transform.GetChild(2).gameObject;
+                    gamemodeDescription.SetActive(!gamemodeDescription.activeInHierarchy);
+                }
+                return;
+            }
+        }
+
         if (GameManager.Instance.UIManager.onboardingUI.backOutPanel.activeInHierarchy)
             return;
 

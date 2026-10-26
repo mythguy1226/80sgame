@@ -20,6 +20,8 @@ public static class FlockingData
 
 public abstract class AbsMovementStrategy
 {
+    public MovementStrategy strategy;
+
     protected KinematicSteer movementController;
 
     public AbsMovementStrategy(KinematicSteer controller)

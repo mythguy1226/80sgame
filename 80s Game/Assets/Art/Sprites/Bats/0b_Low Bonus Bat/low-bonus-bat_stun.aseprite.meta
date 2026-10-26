@@ -13,6 +13,7 @@ ScriptedImporter:
   assetBundleName: 
   assetBundleVariant: 
   script: {fileID: 11500000, guid: 62a9f0aa5b59740cfbadc7e5f9823bb0, type: 3}
+  importerVersion: 2
   textureImporterSettings:
     alphaSource: 1
     mipMapMode: 0
@@ -82,6 +83,7 @@ ScriptedImporter:
     defaultPivotSpace: 0
     defaultPivotAlignment: 0
     customPivotPosition: {x: 0.5, y: 0.5}
+    mosaicPadding: 4
     spritePadding: 0
     generateModelPrefab: 1
     generateAnimationClips: 1
@@ -94,6 +96,7 @@ ScriptedImporter:
     defaultPivotSpace: 0
     defaultPivotAlignment: 0
     customPivotPosition: {x: 0.5, y: 0.5}
+    mosaicPadding: 4
     spritePadding: 0
     generateModelPrefab: 1
     generateAnimationClips: 1
@@ -247,54 +250,65 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: 1372254257
+    uuid:
+      value0: 4276786741
+      value1: 0
+      value2: 0
+      value3: 0
+    guid: -18180555
     name: low-bonus-bat_stun
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: low-bonus-bat_stun_Frame_0
+    - name: Frame_0
       frameIndex: 0
+      additiveSortOrder: 0
       cellRect:
         x: 14
         y: 27
         width: 38
         height: 35
       spriteId: 52f36f94150f50143a4e5be2d1a28e57
-    - name: low-bonus-bat_stun_Frame_1
+    - name: Frame_1
       frameIndex: 1
+      additiveSortOrder: 0
       cellRect:
         x: 14
         y: 27
         width: 38
         height: 35
       spriteId: e69feabcbf42b89438d9c07ae2950ce7
-    - name: low-bonus-bat_stun_Frame_2
+    - name: Frame_2
       frameIndex: 2
+      additiveSortOrder: 0
       cellRect:
         x: 14
         y: 27
         width: 38
         height: 35
       spriteId: 0283a1c3ac745654c90eb9daa0b88c8a
-    - name: low-bonus-bat_stun_Frame_3
+    - name: Frame_3
       frameIndex: 3
+      additiveSortOrder: 0
       cellRect:
         x: 14
         y: 27
         width: 38
         height: 35
       spriteId: 3ff2e532752f9b345b2e1f10f2a5b54e
-    - name: low-bonus-bat_stun_Frame_4
+    - name: Frame_4
       frameIndex: 4
+      additiveSortOrder: 0
       cellRect:
         x: 14
         y: 27
         width: 38
         height: 35
       spriteId: a37455df747309642a660b74b822430c
-    - name: low-bonus-bat_stun_Frame_5
+    - name: Frame_5
       frameIndex: 5
+      additiveSortOrder: 0
       cellRect:
         x: 14
         y: 27
@@ -340,6 +354,8 @@ ScriptedImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     androidETC2FallbackOverride: 0
+  generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
   canvasSize: {x: 64, y: 64}
+  previousTextureSize: {x: 128, y: 256}

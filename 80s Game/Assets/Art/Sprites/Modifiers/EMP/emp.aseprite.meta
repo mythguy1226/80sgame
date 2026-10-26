@@ -13,6 +13,7 @@ ScriptedImporter:
   assetBundleName: 
   assetBundleVariant: 
   script: {fileID: 11500000, guid: 62a9f0aa5b59740cfbadc7e5f9823bb0, type: 3}
+  importerVersion: 2
   textureImporterSettings:
     alphaSource: 1
     mipMapMode: 0
@@ -82,6 +83,7 @@ ScriptedImporter:
     defaultPivotSpace: 0
     defaultPivotAlignment: 7
     customPivotPosition: {x: 0.5, y: 0.5}
+    mosaicPadding: 4
     spritePadding: 0
     generateModelPrefab: 1
     generateAnimationClips: 1
@@ -94,6 +96,7 @@ ScriptedImporter:
     defaultPivotSpace: 0
     defaultPivotAlignment: 7
     customPivotPosition: {x: 0.5, y: 0.5}
+    mosaicPadding: 4
     spritePadding: 0
     generateModelPrefab: 1
     generateAnimationClips: 1
@@ -367,102 +370,119 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: 1600914616
+    uuid:
+      value0: 2665397656
+      value1: 0
+      value2: 0
+      value3: 0
+    guid: -1629569640
     name: emp
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: emp_Frame_0
+    - name: Frame_0
       frameIndex: 0
+      additiveSortOrder: 0
       cellRect:
         x: 0
         y: 0
         width: 32
         height: 32
       spriteId: cec7046f58e008e419bf8652522e192f
-    - name: emp_Frame_1
+    - name: Frame_1
       frameIndex: 1
+      additiveSortOrder: 0
       cellRect:
         x: 0
         y: 0
         width: 32
         height: 32
       spriteId: 78c65ceb878db164a8c0855aab697684
-    - name: emp_Frame_2
+    - name: Frame_2
       frameIndex: 2
+      additiveSortOrder: 0
       cellRect:
         x: 0
         y: 0
         width: 32
         height: 32
       spriteId: 7234372da015c374a8645480418ba8ce
-    - name: emp_Frame_3
+    - name: Frame_3
       frameIndex: 3
+      additiveSortOrder: 0
       cellRect:
         x: 0
         y: 0
         width: 32
         height: 32
       spriteId: a0c87bfb3c130084992eabc5b00f8abf
-    - name: emp_Frame_4
+    - name: Frame_4
       frameIndex: 4
+      additiveSortOrder: 0
       cellRect:
         x: 0
         y: 0
         width: 32
         height: 32
       spriteId: 0a112b22bfdb0ea43a2026b5db2ef552
-    - name: emp_Frame_5
+    - name: Frame_5
       frameIndex: 5
+      additiveSortOrder: 0
       cellRect:
         x: 0
         y: 0
         width: 32
         height: 32
       spriteId: dc5a980c22043204482127eab80a6c22
-    - name: emp_Frame_6
+    - name: Frame_6
       frameIndex: 6
+      additiveSortOrder: 0
       cellRect:
         x: 0
         y: 0
         width: 32
         height: 32
       spriteId: 07eb540a33ed3a2449af6077d3f798b7
-    - name: emp_Frame_7
+    - name: Frame_7
       frameIndex: 7
+      additiveSortOrder: 0
       cellRect:
         x: 0
         y: 0
         width: 32
         height: 32
       spriteId: 8a603bdce96ced34bbb66c61711d58e2
-    - name: emp_Frame_8
+    - name: Frame_8
       frameIndex: 8
+      additiveSortOrder: 0
       cellRect:
         x: 0
         y: 0
         width: 32
         height: 32
       spriteId: 75d7c82396685574b9c717121742d156
-    - name: emp_Frame_9
+    - name: Frame_9
       frameIndex: 9
+      additiveSortOrder: 0
       cellRect:
         x: 0
         y: 0
         width: 32
         height: 32
       spriteId: c81bb4cceade740418422a5836f95d68
-    - name: emp_Frame_10
+    - name: Frame_10
       frameIndex: 10
+      additiveSortOrder: 0
       cellRect:
         x: 0
         y: 0
         width: 32
         height: 32
       spriteId: d317540efc715f24889f6ad71b4cf022
-    - name: emp_Frame_11
+    - name: Frame_11
       frameIndex: 11
+      additiveSortOrder: 0
       cellRect:
         x: 0
         y: 0
@@ -508,6 +528,8 @@ ScriptedImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     androidETC2FallbackOverride: 0
+  generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
   canvasSize: {x: 32, y: 32}
+  previousTextureSize: {x: 128, y: 256}

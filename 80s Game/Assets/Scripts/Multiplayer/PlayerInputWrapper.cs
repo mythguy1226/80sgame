@@ -96,17 +96,14 @@ public class PlayerInputWrapper : MonoBehaviour
         {
             snailModifier = 0.5f;
         }
+
         Vector2 scalingVector = sensitivity * config.sensitivity * snailModifier * Time.deltaTime;
         Vector2 input = value.Get<Vector2>();
-        if (!controllerInput)
+        Vector2 adjustedInput = input;
+        if (controllerInput)
         {
-            if (input.magnitude < 1.0f)
-            {
-                scalingVector *= input.magnitude;
-            }
+            adjustedInput = input.normalized;
         }
-        
-        Vector2 adjustedInput = input.normalized;
         adjustedInput = Vector2.Scale(adjustedInput, scalingVector);
         
 
@@ -191,10 +188,6 @@ public class PlayerInputWrapper : MonoBehaviour
             return;
         }
 
-        if (!NetworkUtility.NetworkDevEnv())
-        {
-            return;
-        }
         LookingGlassUI lookingGlassUI = FindAnyObjectByType<LookingGlassUI>();
         if (lookingGlassUI == null)
         {
@@ -250,6 +243,9 @@ public class PlayerInputWrapper : MonoBehaviour
         {
             GameManager.Instance.UIManager.pauseScreenUI.HowToPlay();
         }
+
+        else if (GameManager.Instance.UIManager.titleScreenUI != null)
+            GameManager.Instance.UIManager.pauseScreenUI.HowToPlay();
     }
 
     // Most of this update thing is for Joycons
@@ -293,16 +289,6 @@ public class PlayerInputWrapper : MonoBehaviour
             //Fire and reset the delay
             player.HandleFire();
             currentDelay = 0.0f;
-        }
-
-        if (playerInput.currentControlScheme == "KnM")
-        {
-            controllerInput = false;
-            SetSensitivity(controllerInput);
-        } else
-        {
-            controllerInput = true;
-            SetSensitivity(controllerInput);
         }
     }
 

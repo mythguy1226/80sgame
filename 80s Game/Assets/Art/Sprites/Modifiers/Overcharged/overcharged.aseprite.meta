@@ -8,6 +8,7 @@ ScriptedImporter:
   assetBundleName: 
   assetBundleVariant: 
   script: {fileID: 11500000, guid: 62a9f0aa5b59740cfbadc7e5f9823bb0, type: 3}
+  importerVersion: 2
   textureImporterSettings:
     alphaSource: 1
     mipMapMode: 0
@@ -77,6 +78,7 @@ ScriptedImporter:
     defaultPivotSpace: 0
     defaultPivotAlignment: 7
     customPivotPosition: {x: 0.5, y: 0.5}
+    mosaicPadding: 4
     spritePadding: 0
     generateModelPrefab: 1
     generateAnimationClips: 1
@@ -89,6 +91,7 @@ ScriptedImporter:
     defaultPivotSpace: 0
     defaultPivotAlignment: 7
     customPivotPosition: {x: 0.5, y: 0.5}
+    mosaicPadding: 4
     spritePadding: 0
     generateModelPrefab: 1
     generateAnimationClips: 1
@@ -302,78 +305,92 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: -1923417612
+    uuid:
+      value0: 4203573956
+      value1: 0
+      value2: 0
+      value3: 0
+    guid: -91393340
     name: overcharged
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: overcharged_Frame_0
+    - name: Frame_0
       frameIndex: 0
+      additiveSortOrder: 0
       cellRect:
         x: 0
         y: 0
         width: 32
         height: 32
       spriteId: 325f37f6787ef5f428184999ad3caaa9
-    - name: overcharged_Frame_1
+    - name: Frame_1
       frameIndex: 1
+      additiveSortOrder: 0
       cellRect:
         x: 0
         y: 0
         width: 32
         height: 32
       spriteId: e7b5eacb9427a794cb503bcde617e32a
-    - name: overcharged_Frame_2
+    - name: Frame_2
       frameIndex: 2
+      additiveSortOrder: 0
       cellRect:
         x: 0
         y: 0
         width: 32
         height: 32
       spriteId: 1d2b75203d4c655458bc3d0c32961f69
-    - name: overcharged_Frame_3
+    - name: Frame_3
       frameIndex: 3
+      additiveSortOrder: 0
       cellRect:
         x: 0
         y: 0
         width: 32
         height: 32
       spriteId: 3ba9aaf7f51638e47b0e4797dd12a149
-    - name: overcharged_Frame_4
+    - name: Frame_4
       frameIndex: 4
+      additiveSortOrder: 0
       cellRect:
         x: 0
         y: 0
         width: 32
         height: 32
       spriteId: 5a2c6df94b527e84d936c2f383ed7f02
-    - name: overcharged_Frame_5
+    - name: Frame_5
       frameIndex: 5
+      additiveSortOrder: 0
       cellRect:
         x: 0
         y: 0
         width: 32
         height: 32
       spriteId: e6e31f975f59fc346930d5d3a2428dad
-    - name: overcharged_Frame_6
+    - name: Frame_6
       frameIndex: 6
+      additiveSortOrder: 0
       cellRect:
         x: 0
         y: 0
         width: 32
         height: 32
       spriteId: c9b1d3b49006cfd4b8a0744d21ada281
-    - name: overcharged_Frame_7
+    - name: Frame_7
       frameIndex: 7
+      additiveSortOrder: 0
       cellRect:
         x: 0
         y: 0
         width: 32
         height: 32
       spriteId: b344d2fa66ade29439b47d1d4b0dcfb6
-    - name: overcharged_Frame_8
+    - name: Frame_8
       frameIndex: 8
+      additiveSortOrder: 0
       cellRect:
         x: 0
         y: 0
@@ -383,6 +400,8 @@ ScriptedImporter:
     linkedCells: []
     parentIndex: -1
   platformSettings: []
+  generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
   canvasSize: {x: 32, y: 32}
+  previousTextureSize: {x: 128, y: 128}

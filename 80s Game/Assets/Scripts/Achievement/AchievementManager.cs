@@ -30,6 +30,11 @@ public static class AchievementManager
             for (int i = 0; i < achievements.Count; i++)
             {
                 AchievementData achievement = achievements[i];
+                if (achievement.internalAchivementKey == "plat")
+                {
+                    lookupTable["plat"] = achievement;
+                    continue;
+                }
                 if (!achievement.platRelevant)
                 {
                     continue;
@@ -478,37 +483,45 @@ public static class AchievementManager
         if (value == 0)
         {
             ResetTrackingKeys();
+            PlayerPrefs.SetInt(AchievementConstants.CLASSIC_FAN, value);
+            PlayerPrefs.SetInt(AchievementConstants.CLASSIC_ENJOYER, value);
+            PlayerPrefs.SetInt(AchievementConstants.TIMELESS_CLASSIC, value);
+            PlayerPrefs.SetInt(AchievementConstants.PROMPT_PROTECTOR, value);
+            PlayerPrefs.SetInt(AchievementConstants.STAUNCH_DEFENDER, value);
+            PlayerPrefs.SetInt(AchievementConstants.BULWARK_OF_RESISTANCE, value);
+            PlayerPrefs.SetInt(AchievementConstants.MK1_NOVICE, value);
+            PlayerPrefs.SetInt(AchievementConstants.MK1_ADEPT, value);
+            PlayerPrefs.SetInt(AchievementConstants.MK1_EXPERT, value);
+            PlayerPrefs.SetInt(AchievementConstants.UNSTABLE_NOVICE, value);
+            PlayerPrefs.SetInt(AchievementConstants.UNSTABLE_ADEPT, value);
+            PlayerPrefs.SetInt(AchievementConstants.UNSTABLE_EXPERT, value);
+            PlayerPrefs.SetInt(AchievementConstants.BONUS_NOVICE, value);
+            PlayerPrefs.SetInt(AchievementConstants.BONUS_ADEPT, value);
+            PlayerPrefs.SetInt(AchievementConstants.BONUS_EXPERT, value);
+            PlayerPrefs.SetInt(AchievementConstants.MOD_BAT_NOVICE, value);
+            PlayerPrefs.SetInt(AchievementConstants.MOD_BAT_ADEPT, value);
+            PlayerPrefs.SetInt(AchievementConstants.MOD_BAT_EXPERT, value);
+            PlayerPrefs.SetInt(AchievementConstants.UNFAZED, value);
+            PlayerPrefs.SetInt(AchievementConstants.KITTED_OUT, value);
+            PlayerPrefs.SetInt(AchievementConstants.FULLY_CHARGED, value);
+            PlayerPrefs.SetInt(AchievementConstants.BOMB_VOYAGE, value);
+            PlayerPrefs.SetInt(AchievementConstants.GREASED_LIGHTNING, value);
+            PlayerPrefs.SetInt(AchievementConstants.WELL_THATS_AWKWARD, value);
+            PlayerPrefs.SetInt(AchievementConstants.BULLSEYE, value);
+            PlayerPrefs.SetInt(AchievementConstants.CAREFUL_FRAGILE, value);
+            PlayerPrefs.SetInt(AchievementConstants.PROUD_OF_YOU, value);
+            PlayerPrefs.SetInt(AchievementConstants.MARKSMAN, value);
+            PlayerPrefs.SetInt(AchievementConstants.SHARPSHOOTER, value);
+            PlayerPrefs.SetInt(AchievementConstants.HAWKEYE, value);
+            PlayerPrefs.SetInt(AchievementConstants.EMPLOYEE_OF_THE_MONTH, value);
+        } else {
+            foreach (KeyValuePair<string, AchievementData> kpv in lookupTable)
+            {
+                UnlockAchievement(kpv.Key);
+            }
         }
-        PlayerPrefs.SetInt(AchievementConstants.CLASSIC_FAN,value);
-        PlayerPrefs.SetInt(AchievementConstants.CLASSIC_ENJOYER,value);
-        PlayerPrefs.SetInt(AchievementConstants.TIMELESS_CLASSIC,value);
-        PlayerPrefs.SetInt(AchievementConstants.PROMPT_PROTECTOR,value);
-        PlayerPrefs.SetInt(AchievementConstants.STAUNCH_DEFENDER,value);
-        PlayerPrefs.SetInt(AchievementConstants.BULWARK_OF_RESISTANCE,value);
-        PlayerPrefs.SetInt(AchievementConstants.MK1_NOVICE,value);
-        PlayerPrefs.SetInt(AchievementConstants.MK1_ADEPT,value);
-        PlayerPrefs.SetInt(AchievementConstants.MK1_EXPERT,value);
-        PlayerPrefs.SetInt(AchievementConstants.UNSTABLE_NOVICE,value);
-        PlayerPrefs.SetInt(AchievementConstants.UNSTABLE_ADEPT,value);
-        PlayerPrefs.SetInt(AchievementConstants.UNSTABLE_EXPERT,value);
-        PlayerPrefs.SetInt(AchievementConstants.BONUS_NOVICE,value);
-        PlayerPrefs.SetInt(AchievementConstants.BONUS_ADEPT,value);
-        PlayerPrefs.SetInt(AchievementConstants.BONUS_EXPERT,value);
-        PlayerPrefs.SetInt(AchievementConstants.MOD_BAT_NOVICE,value);
-        PlayerPrefs.SetInt(AchievementConstants.MOD_BAT_ADEPT,value);
-        PlayerPrefs.SetInt(AchievementConstants.MOD_BAT_EXPERT,value);
-        PlayerPrefs.SetInt(AchievementConstants.UNFAZED,value);
-        PlayerPrefs.SetInt(AchievementConstants.KITTED_OUT,value);
-        PlayerPrefs.SetInt(AchievementConstants.FULLY_CHARGED,value);
-        PlayerPrefs.SetInt(AchievementConstants.BOMB_VOYAGE,value);
-        PlayerPrefs.SetInt(AchievementConstants.GREASED_LIGHTNING,value);
-        PlayerPrefs.SetInt(AchievementConstants.WELL_THATS_AWKWARD,value);
-        PlayerPrefs.SetInt(AchievementConstants.BULLSEYE,value);
-        PlayerPrefs.SetInt(AchievementConstants.CAREFUL_FRAGILE,value);
-        PlayerPrefs.SetInt(AchievementConstants.PROUD_OF_YOU,value);
-        PlayerPrefs.SetInt(AchievementConstants.MARKSMAN,value);
-        PlayerPrefs.SetInt(AchievementConstants.SHARPSHOOTER,value);
-        PlayerPrefs.SetInt(AchievementConstants.HAWKEYE,value);
-        PlayerPrefs.SetInt(AchievementConstants.EMPLOYEE_OF_THE_MONTH,value);
+
+
+        
     }
 }

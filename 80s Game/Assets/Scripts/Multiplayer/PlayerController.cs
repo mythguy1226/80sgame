@@ -126,6 +126,12 @@ public class PlayerController : MonoBehaviour
                 }
 
                 activeCrosshair.gameObject.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = config.initials;
+            } else
+            {
+                if (config.initials == null)
+                {
+                    config.initials = "AAA";
+                }
             }
         }
         currentState = controllerState;

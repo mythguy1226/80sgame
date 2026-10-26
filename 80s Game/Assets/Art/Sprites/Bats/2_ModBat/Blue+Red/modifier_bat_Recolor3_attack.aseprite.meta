@@ -13,6 +13,7 @@ ScriptedImporter:
   assetBundleName: 
   assetBundleVariant: 
   script: {fileID: 11500000, guid: 62a9f0aa5b59740cfbadc7e5f9823bb0, type: 3}
+  importerVersion: 2
   textureImporterSettings:
     alphaSource: 1
     mipMapMode: 0
@@ -82,6 +83,7 @@ ScriptedImporter:
     defaultPivotSpace: 0
     defaultPivotAlignment: 0
     customPivotPosition: {x: 0.5, y: 0.5}
+    mosaicPadding: 4
     spritePadding: 0
     generateModelPrefab: 1
     generateAnimationClips: 1
@@ -94,6 +96,7 @@ ScriptedImporter:
     defaultPivotSpace: 0
     defaultPivotAlignment: 0
     customPivotPosition: {x: 0.5, y: 0.5}
+    mosaicPadding: 4
     spritePadding: 0
     generateModelPrefab: 1
     generateAnimationClips: 1
@@ -367,102 +370,119 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: 704217366
+    uuid:
+      value0: 174870766
+      value1: 0
+      value2: 0
+      value3: 0
+    guid: 174870766
     name: modifier_bat_Recolor3_attack
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: modifier_bat_Recolor3_attack_Frame_0
+    - name: Frame_0
       frameIndex: 0
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: 1
         width: 33
         height: 63
       spriteId: f1cb2921b90bdd843a3c035850de7c6a
-    - name: modifier_bat_Recolor3_attack_Frame_1
+    - name: Frame_1
       frameIndex: 1
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: 0
         width: 33
         height: 64
       spriteId: a5e42691af8ca0248bae0a1866697ce8
-    - name: modifier_bat_Recolor3_attack_Frame_2
+    - name: Frame_2
       frameIndex: 2
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: 1
         width: 33
         height: 63
       spriteId: 5892d0f35e3ed994bbbddf77d71ea217
-    - name: modifier_bat_Recolor3_attack_Frame_3
+    - name: Frame_3
       frameIndex: 3
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: -3
         width: 32
         height: 66
       spriteId: efd74b04e8d23644eb6a275865d80fb7
-    - name: modifier_bat_Recolor3_attack_Frame_4
+    - name: Frame_4
       frameIndex: 4
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: -3
         width: 33
         height: 67
       spriteId: 461faa2fb471acc46a610e44810096e7
-    - name: modifier_bat_Recolor3_attack_Frame_5
+    - name: Frame_5
       frameIndex: 5
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: -3
         width: 33
         height: 67
       spriteId: 65cc9ad6a5c6b994c974ab852520c7cc
-    - name: modifier_bat_Recolor3_attack_Frame_6
+    - name: Frame_6
       frameIndex: 6
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: 1
         width: 33
         height: 63
       spriteId: a00fc77feb212dd4db006f5f6c59319e
-    - name: modifier_bat_Recolor3_attack_Frame_7
+    - name: Frame_7
       frameIndex: 7
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: 0
         width: 32
         height: 63
       spriteId: 2b682cc8955f1a34597ed23e7a47f5b3
-    - name: modifier_bat_Recolor3_attack_Frame_8
+    - name: Frame_8
       frameIndex: 8
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: 1
         width: 33
         height: 63
       spriteId: 38c71359dc91200408539316e410119d
-    - name: modifier_bat_Recolor3_attack_Frame_9
+    - name: Frame_9
       frameIndex: 9
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: -3
         width: 33
         height: 67
       spriteId: bde6f83b705cc014886fec0a58c2a51c
-    - name: modifier_bat_Recolor3_attack_Frame_10
+    - name: Frame_10
       frameIndex: 10
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: -3
         width: 33
         height: 67
       spriteId: 32717300683471845bc89b7b05121154
-    - name: modifier_bat_Recolor3_attack_Frame_11
+    - name: Frame_11
       frameIndex: 11
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: -3
@@ -508,6 +528,8 @@ ScriptedImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     androidETC2FallbackOverride: 0
+  generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
   canvasSize: {x: 64, y: 64}
+  previousTextureSize: {x: 256, y: 256}

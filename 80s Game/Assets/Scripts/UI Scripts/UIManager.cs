@@ -59,6 +59,8 @@ public class UIManager : MonoBehaviour
         scoreBehavior = canvas.GetComponent<ScoreBehavior>();
         titleScreenUI = canvas.GetComponent<TitleScreenBehavior>();
         achievementNotifs = new Queue<AchievementNotificationData>();
+
+        SteamInterface.gameOverlayEvent = SystemInterruptPause;
     }
 
     private void Start()
@@ -226,5 +228,10 @@ public class UIManager : MonoBehaviour
         {
             achievementsUI.CreateAchievements(achievements);
         }
+    }
+
+    public void OnDestroy()
+    {
+        pauseEvent = null;
     }
 }

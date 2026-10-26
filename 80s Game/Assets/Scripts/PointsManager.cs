@@ -70,7 +70,7 @@ public class PointsManager : MonoBehaviour
         scoreBehavior.bonusPoints = numBonusPoints;
         scoreBehavior.UpdateScores(player);
         scoreBehavior.UpdateAccuracy(accuracy);
-        Debug.Log("Updated accuracy: " + accuracy);
+        //Debug.Log("Updated accuracy: " + accuracy);
         return AddRoundPoints(player, numBonusPoints);
     }
 
@@ -139,6 +139,10 @@ public class PointsManager : MonoBehaviour
         // Sort the leaderboard based on score
         records.Sort((record1, record2) => record1.score.CompareTo(record2.score));
         string initials = PlayerData.activePlayers[maxScoringPlayer].initials;
+        if (initials == null)
+        {
+            initials = "AAA";
+        }
 
         // If file contains scores,
         // iterate through the records to compare new score

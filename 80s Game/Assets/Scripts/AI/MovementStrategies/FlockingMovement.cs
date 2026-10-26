@@ -5,7 +5,7 @@ public class FlockingMovement : AbsMovementStrategy
 
     public FlockingMovement(KinematicSteer controller) : base(controller)
     {
-
+        strategy = MovementStrategy.SimpleFlocking;
     }
 
     public override void Initialize()

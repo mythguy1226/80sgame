@@ -3,7 +3,7 @@ using UnityEngine;
 public class VelocityObstacleAvoidance : AbsMovementStrategy
 {
     public VelocityObstacleAvoidance(KinematicSteer controller) : base(controller) {
-
+        strategy = MovementStrategy.ObstacleAvoidance;
     }
 
     public override Vector2 Move()

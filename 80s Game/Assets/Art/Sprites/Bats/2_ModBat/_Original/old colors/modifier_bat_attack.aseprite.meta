@@ -13,6 +13,7 @@ ScriptedImporter:
   assetBundleName: 
   assetBundleVariant: 
   script: {fileID: 11500000, guid: 62a9f0aa5b59740cfbadc7e5f9823bb0, type: 3}
+  importerVersion: 2
   textureImporterSettings:
     alphaSource: 1
     mipMapMode: 0
@@ -82,6 +83,7 @@ ScriptedImporter:
     defaultPivotSpace: 0
     defaultPivotAlignment: 0
     customPivotPosition: {x: 0.5, y: 0.5}
+    mosaicPadding: 4
     spritePadding: 0
     generateModelPrefab: 1
     generateAnimationClips: 1
@@ -94,6 +96,7 @@ ScriptedImporter:
     defaultPivotSpace: 0
     defaultPivotAlignment: 0
     customPivotPosition: {x: 0.5, y: 0.5}
+    mosaicPadding: 4
     spritePadding: 0
     generateModelPrefab: 1
     generateAnimationClips: 1
@@ -367,102 +370,119 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: -406192376
+    uuid:
+      value0: 2303329576
+      value1: 0
+      value2: 0
+      value3: 0
+    guid: -1991637720
     name: modifier_bat_attack
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: modifier_bat_attack_Frame_0
+    - name: Frame_0
       frameIndex: 0
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: 1
         width: 33
         height: 63
       spriteId: a08d26f1e8187984ba5869eaae2678ee
-    - name: modifier_bat_attack_Frame_1
+    - name: Frame_1
       frameIndex: 1
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: 0
         width: 33
         height: 64
       spriteId: d850eeb75bafec1429400feb07066c66
-    - name: modifier_bat_attack_Frame_2
+    - name: Frame_2
       frameIndex: 2
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: 1
         width: 33
         height: 63
       spriteId: 0c4bba4c87d7f07479762dadabf8a824
-    - name: modifier_bat_attack_Frame_3
+    - name: Frame_3
       frameIndex: 3
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: -3
         width: 32
         height: 66
       spriteId: 45f19b10ae9a85f4395514bdc02c558f
-    - name: modifier_bat_attack_Frame_4
+    - name: Frame_4
       frameIndex: 4
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: -3
         width: 33
         height: 67
       spriteId: 06531843b5b05034fbdefa8c5c9dfafa
-    - name: modifier_bat_attack_Frame_5
+    - name: Frame_5
       frameIndex: 5
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: -3
         width: 33
         height: 67
       spriteId: f7152c09807504d4eafc4f831a440929
-    - name: modifier_bat_attack_Frame_6
+    - name: Frame_6
       frameIndex: 6
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: 1
         width: 33
         height: 63
       spriteId: e968aad80fdc62845b35a026a6169b79
-    - name: modifier_bat_attack_Frame_7
+    - name: Frame_7
       frameIndex: 7
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: 0
         width: 32
         height: 63
       spriteId: 2535649f48653dc4a9a059939b56878b
-    - name: modifier_bat_attack_Frame_8
+    - name: Frame_8
       frameIndex: 8
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: 1
         width: 33
         height: 63
       spriteId: e412403022ccaee409f4303cc388449a
-    - name: modifier_bat_attack_Frame_9
+    - name: Frame_9
       frameIndex: 9
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: -3
         width: 33
         height: 67
       spriteId: 08f3612bdadf649428db214ccb96c2a5
-    - name: modifier_bat_attack_Frame_10
+    - name: Frame_10
       frameIndex: 10
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: -3
         width: 33
         height: 67
       spriteId: f0178c60862007b4887ffc7ca21761a1
-    - name: modifier_bat_attack_Frame_11
+    - name: Frame_11
       frameIndex: 11
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: -3
@@ -508,6 +528,8 @@ ScriptedImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     androidETC2FallbackOverride: 0
+  generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
   canvasSize: {x: 64, y: 64}
+  previousTextureSize: {x: 256, y: 256}
