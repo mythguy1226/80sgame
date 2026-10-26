@@ -714,6 +714,8 @@ MonoBehaviour:
   - {fileID: 105476242011053595}
   - {fileID: 4915330240397861484}
   - {fileID: 8239888119581922334}
+  buttonClickSound: {fileID: 8300000, guid: 22eeadc8c63c06e438e04029774dfaf5, type: 3}
+  fadeInScreen: {fileID: 0}
 --- !u!1 &3359791121750641036
 GameObject:
   m_ObjectHideFlags: 0

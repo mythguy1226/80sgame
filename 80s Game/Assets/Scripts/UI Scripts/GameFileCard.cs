@@ -6,6 +6,10 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+/// <summary>
+/// Prefab that shows a summary of a single player campaign save file
+/// Allows creation of new save files
+/// </summary>
 public class GameFileCard : MonoBehaviour
 {
     [SerializeField]
@@ -34,8 +38,13 @@ public class GameFileCard : MonoBehaviour
     List<TextMeshProUGUI> initials;
 
     [SerializeField]
+    AudioClip buttonClickSound;
+
+    [SerializeField]
     GameObject fadeInScreen;
 
+    GameFileData fileData;
+    bool isNew = false;
     int index;
 
     //Variables to keep track of which letter to display for each initial
@@ -43,7 +52,11 @@ public class GameFileCard : MonoBehaviour
     private int initialTwo = 65;
     private int initialThree = 65;
 
-
+    /// <summary>
+    /// Set up the card with the file information
+    /// </summary>
+    /// <param name="index">The index of the card to set up</param>
+    /// <param name="data">The data needed to set up the file</param>
     public void SetUp(int index, GameFileData data)
     {
         this.index = index;
@@ -55,9 +68,13 @@ public class GameFileCard : MonoBehaviour
 
         fileName.text = data.owner;
         progress.text = CalculateProgress(data.levelClearInformation).ToString()+"%";
-        background.sprite = GameManager.Instance.UIManager.levelSprites[data.playerAvatarLocation];
+        //background.sprite = GameManager.Instance.UIManager.levelSprites[data.playerAvatarLocation];
+        fileData = data;
     }
 
+    /// <summary>
+    /// Show the initials typer
+    /// </summary>
     private void ShowTyper()
     {
         typer.SetActive(true);
@@ -74,11 +91,16 @@ public class GameFileCard : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(typerButton);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public void ChooseFile()
     {
         if (fileName.text == "NEW")
         {
+            SoundManager.Instance.PlaySoundContinuous(buttonClickSound);
             ShowTyper();
+            isNew = true;
             return;
         }
 
@@ -86,8 +108,17 @@ public class GameFileCard : MonoBehaviour
         LoadCampaign();
     }
 
+
     public void LoadCampaign()
     {
+        if (isNew)
+        {
+            fileData = new GameFileData();
+            fileData.owner = initials[0].text + initials[1].text + initials[2].text;
+            fileData.playerAvatarLocation = 0;
+            // This needs to be updated once I have the actual method of getting level progress
+            fileData.levelClearInformation = new LevelClearInformation[10];
+        }
         StartCoroutine(FadeOutSubroutine());
     }
 
@@ -137,6 +168,7 @@ public class GameFileCard : MonoBehaviour
         fileName.text = "NEW";
         background.color = new Color(0, 0, 0, 0);
         progress.text = "";
+        
     }
 
     private float CalculateProgress(LevelClearInformation[] clearInformation)
@@ -150,7 +182,7 @@ public class GameFileCard : MonoBehaviour
                 incomplete++;
             }
         }
-        return Mathf.Floor((incomplete / (float)count) * 100);
+        return 100-Mathf.Floor((incomplete / (float)count) * 100);
     }
 
     IEnumerator FadeOutSubroutine()
@@ -172,8 +204,14 @@ public class GameFileCard : MonoBehaviour
         //im.color = new Color(0, 0, 0, 255f);
         im.alpha = 1;
         // To do: Set up information to load
-
-
+        CampaignSave.FileData = fileData;
+        CampaignSave.LoadedIndex = index;
+        // And save the file for newly instantiated files
+        if (isNew)
+        {
+            CampaignSave.FileSaver.Save(index, fileData);
+        }
+        
         SceneManager.LoadScene(6);
     }
 }

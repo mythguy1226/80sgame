@@ -13,6 +13,7 @@ public class CampaignFilePicker : MonoBehaviour
 
     private void OnEnable()
     {
+        CampaignSave.Reset();
         SteamInterface steam = GameManager.Instance.GetComponent<SteamInterface>();
         // To do: Implement Steam Saver
         if (false)
@@ -29,7 +30,7 @@ public class CampaignFilePicker : MonoBehaviour
         {
             gameFileSaver = new IOFileSaver();
         }
-
+        CampaignSave.FileSaver = gameFileSaver;
         DisplayFiles();
 
     }
