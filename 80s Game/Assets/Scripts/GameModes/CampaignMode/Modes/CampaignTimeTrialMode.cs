@@ -1,3 +1,7 @@
+/// <summary>
+/// Time trial mode
+/// Game mode exclusive to the campaign
+/// </summary>
 public class CampaignTimeTrialMode : AbsGameMode
 {
     public override void OnTargetReset()

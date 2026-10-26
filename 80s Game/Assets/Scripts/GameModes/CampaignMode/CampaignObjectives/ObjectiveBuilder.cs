@@ -1,3 +1,6 @@
+/// <summary>
+/// Factory class for objective objects
+/// </summary>
 public static class ObjectiveFactory
 {
     public static AbsGameObjective MakeObjective(ObjectiveType objType)

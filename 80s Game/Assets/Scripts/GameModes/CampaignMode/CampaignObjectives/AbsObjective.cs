@@ -1,3 +1,7 @@
+/// <summary>
+/// Abstract level objective class
+/// This sets the logic for how to evaluate how much progress a player has achieved in a campaign level
+/// </summary>
 public abstract class AbsGameObjective
 {
     protected float OneStarThreshold;
@@ -13,6 +17,10 @@ public abstract class AbsGameObjective
     }
 }
 
+/// <summary>
+/// Objective type that measures if the player is over certain thresholds
+/// (e.g. score objectives, stun counts, power-up collections)
+/// </summary>
 public class OverObjective : AbsGameObjective {
     protected override int Evaluate(float playerValue)
     {
@@ -34,6 +42,10 @@ public class OverObjective : AbsGameObjective {
     }
 }
 
+/// <summary>
+/// Objective that measures if the player is under certain thresholds
+/// (e.g. time trials, damage received, stun counts)
+/// </summary>
 public class UnderObjective : AbsGameObjective
 {
     protected override int Evaluate(float playerValue)

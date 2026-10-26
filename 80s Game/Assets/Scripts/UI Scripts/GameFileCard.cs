@@ -92,7 +92,7 @@ public class GameFileCard : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    /// Receive the choose file signal to determine if a new one must be created or if the game can commence
     /// </summary>
     public void ChooseFile()
     {
@@ -108,7 +108,9 @@ public class GameFileCard : MonoBehaviour
         LoadCampaign();
     }
 
-
+    /// <summary>
+    /// Kicks off the process to load the state of the campaign or save a new file if a new file is being created
+    /// </summary>
     public void LoadCampaign()
     {
         if (isNew)
@@ -122,6 +124,12 @@ public class GameFileCard : MonoBehaviour
         StartCoroutine(FadeOutSubroutine());
     }
 
+    /// <summary>
+    /// Updates the numeric value that is then turned into chars for the initials
+    /// </summary>
+    /// <param name="increment">Whether we're going forwards or backwards in the ABCs</param>
+    /// <param name="currentValue">The current value of the letter being updated</param>
+    /// <returns></returns>
     private int UpdateInitialNumber(bool increment, int currentValue)
     {
         if (increment)
@@ -141,6 +149,11 @@ public class GameFileCard : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Changes the textual value for a particular initial in the typer
+    /// </summary>
+    /// <param name="increment"></param>
+    /// <param name="initialIndex"></param>
     private void ChangeInitial(bool increment, int initialIndex)
     {
         char tempChar;
@@ -163,6 +176,9 @@ public class GameFileCard : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Sets up a card as empty, so players know this file doesn't exist
+    /// </summary>
     private void SetUpEmpty()
     {
         fileName.text = "NEW";
@@ -171,6 +187,11 @@ public class GameFileCard : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// Calculates the progress value of a particular player's game file with regards to the amount of levels that need to be completed
+    /// </summary>
+    /// <param name="clearInformation">The information regarding all levels in the campaign on whether this player has done it</param>
+    /// <returns></returns>
     private float CalculateProgress(LevelClearInformation[] clearInformation)
     {
         int count = clearInformation.Length;

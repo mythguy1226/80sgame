@@ -1,3 +1,6 @@
+/// <summary>
+/// Defense mode with rules adapted for the campaign
+/// </summary>
 public class CampaignDefenseMode : AbsGameMode
 {
     public override void OnTargetReset()

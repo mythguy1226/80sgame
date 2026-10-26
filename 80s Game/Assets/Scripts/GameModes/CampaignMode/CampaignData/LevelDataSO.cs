@@ -1,5 +1,10 @@
 using UnityEngine;
 
+
+/// <summary>
+/// Scriptable Object that details the information for a particular level
+/// READ ONLY.
+/// </summary>
 [CreateAssetMenu(menuName = "ScriptableObjects/Campaign/Level")]
 public class LevelDataSO : ScriptableObject
 {

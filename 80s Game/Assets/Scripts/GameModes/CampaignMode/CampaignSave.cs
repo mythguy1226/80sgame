@@ -1,3 +1,6 @@
+/// <summary>
+/// Static class that holds the information for the game file currently being played
+/// </summary>
 public static class CampaignSave
 {
     public static int LoadedIndex { get; set; }

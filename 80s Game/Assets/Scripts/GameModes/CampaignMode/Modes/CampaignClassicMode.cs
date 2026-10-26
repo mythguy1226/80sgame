@@ -1,4 +1,7 @@
 
+/// <summary>
+/// Game mode adapted for the rules of classic mode in the campaign
+/// </summary>
 public class CampaignClassicMode : AbsGameMode
 {
     public override void OnTargetReset()

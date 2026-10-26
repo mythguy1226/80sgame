@@ -3,6 +3,10 @@ using UnityEngine;
 using SteamIntegration;
 using System.Collections.Generic;
 
+
+/// <summary>
+/// Menu for picking which save file to play
+/// </summary>
 public class CampaignFilePicker : MonoBehaviour
 {
     GameFileSaver gameFileSaver;
