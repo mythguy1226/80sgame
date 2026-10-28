@@ -10,4 +10,15 @@ public class MapNode : MonoBehaviour
 
     [SerializeField]
     LevelDataSO levelData;
+
+    [SerializeField]
+    int x;
+
+    [SerializeField]
+    int y;
+
+    private void OnEnable()
+    {
+        MapManager.Instance.RegisterNode(x, y, this);
+    }
 }

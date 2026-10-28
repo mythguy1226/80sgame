@@ -6,6 +6,7 @@ using UnityEngine;
 /// </summary>
 public class MapPath : MonoBehaviour
 {
+
     public bool PathIsUnlocked { get; private set; }
     
     [SerializeField]
@@ -16,5 +17,4 @@ public class MapPath : MonoBehaviour
     
     [SerializeField] 
     Transform[] pathStops;
-
 }
