@@ -1,12 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using TMPro;
-using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Interactions;
 using UnityEngine.InputSystem.UI;
 using UnityEngine.UI;
 

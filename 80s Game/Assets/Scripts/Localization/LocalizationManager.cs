@@ -21,7 +21,7 @@ namespace Localization
 
     public enum UITextLabels
     {
-        StartGame,
+        Arcade,
         Achievements,
         Settings,
         Exit,
@@ -42,7 +42,8 @@ namespace Localization
         ExitWithoutSaving,
         MnKb,
         SettingsPrompt,
-        Pause
+        Pause,
+        Campaign
     }
 
     public static class LocalizationManager
@@ -96,8 +97,11 @@ namespace Localization
                 LanguageDependentTextData data = elements.textElements[i];
                 switch (data.label)
                 {
-                    case "strt":
-                        UIEncoder.Add(data.label, UITextLabels.StartGame);
+                    case "cmpn":
+                        UIEncoder.Add(data.label, UITextLabels.Campaign);
+                        break;
+                    case "arcd":
+                        UIEncoder.Add(data.label, UITextLabels.Arcade);
                         break;
                     case "achv":
                         UIEncoder.Add(data.label, UITextLabels.Achievements);

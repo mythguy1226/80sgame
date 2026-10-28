@@ -18,6 +18,7 @@ public class TitleScreenBehavior : MonoBehaviour
     public GameObject achievementsPanel;
     public GameObject achievementsList;
     public GameObject achievementRewardPrefab;
+    public GameObject campaignFileScreen;
     public GameObject creditsScreen;
     public AudioClip buttonClickSound;
     public MusicTrack titleScreenMusic;
@@ -27,6 +28,7 @@ public class TitleScreenBehavior : MonoBehaviour
     public TextMeshProUGUI gamemodeDescription;
     public GameObject startButton;
     public List<Button> gamemodeOptions;
+    public List<Button> campaignFileButtons;
     public Image helpInputPrompt;
     public List<Sprite> controllerHelpInputs;
     
@@ -98,27 +100,42 @@ public class TitleScreenBehavior : MonoBehaviour
         SoundManager.Instance.PlaySoundContinuous(buttonClickSound);
 
         //Select the proper UI element for navigation
-        if (gamemodePanel.activeInHierarchy)
+        if (!gamemodePanel.activeInHierarchy)
         {
-            EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(gamemodeOptions[0].gameObject);
+            ResetEventSelection(startButton);
+            return;
+        }
+        ResetEventSelection(gamemodeOptions[0].gameObject);
 
-            //Change the prompt icon for the Gamemode help button to the proper control scheme
-            switch (PlayerData.activePlayers[0].controlScheme)
-            {
-                case "PS4":
-                    helpInputPrompt.sprite = controllerHelpInputs[0];
-                    break;
-                case "xbox":
-                    helpInputPrompt.sprite = controllerHelpInputs[1];
-                    break;
-            }
-        }
-        else
+        //Change the prompt icon for the Gamemode help button to the proper control scheme
+        switch (PlayerData.activePlayers[0].controlScheme)
         {
-            EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(startButton);
+            case "PS4":
+                helpInputPrompt.sprite = controllerHelpInputs[0];
+                break;
+            case "xbox":
+                helpInputPrompt.sprite = controllerHelpInputs[1];
+                break;
         }
+    }
+
+    
+
+    // Toggles the visibility of the options of the campaign menu
+    public void ToggleCampaignMenu()
+    {
+        campaignFileScreen.SetActive(!campaignFileScreen.activeInHierarchy);
+        ToggleButtonInteractability(!gamemodePanel.activeInHierarchy);
+
+        SoundManager.Instance.PlaySoundContinuous(buttonClickSound);
+
+        if (!campaignFileScreen.activeInHierarchy)
+        {
+            ResetEventSelection(startButton);
+            return;
+        }
+
+        ResetEventSelection(campaignFileButtons[0].gameObject);
     }
 
     //Select Gamemode and start the game
@@ -137,18 +154,12 @@ public class TitleScreenBehavior : MonoBehaviour
         SoundManager.Instance.PlaySoundContinuous(buttonClickSound);
         achievementsPanel.SetActive(!achievementsPanel.activeInHierarchy);
         ToggleButtonInteractability(!achievementsPanel.activeInHierarchy);
-
-        if (achievementsPanel.activeInHierarchy)
+        if (!achievementsPanel.activeInHierarchy)
         {
-            EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(achievementsList.transform.GetChild(0).gameObject);
+            ResetEventSelection(startButton);
+            return;
         }
-
-        else
-        {
-            EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(achievementsButton);
-        }
+        ResetEventSelection(achievementsList.transform.GetChild(0).gameObject);
     }
 
     public void ToggleCredisPanel()
@@ -156,17 +167,12 @@ public class TitleScreenBehavior : MonoBehaviour
         SoundManager.Instance.PlaySoundContinuous(buttonClickSound);
         creditsScreen.SetActive(!creditsScreen.activeInHierarchy);
 
-        if (creditsScreen.activeInHierarchy)
+        if (!creditsScreen.activeInHierarchy)
         {
-            EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(creditsScreen.transform.GetChild(1).gameObject);
+            ResetEventSelection(startButton);
+            return;
         }
-
-        else
-        {
-            EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(startButton);
-        }
+        ResetEventSelection(creditsScreen.transform.GetChild(1).gameObject);
     }
     
     //Creates a screen showing achievement rewards
@@ -190,8 +196,7 @@ public class TitleScreenBehavior : MonoBehaviour
         else
         {
             ToggleButtonInteractability(true);
-            EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(startButton);
+            ResetEventSelection(startButton);
         }
     }
 
@@ -201,5 +206,12 @@ public class TitleScreenBehavior : MonoBehaviour
         {
             button.interactable = toggle;
         }
+    }
+
+    // Helper function that sets the event system to the default object
+    private void ResetEventSelection(GameObject target)
+    {
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(target);
     }
 }

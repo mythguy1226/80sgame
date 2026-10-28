@@ -39,6 +39,7 @@ public class UIManager : MonoBehaviour
     public List<Sprite> defenseModeBackgrounds;
 
     public List<GameObject> gamemodeCards;
+    public List<Sprite> levelSprites;
 
     public GameObject achievementNotifPrefab;
     private Queue<AchievementNotificationData> achievementNotifs;
