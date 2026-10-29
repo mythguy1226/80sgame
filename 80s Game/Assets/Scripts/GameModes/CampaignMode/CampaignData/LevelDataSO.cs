@@ -60,5 +60,6 @@ public class LevelDataSO : ScriptableObject
         }
         return allowedSpawnsPerRound[allowedSpawnsPerRound.Length - 1];
     }
+
 }
 

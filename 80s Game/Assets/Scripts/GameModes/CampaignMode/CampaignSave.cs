@@ -7,6 +7,8 @@ public static class CampaignSave
     public static GameFileData FileData {  get; set; }
     public static GameFileSaver FileSaver { get; set; }
 
+    public static LevelDataSO ActiveLevel { get; set; }
+
     public static void Reset()
     {
         FileData = null;

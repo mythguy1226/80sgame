@@ -21,4 +21,9 @@ public class MapNode : MonoBehaviour
     {
         MapManager.Instance.RegisterNode(x, y, this);
     }
+
+    public LevelDataSO GetLevelData()
+    {
+        return levelData;
+    }
 }
