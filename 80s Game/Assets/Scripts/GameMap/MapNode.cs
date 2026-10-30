@@ -17,7 +17,7 @@ public class MapNode : MonoBehaviour
     [SerializeField]
     int y;
 
-    private void OnEnable()
+    private void Start()
     {
         MapManager.Instance.RegisterNode(x, y, this);
     }

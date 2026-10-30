@@ -19,10 +19,11 @@ public class MapManager : MonoBehaviour
         nodes = new Dictionary<(int, int), MapNode>();
         if (Instance != null && Instance != this)
         {
-            Instance = this;
+            Destroy(this);
         } else
         {
-            Destroy(this);
+            Instance = this;
+            
         }
     }
 
@@ -52,6 +53,7 @@ public class MapManager : MonoBehaviour
         if (showingUI)
         {
             CampaignSave.ActiveLevel = activeNode.GetLevelData();
+            StartCoroutine(RunFadeOut());
         }
     }
 
@@ -71,6 +73,7 @@ public class MapManager : MonoBehaviour
             current += Time.deltaTime;
             yield return null;
         }
+        im.alpha = 0;
         fadeInScreen.SetActive(false);
     }
 

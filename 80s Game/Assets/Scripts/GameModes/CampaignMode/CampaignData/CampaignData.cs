@@ -1,3 +1,5 @@
+using System;
+
 public enum LevelType
 {
     Classic,
@@ -19,6 +21,7 @@ public enum ObjectiveType
     PowerUpsCollected
 }
 
+[Serializable]
 public struct AllowedSpawns
 {
     public TargetManager.TargetType[] allowedSpawns;

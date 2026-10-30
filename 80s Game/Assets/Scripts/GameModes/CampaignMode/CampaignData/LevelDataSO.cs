@@ -9,6 +9,9 @@ using UnityEngine;
 public class LevelDataSO : ScriptableObject
 {
     [SerializeField]
+    int rounds;
+
+    [SerializeField]
     LevelType levelType;
 
     [SerializeField]
