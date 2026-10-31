@@ -3,7 +3,10 @@ using UnityEngine;
 
 public class CampaignGameManager : MonoBehaviour
 {
-    AbsGameMode activeGameMode;
+    AbsCampaignMode activeGameMode;
+
+    [SerializeField]
+    SpriteRenderer background;
 
     [SerializeField]
     CanvasGroup fadeScreen;
@@ -31,7 +34,8 @@ public class CampaignGameManager : MonoBehaviour
     private void SetupGameMode()
     {
         activeGameMode = GameModeFactory.MakeCampaignGameMode(dataSpec.GetLevelType());
-
+        activeGameMode.SetupMode(dataSpec);
+        background.sprite = dataSpec.GetLevelBackground();
     }
 
     IEnumerator FadeIn()

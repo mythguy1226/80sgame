@@ -1,6 +1,8 @@
+using UnityEngine.InputSystem;
+
 public abstract class AbsCampaignMode : AbsGameMode
 {
-    AbsCampaignMode() : base() { }
-
+    protected AbsCampaignMode() : base() { }
+    public abstract void SetupMode(LevelDataSO data);
 
 }

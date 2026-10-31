@@ -9,7 +9,7 @@ using UnityEngine;
 public class LevelDataSO : ScriptableObject
 {
     [SerializeField]
-    int rounds;
+    RoundParameters roundParameters;
 
     [SerializeField]
     LevelType levelType;
@@ -31,6 +31,11 @@ public class LevelDataSO : ScriptableObject
 
     [SerializeField]
     AllowedSpawns[] allowedSpawnsPerRound;
+
+    [SerializeField]
+    AbsModifierEffect.ModType[] allowedBuffs;
+
+
 
     public LevelType GetLevelType()
     {
@@ -57,11 +62,16 @@ public class LevelDataSO : ScriptableObject
     /// <returns>The allowed target types that can spawn in a given round</returns>
     public AllowedSpawns GetAllowedSpawns(int index)
     {
-        if(index < allowedSpawnsPerRound.Length-1 && index >= 0)
+        if (index < allowedSpawnsPerRound.Length - 1 && index >= 0)
         {
             return allowedSpawnsPerRound[index];
         }
         return allowedSpawnsPerRound[allowedSpawnsPerRound.Length - 1];
+    }
+
+    public RoundParameters GetStartingParameters()
+    {
+        return roundParameters;
     }
 
 }

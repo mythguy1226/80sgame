@@ -1,7 +1,7 @@
 public static class GameModeFactory
 {
 
-    public static AbsGameMode MakeCampaignGameMode(LevelType type)
+    public static AbsCampaignMode MakeCampaignGameMode(LevelType type)
     {
 
         switch(type){

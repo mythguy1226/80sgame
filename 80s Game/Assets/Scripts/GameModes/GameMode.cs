@@ -7,7 +7,11 @@ public enum EGameMode
     Classic,
     Competitive,
     Defense,
-    Menu
+    Menu,
+    CampaignClassic,
+    CampaignDefense,
+    CampaignTime,
+    CampaignBoss
 }
 
 public abstract class AbsGameMode
@@ -32,7 +36,7 @@ public abstract class AbsGameMode
 
     public AbsGameMode()
     {
-        targetManager = GameManager.Instance.TargetManager;
+        
         GameOver = false;
         CurrentRound = 1;
     }

@@ -26,3 +26,12 @@ public struct AllowedSpawns
 {
     public TargetManager.TargetType[] allowedSpawns;
 }
+
+[Serializable]
+public class RoundParameters
+{
+    public int MaxRounds;
+    public int MaxTargetPerRound;
+    public int TargetsPerRoundIncrement;
+    public int[] RoundTargetCount;
+}

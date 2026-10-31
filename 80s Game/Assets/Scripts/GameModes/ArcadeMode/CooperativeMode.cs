@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using SteamIntegration;
 
-public class CooperativeMode : AbsGameMode
+public class CooperativeMode : AbsArcadeMode
 {
     //float modifierChance = 0.3f;
     Defendable coreObject;

@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 210cd58f4e2cd8d49aed59042a4522db, type: 3}
   m_Name: LevelTest
   m_EditorClassIdentifier: 
-  rounds: 0
+  roundParameters:
+    MaxRounds: 5
+    MaxTargetPerRound: 10
+    TargetsPerRoundIncrement: 2
+    RoundTargetCount: 0a0000000c0000000e0000001000000012000000
   levelType: 0
   metricThresholdOneStar: 10000
   metricThresholdTwoStars: 100000
@@ -22,3 +26,4 @@ MonoBehaviour:
   allowedSpawnsPerRound:
   - allowedSpawns: 00000000
   - allowedSpawns: 0000000003000000
+  allowedBuffs: 

@@ -1,20 +1,21 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using SteamIntegration;
 
-public class CompetitiveMode : AbsGameMode
+
+public class ClassicMode : AbsArcadeMode
 {
-    float modifierChance = 0.3f;
 
-    public CompetitiveMode() : base()
+    public ClassicMode() : base()
     {
-        ModeType = EGameMode.Competitive;
+        ModeType = EGameMode.Classic;
 
         // Initial round parameters
         NumRounds = 12;
-        maxTargetsOnScreen = 15;
-        currentRoundTargetCount = 8;
+        maxTargetsOnScreen = 8;
+        currentRoundTargetCount = 5;
+
         SetupAllowedData();
         debugMode = false;
         GameManager.Instance.SteamInterface.InitData();
@@ -22,10 +23,11 @@ public class CompetitiveMode : AbsGameMode
 
     protected override void SetupAllowedData()
     {
+        // Initialize data stores
+        allowedBats = new Dictionary<TargetManager.TargetType, bool>();
         allowedBuffs = new Dictionary<AbsModifierEffect.ModType, bool>();
         allowedDebuffs = new Dictionary<AbsModifierEffect.ModType, bool>();
-        allowedBats = new Dictionary<TargetManager.TargetType, bool>();
-        
+
         // Set everything to false by default
         foreach (TargetManager.TargetType type in Enum.GetValues(typeof(TargetManager.TargetType)).Cast<TargetManager.TargetType>())
         {
@@ -36,8 +38,7 @@ public class CompetitiveMode : AbsGameMode
             if (AbsModifierEffect.ModTypeIsBuff(mod))
             {
                 allowedBuffs.Add(mod, false);
-            }
-            else
+            } else
             {
                 allowedDebuffs.Add(mod, false);
             }
@@ -50,11 +51,10 @@ public class CompetitiveMode : AbsGameMode
             allowedBuffs[AbsModifierEffect.ModType.Overcharge] = true;
 
         allowedBats[TargetManager.TargetType.Regular] = true;
-        allowedBats[TargetManager.TargetType.LowBonus] = true;
-        allowedBats[TargetManager.TargetType.HighBonus] = true;
-        allowedBats[TargetManager.TargetType.Modifier] = true;
-        allowedBats[TargetManager.TargetType.Unstable] = true;
-        allowedBats[TargetManager.TargetType.Debuff] = true;
+        allowedBats[TargetManager.TargetType.HighBonus] = false;
+        allowedBats[TargetManager.TargetType.LowBonus] = false;
+        allowedBats[TargetManager.TargetType.Modifier] = false;
+        allowedBats[TargetManager.TargetType.Unstable] = false;
 
         numBatsMap = new Dictionary<TargetManager.TargetType, int>();
 
@@ -70,16 +70,19 @@ public class CompetitiveMode : AbsGameMode
     protected override void StartNextRound(bool isFirstRound = false)
     {
         if (!isFirstRound)
+            
             UpdateRoundParams();
 
         // Iterate through and spawn the next set of targets
-        for (int i = 0; i < currentRoundTargetCount; i++)
+        for(int i = 0; i < currentRoundTargetCount; i++)
         {
             int targetIndex = GetNextAvailableBat();
-
+            
             if (targetIndex == -1 && allowedBats[TargetManager.TargetType.Regular])
             {
-                targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<BatStateMachine>());
+                targetIndex = targetManager.GetNextAvailableTargetOfEnumType(TargetManager.TargetType.Regular);
+                if(targetIndex != -1)
+                    targetManager.SpawnTarget(targetIndex);
                 continue;
             }
 
@@ -89,23 +92,16 @@ public class CompetitiveMode : AbsGameMode
             if (targetManager.ActiveTargets.Count == maxTargetsOnScreen)
                 return;
         }
-
-        // Spawn a modifier bat and increment target count
-        if (allowedBats[TargetManager.TargetType.Modifier])
-        {
-            targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<ModifierBatStateMachine>());
-        }
-        currentRoundTargetCount++;
     }
 
     protected override void UpdateRoundParams()
     {
         CurrentRound++;
-        currentRoundTargetCount += 4;
+        currentRoundTargetCount += 2;
         maxTargetsOnScreen += 1;
-
+        
         // Keep max targets on screen to at most two fewer than object pool
-        if (maxTargetsOnScreen >= targetManager.targets.Count)
+        if(maxTargetsOnScreen >= targetManager.targets.Count)
         {
             maxTargetsOnScreen = targetManager.targets.Count - 2;
         }
@@ -124,12 +120,10 @@ public class CompetitiveMode : AbsGameMode
         {
             Target bat = bats[i];
             // Debug Override
-            // Debug Override
             if (debugMode && allowedBats[bat.type] && !bat.FSM.IsActive())
             {
                 return i;
             }
-
             if (SkipBat(bat))
             {
                 continue;
@@ -181,27 +175,17 @@ public class CompetitiveMode : AbsGameMode
             }
         }
 
-        // Chance to spawn a modifier bat every 5 stuns
-        if(targetManager.totalStuns % 5 == 0)
+        if(targetManager.numStuns >= currentRoundTargetCount)
         {
-            if(UnityEngine.Random.Range(0.0f, 1.0f) < modifierChance && allowedBats[TargetManager.TargetType.Modifier])
-            {
-                // Spawn a modifier bat and increment target count
-                targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<ModifierBatStateMachine>());
-                currentRoundTargetCount++;
-            }
-        }
 
-        if (targetManager.numStuns >= currentRoundTargetCount)
-        {
+            GameManager.EmitRoundOverEvent();
 
             // If last round completed
-            if (CurrentRound == NumRounds)
+            if(CurrentRound == NumRounds)
             {
                 GameOver = true;
                 EndGame();
             }
-                
             // Otherwise start next round
             else
             {
@@ -209,8 +193,10 @@ public class CompetitiveMode : AbsGameMode
                 if (GameManager.Instance.roundEndTheme != null)
                     SoundManager.Instance.PlaySoundContinuous(GameManager.Instance.roundEndTheme.Clip);
                 GameManager.Instance.UIManager.scoreBehavior.ShowNewRoundText();
+                GameManager.Instance.UIManager.scoreBehavior.ShowAccuracy();
                 GameManager.Instance.StartRoundDelay();
             }
+                
 
             return;
         }
@@ -222,8 +208,10 @@ public class CompetitiveMode : AbsGameMode
     protected override void EndGame()
     {
         int score = GameManager.Instance.PointsManager.maxScore;
+        GameManager.Instance.SteamInterface.SetSteamData(SteamConstants.CLASSIC_SCORE, score, true);
         GameManager.Instance.SteamInterface.UpdateSteamServer();
         AchievementManager.TestEndGameAchievements(ModeType, CurrentRound, score);
+        AchievementManager.BullseyeTest(GameManager.Instance.GetPlayer(0));
         GameManager.Instance.HandleGameOver();
     }
 
@@ -236,24 +224,107 @@ public class CompetitiveMode : AbsGameMode
 
         // If maximum number of targets isn't on screen
         if (
-            targetManager.ActiveTargets.Count < maxTargetsOnScreen
+            targetManager.ActiveTargets.Count < maxTargetsOnScreen 
             && targetManager.ActiveTargets.Count < neededStuns
         )
         {
             int targetIndex = GetNextAvailableBat();
-
             if (targetIndex >= 0)
                 targetManager.SpawnTarget(targetIndex);
             else if (!allowedBats[TargetManager.TargetType.Regular])
                 return;
             else
-                targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<BatStateMachine>());
+            {
+                targetIndex = targetManager.GetNextAvailableTargetOfEnumType(TargetManager.TargetType.Regular);
+                if(targetIndex != -1)
+                    targetManager.SpawnTarget(targetIndex);
+                else
+                    targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<BatStateMachine>());
+            }
         }
     }
 
     protected override void CallNextRound()
     {
+        // Incorporate new bats based on round
+        UpdateAllowedBats();
+
         // Begin the next round
         StartNextRound();
+                
+        // Spawn a modifier bat and increment target count
+        if (allowedBats[TargetManager.TargetType.Modifier])
+        {
+            targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<ModifierBatStateMachine>());
+            currentRoundTargetCount++;
+        }
+
+        // Spawn some bonus bats and increment target count
+        for(int i = 0; i < 2; i++)
+        {
+            if (allowedBats[TargetManager.TargetType.LowBonus])
+            {
+                targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfEnumType(TargetManager.TargetType.LowBonus));
+                currentRoundTargetCount++;
+            }
+            if (allowedBats[TargetManager.TargetType.HighBonus])
+            {
+                targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfEnumType(TargetManager.TargetType.HighBonus));
+                currentRoundTargetCount++;
+            }
+        }
+
+        // Spawn some debuff bats and increment target count
+        for(int i = 0; i < 2; i++)
+        {
+            if (allowedBats[TargetManager.TargetType.Debuff])
+            {
+                targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<DebuffBatStateMachine>());
+                currentRoundTargetCount++;
+            }
+        }
+
+        // Spawn more modifier bats during rounds 6 and 7 to introduce mods as a mechanic
+        if(CurrentRound == 6 || CurrentRound == 7)
+        {
+            // Spawn some debuff bats and increment target count
+            for(int i = 0; i < 2; i++)
+            {
+                if (allowedBats[TargetManager.TargetType.Modifier])
+                {
+                    targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<ModifierBatStateMachine>());
+                    currentRoundTargetCount++;
+                }
+            }
+        }
+    }
+
+    public void UpdateAllowedBats()
+    {
+        // Check round numbers and unlock specific bat types at specific rounds
+        switch(CurrentRound)
+        {
+            case 2:
+                allowedBats[TargetManager.TargetType.Unstable] = true;
+                break;
+            case 4:
+                allowedBats[TargetManager.TargetType.LowBonus] = true;
+                allowedBats[TargetManager.TargetType.HighBonus] = true;
+                break;
+            case 5:
+                allowedBats[TargetManager.TargetType.Modifier] = true;
+                allowedBats[TargetManager.TargetType.Unstable] = false;
+                allowedBats[TargetManager.TargetType.LowBonus] = false;
+                allowedBats[TargetManager.TargetType.HighBonus] = false;
+                break;
+            case 6:
+                allowedBats[TargetManager.TargetType.Debuff] = true;
+                break;
+            case 7:
+                allowedBats[TargetManager.TargetType.Unstable] = true;
+                allowedBats[TargetManager.TargetType.LowBonus] = true;
+                allowedBats[TargetManager.TargetType.HighBonus] = true;
+                break;
+        }
     }
 }
