@@ -8,7 +8,12 @@ public class CampaignGameManager : MonoBehaviour
     [SerializeField]
     CanvasGroup fadeScreen;
 
+    [SerializeField]
+    LevelDataSO debugFallback;
+    
     LevelDataSO dataSpec;
+
+
 
 
     private void OnEnable()
@@ -16,12 +21,18 @@ public class CampaignGameManager : MonoBehaviour
         dataSpec = CampaignSave.ActiveLevel;
         if (dataSpec == null)
         {
-            //Testing fallback
+            //Same Scene testing fallback
+            dataSpec = debugFallback;
         }
+        SetupGameMode();
         StartCoroutine(FadeIn());   
     }
 
+    private void SetupGameMode()
+    {
+        activeGameMode = GameModeFactory.MakeCampaignGameMode(dataSpec.GetLevelType());
 
+    }
 
     IEnumerator FadeIn()
     {
