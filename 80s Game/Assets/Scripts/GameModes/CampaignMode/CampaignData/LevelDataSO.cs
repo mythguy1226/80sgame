@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using System.Collections.Generic;
 
 /// <summary>
 /// Scriptable Object that details the information for a particular level
@@ -33,9 +33,14 @@ public class LevelDataSO : ScriptableObject
     AllowedSpawns[] allowedSpawnsPerRound;
 
     [SerializeField]
+    SpawnRate[] spawnRates;
+
+    [SerializeField]
     AbsModifierEffect.ModType[] allowedBuffs;
 
-
+    [SerializeField]
+    bool showTutorial;
+    public bool LevelHasTutorial { get {  return showTutorial; } }
 
     public LevelType GetLevelType()
     {
@@ -72,6 +77,15 @@ public class LevelDataSO : ScriptableObject
     public RoundParameters GetStartingParameters()
     {
         return roundParameters;
+    }
+
+    public Dictionary<TargetManager.TargetType, int> GetSpawnRates()
+    {
+        Dictionary<TargetManager.TargetType, int> returnableRates = new Dictionary<TargetManager.TargetType, int>();
+        foreach(SpawnRate sr in spawnRates){
+            returnableRates.Add(sr.targetType, sr.spawnRate);
+        }
+        return returnableRates;
     }
 
 }

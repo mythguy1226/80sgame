@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
 public class CampaignGameManager : MonoBehaviour
 {
+    public static Action roundOverObservers;
     AbsCampaignMode activeGameMode;
 
     [SerializeField]
@@ -13,11 +15,8 @@ public class CampaignGameManager : MonoBehaviour
 
     [SerializeField]
     LevelDataSO debugFallback;
-    
+
     LevelDataSO dataSpec;
-
-
-
 
     private void OnEnable()
     {
@@ -27,16 +26,44 @@ public class CampaignGameManager : MonoBehaviour
             //Same Scene testing fallback
             dataSpec = debugFallback;
         }
+
         SetupGameMode();
         StartCoroutine(FadeIn());   
     }
+
+    public void StartLevel()
+    {
+        if (dataSpec.LevelHasTutorial)
+        {
+            // Show Tutorial Screen
+            return;
+        }
+        StartTargets();
+    }
+
+    public void StartTargets()
+    {
+        activeGameMode.StartGame();
+    }
+
 
     private void SetupGameMode()
     {
         activeGameMode = GameModeFactory.MakeCampaignGameMode(dataSpec.GetLevelType());
         activeGameMode.SetupMode(dataSpec);
+        activeGameMode.onGameEnd += HandleGameEnd;
         background.sprite = dataSpec.GetLevelBackground();
+
+        // Test to see if onboarding needs to appear
+
+        //
     }
+
+    private void HandleGameEnd()
+    {
+
+    }
+
 
     IEnumerator FadeIn()
     {

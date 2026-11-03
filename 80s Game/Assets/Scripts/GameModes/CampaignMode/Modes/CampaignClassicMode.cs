@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class CampaignClassicMode : AbsCampaignMode
 {
     LevelDataSO levelDataSpec;
+    Dictionary<TargetManager.TargetType, int> spawnRates;
     public CampaignClassicMode() : base()
     {
         ModeType = EGameMode.CampaignClassic;
@@ -24,8 +25,9 @@ public class CampaignClassicMode : AbsCampaignMode
         NumRounds = roundParameters.MaxRounds;
         currentRoundTargetCount = roundParameters.RoundTargetCount[CurrentRound];
         maxTargetsOnScreen = roundParameters.MaxTargetPerRound;
-
+       
         levelDataSpec = data;
+        spawnRates = levelDataSpec.GetSpawnRates();
         SetupAllowedData();
     }
 
@@ -36,12 +38,37 @@ public class CampaignClassicMode : AbsCampaignMode
 
     protected override void EndGame()
     {
-        throw new System.NotImplementedException();
+        onGameEnd?.Invoke();
     }
 
     protected override int GetNextAvailableBat()
     {
-        throw new System.NotImplementedException();
+        List<Target> targets = targetManager.targets;
+
+        for (int i = 0; i < targets.Count; i++)
+        {
+            Target bat = targets[i];
+            if (debugMode && allowedBats[bat.type] && bat.FSM.IsActive())
+            {
+                return i;
+            }
+
+            if (SkipBat(bat))
+            {
+                continue;
+            }
+
+
+
+            if (bat.FSM.IsDefault())
+            {
+                return i;
+            } else
+            {
+                return 0;
+            }
+        }
+        return -1;
     }
 
     protected override void SetupAllowedData()
@@ -55,7 +82,25 @@ public class CampaignClassicMode : AbsCampaignMode
 
     protected override void StartNextRound(bool isFirstRound = false)
     {
-        throw new System.NotImplementedException();
+        if (!isFirstRound)
+        {
+            UpdateRoundParams();
+        }
+
+        for (int i = 0; i < currentRoundTargetCount; i++)
+        {
+            int targetIndex = GetNextAvailableBat();
+            if (targetIndex == -1 && allowedBats[TargetManager.TargetType.Regular])
+            {
+                targetIndex = targetManager.GetNextAvailableTargetOfEnumType(TargetManager.TargetType.Regular);
+                if (targetIndex == -1) continue;
+            }
+            targetManager.SpawnTarget(targetIndex);
+
+            // Check if screen is full
+            if (targetManager.ActiveTargets.Count == maxTargetsOnScreen)
+                return;
+        }
     }
 
     protected override void UpdateRoundParams()
