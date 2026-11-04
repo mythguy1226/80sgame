@@ -5,7 +5,11 @@ using UnityEngine;
 public class CampaignGameManager : MonoBehaviour
 {
     public static Action roundOverObservers;
+
     AbsCampaignMode activeGameMode;
+
+    [SerializeField]
+    float roundDelayTime;
 
     [SerializeField]
     SpriteRenderer background;
@@ -16,6 +20,11 @@ public class CampaignGameManager : MonoBehaviour
     [SerializeField]
     LevelDataSO debugFallback;
 
+    [SerializeField]
+    MusicTrack roundEndTheme;
+
+
+    UIManager uiManager;
     LevelDataSO dataSpec;
 
     private void OnEnable()
@@ -26,7 +35,7 @@ public class CampaignGameManager : MonoBehaviour
             //Same Scene testing fallback
             dataSpec = debugFallback;
         }
-
+        uiManager = GetComponent<UIManager>();
         SetupGameMode();
         StartCoroutine(FadeIn());   
     }
@@ -49,19 +58,31 @@ public class CampaignGameManager : MonoBehaviour
 
     private void SetupGameMode()
     {
+        TargetManager targetManagerReference = GetComponent<TargetManager>();
         activeGameMode = GameModeFactory.MakeCampaignGameMode(dataSpec.GetLevelType());
-        activeGameMode.SetupMode(dataSpec);
+        activeGameMode.SetupMode(dataSpec, targetManagerReference);
         activeGameMode.onGameEnd += HandleGameEnd;
+        activeGameMode.onRoundEnd += HandleRoundEnd;
         background.sprite = dataSpec.GetLevelBackground();
 
         // Test to see if onboarding needs to appear
 
-        //
+        // Otherwise start the game
+        activeGameMode.StartGame();
     }
 
     private void HandleGameEnd()
     {
 
+    }
+
+    private void HandleRoundEnd()
+    {
+        SoundManager.Instance.PlaySoundContinuous(roundEndTheme.Clip);
+        uiManager.scoreBehavior.ShowNewRoundText();
+
+        float delay = roundEndTheme.Clip.length - (float)roundEndTheme.EndOffset;
+        StartCoroutine(activeGameMode.DelayNextRound(delay));
     }
 
 

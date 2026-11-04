@@ -235,4 +235,12 @@ public class TargetManager : MonoBehaviour
         int index = GetNextIndexByType(type);
         SpawnTarget(index);
     }
+
+    private void OnDrawGizmos()
+    {
+        foreach(Vector3 v  in spawnLocations)
+        {
+            Gizmos.DrawWireSphere(v, 0.5f);
+        }
+    }
 }

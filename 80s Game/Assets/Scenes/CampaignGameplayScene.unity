@@ -2952,6 +2952,7 @@ GameObject:
   - component: {fileID: 2047806938}
   - component: {fileID: 2047806940}
   - component: {fileID: 2047806939}
+  - component: {fileID: 2047806941}
   m_Layer: 0
   m_Name: CampaignGameManager
   m_TagString: Untagged
@@ -2988,7 +2989,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targets: []
   activeTargets: []
-  spawnLocations: []
+  spawnLocations:
+  - {x: -6, y: 6, z: 0}
+  - {x: -10, y: 3, z: 0}
+  - {x: -10, y: -3, z: 0}
+  - {x: -6, y: -6, z: 0}
+  - {x: 6, y: 6, z: 0}
+  - {x: 10, y: 3, z: 0}
+  - {x: 10, y: -3, z: 0}
+  - {x: 6, y: -6, z: 0}
   numStuns: 0
   totalStuns: 0
   speedIncrement: 0.1
@@ -3006,9 +3015,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eadd47debe0c1de499bb88bb767071e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roundDelayTime: 0
   background: {fileID: 726333804}
   fadeScreen: {fileID: 248937203}
   debugFallback: {fileID: 11400000, guid: 1561b13ad8b1f7d4b955b2351006583a, type: 2}
+  roundEndTheme: {fileID: 0}
+--- !u!114 &2047806941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2047806937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 681ac1cd8ebba3345adc4e6ceb178c19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeUI: 0
+  canvas: {fileID: 138330238}
+  modifierContainers: []
+  postProcessVolume: {fileID: 0}
+  onboardingUI: {fileID: 0}
+  pauseScreenUI: {fileID: 0}
+  titleScreenUI: {fileID: 0}
+  scoreBehavior: {fileID: 0}
+  backgroundUI: {fileID: 0}
+  achievementsUI: {fileID: 0}
+  classicModeBackgrounds: []
+  defenseModeBackgrounds: []
+  gamemodeCards: []
+  levelSprites: []
+  achievementNotifPrefab: {fileID: 0}
+  background: {fileID: 0}
 --- !u!1001 &2100512088
 PrefabInstance:
   m_ObjectHideFlags: 0

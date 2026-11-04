@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using UnityEngine;
+
 /// <summary>
 /// Game mode adapted for the rules of classic mode in the campaign
 /// </summary>
@@ -16,16 +18,26 @@ public class CampaignClassicMode : AbsCampaignMode
 
     public override void OnTargetReset()
     {
-        throw new System.NotImplementedException();
+        if (targetManager.numStuns >= currentRoundTargetCount)
+        {
+            if (CurrentRound == levelDataSpec.GetStartingParameters().MaxRounds)
+            {
+                GameOver = true;
+                EndGame();
+            } else
+            {
+                onRoundEnd?.Invoke();
+            }
+        }
     }
 
-    public override void SetupMode(LevelDataSO data)
+    public override void SetupMode(LevelDataSO data, TargetManager targetMan)
     {
         RoundParameters roundParameters = data.GetStartingParameters();
         NumRounds = roundParameters.MaxRounds;
         currentRoundTargetCount = roundParameters.RoundTargetCount[CurrentRound];
         maxTargetsOnScreen = roundParameters.MaxTargetPerRound;
-       
+        targetManager = targetMan;
         levelDataSpec = data;
         spawnRates = levelDataSpec.GetSpawnRates();
         SetupAllowedData();
@@ -33,7 +45,7 @@ public class CampaignClassicMode : AbsCampaignMode
 
     protected override void CallNextRound()
     {
-        throw new System.NotImplementedException();
+        StartNextRound();
     }
 
     protected override void EndGame()
@@ -58,16 +70,17 @@ public class CampaignClassicMode : AbsCampaignMode
                 continue;
             }
 
-
-
             if (bat.FSM.IsDefault())
             {
                 return i;
             } else
             {
+                // Pick from among the special bats
+                // to do
                 return 0;
             }
         }
+        // Could not find a bat to spawn
         return -1;
     }
 
@@ -75,7 +88,8 @@ public class CampaignClassicMode : AbsCampaignMode
     {
         allowedBats.Clear();   
         AllowedSpawns roundSpawns = levelDataSpec.GetAllowedSpawns(CurrentRound);
-        for (int i = 0; i < allowedBats.Count; i++) {
+        Debug.Log(roundSpawns);
+        for (int i = 0; i < roundSpawns.allowedSpawns.Length; i++) {
             allowedBats.Add(roundSpawns.allowedSpawns[i], true);
         }
     }
@@ -105,6 +119,18 @@ public class CampaignClassicMode : AbsCampaignMode
 
     protected override void UpdateRoundParams()
     {
-        
+        RoundParameters roundParams = levelDataSpec.GetStartingParameters();
+        CurrentRound++;
+        currentRoundTargetCount += roundParams.RoundTargetCount[CurrentRound];
+        maxTargetsOnScreen += roundParams.TargetsPerRoundIncrement;
+
+        // Keep max targets on screen to at most two fewer than object pool
+        if (maxTargetsOnScreen >= targetManager.targets.Count)
+        {
+            maxTargetsOnScreen = targetManager.targets.Count - 2;
+        }
+
+        targetManager.numStuns = 0;
+        targetManager.UpdateTargetParams();
     }
 }

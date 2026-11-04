@@ -25,6 +25,11 @@ public enum ObjectiveType
 public struct AllowedSpawns
 {
     public TargetManager.TargetType[] allowedSpawns;
+
+    public override string ToString()
+    {
+        return allowedSpawns.Length.ToString();
+    }
 }
 
 [Serializable]
