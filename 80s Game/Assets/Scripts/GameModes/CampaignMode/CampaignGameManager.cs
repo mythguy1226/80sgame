@@ -9,9 +9,6 @@ public class CampaignGameManager : MonoBehaviour
     AbsCampaignMode activeGameMode;
 
     [SerializeField]
-    float roundDelayTime;
-
-    [SerializeField]
     SpriteRenderer background;
 
     [SerializeField]
@@ -64,11 +61,17 @@ public class CampaignGameManager : MonoBehaviour
         activeGameMode.onGameEnd += HandleGameEnd;
         activeGameMode.onRoundEnd += HandleRoundEnd;
         background.sprite = dataSpec.GetLevelBackground();
+    }
 
-        // Test to see if onboarding needs to appear
-
-        // Otherwise start the game
-        activeGameMode.StartGame();
+    private void EvaluateStart()
+    {
+        if (dataSpec.LevelHasTutorial)
+        {
+            // Show the tutorial
+        } else
+        {
+            activeGameMode.StartGame();
+        }
     }
 
     private void HandleGameEnd()
@@ -99,6 +102,7 @@ public class CampaignGameManager : MonoBehaviour
         }
         fadeScreen.alpha = 0;
         fadeScreen.gameObject.SetActive(false);
+        EvaluateStart();
     }
 
     IEnumerator FadeOut()

@@ -67,6 +67,7 @@ public class CampaignClassicMode : AbsCampaignMode
 
             if (SkipBat(bat))
             {
+                Debug.Log("Skipping");
                 continue;
             }
 
@@ -77,9 +78,11 @@ public class CampaignClassicMode : AbsCampaignMode
             {
                 // Pick from among the special bats
                 // to do
-                return 0;
+                Debug.Log("Looking for special–");
+                continue;
             }
         }
+        Debug.Log("Defaulting out");
         // Could not find a bat to spawn
         return -1;
     }
@@ -88,7 +91,6 @@ public class CampaignClassicMode : AbsCampaignMode
     {
         allowedBats.Clear();   
         AllowedSpawns roundSpawns = levelDataSpec.GetAllowedSpawns(CurrentRound);
-        Debug.Log(roundSpawns);
         for (int i = 0; i < roundSpawns.allowedSpawns.Length; i++) {
             allowedBats.Add(roundSpawns.allowedSpawns[i], true);
         }
@@ -100,7 +102,7 @@ public class CampaignClassicMode : AbsCampaignMode
         {
             UpdateRoundParams();
         }
-
+        Debug.Log(currentRoundTargetCount);
         for (int i = 0; i < currentRoundTargetCount; i++)
         {
             int targetIndex = GetNextAvailableBat();
@@ -109,8 +111,8 @@ public class CampaignClassicMode : AbsCampaignMode
                 targetIndex = targetManager.GetNextAvailableTargetOfEnumType(TargetManager.TargetType.Regular);
                 if (targetIndex == -1) continue;
             }
+            Debug.Log("Spawning Enemy");
             targetManager.SpawnTarget(targetIndex);
-
             // Check if screen is full
             if (targetManager.ActiveTargets.Count == maxTargetsOnScreen)
                 return;
