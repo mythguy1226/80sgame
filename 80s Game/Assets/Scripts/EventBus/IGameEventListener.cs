@@ -1,4 +1,7 @@
-public interface IGameplayListener<T> where T : IGameplayMessage
+namespace GameplayEvents
 {
-    public void OnGameplayEvent(T GameplayMessage);
+    public interface IGameplayListener<T> where T : IGameplayMessage
+    {
+        public void OnGameplayEvent(T GameplayMessage);
+    }
 }

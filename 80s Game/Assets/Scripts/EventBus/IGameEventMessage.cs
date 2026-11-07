@@ -1,4 +1,8 @@
-public interface IGameplayMessage
+namespace GameplayEvents
 {
+    public interface IGameplayMessage
+    {
 
+    }
 }
+
