@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using GameplayEvents;
 
-public class TargetManager : MonoBehaviour
+public class TargetManager : MonoBehaviour, IGameplayListener<TargetMessage>
 {
     public enum TargetType
     {
@@ -17,6 +19,8 @@ public class TargetManager : MonoBehaviour
     public List<Target> targets;
     public List<Target> activeTargets;
     public List<Vector3> spawnLocations;
+
+    Dictionary<TargetEventType, IGameplayEventHandler<TargetMessage>> handlers;
 
     // Default values
     public int numStuns = 0;
@@ -41,12 +45,41 @@ public class TargetManager : MonoBehaviour
         get { return activeTargets; }
     }
 
+    private void OnEnable()
+    {
+        SetupHandlers();
+        GameEventBus.Register<TargetMessage>(this);
+    }
+
+    private void OnDisable()
+    {
+        GameEventBus.Unregister<TargetMessage>(this);
+    }
+
+    private void OnDestroy()
+    {
+        GameEventBus.Unregister<TargetMessage>(this);
+    }
+
     private void Start()
     {
         targets = new List<Target>(GameObject.FindObjectsOfType<Target>());
         killCount = new Dictionary<TargetType, int>();
         spawnCount = new Dictionary<TargetType, int>();
         DisablePolyCollisions();
+    }
+
+    
+    /// <summary>
+    /// Process incoming gameplay events. This class only listens on the Target Message register
+    /// </summary>
+    /// <param name="message">The message to process</param>
+    public void OnGameplayEvent(TargetMessage message)
+    {
+        if (handlers.TryGetValue(message.EventType, out var handler))
+        {
+            handler.Handle(message);
+        }
     }
 
     public void UpdateTargetParams()
@@ -71,7 +104,7 @@ public class TargetManager : MonoBehaviour
         Target target = targets[targetIndex];
         AddToCount(target.type, spawnCount);
         // Get the spawn point randomly and teleport the target to that point
-        Vector3 spawnPoint = spawnLocations[Random.Range(0, spawnLocations.Count - 1)];
+        Vector3 spawnPoint = spawnLocations[UnityEngine.Random.Range(0, spawnLocations.Count - 1)];
         target.transform.position = spawnPoint;
 
         // Start particles on spawn
@@ -82,9 +115,9 @@ public class TargetManager : MonoBehaviour
 
         // Update target's speed and scaling
         if(target.type != TargetType.LowBonus && target.type != TargetType.HighBonus)
-            target.UpdateSpeed(Random.Range(minSpeed, maxSpeed));
+            target.UpdateSpeed(UnityEngine.Random.Range(minSpeed, maxSpeed));
 
-        float newScale = Random.Range(minScale, maxScale);
+        float newScale = UnityEngine.Random.Range(minScale, maxScale);
         target.gameObject.transform.localScale = new Vector3(newScale, newScale, newScale);
 
         // Update on-screen status
@@ -97,6 +130,7 @@ public class TargetManager : MonoBehaviour
     // Method used for updating values on bat death
     public void OnTargetReset()
     {
+
         // Update number of stuns
         numStuns++;
         totalStuns++;
@@ -189,6 +223,19 @@ public class TargetManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Set up the gameplay event message handlers for this class
+    /// </summary>
+    private void SetupHandlers()
+    {
+        Debug.Log("Handlers being set up");
+        handlers = new Dictionary<TargetEventType, IGameplayEventHandler<TargetMessage>>()
+        {
+            {TargetEventType.Spawn,  new TargetSpawnHandler(this)},
+            {TargetEventType.Reset, new TargetManagementResetHandler(this)},
+        };
+    }
+
+    /// <summary>
     /// Get the index of the next non-active bat on the list by its type
     /// </summary>
     /// <param name="type"></param>
@@ -235,4 +282,6 @@ public class TargetManager : MonoBehaviour
         int index = GetNextIndexByType(type);
         SpawnTarget(index);
     }
+
+
 }

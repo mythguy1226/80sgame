@@ -1,3 +1,4 @@
+using GameplayEvents;
 using TMPro;
 using UnityEngine;
 
@@ -190,7 +191,8 @@ public class Target : MonoBehaviour
         bIsStunned = false;
         FSM.SetActive(true);
         InputManager.detectHitSub += ListenForShot;
-        GameManager.Instance.TargetManager.RegisterActiveTarget(this);
+        TargetMessage targetSpawnMessage = new TargetMessage(this, TargetEventType.Spawn);
+        GameEventBus.Propagate(targetSpawnMessage);
         FSM.TransitionToDefault();
     }
 
@@ -209,7 +211,8 @@ public class Target : MonoBehaviour
 
         // Set bat to its default values
         FSM.SetActive(false);
-        GameManager.Instance.TargetManager.RemoveActiveTarget(this);
+        TargetMessage targetResetMessage = new TargetMessage(this, TargetEventType.Reset);
+        GameEventBus.Propagate(targetResetMessage);
         transform.position = spawnPoint;
         _MovementControls.canMove = false;
         _AnimControls.ResetAnimation();
@@ -221,23 +224,6 @@ public class Target : MonoBehaviour
         // Choose new wander position to be used on respawn
         _MovementControls.Initialize();
 
-        // Get reference to game manager instance
-        GameManager gameManager = GameManager.Instance;
-
-        // Add points if target didn't flee
-        if (!FSM.InUnscorableState())
-        {
-            // Add a successful hit
-            if(stunningPlayer != null)
-            {   
-                AchievementManager.HandleStunAchievements(type);
-                gameManager.TargetManager.AddToCount(GetComponent<Target>().type, gameManager.TargetManager.killCount);
-                gameManager.PointsManager.AddRoundPoints(stunningPlayer.Order, pointValue * stunningPlayer.scoreController.pointsMod);
-            }
-        }
-
-        // Update target manager with current state
-        gameManager.TargetManager.OnTargetReset();
         InputManager.detectHitSub -= ListenForShot;
         stunningPlayer = null;
     }
