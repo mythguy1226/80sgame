@@ -1,3 +1,4 @@
+using GameplayEvents;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -5,26 +6,53 @@ using System.IO;
 using System.Linq;
 using UnityEngine;
 
-public class PointsManager : MonoBehaviour
+public class PointsManager : MonoBehaviour, IGameplayListener<TargetMessage>
 {
     // Public property
     public int maxScore;
     public int maxScoringPlayer;
     public ScoreBehavior scoreBehavior;
 
+
     private Dictionary<int, int> RoundScoreByPlayer;
     public  Dictionary<int, int> TotalPointsByPlayer;
 
     private string filePath = Application.dataPath + "/PlayerData/scores.txt";
     private int numTopScores = 6;
+    private TargetResetPointHandler targetResetPointHandler;
 
     // Start is called before the first frame update
     void Awake()
     {
+        targetResetPointHandler = new TargetResetPointHandler(this);
         maxScore = 0;
         maxScoringPlayer = 0;
         RoundScoreByPlayer = new Dictionary<int, int>();
         TotalPointsByPlayer = new Dictionary<int, int>();
+    }
+
+    private void OnEnable()
+    {
+        GameEventBus.Register<TargetMessage>(this);
+    }
+
+    private void OnDisable()
+    {
+        GameEventBus.Unregister<TargetMessage>(this);
+    }
+    private void OnDestroy()
+    {
+        GameEventBus.Unregister<TargetMessage>(this);
+    }
+
+    public void OnGameplayEvent(TargetMessage message)
+    {
+        if (message.EventType != TargetEventType.Reset)
+        {
+            return;
+        }
+
+        targetResetPointHandler.Handle(message);
     }
 
     /// <summary>
