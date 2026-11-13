@@ -36,6 +36,15 @@ public class PointsManager : MonoBehaviour, IGameplayListener<TargetMessage>
         GameEventBus.Register<TargetMessage>(this);
     }
 
+    private void OnDisable()
+    {
+        GameEventBus.Unregister<TargetMessage>(this);
+    }
+    private void OnDestroy()
+    {
+        GameEventBus.Unregister<TargetMessage>(this);
+    }
+
     public void OnGameplayEvent(TargetMessage message)
     {
         if (message.EventType != TargetEventType.Reset)

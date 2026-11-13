@@ -211,8 +211,7 @@ public class Target : MonoBehaviour
 
         // Set bat to its default values
         FSM.SetActive(false);
-        TargetMessage targetResetMessage = new TargetMessage(this, TargetEventType.Reset);
-        GameEventBus.Propagate(targetResetMessage);
+        
         transform.position = spawnPoint;
         _MovementControls.canMove = false;
         _AnimControls.ResetAnimation();
@@ -220,11 +219,12 @@ public class Target : MonoBehaviour
         GetComponent<CircleCollider2D>().isTrigger = false;
         bIsStunned = false;
 
-
         // Choose new wander position to be used on respawn
         _MovementControls.Initialize();
 
         InputManager.detectHitSub -= ListenForShot;
+        TargetMessage targetResetMessage = new TargetMessage(this, TargetEventType.Reset);
+        GameEventBus.Propagate(targetResetMessage);
         stunningPlayer = null;
     }
 

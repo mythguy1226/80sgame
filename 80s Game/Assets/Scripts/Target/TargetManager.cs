@@ -227,7 +227,6 @@ public class TargetManager : MonoBehaviour, IGameplayListener<TargetMessage>
     /// </summary>
     private void SetupHandlers()
     {
-        Debug.Log("Handlers being set up");
         handlers = new Dictionary<TargetEventType, IGameplayEventHandler<TargetMessage>>()
         {
             {TargetEventType.Spawn,  new TargetSpawnHandler(this)},
