@@ -21,11 +21,11 @@ public class TargetResetPointHandler : IGameplayEventHandler<TargetMessage>
             return;
         }
 
-        if (t.stunningPlayer == null)
+        if (message.RelatedPlayer == null)
         {
             return;
         }
 
-        pm.AddRoundPoints(t.stunningPlayer.Order, t.pointValue * t.stunningPlayer.scoreController.pointsMod);
+        pm.AddRoundPoints(message.RelatedPlayer.Order, t.pointValue * message.RelatedPlayer.scoreController.pointsMod);
     }
 }

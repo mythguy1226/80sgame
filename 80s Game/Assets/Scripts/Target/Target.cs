@@ -14,7 +14,7 @@ public class Target : MonoBehaviour
     SpriteRenderer _SpriteRenderer;
     protected AnimationHandler _AnimControls;
     protected InputManager _InputManager;
-    public PlayerController stunningPlayer;
+    private PlayerController stunningPlayer;
     PolygonCollider2D _Collider;
 
 
@@ -224,8 +224,11 @@ public class Target : MonoBehaviour
 
         InputManager.detectHitSub -= ListenForShot;
         TargetMessage targetResetMessage = new TargetMessage(this, TargetEventType.Reset);
-        GameEventBus.Propagate(targetResetMessage);
+        targetResetMessage.RelatedPlayer = stunningPlayer;
         stunningPlayer = null;
+
+
+        GameEventBus.Propagate(targetResetMessage);
     }
 
     public void SetStunningPlayer(PlayerController controller)

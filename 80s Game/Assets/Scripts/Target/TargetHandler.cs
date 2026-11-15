@@ -28,13 +28,10 @@ public class TargetManagementResetHandler : IGameplayEventHandler<TargetMessage>
         
         Target t = targetResetMessage.Target;
         tm.RemoveActiveTarget(t);
-        if (!t.FSM.InUnscorableState())
+        if (!t.FSM.InUnscorableState() && targetResetMessage.RelatedPlayer != null)
         {
-            if (t.stunningPlayer != null)
-            {
-                AchievementManager.HandleStunAchievements(t.type);
-                tm.AddToCount(t.type, tm.killCount);
-            }
+            AchievementManager.HandleStunAchievements(t.type);
+            tm.AddToCount(t.type, tm.killCount);
         }
         tm.OnTargetReset();
     }

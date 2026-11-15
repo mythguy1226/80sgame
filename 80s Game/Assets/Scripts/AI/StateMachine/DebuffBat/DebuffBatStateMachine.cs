@@ -37,7 +37,7 @@ public class DebuffBatStateMachine : BatStateMachine
         AbsModifierEffect effect = modObj.GetComponent<AbsModifierEffect>();
 
         // Set the activator for the effect to be stunning player
-        effect.activator = GetComponent<Target>().stunningPlayer;
+        effect.activator = GetComponent<Target>().GetStunningPlayer();
         effect.bIsSelfDebuff = true;
     }
 

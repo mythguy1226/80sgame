@@ -15,4 +15,6 @@ public class TargetMessage : IGameplayMessage
         Target = target;
         EventType = eventType;
     }
+
+    public PlayerController RelatedPlayer;
 }
