@@ -151,11 +151,11 @@ public class BatStateMachine : AbsStateMachine<BatStateMachine.BatStates>
         SoundManager.Instance.PlaySoundInterrupt(hitSound, 0.9f, 1.1f);
         
 
-        if (target.stunningPlayer != null)
+        if (target.GetStunningPlayer() != null)
         {
-            if (target.stunningPlayer.HasMod(AbsModifierEffect.ModType.Confusion))
+            if (target.GetStunningPlayer().HasMod(AbsModifierEffect.ModType.Confusion))
             {
-                AchievementManager.UnfazedTest(target.stunningPlayer.Order);
+                AchievementManager.UnfazedTest(target.GetStunningPlayer().Order);
             }
         }
     }

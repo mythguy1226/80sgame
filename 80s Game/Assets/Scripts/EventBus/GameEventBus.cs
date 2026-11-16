@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
+
 namespace GameplayEvents
 {
 public static class GameEventBus
@@ -11,16 +13,16 @@ public static class GameEventBus
         _listeners.Clear();
     }
 
-        public static int ListenerCount<T>() where T : IGameplayMessage
+    public static int ListenerCount<T>() where T : IGameplayMessage
+    {
+        Type t = typeof(T);
+        if(!_listeners.TryGetValue(t, out var list))
         {
-            Type t = typeof(T);
-            if(!_listeners.TryGetValue(t, out var list))
-            {
-                return 0;
-            }
-
-            return list.Count;
+            return 0;
         }
+
+        return list.Count;
+    }
 
     public static void Register<T>(object listener) where T : IGameplayMessage
     {
@@ -48,15 +50,14 @@ public static class GameEventBus
 
     public static void Propagate<T>(T gameplayMessage) where T : IGameplayMessage
     {
-            Type t = typeof(T);
+        Type t = typeof(T);
         if (!_listeners.TryGetValue(t, out var list))
         {
             return;
         }
 
         object[] listenerSnapshot = list.ToArray();
-            for (int i = 0; i < listenerSnapshot.Length; i++)
-            {
+        for (int i = 0; i < listenerSnapshot.Length; i++){
             if (listenerSnapshot[i] is IGameplayListener<T> listener)
             {
                 listener.OnGameplayEvent(gameplayMessage);
