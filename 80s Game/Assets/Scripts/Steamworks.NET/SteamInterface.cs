@@ -1,11 +1,13 @@
+using GameplayEvents;
 using Localization;
+using PlasticPipe.PlasticProtocol.Messages;
 using Steamworks;
 using System;
 using UnityEngine;
 
 namespace SteamIntegration
 {
-    public class SteamInterface : MonoBehaviour
+    public class SteamInterface : MonoBehaviour, IGameplayListener<SteamAchievementEvent>, IGameplayListener<SteamDataUpdateEvent>, IGameplayListener<SteamServerUpdate>
     {
         private bool _connected = false;
         public bool IsConnected {  get { return _connected; } }
@@ -18,6 +20,8 @@ namespace SteamIntegration
         {
             if (SteamManager.Initialized)
             {
+                GameEventBus.Register<SteamAchievementEvent>(this);
+                GameEventBus.Register<SteamDataUpdateEvent>(this);
                 m_GameOverlayActivated = Callback<GameOverlayActivated_t>.Create(OnGameOverlayActivated);
                 
                 //Configure language
@@ -35,6 +39,20 @@ namespace SteamIntegration
             gameOverlayEvent?.Invoke();
         }
 
+        public void OnGameplayEvent(SteamDataUpdateEvent callbackData) { 
+            SetSteamData(callbackData.key, callbackData.value, callbackData.updateIfGreater);
+            UpdateSteamServer();
+        }
+
+        public void OnGameplayEvent(SteamAchievementEvent callbackData) { 
+            
+        }
+
+        public void OnGameplayEvent(SteamServerUpdate callbackData)
+        {
+            UpdateSteamServer();
+        }
+
         public void UnlockSteamAchievement(string key)
         {
             if (_connected)
@@ -46,7 +64,7 @@ namespace SteamIntegration
             }
         }
 
-        public void SetSteamData(string key, int value, bool updateIfGreater = false)
+        private void SetSteamData(string key, int value, bool updateIfGreater = false)
         {
             if (!_connected)
             {
@@ -68,7 +86,7 @@ namespace SteamIntegration
 
         }
 
-        public void UpdateSteamServer()
+        private void UpdateSteamServer()
         {
             if (!_connected)
             {
@@ -82,9 +100,18 @@ namespace SteamIntegration
             }
         }
 
+        public void OnDisable()
+        {
+            gameOverlayEvent = null;
+            GameEventBus.Unregister<SteamAchievementEvent>(this);
+            GameEventBus.Unregister<SteamDataUpdateEvent>(this);
+        }
+
         public void OnDestroy()
         {
             gameOverlayEvent = null;
+            GameEventBus.Unregister<SteamAchievementEvent>(this);
+            GameEventBus.Unregister<SteamDataUpdateEvent>(this);
         }
     }
 }

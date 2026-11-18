@@ -1,3 +1,4 @@
+using GameplayEvents;
 using System.Collections.Generic;
 using UnityEngine;
 using static AchievementData;
@@ -272,7 +273,8 @@ public static class AchievementManager
                 dataKey = lookupTable[AchievementConstants.MOD_BAT_EXPERT].requirementTrackingKey;
                 stunnedBatsOfThisType = GetData(dataKey);
                 stunnedBatsOfThisType++;
-                GameManager.Instance.SteamInterface.SetSteamData(SteamIntegration.SteamConstants.MOD_STUN, stunnedBatsOfThisType);
+                SteamDataUpdateEvent updateData = new SteamDataUpdateEvent(SteamIntegration.SteamConstants.MOD_STUN, stunnedBatsOfThisType);
+                GameEventBus.Propagate(updateData);
                 break;
             /*case TargetManager.TargetType.LowBonus:
             case TargetManager.TargetType.HighBonus:
@@ -368,7 +370,8 @@ public static class AchievementManager
         string key = AchievementConstants.HAWKEYE;
         int currentKillCount = GetData(lookupTable[key].requirementTrackingKey);
         currentKillCount++;
-        GameManager.Instance.SteamInterface.SetSteamData(SteamIntegration.SteamConstants.STUN_COUNT, currentKillCount);
+        SteamDataUpdateEvent updateData = new SteamDataUpdateEvent(SteamIntegration.SteamConstants.STUN_COUNT, currentKillCount);
+        GameEventBus.Propagate(updateData);
         TestAndUnlock(key, requirements[key], currentKillCount, TestType.GreaterThanOrEqual);
         key = AchievementConstants.SHARPSHOOTER;
         TestAndUnlock(key, requirements[key], currentKillCount, TestType.GreaterThanOrEqual);

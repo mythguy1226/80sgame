@@ -1,3 +1,4 @@
+using GameplayEvents;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -172,7 +173,7 @@ public class PauseScreenBehavior : MonoBehaviour
             AbsGameMode gameMode = GameManager.Instance.ActiveGameMode;
             AchievementManager.TestEndGameAchievements(gameMode.ModeType, gameMode.CurrentRound, 0);
         }
-        GameManager.Instance.SteamInterface.UpdateSteamServer();
+        GameEventBus.Propagate(new SteamServerUpdate());
         SceneManager.LoadScene(2);
         SoundManager.Instance.StopAllAudio();
         SoundManager.Instance.PlaySoundContinuous(buttonClickSound);

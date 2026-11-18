@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using GameplayEvents;
 using SteamIntegration;
 
 
@@ -177,8 +178,8 @@ public class ClassicMode : AbsGameMode
 
         if(targetManager.numStuns >= currentRoundTargetCount)
         {
-
-            GameManager.EmitRoundOverEvent();
+            GameStateEvent roundOverEvent = new GameStateEvent(GameStateEventType.RoundEnd);
+            GameEventBus.Propagate(roundOverEvent);
 
             // If last round completed
             if(CurrentRound == NumRounds)
@@ -208,8 +209,8 @@ public class ClassicMode : AbsGameMode
     protected override void EndGame()
     {
         int score = GameManager.Instance.PointsManager.maxScore;
-        GameManager.Instance.SteamInterface.SetSteamData(SteamConstants.CLASSIC_SCORE, score, true);
-        GameManager.Instance.SteamInterface.UpdateSteamServer();
+        SteamDataUpdateEvent dataUpdate = new SteamDataUpdateEvent(SteamConstants.CLASSIC_SCORE, score, true);
+        GameEventBus.Propagate(dataUpdate);
         AchievementManager.TestEndGameAchievements(ModeType, CurrentRound, score);
         AchievementManager.BullseyeTest(GameManager.Instance.GetPlayer(0));
         GameManager.Instance.HandleGameOver();

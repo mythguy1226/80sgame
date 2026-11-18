@@ -150,6 +150,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void OnDisable()
+    {
+        ActiveGameMode.UnregisterAsListener();
+    }
+
+    private void OnDestroy()
+    {
+        ActiveGameMode.UnregisterAsListener();
+    }
+
     public List<GameObject> GetBuffs()
     {
         return debugBuffs;

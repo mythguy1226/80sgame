@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GameplayEvents;
+using System.Threading;
 
 public enum EGameMode
 {
@@ -10,7 +12,7 @@ public enum EGameMode
     Menu
 }
 
-public abstract class AbsGameMode
+public abstract class AbsGameMode : IGameplayListener<TargetMessage>
 {
     public EGameMode ModeType {  get; protected set; }
     public bool GameOver { get; protected set; }
@@ -35,11 +37,25 @@ public abstract class AbsGameMode
         targetManager = GameManager.Instance.TargetManager;
         GameOver = false;
         CurrentRound = 1;
+        GameEventBus.Register<TargetMessage>(this);
     }
 
     public void StartGame()
     {
         StartNextRound(true);
+    }
+
+    public void UnregisterAsListener()
+    {
+        GameEventBus.Unregister<TargetMessage>(this);
+    }
+
+    public void OnGameplayEvent(TargetMessage targetMessage)
+    {
+        if (targetMessage.EventType == TargetEventType.Reset)
+        {
+            OnTargetReset();
+        }
     }
 
     protected abstract void EndGame();

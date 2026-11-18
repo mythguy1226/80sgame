@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using SteamIntegration;
+using GameplayEvents;
 
 public class CooperativeMode : AbsGameMode
 {
@@ -264,8 +265,9 @@ public class CooperativeMode : AbsGameMode
     protected override void EndGame()
     {
         int score = GameManager.Instance.PointsManager.maxScore;
-        GameManager.Instance.SteamInterface.SetSteamData(SteamConstants.DEFENSE_ROUNDS, CurrentRound, true);
-        GameManager.Instance.SteamInterface.UpdateSteamServer();
+
+        SteamDataUpdateEvent dataUpdate = new SteamDataUpdateEvent(SteamConstants.DEFENSE_ROUNDS, CurrentRound, true);
+        GameEventBus.Propagate(dataUpdate);
         AchievementManager.TestEndGameAchievements(ModeType, CurrentRound, score);
         GameManager.Instance.HandleGameOver();
     }

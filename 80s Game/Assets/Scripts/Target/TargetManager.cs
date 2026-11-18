@@ -135,8 +135,6 @@ public class TargetManager : MonoBehaviour, IGameplayListener<TargetMessage>
         numStuns++;
         totalStuns++;
 
-        // Allow game mode to update state based on bat stun
-        GameManager.Instance.ActiveGameMode.OnTargetReset();
     }
 
     /// <summary>
