@@ -208,12 +208,9 @@ public class ClassicMode : AbsGameMode
 
     protected override void EndGame()
     {
-        int score = GameManager.Instance.PointsManager.maxScore;
-        SteamDataUpdateEvent dataUpdate = new SteamDataUpdateEvent(SteamConstants.CLASSIC_SCORE, score, true);
-        GameEventBus.Propagate(dataUpdate);
-        AchievementManager.TestEndGameAchievements(ModeType, CurrentRound, score);
-        AchievementManager.BullseyeTest(GameManager.Instance.GetPlayer(0));
-        GameManager.Instance.HandleGameOver();
+        GameStateEvent gameOverEvent = new GameStateEvent(GameStateEventType.GameEnd);
+        gameOverEvent.GameMode = ModeType;
+        GameEventBus.Propagate(gameOverEvent);
     }
 
     private void SpawnMoreTargets()

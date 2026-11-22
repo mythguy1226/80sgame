@@ -264,12 +264,13 @@ public class CooperativeMode : AbsGameMode
 
     protected override void EndGame()
     {
-        int score = GameManager.Instance.PointsManager.maxScore;
-
+        GameStateEvent gameOverEvent = new GameStateEvent(GameStateEventType.GameEnd);
+        gameOverEvent.GameMode = ModeType;
+        GameEventBus.Propagate(gameOverEvent);
         SteamDataUpdateEvent dataUpdate = new SteamDataUpdateEvent(SteamConstants.DEFENSE_ROUNDS, CurrentRound, true);
         GameEventBus.Propagate(dataUpdate);
-        AchievementManager.TestEndGameAchievements(ModeType, CurrentRound, score);
-        GameManager.Instance.HandleGameOver();
+        AchievementManager.TestRoundLengthAchievement(CurrentRound);
+
     }
 
     /// <summary>

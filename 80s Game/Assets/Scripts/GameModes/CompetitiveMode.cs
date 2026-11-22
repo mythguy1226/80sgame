@@ -222,10 +222,10 @@ public class CompetitiveMode : AbsGameMode
 
     protected override void EndGame()
     {
-        int score = GameManager.Instance.PointsManager.maxScore;
         GameEventBus.Propagate(new SteamServerUpdate());
-        AchievementManager.TestEndGameAchievements(ModeType, CurrentRound, score);
-        GameManager.Instance.HandleGameOver();
+        GameStateEvent gameOverEvent = new GameStateEvent(GameStateEventType.GameEnd);
+        gameOverEvent.GameMode = ModeType;
+        GameEventBus.Propagate(gameOverEvent);
     }
 
     private void SpawnMoreTargets()

@@ -207,7 +207,7 @@ public static class AchievementManager
     /// <param name="gameMode">Game Mode to guide tests by</param>
     /// <param name="currentRound">The current round</param>
     /// <param name="score">The score the player has achieved</param>
-    public static void TestEndGameAchievements(EGameMode gameMode, int currentRound, int score)
+    public static void TestScoreAchievements(EGameMode gameMode, int score)
     {
         TestType greaterTest = TestType.GreaterThanOrEqual;
         string key;
@@ -230,18 +230,22 @@ public static class AchievementManager
                 key = AchievementConstants.PROUD_OF_YOU;
                 TestAndUnlock(key, requirements[key], score, TestType.EqualTo);
                 break;
-            case EGameMode.Defense:
-                key = AchievementConstants.BULWARK_OF_RESISTANCE;
-                RegisterData(lookupTable[key].requirementTrackingKey, currentRound);
-                TestAndUnlock(key, requirements[key], currentRound, greaterTest);
-                key = AchievementConstants.STAUNCH_DEFENDER;
-                RegisterData(lookupTable[key].requirementTrackingKey, currentRound);
-                TestAndUnlock(key, requirements[key], currentRound, greaterTest);
-                key = AchievementConstants.PROMPT_PROTECTOR;
-                RegisterData(lookupTable[key].requirementTrackingKey, currentRound);
-                TestAndUnlock(key, requirements[key], currentRound, greaterTest);
-                break;
         }
+    }
+
+    public static void TestRoundLengthAchievement(int currentRound)
+    {
+        string key;
+        TestType greaterTest = TestType.GreaterThanOrEqual;
+        key = AchievementConstants.BULWARK_OF_RESISTANCE;
+        RegisterData(lookupTable[key].requirementTrackingKey, currentRound);
+        TestAndUnlock(key, requirements[key], currentRound, greaterTest);
+        key = AchievementConstants.STAUNCH_DEFENDER;
+        RegisterData(lookupTable[key].requirementTrackingKey, currentRound);
+        TestAndUnlock(key, requirements[key], currentRound, greaterTest);
+        key = AchievementConstants.PROMPT_PROTECTOR;
+        RegisterData(lookupTable[key].requirementTrackingKey, currentRound);
+        TestAndUnlock(key, requirements[key], currentRound, greaterTest);
     }
 
     /// <summary>

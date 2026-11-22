@@ -1,4 +1,5 @@
 using GameplayEvents;
+using SteamIntegration;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,7 +7,8 @@ using System.IO;
 using System.Linq;
 using UnityEngine;
 
-public class PointsManager : MonoBehaviour, IGameplayListener<TargetMessage>
+
+public class PointsManager : MonoBehaviour, IGameplayListener<TargetMessage>, IGameplayListener<GameStateEvent>
 {
     // Public property
     public int maxScore;
@@ -34,15 +36,18 @@ public class PointsManager : MonoBehaviour, IGameplayListener<TargetMessage>
     private void OnEnable()
     {
         GameEventBus.Register<TargetMessage>(this);
+        GameEventBus.Register<GameStateEvent>(this);
     }
 
     private void OnDisable()
     {
         GameEventBus.Unregister<TargetMessage>(this);
+        GameEventBus.Unregister<GameStateEvent>(this);
     }
     private void OnDestroy()
     {
         GameEventBus.Unregister<TargetMessage>(this);
+        GameEventBus.Unregister<GameStateEvent>(this);
     }
 
     public void OnGameplayEvent(TargetMessage message)
@@ -53,6 +58,24 @@ public class PointsManager : MonoBehaviour, IGameplayListener<TargetMessage>
         }
 
         targetResetPointHandler.Handle(message);
+    }
+
+    public void OnGameplayEvent(GameStateEvent gameStateEvent)
+    {
+        switch (gameStateEvent.EventType)
+        {
+            case GameStateEventType.RoundEnd:
+                ResetRoundPoints();
+                break;
+            case GameStateEventType.GameEnd:
+                if (gameStateEvent.GameMode == EGameMode.Classic)
+                {
+                    SteamDataUpdateEvent dataUpdate = new SteamDataUpdateEvent(SteamConstants.CLASSIC_SCORE, maxScore, true);
+                    GameEventBus.Propagate(dataUpdate);
+                }
+                AchievementManager.TestScoreAchievements(gameStateEvent.GameMode, maxScore);
+                break;
+        }
     }
 
     /// <summary>

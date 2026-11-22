@@ -1,3 +1,4 @@
+using GameplayEvents;
 using SteamIntegration;
 using System;
 using System.Collections.Generic;
@@ -5,7 +6,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviour, IGameplayListener<GameStateEvent>
 {
     public static Action roundOverObservers;
     // Singleton pattern
@@ -75,6 +76,7 @@ public class GameManager : MonoBehaviour
             PointsManager = GetComponent<PointsManager>();
             SteamInterface = GetComponent<SteamInterface>();
             UIManager = GetComponent<UIManager>();
+            GameEventBus.Register<GameStateEvent>(this);
             players = new List<PlayerController>();
 
             if (PlayerData.activePlayers.Count == 0 && debug) {
@@ -153,11 +155,32 @@ public class GameManager : MonoBehaviour
     private void OnDisable()
     {
         ActiveGameMode.UnregisterAsListener();
+        GameEventBus.Unregister<GameStateEvent>(this);
     }
 
     private void OnDestroy()
     {
         ActiveGameMode.UnregisterAsListener();
+        GameEventBus.Unregister<GameStateEvent>(this);
+    }
+
+    public void OnGameplayEvent(GameStateEvent stateEvent)
+    {
+        if (stateEvent.EventType == GameStateEventType.Quit && ActiveGameMode.ModeType == EGameMode.Defense)
+        {
+            AchievementManager.TestRoundLengthAchievement(ActiveGameMode.CurrentRound);
+            return;
+        }
+
+        if (stateEvent.EventType == GameStateEventType.GameEnd)
+        {
+            if (ActiveGameMode.ModeType == EGameMode.Classic)
+            {
+                PlayerController player = GetPlayer(0);
+                AchievementManager.BullseyeTest(player);
+            }
+            HandleGameOver();
+        }
     }
 
     public List<GameObject> GetBuffs()
@@ -200,7 +223,6 @@ public class GameManager : MonoBehaviour
     public static void EmitRoundOverEvent()
     {
         roundOverObservers?.Invoke();
-        GameManager.Instance.PointsManager.ResetRoundPoints();
     }
 
     /// <summary>

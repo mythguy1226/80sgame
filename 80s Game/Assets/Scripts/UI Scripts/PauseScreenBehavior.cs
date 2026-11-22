@@ -167,12 +167,8 @@ public class PauseScreenBehavior : MonoBehaviour
     public void QuitGame()
     {
         Time.timeScale = 1f;
-
-        if (GameManager.Instance.ActiveGameMode.ModeType == EGameMode.Defense)
-        {
-            AbsGameMode gameMode = GameManager.Instance.ActiveGameMode;
-            AchievementManager.TestEndGameAchievements(gameMode.ModeType, gameMode.CurrentRound, 0);
-        }
+        GameStateEvent quitEvent = new GameStateEvent(GameStateEventType.Quit);
+        GameEventBus.Propagate(quitEvent);
         GameEventBus.Propagate(new SteamServerUpdate());
         SceneManager.LoadScene(2);
         SoundManager.Instance.StopAllAudio();
