@@ -15,7 +15,7 @@ public class LookingGlass : MonoBehaviour
     /// <param name="type">The type of bat to spawn</param>
     public void SpawnBat(int type)
     {
-        GameManager.Instance.TargetManager.SpawnTarget((TargetManager.TargetType)type);
+        GameManager.Instance.TargetManager.SpawnTarget((TargetType)type);
     }
 
 
@@ -25,7 +25,7 @@ public class LookingGlass : MonoBehaviour
     /// <param name="type"></param>
     public void ToggleCanSpawn(int type)
     {
-        TargetManager.TargetType toggleType = (TargetManager.TargetType)type;
+        TargetType toggleType = (TargetType)type;
         GameManager.Instance.ActiveGameMode.ToggleAllowedBatType(toggleType);
     }
 

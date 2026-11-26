@@ -4,16 +4,14 @@ using UnityEngine;
 
 public class Target : MonoBehaviour
 {
-    public TargetManager.TargetType type;
+    public TargetType type;
 
     // Get state machine
     public StateMachineWrapper FSM;
 
     // Get needed components for state machine
     KinematicSteer _MovementControls;
-    SpriteRenderer _SpriteRenderer;
     protected AnimationHandler _AnimControls;
-    protected InputManager _InputManager;
     private PlayerController stunningPlayer;
     PolygonCollider2D _Collider;
 
@@ -28,6 +26,10 @@ public class Target : MonoBehaviour
     public float deathHeight = -6.5f;
     public AudioClip hitSound;
     public GameObject rewiredParticles;
+
+    // Mode dependent fields
+    private bool showPoints = false;
+    private bool showColor = false;
 
     // Public fields
     public bool IsActive 
@@ -65,7 +67,6 @@ public class Target : MonoBehaviour
     {
         FSM = GetComponent<StateMachineWrapper>();
         _MovementControls = GetComponent<KinematicSteer>();
-        _SpriteRenderer = GetComponent<SpriteRenderer>();
         _AnimControls = GetComponent<AnimationHandler>();
         _Collider = GetComponent<PolygonCollider2D>();
         spawnPoint = transform.position;
@@ -194,6 +195,14 @@ public class Target : MonoBehaviour
         TargetMessage targetSpawnMessage = new TargetMessage(this, TargetEventType.Spawn);
         GameEventBus.Propagate(targetSpawnMessage);
         FSM.TransitionToDefault();
+        _AnimControls.ResetAnimation();
+        _Collider.isTrigger = false;
+    }
+
+    public void SetModeVariables(bool pointsVisible, bool paintPoints)
+    {
+        showPoints = pointsVisible;
+        showColor = paintPoints;
     }
 
     /// <summary>
@@ -247,29 +256,28 @@ public class Target : MonoBehaviour
     private void ShowFloatingText()
     {
         //Don't Show Floating Text in Defense Mode
-        if (GameModeData.activeGameMode == EGameMode.Defense)
+        if (!showPoints)
+        {
+            return;
+        }
+
+        if (stunningPlayer == null)
         {
             return;
         }
 
         GameObject text = Instantiate(floatingTextPrefab, transform.position, Quaternion.identity);
 
-        if (stunningPlayer != null)
+        if (stunningPlayer.HasMod(AbsModifierEffect.ModType.DoublePoints))
         {
-            if (stunningPlayer.HasMod(AbsModifierEffect.ModType.DoublePoints))
-            {
-                text.GetComponent<TextMeshPro>().text = $"{pointValue * 2}";
-            }
+            text.GetComponent<TextMeshPro>().text = $"{pointValue * 2}";
+        } else {
+            text.GetComponent<TextMeshPro>().text = $"{pointValue}";
+        }
 
-            else
-            {
-                text.GetComponent<TextMeshPro>().text = $"{pointValue}";
-            }
-
-            if (GameModeData.activeGameMode == EGameMode.Competitive)
-            {
-                text.GetComponent<TextMeshPro>().color = stunningPlayer.activeCrosshair.gameObject.GetComponent<SpriteRenderer>().color;
-            }
+        if (showColor)
+        {
+            text.GetComponent<TextMeshPro>().color = stunningPlayer.activeCrosshair.gameObject.GetComponent<SpriteRenderer>().color;
         }
     }
 

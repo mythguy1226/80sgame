@@ -1,6 +1,5 @@
 using GameplayEvents;
 using Localization;
-using PlasticPipe.PlasticProtocol.Messages;
 using Steamworks;
 using System;
 using UnityEngine;
@@ -22,6 +21,7 @@ namespace SteamIntegration
             {
                 GameEventBus.Register<SteamAchievementEvent>(this);
                 GameEventBus.Register<SteamDataUpdateEvent>(this);
+                GameEventBus.Register<SteamServerUpdate>(this);
                 m_GameOverlayActivated = Callback<GameOverlayActivated_t>.Create(OnGameOverlayActivated);
                 
                 //Configure language
@@ -105,6 +105,7 @@ namespace SteamIntegration
             gameOverlayEvent = null;
             GameEventBus.Unregister<SteamAchievementEvent>(this);
             GameEventBus.Unregister<SteamDataUpdateEvent>(this);
+            GameEventBus.Unregister<SteamServerUpdate>(this);
         }
 
         public void OnDestroy()
@@ -112,6 +113,7 @@ namespace SteamIntegration
             gameOverlayEvent = null;
             GameEventBus.Unregister<SteamAchievementEvent>(this);
             GameEventBus.Unregister<SteamDataUpdateEvent>(this);
+            GameEventBus.Unregister<SteamServerUpdate>(this);
         }
     }
 }

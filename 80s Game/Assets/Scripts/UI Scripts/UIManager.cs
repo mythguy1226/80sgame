@@ -6,9 +6,10 @@ using UnityEngine.EventSystems;
 using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.UI;
 using SteamIntegration;
+using GameplayEvents;
 //using UnityEngine.WSA;
 
-public class UIManager : MonoBehaviour
+public class UIManager : MonoBehaviour, IGameplayListener<GameStateEvent>
 {
 
     public static Action<int> pauseEvent;
@@ -60,13 +61,27 @@ public class UIManager : MonoBehaviour
         scoreBehavior = canvas.GetComponent<ScoreBehavior>();
         titleScreenUI = canvas.GetComponent<TitleScreenBehavior>();
         achievementNotifs = new Queue<AchievementNotificationData>();
-
-        SteamInterface.gameOverlayEvent = SystemInterruptPause;
+        GameEventBus.Register<GameStateEvent>(this);
+        SteamInterface.gameOverlayEvent += SystemInterruptPause;
     }
 
     private void Start()
     {
         SetBackground();
+    }
+
+    public void OnGameplayEvent(GameStateEvent stateEvent)
+    {
+        scoreBehavior.ShowNewRoundText();
+        if (stateEvent.GameMode == EGameMode.Classic)
+        {
+            scoreBehavior.ShowAccuracy();
+        }
+    }
+
+    public void OnDisable()
+    {
+       GameEventBus.Unregister<GameStateEvent>(this);
     }
 
     private void Update()
@@ -234,5 +249,6 @@ public class UIManager : MonoBehaviour
     public void OnDestroy()
     {
         pauseEvent = null;
+        GameEventBus.Unregister<GameStateEvent>(this);
     }
 }

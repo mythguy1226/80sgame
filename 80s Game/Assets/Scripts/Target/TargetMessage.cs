@@ -18,3 +18,23 @@ public class TargetMessage : IGameplayMessage
 
     public PlayerController RelatedPlayer;
 }
+
+public class SpawnRequest : IGameplayMessage
+{
+    public TargetType TargetType { get; private set; }
+    public int TargetIndex { get; private set; }
+
+    public int TargetLimit { get; private set; }
+
+    public SpawnRequest(int targetIndex, int targetLimit)
+    {
+        TargetIndex = targetIndex;
+        TargetLimit = targetLimit;
+    }
+    public SpawnRequest(TargetType type, int targetLimit)
+    {
+        TargetIndex = -1;
+        TargetType = type;
+        TargetLimit = targetLimit;
+    }
+}

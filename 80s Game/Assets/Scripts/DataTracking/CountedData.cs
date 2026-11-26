@@ -15,7 +15,7 @@ public class BatData
     public int modified;
     public int divebomb;
 
-    public BatData(Dictionary<TargetManager.TargetType, int> data)
+    public BatData(Dictionary<TargetType, int> data)
     {
         normal = 0;
         unstable = 0;
@@ -29,38 +29,38 @@ public class BatData
     /// Loads data directly from a dictionary counter kept by some other class
     /// </summary>
     /// <param name="data">The counter object kept by another class</param>
-    private void LoadData(Dictionary<TargetManager.TargetType, int> data)
+    private void LoadData(Dictionary<TargetType, int> data)
     {
         // All of these methods test for keys because they are lazily added by the counters
         // No key existence is guaranteed
-        if (data.ContainsKey(TargetManager.TargetType.Regular))
+        if (data.ContainsKey(TargetType.Regular))
         {
-            normal = data[TargetManager.TargetType.Regular];
+            normal = data[TargetType.Regular];
         }
 
-        if (data.ContainsKey(TargetManager.TargetType.LowBonus))
+        if (data.ContainsKey(TargetType.LowBonus))
         {
-            lowbonus = data[TargetManager.TargetType.LowBonus];
+            lowbonus = data[TargetType.LowBonus];
         }
 
-        if (data.ContainsKey(TargetManager.TargetType.HighBonus))
+        if (data.ContainsKey(TargetType.HighBonus))
         {
-            highbonus = data[TargetManager.TargetType.HighBonus];
+            highbonus = data[TargetType.HighBonus];
         }
 
-        if (data.ContainsKey(TargetManager.TargetType.Unstable))
+        if (data.ContainsKey(TargetType.Unstable))
         {
-            unstable = data[TargetManager.TargetType.Unstable];
+            unstable = data[TargetType.Unstable];
         }
 
-        if (data.ContainsKey(TargetManager.TargetType.Modifier))
+        if (data.ContainsKey(TargetType.Modifier))
         {
-            modified = data[TargetManager.TargetType.Modifier];
+            modified = data[TargetType.Modifier];
         }
 
-        if (data.ContainsKey(TargetManager.TargetType.DiveBomb))
+        if (data.ContainsKey(TargetType.DiveBomb))
         {
-            divebomb = data[TargetManager.TargetType.DiveBomb];
+            divebomb = data[TargetType.DiveBomb];
         }
 
     }

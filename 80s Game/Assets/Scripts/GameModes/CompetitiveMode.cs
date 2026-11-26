@@ -1,6 +1,5 @@
 using GameplayEvents;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -19,16 +18,17 @@ public class CompetitiveMode : AbsGameMode
         SetupAllowedData();
         debugMode = false;
         GameManager.Instance.SteamInterface.InitData();
+        GameEventBus.Propagate(new ModeConfigurationMessage(ModeType, new TargetScoreParameters(true, true)));
     }
 
     protected override void SetupAllowedData()
     {
         allowedBuffs = new Dictionary<AbsModifierEffect.ModType, bool>();
         allowedDebuffs = new Dictionary<AbsModifierEffect.ModType, bool>();
-        allowedBats = new Dictionary<TargetManager.TargetType, bool>();
+        allowedBats = new Dictionary<TargetType, bool>();
         
         // Set everything to false by default
-        foreach (TargetManager.TargetType type in Enum.GetValues(typeof(TargetManager.TargetType)).Cast<TargetManager.TargetType>())
+        foreach (TargetType type in Enum.GetValues(typeof(TargetType)).Cast<TargetType>())
         {
             allowedBats.Add(type, false);
         }
@@ -50,22 +50,22 @@ public class CompetitiveMode : AbsGameMode
         if(AchievementManager.GetAchievementByKey("mod-1").isUnlocked())
             allowedBuffs[AbsModifierEffect.ModType.Overcharge] = true;
 
-        allowedBats[TargetManager.TargetType.Regular] = true;
-        allowedBats[TargetManager.TargetType.LowBonus] = true;
-        allowedBats[TargetManager.TargetType.HighBonus] = true;
-        allowedBats[TargetManager.TargetType.Modifier] = true;
-        allowedBats[TargetManager.TargetType.Unstable] = true;
-        allowedBats[TargetManager.TargetType.Debuff] = true;
+        allowedBats[TargetType.Regular] = true;
+        allowedBats[TargetType.LowBonus] = true;
+        allowedBats[TargetType.HighBonus] = true;
+        allowedBats[TargetType.Modifier] = true;
+        allowedBats[TargetType.Unstable] = true;
+        allowedBats[TargetType.Debuff] = true;
 
-        numBatsMap = new Dictionary<TargetManager.TargetType, int>();
+        numBatsMap = new Dictionary<TargetType, int>();
 
         // Init map types
-        numBatsMap.Add(TargetManager.TargetType.Regular, 0);
-        numBatsMap.Add(TargetManager.TargetType.Modifier, 0);
-        numBatsMap.Add(TargetManager.TargetType.LowBonus, 0);
-        numBatsMap.Add(TargetManager.TargetType.HighBonus, 0);
-        numBatsMap.Add(TargetManager.TargetType.Unstable, 0);
-        numBatsMap.Add(TargetManager.TargetType.Debuff, 0);
+        numBatsMap.Add(TargetType.Regular, 0);
+        numBatsMap.Add(TargetType.Modifier, 0);
+        numBatsMap.Add(TargetType.LowBonus, 0);
+        numBatsMap.Add(TargetType.HighBonus, 0);
+        numBatsMap.Add(TargetType.Unstable, 0);
+        numBatsMap.Add(TargetType.Debuff, 0);
     }
 
     protected override void StartNextRound(bool isFirstRound = false)
@@ -78,7 +78,7 @@ public class CompetitiveMode : AbsGameMode
         {
             int targetIndex = GetNextAvailableBat();
 
-            if (targetIndex == -1 && allowedBats[TargetManager.TargetType.Regular])
+            if (targetIndex == -1 && allowedBats[TargetType.Regular])
             {
                 targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<BatStateMachine>());
                 continue;
@@ -92,7 +92,7 @@ public class CompetitiveMode : AbsGameMode
         }
 
         // Spawn a modifier bat and increment target count
-        if (allowedBats[TargetManager.TargetType.Modifier])
+        if (allowedBats[TargetType.Modifier])
         {
             targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<ModifierBatStateMachine>());
         }
@@ -140,7 +140,7 @@ public class CompetitiveMode : AbsGameMode
             foreach(SpawnRate rate in GameManager.Instance.spawnConfig.rates)
             {
                 // Check that type isnt regular
-                if(rate.targetType != TargetManager.TargetType.Regular)
+                if(rate.targetType != TargetType.Regular)
                 {
                     // Check that there are special types available
                     if(numBatsMap[rate.targetType] > 0)
@@ -175,7 +175,7 @@ public class CompetitiveMode : AbsGameMode
         // be added to it
         foreach(SpawnRate rate in GameManager.Instance.spawnConfig.rates)
         {
-            if(rate.targetType != TargetManager.TargetType.Regular)
+            if(rate.targetType != TargetType.Regular)
             {
                 if(targetManager.totalStuns % rate.spawnRate == 0)
                     numBatsMap[rate.targetType]++;
@@ -185,7 +185,7 @@ public class CompetitiveMode : AbsGameMode
         // Chance to spawn a modifier bat every 5 stuns
         if(targetManager.totalStuns % 5 == 0)
         {
-            if(UnityEngine.Random.Range(0.0f, 1.0f) < modifierChance && allowedBats[TargetManager.TargetType.Modifier])
+            if(UnityEngine.Random.Range(0.0f, 1.0f) < modifierChance && allowedBats[TargetType.Modifier])
             {
                 // Spawn a modifier bat and increment target count
                 targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<ModifierBatStateMachine>());
@@ -195,6 +195,8 @@ public class CompetitiveMode : AbsGameMode
 
         if (targetManager.numStuns >= currentRoundTargetCount)
         {
+            GameStateEvent roundOverEvent = new GameStateEvent(GameStateEventType.RoundEnd);
+            GameEventBus.Propagate(roundOverEvent);
 
             // If last round completed
             if (CurrentRound == NumRounds)
@@ -209,7 +211,6 @@ public class CompetitiveMode : AbsGameMode
                 // Play round-end jingle and call method for delayed round start
                 if (GameManager.Instance.roundEndTheme != null)
                     SoundManager.Instance.PlaySoundContinuous(GameManager.Instance.roundEndTheme.Clip);
-                GameManager.Instance.UIManager.scoreBehavior.ShowNewRoundText();
                 GameManager.Instance.StartRoundDelay();
             }
 
@@ -245,7 +246,7 @@ public class CompetitiveMode : AbsGameMode
 
             if (targetIndex >= 0)
                 targetManager.SpawnTarget(targetIndex);
-            else if (!allowedBats[TargetManager.TargetType.Regular])
+            else if (!allowedBats[TargetType.Regular])
                 return;
             else
                 targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<BatStateMachine>());

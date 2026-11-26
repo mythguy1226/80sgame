@@ -8,7 +8,7 @@ public class SpawnCommandGroup : MonoBehaviour
 {
     [SerializeField]
     private Image availabilityRenderer;
-    public TargetManager.TargetType type;
+    public TargetType type;
 
     private void Start()
     {

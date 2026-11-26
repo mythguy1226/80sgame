@@ -16,6 +16,6 @@ public class SpawnRateConfig : ScriptableObject
 [System.Serializable]
 public struct SpawnRate
 {
-    public TargetManager.TargetType targetType;
+    public TargetType targetType;
     public int spawnRate;
 }

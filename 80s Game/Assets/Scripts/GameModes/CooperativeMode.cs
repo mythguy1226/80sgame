@@ -9,7 +9,7 @@ public class CooperativeMode : AbsGameMode
 {
     //float modifierChance = 0.3f;
     Defendable coreObject;
-    List<TargetManager.TargetType> specialTypes;
+    List<TargetType> specialTypes;
 
     public CooperativeMode() : base()
     {
@@ -19,7 +19,7 @@ public class CooperativeMode : AbsGameMode
         NumRounds = 99;
         maxTargetsOnScreen = 15;
         currentRoundTargetCount = 8;
-        allowedBats = new Dictionary<TargetManager.TargetType, bool>();
+        allowedBats = new Dictionary<TargetType, bool>();
         SetupAllowedData();
         debugMode = false;
 
@@ -38,17 +38,18 @@ public class CooperativeMode : AbsGameMode
         int playerCount = GameManager.Instance.GetPlayerCount();
         ScaleGameValues(playerCount);
         GameManager.Instance.SteamInterface.InitData();
-        specialTypes = new List<TargetManager.TargetType>();
+        specialTypes = new List<TargetType>();
+        GameEventBus.Propagate(new ModeConfigurationMessage(ModeType, new TargetScoreParameters(false, false)));
     }
 
     protected override void SetupAllowedData()
     {
         allowedBuffs = new Dictionary<AbsModifierEffect.ModType, bool>();
         allowedDebuffs = new Dictionary<AbsModifierEffect.ModType, bool>();
-        allowedBats = new Dictionary<TargetManager.TargetType, bool>();
+        allowedBats = new Dictionary<TargetType, bool>();
 
         // Set everything to false by default
-        foreach (TargetManager.TargetType type in Enum.GetValues(typeof(TargetManager.TargetType)).Cast<TargetManager.TargetType>())
+        foreach (TargetType type in Enum.GetValues(typeof(TargetType)).Cast<TargetType>())
         {
             allowedBats.Add(type, false);
         }
@@ -74,20 +75,20 @@ public class CooperativeMode : AbsGameMode
         if(AchievementManager.GetAchievementByKey("mod-3").isUnlocked())
             allowedBuffs[AbsModifierEffect.ModType.EMP] = true;
 
-        allowedBats[TargetManager.TargetType.Regular] = true;
-        allowedBats[TargetManager.TargetType.Modifier] = false;
-        allowedBats[TargetManager.TargetType.Unstable] = false;
-        allowedBats[TargetManager.TargetType.DiveBomb] = false;
-        allowedBats[TargetManager.TargetType.Debuff] = false;
+        allowedBats[TargetType.Regular] = true;
+        allowedBats[TargetType.Modifier] = false;
+        allowedBats[TargetType.Unstable] = false;
+        allowedBats[TargetType.DiveBomb] = false;
+        allowedBats[TargetType.Debuff] = false;
 
-        numBatsMap = new Dictionary<TargetManager.TargetType, int>();
+        numBatsMap = new Dictionary<TargetType, int>();
 
         // Init map types
-        numBatsMap.Add(TargetManager.TargetType.Regular, 0);
-        numBatsMap.Add(TargetManager.TargetType.Modifier, 0);
-        numBatsMap.Add(TargetManager.TargetType.DiveBomb, 0);
-        numBatsMap.Add(TargetManager.TargetType.Unstable, 0);
-        numBatsMap.Add(TargetManager.TargetType.Debuff, 0);
+        numBatsMap.Add(TargetType.Regular, 0);
+        numBatsMap.Add(TargetType.Modifier, 0);
+        numBatsMap.Add(TargetType.DiveBomb, 0);
+        numBatsMap.Add(TargetType.Unstable, 0);
+        numBatsMap.Add(TargetType.Debuff, 0);
     }
 
     protected override void StartNextRound(bool isFirstRound = false)
@@ -100,11 +101,11 @@ public class CooperativeMode : AbsGameMode
         {
             int targetIndex = GetNextAvailableBat();
 
-            if (targetIndex == -1 && allowedBats[TargetManager.TargetType.Regular])
+            if (targetIndex == -1 && allowedBats[TargetType.Regular])
             {
                 if(CurrentRound <= 5)
                 {
-                    targetIndex = targetManager.GetNextAvailableTargetOfEnumType(TargetManager.TargetType.Regular);
+                    targetIndex = targetManager.GetNextAvailableTargetOfEnumType(TargetType.Regular);
                     if(targetIndex != -1)
                         targetManager.SpawnTarget(targetIndex);
                 }
@@ -176,7 +177,7 @@ public class CooperativeMode : AbsGameMode
                 return i;
             }
 
-            foreach (TargetManager.TargetType specialType in specialTypes)
+            foreach (TargetType specialType in specialTypes)
             {
                 // Check that there are special types available
                 if(numBatsMap[specialType] > 0)
@@ -197,7 +198,7 @@ public class CooperativeMode : AbsGameMode
         // be added to it
         foreach(SpawnRate rate in GameManager.Instance.spawnConfig.rates)
         {
-            if(rate.targetType != TargetManager.TargetType.Regular)
+            if(rate.targetType != TargetType.Regular)
             {
                 if(targetManager.totalStuns % rate.spawnRate == 0)
                     numBatsMap[rate.targetType]++;
@@ -207,10 +208,12 @@ public class CooperativeMode : AbsGameMode
         // Start the next round if desired number of stuns is met
         if (targetManager.numStuns >= currentRoundTargetCount)
         {
+            GameStateEvent roundOverEvent = new GameStateEvent(GameStateEventType.RoundEnd);
+            GameEventBus.Propagate(roundOverEvent);
+            
             // Play round-end jingle and call method for delayed round start
             if (GameManager.Instance.roundEndTheme != null)
                 SoundManager.Instance.PlaySoundContinuous(GameManager.Instance.roundEndTheme.Clip);
-            GameManager.Instance.UIManager.scoreBehavior.ShowNewRoundText();
             GameManager.Instance.StartRoundDelay();
             return;
         }
@@ -241,10 +244,10 @@ public class CooperativeMode : AbsGameMode
 
             if (targetIndex >= 0)
                 targetManager.SpawnTarget(targetIndex);
-            else if (!allowedBats[TargetManager.TargetType.Regular])
+            else if (!allowedBats[TargetType.Regular])
                 return;
             else
-                targetIndex = targetManager.GetNextAvailableTargetOfEnumType(TargetManager.TargetType.Regular);
+                targetIndex = targetManager.GetNextAvailableTargetOfEnumType(TargetType.Regular);
                 if(targetIndex != -1)
                     targetManager.SpawnTarget(targetIndex);
                 else
@@ -313,7 +316,7 @@ public class CooperativeMode : AbsGameMode
         StartNextRound();
 
         // Spawn a modifier bat and increment target count
-        if (allowedBats[TargetManager.TargetType.Modifier])
+        if (allowedBats[TargetType.Modifier])
         {
             targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<ModifierDefenseBatStateMachine>());
             currentRoundTargetCount++;
@@ -325,7 +328,7 @@ public class CooperativeMode : AbsGameMode
             // Spawn some modifer bats and increment target count
             for(int i = 0; i < 2; i++)
             {
-                if (allowedBats[TargetManager.TargetType.Modifier])
+                if (allowedBats[TargetType.Modifier])
                 {
                     targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<ModifierDefenseBatStateMachine>());
                     currentRoundTargetCount++;
@@ -336,7 +339,7 @@ public class CooperativeMode : AbsGameMode
         // Spawn some debuff bats and increment target count
         for(int i = 0; i < 2; i++)
         {
-            if (allowedBats[TargetManager.TargetType.Debuff])
+            if (allowedBats[TargetType.Debuff])
             {
                 targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<DebuffBatStateMachine>());
                 currentRoundTargetCount++;
@@ -350,28 +353,28 @@ public class CooperativeMode : AbsGameMode
         switch(CurrentRound)
         {
             case 1:
-                allowedBats[TargetManager.TargetType.Unstable] = true;
-                specialTypes.Add(TargetManager.TargetType.Unstable);
-                allowedBats[TargetManager.TargetType.DiveBomb] = true;
-                specialTypes.Add(TargetManager.TargetType.DiveBomb);
+                allowedBats[TargetType.Unstable] = true;
+                specialTypes.Add(TargetType.Unstable);
+                allowedBats[TargetType.DiveBomb] = true;
+                specialTypes.Add(TargetType.DiveBomb);
                 break;
             case 2:
-                allowedBats[TargetManager.TargetType.Unstable] = false;
-                specialTypes.Remove(TargetManager.TargetType.Unstable);
-                allowedBats[TargetManager.TargetType.DiveBomb] = false;
-                specialTypes.Remove(TargetManager.TargetType.DiveBomb);
-                allowedBats[TargetManager.TargetType.Modifier] = true;
-                specialTypes.Add(TargetManager.TargetType.Modifier);
+                allowedBats[TargetType.Unstable] = false;
+                specialTypes.Remove(TargetType.Unstable);
+                allowedBats[TargetType.DiveBomb] = false;
+                specialTypes.Remove(TargetType.DiveBomb);
+                allowedBats[TargetType.Modifier] = true;
+                specialTypes.Add(TargetType.Modifier);
                 break;
             case 4:
-                allowedBats[TargetManager.TargetType.Debuff] = true;
-                specialTypes.Add(TargetManager.TargetType.Debuff);
+                allowedBats[TargetType.Debuff] = true;
+                specialTypes.Add(TargetType.Debuff);
                 break;
             case 5:
-                allowedBats[TargetManager.TargetType.DiveBomb] = true;
-                specialTypes.Add(TargetManager.TargetType.DiveBomb);
-                allowedBats[TargetManager.TargetType.Unstable] = true;
-                specialTypes.Add(TargetManager.TargetType.Unstable);
+                allowedBats[TargetType.DiveBomb] = true;
+                specialTypes.Add(TargetType.DiveBomb);
+                allowedBats[TargetType.Unstable] = true;
+                specialTypes.Add(TargetType.Unstable);
                 break;
         }
     }
@@ -388,7 +391,7 @@ public class CooperativeMode : AbsGameMode
 
         int index = UnityEngine.Random.Range(0, specialTypes.Count);
         int swap = UnityEngine.Random.Range(1, specialTypes.Count);
-        TargetManager.TargetType temp = specialTypes[swap];
+        TargetType temp = specialTypes[swap];
         specialTypes[swap] = specialTypes[index];
         specialTypes[index] = temp;
     }

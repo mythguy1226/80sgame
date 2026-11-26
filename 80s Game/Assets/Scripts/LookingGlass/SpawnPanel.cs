@@ -6,11 +6,11 @@ public class SpawnPanel : LookingGlassPanel
     private Sprite available;
     [SerializeField]
     private Sprite notAvailable;
-    Dictionary<TargetManager.TargetType, SpawnCommandGroup> spawnUIGroups;
+    Dictionary<TargetType, SpawnCommandGroup> spawnUIGroups;
 
     public void Awake()
     {
-        spawnUIGroups = new Dictionary<TargetManager.TargetType, SpawnCommandGroup>();
+        spawnUIGroups = new Dictionary<TargetType, SpawnCommandGroup>();
     }
 
     /// <summary>
@@ -19,7 +19,7 @@ public class SpawnPanel : LookingGlassPanel
     /// </summary>
     /// <param name="type">the type of bat the group belongs to</param>
     /// <param name="group">The group object itself</param>
-    public void EnlistToGroup(TargetManager.TargetType type, SpawnCommandGroup group)
+    public void EnlistToGroup(TargetType type, SpawnCommandGroup group)
     {
         if (!spawnUIGroups.ContainsKey(type))
         {
@@ -38,7 +38,7 @@ public class SpawnPanel : LookingGlassPanel
     /// <param name="type">The int that represents the TargetType enum</param>
     public void UpdateAvailabilityUI(int type)
     {
-        TargetManager.TargetType targetType = (TargetManager.TargetType)type;
+        TargetType targetType = (TargetType)type;
         bool canSpawn = GameManager.Instance.ActiveGameMode.CanSpawnType(targetType);
         if (canSpawn)
         {

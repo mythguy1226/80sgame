@@ -252,7 +252,7 @@ public static class AchievementManager
     /// Handle all stun-related achievements
     /// </summary>
     /// <param name="type">The stunned target type</param>
-    public static void HandleStunAchievements(TargetManager.TargetType type)
+    public static void HandleStunAchievements(TargetType type)
     {
         int stunnedBatsOfThisType = 0;
         string dataKey = "";
@@ -260,7 +260,7 @@ public static class AchievementManager
         // Test for the highest thing first. This can bypass execution of all other checks
         switch (type)
         {
-            /*case TargetManager.TargetType.Unstable:
+            /*case TargetType.Unstable:
                 if (HasBeenUnlocked(AchievementConstants.UNSTABLE_EXPERT))
                 {
                     return;
@@ -269,7 +269,7 @@ public static class AchievementManager
                 stunnedBatsOfThisType = GetData(dataKey);
                 stunnedBatsOfThisType++;
                 break;*/
-            case TargetManager.TargetType.Modifier:
+            case TargetType.Modifier:
                 if (HasBeenUnlocked(AchievementConstants.MOD_BAT_EXPERT))
                 {
                     return;
@@ -280,8 +280,8 @@ public static class AchievementManager
                 SteamDataUpdateEvent updateData = new SteamDataUpdateEvent(SteamIntegration.SteamConstants.MOD_STUN, stunnedBatsOfThisType);
                 GameEventBus.Propagate(updateData);
                 break;
-            /*case TargetManager.TargetType.LowBonus:
-            case TargetManager.TargetType.HighBonus:
+            /*case TargetType.LowBonus:
+            case TargetType.HighBonus:
                 if (HasBeenUnlocked(AchievementConstants.BONUS_EXPERT))
                 {
                     return;
@@ -290,7 +290,7 @@ public static class AchievementManager
                 stunnedBatsOfThisType = GetData(dataKey);
                 stunnedBatsOfThisType++;
                 break;
-            case TargetManager.TargetType.Regular:
+            case TargetType.Regular:
                 if (HasBeenUnlocked(AchievementConstants.MK1_EXPERT))
                 {
                     return;
@@ -309,12 +309,12 @@ public static class AchievementManager
     /// <param name="type">Type of the stunned bat</param>
     /// <param name="dataKey">The tracked key for this bat type</param>
     /// <param name="stunnedBatsOfThisType">The stun count for this type</param>
-    private static void TestStunUnlockByType(TargetManager.TargetType type, string dataKey, int stunCount)
+    private static void TestStunUnlockByType(TargetType type, string dataKey, int stunCount)
     {
         string key;
         switch (type)
         {
-            /*case TargetManager.TargetType.Unstable:
+            /*case TargetType.Unstable:
                 key = AchievementConstants.UNSTABLE_EXPERT;
                 TestAndUnlock(key, requirements[key], stunCount, TestType.GreaterThanOrEqual);
                 key = AchievementConstants.UNSTABLE_ADEPT;
@@ -322,7 +322,7 @@ public static class AchievementManager
                 key = AchievementConstants.UNSTABLE_NOVICE;
                 TestAndUnlock(key, requirements[key], stunCount, TestType.GreaterThanOrEqual);
                 break;*/
-            case TargetManager.TargetType.Modifier:
+            case TargetType.Modifier:
                 key = AchievementConstants.MOD_BAT_EXPERT;
                 TestAndUnlock(key, requirements[key], stunCount, TestType.GreaterThanOrEqual);
                 key = AchievementConstants.MOD_BAT_ADEPT;
@@ -330,8 +330,8 @@ public static class AchievementManager
                 key = AchievementConstants.MOD_BAT_NOVICE;
                 TestAndUnlock(key, requirements[key], stunCount, TestType.GreaterThanOrEqual);
                 break;
-            /*case TargetManager.TargetType.LowBonus:
-            case TargetManager.TargetType.HighBonus:
+            /*case TargetType.LowBonus:
+            case TargetType.HighBonus:
                 key = AchievementConstants.BONUS_EXPERT;
                 TestAndUnlock(key, requirements[key], stunCount, TestType.GreaterThanOrEqual);
                 key = AchievementConstants.BONUS_ADEPT;
@@ -339,7 +339,7 @@ public static class AchievementManager
                 key = AchievementConstants.BONUS_NOVICE;
                 TestAndUnlock(key, requirements[key], stunCount, TestType.GreaterThanOrEqual);
                 break;
-            case TargetManager.TargetType.Regular:
+            case TargetType.Regular:
                 key = AchievementConstants.MK1_EXPERT;
                 TestAndUnlock(key, requirements[key], stunCount, TestType.GreaterThanOrEqual);
                 key = AchievementConstants.MK1_ADEPT;

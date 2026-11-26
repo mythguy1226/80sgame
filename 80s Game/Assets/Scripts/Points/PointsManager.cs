@@ -121,7 +121,6 @@ public class PointsManager : MonoBehaviour, IGameplayListener<TargetMessage>, IG
         scoreBehavior.bonusPoints = numBonusPoints;
         scoreBehavior.UpdateScores(player);
         scoreBehavior.UpdateAccuracy(accuracy);
-        //Debug.Log("Updated accuracy: " + accuracy);
         return AddRoundPoints(player, numBonusPoints);
     }
 

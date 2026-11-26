@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using GameplayEvents;
-using System.Threading;
 
 public enum EGameMode
 {
@@ -25,12 +24,11 @@ public abstract class AbsGameMode : IGameplayListener<TargetMessage>
     protected int maxTargetsOnScreen;
     protected int currentRoundTargetCount;
     protected int numBonusBats = 0;
-    protected Dictionary<TargetManager.TargetType, bool> allowedBats;
+    protected Dictionary<TargetType, bool> allowedBats;
     protected Dictionary<AbsModifierEffect.ModType, bool> allowedBuffs;
     protected Dictionary<AbsModifierEffect.ModType, bool> allowedDebuffs;
     protected bool debugMode;
-
-    protected Dictionary<TargetManager.TargetType, int> numBatsMap;
+    protected Dictionary<TargetType, int> numBatsMap;
 
     public AbsGameMode()
     {
@@ -67,7 +65,7 @@ public abstract class AbsGameMode : IGameplayListener<TargetMessage>
     /// <returns>Whether or not to skip this target for spawning</returns>
     protected bool SkipBat(Target target)
     {
-        return !allowedBats[target.type] || target.FSM.IsActive() || target.type == TargetManager.TargetType.Modifier;
+        return !allowedBats[target.type] || target.FSM.IsActive() || target.type == TargetType.Modifier;
     }
 
     /// <summary>
@@ -98,7 +96,7 @@ public abstract class AbsGameMode : IGameplayListener<TargetMessage>
     /// </summary>
     /// <param name="type">Type of bat to check</param>
     /// <returns>Whether or not it can spawn</returns>
-    public bool CanSpawnType(TargetManager.TargetType type)
+    public bool CanSpawnType(TargetType type)
     {
         return allowedBats[type];
     }
@@ -107,7 +105,7 @@ public abstract class AbsGameMode : IGameplayListener<TargetMessage>
     /// Toggles whether a bat is allowed to spawn or not. Useful for debugging
     /// </summary>
     /// <param name="type">The type to toggle</param>
-    public void ToggleAllowedBatType(TargetManager.TargetType type)
+    public void ToggleAllowedBatType(TargetType type)
     {
         allowedBats[type] = !allowedBats[type];
         debugMode = true;

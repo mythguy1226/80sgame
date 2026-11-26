@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using GameplayEvents;
-using SteamIntegration;
 
 
 public class ClassicMode : AbsGameMode
@@ -20,17 +19,18 @@ public class ClassicMode : AbsGameMode
         SetupAllowedData();
         debugMode = false;
         GameManager.Instance.SteamInterface.InitData();
+        GameEventBus.Propagate(new ModeConfigurationMessage(ModeType, new TargetScoreParameters(true, false)));
     }
 
     protected override void SetupAllowedData()
     {
         // Initialize data stores
-        allowedBats = new Dictionary<TargetManager.TargetType, bool>();
+        allowedBats = new Dictionary<TargetType, bool>();
         allowedBuffs = new Dictionary<AbsModifierEffect.ModType, bool>();
         allowedDebuffs = new Dictionary<AbsModifierEffect.ModType, bool>();
 
         // Set everything to false by default
-        foreach (TargetManager.TargetType type in Enum.GetValues(typeof(TargetManager.TargetType)).Cast<TargetManager.TargetType>())
+        foreach (TargetType type in Enum.GetValues(typeof(TargetType)).Cast<TargetType>())
         {
             allowedBats.Add(type, false);
         }
@@ -51,21 +51,21 @@ public class ClassicMode : AbsGameMode
         if(AchievementManager.GetAchievementByKey("mod-1").isUnlocked())
             allowedBuffs[AbsModifierEffect.ModType.Overcharge] = true;
 
-        allowedBats[TargetManager.TargetType.Regular] = true;
-        allowedBats[TargetManager.TargetType.HighBonus] = false;
-        allowedBats[TargetManager.TargetType.LowBonus] = false;
-        allowedBats[TargetManager.TargetType.Modifier] = false;
-        allowedBats[TargetManager.TargetType.Unstable] = false;
+        allowedBats[TargetType.Regular] = true;
+        allowedBats[TargetType.HighBonus] = false;
+        allowedBats[TargetType.LowBonus] = false;
+        allowedBats[TargetType.Modifier] = false;
+        allowedBats[TargetType.Unstable] = false;
 
-        numBatsMap = new Dictionary<TargetManager.TargetType, int>();
+        numBatsMap = new Dictionary<TargetType, int>();
 
         // Init map types
-        numBatsMap.Add(TargetManager.TargetType.Regular, 0);
-        numBatsMap.Add(TargetManager.TargetType.Modifier, 0);
-        numBatsMap.Add(TargetManager.TargetType.LowBonus, 0);
-        numBatsMap.Add(TargetManager.TargetType.HighBonus, 0);
-        numBatsMap.Add(TargetManager.TargetType.Unstable, 0);
-        numBatsMap.Add(TargetManager.TargetType.Debuff, 0);
+        numBatsMap.Add(TargetType.Regular, 0);
+        numBatsMap.Add(TargetType.Modifier, 0);
+        numBatsMap.Add(TargetType.LowBonus, 0);
+        numBatsMap.Add(TargetType.HighBonus, 0);
+        numBatsMap.Add(TargetType.Unstable, 0);
+        numBatsMap.Add(TargetType.Debuff, 0);
     }
 
     protected override void StartNextRound(bool isFirstRound = false)
@@ -79,19 +79,15 @@ public class ClassicMode : AbsGameMode
         {
             int targetIndex = GetNextAvailableBat();
             
-            if (targetIndex == -1 && allowedBats[TargetManager.TargetType.Regular])
+            if (targetIndex == -1 && allowedBats[TargetType.Regular])
             {
-                targetIndex = targetManager.GetNextAvailableTargetOfEnumType(TargetManager.TargetType.Regular);
-                if(targetIndex != -1)
-                    targetManager.SpawnTarget(targetIndex);
+                SpawnRequest spawnRegularRequest = new SpawnRequest(TargetType.Regular, maxTargetsOnScreen);
+                GameEventBus.Propagate(spawnRegularRequest);
                 continue;
             }
 
-            targetManager.SpawnTarget(targetIndex);
-
-            // Check if screen is now full
-            if (targetManager.ActiveTargets.Count == maxTargetsOnScreen)
-                return;
+            SpawnRequest byIndexRequest = new SpawnRequest(targetIndex, maxTargetsOnScreen);
+            GameEventBus.Propagate(byIndexRequest);
         }
     }
 
@@ -134,7 +130,7 @@ public class ClassicMode : AbsGameMode
             foreach(SpawnRate rate in GameManager.Instance.spawnConfig.rates)
             {
                 // Check that type isnt regular
-                if(rate.targetType != TargetManager.TargetType.Regular)
+                if(rate.targetType != TargetType.Regular)
                 {
                     // Check that there are special types available
                     if(numBatsMap[rate.targetType] > 0)
@@ -169,7 +165,7 @@ public class ClassicMode : AbsGameMode
         // be added to it
         foreach(SpawnRate rate in GameManager.Instance.spawnConfig.rates)
         {
-            if(rate.targetType != TargetManager.TargetType.Regular)
+            if(rate.targetType != TargetType.Regular)
             {
                 if(targetManager.totalStuns % rate.spawnRate == 0)
                     numBatsMap[rate.targetType]++;
@@ -193,8 +189,6 @@ public class ClassicMode : AbsGameMode
                 // Play round-end jingle and call method for delayed round start
                 if (GameManager.Instance.roundEndTheme != null)
                     SoundManager.Instance.PlaySoundContinuous(GameManager.Instance.roundEndTheme.Clip);
-                GameManager.Instance.UIManager.scoreBehavior.ShowNewRoundText();
-                GameManager.Instance.UIManager.scoreBehavior.ShowAccuracy();
                 GameManager.Instance.StartRoundDelay();
             }
                 
@@ -228,16 +222,15 @@ public class ClassicMode : AbsGameMode
         {
             int targetIndex = GetNextAvailableBat();
             if (targetIndex >= 0)
-                targetManager.SpawnTarget(targetIndex);
-            else if (!allowedBats[TargetManager.TargetType.Regular])
-                return;
+            {
+                SpawnRequest regularSpawnRequest = new(targetIndex, maxTargetsOnScreen);
+                GameEventBus.Propagate(regularSpawnRequest);
+            }
+            else if (!allowedBats[TargetType.Regular]) return;
             else
             {
-                targetIndex = targetManager.GetNextAvailableTargetOfEnumType(TargetManager.TargetType.Regular);
-                if(targetIndex != -1)
-                    targetManager.SpawnTarget(targetIndex);
-                else
-                    targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<BatStateMachine>());
+                SpawnRequest regularSpawnRequest = new(TargetType.Regular, maxTargetsOnScreen);
+                GameEventBus.Propagate(regularSpawnRequest);
             }
         }
     }
@@ -251,23 +244,26 @@ public class ClassicMode : AbsGameMode
         StartNextRound();
                 
         // Spawn a modifier bat and increment target count
-        if (allowedBats[TargetManager.TargetType.Modifier])
+        if (allowedBats[TargetType.Modifier])
         {
-            targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<ModifierBatStateMachine>());
+            SpawnRequest modifierSpawnRequest = new(TargetType.Modifier, maxTargetsOnScreen);
+            GameEventBus.Propagate(modifierSpawnRequest);
             currentRoundTargetCount++;
         }
 
         // Spawn some bonus bats and increment target count
         for(int i = 0; i < 2; i++)
         {
-            if (allowedBats[TargetManager.TargetType.LowBonus])
+            if (allowedBats[TargetType.LowBonus])
             {
-                targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfEnumType(TargetManager.TargetType.LowBonus));
+                SpawnRequest lowBonusSpawnRequest = new(TargetType.LowBonus, maxTargetsOnScreen);
+                GameEventBus.Propagate(lowBonusSpawnRequest);
                 currentRoundTargetCount++;
             }
-            if (allowedBats[TargetManager.TargetType.HighBonus])
+            if (allowedBats[TargetType.HighBonus])
             {
-                targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfEnumType(TargetManager.TargetType.HighBonus));
+                SpawnRequest highBonusSpawnRequest = new(TargetType.HighBonus, maxTargetsOnScreen);
+                GameEventBus.Propagate(highBonusSpawnRequest);
                 currentRoundTargetCount++;
             }
         }
@@ -275,9 +271,10 @@ public class ClassicMode : AbsGameMode
         // Spawn some debuff bats and increment target count
         for(int i = 0; i < 2; i++)
         {
-            if (allowedBats[TargetManager.TargetType.Debuff])
+            if (allowedBats[TargetType.Debuff])
             {
-                targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<DebuffBatStateMachine>());
+                SpawnRequest debuffRequest = new(TargetType.Debuff, maxTargetsOnScreen);
+                GameEventBus.Propagate(debuffRequest);
                 currentRoundTargetCount++;
             }
         }
@@ -288,9 +285,10 @@ public class ClassicMode : AbsGameMode
             // Spawn some debuff bats and increment target count
             for(int i = 0; i < 2; i++)
             {
-                if (allowedBats[TargetManager.TargetType.Modifier])
+                if (allowedBats[TargetType.Modifier])
                 {
-                    targetManager.SpawnTarget(targetManager.GetNextAvailableTargetOfType<ModifierBatStateMachine>());
+                    SpawnRequest modifierRequest = new(TargetType.Modifier, maxTargetsOnScreen);
+                    GameEventBus.Propagate(modifierRequest);
                     currentRoundTargetCount++;
                 }
             }
@@ -303,25 +301,25 @@ public class ClassicMode : AbsGameMode
         switch(CurrentRound)
         {
             case 2:
-                allowedBats[TargetManager.TargetType.Unstable] = true;
+                allowedBats[TargetType.Unstable] = true;
                 break;
             case 4:
-                allowedBats[TargetManager.TargetType.LowBonus] = true;
-                allowedBats[TargetManager.TargetType.HighBonus] = true;
+                allowedBats[TargetType.LowBonus] = true;
+                allowedBats[TargetType.HighBonus] = true;
                 break;
             case 5:
-                allowedBats[TargetManager.TargetType.Modifier] = true;
-                allowedBats[TargetManager.TargetType.Unstable] = false;
-                allowedBats[TargetManager.TargetType.LowBonus] = false;
-                allowedBats[TargetManager.TargetType.HighBonus] = false;
+                allowedBats[TargetType.Modifier] = true;
+                allowedBats[TargetType.Unstable] = false;
+                allowedBats[TargetType.LowBonus] = false;
+                allowedBats[TargetType.HighBonus] = false;
                 break;
             case 6:
-                allowedBats[TargetManager.TargetType.Debuff] = true;
+                allowedBats[TargetType.Debuff] = true;
                 break;
             case 7:
-                allowedBats[TargetManager.TargetType.Unstable] = true;
-                allowedBats[TargetManager.TargetType.LowBonus] = true;
-                allowedBats[TargetManager.TargetType.HighBonus] = true;
+                allowedBats[TargetType.Unstable] = true;
+                allowedBats[TargetType.LowBonus] = true;
+                allowedBats[TargetType.HighBonus] = true;
                 break;
         }
     }

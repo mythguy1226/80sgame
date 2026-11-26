@@ -21,5 +21,5 @@ public enum ObjectiveType
 
 public struct AllowedSpawns
 {
-    public TargetManager.TargetType[] allowedSpawns;
+    public TargetType[] allowedSpawns;
 }

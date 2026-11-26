@@ -3,24 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using GameplayEvents;
 
-public class TargetManager : MonoBehaviour, IGameplayListener<TargetMessage>
+public class TargetManager : MonoBehaviour, IGameplayListener<TargetMessage>, IGameplayListener<SpawnRequest>, IGameplayListener<ModeConfigurationMessage>
 {
-    public enum TargetType
-    {
-        Regular = 0,
-        LowBonus,
-        HighBonus,
-        Unstable,
-        Modifier,
-        DiveBomb,
-        Debuff
-    }
+    
     // Fields for all targets and spawn locations
     public List<Target> targets;
     public List<Target> activeTargets;
     public List<Vector3> spawnLocations;
 
     Dictionary<TargetEventType, IGameplayEventHandler<TargetMessage>> handlers;
+    TargetSpawnRequestHandler spawnRequestHandler;
 
     // Default values
     public int numStuns = 0;
@@ -47,23 +39,30 @@ public class TargetManager : MonoBehaviour, IGameplayListener<TargetMessage>
 
     private void OnEnable()
     {
+        targets = new List<Target>(GameObject.FindObjectsOfType<Target>());
         SetupHandlers();
         GameEventBus.Register<TargetMessage>(this);
+        GameEventBus.Register<SpawnRequest>(this);
+        GameEventBus.Register<ModeConfigurationMessage>(this);
     }
 
     private void OnDisable()
     {
+        GameEventBus.Unregister<SpawnRequest>(this);
         GameEventBus.Unregister<TargetMessage>(this);
+        GameEventBus.Unregister<ModeConfigurationMessage>(this);
     }
 
     private void OnDestroy()
     {
+        GameEventBus.Unregister<SpawnRequest>(this);
         GameEventBus.Unregister<TargetMessage>(this);
+        GameEventBus.Unregister<ModeConfigurationMessage>(this);
     }
 
     private void Start()
     {
-        targets = new List<Target>(GameObject.FindObjectsOfType<Target>());
+        spawnRequestHandler = new(this);
         killCount = new Dictionary<TargetType, int>();
         spawnCount = new Dictionary<TargetType, int>();
         DisablePolyCollisions();
@@ -79,6 +78,24 @@ public class TargetManager : MonoBehaviour, IGameplayListener<TargetMessage>
         if (handlers.TryGetValue(message.EventType, out var handler))
         {
             handler.Handle(message);
+        }
+    }
+
+    public void OnGameplayEvent(SpawnRequest spawnRequest)
+    {
+        spawnRequestHandler.Handle(spawnRequest);
+    }
+
+    public void OnGameplayEvent(ModeConfigurationMessage configMessage)
+    {
+        SetupTargetTextVisibility(configMessage.TargetScoreParameters.ShowText, configMessage.TargetScoreParameters.ShowPlayerColor);
+    }
+
+    public void SetupTargetTextVisibility(bool showText, bool showColor)
+    {
+        foreach(Target t in targets)
+        {
+            t.SetModeVariables(showText, showColor);
         }
     }
 
@@ -102,6 +119,7 @@ public class TargetManager : MonoBehaviour, IGameplayListener<TargetMessage>
             return;
 
         Target target = targets[targetIndex];
+
         AddToCount(target.type, spawnCount);
         // Get the spawn point randomly and teleport the target to that point
         Vector3 spawnPoint = spawnLocations[UnityEngine.Random.Range(0, spawnLocations.Count - 1)];
@@ -122,15 +140,12 @@ public class TargetManager : MonoBehaviour, IGameplayListener<TargetMessage>
 
         // Update on-screen status
         target.Spawn();
-        target.GetComponent<AnimationHandler>().ResetAnimation();
-        target.GetComponent<PolygonCollider2D>().isTrigger = false;
         
     }
 
     // Method used for updating values on bat death
     public void OnTargetReset()
     {
-
         // Update number of stuns
         numStuns++;
         totalStuns++;
